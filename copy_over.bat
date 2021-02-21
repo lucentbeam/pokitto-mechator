@@ -1,2 +1,2 @@
-del /F "D:\firmware.bin"
-copy pokitto-mechator.bin D:\mechator.bin
+del /F "E:\firmware.bin"
+copy pokitto-mechator.bin E:\mechator.bin

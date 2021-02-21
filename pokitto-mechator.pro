@@ -14,7 +14,6 @@ SOURCES += \
 HEADERS += \
     core/audio/audiosystem.h \
     core/rendering/tilemap.h \
-    core/utilities/babyecs.h \
     core/utilities/babyfsm.h \
     core/pokittolibextensions.h \
     core/rendering/rendersystem.h \

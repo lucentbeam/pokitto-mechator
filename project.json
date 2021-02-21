@@ -1218,6 +1218,153 @@
 		},
 		"\\pokitto-mechator.elf": {
 			"sdcard": false
+		},
+		"\\content\\tiled-map-reader.zip": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.bin": {
+			"sdcard": false
+		},
+		"\\content\\art\\soldier.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\soldier.png": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.znxRAb": {
+			"sdcard": false
+		},
+		"\\game\\player.h.autosave.nqVcak": {
+			"sdcard": false
+		},
+		"\\game\\player.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\player.h.bFFEQH": {
+			"sdcard": false
+		},
+		"\\game\\player.h.lDRZas": {
+			"sdcard": false
+		},
+		"\\game\\player.h.autosave.gsnUhF": {
+			"sdcard": false
+		},
+		"\\game\\player.h.JTYHTf": {
+			"sdcard": false
+		},
+		"\\game\\player.h.LlGhHv": {
+			"sdcard": false
+		},
+		"\\game\\player.h.autosave.AXNsYh": {
+			"sdcard": false
+		},
+		"\\game\\player.h.yXNZie": {
+			"sdcard": false
+		},
+		"\\game\\player.h.jedmTi": {
+			"sdcard": false
+		},
+		"\\game\\player.h.lmWzKc": {
+			"sdcard": false
+		},
+		"\\game\\player.h.cfOtwJ": {
+			"sdcard": false
+		},
+		"\\game\\player.h.fuBNjZ": {
+			"sdcard": false
+		},
+		"\\game\\player.h.rBuzkQ": {
+			"sdcard": false
+		},
+		"\\game\\player.h.ZrMmRd": {
+			"sdcard": false
+		},
+		"\\game\\player.h.autosave.zVLMQz": {
+			"sdcard": false
+		},
+		"\\game\\player.h.IXVVOD": {
+			"sdcard": false
+		},
+		"\\game\\player.h.kzzHhE": {
+			"sdcard": false
+		},
+		"\\game\\player.h.NMNlpu": {
+			"sdcard": false
+		},
+		"\\game\\player.h.nwxkWC": {
+			"sdcard": false
+		},
+		"\\game\\player.h.GtKhRd": {
+			"sdcard": false
+		},
+		"\\game\\player.h.BCLStn": {
+			"sdcard": false
+		},
+		"\\game\\player.h~RFad454c.TMP": {
+			"sdcard": false
+		},
+		"\\game\\player.h.oihlUM": {
+			"sdcard": false
+		},
+		"\\game\\player.h.FJlixr": {
+			"sdcard": false
+		},
+		"\\game\\player.h.gibova": {
+			"sdcard": false
+		},
+		"\\game\\player.h.CKQaCa": {
+			"sdcard": false
+		},
+		"\\game\\player.h.mAbBxC": {
+			"sdcard": false
+		},
+		"\\game\\player.h.HrOwge": {
+			"sdcard": false
+		},
+		"\\game\\player.h.BVIkGt": {
+			"sdcard": false
+		},
+		"\\game\\player.h.nLzuZM": {
+			"sdcard": false
+		},
+		"\\game\\player.h.hSXGaM": {
+			"sdcard": false
+		},
+		"\\game\\player.h.ZjjGVq": {
+			"sdcard": false
+		},
+		"\\game\\player.h.LeNZns": {
+			"sdcard": false
+		},
+		"\\game\\player.h.srqoyc": {
+			"sdcard": false
+		},
+		"\\game\\player.h.ceJVqC": {
+			"sdcard": false
+		},
+		"\\game\\player.h.dHtMde": {
+			"sdcard": false
+		},
+		"\\game\\player.h.Wzxpqq": {
+			"sdcard": false
+		},
+		"\\game\\player.h.ysKIyB": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\soldier.h": {
+			"sdcard": false
+		},
+		"\\main.cpp.OhQzCY": {
+			"sdcard": false
+		},
+		"\\main.cpp.bRzUhV": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.jJAtcb": {
+			"sdcard": false
+		},
+		"\\main.cpp.qPiHoH": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

@@ -1,5 +1,4 @@
 /obj
-*.zip
 *.usbeecomp
 *.o
 *.i
@@ -9,6 +8,8 @@
 *.layout
 *.map
 *.elay
+*.bin
+*.elf
 build-*
 
 
