@@ -1,0 +1,15 @@
+/obj
+*.zip
+*.usbeecomp
+*.o
+*.i
+*.s
+*.d
+*.mpg
+*.layout
+*.map
+*.elay
+build-*
+
+
+src/pokitto-base.pro.user
