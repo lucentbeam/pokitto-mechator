@@ -4,6 +4,8 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    game/utilities/tilecollider.cpp \
+    game/utilities/vec.cpp \
     main.cpp \
     core/audio/audiosystem.cpp \
     core/utilities/rect.cpp \
@@ -25,7 +27,9 @@ HEADERS += \
     game/maps/mechator.h \
     game/player.h \
     game/rendering/camera.h \
-    game/tilesets.h
+    game/tilesets.h \
+    game/utilities/tilecollider.h \
+    game/utilities/vec.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
 win32:DEPENDPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
