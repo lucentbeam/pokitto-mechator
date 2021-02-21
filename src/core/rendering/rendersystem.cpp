@@ -96,6 +96,9 @@ void RenderSystem::clear(uint8_t idx) {
 
 #include <iostream>
 
+const uint8_t screenwidth = 110, screenheight = 88;
+const bool four_bpp = false;
+
 struct SfmlSystem {
     sf::RenderWindow * window;
 
@@ -112,8 +115,8 @@ struct SfmlSystem {
     sf::Clock clock;
 
     void create() {
-        window = new sf::RenderWindow(sf::VideoMode(110*6,88*6), "Pokitto Testing");
-        window->setView(sf::View(sf::Vector2f(55,44),sf::Vector2f(110,88)));
+        window = new sf::RenderWindow(sf::VideoMode(screenwidth*6,screenheight*6), "Pokitto Testing");
+        window->setView(sf::View(sf::Vector2f(screenwidth/2, screenheight/2),sf::Vector2f(screenwidth, screenheight)));
         window->setFramerateLimit(60);
         for (int i = 0; i < sizeof(palette)/sizeof(uint16_t); i++) {
             uint16_t color = palette[i];
@@ -123,7 +126,7 @@ struct SfmlSystem {
             colors[i] = sf::Color(r << 3, g << 2, b << 3);
             font.loadFromFile("../font/3x5.ttf");
         }
-        screenbuffer.create(110, 88, colors[0]);
+        screenbuffer.create(screenwidth, screenheight, colors[0]);
     }
 } sfSys;
 
@@ -157,7 +160,7 @@ bool RenderSystem::update() {
         sfSys.window->draw(txt);
     }
     sfSys.texts.clear();
-    sfSys.screenbuffer.create(110, 88, sfSys.colors[sfSys.clearcolor]);
+    sfSys.screenbuffer.create(screenwidth, screenheight, sfSys.colors[sfSys.clearcolor]);
     sfSys.window->display();
     return true;
 }
@@ -176,6 +179,9 @@ void RenderSystem::print(int x, int y, const char *line, uint8_t color, uint8_t 
 
 void RenderSystem::pixel(int x, int y, uint8_t color)
 {
+    if (x < 0 || y < 0 || x >= screenwidth || y >= screenheight) {
+        return;
+    }
     sfSys.screenbuffer.setPixel(x, y, sfSys.colors[color]);
 }
 
@@ -197,18 +203,21 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
         if (flip) {
             px = x + (w - dx);
         }
-        if (px < 0 || py < 0 || px >= 110 || py >= 88) {
+        if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
             continue;
         }
         // this is for 4 bpp
-//        int idx;
-//        int val = start[i/2];
-//        if (i % 2  == 0) {
-//            idx = (val & 0xf0) >> 4;
-//        } else {
-//            idx = val & 0x0f;
-//        }
-        int idx = start[i];
+        int idx;
+        if (four_bpp) {
+            int val = start[i/2];
+            if (i % 2  == 0) {
+                idx = (val & 0xf0) >> 4;
+            } else {
+                idx = val & 0x0f;
+            }
+        } else {
+            idx = start[i];
+        }
         if (idx == transparent_color) {
             continue;
         }

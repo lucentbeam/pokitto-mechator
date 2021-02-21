@@ -17,7 +17,7 @@
 #include "game/player.h"
 
 RenderSystem renderSystem;
-Tilemap<6,6> tileset(jungle, approach);
+Tilemap<6,6> tileset(jungletiles, approach);
 ControlStatus controlStatus;
 
 Camera camera;
