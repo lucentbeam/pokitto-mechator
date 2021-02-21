@@ -19,6 +19,25 @@ public:
     void setY(float y) { m_y = y; init = false; }
 
     float dot(const Vec2f &other) { return m_x * other.m_x + m_y * other.m_y; }
+
+    Vec2f operator+(const Vec2f &other) const {
+        return Vec2f(m_x + other.m_x, m_y + other.m_y);
+    }
+
+    Vec2f operator*(float val) const {
+        return Vec2f(m_x * val, m_y * val);
+    }
+
+    Vec2f& operator*=(float val) {
+        m_x *= val;
+        m_y *= val;
+        m_length *= val;
+        return *this;
+    }
+
+    Vec2f operator/(float val) const {
+        return Vec2f(m_x / val, m_y / val);
+    }
 };
 
 #endif // VEC_H
