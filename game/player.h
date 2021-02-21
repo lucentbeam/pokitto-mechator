@@ -31,7 +31,7 @@ public:
         if (controls.x != 0 || controls.y != 0) {
             float dx = controls.x - fx;
             float dy = controls.y - fy;
-            const float change_rate = 0.05f;
+            const float change_rate = 0.1f;
             fx += dx * change_rate;
             fy += dy * change_rate;
             float len = std::sqrt(fx*fx + fy*fy);
@@ -53,8 +53,9 @@ public:
         uint8_t sprite = 0;
 
         float angle = std::atan2(fy, std::abs(fx)) * 180.0f / 3.1415926f;
-        angle = std::fabs(angle - 90.0f + 22.5f);
-        sprite = uint8_t(angle / 45.0f);
+
+        angle = angle + 90.0f + 11.25f;
+        sprite = uint8_t(angle / 180.0f * 8.0f);
         if (fx < 0) {
             flip = false;
         }

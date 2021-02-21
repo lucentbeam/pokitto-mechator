@@ -747,6 +747,477 @@
 		},
 		"\\pokitto-base.pro.user.BRmTXS": {
 			"sdcard": false
+		},
+		"\\art": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit": {
+			"sdcard": false
+		},
+		"\\font": {
+			"sdcard": false
+		},
+		"\\maps": {
+			"sdcard": false
+		},
+		"\\music": {
+			"sdcard": false
+		},
+		"\\src": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader": {
+			"sdcard": false
+		},
+		"\\art\\exports": {
+			"sdcard": false
+		},
+		"\\art\\jeep.aseprite": {
+			"sdcard": false
+		},
+		"\\art\\jungletiles.aseprite": {
+			"sdcard": false
+		},
+		"\\art\\resurrect-64.hex": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\Makefile": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\Makefile.Debug": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\Makefile.Release": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release": {
+			"sdcard": false
+		},
+		"\\font\\3X5.TTF": {
+			"sdcard": false
+		},
+		"\\maps\\mechator.json": {
+			"sdcard": false
+		},
+		"\\maps\\mechator.png": {
+			"sdcard": false
+		},
+		"\\maps\\mechator.tmx": {
+			"sdcard": false
+		},
+		"\\music\\exports": {
+			"sdcard": false
+		},
+		"\\src\\core": {
+			"sdcard": false
+		},
+		"\\src\\game": {
+			"sdcard": false
+		},
+		"\\src\\main.cpp": {
+			"sdcard": false
+		},
+		"\\src\\My_settings.h": {
+			"sdcard": false
+		},
+		"\\src\\pokitto-mechator.pro": {
+			"sdcard": false
+		},
+		"\\src\\pokitto-mechator.pro.user": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\TiledMapReader": {
+			"sdcard": false
+		},
+		"\\art\\exports\\jeep.png": {
+			"sdcard": false
+		},
+		"\\art\\exports\\mechator_palette.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\audiosystem.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\controls.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\main.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\pokitto-mechator.exe": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\pokittolibextensions.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\rect.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\rendersystem.obj": {
+			"sdcard": false
+		},
+		"\\src\\core\\audio": {
+			"sdcard": false
+		},
+		"\\src\\core\\controls": {
+			"sdcard": false
+		},
+		"\\src\\core\\pokittolibextensions.cpp": {
+			"sdcard": false
+		},
+		"\\src\\core\\pokittolibextensions.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\rendering": {
+			"sdcard": false
+		},
+		"\\src\\core\\serialization": {
+			"sdcard": false
+		},
+		"\\src\\core\\utilities": {
+			"sdcard": false
+		},
+		"\\src\\game\\maps": {
+			"sdcard": false
+		},
+		"\\src\\game\\player.h": {
+			"sdcard": false
+		},
+		"\\src\\game\\rendering": {
+			"sdcard": false
+		},
+		"\\src\\game\\sfx": {
+			"sdcard": false
+		},
+		"\\src\\game\\tilesets.h": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug": {
+			"sdcard": false
+		},
+		"\\art\\exports\\jungletiles.png": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\Makefile.Release": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\release": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\debug": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\Makefile": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\Makefile.Debug": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile.Release": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile.Debug": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\TiledMapReader\\json.hpp": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\TiledMapReader\\TiledMapReader.pro": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\TiledMapReader\\TiledMapReader.pro.user": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\TiledMapReader\\main.cpp": {
+			"sdcard": false
+		},
+		"\\src\\core\\audio\\audiosystem.cpp": {
+			"sdcard": false
+		},
+		"\\src\\core\\audio\\audiosystem.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\controls\\controls.cpp": {
+			"sdcard": false
+		},
+		"\\src\\core\\controls\\controls.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\rendering\\rendersystem.cpp": {
+			"sdcard": false
+		},
+		"\\src\\core\\rendering\\rendersystem.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\rendering\\tilemap.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\rendering\\sprites.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\rendering\\sprites.cpp": {
+			"sdcard": false
+		},
+		"\\src\\core\\serialization\\serialization.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\utilities\\babyecs.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\utilities\\babyfsm.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\utilities\\fpshelper.h": {
+			"sdcard": false
+		},
+		"\\src\\core\\utilities\\rect.cpp": {
+			"sdcard": false
+		},
+		"\\src\\core\\utilities\\rect.h": {
+			"sdcard": false
+		},
+		"\\src\\game\\maps\\mechator.h": {
+			"sdcard": false
+		},
+		"\\src\\game\\maps\\TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"\\src\\game\\rendering\\camera.h": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\main.obj": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\TiledMapReader.pdb": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\TiledMapReader.ilk": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release\\TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\TiledMapReader.vc.pdb": {
+			"sdcard": false
+		},
+		"\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release\\main.obj": {
+			"sdcard": false
+		},
+		"\\art\\exports\\mechator_palette.h": {
+			"sdcard": false
+		},
+		"\\art\\exports\\jeep.h": {
+			"sdcard": false
+		},
+		"\\maps\\mechator.h": {
+			"sdcard": false
+		},
+		"\\art\\exports\\jungletiles.h": {
+			"sdcard": false
+		},
+		"\\content": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user": {
+			"sdcard": false
+		},
+		"\\content\\art": {
+			"sdcard": false
+		},
+		"\\content\\font": {
+			"sdcard": false
+		},
+		"\\content\\maps": {
+			"sdcard": false
+		},
+		"\\content\\music": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader": {
+			"sdcard": false
+		},
+		"\\core\\utilities": {
+			"sdcard": false
+		},
+		"\\game\\maps": {
+			"sdcard": false
+		},
+		"\\game\\player.h": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports": {
+			"sdcard": false
+		},
+		"\\content\\art\\jeep.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\jungletiles.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\resurrect-64.hex": {
+			"sdcard": false
+		},
+		"\\content\\font\\3X5.TTF": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.h": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.png": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx": {
+			"sdcard": false
+		},
+		"\\content\\music\\exports": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\TiledMapReader": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\babyecs.h": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\babyfsm.h": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\fpshelper.h": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\rect.cpp": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\rect.h": {
+			"sdcard": false
+		},
+		"\\game\\maps\\mechator.h": {
+			"sdcard": false
+		},
+		"\\game\\maps\\TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\jeep.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\jeep.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\jungletiles.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\jungletiles.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\mechator_palette.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\mechator_palette.png": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\Makefile": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\Makefile.Debug": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\release": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\Makefile.Release": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\debug": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile.Debug": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile.Release": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\TiledMapReader\\json.hpp": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\TiledMapReader\\main.cpp": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\TiledMapReader\\TiledMapReader.pro": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\TiledMapReader\\TiledMapReader.pro.user": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\main.obj": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\TiledMapReader.ilk": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\TiledMapReader.pdb": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Debug\\debug\\TiledMapReader.vc.pdb": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release\\main.obj": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release\\TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.elf": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
