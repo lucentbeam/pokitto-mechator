@@ -36,7 +36,7 @@ void FPSHelper::draw(RenderSystem *renderer, int x, int y, int color) const
         avg += t / m_fps_list.size();
     }
     char fpses[10];
-    std::sprintf(fpses, "fps: %d", int(avg));
+    std::sprintf(fpses, "fps:%d", int(avg));
     renderer->print(x, y, fpses, color);
 }
 

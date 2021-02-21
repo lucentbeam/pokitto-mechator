@@ -124,7 +124,7 @@ struct SfmlSystem {
             uint8_t g = (color & 0b0000011111100000) >> 5;
             uint8_t b = (color & 0b0000000000011111);
             colors[i] = sf::Color(r << 3, g << 2, b << 3);
-            font.loadFromFile("../font/3x5.ttf");
+            font.loadFromFile("../content/font/3x5.ttf");
         }
         screenbuffer.create(screenwidth, screenheight, colors[0]);
     }

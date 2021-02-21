@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="30" height="50" tilewidth="6" tileheight="6" infinite="0" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" name="mechator" tilewidth="6" tileheight="6" tilecount="252" columns="18">
-  <image source="mechator.png" width="108" height="84"/>
+  <image source="../art/exports/jungletiles.png" width="108" height="84"/>
  </tileset>
  <layer id="3" name="approach" width="30" height="50">
   <data encoding="csv">

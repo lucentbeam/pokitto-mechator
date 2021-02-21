@@ -3,7 +3,6 @@
 #include "core/rendering/rendersystem.h"
 #include "core/controls/controls.h"
 
-#include "core/utilities/babyecs.h"
 #include "core/utilities/babyfsm.h"
 
 // testing stuff
@@ -18,13 +17,12 @@
 
 RenderSystem renderSystem;
 Tilemap<6,6> tileset(jungletiles, approach);
-ControlStatus controlStatus;
 
 Camera camera;
-Player player(32,32);
+Player player(6*20,6*48);
 
 void updateState(FSM &fsm) {
-    player.update(0.014f, controlStatus);
+    player.update(0.014f);
 }
 
 void drawState() {
@@ -36,14 +34,12 @@ void drawState() {
     player.draw(&renderSystem, camera);
 
     fps.update(&renderSystem);
-    fps.draw(&renderSystem, 2, 81, 9);
-    fps.draw(&renderSystem, 2, 80, 41);
+    fps.draw(&renderSystem, 2, 82, 9);
+    fps.draw(&renderSystem, 2, 81, 37);
 }
 
 int main ()
 {
-    BabyECS::initialize();
-
     renderSystem.initialize();
 
     Controls controls;
@@ -65,8 +61,6 @@ int main ()
         lastGameTime = renderSystem.getTimeMs();
         uint8_t step_counter = 0;
         while (gameTime > 0 && step_counter < maxPhysicsStepsPerFrame) {
-            controlStatus = controls.getStatus(true);
-            BabyECS::compress();
             fsm.update();
             gameTime -= physicsTimestepMs;
             step_counter++;
@@ -76,8 +70,6 @@ int main ()
             fsm.draw(); // TODO: add frame interpolation?
         }
     }
-
-    BabyECS::destroyAll();
 
     return 0;
 }
