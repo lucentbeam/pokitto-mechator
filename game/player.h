@@ -31,7 +31,7 @@ public:
 
 Player::Player(float x, float y) :
     m_soldier(x, y, 20.0f, 1.0f),
-    m_jeep(x, y - 12, 50.0f, 0.1f,0.1f)
+    m_jeep(x, y - 12, 50.0f, 0.1f,0.05f)
 {
 
 }

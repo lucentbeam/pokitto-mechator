@@ -1365,6 +1365,54 @@
 		},
 		"\\main.cpp.qPiHoH": {
 			"sdcard": false
+		},
+		"\\game\\physics": {
+			"sdcard": false
+		},
+		"\\game\\utilities": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\camera.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\steering.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\tilecollider.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\tilemap.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\vec.obj": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.h": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\tilecollider.h": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\vec.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\vec.h": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\tilecollider.cpp": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.j10908": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.c10908": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
