@@ -30,8 +30,8 @@ public:
 #endif // PLAYER_H
 
 Player::Player(float x, float y) :
-    m_soldier(x, y, 20.0f, 1.0f),
-    m_jeep(x, y - 12, 50.0f, 0.1f,0.05f)
+    m_soldier(x, y, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
+    m_jeep(x + 6, y - 12, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f)
 {
 
 }

@@ -2,8 +2,10 @@
 #define COLLISIONMANAGER_H
 
 #include <cstdint>
+#include <set>
 
 #include "game/utilities/mapmanager.h"
+#include "core/utilities/rect.h"
 
 enum Terrain : uint8_t {
     None = 0,
@@ -36,9 +38,13 @@ const uint8_t jungletilesterrain[] =
 
 class CollisionManager
 {
+    static bool collisionOn(const Rect &rect, const std::set<uint8_t> collisions);
+
 public:
 
     static Terrain getTerrainAt(float x, float y);
+
+    static Vec2f resolveMovement(const Vec2f &pos, const Vec2f &delta, const std::set<uint8_t> &collisions, const Vec2f &size);
 };
 
 #endif // COLLISIONMANAGER_H
