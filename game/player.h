@@ -22,7 +22,7 @@ public:
 
     void update(float dt);
 
-    void draw(RenderSystem * renderSystem, const Camera &camera);
+    void draw(RenderSystem * renderSystem);
 
     Vec2f pos() const;
 };
@@ -57,9 +57,10 @@ void Player::update(float dt) {
     }
 }
 
-void Player::draw(RenderSystem *renderSystem, const Camera &camera) {
+void Player::draw(RenderSystem *renderSystem) {
     // jeep rendering
-    renderSystem->sprite(m_jeep.pos().x() - camera.tl_x() - 7, m_jeep.pos().y() - camera.tl_y() - 7, jeep[m_jeep.rotation_frame()], jeep[0][2], m_jeep.facing().x() > 0);
+    Vec2f jpos = Camera::worldToScreen(m_jeep.pos());
+    renderSystem->sprite(jpos.x() - 7, jpos.y() - 7, jeep[m_jeep.rotation_frame()], jeep[0][2], m_jeep.facing().x() > 0);
 
     if (m_dismounted) {
         // soldier rendering
@@ -71,7 +72,8 @@ void Player::draw(RenderSystem *renderSystem, const Camera &camera) {
         } else {
             sprite += 1;
         }
-        renderSystem->sprite(m_soldier.pos().x() - camera.tl_x() - 3, m_soldier.pos().y() - camera.tl_y() - 3, soldier[sprite], soldier[0][2], m_soldier.facing().x() > 0);
+        Vec2f spos = Camera::worldToScreen(m_soldier.pos());
+        renderSystem->sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], m_soldier.facing().x() > 0);
     }
 }
 

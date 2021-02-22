@@ -17,8 +17,6 @@
 
 RenderSystem renderSystem;
 Tilemap<6,6> tileset(jungletiles, approach);
-
-Camera camera;
 Player player(6*20,6*48);
 
 void updateState(FSM &fsm) {
@@ -28,10 +26,10 @@ void updateState(FSM &fsm) {
 void drawState() {
     static FPSHelper fps(10);
 
-    camera.update(player.pos().x(), player.pos().y(), tileset.mapWidth(), tileset.mapHeight(), tileset.tileWidth(), tileset.tileHeight());
+    Camera::update(player.pos().x(), player.pos().y());
 
-    tileset.draw(&renderSystem, camera.tl_x() / 6, camera.tl_y() / 6, camera.render_width, camera.render_height, camera.offset_x(), camera.offset_y());
-    player.draw(&renderSystem, camera);
+    tileset.draw(&renderSystem);
+    player.draw(&renderSystem);
 
     fps.update(&renderSystem);
     fps.draw(&renderSystem, 2, 82, 9);
@@ -40,6 +38,7 @@ void drawState() {
 
 int main ()
 {
+    Camera::configure(tileset.tileWidth(), tileset.tileHeight(), tileset.mapWidth(), tileset.mapHeight());
     renderSystem.initialize();
 
     Controls controls;

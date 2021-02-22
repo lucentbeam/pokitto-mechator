@@ -5,6 +5,7 @@ CONFIG -= qt
 
 SOURCES += \
     game/physics/steering.cpp \
+    game/rendering/camera.cpp \
     game/utilities/tilecollider.cpp \
     game/utilities/vec.cpp \
     main.cpp \

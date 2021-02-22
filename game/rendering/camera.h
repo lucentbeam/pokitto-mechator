@@ -6,35 +6,32 @@
 #include <algorithm>
 
 #include "core/rendering/rendersystem.h"
-#include "core/rendering/tilemap.h"
+#include "game/utilities/vec.h"
 
 class Camera {
-    int m_x,m_y;
-    float m_offset_x, m_offset_y;
+    static const uint8_t screen_half_x = 55, screen_half_y = 44;
 
-    const uint8_t screen_half_x = 55, screen_half_y = 44;
+    static int s_x,s_y;
+    static float s_offset_x, s_offset_y;
 
-    int m_tile_width, m_tile_height;
+    static int s_tile_width;
+    static int s_tile_height;
+    static int s_map_width;
+    static int s_map_height;
+    static bool s_clamp;
 
 public:
-    const uint8_t render_width = 20, render_height = 16;
 
-    void update(int center_x, int center_y, int map_width, int map_height, int tile_width, int tile_height) {
-        float px = std::clamp<float>(center_x - screen_half_x, 0.0f, map_width * tile_width - screen_half_x * 2.0f);
-        float py = std::clamp<float>(center_y - screen_half_y, 0.0f, map_height * tile_height - screen_half_y * 2.0f);
-        m_x = int(px / tile_width);
-        m_y = int(py / tile_height);
-        m_offset_x = -std::fmod(px, float(tile_width));
-        m_offset_y = -std::fmod(py, float(tile_height));
+    static void configure(int tile_width, int tile_height, int map_width = 0, int map_height = 0);
 
-        m_tile_width = tile_width;
-        m_tile_height = tile_height;
-    }
+    static void update(int center_x, int center_y);
 
-    float tl_x() const { return m_x * m_tile_width - m_offset_x; }
-    float tl_y() const { return m_y * m_tile_height - m_offset_y; }
-    float offset_x() const { return m_offset_x; }
-    float offset_y() const { return m_offset_y; }
+    static float tl_x() { return s_x * s_tile_width - s_offset_x; }
+    static float tl_y() { return s_y * s_tile_height - s_offset_y; }
+    static float offset_x() { return s_offset_x; }
+    static float offset_y() { return s_offset_y; }
+
+    static Vec2f worldToScreen(const Vec2f &pos);
 };
 
 #endif // CAMERA_H
