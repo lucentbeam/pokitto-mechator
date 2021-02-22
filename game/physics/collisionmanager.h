@@ -7,7 +7,7 @@
 #include "game/utilities/mapmanager.h"
 #include "core/utilities/rect.h"
 
-enum Terrain : uint8_t {
+enum Terrain : uint16_t {
     None = 0,
     Wall = 1,
     WaterShallow = 2,
@@ -38,13 +38,21 @@ const uint8_t jungletilesterrain[] =
 
 class CollisionManager
 {
-    static bool collisionOn(const Rect &rect, const std::set<uint8_t> collisions);
+    static bool rectCollides(const Rect &rect, uint16_t collisionMask);
 
 public:
 
+    static uint16_t getMask(std::initializer_list<uint8_t> collisions) {
+        uint16_t mask = 0;
+        for(auto c : collisions) {
+            mask |= (1 << c);
+        }
+        return mask;
+    }
+
     static Terrain getTerrainAt(float x, float y);
 
-    static Vec2f resolveMovement(const Vec2f &pos, const Vec2f &delta, const std::set<uint8_t> &collisions, const Vec2f &size);
+    static Vec2f resolveMovement(Vec2f pos, const Vec2f &delta, uint16_t collisionMask, const Vec2f &size);
 };
 
 #endif // COLLISIONMANAGER_H

@@ -15,7 +15,7 @@ class Steering {
     const Vec2f m_size;
     const float m_speed;
     const float m_cornering;
-    const std::set<uint8_t> m_collisions;
+    const uint16_t m_collisions;
     const float m_friction;
     bool m_moving;
     float m_interia;
@@ -25,7 +25,7 @@ public:
         m_size(width,height),
         m_speed(speed),
         m_cornering(cornering),
-        m_collisions(collisions),
+        m_collisions(CollisionManager::getMask(collisions)),
         m_friction(friction)
     {
 

@@ -64,8 +64,8 @@ template<int TileWidth, int TileHeight>
 uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y)
 {
     if (x < 0 || y < 0) return 0;
-    uint8_t px = (x / TileWidth);
-    uint8_t py = (y / TileHeight);
+    int px = (x / TileWidth);
+    int py = (y / TileHeight);
     if (px >= m_mapwidth || py >= m_mapheight) return 0;
     return m_map[px + py * m_mapwidth];
 }

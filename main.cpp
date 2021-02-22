@@ -34,8 +34,6 @@ int main ()
     MapManager::setBackground(BGMap::Approach);
     renderSystem.initialize();
 
-    Controls controls;
-
     FSM fsm;
     fsm.add(0, updateState, drawState);
 
