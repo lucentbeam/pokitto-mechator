@@ -24,6 +24,8 @@ public:
   uint8_t mapHeight() const { return m_mapheight; }
   int tileWidth() const { return TileWidth; }
   int tileHeight() const { return TileHeight; }
+
+  uint8_t getTileAt(float x, float y);
 };
 
 template<int TileWidth, int TileHeight>
@@ -56,6 +58,16 @@ void Tilemap<TileWidth, TileHeight>::draw(RenderSystem *system)
             system->sprite(sx + (i-x) * TileWidth, sy + (j-y) * TileHeight, m_tiles[tile]);
         }
     }
+}
+
+template<int TileWidth, int TileHeight>
+uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y)
+{
+    if (x < 0 || y < 0) return 0;
+    uint8_t px = (x / TileWidth);
+    uint8_t py = (y / TileHeight);
+    if (px >= m_mapwidth || py >= m_mapheight) return 0;
+    return m_map[px + py * m_mapwidth];
 }
 
 #endif

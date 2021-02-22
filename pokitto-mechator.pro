@@ -4,8 +4,10 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    game/physics/collisionmanager.cpp \
     game/physics/steering.cpp \
     game/rendering/camera.cpp \
+    game/utilities/mapmanager.cpp \
     game/utilities/tilecollider.cpp \
     game/utilities/vec.cpp \
     main.cpp \
@@ -27,10 +29,12 @@ HEADERS += \
     core/controls/controls.h \
     core/settings_pokitto.h \
     game/maps/mechator.h \
+    game/physics/collisionmanager.h \
     game/physics/steering.h \
     game/player.h \
     game/rendering/camera.h \
     game/tilesets.h \
+    game/utilities/mapmanager.h \
     game/utilities/tilecollider.h \
     game/utilities/vec.h
 

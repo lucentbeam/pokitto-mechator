@@ -1413,6 +1413,15 @@
 		},
 		"\\content\\maps\\mechator.json.c10908": {
 			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.G10908": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.k10908": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.l10908": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

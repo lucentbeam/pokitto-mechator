@@ -47,8 +47,9 @@ void Player::update(float dt) {
     if (controls.pb) {
         if (m_dismounted) {
             Vec2f dp = m_jeep.pos() - m_soldier.pos();
-            if (dp.length() > 6) return;
-            m_dismounted = false;
+            if (dp.length() < 6) {
+                m_dismounted = false;
+            }
         } else {
             m_dismounted = true;
             m_soldier.copyPosition(m_jeep);
@@ -75,6 +76,7 @@ void Player::draw(RenderSystem *renderSystem) {
         Vec2f spos = Camera::worldToScreen(m_soldier.pos());
         renderSystem->sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], m_soldier.facing().x() > 0);
     }
+
 }
 
 Vec2f Player::pos() const

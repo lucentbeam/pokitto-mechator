@@ -2,21 +2,14 @@
 
 #include "core/rendering/rendersystem.h"
 #include "core/controls/controls.h"
-
 #include "core/utilities/babyfsm.h"
-
-// testing stuff
-#include "game/tilesets.h"
-#include "core/rendering/tilemap.h"
-#include "game/maps/mechator.h"
-
 #include "core/utilities/fpshelper.h"
 
 #include "game/rendering/camera.h"
 #include "game/player.h"
+#include "game/utilities/mapmanager.h"
 
 RenderSystem renderSystem;
-Tilemap<6,6> tileset(jungletiles, approach);
 Player player(6*20,6*48);
 
 void updateState(FSM &fsm) {
@@ -28,7 +21,7 @@ void drawState() {
 
     Camera::update(player.pos().x(), player.pos().y());
 
-    tileset.draw(&renderSystem);
+    MapManager::draw(&renderSystem);
     player.draw(&renderSystem);
 
     fps.update(&renderSystem);
@@ -38,7 +31,7 @@ void drawState() {
 
 int main ()
 {
-    Camera::configure(tileset.tileWidth(), tileset.tileHeight(), tileset.mapWidth(), tileset.mapHeight());
+    MapManager::setBackground(BGMap::Approach);
     renderSystem.initialize();
 
     Controls controls;
