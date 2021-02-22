@@ -28,7 +28,7 @@ void updateState(FSM &fsm) {
 void drawState() {
     static FPSHelper fps(10);
 
-    camera.update(player.x(), player.y(), tileset.mapWidth(), tileset.mapHeight(), tileset.tileWidth(), tileset.tileHeight());
+    camera.update(player.pos().x(), player.pos().y(), tileset.mapWidth(), tileset.mapHeight(), tileset.tileWidth(), tileset.tileHeight());
 
     tileset.draw(&renderSystem, camera.tl_x() / 6, camera.tl_y() / 6, camera.render_width, camera.render_height, camera.offset_x(), camera.offset_y());
     player.draw(&renderSystem, camera);
