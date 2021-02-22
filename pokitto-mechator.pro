@@ -8,7 +8,6 @@ SOURCES += \
     game/physics/steering.cpp \
     game/rendering/camera.cpp \
     game/utilities/mapmanager.cpp \
-    game/utilities/tilecollider.cpp \
     game/utilities/vec.cpp \
     main.cpp \
     core/audio/audiosystem.cpp \
@@ -35,7 +34,6 @@ HEADERS += \
     game/rendering/camera.h \
     game/tilesets.h \
     game/utilities/mapmanager.h \
-    game/utilities/tilecollider.h \
     game/utilities/vec.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include

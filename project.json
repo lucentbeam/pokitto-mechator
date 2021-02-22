@@ -1422,6 +1422,42 @@
 		},
 		"\\content\\maps\\mechator.json.l10908": {
 			"sdcard": false
+		},
+		"\\content\\art\\jungletilesterrain.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\terrainindices.aseprite": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\collisionmanager.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\mapmanager.obj": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\jungletilesterrain.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\terrainindices.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\jungletilesterrain.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\terrainindices.h": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
