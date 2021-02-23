@@ -4,6 +4,8 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    game/entities/projectile.cpp \
+    game/physics/body.cpp \
     game/physics/collisionmanager.cpp \
     game/physics/steering.cpp \
     game/rendering/camera.cpp \
@@ -27,7 +29,9 @@ HEADERS += \
     core/utilities/rect.h \
     core/controls/controls.h \
     core/settings_pokitto.h \
+    game/entities/projectile.h \
     game/maps/mechator.h \
+    game/physics/body.h \
     game/physics/collisionmanager.h \
     game/physics/steering.h \
     game/player.h \

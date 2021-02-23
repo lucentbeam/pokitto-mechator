@@ -8,6 +8,7 @@
 
 #include "game/tilesets.h"
 #include "game/physics/steering.h"
+#include "game/entities/projectile.h"
 
 class Player {
     Controls m_controller;
@@ -44,7 +45,7 @@ void Player::update(float dt) {
     } else {
         m_jeep.update(dt, controls.x, controls.y);
     }
-    if (controls.pb) {
+    if (controls.pc) {
         if (m_dismounted) {
             Vec2f dp = m_jeep.pos() - m_soldier.pos();
             if (dp.length() < 6) {
@@ -54,7 +55,11 @@ void Player::update(float dt) {
             m_dismounted = true;
             m_soldier.copyPosition(m_jeep);
         }
-
+    }
+    if (controls.pa) {
+        Vec2f p = !m_dismounted ? m_jeep.pos() : m_soldier.pos();
+        Vec2f f = !m_dismounted ? m_jeep.facing() : m_soldier.facing();
+        ProjectileManager::create(p, f * 100.0f, 0.5f);
     }
 }
 

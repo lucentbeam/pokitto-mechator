@@ -8,12 +8,14 @@
 #include "game/rendering/camera.h"
 #include "game/player.h"
 #include "game/utilities/mapmanager.h"
+#include "game/entities/projectile.h"
 
 RenderSystem renderSystem;
 Player player(6*20,6*48);
 
 void updateState(FSM &fsm) {
     player.update(0.014f);
+    ProjectileManager::update(0.014f);
 }
 
 void drawState() {
@@ -23,6 +25,7 @@ void drawState() {
 
     MapManager::draw(&renderSystem);
     player.draw(&renderSystem);
+    ProjectileManager::draw(&renderSystem);
 
     fps.update(&renderSystem);
     fps.draw(&renderSystem, 2, 82, 9);

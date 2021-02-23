@@ -1467,6 +1467,12 @@
 		},
 		"\\game\\utilities\\helpers.h": {
 			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.d10908": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.Gg2248": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
