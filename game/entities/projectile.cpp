@@ -31,30 +31,27 @@ void Projectile::setEntityCollide(void (*enemy_collide_callback)(Projectile *, u
     m_hit_entity = enemy_collide_callback;
 }
 
-void Projectile::setSprite(const uint8_t *spr)
-{
-    sprite = SpriteWrapper(spr);
-}
-
 void Projectile::setSprite(std::initializer_list<const uint8_t *> frames, float fps)
 {
-
+    sprite = SpriteWrapper(frames, fps);
 }
 
 void Projectile::update(float dt)
 {
     m_body.update(dt);
     m_lifetime -= dt;
+    sprite.update();
 }
 
 void Projectile::draw(RenderSystem *renderer)
 {
     Vec2f pos = Camera::worldToScreen(m_body.pos());
-    if (sprite.data == nullptr) {
+    const uint8_t * spriteData = sprite.data();
+    if (spriteData == nullptr) {
         renderer->drawRect(pos.x()-1,pos.y(),2,2,9);
         renderer->drawRect(pos.x()-1,pos.y()-1,2,2,41);
     } else {
-        renderer->sprite(pos.x()-sprite.data[0]/2, pos.y()-sprite.data[1]/2, sprite.data);
+        renderer->sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData);
     }
 }
 

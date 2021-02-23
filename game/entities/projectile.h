@@ -2,16 +2,42 @@
 #define BULLET_H
 
 #include <cstdint>
-#include <initializer_list>
+#include <vector>
 
 #include "game/physics/body.h"
 #include "core/rendering/rendersystem.h"
 
 class SpriteWrapper {
+    std::vector<const uint8_t*> frameData;
+    uint8_t counter = 0;
+    uint8_t currentFrame = 0;
+    uint8_t countsPerFrame = 0;
 public:
-    const uint8_t * data;
-    SpriteWrapper() : data(nullptr) {}
-    SpriteWrapper(const uint8_t * spr) : data(spr) {}
+    SpriteWrapper() {}
+    SpriteWrapper(std::initializer_list<const uint8_t*> sprites, float fps) :
+        frameData(sprites),
+        countsPerFrame(1.0f / (0.014f * fps) + 0.5f)
+    {
+
+    }
+
+    void update() {
+        if (frameData.size() < 2) {
+            return;
+        }
+        counter++;
+        if (counter >= countsPerFrame) {
+            counter %= countsPerFrame;
+            currentFrame++;
+            currentFrame %= frameData.size();
+        }
+    }
+    const uint8_t * data() const {
+        if (frameData.size() < 1) {
+            return nullptr;
+        }
+        return frameData[currentFrame];
+    }
 };
 
 class Projectile
@@ -30,8 +56,6 @@ public:
     void setExpireCallback(void (*expire_callback)(Projectile*));
 
     void setEntityCollide(void (*enemy_collide_callback)(Projectile*,uint16_t,void*));
-
-    void setSprite(const uint8_t * spr);
 
     void setSprite(std::initializer_list<const uint8_t*> frames, float fps);
 

@@ -3,12 +3,22 @@
 
 #include <cstdint>
 
-const uint8_t projectile[] =
+//Sprite sheet:1x2
+const uint8_t projectile [][11] ={
+//[0] cell:0x0
 {
 3,3,
 59,47,59,
 47,41,47,
 59,47,59,
+},
+//[1] cell:0x1
+{
+3,3,
+45,56,45,
+56,54,56,
+45,56,45,
+},
 };
 
 //Sprite sheet:1x6

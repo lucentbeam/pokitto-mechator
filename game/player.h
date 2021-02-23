@@ -59,7 +59,7 @@ void Player::update(float dt) {
     if (controls.pa) {
         Vec2f p = !m_dismounted ? m_jeep.pos() : m_soldier.pos();
         Vec2f f = !m_dismounted ? m_jeep.aim() : m_soldier.aim();
-        ProjectileManager::create(p, f * 100.0f, 0.5f)->setSprite({jeep[0]}, 5);
+        ProjectileManager::create(p, f * 25.0f, 3.5f)->setSprite({projectile[0]}, 20);
     }
 }
 
