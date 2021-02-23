@@ -33,6 +33,7 @@ HEADERS += \
     game/player.h \
     game/rendering/camera.h \
     game/tilesets.h \
+    game/utilities/helpers.h \
     game/utilities/mapmanager.h \
     game/utilities/vec.h
 

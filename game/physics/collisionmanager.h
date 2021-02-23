@@ -2,7 +2,6 @@
 #define COLLISIONMANAGER_H
 
 #include <cstdint>
-#include <set>
 
 #include "game/utilities/mapmanager.h"
 #include "core/utilities/rect.h"
@@ -32,8 +31,8 @@ const uint8_t jungletilesterrain[] =
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
 1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,7,6,0,0,0,0,0,0,0,0,0,1,1,1,
-1,1,1,0,7,6,0,0,0,0,0,0,0,0,0,0,0,0,
+1,1,0,7,6,0,0,0,0,0,0,0,0,0,0,1,1,1,
+1,1,0,7,6,0,0,0,0,0,0,0,0,0,0,0,0,0,
 };
 
 class CollisionManager
@@ -41,14 +40,6 @@ class CollisionManager
     static bool rectCollides(const Rect &rect, uint16_t collisionMask);
 
 public:
-
-    static uint16_t getMask(std::initializer_list<uint8_t> collisions) {
-        uint16_t mask = 0;
-        for(auto c : collisions) {
-            mask |= (1 << c);
-        }
-        return mask;
-    }
 
     static Terrain getTerrainAt(float x, float y);
 

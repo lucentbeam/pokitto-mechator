@@ -4,10 +4,10 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
-#include <set>
 
 #include "game/utilities/vec.h"
 #include "game/physics/collisionmanager.h"
+#include "game/utilities/helpers.h"
 
 class Steering {
     Vec2f m_pos;
@@ -25,7 +25,7 @@ public:
         m_size(width,height),
         m_speed(speed),
         m_cornering(cornering),
-        m_collisions(CollisionManager::getMask(collisions)),
+        m_collisions(Helpers::getMask(collisions)),
         m_friction(friction)
     {
 

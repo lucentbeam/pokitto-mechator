@@ -1458,6 +1458,15 @@
 		},
 		"\\content\\art\\exports\\terrainindices.h": {
 			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.CZoouu": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.h.FCfHqp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\helpers.h": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
