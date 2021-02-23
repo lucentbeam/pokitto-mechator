@@ -14,7 +14,7 @@ void MapManager::draw(RenderSystem *renderer)
 void MapManager::setBackground(BGMap idx)
 {
     s_activeBackground = s_backgrounds + idx;
-    Camera::configure(s_activeBackground->tileWidth(), s_activeBackground->tileHeight(), s_activeBackground->mapWidth(), s_activeBackground->mapHeight());
+    Camera::configure(s_activeBackground->tileWidth(), s_activeBackground->tileHeight());//, s_activeBackground->mapWidth(), s_activeBackground->mapHeight());
 }
 
 uint8_t MapManager::getTileAt(float x, float y)

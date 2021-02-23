@@ -63,7 +63,8 @@ void Tilemap<TileWidth, TileHeight>::draw(RenderSystem *system)
 template<int TileWidth, int TileHeight>
 uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y)
 {
-    if (x < 0 || y < 0) return 0;
+    const uint8_t defaultTileIndex = 19; // deep water; TODO: find a better place for this
+    if (x < 0 || y < 0) return defaultTileIndex;
     int px = (x / TileWidth);
     int py = (y / TileHeight);
     if (px >= m_mapwidth || py >= m_mapheight) return 0;

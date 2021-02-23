@@ -1,10 +1,12 @@
 #include "projectile.h"
 #include "game/rendering/camera.h"
+#include "game/utilities/helpers.h"
+#include "game/physics/collisionmanager.h"
 
 Projectile::Projectile() :
     m_body({0, 0}, {0, 0}),
     m_lifetime(0),
-    m_hit_wall(nullptr),
+    m_on_expire(nullptr),
     m_hit_entity(nullptr)
 {
 
@@ -13,20 +15,30 @@ Projectile::Projectile() :
 Projectile::Projectile(const Vec2f &pos, const Vec2f &vel, float lifetime) :
     m_body(pos, vel),
     m_lifetime(lifetime),
-    m_hit_wall(nullptr),
+    m_on_expire(nullptr),
     m_hit_entity(nullptr)
 {
 
 }
 
-void Projectile::setWallCollide(void (*wall_collide_callback)(Projectile *, uint16_t))
+void Projectile::setExpireCallback(void (*expire_callback)(Projectile *))
 {
-    m_hit_wall = wall_collide_callback;
+    m_on_expire = expire_callback;
 }
 
 void Projectile::setEntityCollide(void (*enemy_collide_callback)(Projectile *, uint16_t, void *))
 {
     m_hit_entity = enemy_collide_callback;
+}
+
+void Projectile::setSprite(const uint8_t *spr)
+{
+    sprite = SpriteWrapper(spr);
+}
+
+void Projectile::setSprite(std::initializer_list<const uint8_t *> frames, float fps)
+{
+
 }
 
 void Projectile::update(float dt)
@@ -38,8 +50,19 @@ void Projectile::update(float dt)
 void Projectile::draw(RenderSystem *renderer)
 {
     Vec2f pos = Camera::worldToScreen(m_body.pos());
-    renderer->drawRect(pos.x()-1,pos.y(),2,2,9);
-    renderer->drawRect(pos.x()-1,pos.y()-1,2,2,41);
+    if (sprite.data == nullptr) {
+        renderer->drawRect(pos.x()-1,pos.y(),2,2,9);
+        renderer->drawRect(pos.x()-1,pos.y()-1,2,2,41);
+    } else {
+        renderer->sprite(pos.x()-sprite.data[0]/2, pos.y()-sprite.data[1]/2, sprite.data);
+    }
+}
+
+void Projectile::onExpire()
+{
+    if (m_on_expire != nullptr) {
+        m_on_expire(this);
+    }
 }
 
 Projectile ProjectileManager::s_projectiles[32];
@@ -58,10 +81,13 @@ Projectile *ProjectileManager::create(const Vec2f &pos, const Vec2f &vel, float 
 
 void ProjectileManager::update(float dt)
 {
+    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal});
     int i = 0;
     while (i < s_projectileCount) {
         s_projectiles[i].update(dt);
-        if (s_projectiles[i].expired()) {
+        bool hitWall = CollisionManager::collision(s_projectiles[i].pos(), mask, Vec2f(2,2));
+        if (s_projectiles[i].expired() || hitWall) {
+            s_projectiles[i].onExpire();
             s_projectiles[i] = s_projectiles[s_projectileCount-1];
             s_projectileCount--;
         } else {

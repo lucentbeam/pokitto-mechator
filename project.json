@@ -1473,6 +1473,192 @@
 		},
 		"\\content\\maps\\mechator.json.Gg2248": {
 			"sdcard": false
+		},
+		"\\game\\entities": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\audiosystem.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\body.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\camera.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\collisionmanager.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\controls.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\main.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\mapmanager.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pokitto-mechator.pdb": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pokitto-mechator.vc.pdb": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pokittolibextensions.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\projectile.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\rect.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\rendersystem.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\steering.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\vec.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pokitto-mechator.exe": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\body.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\projectile.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pokitto-mechator.ilk": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h": {
+			"sdcard": false
+		},
+		"\\game\\physics\\body.cpp": {
+			"sdcard": false
+		},
+		"\\game\\physics\\body.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\projectile.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\projectile.png": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.Dmyjbz": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.aqcUpZ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.uhseWW": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.wmpjKw": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.MjSPDP": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.BiBFVH": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.ZOOFra": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.MbxmJn": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.vCWjRw": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.dZAeAt": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.YmsUyH": {
+			"sdcard": false
+		},
+		"\\game\\player.h.pmyOBm": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.DxHSjo": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.EjhzxY": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\projectile.h": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.wbDsgu": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.xmFKjY": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.ncIUjE": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.gTRXdb": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.EoTjLa": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.XznNPu": {
+			"sdcard": false
+		},
+		"\\game\\player.h.bhRyCq": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.fIUelI": {
+			"sdcard": false
+		},
+		"\\game\\player.h.wpapXF": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.NkAKNf": {
+			"sdcard": false
+		},
+		"\\game\\player.h.JMNAsw": {
+			"sdcard": false
+		},
+		"\\game\\player.h.BnTgbc": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.mQNBah": {
+			"sdcard": false
+		},
+		"\\main.cpp.zScFBS": {
+			"sdcard": false
+		},
+		"\\main.cpp.IeHeyc": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.nP4280": {
+			"sdcard": false
+		},
+		"\\main.cpp.nkRpMF": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.py4280": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.bokzFr": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.rSmUQE": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.ypzGAW": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

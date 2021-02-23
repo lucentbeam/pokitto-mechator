@@ -20,6 +20,13 @@ bool CollisionManager::rectCollides(const Rect &rect, uint16_t collisionMask)
     return false;
 }
 
+bool CollisionManager::collision(const Vec2f &pos, uint16_t collisionMask, const Vec2f &size)
+{
+    Rect rect = Rect(0, 0, size.x(), size.y());
+    rect.setCenter(pos.x(), pos.y());
+    return rectCollides(rect, collisionMask);
+}
+
 Terrain CollisionManager::getTerrainAt(float x, float y)
 {
     return Terrain(jungletilesterrain[MapManager::getTileAt(x,y)]);

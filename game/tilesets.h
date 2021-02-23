@@ -3,6 +3,14 @@
 
 #include <cstdint>
 
+const uint8_t projectile[] =
+{
+3,3,
+59,47,59,
+47,41,47,
+59,47,59,
+};
+
 //Sprite sheet:1x6
 const uint8_t soldier [][38] ={
 //[0] cell:0x0

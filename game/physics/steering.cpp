@@ -4,7 +4,8 @@ void Steering::update(float dt, float x, float y) {
     m_moving = false;
     if (std::fabs(x) > 0.01f || std::fabs(y) > 0.01f) {
         m_moving = true;
-        Vec2f dp = Vec2f(x,y) - m_facing;
+        m_aim = Vec2f(x,y);
+        Vec2f dp = m_aim - m_facing;
         m_facing += dp * m_cornering;
         float len = m_facing.length();
         if (len > 0) {

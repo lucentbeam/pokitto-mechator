@@ -3,7 +3,7 @@
 const uint16_t palette[] = {
 0,59847,7662,19676,65110,10501,64323,38605,36511,14760,62626,52973,16711,25260,65029,12711,27118,37741,31112,12905,37621,44207,39463,21484,44094,27244,52039,38224,60797,31633,58505,46546,29162,40278,64970,2796,41549,50938,18916,3153,52015,65535,25382,3443,60435,26916,42312,14103,33003,45510,55049,36828,49450,60006,65520,12682,62063,62441,4809,19022,62480,43270,9356,19254,64818,
 };
-const uint8_t backgroundColor = 26;
+const uint8_t backgroundColor = 63;
 
 #include <cstdio>
 
@@ -189,7 +189,10 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
 {
     if (m_clipping && (m_clip_width == 0 || m_clip_height == 0)) return;
     uint8_t w = sprite[0];
-    uint8_t width = w + (w % 2);
+    uint8_t width = w;
+    if (four_bpp) {
+        width = w + (w % 2);
+    }
     uint8_t h = sprite[1];
     const uint8_t * start = sprite + 2;
     for (int i = 0; i < width * h; i++) {

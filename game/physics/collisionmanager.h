@@ -40,6 +40,7 @@ class CollisionManager
     static bool rectCollides(const Rect &rect, uint16_t collisionMask);
 
 public:
+    static bool collision(const Vec2f &pos, uint16_t collisionMask, const Vec2f &size);
 
     static Terrain getTerrainAt(float x, float y);
 
