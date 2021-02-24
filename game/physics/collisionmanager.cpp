@@ -7,8 +7,8 @@ bool CollisionManager::rectCollides(const Rect &rect, uint16_t collisionMask)
     int ylower = rect.top()/6.0f;
     int yupper = rect.bottom()/6.0f;
 
-    for(int px = xlower; px < xupper; px++) {
-        for (int py = ylower; py < yupper; py++) {
+    for(int px = xlower; px <= xupper; px++) {
+        for (int py = ylower; py <= yupper; py++) {
             if ((1 << getTerrainAt(px*6,py*6) & collisionMask) > 0) {
                 return true;
             }

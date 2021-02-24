@@ -11,9 +11,9 @@ void Rect::grow(float w, float h)
 
 void Rect::setCenter(float x, float y) {
   m_l = x - m_w/2.0f;
-  m_r = x + m_w;
+  m_r = x + m_w/2.0f;
   m_t = y - m_h/2.0f;
-  m_b = y + m_h;
+  m_b = y + m_h/2.0f;
 }
 
 bool Rect::overlaps(const Rect &other)
