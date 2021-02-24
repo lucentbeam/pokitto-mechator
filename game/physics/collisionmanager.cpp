@@ -2,17 +2,14 @@
 
 bool CollisionManager::rectCollides(const Rect &rect, uint16_t collisionMask)
 {
-    float x = rect.left();
-    float y = rect.top();
-    int xdivisions = int(rect.width() / 6) + 1;
-    float xstep = rect.width() / float(xdivisions);
-    int ydivisions = int(rect.height() / 6) + 1;
-    float ystep = rect.height() / float(ydivisions);
-    for(int i = 0; i <= xdivisions; i++) {
-        for (int j = 0; j <= ydivisions; j++) {
-            float px = x + float(i) * xstep;
-            float py = y + float(j) * ystep;
-            if ((1 << getTerrainAt(px,py) & collisionMask) > 0) {
+    int xlower = rect.left()/6.0f;
+    int xupper = rect.right()/6.0f;
+    int ylower = rect.top()/6.0f;
+    int yupper = rect.bottom()/6.0f;
+
+    for(int px = xlower; px < xupper; px++) {
+        for (int py = ylower; py < yupper; py++) {
+            if ((1 << getTerrainAt(px*6,py*6) & collisionMask) > 0) {
                 return true;
             }
         }

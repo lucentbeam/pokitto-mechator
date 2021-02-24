@@ -1917,6 +1917,60 @@
 		},
 		"\\game\\physics\\steering.h.TiiEbl": {
 			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.cGdrcI": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.LGESMV": {
+			"sdcard": false
+		},
+		"\\content\\art\\explosion.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\explosion.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\projectile-grenade.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\projectile-grenade.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\explosion.h": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp.rjTSOx": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp.nJmxXo": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp.yHdbNe": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp.wOZjdo": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp.xsKICa": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp.IZfvgd": {
+			"sdcard": false
+		},
+		"\\game\\player.h.LqZdIX": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp.gapZcv": {
+			"sdcard": false
+		},
+		"\\game\\player.h.ESZCzW": {
+			"sdcard": false
+		},
+		"\\game\\player.h.wYMeqW": {
+			"sdcard": false
+		},
+		"\\game\\player.h.lGlpyK": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
