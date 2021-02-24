@@ -4,6 +4,7 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    core/rendering/screenbuffer.cpp \
     game/entities/projectile.cpp \
     game/physics/body.cpp \
     game/physics/collisionmanager.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 
 HEADERS += \
     core/audio/audiosystem.h \
+    core/rendering/screenbuffer.h \
     core/rendering/tilemap.h \
     core/utilities/babyfsm.h \
     core/pokittolibextensions.h \
