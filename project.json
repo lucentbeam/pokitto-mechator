@@ -1845,6 +1845,33 @@
 		},
 		"\\core\\controls\\controls.cpp.AzBYBg": {
 			"sdcard": false
+		},
+		"\\game\\player.h.amPxEq": {
+			"sdcard": false
+		},
+		"\\game\\player.h.CqGBaZ": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\vec.h.secHFG": {
+			"sdcard": false
+		},
+		"\\game\\player.h.eHvUGb": {
+			"sdcard": false
+		},
+		"\\game\\player.h.WCKBiB": {
+			"sdcard": false
+		},
+		"\\game\\player.h.XeLVfj": {
+			"sdcard": false
+		},
+		"\\game\\player.h.CuUSYA": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.lhGtgN": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.hYKjpF": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

@@ -56,10 +56,16 @@ void Player::update(float dt) {
             m_soldier.copyPosition(m_jeep);
         }
     }
-    if (controls.a.downEvery(1, 10)) {
-        Vec2f p = !m_dismounted ? m_jeep.pos() : m_soldier.pos();
-        Vec2f f = !m_dismounted ? m_jeep.aim() : m_soldier.aim();
-        ProjectileManager::create(p, f * 100.0f, 3.5f)->setSprite({projectile[0]}, 20);
+    if (m_dismounted) {
+        if (controls.a.downEvery(1, 12)) {
+            ProjectileManager::create(m_soldier.pos(), m_soldier.aim() * 100.0f, 0.5f)->setSprite({projectile[0]}, 20);
+        }
+    } else {
+        if (controls.a.downEvery(1, 18)) {
+            Vec2f offset = m_jeep.aim().rot90();
+            ProjectileManager::create(m_jeep.pos() + offset * 4.0f, m_jeep.aim() * 100.0f, 0.5f)->setSprite({projectile[0]}, 20);
+            ProjectileManager::create(m_jeep.pos() - offset * 4.0f, m_jeep.aim() * 100.0f, 0.5f)->setSprite({projectile[0]}, 20);
+        }
     }
 }
 

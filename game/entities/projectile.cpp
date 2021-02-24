@@ -12,13 +12,12 @@ Projectile::Projectile() :
 
 }
 
-Projectile::Projectile(const Vec2f &pos, const Vec2f &vel, float lifetime) :
-    m_body(pos, vel),
-    m_lifetime(lifetime),
-    m_on_expire(nullptr),
-    m_hit_entity(nullptr)
+void Projectile::configure(const Vec2f &pos, const Vec2f &vel, float lifetime)
 {
-
+    m_body = Body(pos, vel);
+    m_lifetime = lifetime;
+    m_on_expire = nullptr;
+    m_hit_entity = nullptr;
 }
 
 void Projectile::setExpireCallback(void (*expire_callback)(Projectile *))
@@ -71,7 +70,7 @@ Projectile *ProjectileManager::create(const Vec2f &pos, const Vec2f &vel, float 
     if (s_projectileCount >= 32) {
         return nullptr;
     }
-    s_projectiles[s_projectileCount] = Projectile(pos, vel, lifetime);
+    s_projectiles[s_projectileCount].configure(pos, vel, lifetime);
     s_projectileCount++;
     return s_projectiles + s_projectileCount - 1;
 }

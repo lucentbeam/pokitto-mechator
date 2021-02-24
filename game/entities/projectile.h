@@ -51,7 +51,7 @@ class Projectile
 public:
     Projectile();
 
-    Projectile(const Vec2f &pos, const Vec2f &vel, float lifetime);
+    void configure(const Vec2f &pos, const Vec2f &vel, float lifetime);
 
     void setExpireCallback(void (*expire_callback)(Projectile*));
 
