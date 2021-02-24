@@ -66,6 +66,11 @@ void Player::update(float dt) {
             ProjectileManager::create(m_jeep.pos() + offset * 4.0f, m_jeep.aim() * 100.0f, 0.5f)->setSprite({projectile[0]}, 20);
             ProjectileManager::create(m_jeep.pos() - offset * 4.0f, m_jeep.aim() * 100.0f, 0.5f)->setSprite({projectile[0]}, 20);
         }
+        if (controls.b.pressed()) {
+
+            Projectile * grenade = ProjectileManager::create(m_jeep.pos(), m_jeep.vel() + m_jeep.facing() * 20.0f, 1.0f);
+            grenade->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4);
+        }
     }
 }
 

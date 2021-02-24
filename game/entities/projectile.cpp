@@ -50,7 +50,7 @@ void Projectile::draw(RenderSystem *renderer)
         renderer->drawRect(pos.x()-1,pos.y(),2,2,9);
         renderer->drawRect(pos.x()-1,pos.y()-1,2,2,41);
     } else {
-        renderer->sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData);
+        renderer->sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2]);
     }
 }
 

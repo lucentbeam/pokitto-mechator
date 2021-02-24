@@ -1872,6 +1872,51 @@
 		},
 		"\\game\\entities\\projectile.cpp.hYKjpF": {
 			"sdcard": false
+		},
+		"\\content\\art\\projectile-grenade.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\projectile-grenade.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\projectile-grenade.png": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.aUcaUl": {
+			"sdcard": false
+		},
+		"\\game\\player.h.otdzxu": {
+			"sdcard": false
+		},
+		"\\game\\player.h.cfEVkk": {
+			"sdcard": false
+		},
+		"\\game\\player.h.cEryKl": {
+			"sdcard": false
+		},
+		"\\game\\player.h.EfIPET": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.oDxsLi": {
+			"sdcard": false
+		},
+		"\\game\\player.h.xsSTAL": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.h.autosave.GjeBKv": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.h.KPjFOa": {
+			"sdcard": false
+		},
+		"\\game\\player.h.QheTDI": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.h.TiiEbl": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

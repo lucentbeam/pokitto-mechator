@@ -41,6 +41,7 @@ public:
     Vec2f pos() const { return m_pos; }
     Vec2f facing() const { return m_facing; }
     Vec2f aim() const { return m_aim; }
+    Vec2f vel() const { return m_facing * m_interia; }
     uint8_t rotation_frame() const;
 };
 
