@@ -2043,6 +2043,60 @@
 		},
 		"\\game\\physics\\collisionmanager.cpp.jmZoHH": {
 			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.NrLwWI": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.UTOEOx": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.UBdCWf": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.autosave.HzPfye": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.rjmKUT": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.aMEtxT": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.RvCpHN": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.pOhvMM": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.EYVXqY": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.EfDBsY": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.dMnbil": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.eyJCHU": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.KkjPMz": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.HXGZoE": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.gjTxjV": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.hKuKzy": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

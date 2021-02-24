@@ -35,11 +35,12 @@ namespace Pokitto {
             screeny = 0;
             offsety = -y;
         }
-        uint8_t* m_scrbuf = Display::getBuffer();
-        for (int j = screeny; j < screeny+screenh; j++) {
-          uint8_t * loc = m_scrbuf + 110 * j + screenx;
-          const uint8_t * tloc = tile + w * (j - y) + offsetx;
+        uint8_t* loc = Display::getBuffer() + 110 * screeny + screenx;
+        uint8_t* tloc = const_cast<uint8_t*>(tile) + offsetx;
+        for (int j = 0; j < screenh; j++) {
           std::memcpy(loc, tloc, screenw);
+          loc += 110;
+          tloc += w;
         }
     }
 

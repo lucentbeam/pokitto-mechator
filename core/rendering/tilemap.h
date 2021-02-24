@@ -49,14 +49,16 @@ void Tilemap<TileWidth, TileHeight>::draw(RenderSystem *system)
     if (x_upper > m_mapwidth) x_upper = m_mapwidth;
     uint16_t y_upper = y + render_height;
     if (y_upper > m_mapheight) y_upper = m_mapheight;
-    for(int16_t j = y; j < y_upper; j++) {
-        if (j < 0) continue;
-        for(int16_t i = x; i < x_upper; i++) {
-            if (i < 0) continue;
-            uint16_t idx = i + j * m_mapwidth;
+    uint16_t x_lower = x < 0 ? 0 : x;
+    uint16_t y_lower = y < 0 ? 0 : y;
+    uint16_t idx = x_lower + y_lower * m_mapwidth;
+    for(int16_t j = y_lower; j < y_upper; j++) {
+        for(int16_t i = x_lower; i < x_upper; i++) {
             uint8_t tile = m_map[idx];
             system->sprite(sx + (i-x) * TileWidth, sy + (j-y) * TileHeight, m_tiles[tile]);
+            idx++;
         }
+        idx += (m_mapwidth - (x_upper - x_lower));
     }
 }
 
