@@ -19,6 +19,7 @@ void RenderSystem::initialize()
 {
     game.begin();
     game.display.textWrap = false;
+    game.display.persistence = true;
     game.display.load565Palette(palette);
     game.display.setInvisibleColor(255);
     game.display.setColor(3, backgroundColor);
