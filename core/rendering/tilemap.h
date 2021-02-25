@@ -111,16 +111,13 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
 
         int map_t_tile = y / TileHeight;
         int map_l_tile = x / TileWidth;
+        int map_r_tile = (x + 109) / TileWidth;
+        int map_b_tile = (y + 87) / TileHeight;
 
         if (dx != 0) {
-            int cols_to_draw = std::abs(dx) / 6 + 2;
+            int cols_to_draw = std::abs(dx) / 6 + 1;
 
-            int left = map_l_tile;
-
-            if (dx > 0) {
-                left += (render_width - cols_to_draw);
-                cols_to_draw++;
-            }
+            int left = dx > 0 ? map_r_tile : map_l_tile;
 
             int sx = left * TileWidth - x;
             int sy = map_t_tile * TileHeight - y;
@@ -131,25 +128,33 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
                     buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[m_map[idx]]);
                 }
             }
-            buffer->getBuffer()[40*110+sx] = 41;
         }
 
         if (dy != 0) {
             int rows_to_draw = std::abs(dy) / 6 + 1;
 
-            if (dy > 0) {
-                map_t_tile += (render_height - rows_to_draw);
-                rows_to_draw++;
-            }
+            int top = dy > 0 ? map_b_tile : map_t_tile;
 
             int sx = map_l_tile * TileWidth - x;
-            int sy = map_t_tile * TileHeight - y;
+            int sy = top * TileHeight - y;
 
             for(int i = 0; i < render_width; i++) {
                 for (int j = 0; j < rows_to_draw; j++) {
-                    int idx = map_l_tile + i + (j + map_t_tile) * m_mapwidth;
+                    int idx = map_l_tile + i + (j + top) * m_mapwidth;
                     buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[m_map[idx]]);
                 }
+            }
+        } else {
+            // if dx > 0, render lower right tile
+            // if dx < 0, render upper left tile
+            int top = map_b_tile;
+
+            int sx = map_l_tile * TileWidth - x;
+            int sy = top * TileHeight - y;
+
+            for(int i = 0; i < render_width; i++) {
+                int idx = map_l_tile + i + top * m_mapwidth;
+                buffer->drawTile(sx + i * TileWidth, sy, m_tiles[m_map[idx]]);
             }
         }
     }
