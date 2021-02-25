@@ -11,14 +11,16 @@
 #include "game/entities/projectile.h"
 
 #include "core/rendering/screenbuffer.h"
+#include "game/entities/effects.h"
 
 RenderSystem renderSystem;
-Player player(6*20,6*48);
+Player player;
 ScreenBuffer screenbuffer;
 
 void updateState(FSM &fsm) {
     player.update(0.014f);
     ProjectileManager::update(0.014f);
+    EffectManager::update(0.014f);
 }
 
 void drawState() {
@@ -31,6 +33,7 @@ void drawState() {
     renderSystem.drawBuffer(screenbuffer.getData());
     player.draw(&renderSystem);
     ProjectileManager::draw(&renderSystem);
+    EffectManager::draw(&renderSystem);
 
     fps.update(&renderSystem);
     fps.draw(&renderSystem, 2, 82, 9);

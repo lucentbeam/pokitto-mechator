@@ -1,7 +1,7 @@
 #include "mapmanager.h"
 
 BackgroundMap MapManager::s_backgrounds[] = {
-    BackgroundMap(jungletiles, approach)
+    BackgroundMap(jungletiles, world)
 };
 
 BackgroundMap * MapManager::s_activeBackground;
@@ -26,3 +26,9 @@ uint8_t MapManager::getTileAt(float x, float y)
 {
     return s_activeBackground->getTileAt(x, y);
 }
+
+void MapManager::setTileAt(float x, float y, uint8_t override)
+{
+    s_activeBackground->setTileAt(x, y, override);
+}
+

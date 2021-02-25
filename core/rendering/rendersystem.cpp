@@ -89,6 +89,19 @@ void RenderSystem::clear(uint8_t idx) {
 void RenderSystem::drawBuffer(uint8_t *buffer)
 {
     std::memcpy(game.display.getBuffer(), buffer, 110*88);
+    uint8_t * bfr = game.display.getBuffer();
+    for(int i = 0; i < 110; i++) {
+        for (int j = 0; j < 88; j++) {
+            uint8_t idx = bfr[j * 110 + i];
+            if (i > 40 && i < 70 && j > 28 && j < 60) {
+                idx = shading[idx];
+                if (i > 46 && i < 64 && j > 34 && j < 54) {
+                    idx = shading[idx];
+                }
+            }
+            bfr[j * 110 + i] = idx;
+        }
+    }
 }
 #else
 
@@ -306,7 +319,14 @@ void RenderSystem::drawBuffer(uint8_t *buffer)
 {
     for(int i = 0; i < 110; i++) {
         for (int j = 0; j < 88; j++) {
-            sf::Color c = sfSys.colors[buffer[j * 110 + i]];
+            uint8_t idx = buffer[j * 110 + i];
+            if (i > 40 && i < 70 && j > 28 && j < 60) {
+                idx = shading[idx];
+                if (i > 50 && i < 60 && j > 38 && j < 50) {
+                    idx = shading[idx];
+                }
+            }
+            sf::Color c = sfSys.colors[idx];
             sfSys.screenbuffer.setPixel(i,j,c);
         }
     }

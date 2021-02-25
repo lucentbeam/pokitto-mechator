@@ -10,6 +10,8 @@
 #include "game/physics/steering.h"
 #include "game/entities/projectile.h"
 
+#include "game/entities/effects.h"
+
 class Player {
     Controls m_controller;
 
@@ -19,7 +21,7 @@ class Player {
     bool m_dismounted = true;
 
 public:
-    Player(float x, float y);
+    Player();
 
     void update(float dt);
 
@@ -30,9 +32,9 @@ public:
 
 #endif // PLAYER_H
 
-Player::Player(float x, float y) :
-    m_soldier(x, y, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
-    m_jeep(x + 6, y - 12, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f)
+Player::Player() :
+    m_soldier(4*6, 8*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
+    m_jeep(26*6, 8*6, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f)
 {
 
 }
@@ -48,7 +50,7 @@ void Player::update(float dt) {
     if (controls.c.pressed()) {
         if (m_dismounted) {
             Vec2f dp = m_jeep.pos() - m_soldier.pos();
-            if (dp.length() < 12) {
+            if (dp.length() < 6) {
                 m_dismounted = false;
             }
         } else {
@@ -63,13 +65,24 @@ void Player::update(float dt) {
     } else {
         if (controls.a.downEvery(1, 18)) {
             Vec2f offset = m_jeep.aim().rot90();
-            ProjectileManager::create(m_jeep.pos() + offset * 4.0f, m_jeep.aim() * 100.0f, 0.5f)->setSprite({projectile[0]}, 20);
-            ProjectileManager::create(m_jeep.pos() - offset * 4.0f, m_jeep.aim() * 100.0f, 0.5f)->setSprite({projectile[0]}, 20);
+            ProjectileManager::create(m_jeep.pos() + offset * 4.0f, m_jeep.aim() * 150.0f, 0.35f)->setSprite({projectile[0]}, 20);
+            ProjectileManager::create(m_jeep.pos() - offset * 4.0f, m_jeep.aim() * 150.0f, 0.35f)->setSprite({projectile[0]}, 20);
         }
         if (controls.b.pressed()) {
 
-            Projectile * grenade = ProjectileManager::create(m_jeep.pos(), m_jeep.vel() + m_jeep.facing() * 20.0f, 1.0f);
+            Projectile * grenade = ProjectileManager::create(m_jeep.pos(), m_jeep.vel() * 0.85f + m_jeep.facing() * 50.0f, 0.5f);
             grenade->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4);
+            grenade->setExpireCallback([](Projectile*p) {
+                for(int i = -4; i <= 4; i+=4) {
+                    for (int j = -4; j <= 4; j+= 4) {
+                        Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
+                        if (t == Terrain::DestrucableWood) {
+                            MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
+                        }
+                    }
+                }
+                EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+            });
         }
     }
 }

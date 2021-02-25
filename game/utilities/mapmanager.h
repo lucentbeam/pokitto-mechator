@@ -28,6 +28,8 @@ public:
     static void setBackground(BGMap idx);
 
     static uint8_t getTileAt(float x, float y);
+
+    static void setTileAt(float x, float y, uint8_t override);
 };
 
 #endif // MAPMANAGER_H

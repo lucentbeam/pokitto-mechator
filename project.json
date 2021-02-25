@@ -2628,6 +2628,291 @@
 		},
 		"\\pokitto-mechator.pro.user.kvppej": {
 			"sdcard": false
+		},
+		"\\game\\player.h.fgIKHe": {
+			"sdcard": false
+		},
+		"\\game\\player.h.autosave.bUhGQv": {
+			"sdcard": false
+		},
+		"\\game\\player.h.rvHGTG": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.WsLKND": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.YlRsRB": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.GLDRSu": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\spritewrapper.h.EECNwT": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\spritewrapper.h": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.VvpQQY": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.fNclhZ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.aPNdYT": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\spritewrapper.h.vKHRYm": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\spritewrapper.h.kybanb": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\effects.obj": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.autosave.ZMubCa": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.cOgcqw": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.autosave.PmkIJN": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.autosave.nOLJch": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.XmcadP": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.EEDSOh": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.naUSRv": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.KrSHmu": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.UnJvWt": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.JhZHYr": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.vLgIoL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.h.DCmkFU": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.GTlSQX": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp~RF20709a8.TMP": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.autosave.kqzFfo": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.GmchIF": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.uPTpSA": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.aurSdT": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\spritewrapper.h.uwoSUT": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\spritewrapper.h~RF2096357.TMP": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.EDxBZi": {
+			"sdcard": false
+		},
+		"\\main.cpp.xyrCuS": {
+			"sdcard": false
+		},
+		"\\main.cpp.nTHLfq": {
+			"sdcard": false
+		},
+		"\\game\\player.h.UHhSKn": {
+			"sdcard": false
+		},
+		"\\game\\player.h.jAOAJp": {
+			"sdcard": false
+		},
+		"\\game\\entities\\effects.cpp.swEVsu": {
+			"sdcard": false
+		},
+		"\\game\\player.h.YInlge": {
+			"sdcard": false
+		},
+		"\\game\\player.h.lutlWK": {
+			"sdcard": false
+		},
+		"\\game\\player.h.Fsaffw": {
+			"sdcard": false
+		},
+		"\\game\\player.h.nnuPnB": {
+			"sdcard": false
+		},
+		"\\game\\player.h.NWULwg": {
+			"sdcard": false
+		},
+		"\\game\\player.h.xMmmcM": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.iOrTBj": {
+			"sdcard": false
+		},
+		"\\game\\player.h.sSveLe": {
+			"sdcard": false
+		},
+		"\\game\\player.h.xWKoRO": {
+			"sdcard": false
+		},
+		"\\game\\player.h.zaidzY": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.ELHhGm": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.IGGolv": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.wbxDDc": {
+			"sdcard": false
+		},
+		"\\game\\player.h.COMnTv": {
+			"sdcard": false
+		},
+		"\\game\\player.h.rDGzGY": {
+			"sdcard": false
+		},
+		"\\game\\player.h.HqsTjB": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.Hp1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.sy1384": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.oimjWW": {
+			"sdcard": false
+		},
+		"\\main.cpp.GpRJoA": {
+			"sdcard": false
+		},
+		"\\game\\player.h.vCPmxW": {
+			"sdcard": false
+		},
+		"\\game\\player.h.eAejsh": {
+			"sdcard": false
+		},
+		"\\main.cpp.mAPfjm": {
+			"sdcard": false
+		},
+		"\\main.cpp.FNrwEM": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.mT1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.cW1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.Fe1384": {
+			"sdcard": false
+		},
+		"\\content\\art\\shading.ase": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\shading.png": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.OtzWTh": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.autosave.gkdjjT": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.autosave": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.IQqpCe": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.FlazXI": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.jYVRhS": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.rGMWhA": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.XBuGkk": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.iPfMJO": {
+			"sdcard": false
+		},
+		"\\content\\art\\shading_2.ase": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.omCevl": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.oCbRyB": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.aWQxli": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.autosave.FikYAO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.FGXgUg": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\shading.h": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.Zx1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.Ol1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.vO1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.rZ1384": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.qPrpcG": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

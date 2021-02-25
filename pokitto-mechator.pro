@@ -5,6 +5,7 @@ CONFIG -= qt
 
 SOURCES += \
     core/rendering/screenbuffer.cpp \
+    game/entities/effects.cpp \
     game/entities/projectile.cpp \
     game/physics/body.cpp \
     game/physics/collisionmanager.cpp \
@@ -31,6 +32,7 @@ HEADERS += \
     core/utilities/rect.h \
     core/controls/controls.h \
     core/settings_pokitto.h \
+    game/entities/effects.h \
     game/entities/projectile.h \
     game/maps/mechator.h \
     game/physics/body.h \
@@ -38,6 +40,7 @@ HEADERS += \
     game/physics/steering.h \
     game/player.h \
     game/rendering/camera.h \
+    game/rendering/spritewrapper.h \
     game/tilesets.h \
     game/utilities/helpers.h \
     game/utilities/mapmanager.h \

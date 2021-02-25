@@ -2,6 +2,8 @@
 #define _TILESETTER
 
 #include <cstdint>
+#include <map>
+#include <vector>
 
 #include "core/rendering/rendersystem.h"
 #include "game/rendering/camera.h"
@@ -17,6 +19,8 @@ class Tilemap {
   bool clearBuffer = true;
   int16_t lastCameraX, lastCameraY;
 
+  std::map<int, uint8_t> m_overrides;
+  std::vector<Vec2f> m_redraws;
 public:
   const uint8_t render_width = 19, render_height = 15;
 
@@ -30,7 +34,9 @@ public:
   int tileWidth() const { return TileWidth; }
   int tileHeight() const { return TileHeight; }
 
-  uint8_t getTileAt(float x, float y);
+  uint8_t getTileAt(float x, float y) const;
+  uint8_t getTileAt(int index) const;
+  void setTileAt(float x, float y, uint8_t override);
 };
 
 template<int TileWidth, int TileHeight>
@@ -103,6 +109,21 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
         int16_t dx = x - lastCameraX; // positive is right, creates deadspace at the right
         int16_t dy = y - lastCameraY; // positive is down, creates deadspace at bottom
 
+
+        {
+            for(const Vec2f &p : m_redraws) {
+                int top = p.y() / TileHeight;
+                int left = p.x() / TileWidth;
+
+                int sx = left * TileWidth - x;
+                int sy = top * TileHeight - y;
+
+                int idx = left + top * m_mapwidth;
+
+                buffer->drawTile(sx, sy, m_tiles[getTileAt(idx)]);
+            }
+            m_redraws.clear();
+        }
         if (dx == 0 && dy == 0) return;
 
         buffer->shift(dx, dy);
@@ -126,7 +147,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             for(int j = 0; j < render_height; j++) {
                 for (int i = 0; i < cols_to_draw; i++) {
                     int idx = left + i + (j + map_t_tile) * m_mapwidth;
-                    buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[m_map[idx]]);
+                    buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[getTileAt(idx)]);
                 }
             }
         }
@@ -143,7 +164,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             for(int i = 0; i < render_width; i++) {
                 for (int j = 0; j < rows_to_draw; j++) {
                     int idx = map_l_tile + i + (j + top) * m_mapwidth;
-                    buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[m_map[idx]]);
+                    buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[getTileAt(idx)]);
                 }
             }
         } else {
@@ -157,21 +178,39 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
 
             for(int i = 0; i < render_width; i++) {
                 int idx = left + i + top * m_mapwidth;
-                buffer->drawTile(sx + i * TileWidth, sy, m_tiles[m_map[idx]]);
+                buffer->drawTile(sx + i * TileWidth, sy, m_tiles[getTileAt(idx)]);
             }
         }
     }
 }
 
 template<int TileWidth, int TileHeight>
-uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y)
+uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
 {
-    const uint8_t defaultTileIndex = 19; // deep water; TODO: find a better place for this
-    if (x < 0 || y < 0) return defaultTileIndex;
     int px = (x / TileWidth);
     int py = (y / TileHeight);
-    if (px >= m_mapwidth || py >= m_mapheight) return 0;
-    return m_map[px + py * m_mapwidth];
+    const uint8_t defaultTileIndex = 19; // deep water; TODO: find a better place for this
+    if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return defaultTileIndex;
+    return getTileAt(px + py * m_mapwidth);
+}
+
+template<int TileWidth, int TileHeight>
+uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(int index) const
+{
+    if (m_overrides.find(index) != m_overrides.end()) {
+        return m_overrides.at(index);
+    }
+    return m_map[index];
+}
+
+template<int TileWidth, int TileHeight>
+void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t override)
+{
+    int px = (x / TileWidth);
+    int py = (y / TileHeight);
+    if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return;
+    m_overrides[px + py * m_mapwidth] = override;
+    m_redraws.push_back({x,y});
 }
 
 #endif
