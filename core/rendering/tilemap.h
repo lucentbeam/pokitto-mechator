@@ -109,13 +109,14 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
         lastCameraX = x;
         lastCameraY = y;
 
-        int map_t_tile = y / TileHeight;
         int map_l_tile = x / TileWidth;
-        int map_r_tile = (x + 109) / TileWidth;
-        int map_b_tile = (y + 87) / TileHeight;
+        int map_t_tile = y / TileHeight;
+        int map_r_tile = (x + 109 - dx) / TileWidth;
+        int map_b_tile = (y + 87 - dy) / TileHeight;
 
         if (dx != 0) {
-            int cols_to_draw = std::abs(dx) / 6 + 1;
+            int cols_to_draw = dx > 0 ? (x + 109) / TileWidth - map_r_tile : (x - dx) / TileWidth - map_l_tile;
+            cols_to_draw++;
 
             int left = dx > 0 ? map_r_tile : map_l_tile;
 
@@ -131,7 +132,8 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
         }
 
         if (dy != 0) {
-            int rows_to_draw = std::abs(dy) / 6 + 1;
+            int rows_to_draw = dy > 0 ? (y + 87) / TileHeight - map_b_tile : (y - dy) / TileHeight - map_t_tile;
+            rows_to_draw++;
 
             int top = dy > 0 ? map_b_tile : map_t_tile;
 
@@ -147,13 +149,14 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
         } else {
             // if dx > 0, render lower right tile
             // if dx < 0, render upper left tile
-            int top = map_b_tile;
+            int top = dx > 0 ? map_b_tile : map_t_tile;
+            int left = dx > 0 ? map_r_tile : map_l_tile;
 
-            int sx = map_l_tile * TileWidth - x;
+            int sx = left * TileWidth - x;
             int sy = top * TileHeight - y;
 
             for(int i = 0; i < render_width; i++) {
-                int idx = map_l_tile + i + top * m_mapwidth;
+                int idx = left + i + top * m_mapwidth;
                 buffer->drawTile(sx + i * TileWidth, sy, m_tiles[m_map[idx]]);
             }
         }
