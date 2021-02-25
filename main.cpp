@@ -28,7 +28,7 @@ void drawState() {
 
 //    MapManager::draw(&renderSystem);
     MapManager::draw(&screenbuffer);
-    renderSystem.drawBuffer(screenbuffer.getBuffer());
+    renderSystem.drawBuffer(screenbuffer.getData());
     player.draw(&renderSystem);
     ProjectileManager::draw(&renderSystem);
 

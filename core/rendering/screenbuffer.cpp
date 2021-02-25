@@ -6,15 +6,12 @@
 
 void ScreenBuffer::shift(int8_t x, int8_t y)
 {
-    uint8_t source_x_offset = x < 0 ? 0 : uint8_t(x);
-    uint8_t dest_x_offset = x < 0 ? uint8_t(-x) : 0;
-    std::memmove(m_buffer + dest_x_offset, m_buffer + source_x_offset, screenwidth * screenheight - std::abs(x));
-
-    uint8_t source_y_offset = y > 0 ? uint8_t(y) * screenwidth : 0;
-    uint8_t dest_y_offset = y > 0 ? 0 : uint8_t(-y) * screenwidth;
-    uint8_t newHeight = screenheight - std::abs(y);
-    std::memmove(m_buffer + dest_y_offset, m_buffer + source_y_offset, newHeight * screenwidth);
-
+    int16_t offset = -x - y * screenwidth;
+    if (offset > 0) {
+        std::memmove(m_buffer + offset, m_buffer, screenwidth * screenheight - offset);
+    } else {
+        std::memmove(m_buffer, m_buffer - offset, screenwidth * screenheight + offset);
+    }
 }
 
 void ScreenBuffer::drawTile(int16_t x, int16_t y, const uint8_t *tile)

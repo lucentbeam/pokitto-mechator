@@ -48,7 +48,7 @@ void Player::update(float dt) {
     if (controls.c.pressed()) {
         if (m_dismounted) {
             Vec2f dp = m_jeep.pos() - m_soldier.pos();
-            if (dp.length() < 6) {
+            if (dp.length() < 12) {
                 m_dismounted = false;
             }
         } else {

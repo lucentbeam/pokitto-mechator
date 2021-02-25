@@ -9,7 +9,7 @@ class ScreenBuffer
 
     uint8_t m_buffer[screenwidth * screenheight];
 public:
-    uint8_t * getBuffer() { return m_buffer; }
+    uint8_t * getData() { return m_buffer; }
 
     void shift(int8_t x, int8_t y);
 
