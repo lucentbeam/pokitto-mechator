@@ -23,6 +23,8 @@ public:
 
     static void draw(RenderSystem * renderer);
 
+    static void draw(ScreenBuffer * buffer);
+
     static void setBackground(BGMap idx);
 
     static uint8_t getTileAt(float x, float y);

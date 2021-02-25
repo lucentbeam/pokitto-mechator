@@ -2277,6 +2277,297 @@
 		},
 		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\screenbuffer.obj": {
 			"sdcard": false
+		},
+		"\\game\\rendering\\camera.h.QjEdeK": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.cpp.rznMLI": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.h.JcHygS": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.kkEBTn": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.nwtixq": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.VvmYCl": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.dXllFd": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.irOyNj": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.h.zddBti": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.YLLWbh": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.jzsrUa": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.BuJWQE": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.bsvjUI": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.pMYpNu": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.autosave.KXwByb": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.autosave.lbrpFX": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\main.cpp.autosave.NlyyRg": {
+			"sdcard": false
+		},
+		"\\main.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.nzrjUi": {
+			"sdcard": false
+		},
+		"\\main.cpp.zvXhbo": {
+			"sdcard": false
+		},
+		"\\main.cpp.FHZjky": {
+			"sdcard": false
+		},
+		"\\main.cpp.VOsPMf": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.CscBtn": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.HlZSfK": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.yLGPaM": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.VNLilS": {
+			"sdcard": false
+		},
+		"\\main.cpp.BQjfSm": {
+			"sdcard": false
+		},
+		"\\main.cpp~RF11eaca91.TMP": {
+			"sdcard": false
+		},
+		"\\main.cpp.eKMpfJ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.xqHEyr": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.xgVxbq": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.JNbbhg": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.JBBzhl": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.cASYRj": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.yLBiHt": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.PZUTvO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.eIgcqN": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.VcFCAy": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.lFDHLc": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.mAgece": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.CUnaSG": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.hiMhIQ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.kwAgNl": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.XXkXGW": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.GoGKZt": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.KdCNYf": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.autosave.TvpXxb": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.mWRURU": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.QsLRwL": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.FZfSjV": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.GjTEJz": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.yXUZUy": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.VoUrvR": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.knqbDe": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.AmulPi": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.PxXDMr": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.YGnVTG": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.XkTooO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.hkRAsv": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.QYOaaB": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.xeqJbl": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.edhgMm": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.jJLLdz": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.bzzxzu": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.KFqoFX": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.nKaOvB": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.VQhLme": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.bXsXwF": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.oIzynZ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.najkPi": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.UpsNzY": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.VXnaon": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.FLemnr": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.ayjhQb": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.cDpjOz": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.TzsrEZ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.aHvbpX": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\screenbuffer.cpp.HIrBpj": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.NnYpJb": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.rSHRwT": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.yKEwMC": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.OGYuWk": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.WAFdcD": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.mKCkno": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.nrNoxv": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.zPrQOO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.ERUMrO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.deAQtR": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.SwykyK": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.EylMbO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.FuZwvF": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.gxnsek": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.ctkaZL": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.HIjrYF": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.RixZbV": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

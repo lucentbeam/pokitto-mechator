@@ -10,8 +10,11 @@
 #include "game/utilities/mapmanager.h"
 #include "game/entities/projectile.h"
 
+#include "core/rendering/screenbuffer.h"
+
 RenderSystem renderSystem;
 Player player(6*20,6*48);
+ScreenBuffer screenbuffer;
 
 void updateState(FSM &fsm) {
     player.update(0.014f);
@@ -23,7 +26,9 @@ void drawState() {
 
     Camera::update(player.pos().x(), player.pos().y());
 
-    MapManager::draw(&renderSystem);
+//    MapManager::draw(&renderSystem);
+    MapManager::draw(&screenbuffer);
+    renderSystem.drawBuffer(screenbuffer.getBuffer());
     player.draw(&renderSystem);
     ProjectileManager::draw(&renderSystem);
 

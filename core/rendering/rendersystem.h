@@ -37,6 +37,8 @@ public:
 
     void drawRect(int x0, int y0, int w, int h, uint8_t color);
 
+    void drawBuffer(uint8_t * buffer);
+
 };
 
 #endif

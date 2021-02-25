@@ -3,10 +3,11 @@
 
 #include <stdint.h>
 
-template<uint8_t Width, uint8_t Height>
 class ScreenBuffer
 {
-    uint8_t m_buffer[Width*Height];
+    static const uint8_t screenwidth = 110, screenheight = 88;
+
+    uint8_t m_buffer[screenwidth * screenheight];
 public:
     uint8_t * getBuffer() { return m_buffer; }
 

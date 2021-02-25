@@ -86,6 +86,10 @@ void RenderSystem::clear(uint8_t idx) {
     game.display.bgcolor = idx;
 }
 
+void RenderSystem::drawBuffer(uint8_t *buffer)
+{
+    std::memcpy(game.display.getBuffer(), buffer, 110*88);
+}
 #else
 
 #include <SFML/Graphics.hpp>
@@ -294,6 +298,16 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
             if (i > 0 && j > 0 && i < screenwidth && j < screenheight) {
                 sfSys.screenbuffer.setPixel(i,j,c);
             }
+        }
+    }
+}
+
+void RenderSystem::drawBuffer(uint8_t *buffer)
+{
+    for(int i = 0; i < 110; i++) {
+        for (int j = 0; j < 88; j++) {
+            sf::Color c = sfSys.colors[buffer[j * 110 + i]];
+            sfSys.screenbuffer.setPixel(i,j,c);
         }
     }
 }

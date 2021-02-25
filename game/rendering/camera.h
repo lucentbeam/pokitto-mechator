@@ -12,7 +12,6 @@ class Camera {
     static const uint8_t screen_half_x = 55, screen_half_y = 44;
 
     static int s_x,s_y;
-    static float s_offset_x, s_offset_y;
 
     static int s_tile_width;
     static int s_tile_height;
@@ -26,10 +25,8 @@ public:
 
     static void update(int center_x, int center_y);
 
-    static float tl_x() { return s_x * s_tile_width - s_offset_x; }
-    static float tl_y() { return s_y * s_tile_height - s_offset_y; }
-    static float offset_x() { return s_offset_x; }
-    static float offset_y() { return s_offset_y; }
+    static float tl_x() { return s_x; }
+    static float tl_y() { return s_y; }
 
     static Vec2f worldToScreen(const Vec2f &pos);
 };

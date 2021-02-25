@@ -11,6 +11,11 @@ void MapManager::draw(RenderSystem *renderer)
     s_activeBackground->draw(renderer);
 }
 
+void MapManager::draw(ScreenBuffer *buffer)
+{
+    s_activeBackground->drawToBuffer(buffer);
+}
+
 void MapManager::setBackground(BGMap idx)
 {
     s_activeBackground = s_backgrounds + idx;
