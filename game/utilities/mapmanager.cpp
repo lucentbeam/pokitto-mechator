@@ -1,14 +1,24 @@
 #include "mapmanager.h"
 
+#include "game/maps/mechator.h"
+#include "game/maps/mechator_sky.h"
+#include "game/tilesets.h"
+
 BackgroundMap MapManager::s_backgrounds[] = {
     BackgroundMap(jungletiles, world)
 };
 
 BackgroundMap * MapManager::s_activeBackground;
 
-void MapManager::draw(RenderSystem *renderer)
+ForegroundMap MapManager::s_foreground(jungletiles_sky, sky);
+
+void MapManager::draw(RenderSystem *renderer, bool bg)
 {
-    s_activeBackground->draw(renderer);
+    if (bg) {
+        s_activeBackground->draw(renderer);
+    } else {
+        s_foreground.draw(renderer);
+    }
 }
 
 void MapManager::draw(ScreenBuffer *buffer)

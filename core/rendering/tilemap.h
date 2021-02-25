@@ -54,10 +54,10 @@ void Tilemap<TileWidth, TileHeight>::draw(RenderSystem *system)
 {
     int16_t x = Camera::tl_x();
     int16_t y = Camera::tl_y();
-    float sx = -std::fmod(x, 6.0f);
-    float sy = -std::fmod(y, 6.0f);
-    x /= 6;
-    y /= 6;
+    float sx = -std::fmod(x, TileWidth);
+    float sy = -std::fmod(y, TileHeight);
+    x /= TileWidth;
+    y /= TileHeight;
     uint16_t x_upper = x + render_width;
     if (x_upper > m_mapwidth) x_upper = m_mapwidth;
     uint16_t y_upper = y + render_height;
@@ -83,10 +83,10 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
         int16_t y = Camera::tl_y();
         lastCameraX = x;
         lastCameraY = y;
-        float sx = -std::fmod(x, 6.0f);
-        float sy = -std::fmod(y, 6.0f);
-        x /= 6;
-        y /= 6;
+        float sx = -std::fmod(x, TileWidth);
+        float sy = -std::fmod(y, TileHeight);
+        x /= TileWidth;
+        y /= TileHeight;
         uint16_t x_upper = x + render_width;
         if (x_upper > m_mapwidth) x_upper = m_mapwidth;
         uint16_t y_upper = y + render_height;

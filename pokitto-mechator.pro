@@ -35,6 +35,7 @@ HEADERS += \
     game/entities/effects.h \
     game/entities/projectile.h \
     game/maps/mechator.h \
+    game/maps/mechator_sky.h \
     game/physics/body.h \
     game/physics/collisionmanager.h \
     game/physics/steering.h \

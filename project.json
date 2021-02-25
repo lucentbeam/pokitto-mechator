@@ -2913,6 +2913,117 @@
 		},
 		"\\core\\rendering\\rendersystem.cpp.qPrpcG": {
 			"sdcard": false
+		},
+		"\\content\\art\\mechator_mocks.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\jungletiles_18x.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.bz1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_world.png": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.Zy1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.tmx.cA1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.tmx": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\jungletiles_sky.png": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.tmx.hn1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.png": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.eY1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.tmx.SK1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.cT1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.mL1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.json.QS1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.json": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.h": {
+			"sdcard": false
+		},
+		"\\game\\maps\\mechator_sky.h": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.DSzPDR": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.autosave.DrRAEo": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.aZtILp": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.SpNTXY": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.pMxqRu": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.vAJEEe": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.qnaJIA": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.pJgNfQ": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.FGlWzk": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.hUTOxk": {
+			"sdcard": false
+		},
+		"\\main.cpp.cmAnVI": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.autosave.yCXvlX": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.FEHzXD": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.vQXfPx": {
+			"sdcard": false
+		},
+		"\\main.cpp.rfdGki": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.QXNPYt": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h~RF2fc410c.TMP": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.VrvAsX": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

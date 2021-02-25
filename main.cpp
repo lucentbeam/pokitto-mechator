@@ -33,6 +33,8 @@ void drawState() {
     renderSystem.drawBuffer(screenbuffer.getData());
     player.draw(&renderSystem);
     ProjectileManager::draw(&renderSystem);
+
+    MapManager::draw(&renderSystem, false);
     EffectManager::draw(&renderSystem);
 
     fps.update(&renderSystem);
