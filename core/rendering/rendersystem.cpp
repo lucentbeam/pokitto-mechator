@@ -82,6 +82,12 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
     game.display.fillRect(x0, y0, w, h);
 }
 
+
+void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color)
+{
+    Pokitto::DisplayExtensions::drawShadow(x, y, sprite, transparent_color, shading);
+}
+
 void RenderSystem::clear(uint8_t idx) {
     game.display.bgcolor = idx;
 }
@@ -89,19 +95,6 @@ void RenderSystem::clear(uint8_t idx) {
 void RenderSystem::drawBuffer(uint8_t *buffer)
 {
     std::memcpy(game.display.getBuffer(), buffer, 110*88);
-    uint8_t * bfr = game.display.getBuffer();
-    for(int i = 0; i < 110; i++) {
-        for (int j = 0; j < 88; j++) {
-            uint8_t idx = bfr[j * 110 + i];
-            if (i > 40 && i < 70 && j > 28 && j < 60) {
-                idx = shading[idx];
-                if (i > 46 && i < 64 && j > 34 && j < 54) {
-                    idx = shading[idx];
-                }
-            }
-            bfr[j * 110 + i] = idx;
-        }
-    }
 }
 #else
 
@@ -315,17 +308,44 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
     }
 }
 
+void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color)
+{
+    if (m_clipping && (m_clip_width == 0 || m_clip_height == 0)) return;
+    uint8_t w = sprite[0];
+    uint8_t h = sprite[1];
+    const uint8_t * start = sprite + 2;
+    for (int i = 0; i < w * h; i++) {
+        int dx = i % w;
+        if (dx >= w) continue;
+        if (m_clipping && dx > m_clip_width) continue;
+        int dy = i / w;
+        if (m_clipping && dy > m_clip_height) continue;
+        int px = x + dx;
+        int py = y + dy;
+        if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
+            continue;
+        }
+        int idx = start[i];
+        if (idx == transparent_color) {
+            continue;
+        }
+        sf::Color c = sfSys.screenbuffer.getPixel(px, py);
+        int col_idx = 0;
+        for (int i = 0; i < 255; i++) {
+            if (sfSys.colors[i] == c) {
+                col_idx = i;
+                break;
+            }
+        }
+        sfSys.screenbuffer.setPixel(px, py, sfSys.colors[shading[col_idx]]);
+    }
+}
+
 void RenderSystem::drawBuffer(uint8_t *buffer)
 {
     for(int i = 0; i < 110; i++) {
         for (int j = 0; j < 88; j++) {
             uint8_t idx = buffer[j * 110 + i];
-            if (i > 40 && i < 70 && j > 28 && j < 60) {
-                idx = shading[idx];
-                if (i > 50 && i < 60 && j > 38 && j < 50) {
-                    idx = shading[idx];
-                }
-            }
             sf::Color c = sfSys.colors[idx];
             sfSys.screenbuffer.setPixel(i,j,c);
         }

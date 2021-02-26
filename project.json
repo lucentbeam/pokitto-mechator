@@ -3024,6 +3024,255 @@
 		},
 		"\\core\\rendering\\tilemap.h.VrvAsX": {
 			"sdcard": false
+		},
+		"\\content\\art\\exports\\jungletiles_sky.h": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_world.h": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.PuRkTy": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.MlbgaU": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.KoDjzp": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.NYZHrv": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.McPnUa": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.ezkpgx": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.h.QfXukY": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.h": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.YofOxg": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.ErRhZy": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.h.autosave.IWdyqr": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.h.nGqHTq": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.h.iDnXTR": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.cpp.GWCgsh": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.cpp.dxdYoq": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.IcrKGO": {
+			"sdcard": false
+		},
+		"\\main.cpp.VPVBis": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.SUwxOP": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.akODRe": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.RtkSTv": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.iNVIrK": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.PyAcnt": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.zdcYXp": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.cpp.DeZZzG": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.h.Vzzksd": {
+			"sdcard": false
+		},
+		"\\main.cpp.voLBmd": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\skytilemap.obj": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.azWQgc": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.btwLjT": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.TWMxPn": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.fJPQeN": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.xHYkVs": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.owZDyC": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.HnHavG": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.TgUzsb": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.iXULQu": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.qhyIYU": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.TKJoOO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.tsvZwV": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.PfpTUk": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.ZYatrO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.HFBjzB": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.hKmiHE": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.AVrueJ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.RyGeJN": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.WKkkpg": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.GXDgac": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.hYPKMQ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.CLKNSz": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.mihoyE": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.YZRaIz": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.LNtkJQ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.REKDod": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.dsRseL": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.EnhbUA": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.lQhrTm": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.autosave.LVuags": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.autosave": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.autosave.oBSOUP": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.autosave.nZrALU": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.wXQmux": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.ttXxdK": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.cpp.TICzRy": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.cpp.jaQvDd": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.umIyuI": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.NNNvze": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.h.autosave.exzysF": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.h.FDurqK": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.autosave.iVpyGA": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.autosave.kkmLEK": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.CcFjEK": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.wLDCoa": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.QeWdAq": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.fFshRu": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.WXsKNO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.ovOTAW": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.TnfhDm": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.LeDBvL": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.IXTalz": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

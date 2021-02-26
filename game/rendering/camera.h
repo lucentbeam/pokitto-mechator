@@ -13,15 +13,7 @@ class Camera {
 
     static int s_x,s_y;
 
-    static int s_tile_width;
-    static int s_tile_height;
-    static int s_map_width;
-    static int s_map_height;
-    static bool s_clamp;
-
 public:
-
-    static void configure(int tile_width, int tile_height, int map_width = 0, int map_height = 0);
 
     static void update(int center_x, int center_y);
 

@@ -43,6 +43,8 @@ public:
 
     void drawRect(int x0, int y0, int w, int h, uint8_t color);
 
+    void drawShadow(int x, int y, const uint8_t * sprite, int transparent_color);
+
     void drawBuffer(uint8_t * buffer);
 
 };

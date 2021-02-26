@@ -44,7 +44,6 @@ void drawState() {
 
 int main ()
 {
-    MapManager::setBackground(BGMap::Approach);
     renderSystem.initialize();
 
     FSM fsm;

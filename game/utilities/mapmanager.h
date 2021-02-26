@@ -4,29 +4,21 @@
 #include "core/rendering/rendersystem.h"
 #include "core/rendering/tilemap.h"
 #include "game/rendering/camera.h"
+#include "game/rendering/skytilemap.h"
 
 typedef Tilemap<6,6> BackgroundMap;
-typedef Tilemap<18,18> ForegroundMap;
-
-enum BGMap {
-    Approach = 0
-};
 
 class MapManager
 {
-    static BackgroundMap s_backgrounds[];
+    static BackgroundMap s_background;
 
-    static ForegroundMap s_foreground;
-
-    static BackgroundMap * s_activeBackground;
+    static SkyTilemap s_foreground;
 
 public:
 
     static void draw(RenderSystem * renderer, bool bg);
 
     static void draw(ScreenBuffer * buffer);
-
-    static void setBackground(BGMap idx);
 
     static uint8_t getTileAt(float x, float y);
 

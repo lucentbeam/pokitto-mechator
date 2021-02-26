@@ -11,6 +11,7 @@ SOURCES += \
     game/physics/collisionmanager.cpp \
     game/physics/steering.cpp \
     game/rendering/camera.cpp \
+    game/rendering/skytilemap.cpp \
     game/utilities/mapmanager.cpp \
     game/utilities/vec.cpp \
     main.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
     game/physics/steering.h \
     game/player.h \
     game/rendering/camera.h \
+    game/rendering/skytilemap.h \
     game/rendering/spritewrapper.h \
     game/tilesets.h \
     game/utilities/helpers.h \
