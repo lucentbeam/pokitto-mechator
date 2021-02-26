@@ -3438,6 +3438,177 @@
 		},
 		"\\game\\tilesets.h.LZAQcq": {
 			"sdcard": false
+		},
+		"\\main.cpp.lFWPto": {
+			"sdcard": false
+		},
+		"\\main.cpp.HUGySc": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.cpp.KXHcBc": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.OMtXla": {
+			"sdcard": false
+		},
+		"\\main.cpp.autosave.tsidqH": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.BP1384": {
+			"sdcard": false
+		},
+		"\\main.cpp.wCOgrV": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.autosave.mgSPQU": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.Znbdhc": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.ShrfAJ": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.Jy1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.KC1384": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.XMkrqC": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.IlUGck": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.iLKayT": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.xvOsEH": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.autosave.kxISop": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.autosave.bcyBYv": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.BJBmbc": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\regionmanager.obj": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.vW1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.hN1384": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.nJEOVj": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.ek1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.mB1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.tmx.EK1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.json.Tu1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.json.Cw1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.aa1384": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.SkujSf": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.zJEvWX": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.cpp.wrkjur": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.cpp.NWyrzj": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.h.Wsenjk": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.cpp.MerMnj": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.eeQFTD": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.IcQahl": {
+			"sdcard": false
+		},
+		"\\game\\physics\\steering.cpp.lddOId": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.KY1384": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.autosave.KlBFjB": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.eaRKDF": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.Rq1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.tmx.aT1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.json.Fr1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.gQ1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.dE1384": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.XzYkdd": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.WE1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.Jr1384": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.qAlLoz": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.HELaiS": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.dclKkL": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.PL1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.PW1384": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

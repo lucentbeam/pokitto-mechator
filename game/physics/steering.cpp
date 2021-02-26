@@ -11,11 +11,11 @@ void Steering::update(float dt, float x, float y) {
         if (len > 0) {
             m_facing /= len;
         }
-        m_interia = m_speed;
+        m_inertia = m_speed;
     } else {
-        m_interia *= (1.0f - m_friction);
+        m_inertia *= (1.0f - m_friction);
     }
-    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_interia * dt, m_collisions, m_size);
+    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_inertia * dt, m_collisions, m_size);
 }
 
 void Steering::copyPosition(const Steering &other) {

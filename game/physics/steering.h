@@ -19,7 +19,7 @@ class Steering {
     const uint16_t m_collisions;
     const float m_friction;
     bool m_moving;
-    float m_interia;
+    float m_inertia;
 public:
     Steering(float x, float y, float speed, float cornering, const std::initializer_list<uint8_t> collisions, float width, float height, float friction = 1.0f) :
         m_pos(x,y),
@@ -41,7 +41,7 @@ public:
     Vec2f pos() const { return m_pos; }
     Vec2f facing() const { return m_facing; }
     Vec2f aim() const { return m_aim; }
-    Vec2f vel() const { return m_facing * m_interia; }
+    Vec2f vel() const { return m_facing * m_inertia; }
     uint8_t rotation_frame() const;
 };
 

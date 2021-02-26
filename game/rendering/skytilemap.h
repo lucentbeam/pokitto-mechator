@@ -16,7 +16,7 @@ class SkyTilemap {
   const uint8_t m_mapwidth, m_mapheight;
 
 public:
-  const uint8_t render_width = 7, render_height = 5;
+  const uint8_t render_width = 7, render_height = 6;
 
   SkyTilemap(const uint8_t tiles[][18*18+2], const uint8_t * map);
 

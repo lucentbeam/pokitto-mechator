@@ -30,7 +30,6 @@ void drawState() {
 
     Camera::update(player.pos().x(), player.pos().y());
 
-//    MapManager::draw(&renderSystem);
     MapManager::draw(&screenbuffer);
     renderSystem.drawBuffer(screenbuffer.getData());
     player.draw(&renderSystem);

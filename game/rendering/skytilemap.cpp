@@ -28,7 +28,7 @@ void SkyTilemap::draw(RenderSystem *system)
         for(int16_t i = x_lower; i < x_upper; i++) {
             uint8_t tile = m_map[idx];
             if (tile == uint8_t(-1)) { idx++; continue; }
-            system->drawShadow(sx + (i-x) * 18, sy + (j-y) * 18 + 2, m_tiles[tile], m_tiles[tile][2]);
+            system->drawShadow(sx + (i-x) * 18, sy + (j-y) * 18 + 3, m_tiles[tile], m_tiles[tile][2]);
             system->sprite(sx + (i-x) * 18, sy + (j-y) * 18, m_tiles[tile], m_tiles[tile][2]);
             idx++;
         }
