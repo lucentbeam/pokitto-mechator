@@ -12,6 +12,7 @@
 
 #include "core/rendering/screenbuffer.h"
 #include "game/entities/effects.h"
+#include "game/rendering/cloudmanager.h"
 
 RenderSystem renderSystem;
 Player player;
@@ -21,6 +22,7 @@ void updateState(FSM &fsm) {
     player.update(0.014f);
     ProjectileManager::update(0.014f);
     EffectManager::update(0.014f);
+//    CloudManager::update(0.014f);
 }
 
 void drawState() {
@@ -36,6 +38,7 @@ void drawState() {
 
     MapManager::draw(&renderSystem, false);
     EffectManager::draw(&renderSystem);
+//    CloudManager::draw(&renderSystem);
 
     fps.update(&renderSystem);
     fps.draw(&renderSystem, 2, 82, 9);

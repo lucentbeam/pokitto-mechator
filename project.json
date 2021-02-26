@@ -3273,6 +3273,171 @@
 		},
 		"\\core\\pokittolibextensions.cpp.IXTalz": {
 			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.h.gKrHwA": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.h": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.cpp.TJCgyx": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.iRjoYP": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.sGIgxg": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.h.TKRCCQ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.cpp.autosave.kXOeVb": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.cpp.autosave.kbqpct": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\clouds.png": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.cpp.dNLjrM": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.teNnQQ": {
+			"sdcard": false
+		},
+		"\\main.cpp.IyejNY": {
+			"sdcard": false
+		},
+		"\\main.cpp.ZNOllc": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\cloudmanager.obj": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.aiKgKh": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\cloudmanager.cpp.PNBibS": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.VHEOuX": {
+			"sdcard": false
+		},
+		"\\main.cpp.hhrWeJ": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\clouds.h": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.JSiwZI": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.AjVocD": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.esdCFE": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.uypKiN": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.ubGljV": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.autosave.bjyakU": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.CvGuLL": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.hhIkRd": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.ryPMad": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.cvTSpF": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.cBPAyG": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.autosave.iOeDkk": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.BycGDI": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.dTQoDY": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.VsMhNo": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.gsNoeH": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.frpMzt": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.aUQeWb": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.IVuRbF": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.mypWbU": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.sdkpcW": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.amnPnI": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.EuTHFc": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.wQiAHn": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.jyryYz": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.jnKiiT": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.ifiWAS": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.ybvhgS": {
+			"sdcard": false
+		},
+		"\\content\\art\\clouds.aseprite": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.LZAQcq": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

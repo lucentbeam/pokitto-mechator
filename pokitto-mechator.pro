@@ -4,6 +4,7 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    game/rendering/cloudmanager.cpp \
     core/rendering/screenbuffer.cpp \
     game/entities/effects.cpp \
     game/entities/projectile.cpp \
@@ -23,6 +24,7 @@ SOURCES += \
 
 HEADERS += \
     core/audio/audiosystem.h \
+    game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \
     core/rendering/tilemap.h \
     core/utilities/babyfsm.h \
