@@ -98,7 +98,9 @@ void Player::draw(RenderSystem *renderSystem) {
         static int counter = 0;
         if (m_soldier.moving()) {
             counter++;
-            sprite += counter % 30 < 10 ? 0 : counter % 30 < 20 ? 1 : 2;
+            const int increment = 6;
+            int mod = counter % (increment * 4);
+            sprite += mod < increment ? 0 : mod < increment * 2 ? 1 : mod < increment * 3 ? 2 : 1;
         } else {
             sprite += 1;
         }

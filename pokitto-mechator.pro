@@ -4,6 +4,7 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    game/entities/enemymech.cpp \
     game/physics/regionmanager.cpp \
     game/rendering/cloudmanager.cpp \
     core/rendering/screenbuffer.cpp \
@@ -25,6 +26,8 @@ SOURCES += \
 
 HEADERS += \
     core/audio/audiosystem.h \
+    core/utilities/objectpool.h \
+    game/entities/enemymech.h \
     game/physics/regionmanager.h \
     game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \

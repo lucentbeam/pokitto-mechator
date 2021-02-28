@@ -1,6 +1,7 @@
 #include "rendersystem.h"
 
 #include <cstdio>
+#include <cstring>
 
 #ifndef POKITTO_SFML
 

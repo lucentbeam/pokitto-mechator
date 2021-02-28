@@ -183,7 +183,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
 
             for(int i = 0; i < render_width; i++) {
                 for (int j = 0; j < rows_to_draw; j++) {
-                    int idx = map_l_tile + i + (j + top) * m_mapwidth;
+//                    int idx = map_l_tile + i + (j + top) * m_mapwidth;
                     uint8_t tile = getTileAt(x + sx + i * TileWidth, y + sy + j * TileHeight);
                     buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[tile]);
                 }
@@ -198,7 +198,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             int sy = top * TileHeight - y;
 
             for(int i = 0; i < render_width; i++) {
-                int idx = left + i + top * m_mapwidth;
+//                int idx = left + i + top * m_mapwidth;
                 uint8_t tile = getTileAt(x + sx + i * TileWidth, y + sy);
                 buffer->drawTile(sx + i * TileWidth, sy, m_tiles[tile]);
             }

@@ -3609,6 +3609,507 @@
 		},
 		"\\content\\maps\\mechator.json.PW1384": {
 			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.autosave.YllUnC": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.autosave.nBNUfY": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.unvEdZ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.autosave.qKkYYR": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.MweMjf": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.mxhCXi": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.kmgzhQ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.ESKfUv": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.JlCpye": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.autosave.lumeXX": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.autosave.GBVwjI": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.AZkGla": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.zvCsVd": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.ruvigf": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.PwBaNi": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.autosave.YIUDjm": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.ixkszp": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.eMzEpb": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.VN1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.zG1384": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator_sky.tmx.IM1384": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.YAInTJ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.iNeJWb": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.eDRWFV": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.qNZzVO": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.autosave.mJCagh": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.xYitrX": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.EeDHRv": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.SVeMuw": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.FBGhPT": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.EPmjHy": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.roToUV": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.YxIoum": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.OhQMKl": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.aEzAXI": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.naSMHa": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.Kxknxd": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.LYBiZL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.ZZomyW": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.rtwhQY": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.xtKUEP": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.bjpryN": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.AhxxZG": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.autosave.cNAlTY": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.autosave.qzzbys": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.autosave.cVkOdI": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.RKbAfY": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.oVDwcB": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.XeleNK": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.oVbyOk": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.autosave.bzIbxb": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.JCXEjW": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.XHENeA": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.autosave.BhaFeG": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.SgAhGM": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.rEGBfz": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.AokjRQ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.vmkxIH": {
+			"sdcard": false
+		},
+		"\\main.cpp.autosave.FzkIBe": {
+			"sdcard": false
+		},
+		"\\main.cpp.qiZxHE": {
+			"sdcard": false
+		},
+		"\\main.cpp.cjfhWi": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\enemymech.obj": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.NXvsSp": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.bpoAnJ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.VNJzjS": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.pgjBpd": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.cTFxpB": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.fWLoWG": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.QVIYEg": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.FLUAnO": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.QqWnlP": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.autosave.naJQRO": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.XWKKNc": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.gPebgZ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.kNTaBL": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.aQnalZ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.GTvCGt": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.YvAiaE": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.cHFhpF": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.FprItc": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.SAjOys": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.XyEtgy": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.WenRcE": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.deUnoc": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.pBupBw": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.PIkxFy": {
+			"sdcard": false
+		},
+		"\\main.cpp.JoITkw": {
+			"sdcard": false
+		},
+		"\\main.cpp.XjPIVp": {
+			"sdcard": false
+		},
+		"\\main.cpp.YCSxhw": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.eUYiLu": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.wdwwok": {
+			"sdcard": false
+		},
+		"\\main.cpp.zZzHeG": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.sEKYwp": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.uWuKiR": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.IAUvgl": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.AoTgpZ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.ObSbNA": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.wArZAS": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.AcMymq": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.rFlPQA": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.tuvnYk": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.wSlQXG": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.YKcENJ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.qLvVGt": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.h.zbgOsc": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.Hifaqi": {
+			"sdcard": false
+		},
+		"\\main.cpp.mGbGUE": {
+			"sdcard": false
+		},
+		"\\main.cpp.DtCKyT": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.ZdEQjY": {
+			"sdcard": false
+		},
+		"\\main.cpp.emjmaU": {
+			"sdcard": false
+		},
+		"\\main.cpp.OEXPcj": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.nZoLbV": {
+			"sdcard": false
+		},
+		"\\game\\physics\\regionmanager.cpp.aSfnLB": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.ZAFCJs": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.cLOsbo": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.autosave.JgXYsq": {
+			"sdcard": false
+		},
+		"\\content\\art\\enemy_ground.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\enemy_ground.png": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.XHAWGj": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.dLizHd": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.elwUVt": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.ydAFij": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.autosave.uMAzBn": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.autosave.LVJOCz": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.autosave.bLdqfO": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.autosave.qRchLA": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\enemy_ground.h": {
+			"sdcard": false
+		},
+		"\\game\\player.h.dVOTEh": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.iPwuPI": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.OhcOqe": {
+			"sdcard": false
+		},
+		"\\game\\player.h.KWJipy": {
+			"sdcard": false
+		},
+		"\\game\\player.h.HzOGQv": {
+			"sdcard": false
+		},
+		"\\game\\player.h.viQScl": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.JxJYpI": {
+			"sdcard": false
+		},
+		"\\main.cpp.hJeHRs": {
+			"sdcard": false
+		},
+		"\\main.cpp.aboDdT": {
+			"sdcard": false
+		},
+		"\\main.cpp.jHKPxz": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.VsdZcX": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.ExnHJI": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.lAbJTi": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.ZXdAYh": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.autosave.GAqGUR": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.autosave": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.HAFEkm": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.LRGYne": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.BYueNQ": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.RNWALw": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.WDqNkD": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.autosave.uNEwqr": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.RUPPHB": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.autosave.AXDlel": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.zZWkZi": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.CZBjTy": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.CpuHBU": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.autosave.JfEptP": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.NvouCd": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.MRyabL": {
+			"sdcard": false
+		},
+		"\\main.cpp.lQXnmJ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.zecxnY": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

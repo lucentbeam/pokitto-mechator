@@ -13,6 +13,7 @@
 #include "core/rendering/screenbuffer.h"
 #include "game/entities/effects.h"
 #include "game/rendering/cloudmanager.h"
+#include "game/entities/enemymech.h"
 
 RenderSystem renderSystem;
 Player player;
@@ -22,6 +23,7 @@ void updateState(FSM &fsm) {
     player.update(0.014f);
     ProjectileManager::update(0.014f);
     EffectManager::update(0.014f);
+    Enemy::updateMechs(0.014f);
 //    CloudManager::update(0.014f);
 }
 
@@ -32,6 +34,7 @@ void drawState() {
 
     MapManager::draw(&screenbuffer);
     renderSystem.drawBuffer(screenbuffer.getData());
+    Enemy::drawMechs(&renderSystem);
     player.draw(&renderSystem);
     ProjectileManager::draw(&renderSystem);
 
@@ -56,7 +59,7 @@ int main ()
 
     const uint8_t physicsTimestepMs = 14;
     const uint8_t maxPhysicsStepsPerFrame = 5; // prevent death spiral
-    
+
     while (renderSystem.running())
     {
         bool draws = renderSystem.update();
