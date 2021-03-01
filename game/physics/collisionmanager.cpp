@@ -56,3 +56,26 @@ Vec2f CollisionManager::resolveMovement(Vec2f pos, const Vec2f &delta, uint16_t 
     return pos;
 }
 
+Vec2f CollisionManager::resolveMovement(const Vec2f &pos, const Vec2f &delta, uint16_t collisionMask)
+{
+    Vec2f next = pos + delta;
+
+    if ((1 << getTerrainAt(next.x(),next.y()) & collisionMask) == 0) {
+        return next;
+    }
+
+    Vec2f dp = Vec2f(0.0f, delta.y());
+    next = pos + dp;
+    if ((1 << getTerrainAt(next.x(),next.y()) & collisionMask) == 0) {
+        return next;
+    }
+
+    dp = Vec2f(delta.x(), 0.0f);
+    next = pos + dp;
+    if ((1 << getTerrainAt(next.x(),next.y()) & collisionMask) == 0) {
+        return next;
+    }
+
+    return pos;
+}
+

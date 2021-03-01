@@ -15,6 +15,10 @@
 #include "game/rendering/cloudmanager.h"
 #include "game/entities/enemymech.h"
 
+#include "game/maps/spawnpoint.h"
+
+const SpawnPoint spawns[] = { SpawnPoint({38*6, 7*6}, Enemy::createMech) };
+
 RenderSystem renderSystem;
 Player player;
 ScreenBuffer screenbuffer;
@@ -24,24 +28,28 @@ void updateState(FSM &fsm) {
     ProjectileManager::update(0.014f);
     EffectManager::update(0.014f);
     Enemy::updateMechs(0.014f);
+
+    Camera::update(player.pos().x(), player.pos().y());
+
+    SpawnPoint::setActiveRegion(spawns, 1);
 //    CloudManager::update(0.014f);
 }
 
 void drawState() {
     static FPSHelper fps(10);
 
-    Camera::update(player.pos().x(), player.pos().y());
-
     MapManager::draw(&screenbuffer);
     renderSystem.drawBuffer(screenbuffer.getData());
     Enemy::drawMechs(&renderSystem);
     player.draw(&renderSystem);
+
     ProjectileManager::draw(&renderSystem);
-
-    MapManager::draw(&renderSystem, false);
     EffectManager::draw(&renderSystem);
-//    CloudManager::draw(&renderSystem);
 
+    // sky layer
+    MapManager::draw(&renderSystem, false);
+
+//    CloudManager::draw(&renderSystem);
     fps.update(&renderSystem);
     fps.draw(&renderSystem, 2, 82, 9);
     fps.draw(&renderSystem, 2, 81, 37);

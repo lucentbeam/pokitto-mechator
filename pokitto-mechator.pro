@@ -5,7 +5,7 @@ CONFIG -= qt
 
 SOURCES += \
     game/entities/enemymech.cpp \
-    game/physics/regionmanager.cpp \
+    game/maps/spawnpoint.cpp \
     game/rendering/cloudmanager.cpp \
     core/rendering/screenbuffer.cpp \
     game/entities/effects.cpp \
@@ -28,7 +28,7 @@ HEADERS += \
     core/audio/audiosystem.h \
     core/utilities/objectpool.h \
     game/entities/enemymech.h \
-    game/physics/regionmanager.h \
+    game/maps/spawnpoint.h \
     game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \
     core/rendering/tilemap.h \

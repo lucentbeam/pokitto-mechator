@@ -20,6 +20,10 @@ public:
     static void foreach(void (*)(Obj*));
 
     static void testRemove(bool (*)(Obj*));
+
+    static Obj * objects() { return s_objects; }
+
+    static uint8_t objectCount() { return s_activeCount; }
 };
 
 #endif // OBJECTPOOL_H
@@ -28,7 +32,7 @@ template <class Obj, int Count>
 Obj ObjectPool<Obj,Count>::s_objects[Count];
 
 template <class Obj, int Count>
-uint8_t ObjectPool<Obj,Count>::s_activeCount = Count;
+uint8_t ObjectPool<Obj,Count>::s_activeCount = 0;
 
 template<class Obj, int Count>
 Obj *ObjectPool<Obj,Count>::activateNext()
@@ -37,7 +41,7 @@ Obj *ObjectPool<Obj,Count>::activateNext()
         return nullptr;
     }
     s_activeCount++;
-    return s_objects[s_activeCount-1];
+    return s_objects + s_activeCount - 1;
 }
 
 template<class Obj, int Count>

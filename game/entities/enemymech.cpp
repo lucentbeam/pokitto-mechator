@@ -4,7 +4,15 @@
 #include "game/utilities/helpers.h"
 #include "game/physics/collisionmanager.h"
 
+ObjectPool<EnemyMech,10> Enemy::s_mechs;
 
+void Enemy::createMech(const Vec2f &pos)
+{
+    auto m = s_mechs.activateNext();
+    if (m != nullptr) {
+        m->setup(pos);
+    }
+}
 
 void Enemy::updateMechs(float dt)
 {
@@ -15,8 +23,9 @@ void Enemy::updateMechs(float dt)
 
     static uint8_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal});
 
-    for(auto rect : RegionRect::getInRange(px - 24, py - 24, 110+24, 88+24)) {
-        EnemyMech * mech = reinterpret_cast<EnemyMech*>(rect->parent);
+    EnemyMech * start = s_mechs.objects();
+    for (int i = 0; i < s_mechs.objectCount(); i++) {
+        EnemyMech * mech = start + i;
         mech->m_counter++;
         Vec2f dir = {tx - mech->m_rect.centerX(), ty - mech->m_rect.centerY()};
         float len = dir.length();
@@ -38,7 +47,7 @@ void Enemy::updateMechs(float dt)
             break;
         case EnemyMech::Mode::Preparing:
             if (mech->m_counter > 60) {
-                Projectile * p = ProjectileManager::create({rect->centerX(), rect->centerY()}, dir * 50.0f, 3.0);
+                Projectile * p = ProjectileManager::create({mech->m_rect.centerX(), mech->m_rect.centerY()}, dir * 50.0f, 3.0);
                 p->setSprite({projectile[0], projectile[1]}, 20.0);
                 mech->status = EnemyMech::Mode::Walking;
                 mech->m_counter = rand() % 40;
@@ -47,9 +56,8 @@ void Enemy::updateMechs(float dt)
         default:
             break;
         }
-        Vec2f pos = {rect->centerX(), rect->centerY()};
-        pos = CollisionManager::resolveMovement(pos, mech->m_velocity * dt, mask, {4,4});
-        rect->move(pos.x(), pos.y());
+        Vec2f pos = CollisionManager::resolveMovement({mech->m_rect.centerX(), mech->m_rect.centerY() + 2}, mech->m_velocity * 0.014f, mask);
+        mech->m_rect.setCenter(pos.x(), pos.y() - 2);
     }
 }
 
@@ -57,9 +65,10 @@ void Enemy::drawMechs(RenderSystem *renderer)
 {
     float px = Camera::tl_x();
     float py = Camera::tl_y();
-    for(auto rect : RegionRect::getInRange(px - 12, py - 12, 110+24, 88+24)) {
-        auto pos = Camera::worldToScreen({rect->centerX(), rect->centerY()});
-        EnemyMech * mech = reinterpret_cast<EnemyMech*>(rect->parent);
+    EnemyMech * start = s_mechs.objects();
+    for (int i = 0; i < s_mechs.objectCount(); i++) {
+        EnemyMech * mech = start + i;
+        auto pos = Camera::worldToScreen({mech->m_rect.centerX(), mech->m_rect.centerY()});
         if (mech->status == EnemyMech::Mode::Preparing) {
             int idx = mech->m_counter % 10 < 5 ? 1 : 3;
             renderer->sprite(pos.x()-2, pos.y()-2, enemy_ground[idx], enemy_ground[idx][2]);

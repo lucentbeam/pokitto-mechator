@@ -24,6 +24,7 @@ public:
   void setCenter(float x, float y);
 
   bool overlaps(const Rect &other);
+  bool contains(float x, float y);
 
   static bool overlaps(const Rect &r1, const Rect &r2);
 };

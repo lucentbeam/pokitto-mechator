@@ -45,6 +45,8 @@ public:
     static Terrain getTerrainAt(float x, float y);
 
     static Vec2f resolveMovement(Vec2f pos, const Vec2f &delta, uint16_t collisionMask, const Vec2f &size);
+
+    static Vec2f resolveMovement(const Vec2f &pos, const Vec2f &delta, uint16_t collisionMask);
 };
 
 #endif // COLLISIONMANAGER_H

@@ -21,6 +21,11 @@ bool Rect::overlaps(const Rect &other)
     return Rect::overlaps(*this, other);
 }
 
+bool Rect::contains(float x, float y)
+{
+    return x >= m_l && x <= m_r && y >= m_t && y <= m_b;
+}
+
 bool Rect::overlaps(const Rect &r1, const Rect &r2) {
   return r1.m_l < r2.m_r
       && r2.m_l < r1.m_r
