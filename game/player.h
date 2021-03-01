@@ -60,19 +60,27 @@ void Player::update(float dt) {
     }
     if (m_dismounted) {
         if (controls.a.downEvery(1, 12)) {
-            ProjectileManager::create(m_soldier.pos(), m_soldier.aim() * 100.0f, 0.5f)->setSprite({projectile[0]}, 20);
+            Projectile * p = ProjectileManager::create(m_soldier.pos(), m_soldier.aim() * 100.0f, 3, 0.5f)
+                ->setSprite({projectile[0]}, 20)
+                ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
         }
     } else {
         if (controls.a.downEvery(1, 18)) {
             Vec2f offset = m_jeep.aim().rot90();
-            ProjectileManager::create(m_jeep.pos() + offset * 4.0f, m_jeep.aim() * 150.0f, 0.35f)->setSprite({projectile[0]}, 20);
-            ProjectileManager::create(m_jeep.pos() - offset * 4.0f, m_jeep.aim() * 150.0f, 0.35f)->setSprite({projectile[0]}, 20);
+            ProjectileManager::create(m_jeep.pos() + offset * 4.0f, m_jeep.aim() * 150.0f, 3, 0.35f)
+                    ->setSprite({projectile[0]}, 20)
+                    ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
+            ProjectileManager::create(m_jeep.pos() - offset * 4.0f, m_jeep.aim() * 150.0f, 3, 0.35f)
+                    ->setSprite({projectile[0]}, 20)
+                    ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
         }
         if (controls.b.pressed()) {
 
-            Projectile * grenade = ProjectileManager::create(m_jeep.pos(), m_jeep.vel() * 0.85f + m_jeep.facing() * 50.0f, 0.5f);
-            grenade->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4);
-            grenade->setExpireCallback([](Projectile*p) {
+            ProjectileManager::create(m_jeep.pos(), m_jeep.vel() * 0.85f + m_jeep.facing() * 50.0f, 4, 0.5f)
+                ->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)
+                ->setTargetMask({EnemyTarget, GroundTarget})
+                ->setDamage(0)
+                ->setExpireCallback([](Projectile*p) {
                 for(int i = -4; i <= 4; i+=4) {
                     for (int j = -4; j <= 4; j+= 4) {
                         Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
@@ -81,6 +89,7 @@ void Player::update(float dt) {
                         }
                     }
                 }
+                ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1);
                 EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
             });
         }

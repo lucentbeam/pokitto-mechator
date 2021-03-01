@@ -17,7 +17,7 @@ public:
 
     SpawnPoint(const Vec2f &pos, void (* const onApproach)(const Vec2f &)) : m_pos(pos), m_on_approach(onApproach) {}
 
-    static void setActiveRegion(const SpawnPoint points[], uint16_t point_count);
+    static void setActiveRegion();
 };
 
 const SpawnPoint world_points[] = { SpawnPoint({0,0},nullptr) };

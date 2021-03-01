@@ -150,12 +150,30 @@ bool RenderSystem::running() {
     return sfSys.window->isOpen();
 }
 
+#include <list>
 bool RenderSystem::update() {
+    static std::list<sf::Image> s_captures;
+    static int capture_count = 0;
+
     sf::Event event;
     while (sfSys.window->pollEvent(event))
     {
         if (event.type == sf::Event::Closed) {
             sfSys.window->close();
+        }
+        if (event.type == sf::Event::KeyPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+            if (capture_count == 0) {
+                s_captures.clear();
+                capture_count = 240;
+            } else {
+                capture_count = 0;
+                int i = 0;
+                for(auto &cap : s_captures) {
+                    cap.saveToFile("screenshots/capture_"+std::to_string(i)+".png");
+                    i++;
+                }
+                s_captures.clear();
+            }
         }
     }
     sf::Texture texture;
@@ -169,6 +187,13 @@ bool RenderSystem::update() {
     sfSys.texts.clear();
     sfSys.screenbuffer.create(screenwidth, screenheight, sfSys.colors[sfSys.clearcolor]);
     sfSys.window->display();
+
+    if (capture_count > 0) {
+        s_captures.push_back(sfSys.window->capture());
+        if (s_captures.size() > capture_count) {
+            s_captures.pop_front();
+        }
+    }
     return true;
 }
 

@@ -3,23 +3,27 @@
 #include "game/rendering/camera.h"
 #include <algorithm>
 
+#include "game/entities/enemymech.h"
+#include "game/entities/barracks.h"
+
 std::unordered_set<const SpawnPoint*> SpawnPoint::s_active_points;
 
-void SpawnPoint::setActiveRegion(const SpawnPoint points[], uint16_t point_count)
+const SpawnPoint points[] = { SpawnPoint({43*6, 10*6}, spawnBarracks<42,7,4,3>), SpawnPoint({15*6, 7*6}, Enemy::createMech), SpawnPoint({38*6, 7*6}, Enemy::createMech)};
+const int point_count = sizeof(points)/sizeof(SpawnPoint);
+
+void SpawnPoint::setActiveRegion()
 {
     if (!Camera::hasMovedRegions()) return;
 
-    std::unordered_set<const SpawnPoint*> prev;
-    prev.insert(s_active_points.begin(), s_active_points.end());
-    s_active_points.clear();
+    std::unordered_set<const SpawnPoint*> next;
 
     for (int i = 0; i < point_count; i++) {
-        const SpawnPoint pt = points[i];
-        if (Camera::inActiveZone(pt.m_pos)) {
-            s_active_points.insert(&pt);
-            if (prev.find(&pt) == prev.end()) {
-                pt.m_on_approach(pt.m_pos);
+        if (Camera::inActiveZone(points[i].m_pos)) {
+            if (s_active_points.find(points + i) == s_active_points.end()) {
+                points[i].m_on_approach(points[i].m_pos);
             }
+            next.insert(points + i);
         }
     }
+    s_active_points = next;
 }

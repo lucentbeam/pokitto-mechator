@@ -13,11 +13,10 @@
 #include "core/rendering/screenbuffer.h"
 #include "game/entities/effects.h"
 #include "game/rendering/cloudmanager.h"
-#include "game/entities/enemymech.h"
 
 #include "game/maps/spawnpoint.h"
-
-const SpawnPoint spawns[] = { SpawnPoint({38*6, 7*6}, Enemy::createMech) };
+#include "game/entities/enemymech.h"
+#include "game/entities/barracks.h"
 
 RenderSystem renderSystem;
 Player player;
@@ -28,10 +27,11 @@ void updateState(FSM &fsm) {
     ProjectileManager::update(0.014f);
     EffectManager::update(0.014f);
     Enemy::updateMechs(0.014f);
+    Barracks::update(0.014f);
 
     Camera::update(player.pos().x(), player.pos().y());
 
-    SpawnPoint::setActiveRegion(spawns, 1);
+    SpawnPoint::setActiveRegion();
 //    CloudManager::update(0.014f);
 }
 

@@ -16,12 +16,17 @@ void Rect::setCenter(float x, float y) {
   m_b = y + m_h/2.0f;
 }
 
-bool Rect::overlaps(const Rect &other)
+bool Rect::overlaps(const Rect &other) const
 {
     return Rect::overlaps(*this, other);
 }
 
-bool Rect::contains(float x, float y)
+bool Rect::contains(const Vec2f &p) const
+{
+    return contains(p.x(), p.y());
+}
+
+bool Rect::contains(float x, float y) const
 {
     return x >= m_l && x <= m_r && y >= m_t && y <= m_b;
 }

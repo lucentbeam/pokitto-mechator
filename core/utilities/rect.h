@@ -1,6 +1,8 @@
 #ifndef _RECT
 #define _RECT
 
+#include "game/utilities/vec.h"
+
 class Rect {
   float m_l, m_t, m_r, m_b, m_w, m_h;
 
@@ -23,8 +25,9 @@ public:
 
   void setCenter(float x, float y);
 
-  bool overlaps(const Rect &other);
-  bool contains(float x, float y);
+  bool overlaps(const Rect &other) const;
+  bool contains(const Vec2f &p) const;
+  bool contains(float x, float y) const;
 
   static bool overlaps(const Rect &r1, const Rect &r2);
 };

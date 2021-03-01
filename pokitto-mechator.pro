@@ -4,6 +4,7 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    game/entities/barracks.cpp \
     game/entities/enemymech.cpp \
     game/maps/spawnpoint.cpp \
     game/rendering/cloudmanager.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
     core/audio/audiosystem.h \
     core/utilities/objectpool.h \
+    game/entities/barracks.h \
     game/entities/enemymech.h \
     game/maps/spawnpoint.h \
     game/rendering/cloudmanager.h \

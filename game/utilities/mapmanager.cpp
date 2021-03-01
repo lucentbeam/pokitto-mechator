@@ -32,3 +32,8 @@ void MapManager::setTileAt(float x, float y, uint8_t override)
     s_background.setTileAt(x, y, override);
 }
 
+void MapManager::clearOverrideAt(float x, float y)
+{
+    s_background.clearOverrideAt(x, y);
+}
+

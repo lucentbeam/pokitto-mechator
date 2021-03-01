@@ -39,6 +39,7 @@ public:
   uint8_t getTileAt(float x, float y) const;
   uint8_t getTileAt(int index) const;
   void setTileAt(float x, float y, uint8_t override);
+  void clearOverrideAt(float x, float y);
 };
 
 template<int TileWidth, int TileHeight>
@@ -233,6 +234,15 @@ void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t overrid
     if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return;
     m_overrides[px + py * m_mapwidth] = override;
     m_redraws.push_back({x,y});
+}
+
+template<int TileWidth, int TileHeight>
+void Tilemap<TileWidth, TileHeight>::clearOverrideAt(float x, float y)
+{
+    int px = (x / TileWidth);
+    int py = (y / TileHeight);
+    if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return;
+    m_overrides.erase(px + py * m_mapwidth);
 }
 
 #endif

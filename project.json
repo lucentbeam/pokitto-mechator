@@ -4338,6 +4338,1041 @@
 		},
 		"\\game\\entities\\enemymech.h.kIObJs": {
 			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.riirHZ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.fXYGcf": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.OOxOfk": {
+			"sdcard": false
+		},
+		"\\main.cpp.autosave.rALdWX": {
+			"sdcard": false
+		},
+		"\\main.cpp.kANJIl": {
+			"sdcard": false
+		},
+		"\\main.cpp.ASmbkC": {
+			"sdcard": false
+		},
+		"\\main.cpp.PtWyEb": {
+			"sdcard": false
+		},
+		"\\main.cpp.ZgsypB": {
+			"sdcard": false
+		},
+		"\\main.cpp.zSCiGt": {
+			"sdcard": false
+		},
+		"\\main.cpp.UBfoQP": {
+			"sdcard": false
+		},
+		"\\main.cpp.RMEFCQ": {
+			"sdcard": false
+		},
+		"\\main.cpp.XtniPH": {
+			"sdcard": false
+		},
+		"\\main.cpp.ZNXQRF": {
+			"sdcard": false
+		},
+		"\\main.cpp.PynoIr": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.miTFVM": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.xFTbvK": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.ViIdvS": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.nrgohD": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.imBElv": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.tGshLF": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.autosave.mszImQ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.LCONXL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.hUGSHb": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.TpaClU": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.wxJgEx": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.XxowkU": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.ILMusL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.autosave.oqtIhK": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.autosave.TxZYhy": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.h.autosave.kIXBHw": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.autosave.QctMRL": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.nGDGuw": {
+			"sdcard": false
+		},
+		"\\content\\art\\explosion-small.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\explosion-small.png": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.nlbGRX": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.vxnewo": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.JryznO": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.BzzwlY": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.zMLleS": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.WHyCQI": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\barracks.obj": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.HtsBta": {
+			"sdcard": false
+		},
+		"\\main.cpp.opOkFn": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.autosave.RYVrhh": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.dfjmbG": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.nVKfbx": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.iGPKgv": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.kYfVrN": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.autosave.BplojL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.apQEyn": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.GLtRcg": {
+			"sdcard": false
+		},
+		"\\main.cpp.sqrxGa": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.NGMFst": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\rect.h.LReusL": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\rect.cpp.wdpfoX": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.aBnbXB": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.wSevzP": {
+			"sdcard": false
+		},
+		"\\main.cpp.HeKnMN": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.QbOpTa": {
+			"sdcard": false
+		},
+		"\\main.cpp.AqzeOX": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.autosave.ZgWUrB": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.SaKeUF": {
+			"sdcard": false
+		},
+		"\\main.cpp.awEVYH": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.aZZNIq": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.cpp.jWPyUv": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.XDWkjM": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.nhKQCl": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.CJcFNI": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.autosave.DNkdku": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.zIihFf": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.EogZFt": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.jdIudi": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.FDpcsw": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.JJnYCJ": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.USzVTN": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.h.autosave.AYfXYB": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.autosave.wxezeS": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.h.KWUhxE": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.PBDPtF": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.OxoRFj": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.autosave.SKvdGT": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.awMgPc": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.cdYfJN": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.h.oqKapP": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.VpSBOW": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.h.xRVBfl": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\New folder": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\cloudmanager.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\enemymech.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\barracks.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\spawnpoint.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\screenbuffer.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\effects.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\skytilemap.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_0.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_1.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_2.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_3.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_4.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_5.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_6.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_7.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_8.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_9.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_10.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_11.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_12.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_13.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_14.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_15.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_16.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_17.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_18.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_19.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_20.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_21.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_22.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_23.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_24.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_25.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_26.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_27.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_28.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_29.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_30.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_31.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_32.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_33.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_34.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_35.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_36.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_37.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_38.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_39.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_40.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_41.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_42.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_43.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_44.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_45.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_46.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_47.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_48.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_49.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_50.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_51.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_52.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_53.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_54.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_55.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_56.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_57.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_58.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_59.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_60.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_61.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_62.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_63.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_64.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_65.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_66.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_67.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_68.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_69.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_70.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_71.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_72.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_73.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_74.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_75.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_76.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_77.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_78.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_79.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_80.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_81.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_82.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_83.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_84.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_85.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_86.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_87.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_88.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_89.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_90.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_91.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_92.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_93.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_94.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_95.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_96.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_97.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_98.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_99.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_100.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_101.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_102.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_103.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_104.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_105.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_106.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_107.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_108.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_109.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_110.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_111.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_112.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_113.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_114.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_115.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_116.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_117.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_118.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_119.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_120.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_121.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_122.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_123.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_124.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_125.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_126.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_127.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_128.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_129.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_130.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_131.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_132.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_133.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_134.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_135.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_136.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_137.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_138.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_139.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_140.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_141.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_142.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_143.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_144.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_145.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_146.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_147.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_148.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_149.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_150.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_151.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_152.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_153.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_154.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_155.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_156.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_157.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_158.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_159.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_160.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_161.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_162.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_163.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_164.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_165.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_166.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_167.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_168.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_169.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_170.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_171.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_172.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_173.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_174.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_175.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_176.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_177.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_178.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_179.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_180.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_181.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_182.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_183.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_184.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_185.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_186.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_187.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_188.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_189.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_190.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_191.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_192.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_193.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_194.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_195.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_196.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_197.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_198.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_199.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_200.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_201.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_202.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_203.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_204.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_205.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_206.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_207.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_208.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_209.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_210.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_211.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_212.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_213.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_214.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_215.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_216.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_217.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_218.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_219.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_220.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_221.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_222.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_223.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_224.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_225.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_226.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_227.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_228.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_229.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_230.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_231.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_232.png": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\screenshots\\capture_233.png": {
+			"sdcard": false
+		},
+		"\\main.cpp.ShqEbU": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.iKkBLO": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.h.RMZtIb": {
+			"sdcard": false
+		},
+		"\\main.cpp.ydObqn": {
+			"sdcard": false
+		},
+		"\\main.cpp.vyTrPB": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.xJaTaC": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.lLjeCf": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.BLYhzm": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.QdRhpG": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.fYXHZU": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.eADkTX": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.gYejpu": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
