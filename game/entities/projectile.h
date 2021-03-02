@@ -31,6 +31,7 @@ class Projectile
     uint16_t mask;
     uint8_t damage;
     bool struck = false;
+    bool ignore_walls = false;
 
     friend ProjectileManager;
 public:
@@ -47,6 +48,8 @@ public:
     Projectile * setTargetMask(std::initializer_list<uint8_t> mask_enums);
 
     Projectile * setDamage(int d) { damage = d; return this; }
+
+    Projectile * setIgnoreWalls() { ignore_walls = true; return this; }
 
     void update(float dt);
 

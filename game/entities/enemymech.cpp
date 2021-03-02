@@ -6,12 +6,22 @@
 #include "game/entities/effects.h"
 
 ObjectPool<EnemyMech,10> Enemy::s_mechs;
+
 void Enemy::createMech(const Vec2f &pos)
 {
     auto m = s_mechs.activateNext();
     if (m != nullptr) {
         m->setup(pos);
     }
+}
+
+EnemyMech *Enemy::createAndReturnMech(const Vec2f &pos)
+{
+    auto m = s_mechs.activateNext();
+    if (m != nullptr) {
+        m->setup(pos);
+    }
+    return m;
 }
 
 void Enemy::updateMechs(float dt)
@@ -67,12 +77,15 @@ void Enemy::updateMechs(float dt)
         Vec2f pos = CollisionManager::resolveMovement({mech->m_rect.centerX(), mech->m_rect.centerY() + 2}, mech->m_velocity * 0.014f, mask);
         pos.setY(pos.y()-2);
         mech->m_rect.setCenter(pos.x(), pos.y());
-
         int damage = ProjectileManager::getCollisionDamage(pos, 4, bulletMask);
-        if (damage > 0) {
+        mech->m_life -= damage;
+        if (mech->m_life <= 0) {
             s_mechs.deactivate(i);
             EffectManager::create(pos, {explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
         } else {
+            if (damage > 0) {
+                EffectManager::create(pos, {hit[0], hit[1], hit[2], hit[3], hit[4]}, 20.0f);
+            }
             ++i;
         }
     }

@@ -20,6 +20,7 @@ void Projectile::configure(const Vec2f &pos, const Vec2f &vel, int size, float l
     m_on_expire = nullptr;
     damage = 1;
     struck = false;
+    ignore_walls = false;
 }
 
 Projectile * Projectile::setExpireCallback(void (*expire_callback)(Projectile *))
@@ -82,17 +83,17 @@ Projectile *ProjectileManager::create(const Vec2f &pos, const Vec2f &vel, int si
 void ProjectileManager::update(float dt)
 {
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal});
-    int i = 0;
+    int i = s_projectiles.objectCount() - 1;
     Projectile * start = s_projectiles.objects();
-    while (i < s_projectiles.objectCount()) {
-        bool hitWall = CollisionManager::collision(start[i].pos(), mask, Vec2f(2,2));
+    while (i >= 0) {
+        bool hitWall = !start[i].ignore_walls && CollisionManager::collision(start[i].pos(), mask, Vec2f(2,2));
         if (start[i].expired() || hitWall) {
             start[i].onExpire();
             s_projectiles.deactivate(i);
         } else {
             start[i].update(dt); // let wall hits clear out next frame to give other things time to get hit
-            ++i;
         }
+        --i;
     }
 }
 

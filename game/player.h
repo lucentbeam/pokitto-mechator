@@ -89,7 +89,7 @@ void Player::update(float dt) {
                         }
                     }
                 }
-                ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1);
+                ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls();
                 EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
             });
         }

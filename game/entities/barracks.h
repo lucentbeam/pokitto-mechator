@@ -17,6 +17,9 @@ class Barracks
     int8_t m_life = 30;
     Rect m_collision_rect;
 
+    int8_t m_spawn_timer = 120;
+    std::vector<EnemyMech*> m_linked_mechs;
+
     Stage stage() const { return m_life > 20 ? DefaultStage : m_life > 10 ? DamagedStage : HeavyDamagedStage; }
 
 public:
