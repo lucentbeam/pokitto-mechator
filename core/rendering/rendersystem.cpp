@@ -125,7 +125,7 @@ struct SfmlSystem {
         window = new sf::RenderWindow(sf::VideoMode(screenwidth*6,screenheight*6), "Pokitto Testing");
         window->setView(sf::View(sf::Vector2f(screenwidth/2, screenheight/2),sf::Vector2f(screenwidth, screenheight)));
         window->setFramerateLimit(60);
-        for (int i = 0; i < sizeof(palette)/sizeof(uint16_t); i++) {
+        for (int i = 0; i < sizeof(palette)/sizeof(uint16_t); ++i) {
             uint16_t color = palette[i];
             uint8_t r = (color & 0b1111100000000000) >> 11;
             uint8_t g = (color & 0b0000011111100000) >> 5;
@@ -170,7 +170,7 @@ bool RenderSystem::update() {
                 int i = 0;
                 for(auto &cap : s_captures) {
                     cap.saveToFile("screenshots/capture_"+std::to_string(i)+".png");
-                    i++;
+                    ++i;
                 }
                 s_captures.clear();
             }
@@ -227,7 +227,7 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
     }
     uint8_t h = sprite[1];
     const uint8_t * start = sprite + 2;
-    for (int i = 0; i < width * h; i++) {
+    for (int i = 0; i < width * h; ++i) {
         int dx = i % width;
         if (dx >= w) continue;
         if (m_clipping && dx > m_clip_width) continue;
@@ -325,7 +325,7 @@ void RenderSystem::drawLine(int x0, int y0, int x1, int y1, uint8_t color)
 void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
 {
     sf::Color c = sfSys.colors[color];
-    for (int i = x0; i < (x0 + w); i++) {
+    for (int i = x0; i < (x0 + w); ++i) {
         for (int j = y0; j < (y0 + h); j++) {
             if (i > 0 && j > 0 && i < screenwidth && j < screenheight) {
                 sfSys.screenbuffer.setPixel(i,j,c);
@@ -340,7 +340,7 @@ void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transpare
     uint8_t w = sprite[0];
     uint8_t h = sprite[1];
     const uint8_t * start = sprite + 2;
-    for (int i = 0; i < w * h; i++) {
+    for (int i = 0; i < w * h; ++i) {
         int dx = i % w;
         if (dx >= w) continue;
         if (m_clipping && dx > m_clip_width) continue;
@@ -357,7 +357,7 @@ void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transpare
         }
         sf::Color c = sfSys.screenbuffer.getPixel(px, py);
         int col_idx = 0;
-        for (int i = 0; i < 255; i++) {
+        for (int i = 0; i < 255; ++i) {
             if (sfSys.colors[i] == c) {
                 col_idx = i;
                 break;
@@ -369,7 +369,7 @@ void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transpare
 
 void RenderSystem::drawBuffer(uint8_t *buffer)
 {
-    for(int i = 0; i < 110; i++) {
+    for(int i = 0; i < 110; ++i) {
         for (int j = 0; j < 88; j++) {
             uint8_t idx = buffer[j * 110 + i];
             sf::Color c = sfSys.colors[idx];

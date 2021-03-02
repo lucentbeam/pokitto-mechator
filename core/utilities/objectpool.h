@@ -50,11 +50,11 @@ void ObjectPool<Obj,Count>::deactivate(Obj * target)
     if (s_activeCount == 0) {
         return;
     }
-    for(int i = 0; i < Count; i++) {
+    for(int i = 0; i < Count; ++i) {
         if (target == &s_objects[i]) {
             s_objects[i] = *s_objects[s_activeCount-1];
             s_objects[s_activeCount-1] = *target;
-            s_activeCount--;
+            --s_activeCount;
             return;
         }
     }
@@ -67,13 +67,13 @@ void ObjectPool<Obj,Count>::deactivate(uint8_t idx)
     Obj * target = s_objects + idx;
     s_objects[idx] = *end;
     s_objects[s_activeCount - 1] = *target;
-    s_activeCount--;
+    --s_activeCount;
 }
 
 template<class Obj, int Count>
 void ObjectPool<Obj,Count>::foreach(void (*func)(Obj *))
 {
-    for(int i = 0; i < s_activeCount; i++) {
+    for(int i = 0; i < s_activeCount; ++i) {
         func(&s_objects[i]);
     }
 }
@@ -86,7 +86,7 @@ void ObjectPool<Obj,Count>::testRemove(bool (*func)(Obj *))
         if (func(&s_objects[i])) {
             deactivate(i);
         } else {
-            i++;
+            ++i;
         }
     }
 }

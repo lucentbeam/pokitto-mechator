@@ -73,7 +73,7 @@ void Enemy::updateMechs(float dt)
             s_mechs.deactivate(i);
             EffectManager::create(pos, {explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
         } else {
-            i++;
+            ++i;
         }
     }
 }
@@ -81,7 +81,7 @@ void Enemy::updateMechs(float dt)
 void Enemy::drawMechs(RenderSystem *renderer)
 {
     EnemyMech * start = s_mechs.objects();
-    for (int i = 0; i < s_mechs.objectCount(); i++) {
+    for (int i = 0; i < s_mechs.objectCount(); ++i) {
         EnemyMech * mech = start + i;
         auto pos = Camera::worldToScreen({mech->m_rect.centerX(), mech->m_rect.centerY()});
         if (mech->status == EnemyMech::Mode::Preparing) {

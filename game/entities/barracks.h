@@ -1,19 +1,23 @@
 #ifndef BARRACKS_H
 #define BARRACKS_H
 
-//#include "core/utilities/objectpool.h"
 #include "game/utilities/vec.h"
 #include "core/utilities/rect.h"
 #include "game/entities/enemymech.h"
 
 class Barracks
 {
+    enum Stage { DefaultStage, DamagedStage, HeavyDamagedStage };
+
     static ObjectPool<Barracks, 6> s_barracks;
 
     Vec2f m_spawn{0, 0};
     uint16_t m_top, m_left;
     uint8_t m_width, m_height;
+    int8_t m_life = 30;
     Rect m_collision_rect;
+
+    Stage stage() const { return m_life > 20 ? DefaultStage : m_life > 10 ? DamagedStage : HeavyDamagedStage; }
 
 public:
     void config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height);

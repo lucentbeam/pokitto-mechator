@@ -115,7 +115,7 @@ namespace Pokitto {
         uint8_t h = sprite[1];
         const uint8_t * start = sprite + 2;
         uint8_t* m_scrbuf = Display::getBuffer();
-        for (int i = 0; i < w * h; i++) {
+        for (int i = 0; i < w * h; ++i) {
             int idx = start[i];
             if (idx == transparent_color) {
                 continue;

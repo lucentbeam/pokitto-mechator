@@ -17,7 +17,7 @@ void SpawnPoint::setActiveRegion()
 
     std::unordered_set<const SpawnPoint*> next;
 
-    for (int i = 0; i < point_count; i++) {
+    for (int i = 0; i < point_count; ++i) {
         if (Camera::inActiveZone(points[i].m_pos)) {
             if (s_active_points.find(points + i) == s_active_points.end()) {
                 points[i].m_on_approach(points[i].m_pos);

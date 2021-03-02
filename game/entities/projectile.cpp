@@ -70,41 +70,39 @@ void Projectile::onExpire()
     }
 }
 
-Projectile ProjectileManager::s_projectiles[32];
-
-uint8_t ProjectileManager::s_projectileCount = 0;
+ObjectPool<Projectile,32> ProjectileManager::s_projectiles;
 
 Projectile *ProjectileManager::create(const Vec2f &pos, const Vec2f &vel, int size, float lifetime)
 {
-    if (s_projectileCount >= 32) {
-        return nullptr;
-    }
-    s_projectiles[s_projectileCount].configure(pos, vel, size, lifetime);
-    s_projectileCount++;
-    return s_projectiles + s_projectileCount - 1;
+    Projectile * p = s_projectiles.activateNext();
+    p->configure(pos, vel, size, lifetime);
+    return p;
 }
 
 void ProjectileManager::update(float dt)
 {
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal});
     int i = 0;
-    while (i < s_projectileCount) {
-        s_projectiles[i].update(dt);
-        bool hitWall = CollisionManager::collision(s_projectiles[i].pos(), mask, Vec2f(2,2));
-        if (s_projectiles[i].expired() || hitWall) {
-            s_projectiles[i].onExpire();
-            s_projectiles[i] = s_projectiles[s_projectileCount-1];
-            s_projectileCount--;
+    Projectile * start = s_projectiles.objects();
+    while (i < s_projectiles.objectCount()) {
+        bool hitWall = CollisionManager::collision(start[i].pos(), mask, Vec2f(2,2));
+        if (start[i].expired() || hitWall) {
+            start[i].onExpire();
+            s_projectiles.deactivate(i);
         } else {
-            i++;
+            start[i].update(dt); // let wall hits clear out next frame to give other things time to get hit
+            ++i;
         }
     }
 }
 
 void ProjectileManager::draw(RenderSystem *renderer)
 {
-    for (int i = 0; i < s_projectileCount; i++) {
-        s_projectiles[i].draw(renderer);
+    int i = 0;
+    Projectile * start = s_projectiles.objects();
+    while (i < s_projectiles.objectCount()) {
+        start[i].draw(renderer);
+        ++i;
     }
 }
 
@@ -118,12 +116,14 @@ int ProjectileManager::getCollisionDamage(const Vec2f &pos, int size, uint16_t m
 int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask)
 {
     int damage = 0;
-    for(int i = 0; i < s_projectileCount; i++) {
-        const Rect r = s_projectiles[i].m_rect;
-        if (((mask & s_projectiles[i].mask) == mask) && rect.overlaps(r)) {
-            damage += s_projectiles[i].damage;
-            s_projectiles[i].struck = true;
+    int i = 0;
+    Projectile * start = s_projectiles.objects();
+    while (i < s_projectiles.objectCount()) {
+        if (((mask & start[i].mask) == mask) && rect.overlaps(start[i].m_rect)) {
+            damage += start[i].damage;
+            start[i].struck = true;
         }
+        ++i;
     }
     return damage;
 }

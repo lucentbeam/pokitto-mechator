@@ -18,19 +18,19 @@ void EffectManager::update(float dt)
     int i = 0;
     while (i < s_effectCount) {
         s_effects[i].sprite.update();
-        s_effects[i].lifetime--;
+        --s_effects[i].lifetime;
         if (s_effects[i].lifetime < 0) {
             s_effects[i] = s_effects[s_effectCount-1];
-            s_effectCount--;
+            --s_effectCount;
         } else {
-            i++;
+            ++i;
         }
     }
 }
 
 void EffectManager::draw(RenderSystem *renderer)
 {
-    for (int i = 0; i < s_effectCount; i++) {
+    for (int i = 0; i < s_effectCount; ++i) {
         Vec2f pos = Camera::worldToScreen(s_effects[i].pos);
         renderer->sprite(pos.x(), pos.y(), s_effects[i].sprite.data(), s_effects[i].sprite.data()[2]);
     }

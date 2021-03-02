@@ -68,8 +68,8 @@ void Tilemap<TileWidth, TileHeight>::draw(RenderSystem *system)
     uint16_t x_lower = x < 0 ? 0 : x;
     uint16_t y_lower = y < 0 ? 0 : y;
     uint16_t idx = x_lower + y_lower * m_mapwidth;
-    for(int16_t j = y_lower; j < y_upper; j++) {
-        for(int16_t i = x_lower; i < x_upper; i++) {
+    for(int16_t j = y_lower; j < y_upper; ++j) {
+        for(int16_t i = x_lower; i < x_upper; ++i) {
             uint8_t tile = m_map[idx];
             if (j < 0 || i < 0 || j > m_mapheight || i > m_mapwidth) {
                 tile = defaultTile;
@@ -96,8 +96,8 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
 
         int sx = left * TileWidth - x;
         int sy = top * TileHeight - y;
-        for(int j = 0; j <= render_height; j++) {
-            for (int i = 0; i <= render_width; i++) {
+        for(int j = 0; j <= render_height; ++j) {
+            for (int i = 0; i <= render_width; ++i) {
                 uint8_t tile = getTileAt(x + sx + i * TileWidth, y + sy + j * TileHeight);
                 buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[tile]);
             }
@@ -144,8 +144,8 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             int sx = left * TileWidth - x;
             int sy = map_t_tile * TileHeight - y;
 
-            for(int j = 0; j < render_height; j++) {
-                for (int i = 0; i < cols_to_draw; i++) {
+            for(int j = 0; j < render_height; ++j) {
+                for (int i = 0; i < cols_to_draw; ++i) {
                     uint8_t tile = getTileAt(x + sx + i * TileWidth, y + sy + j * TileHeight);
                     buffer->drawTile(sx + i * TileWidth, sy + j*TileHeight, m_tiles[tile]);
                 }
@@ -159,7 +159,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             int sx = left * TileWidth - x;
             int sy = top * TileHeight - y;
 
-            for(int i = 0; i < render_height; i++) {
+            for(int i = 0; i < render_height; ++i) {
                 uint8_t tile = getTileAt(x + sx, y + sy + i * TileHeight);
                 buffer->drawTile(sx, sy + i * TileHeight, m_tiles[tile]);
             }
@@ -167,7 +167,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             sx = left * TileWidth - x;
             sy = top * TileHeight - y;
 
-            for(int i = 0; i < render_height; i++) {
+            for(int i = 0; i < render_height; ++i) {
                 uint8_t tile = getTileAt(x + sx, y + sy + i * TileHeight);
                 buffer->drawTile(sx, sy + i * TileHeight, m_tiles[tile]);
             }
@@ -182,7 +182,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             int sx = map_l_tile * TileWidth - x;
             int sy = top * TileHeight - y;
 
-            for(int i = 0; i < render_width; i++) {
+            for(int i = 0; i < render_width; ++i) {
                 for (int j = 0; j < rows_to_draw; j++) {
 //                    int idx = map_l_tile + i + (j + top) * m_mapwidth;
                     uint8_t tile = getTileAt(x + sx + i * TileWidth, y + sy + j * TileHeight);
@@ -198,7 +198,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             int sx = left * TileWidth - x;
             int sy = top * TileHeight - y;
 
-            for(int i = 0; i < render_width; i++) {
+            for(int i = 0; i < render_width; ++i) {
 //                int idx = left + i + top * m_mapwidth;
                 uint8_t tile = getTileAt(x + sx + i * TileWidth, y + sy);
                 buffer->drawTile(sx + i * TileWidth, sy, m_tiles[tile]);

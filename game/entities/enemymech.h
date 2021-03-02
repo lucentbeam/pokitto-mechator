@@ -5,7 +5,6 @@
 #include "game/utilities/vec.h"
 
 #include "core/utilities/rect.h"
-#include "core/utilities/objectpool.h"
 
 class Enemy;
 class EnemyMech;

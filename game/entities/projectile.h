@@ -8,6 +8,7 @@
 #include "core/rendering/rendersystem.h"
 #include "game/rendering/spritewrapper.h"
 #include "core/utilities/rect.h"
+#include "core/utilities/objectpool.h"
 
 enum Targets {
     PlayerTarget = 1,
@@ -60,9 +61,7 @@ public:
 
 class ProjectileManager
 {
-    static Projectile s_projectiles[32];
-
-    static uint8_t s_projectileCount;
+    static ObjectPool<Projectile, 32> s_projectiles;
 
 public:
 

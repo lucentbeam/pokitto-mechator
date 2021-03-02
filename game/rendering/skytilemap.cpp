@@ -25,7 +25,7 @@ void SkyTilemap::draw(RenderSystem *system)
     uint16_t y_lower = y < 0 ? 0 : y;
     uint16_t idx = x_lower + y_lower * m_mapwidth;
     for(int16_t j = y_lower; j < y_upper; j++) {
-        for(int16_t i = x_lower; i < x_upper; i++) {
+        for(int16_t i = x_lower; i < x_upper; ++i) {
             uint8_t tile = m_map[idx];
             if (tile == uint8_t(-1)) { idx++; continue; }
             system->drawShadow(sx + (i-x) * 18, sy + (j-y) * 18 + 3, m_tiles[tile], m_tiles[tile][2]);
