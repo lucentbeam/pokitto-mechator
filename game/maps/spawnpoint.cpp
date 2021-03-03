@@ -8,7 +8,15 @@
 
 std::unordered_set<const SpawnPoint*> SpawnPoint::s_active_points;
 
-const SpawnPoint points[] = { SpawnPoint({43*6, 10*6}, spawnBarracks<42,7,4,3>), SpawnPoint({15*6, 7*6}, Enemy::createMech), SpawnPoint({38*6, 7*6}, Enemy::createMech)};
+const SpawnPoint points[] = {
+    SpawnPoint({15*6, 7*6}, Enemy::createMech),
+    SpawnPoint({38*6, 7*6}, Enemy::createMech),
+    SpawnPoint({43*6, 10*6}, spawnBarracks<42,7,4,3>),
+    SpawnPoint({60*6, 13*6}, spawnBarracks<59,10,3,3>),
+    SpawnPoint({68*6, 13*6}, spawnBarracks<67,10,3,3>),
+    SpawnPoint({68*6, 24*6}, spawnBarracks<67,21,3,3>),
+    SpawnPoint({60*6, 24*6}, spawnBarracks<59,21,3,3>),
+};
 const int point_count = sizeof(points)/sizeof(SpawnPoint);
 
 void SpawnPoint::setActiveRegion()

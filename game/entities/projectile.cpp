@@ -128,3 +128,19 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask)
     }
     return damage;
 }
+
+int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask, std::vector<Vec2f> &at)
+{
+    int damage = 0;
+    int i = 0;
+    Projectile * start = s_projectiles.objects();
+    while (i < s_projectiles.objectCount()) {
+        if (((mask & start[i].mask) == mask) && rect.overlaps(start[i].m_rect)) {
+            damage += start[i].damage;
+            start[i].struck = true;
+            at.push_back(start[i].m_body.pos());
+        }
+        ++i;
+    }
+    return damage;
+}

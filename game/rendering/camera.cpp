@@ -5,7 +5,7 @@ const int regionSize = 6 * 14; // 6 pixels per tile, 14 tiles per region
 int Camera::s_x;
 int Camera::s_y;
 
-Rect Camera::s_region_bounds(0, 0, regionSize * 2, regionSize * 2);
+Rect Camera::s_region_bounds(0, 0, regionSize * 3, regionSize * 3);
 bool Camera::s_regions_changed = true;
 
 void Camera::update(int center_x, int center_y) {

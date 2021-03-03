@@ -14,6 +14,7 @@ class EnemyMech
     Rect m_rect;
     Vec2f m_velocity;
     int8_t m_life = 3;
+    uint8_t m_damage_frames = 0;
 
     enum Mode { Walking, Preparing } status = Mode::Walking;
 
@@ -33,13 +34,14 @@ class Enemy
 {
     static ObjectPool<EnemyMech, 10> s_mechs;
 
-public:
-
+public:    
     static void createMech(const Vec2f &pos);
 
-    static EnemyMech * createAndReturnMech(const Vec2f &pos);
+    static bool updateMech(EnemyMech * mech, float dt); // returns true if still alive
 
     static void updateMechs(float dt);
+
+    static void drawMech(RenderSystem * renderer, EnemyMech * mech);
 
     static void drawMechs(RenderSystem * renderer);
 };

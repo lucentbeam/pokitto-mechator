@@ -94,6 +94,7 @@
 			"-I${projectPath}",
 			"-DPOK_SIM",
 			"-Wall",
+			"-Wno-narrowing",
 			"-std=gnu++17",
 			"-fsigned-char",
 			"-DPOK_SIM",
@@ -6371,6 +6372,15 @@
 			"sdcard": false
 		},
 		"\\pokitto-mechator.pro.user.xnPLJD": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.exe": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.FEbSCm": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.gkuFpZ": {
 			"sdcard": false
 		}
 	},
