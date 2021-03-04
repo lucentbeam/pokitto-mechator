@@ -64,11 +64,7 @@ void ObjectPool<Obj,Count>::deactivate(Obj * target)
 template<class Obj, int Count>
 void ObjectPool<Obj,Count>::deactivate(uint8_t idx)
 {
-//    std::swap(s_objects[idx], s_objects[s_activeCount - 1]);
-    Obj * end = s_objects + s_activeCount - 1;
-    Obj * target = s_objects + idx;
-    s_objects[idx] = *end;
-    s_objects[s_activeCount - 1] = *target;
+    std::swap(s_objects[idx], s_objects[s_activeCount - 1]);
     --s_activeCount;
 }
 

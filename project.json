@@ -6727,6 +6727,48 @@
 		},
 		"\\game\\entities\\pickups.cpp.Ctogsl": {
 			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.KXieyp": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.Fnpaxz": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.lywnNu": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_dollar.h": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.h.Ymtsbt": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.JbHHEh": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.ZQadtB": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.KbrwRm": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.tyuJHl": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.MFhdAk": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.nARbuI": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.zuqocO": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.QRhbwp": {
+			"sdcard": false
+		},
+		"\\content\\art\\ui-mocks.ase": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
