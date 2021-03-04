@@ -4,6 +4,7 @@
 #include "game/utilities/helpers.h"
 #include "game/physics/collisionmanager.h"
 #include "game/entities/effects.h"
+#include "game/entities/pickups.h"
 
 ObjectPool<EnemyMech,10> Enemy::s_mechs;
 
@@ -71,6 +72,7 @@ bool Enemy::updateMech(EnemyMech *mech, float dt)
     int damage = ProjectileManager::getCollisionDamage(pos, 4, bulletMask);
     mech->m_life -= damage;
     if (mech->m_life <= 0) {
+        Pickups::spawnDollar({mech->m_rect.centerX(), mech->m_rect.centerY()});
         EffectManager::create(pos, {explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
         return false;
     } else {

@@ -6,7 +6,9 @@ CONFIG -= qt
 SOURCES += \
     game/entities/barracks.cpp \
     game/entities/enemymech.cpp \
+    game/entities/pickups.cpp \
     game/maps/spawnpoint.cpp \
+    game/player.cpp \
     game/rendering/cloudmanager.cpp \
     core/rendering/screenbuffer.cpp \
     game/entities/effects.cpp \
@@ -30,6 +32,7 @@ HEADERS += \
     core/utilities/objectpool.h \
     game/entities/barracks.h \
     game/entities/enemymech.h \
+    game/entities/pickups.h \
     game/maps/spawnpoint.h \
     game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \
@@ -56,6 +59,7 @@ HEADERS += \
     game/tilesets.h \
     game/utilities/helpers.h \
     game/utilities/mapmanager.h \
+    game/utilities/rumbler.h \
     game/utilities/vec.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include

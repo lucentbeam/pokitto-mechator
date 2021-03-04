@@ -7,6 +7,8 @@
 
 ObjectPool<Barracks, 6> Barracks::s_barracks;
 
+int8_t Barracks::s_max_life = 27;
+
 void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
 {
     m_spawn = spawn;
@@ -14,7 +16,7 @@ void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t w
     m_top = top * 6;
     m_width = width * 6;
     m_height = height * 6;
-    m_life = 30;
+    m_life = s_max_life;
     m_collision_rect = Rect(m_left, m_top, m_width, m_height);
     m_spawn_timer = 80 + (rand() % 40);
 }

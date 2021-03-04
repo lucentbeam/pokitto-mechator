@@ -17,6 +17,7 @@
 #include "game/maps/spawnpoint.h"
 #include "game/entities/enemymech.h"
 #include "game/entities/barracks.h"
+#include "game/entities/pickups.h"
 
 RenderSystem renderSystem;
 Player player;
@@ -28,8 +29,9 @@ void updateState(FSM &fsm) {
     EffectManager::update(0.014f);
     Enemy::updateMechs(0.014f);
     Barracks::update(0.014f);
+    Pickups::update(0.014f);
 
-    Camera::update(player.pos().x(), player.pos().y());
+    Camera::update(player.position().x(), player.position().y());
 
     SpawnPoint::setActiveRegion();
 //    CloudManager::update(0.014f);
@@ -40,6 +42,7 @@ void drawState() {
 
     MapManager::draw(&screenbuffer);
     renderSystem.drawBuffer(screenbuffer.getData());
+    Pickups::draw(&renderSystem);
     Enemy::drawMechs(&renderSystem);
     player.draw(&renderSystem);
 

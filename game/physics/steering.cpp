@@ -11,11 +11,11 @@ void Steering::update(float dt, float x, float y) {
         if (len > 0) {
             m_facing /= len;
         }
-        m_inertia = m_speed;
+        m_current_speed = m_max_speed;
     } else {
-        m_inertia *= (1.0f - m_friction);
+        m_current_speed *= (1.0f - m_friction);
     }
-    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_inertia * dt, m_collisions, m_size);
+    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, m_collisions, m_size);
 }
 
 void Steering::copyPosition(const Steering &other) {
@@ -23,7 +23,9 @@ void Steering::copyPosition(const Steering &other) {
 }
 
 uint8_t Steering::rotation_frame() const {
+    const float anglePerFrame = 22.5f;
+    const float frameCount = 8.0f;
     float angle = std::atan2(m_facing.y(), std::abs(m_facing.x())) * 180.0f / 3.1415926f;
-    angle = angle + 90.0f + 11.25f;
-    return uint8_t(angle / 180.0f * 8.0f);
+    angle = angle + 90.0f + anglePerFrame / 2.0f; // shift atan2 to [0,180]
+    return uint8_t(angle / 180.0f * frameCount);
 }
