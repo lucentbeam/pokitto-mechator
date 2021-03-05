@@ -6769,6 +6769,42 @@
 		},
 		"\\content\\art\\ui-mocks.ase": {
 			"sdcard": false
+		},
+		"\\content\\art\\health_pips.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\poi.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\pickup_hackingkit.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\pickup_keycard1.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\pickup_keycard2.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\pickup_keycard3.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\health_pips.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\poi.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_hackingkit.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_keycard1.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_keycard2.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_keycard3.png": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
