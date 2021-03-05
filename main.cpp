@@ -14,6 +14,8 @@
 #include "game/entities/effects.h"
 #include "game/rendering/cloudmanager.h"
 
+#include "game/ui/ui.h"
+
 #include "game/maps/spawnpoint.h"
 #include "game/entities/enemymech.h"
 #include "game/entities/barracks.h"
@@ -52,10 +54,12 @@ void drawState() {
     // sky layer
     MapManager::draw(&renderSystem, false);
 
+    UI::drawHealthBar(&renderSystem, 4, 8, PlayerMode::Soldier);
+
 //    CloudManager::draw(&renderSystem);
     fps.update(&renderSystem);
-    fps.draw(&renderSystem, 2, 82, 9);
-    fps.draw(&renderSystem, 2, 81, 37);
+    fps.draw(&renderSystem, 8, 82, 9);
+    fps.draw(&renderSystem, 8, 81, 37);
 }
 
 int main ()

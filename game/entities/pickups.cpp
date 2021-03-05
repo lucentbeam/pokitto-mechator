@@ -1,6 +1,12 @@
 #include "pickups.h"
 
-void Pickups::configure(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(), uint16_t lifetime)
+
+ObjectPool<Pickups, 10> Pickups::s_temporary;
+ObjectPool<Pickups, 4> Pickups::s_special;
+
+std::vector<uint16_t> Pickups::s_acquired_specials;
+
+void Pickups::configure(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime)
 {
     position = pos;
     m_sprite = SpriteWrapper(spriteFrames, spriteFPS);
@@ -8,21 +14,71 @@ void Pickups::configure(const Vec2f &pos, std::initializer_list<const uint8_t *>
     m_lifetime = lifetime;
 }
 
-void Pickups::spawnTemporary(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(), uint16_t lifetime)
+void Pickups::spawnTemporary(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime)
 {
     s_temporary.activateNext()->configure(pos, spriteFrames, spriteFPS, on_collect, lifetime);
 }
 
-void Pickups::spawnSpecial(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)())
+void Pickups::spawnSpecial(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&))
 {
     s_special.activateNext()->configure(pos, spriteFrames, spriteFPS, on_collect, std::numeric_limits<uint16_t>::max());
 }
 
+bool Pickups::mapIndexUnacquired(const Vec2f &pos)
+{
+    return std::find(s_acquired_specials.begin(), s_acquired_specials.end(), MapManager::getMapIndex(pos.x(), pos.y())) == s_acquired_specials.end();
+}
+
+void Pickups::acquireAtIndex(const Vec2f &pos)
+{
+    s_acquired_specials.push_back(MapManager::getMapIndex(pos.x(), pos.y()));
+}
+
 void Pickups::spawnDollar(const Vec2f &pos)
 {
-    spawnTemporary(pos, {pickup_dollar[0],pickup_dollar[1]}, 8.0f, []() {
+    spawnTemporary(pos, {pickup_dollar[0],pickup_dollar[1]}, 8.0f, [](const Vec2f &pos) {
 
     }, 600);
+}
+
+void Pickups::spawnHackingKit(const Vec2f &pos)
+{
+    if (mapIndexUnacquired(pos)) {
+        spawnSpecial(pos, {pickup_hackingkit[0], pickup_hackingkit[1]}, 8.0f, [](const Vec2f &pos) {
+            // run callback
+            acquireAtIndex(pos);
+        });
+    }
+}
+
+void Pickups::spawnKeycardA(const Vec2f &pos)
+{
+    if (mapIndexUnacquired(pos)) {
+        spawnSpecial(pos, {pickup_keycard1[0], pickup_keycard1[1]}, 8.0f, [](const Vec2f &pos) {
+            // run callback
+            acquireAtIndex(pos);
+        });
+    }
+}
+
+void Pickups::spawnKeycardB(const Vec2f &pos)
+{
+    if (mapIndexUnacquired(pos)) {
+        spawnSpecial(pos, {pickup_keycard2[0], pickup_keycard2[1]}, 8.0f, [](const Vec2f &pos) {
+            // run callback
+            acquireAtIndex(pos);
+        });
+    }
+}
+
+void Pickups::spawnKeycardC(const Vec2f &pos)
+{
+    if (mapIndexUnacquired(pos)) {
+        spawnSpecial(pos, {pickup_keycard3[0], pickup_keycard3[1]}, 8.0f, [](const Vec2f &pos) {
+            // run callback
+            acquireAtIndex(pos);
+        });
+    }
 }
 
 void Pickups::update(float dt)
@@ -33,7 +89,7 @@ void Pickups::update(float dt)
         Pickups * current = start + i;
         current->m_sprite.update();
         if ((Player::position() - current->position).length() < 6) {
-            current->m_on_collect();
+            current->m_on_collect(current->position);
             s_temporary.deactivate(i);
             --i;
             continue;
@@ -58,7 +114,7 @@ void Pickups::update(float dt)
             continue;
         }
         if ((Player::position() - current->position).length() < 6) {
-            current->m_on_collect();
+            current->m_on_collect(current->position);
             s_special.deactivate(i);
             --i;
             continue;

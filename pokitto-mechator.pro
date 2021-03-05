@@ -18,6 +18,7 @@ SOURCES += \
     game/physics/steering.cpp \
     game/rendering/camera.cpp \
     game/rendering/skytilemap.cpp \
+    game/ui/ui.cpp \
     game/utilities/mapmanager.cpp \
     game/utilities/vec.cpp \
     main.cpp \
@@ -57,6 +58,7 @@ HEADERS += \
     game/rendering/skytilemap.h \
     game/rendering/spritewrapper.h \
     game/tilesets.h \
+    game/ui/ui.h \
     game/utilities/helpers.h \
     game/utilities/mapmanager.h \
     game/utilities/rumbler.h \

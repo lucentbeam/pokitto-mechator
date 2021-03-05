@@ -6805,6 +6805,36 @@
 		},
 		"\\content\\art\\exports\\pickup_keycard3.png": {
 			"sdcard": false
+		},
+		"\\game\\ui": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\ui.obj": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\health_pips.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_hackingkit.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_keycard1.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_keycard3.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\pickup_keycard2.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\poi.h": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

@@ -36,6 +36,7 @@ public:
   int tileWidth() const { return TileWidth; }
   int tileHeight() const { return TileHeight; }
 
+  uint16_t getMapIndex(float x, float y) const;
   uint8_t getTileAt(float x, float y) const;
   uint8_t getTileAt(int index) const;
   void setTileAt(float x, float y, uint8_t override);
@@ -205,6 +206,15 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
             }
         }
     }
+}
+
+template<int TileWidth, int TileHeight>
+uint16_t Tilemap<TileWidth, TileHeight>::getMapIndex(float x, float y) const
+{
+    // TODO: make this a tryGet?
+    int px = (x / TileWidth);
+    int py = (y / TileHeight);
+    return px + py * m_mapwidth;
 }
 
 template<int TileWidth, int TileHeight>

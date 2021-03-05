@@ -5,10 +5,12 @@
 
 #include "game/entities/enemymech.h"
 #include "game/entities/barracks.h"
+#include "game/entities/pickups.h"
 
 std::unordered_set<const SpawnPoint*> SpawnPoint::s_active_points;
 
 const SpawnPoint points[] = {
+    SpawnPoint({18*6, 15*6}, Pickups::spawnKeycardA),
     SpawnPoint({15*6, 7*6}, Enemy::createMech),
     SpawnPoint({38*6, 7*6}, Enemy::createMech),
     SpawnPoint({43*6, 10*6}, spawnBarracks<42,7,4,3>),

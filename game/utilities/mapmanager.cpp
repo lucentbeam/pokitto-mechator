@@ -22,6 +22,11 @@ void MapManager::draw(ScreenBuffer *buffer)
     s_background.drawToBuffer(buffer);
 }
 
+uint16_t MapManager::getMapIndex(float x, float y)
+{
+    return s_background.getMapIndex(x, y);
+}
+
 uint8_t MapManager::getTileAt(float x, float y)
 {
     return s_background.getTileAt(x, y);
