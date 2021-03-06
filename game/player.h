@@ -13,6 +13,8 @@
 #include "game/entities/effects.h"
 
 #include "game/utilities/rumbler.h"
+#include "game/utilities/playerstats.h"
+#include "game/enums.h"
 
 class Player {
     Controls m_controller;
@@ -20,12 +22,18 @@ class Player {
     Steering m_soldier;
     Steering m_jeep;
 
-    bool m_dismounted = true;
-
     Rumbler m_shake;
 
+    PlayerMode m_mode = PlayerMode::Soldier;
+
     static Player * s_instance;
+
 public:
+
+    static PlayerStats s_stats;
+
+    static PlayerMode mode() { return s_instance->m_mode; }
+
     Player();
 
     void update(float dt);

@@ -54,7 +54,8 @@ void drawState() {
     // sky layer
     MapManager::draw(&renderSystem, false);
 
-    UI::drawHealthBar(&renderSystem, 4, 8, PlayerMode::Soldier);
+    PlayerMode mode = Player::mode();
+    UI::drawHealthBar(&renderSystem, mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.value() : Player::s_stats.health_jeep.value(), mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.max() : Player::s_stats.health_jeep.max(), mode);
 
 //    CloudManager::draw(&renderSystem);
     fps.update(&renderSystem);

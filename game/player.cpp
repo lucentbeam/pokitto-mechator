@@ -1,7 +1,8 @@
 #include "player.h"
 
-
 Player * Player::s_instance;
+
+PlayerStats Player::s_stats;
 
 Player::Player() :
     m_soldier(4*6, 8*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
@@ -12,12 +13,23 @@ Player::Player() :
 }
 
 void Player::update(float dt) {
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
+
     ControlStatus controls = m_controller.getStatus(true);
-    if (m_dismounted) {
+    int damage = 0;
+    if (m_mode == PlayerMode::Soldier) {
         m_soldier.update(dt, controls.x , controls.y);
         m_jeep.update(dt, 0.0f, 0.0f);
+        damage = ProjectileManager::getCollisionDamage(m_soldier.rect(), bulletMask);
+        if (damage > 0) {
+            s_stats.health_soldier.change(-damage);
+        }
     } else {
         m_jeep.update(dt, controls.x, controls.y);
+        damage = ProjectileManager::getCollisionDamage(m_jeep.rect(), bulletMask);
+        if (damage > 0) {
+            s_stats.health_jeep.change(-damage);
+        }
         if (m_jeep.moving()) {
             Terrain current = CollisionManager::getTerrainAt(m_jeep.pos().x(), m_jeep.pos().y());
             m_shake.intensity = current == Terrain::Grass ? Rumbler::Vigorous : Rumbler::Slight;
@@ -26,17 +38,17 @@ void Player::update(float dt) {
         }
     }
     if (controls.c.pressed()) {
-        if (m_dismounted) {
+        if (m_mode == PlayerMode::Soldier) {
             Vec2f dp = m_jeep.pos() - m_soldier.pos();
             if (dp.length() < 6) {
-                m_dismounted = false;
+                m_mode = PlayerMode::Jeep;
             }
         } else {
-            m_dismounted = true;
             m_soldier.copyPosition(m_jeep);
+            m_mode = PlayerMode::Soldier;
         }
     }
-    if (m_dismounted) {
+    if (m_mode == PlayerMode::Soldier) {
         if (controls.a.downEvery(1, 12)) {
             Projectile * p = ProjectileManager::create(m_soldier.pos(), m_soldier.aim() * 100.0f, 3, 0.5f)
                 ->setSprite({projectile[0]}, 20)
@@ -79,7 +91,7 @@ void Player::draw(RenderSystem *renderSystem) {
     Vec2f jpos = Camera::worldToScreen(m_jeep.pos());
     renderSystem->sprite(jpos.x() - 7, jpos.y() - 7 - m_shake.offset(1), jeep[m_jeep.rotation_frame()], jeep[0][2], m_jeep.facing().x() > 0);
 
-    if (m_dismounted) {
+    if (m_mode == PlayerMode::Soldier) {
         // soldier rendering
         uint8_t sprite = m_soldier.facing().y() < 0 ? 3 : 0;
         static int counter = 0;
@@ -95,9 +107,10 @@ void Player::draw(RenderSystem *renderSystem) {
         renderSystem->sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], m_soldier.facing().x() > 0);
     }
 
+
 }
 
 Vec2f Player::position()
 {
-    return s_instance->m_dismounted ? s_instance->m_soldier.pos() : s_instance->m_jeep.pos();
+    return s_instance->m_mode == PlayerMode::Soldier ? s_instance->m_soldier.pos() : s_instance->m_jeep.pos();
 }

@@ -7,6 +7,7 @@ SOURCES += \
     game/entities/barracks.cpp \
     game/entities/enemymech.cpp \
     game/entities/pickups.cpp \
+    game/entities/pois.cpp \
     game/maps/spawnpoint.cpp \
     game/player.cpp \
     game/rendering/cloudmanager.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
     game/rendering/skytilemap.cpp \
     game/ui/ui.cpp \
     game/utilities/mapmanager.cpp \
+    game/utilities/playerstats.cpp \
     game/utilities/vec.cpp \
     main.cpp \
     core/audio/audiosystem.cpp \
@@ -34,6 +36,8 @@ HEADERS += \
     game/entities/barracks.h \
     game/entities/enemymech.h \
     game/entities/pickups.h \
+    game/entities/pois.h \
+    game/enums.h \
     game/maps/spawnpoint.h \
     game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \
@@ -61,6 +65,7 @@ HEADERS += \
     game/ui/ui.h \
     game/utilities/helpers.h \
     game/utilities/mapmanager.h \
+    game/utilities/playerstats.h \
     game/utilities/rumbler.h \
     game/utilities/vec.h
 

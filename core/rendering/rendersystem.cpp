@@ -327,7 +327,7 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
     sf::Color c = sfSys.colors[color];
     for (int i = x0; i < (x0 + w); ++i) {
         for (int j = y0; j < (y0 + h); j++) {
-            if (i > 0 && j > 0 && i < screenwidth && j < screenheight) {
+            if (i >= 0 && j >= 0 && i < screenwidth && j < screenheight) {
                 sfSys.screenbuffer.setPixel(i,j,c);
             }
         }

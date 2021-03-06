@@ -6835,6 +6835,12 @@
 		},
 		"\\content\\art\\exports\\poi.h": {
 			"sdcard": false
+		},
+		"\\game\\entities\\pois.cpp": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pois.h": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

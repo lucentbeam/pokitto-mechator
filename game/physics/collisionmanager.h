@@ -5,17 +5,7 @@
 
 #include "game/utilities/mapmanager.h"
 #include "core/utilities/rect.h"
-
-enum Terrain : uint16_t {
-    None = 0,
-    Wall = 1,
-    WaterShallow = 2,
-    WaterDeep = 3,
-    Grass = 4,
-    Mud = 5,
-    DestrucableWood = 6,
-    DestructableMetal = 7
-};
+#include "game/enums.h"
 
 const uint8_t jungletilesterrain[] =
 {
