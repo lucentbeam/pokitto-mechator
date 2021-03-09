@@ -4,6 +4,7 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    core/utilities/babyfsm.cpp \
     game/entities/barracks.cpp \
     game/entities/enemymech.cpp \
     game/entities/pickups.cpp \
@@ -19,6 +20,8 @@ SOURCES += \
     game/physics/steering.cpp \
     game/rendering/camera.cpp \
     game/rendering/skytilemap.cpp \
+    game/states/game.cpp \
+    game/states/opendoorprompt.cpp \
     game/ui/ui.cpp \
     game/utilities/mapmanager.cpp \
     game/utilities/playerstats.cpp \
@@ -61,6 +64,8 @@ HEADERS += \
     game/rendering/camera.h \
     game/rendering/skytilemap.h \
     game/rendering/spritewrapper.h \
+    game/states/game.h \
+    game/states/opendoorprompt.h \
     game/tilesets.h \
     game/ui/ui.h \
     game/utilities/helpers.h \

@@ -3,18 +3,24 @@
 
 #include <cstdint>
 
+#include "core/rendering/rendersystem.h"
+
 const uint8_t maxStates = 9;
 
 class FSM {
     void (*updates[maxStates])(FSM&);
-    void (*draws[maxStates])();
+    void (*draws[maxStates])(RenderSystem*);
 
     uint8_t m_current;
 
     bool m_initialized = false;
 
 public:
-    FSM &add(uint8_t s, void (*upd)(FSM&) = nullptr, void (*drw)() = nullptr) {
+    FSM() {
+        instance = this;
+    }
+
+    FSM &add(uint8_t s, void (*upd)(FSM&) = nullptr, void (*drw)(RenderSystem*) = nullptr) {
         updates[s] = upd;
         draws[s] = drw;
 
@@ -38,11 +44,13 @@ public:
         }
     }
 
-    void draw() {
+    void draw(RenderSystem * renderer) {
         if (draws[m_current] != nullptr) {
-            draws[m_current]();
+            draws[m_current](renderer);
         }
     }
+
+    static FSM * instance;
 };
 
 #endif // BABYFSM_H

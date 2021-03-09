@@ -10,6 +10,7 @@ class ObjectPool
     static Obj s_objects[Count];
 
     static uint8_t s_activeCount;
+
 public:
 
     static Obj * activateNext();
@@ -18,9 +19,7 @@ public:
 
     static void deactivate(uint8_t);
 
-    static void foreach(void (*)(Obj*));
-
-    static void testRemove(bool (*)(Obj*));
+    static void iterate(void* data, void (*)(void*,Obj*,bool&));
 
     static Obj * objects() { return s_objects; }
 
@@ -51,13 +50,14 @@ void ObjectPool<Obj,Count>::deactivate(Obj * target)
     if (s_activeCount == 0) {
         return;
     }
+    int choice = -1;
     for(int i = 0; i < Count; ++i) {
-        if (target == &s_objects[i]) {
-            s_objects[i] = *s_objects[s_activeCount-1];
-            s_objects[s_activeCount-1] = *target;
-            --s_activeCount;
-            return;
+        if (target == (s_objects + i)) {
+            choice = i;
         }
+    }
+    if (choice >= 0) {
+        deactivate(choice);
     }
 }
 
@@ -69,22 +69,13 @@ void ObjectPool<Obj,Count>::deactivate(uint8_t idx)
 }
 
 template<class Obj, int Count>
-void ObjectPool<Obj,Count>::foreach(void (*func)(Obj *))
+void ObjectPool<Obj,Count>::iterate(void *data, void (*func)(void *, Obj *, bool&))
 {
-    for(int i = 0; i < s_activeCount; ++i) {
-        func(&s_objects[i]);
-    }
-}
-
-template<class Obj, int Count>
-void ObjectPool<Obj,Count>::testRemove(bool (*func)(Obj *))
-{
-    int i = 0;
-    while(i < s_activeCount) {
-        if (func(&s_objects[i])) {
+    for(int i = s_activeCount-1; i >= 0; --i) {
+        bool destroy = false;
+        func(data, s_objects+i, destroy);
+        if (destroy) {
             deactivate(i);
-        } else {
-            ++i;
         }
     }
 }

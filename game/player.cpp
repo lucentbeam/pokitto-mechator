@@ -5,7 +5,7 @@ Player * Player::s_instance;
 PlayerStats Player::s_stats;
 
 Player::Player() :
-    m_soldier(4*6, 8*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
+    m_soldier(48*6, 13*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
     m_jeep(26*6, 8*6, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f)
 {
     m_shake.intensity = Rumbler::Slight;
