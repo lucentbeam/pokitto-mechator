@@ -3,6 +3,8 @@
 #include <cstdio>
 #include <cstring>
 
+RenderSystem * RenderSystem::instance = nullptr;
+
 #ifndef POKITTO_SFML
 
 #include "Pokitto.h"
@@ -25,6 +27,7 @@ void RenderSystem::initialize()
     game.display.setInvisibleColor(255);
     game.display.setColor(3, backgroundColor);
     game.display.font = font3x5;
+    instance = this;
 }
 
 bool RenderSystem::running()
@@ -144,6 +147,7 @@ uint32_t RenderSystem::getTimeMs()
 
 void RenderSystem::initialize() {
     sfSys.create();
+    instance = this;
 }
 
 bool RenderSystem::running() {

@@ -6841,6 +6841,57 @@
 		},
 		"\\game\\entities\\pois.h": {
 			"sdcard": false
+		},
+		"\\game\\enums.h": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\babyfsm.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\game.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\opendoorprompt.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\player.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\playerstats.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pois.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\ui.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pickups.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\playerstats.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\pois.obj": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\babyfsm.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\playerstats.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\playerstats.h": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp": {
+			"sdcard": false
+		},
+		"\\game\\states\\opendoorprompt.cpp": {
+			"sdcard": false
+		},
+		"\\game\\states\\opendoorprompt.h": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

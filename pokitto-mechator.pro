@@ -22,9 +22,12 @@ SOURCES += \
     game/rendering/skytilemap.cpp \
     game/states/game.cpp \
     game/states/opendoorprompt.cpp \
+    game/states/openshopprompt.cpp \
+    game/states/shop.cpp \
     game/ui/ui.cpp \
     game/utilities/mapmanager.cpp \
     game/utilities/playerstats.cpp \
+    game/utilities/tween.cpp \
     game/utilities/vec.cpp \
     main.cpp \
     core/audio/audiosystem.cpp \
@@ -66,12 +69,15 @@ HEADERS += \
     game/rendering/spritewrapper.h \
     game/states/game.h \
     game/states/opendoorprompt.h \
+    game/states/openshopprompt.h \
+    game/states/shop.h \
     game/tilesets.h \
     game/ui/ui.h \
     game/utilities/helpers.h \
     game/utilities/mapmanager.h \
     game/utilities/playerstats.h \
     game/utilities/rumbler.h \
+    game/utilities/tween.h \
     game/utilities/vec.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include

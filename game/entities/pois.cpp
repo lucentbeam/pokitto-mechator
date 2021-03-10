@@ -1,6 +1,8 @@
 #include "pois.h"
 
 #include "game/states/opendoorprompt.h"
+#include "game/states/openshopprompt.h"
+#include "game/states/shop.h"
 
 ObjectPool<POIs, 6> POIs::s_pois;
 std::vector<uint16_t> POIs::s_activated;
@@ -45,6 +47,8 @@ void POIs::spawnShop(const Vec2f &pos)
     }
     p->m_position = pos;
     p->m_door_type = POIType::Shop;
+    int idx = mapIndexUnopened(pos) ? 0 : 1;
+    p->m_sprite = SpriteWrapper({poi[idx]}, 8.0f);
 }
 
 void POIs::unlockCurrent()
@@ -55,15 +59,16 @@ void POIs::unlockCurrent()
     if (mapIndexUnopened(s_current_active_poi->m_position)) {
         openAtIndex(s_current_active_poi->m_position);
         if (s_current_active_poi->m_door_type == Shop) {
-            // open the shop UI
+            showShop();
+            s_current_active_poi->m_sprite = SpriteWrapper({poi[1]}, 8.0f);
         } else {
             for(int x = s_current_active_poi->m_left; x < (s_current_active_poi->m_width + s_current_active_poi->m_left); x+=6) {
                 for(int y = s_current_active_poi->m_top; y < (s_current_active_poi->m_height + s_current_active_poi->m_top); y+=6) {
                     MapManager::setTileAt(x, y, SpecialTiles::BaseGround);
                 }
             }
+            s_pois.deactivate(s_current_active_poi);
         }
-        s_pois.deactivate(s_current_active_poi);
     }
 }
 
@@ -77,7 +82,15 @@ void POIs::update(float dt)
             any_in_range = true;
             if (s_current_active_poi != p) {
                 s_current_active_poi = p;
-                showOpenDoorPrompt(s_current_active_poi->m_door_type);
+                if (p->m_door_type == Shop) {
+                    if (mapIndexUnopened(p->m_position)) {
+                        showOpenShopPrompt();
+                    } else {
+                        showShop();
+                    }
+                } else {
+                    showOpenDoorPrompt(s_current_active_poi->m_door_type);
+                }
             }
         }
     }

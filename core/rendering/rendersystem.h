@@ -47,6 +47,7 @@ public:
 
     void drawBuffer(uint8_t * buffer);
 
+    static RenderSystem * instance;
 };
 
 #endif

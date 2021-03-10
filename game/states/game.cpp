@@ -24,7 +24,7 @@
 Player player;
 ScreenBuffer screenbuffer;
 
-void updateState(FSM &fsm) {
+void updateGameState(FSM &fsm) {
     player.update(0.014f);
     ProjectileManager::update(0.014f);
     EffectManager::update(0.014f);
@@ -39,7 +39,7 @@ void updateState(FSM &fsm) {
 //    CloudManager::update(0.014f);
 }
 
-void drawState(RenderSystem * renderSystem) {
+void drawGameState(RenderSystem * renderSystem) {
     static FPSHelper fps(10);
 
     MapManager::draw(&screenbuffer);

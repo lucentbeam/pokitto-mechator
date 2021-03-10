@@ -20,6 +20,7 @@ const SpawnPoint points[] = {
     SpawnPoint({68*6, 24*6}, spawnBarracks<67,21,3,3>),
     SpawnPoint({60*6, 24*6}, spawnBarracks<59,21,3,3>),
     SpawnPoint({45*6, 16*6}, spawnDoorA<44,15,1,3>),
+    SpawnPoint({50*6, 16*6}, POIs::spawnShop),
 };
 const int point_count = sizeof(points)/sizeof(SpawnPoint);
 

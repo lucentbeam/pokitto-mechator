@@ -6,6 +6,8 @@
 
 #include "game/states/game.h"
 #include "game/states/opendoorprompt.h"
+#include "game/states/openshopprompt.h"
+#include "game/states/shop.h"
 
 RenderSystem renderSystem;
 
@@ -14,8 +16,10 @@ int main ()
     renderSystem.initialize();
 
     FSM fsm;
-    fsm.add(GameStates::Game, updateState, drawState);
+    fsm.add(GameStates::Game, updateGameState, drawGameState);
     fsm.add(GameStates::ShowUnlockDoor, updateOpenDoorState, drawOpenDoorState);
+    fsm.add(GameStates::ShowUnlockShop, updateOpenShopState, drawOpenShopState);
+    fsm.add(GameStates::ShowShop, updateShopState, drawShopState);
 
     int32_t gameTime = 0;
     uint32_t lastGameTime = renderSystem.getTimeMs();
