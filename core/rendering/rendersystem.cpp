@@ -6,6 +6,7 @@ const uint16_t palette[] = {
 const uint8_t backgroundColor = 26;
 
 #include <cstdio>
+#include <cmath>
 
 #ifndef POKITTO_SFML
 
@@ -236,14 +237,14 @@ void RenderSystem::setClip(bool clip, uint8_t clip_width, uint8_t clip_height)
 void plotLow(float x0, float y0, float x1, float y1, const sf::Color &color) {
     float dx = x1 - x0;
     float dy = y1 - y0;
-    float delta = abs(dy/dx);
+    float delta = std::abs(dy/dx);
     float error = 0;
     int y = y0;
     for (int x = x0; x < x1; x++) {
         sfSys.screenbuffer.setPixel(x, y, color);
         error += delta;
         if (error >= 0.5) {
-            y = y + copysign(1.0, dy);
+            y = y + std::copysign(1.0, dy);
             error--;
         }
     }
@@ -253,7 +254,7 @@ void plotHigh(float x0, float y0, float x1, float y1, const sf::Color &color) {
     float dx = x1 - x0;
     float dy = y1 - y0;
 
-    float delta = abs(dx/dy);
+    float delta = std::abs(dx/dy);
     float error = 0;
     int x = x0;
     for (int y = y0; y < y1; y++) {
@@ -267,7 +268,7 @@ void plotHigh(float x0, float y0, float x1, float y1, const sf::Color &color) {
 }
 
 void plotLine( float x0, float y0, float x1, float y1, const sf::Color &color) { // bresenham's algorithm
-    if ((abs(y1-y0) < abs(x1-x0))) {
+    if ((std::abs(y1-y0) < std::abs(x1-x0))) {
         if (x0 > x1) {
             plotLow(x1,y1,x0,y0,color);
         } else {

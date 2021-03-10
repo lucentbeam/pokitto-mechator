@@ -43,10 +43,10 @@ else:win32:CONFIG(debug, debug|release): LIBS += -LC:/SFML/SFML-2.5.1_msvc2017_6
 
 win32: LIBS += -L"$$PWD/../../../../../Program Files (x86)/Windows Kits/10/Lib/10.0.16299.0/um/x64/" -lwinmm -lgdi32 -lopengl32 -luser32 -ladvapi32
 
-mac: QMAKE_LFLAGS += -F$$PWD/../../../SFML-2.5.1/Frameworks/
+mac: QMAKE_LFLAGS += -F$$PWD/../../SFML-2.5.1/Frameworks/
 mac: LIBS += -framework SFML -framework sfml-system -framework sfml-window -framework sfml-graphics
 
-mac: INCLUDEPATH += $$PWD/../../../SFML-2.5.1/include
-mac: DEPENDPATH += $$PWD/../../../SFML-2.5.1/include
+mac: INCLUDEPATH += $$PWD/../../SFML-2.5.1/include
+mac: DEPENDPATH += $$PWD/../../SFML-2.5.1/include
 
 DEFINES += POKITTO_SFML

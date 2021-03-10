@@ -1,5 +1,7 @@
 #include "controls.h"
 
+#include <cmath>
+
 bool previousUp = false;
 bool previousDown = false;
 bool previousLeft = false;
@@ -80,7 +82,7 @@ ControlStatus Controls::getStatus(bool normalize_dir)
     m_stats.x = (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ? 1 : 0);
     m_stats.y = (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ? 1 : 0);
 
-    if (normalize_dir && fabs(m_stats.x) > std::numeric_limits<float>::epsilon() && fabs(m_stats.y) > std::numeric_limits<float>::epsilon()) {
+    if (normalize_dir && std::fabs(m_stats.x) > std::numeric_limits<float>::epsilon() && std::fabs(m_stats.y) > std::numeric_limits<float>::epsilon()) {
         m_stats.x *= 0.7071f;
         m_stats.y *= 0.7071f;
     }
