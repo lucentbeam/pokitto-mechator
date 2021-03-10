@@ -1,27 +1,31 @@
 #ifndef __CONTROLS
 #define __CONTROLS
 
+#include <cstdint>
+
+class Controls;
+class Button {
+    uint16_t downCount = 0;
+
+    friend Controls;
+public:
+    void update(bool held) { downCount = held ? downCount + 1 : 0; }
+    bool pressed() const { return downCount == 1; }
+    bool held() const { return downCount > 0; }
+    bool downEvery(int initial, int thereafter) {
+        return initial == downCount || (downCount > initial && (downCount - initial) % thereafter == 0);
+    }
+};
+
 struct ControlStatus {
   float x = 0.0f, y = 0.0f;
-  bool pu = false, pd = false, pl = false, pr = false;
-  bool a = false,b = false,c = false;
-  bool pa = false;
-  bool pb = false;
-  bool pc = false;
+  Button up, down, left, right, a, b, c;
 };
 
 class Controls {
     ControlStatus m_stats;
 public:
-    ControlStatus getStatus(bool normalize_dir = false);
+    const ControlStatus getStatus(bool normalize_dir = false);
 };
-
-extern bool previousUp, previousDown, previousLeft, previousRight;
-
-#ifdef POKITTO_SFML
-extern bool previousA, previousB, previousC;
-#else
-extern unsigned int upCount, downCount, leftCount, rightCount;
-#endif
 
 #endif

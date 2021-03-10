@@ -1,12 +1,12 @@
 #include "rendersystem.h"
 
-const uint16_t palette[] = {
-0,59847,7662,19676,65110,10501,64323,38605,36511,14760,62626,52973,16711,25260,65029,12711,27118,37741,31112,12905,37621,44207,39463,21484,44094,27244,52039,38224,60797,31633,58505,46546,29162,40278,64970,2796,41549,50938,18916,3153,52015,65535,25382,3443,60435,26916,42312,14103,33003,45510,55049,36828,49450,60006,65520,12682,62063,62441,4809,19022,62480,43270,9356,19254,64818,
-};
-const uint8_t backgroundColor = 26;
-
 #include <cstdio>
 #include <cmath>
+#include <cstring>
+
+uint8_t RenderSystem::s_clip_width;
+uint8_t RenderSystem::s_clip_height;
+bool RenderSystem::s_clipping = false;
 
 #ifndef POKITTO_SFML
 
@@ -25,6 +25,7 @@ void RenderSystem::initialize()
 {
     game.begin();
     game.display.textWrap = false;
+    game.display.persistence = true;
     game.display.load565Palette(palette);
     game.display.setInvisibleColor(255);
     game.display.setColor(3, backgroundColor);
@@ -56,13 +57,13 @@ void RenderSystem::pixel(int x, int y, uint8_t pixel_idx)
 }
 
 void RenderSystem::sprite(int x, int y, const uint8_t * sprite, int transparent_color, bool flip) {
-    if (m_clipping && (m_clip_width == 0 || m_clip_height == 0)) {
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) {
         return;
     }
     if (flip || transparent_color >= 0) {
         Pokitto::DisplayExtensions::drawBitmap(x, y, sprite, transparent_color, flip);
-    } else if (m_clipping) {
-        Pokitto::DisplayExtensions::drawClippedBitmap(x, y, sprite[0], sprite[1], m_clip_width, m_clip_height, sprite + 2);
+    } else if (s_clipping) {
+        Pokitto::DisplayExtensions::drawClippedBitmap(x, y, sprite[0], sprite[1], s_clip_width, s_clip_height, sprite + 2);
     } else {
         Pokitto::DisplayExtensions::drawTile(x, y, sprite[0], sprite[1], sprite + 2);
     }
@@ -70,9 +71,9 @@ void RenderSystem::sprite(int x, int y, const uint8_t * sprite, int transparent_
 
 void RenderSystem::setClip(bool clip, uint8_t clip_width, uint8_t clip_height)
 {
-    m_clipping = clip;
-    m_clip_width = clip_width;
-    m_clip_height = clip_height;
+    s_clipping = clip;
+    s_clip_width = clip_width;
+    s_clip_height = clip_height;
 }
 
 void RenderSystem::drawLine(int x0, int y0, int x1, int y1, uint8_t color)
@@ -87,10 +88,20 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
     game.display.fillRect(x0, y0, w, h);
 }
 
+
+void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color)
+{
+    Pokitto::DisplayExtensions::drawShadow(x, y, sprite, transparent_color, shading);
+}
+
 void RenderSystem::clear(uint8_t idx) {
     game.display.bgcolor = idx;
 }
 
+void RenderSystem::drawBuffer(uint8_t *buffer)
+{
+    std::memcpy(game.display.getBuffer(), buffer, 110*88);
+}
 #else
 
 #include <SFML/Graphics.hpp>
@@ -119,7 +130,7 @@ struct SfmlSystem {
         window = new sf::RenderWindow(sf::VideoMode(screenwidth*6,screenheight*6), "Pokitto Testing");
         window->setView(sf::View(sf::Vector2f(screenwidth/2, screenheight/2),sf::Vector2f(screenwidth, screenheight)));
         window->setFramerateLimit(60);
-        for (int i = 0; i < sizeof(palette)/sizeof(uint16_t); i++) {
+        for (int i = 0; i < sizeof(palette)/sizeof(uint16_t); ++i) {
             uint16_t color = palette[i];
             uint8_t r = (color & 0b1111100000000000) >> 11;
             uint8_t g = (color & 0b0000011111100000) >> 5;
@@ -144,12 +155,30 @@ bool RenderSystem::running() {
     return sfSys.window->isOpen();
 }
 
+#include <list>
 bool RenderSystem::update() {
+    static std::list<sf::Image> s_captures;
+    static int capture_count = 0;
+
     sf::Event event;
     while (sfSys.window->pollEvent(event))
     {
         if (event.type == sf::Event::Closed) {
             sfSys.window->close();
+        }
+        if (event.type == sf::Event::KeyPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
+            if (capture_count == 0) {
+                s_captures.clear();
+                capture_count = 240;
+            } else {
+                capture_count = 0;
+                int i = 0;
+                for(auto &cap : s_captures) {
+                    cap.saveToFile("screenshots/capture_"+std::to_string(i)+".png");
+                    ++i;
+                }
+                s_captures.clear();
+            }
         }
     }
     sf::Texture texture;
@@ -163,6 +192,13 @@ bool RenderSystem::update() {
     sfSys.texts.clear();
     sfSys.screenbuffer.create(screenwidth, screenheight, sfSys.colors[sfSys.clearcolor]);
     sfSys.window->display();
+
+    if (capture_count > 0) {
+        s_captures.push_back(sfSys.window->capture());
+        if (s_captures.size() > capture_count) {
+            s_captures.pop_front();
+        }
+    }
     return true;
 }
 
@@ -188,17 +224,20 @@ void RenderSystem::pixel(int x, int y, uint8_t color)
 
 void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_color, bool flip)
 {
-    if (m_clipping && (m_clip_width == 0 || m_clip_height == 0)) return;
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
     uint8_t w = sprite[0];
-    uint8_t width = w + (w % 2);
+    uint8_t width = w;
+    if (four_bpp) {
+        width = w + (w % 2);
+    }
     uint8_t h = sprite[1];
     const uint8_t * start = sprite + 2;
-    for (int i = 0; i < width * h; i++) {
+    for (int i = 0; i < width * h; ++i) {
         int dx = i % width;
         if (dx >= w) continue;
-        if (m_clipping && dx > m_clip_width) continue;
+        if (s_clipping && dx > s_clip_width) continue;
         int dy = i / width;
-        if (m_clipping && dy > m_clip_height) continue;
+        if (s_clipping && dy > s_clip_height) continue;
         int px = x + dx;
         int py = y + dy;
         if (flip) {
@@ -228,9 +267,9 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
 
 void RenderSystem::setClip(bool clip, uint8_t clip_width, uint8_t clip_height)
 {
-    m_clipping = clip;
-    m_clip_width = clip_width;
-    m_clip_height = clip_height;
+    s_clipping = clip;
+    s_clip_width = clip_width;
+    s_clip_height = clip_height;
 }
 
 
@@ -291,8 +330,54 @@ void RenderSystem::drawLine(int x0, int y0, int x1, int y1, uint8_t color)
 void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
 {
     sf::Color c = sfSys.colors[color];
-    for (int i = x0; i < (x0 + w); i++) {
+    for (int i = x0; i < (x0 + w); ++i) {
         for (int j = y0; j < (y0 + h); j++) {
+            if (i >= 0 && j >= 0 && i < screenwidth && j < screenheight) {
+                sfSys.screenbuffer.setPixel(i,j,c);
+            }
+        }
+    }
+}
+
+void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color)
+{
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
+    uint8_t w = sprite[0];
+    uint8_t h = sprite[1];
+    const uint8_t * start = sprite + 2;
+    for (int i = 0; i < w * h; ++i) {
+        int dx = i % w;
+        if (dx >= w) continue;
+        if (s_clipping && dx > s_clip_width) continue;
+        int dy = i / w;
+        if (s_clipping && dy > s_clip_height) continue;
+        int px = x + dx;
+        int py = y + dy;
+        if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
+            continue;
+        }
+        int idx = start[i];
+        if (idx == transparent_color) {
+            continue;
+        }
+        sf::Color c = sfSys.screenbuffer.getPixel(px, py);
+        int col_idx = 0;
+        for (int i = 0; i < 255; ++i) {
+            if (sfSys.colors[i] == c) {
+                col_idx = i;
+                break;
+            }
+        }
+        sfSys.screenbuffer.setPixel(px, py, sfSys.colors[shading[col_idx]]);
+    }
+}
+
+void RenderSystem::drawBuffer(uint8_t *buffer)
+{
+    for(int i = 0; i < 110; ++i) {
+        for (int j = 0; j < 88; j++) {
+            uint8_t idx = buffer[j * 110 + i];
+            sf::Color c = sfSys.colors[idx];
             sfSys.screenbuffer.setPixel(i,j,c);
         }
     }

@@ -35,11 +35,12 @@ namespace Pokitto {
             screeny = 0;
             offsety = -y;
         }
-        uint8_t* m_scrbuf = Display::getBuffer();
-        for (int j = screeny; j < screeny+screenh; j++) {
-          uint8_t * loc = m_scrbuf + 110 * j + screenx;
-          const uint8_t * tloc = tile + w * (j - y) + offsetx;
+        uint8_t* loc = Display::getBuffer() + 110 * screeny + screenx;
+        uint8_t* tloc = const_cast<uint8_t*>(tile) + offsetx;
+        for (int j = 0; j < screenh; j++) {
           std::memcpy(loc, tloc, screenw);
+          loc += 110;
+          tloc += w;
         }
     }
 
@@ -106,6 +107,31 @@ namespace Pokitto {
         }
     }
 
+    void DisplayExtensions::drawShadow(int16_t x, int16_t y, const uint8_t *sprite, int transparent_color, const uint8_t *shading)
+    {
+        const uint8_t screenwidth = 110;
+        const uint8_t screenheight = 88;
+        uint8_t w = sprite[0];
+        uint8_t h = sprite[1];
+        const uint8_t * start = sprite + 2;
+        uint8_t* m_scrbuf = Display::getBuffer();
+        for (int i = 0; i < w * h; ++i) {
+            int idx = start[i];
+            if (idx == transparent_color) {
+                continue;
+            }
+            int dx = i % w;
+            if (dx >= w) continue;
+            int dy = i / w;
+            int px = x + dx;
+            int py = y + dy;
+            if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
+                continue;
+            }
+            int col_idx = m_scrbuf[px + py * screenwidth];
+            m_scrbuf[px + py * screenwidth] = shading[col_idx];
+        }
+    }
 }
 
 #endif

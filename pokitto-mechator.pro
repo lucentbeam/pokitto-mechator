@@ -4,8 +4,30 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    core/utilities/babyfsm.cpp \
+    game/entities/barracks.cpp \
+    game/entities/enemymech.cpp \
+    game/entities/pickups.cpp \
+    game/entities/pois.cpp \
+    game/maps/spawnpoint.cpp \
+    game/player.cpp \
+    game/rendering/cloudmanager.cpp \
+    core/rendering/screenbuffer.cpp \
+    game/entities/effects.cpp \
+    game/entities/projectile.cpp \
+    game/physics/body.cpp \
+    game/physics/collisionmanager.cpp \
     game/physics/steering.cpp \
-    game/utilities/tilecollider.cpp \
+    game/rendering/camera.cpp \
+    game/rendering/skytilemap.cpp \
+    game/states/game.cpp \
+    game/states/opendoorprompt.cpp \
+    game/states/openshopprompt.cpp \
+    game/states/shop.cpp \
+    game/ui/ui.cpp \
+    game/utilities/mapmanager.cpp \
+    game/utilities/playerstats.cpp \
+    game/utilities/tween.cpp \
     game/utilities/vec.cpp \
     main.cpp \
     core/audio/audiosystem.cpp \
@@ -16,6 +38,15 @@ SOURCES += \
 
 HEADERS += \
     core/audio/audiosystem.h \
+    core/utilities/objectpool.h \
+    game/entities/barracks.h \
+    game/entities/enemymech.h \
+    game/entities/pickups.h \
+    game/entities/pois.h \
+    game/enums.h \
+    game/maps/spawnpoint.h \
+    game/rendering/cloudmanager.h \
+    core/rendering/screenbuffer.h \
     core/rendering/tilemap.h \
     core/utilities/babyfsm.h \
     core/pokittolibextensions.h \
@@ -25,12 +56,28 @@ HEADERS += \
     core/utilities/rect.h \
     core/controls/controls.h \
     core/settings_pokitto.h \
+    game/entities/effects.h \
+    game/entities/projectile.h \
     game/maps/mechator.h \
+    game/maps/mechator_sky.h \
+    game/physics/body.h \
+    game/physics/collisionmanager.h \
     game/physics/steering.h \
     game/player.h \
     game/rendering/camera.h \
+    game/rendering/skytilemap.h \
+    game/rendering/spritewrapper.h \
+    game/states/game.h \
+    game/states/opendoorprompt.h \
+    game/states/openshopprompt.h \
+    game/states/shop.h \
     game/tilesets.h \
-    game/utilities/tilecollider.h \
+    game/ui/ui.h \
+    game/utilities/helpers.h \
+    game/utilities/mapmanager.h \
+    game/utilities/playerstats.h \
+    game/utilities/rumbler.h \
+    game/utilities/tween.h \
     game/utilities/vec.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include

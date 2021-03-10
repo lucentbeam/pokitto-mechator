@@ -14,6 +14,10 @@ class FSM {
     bool m_initialized = false;
 
 public:
+    FSM() {
+        instance = this;
+    }
+
     FSM &add(uint8_t s, void (*upd)(FSM&) = nullptr, void (*drw)() = nullptr) {
         updates[s] = upd;
         draws[s] = drw;
@@ -43,6 +47,8 @@ public:
             draws[m_current]();
         }
     }
+
+    static FSM * instance;
 };
 
 #endif // BABYFSM_H
