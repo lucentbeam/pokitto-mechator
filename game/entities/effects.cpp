@@ -28,10 +28,10 @@ void EffectManager::update(float dt)
     }
 }
 
-void EffectManager::draw(RenderSystem *renderer)
+void EffectManager::draw()
 {
     for (int i = 0; i < s_effectCount; ++i) {
         Vec2f pos = Camera::worldToScreen(s_effects[i].pos);
-        renderer->sprite(pos.x(), pos.y(), s_effects[i].sprite.data(), s_effects[i].sprite.data()[2]);
+        RenderSystem::sprite(pos.x(), pos.y(), s_effects[i].sprite.data(), s_effects[i].sprite.data()[2]);
     }
 }

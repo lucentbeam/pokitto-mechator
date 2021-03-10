@@ -39,27 +39,27 @@ void updateGameState(FSM &fsm) {
 //    CloudManager::update(0.014f);
 }
 
-void drawGameState(RenderSystem * renderSystem) {
+void drawGameState() {
     static FPSHelper fps(10);
 
     MapManager::draw(&screenbuffer);
-    renderSystem->drawBuffer(screenbuffer.getData());
-    Pickups::draw(renderSystem);
-    POIs::draw(renderSystem);
-    Enemy::drawMechs(renderSystem);
-    player.draw(renderSystem);
+    RenderSystem::drawBuffer(screenbuffer.getData());
+    Pickups::draw();
+    POIs::draw();
+    Enemy::drawMechs();
+    player.draw();
 
-    ProjectileManager::draw(renderSystem);
-    EffectManager::draw(renderSystem);
+    ProjectileManager::draw();
+    EffectManager::draw();
 
     // sky layer
-    MapManager::draw(renderSystem, false);
+    MapManager::draw(false);
 
     PlayerMode mode = Player::mode();
-    UI::drawHealthBar(renderSystem, mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.value() : Player::s_stats.health_jeep.value(), mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.max() : Player::s_stats.health_jeep.max(), mode);
+    UI::drawHealthBar(mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.value() : Player::s_stats.health_jeep.value(), mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.max() : Player::s_stats.health_jeep.max(), mode);
 
 //    CloudManager::draw(&renderSystem);
-    fps.update(renderSystem);
-    fps.draw(renderSystem, 8, 82, 9);
-    fps.draw(renderSystem, 8, 81, 37);
+    fps.update();
+    fps.draw(8, 82, 9);
+    fps.draw(8, 81, 37);
 }

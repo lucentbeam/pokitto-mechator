@@ -9,11 +9,9 @@
 #include "game/states/openshopprompt.h"
 #include "game/states/shop.h"
 
-RenderSystem renderSystem;
-
 int main ()
 {
-    renderSystem.initialize();
+    RenderSystem::initialize();
 
     FSM fsm;
     fsm.add(GameStates::Game, updateGameState, drawGameState);
@@ -22,17 +20,17 @@ int main ()
     fsm.add(GameStates::ShowShop, updateShopState, drawShopState);
 
     int32_t gameTime = 0;
-    uint32_t lastGameTime = renderSystem.getTimeMs();
+    uint32_t lastGameTime = RenderSystem::getTimeMs();
 
     const uint8_t physicsTimestepMs = 14;
     const uint8_t maxPhysicsStepsPerFrame = 5; // prevent death spiral
 
-    while (renderSystem.running())
+    while (RenderSystem::running())
     {
-        bool draws = renderSystem.update();
+        bool draws = RenderSystem::update();
 
-        gameTime += renderSystem.getTimeMs() - lastGameTime;
-        lastGameTime = renderSystem.getTimeMs();
+        gameTime += RenderSystem::getTimeMs() - lastGameTime;
+        lastGameTime = RenderSystem::getTimeMs();
         uint8_t step_counter = 0;
         while (gameTime > 0 && step_counter < maxPhysicsStepsPerFrame) {
             fsm.update();
@@ -41,7 +39,7 @@ int main ()
         }
 
         if (draws) {
-            fsm.draw(&renderSystem); // TODO: add frame interpolation?
+            fsm.draw(); // TODO: add frame interpolation?
         }
     }
 

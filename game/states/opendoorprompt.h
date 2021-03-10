@@ -8,6 +8,6 @@ void showOpenDoorPrompt(POIType door);
 
 void updateOpenDoorState(FSM &fsm);
 
-void drawOpenDoorState(RenderSystem * renderSystem);
+void drawOpenDoorState();
 
 #endif // OPENDOORPROMPT_H

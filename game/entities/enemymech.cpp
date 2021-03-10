@@ -100,26 +100,26 @@ void Enemy::updateMechs(float dt)
     }
 }
 
-void Enemy::drawMech(RenderSystem *renderer, EnemyMech *mech)
+void Enemy::drawMech(EnemyMech *mech)
 {
     auto pos = Camera::worldToScreen({mech->m_rect.centerX(), mech->m_rect.centerY()});
     if (mech->m_damage_frames > 0) {
-        renderer->sprite(pos.x()-2, pos.y()-2, enemy_ground[4], enemy_ground[4][2]);
+        RenderSystem::sprite(pos.x()-2, pos.y()-2, enemy_ground[4], enemy_ground[4][2]);
     } else if (mech->status == EnemyMech::Mode::Preparing) {
         int idx = mech->m_counter % 10 < 5 ? 1 : 3;
-        renderer->sprite(pos.x()-2, pos.y()-2, enemy_ground[idx], enemy_ground[idx][2]);
+        RenderSystem::sprite(pos.x()-2, pos.y()-2, enemy_ground[idx], enemy_ground[idx][2]);
     } else {
         const int increment = 7;
         int idx = mech->m_counter % (increment*4);
         idx = idx < increment ? 0 : idx < increment*2 ? 1 : idx < increment*3 ? 2 : 1;
-        renderer->sprite(pos.x()-2, pos.y()-2, enemy_ground[idx], enemy_ground[idx][2]);
+        RenderSystem::sprite(pos.x()-2, pos.y()-2, enemy_ground[idx], enemy_ground[idx][2]);
     }
 }
 
-void Enemy::drawMechs(RenderSystem *renderer)
+void Enemy::drawMechs()
 {
     EnemyMech * start = s_mechs.objects();
     for (int i = 0; i < s_mechs.objectCount(); ++i) {
-        drawMech(renderer, start + i);
+        drawMech(start + i);
     }
 }

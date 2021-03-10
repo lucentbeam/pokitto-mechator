@@ -53,7 +53,7 @@ public:
 
     void update(float dt);
 
-    void draw(RenderSystem * renderer);
+    void draw();
 
     Vec2f pos() const { return m_body.pos(); }
 
@@ -72,7 +72,7 @@ public:
 
     static void update(float dt);
 
-    static void draw(RenderSystem * renderer);
+    static void draw();
 
     static int getCollisionDamage(const Vec2f &pos, int size, uint16_t mask);
 

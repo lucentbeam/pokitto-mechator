@@ -8,12 +8,12 @@ BackgroundMap MapManager::s_background(jungletiles, world);
 
 SkyTilemap MapManager::s_foreground(jungletiles_sky, sky);
 
-void MapManager::draw(RenderSystem *renderer, bool bg)
+void MapManager::draw(bool bg)
 {
     if (bg) {
-        s_background.draw(renderer);
+        s_background.draw();
     } else {
-        s_foreground.draw(renderer);
+        s_foreground.draw();
     }
 }
 

@@ -8,6 +8,6 @@ void showShop();
 
 void updateShopState(FSM &fsm);
 
-void drawShopState(RenderSystem * renderSystem);
+void drawShopState();
 
 #endif // SHOP_H

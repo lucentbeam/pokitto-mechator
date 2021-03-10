@@ -30,11 +30,11 @@ void updateOpenDoorState(FSM &fsm) {
     }
 }
 
-void drawOpenDoorState(RenderSystem * renderSystem) {
-    drawGameState(renderSystem);
-    renderSystem->drawRect(40, 30, 30, 28, 0);
+void drawOpenDoorState() {
+    drawGameState();
+    RenderSystem::drawRect(40, 30, 30, 28, 0);
 
     char buf[3];
     sprintf(buf, "%d", int(currentDoor));
-    renderSystem->print(44, 34, buf, 41);
+    RenderSystem::print(44, 34, buf, 41);
 }

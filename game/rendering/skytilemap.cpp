@@ -9,7 +9,7 @@ SkyTilemap::SkyTilemap(const uint8_t tiles[][18*18+2], const uint8_t *map) :
 
 }
 
-void SkyTilemap::draw(RenderSystem *system)
+void SkyTilemap::draw()
 {
     int16_t x = Camera::tl_x();
     int16_t y = Camera::tl_y();
@@ -28,8 +28,8 @@ void SkyTilemap::draw(RenderSystem *system)
         for(int16_t i = x_lower; i < x_upper; ++i) {
             uint8_t tile = m_map[idx];
             if (tile == uint8_t(-1)) { idx++; continue; }
-            system->drawShadow(sx + (i-x) * 18, sy + (j-y) * 18 + 3, m_tiles[tile], m_tiles[tile][2]);
-            system->sprite(sx + (i-x) * 18, sy + (j-y) * 18, m_tiles[tile], m_tiles[tile][2]);
+            RenderSystem::drawShadow(sx + (i-x) * 18, sy + (j-y) * 18 + 3, m_tiles[tile], m_tiles[tile][2]);
+            RenderSystem::sprite(sx + (i-x) * 18, sy + (j-y) * 18, m_tiles[tile], m_tiles[tile][2]);
             idx++;
         }
         idx += (m_mapwidth - (x_upper - x_lower));

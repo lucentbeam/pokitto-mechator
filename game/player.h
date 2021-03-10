@@ -38,7 +38,7 @@ public:
 
     void update(float dt);
 
-    void draw(RenderSystem * renderSystem);
+    void draw();
 
     static Vec2f position();
 };

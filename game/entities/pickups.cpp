@@ -129,13 +129,13 @@ void Pickups::update(float dt)
     }
 }
 
-void Pickups::draw(RenderSystem *renderer)
+void Pickups::draw()
 {
     int i = s_temporary.objectCount()-1;
     Pickups * start = s_temporary.objects();
     while (i >= 0) {
         Vec2f p = Camera::worldToScreen(start[i].position);
-        renderer->sprite(p.x() - 4, p.y() - 4, start[i].m_sprite.data(), start[i].m_sprite.data()[2]);
+        RenderSystem::sprite(p.x() - 4, p.y() - 4, start[i].m_sprite.data(), start[i].m_sprite.data()[2]);
 
         --i;
     }
@@ -143,7 +143,7 @@ void Pickups::draw(RenderSystem *renderer)
     start = s_special.objects();
     while (i >= 0) {
         Vec2f p = Camera::worldToScreen(start[i].position);
-        renderer->sprite(p.x() - 4, p.y() - 4, start[i].m_sprite.data(), start[i].m_sprite.data()[2]);
+        RenderSystem::sprite(p.x() - 4, p.y() - 4, start[i].m_sprite.data(), start[i].m_sprite.data()[2]);
 
         --i;
     }

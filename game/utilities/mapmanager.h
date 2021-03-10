@@ -16,7 +16,7 @@ class MapManager
 
 public:
 
-    static void draw(RenderSystem * renderer, bool bg);
+    static void draw(bool bg);
 
     static void draw(ScreenBuffer * buffer);
 

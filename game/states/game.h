@@ -6,6 +6,6 @@
 
 void updateGameState(FSM &fsm);
 
-void drawGameState(RenderSystem * renderSystem);
+void drawGameState();
 
 #endif // GAME_H

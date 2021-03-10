@@ -20,7 +20,7 @@ public:
 
   SkyTilemap(const uint8_t tiles[][18*18+2], const uint8_t * map);
 
-  void draw(RenderSystem * system);
+  void draw();
 
 };
 

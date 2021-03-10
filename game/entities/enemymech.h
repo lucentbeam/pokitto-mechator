@@ -41,9 +41,9 @@ public:
 
     static void updateMechs(float dt);
 
-    static void drawMech(RenderSystem * renderer, EnemyMech * mech);
+    static void drawMech(EnemyMech * mech);
 
-    static void drawMechs(RenderSystem * renderer);
+    static void drawMechs();
 };
 
 #endif // ENEMYMECH_H

@@ -3,7 +3,9 @@
 #include <cstdio>
 #include <cstring>
 
-RenderSystem * RenderSystem::instance = nullptr;
+uint8_t RenderSystem::s_clip_width;
+uint8_t RenderSystem::s_clip_height;
+bool RenderSystem::s_clipping = false;
 
 #ifndef POKITTO_SFML
 
@@ -27,7 +29,6 @@ void RenderSystem::initialize()
     game.display.setInvisibleColor(255);
     game.display.setColor(3, backgroundColor);
     game.display.font = font3x5;
-    instance = this;
 }
 
 bool RenderSystem::running()
@@ -55,13 +56,13 @@ void RenderSystem::pixel(int x, int y, uint8_t pixel_idx)
 }
 
 void RenderSystem::sprite(int x, int y, const uint8_t * sprite, int transparent_color, bool flip) {
-    if (m_clipping && (m_clip_width == 0 || m_clip_height == 0)) {
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) {
         return;
     }
     if (flip || transparent_color >= 0) {
         Pokitto::DisplayExtensions::drawBitmap(x, y, sprite, transparent_color, flip);
-    } else if (m_clipping) {
-        Pokitto::DisplayExtensions::drawClippedBitmap(x, y, sprite[0], sprite[1], m_clip_width, m_clip_height, sprite + 2);
+    } else if (s_clipping) {
+        Pokitto::DisplayExtensions::drawClippedBitmap(x, y, sprite[0], sprite[1], s_clip_width, s_clip_height, sprite + 2);
     } else {
         Pokitto::DisplayExtensions::drawTile(x, y, sprite[0], sprite[1], sprite + 2);
     }
@@ -69,9 +70,9 @@ void RenderSystem::sprite(int x, int y, const uint8_t * sprite, int transparent_
 
 void RenderSystem::setClip(bool clip, uint8_t clip_width, uint8_t clip_height)
 {
-    m_clipping = clip;
-    m_clip_width = clip_width;
-    m_clip_height = clip_height;
+    s_clipping = clip;
+    s_clip_width = clip_width;
+    s_clip_height = clip_height;
 }
 
 void RenderSystem::drawLine(int x0, int y0, int x1, int y1, uint8_t color)
@@ -147,7 +148,6 @@ uint32_t RenderSystem::getTimeMs()
 
 void RenderSystem::initialize() {
     sfSys.create();
-    instance = this;
 }
 
 bool RenderSystem::running() {
@@ -223,7 +223,7 @@ void RenderSystem::pixel(int x, int y, uint8_t color)
 
 void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_color, bool flip)
 {
-    if (m_clipping && (m_clip_width == 0 || m_clip_height == 0)) return;
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
     uint8_t w = sprite[0];
     uint8_t width = w;
     if (four_bpp) {
@@ -234,9 +234,9 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
     for (int i = 0; i < width * h; ++i) {
         int dx = i % width;
         if (dx >= w) continue;
-        if (m_clipping && dx > m_clip_width) continue;
+        if (s_clipping && dx > s_clip_width) continue;
         int dy = i / width;
-        if (m_clipping && dy > m_clip_height) continue;
+        if (s_clipping && dy > s_clip_height) continue;
         int px = x + dx;
         int py = y + dy;
         if (flip) {
@@ -266,9 +266,9 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
 
 void RenderSystem::setClip(bool clip, uint8_t clip_width, uint8_t clip_height)
 {
-    m_clipping = clip;
-    m_clip_width = clip_width;
-    m_clip_height = clip_height;
+    s_clipping = clip;
+    s_clip_width = clip_width;
+    s_clip_height = clip_height;
 }
 
 
@@ -340,16 +340,16 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
 
 void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color)
 {
-    if (m_clipping && (m_clip_width == 0 || m_clip_height == 0)) return;
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
     uint8_t w = sprite[0];
     uint8_t h = sprite[1];
     const uint8_t * start = sprite + 2;
     for (int i = 0; i < w * h; ++i) {
         int dx = i % w;
         if (dx >= w) continue;
-        if (m_clipping && dx > m_clip_width) continue;
+        if (s_clipping && dx > s_clip_width) continue;
         int dy = i / w;
-        if (m_clipping && dy > m_clip_height) continue;
+        if (s_clipping && dy > s_clip_height) continue;
         int px = x + dx;
         int py = y + dy;
         if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {

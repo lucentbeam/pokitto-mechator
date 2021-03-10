@@ -8,7 +8,7 @@ class UI
 {
 public:
 
-    static void drawHealthBar(RenderSystem * renderer, uint8_t current, uint8_t max, PlayerMode mode);
+    static void drawHealthBar(uint8_t current, uint8_t max, PlayerMode mode);
 };
 
 #endif // UI_H

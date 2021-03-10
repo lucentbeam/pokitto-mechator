@@ -25,10 +25,10 @@ void updateOpenShopState(FSM &fsm)
     }
 }
 
-void drawOpenShopState(RenderSystem *renderSystem)
+void drawOpenShopState()
 {
-    drawGameState(renderSystem);
-    renderSystem->drawRect(40, 30, 30, 28, 0);
+    drawGameState();
+    RenderSystem::drawRect(40, 30, 30, 28, 0);
 
-    renderSystem->print(44, 34, "open shop?", 41);
+    RenderSystem::print(44, 34, "open shop?", 41);
 }

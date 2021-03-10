@@ -55,12 +55,12 @@ void Projectile::update(float dt)
     m_rect.setCenter(m_body.pos().x(), m_body.pos().y());
 }
 
-void Projectile::draw(RenderSystem *renderer)
+void Projectile::draw()
 {
     Vec2f pos = Camera::worldToScreen(m_body.pos());
     const uint8_t * spriteData = sprite.data();
     if (spriteData != nullptr) {
-        renderer->sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2]);
+        RenderSystem::sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2]);
     }
 }
 
@@ -97,12 +97,12 @@ void ProjectileManager::update(float dt)
     }
 }
 
-void ProjectileManager::draw(RenderSystem *renderer)
+void ProjectileManager::draw()
 {
     int i = 0;
     Projectile * start = s_projectiles.objects();
     while (i < s_projectiles.objectCount()) {
-        start[i].draw(renderer);
+        start[i].draw();
         ++i;
     }
 }

@@ -6892,6 +6892,45 @@
 		},
 		"\\game\\states\\opendoorprompt.h": {
 			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\openshopprompt.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\shop.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\tween.obj": {
+			"sdcard": false
+		},
+		"\\game\\states\\openshopprompt.cpp": {
+			"sdcard": false
+		},
+		"\\game\\states\\openshopprompt.h": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\tween.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\tween.h": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.XAgAfE": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.OCBcZr": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.cpp.susfgm": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\skytilemap.h.jzcHlj": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.ZgsItJ": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

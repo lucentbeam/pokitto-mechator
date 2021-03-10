@@ -99,11 +99,11 @@ void POIs::update(float dt)
     }
 }
 
-void POIs::draw(RenderSystem *renderer)
+void POIs::draw()
 {
     for(int i = s_pois.objectCount() - 1; i >= 0; --i) {
         POIs * p = s_pois.objects() + i;
         Vec2f pos = Camera::worldToScreen(p->m_position);
-        renderer->sprite(pos.x(), pos.y(), p->m_sprite.data());
+        RenderSystem::sprite(pos.x(), pos.y(), p->m_sprite.data());
     }
 }

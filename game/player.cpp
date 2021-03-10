@@ -86,10 +86,10 @@ void Player::update(float dt) {
     }
 }
 
-void Player::draw(RenderSystem *renderSystem) {
+void Player::draw() {
     // jeep rendering
     Vec2f jpos = Camera::worldToScreen(m_jeep.pos());
-    renderSystem->sprite(jpos.x() - 7, jpos.y() - 7 - m_shake.offset(1), jeep[m_jeep.rotation_frame()], jeep[0][2], m_jeep.facing().x() > 0);
+    RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - m_shake.offset(1), jeep[m_jeep.rotation_frame()], jeep[0][2], m_jeep.facing().x() > 0);
 
     if (m_mode == PlayerMode::Soldier) {
         // soldier rendering
@@ -104,7 +104,7 @@ void Player::draw(RenderSystem *renderSystem) {
             sprite += 1;
         }
         Vec2f spos = Camera::worldToScreen(m_soldier.pos());
-        renderSystem->sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], m_soldier.facing().x() > 0);
+        RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], m_soldier.facing().x() > 0);
     }
 
 

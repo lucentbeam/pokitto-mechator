@@ -36,7 +36,7 @@ public:
 
     static void update(float dt);
 
-    static void draw(RenderSystem * renderer);
+    static void draw();
 };
 
 template <int l, int t, int w, int h>

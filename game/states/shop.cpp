@@ -20,10 +20,10 @@ void updateShopState(FSM &fsm)
     }
 }
 
-void drawShopState(RenderSystem *renderSystem)
+void drawShopState()
 {
-    drawGameState(renderSystem);
-    renderSystem->drawRect(40, 30, 30, 28, 0);
+    drawGameState();
+    RenderSystem::drawRect(40, 30, 30, 28, 0);
 
-    renderSystem->print(44, 34, "shop", 41);
+    RenderSystem::print(44, 34, "shop", 41);
 }

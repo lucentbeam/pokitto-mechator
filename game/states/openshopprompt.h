@@ -8,6 +8,6 @@ void showOpenShopPrompt();
 
 void updateOpenShopState(FSM &fsm);
 
-void drawOpenShopState(RenderSystem * renderSystem);
+void drawOpenShopState();
 
 #endif // OPENSHOPPROMPT_H

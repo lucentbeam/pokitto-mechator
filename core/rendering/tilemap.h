@@ -28,7 +28,7 @@ public:
 
   Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map);
 
-  void draw(RenderSystem * system);
+  void draw();
   void drawToBuffer(ScreenBuffer * buffer);
 
   uint8_t mapWidth() const { return m_mapwidth; }
@@ -54,7 +54,7 @@ Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeig
 }
 
 template<int TileWidth, int TileHeight>
-void Tilemap<TileWidth, TileHeight>::draw(RenderSystem *system)
+void Tilemap<TileWidth, TileHeight>::draw()
 {
     int16_t x = Camera::tl_x();
     int16_t y = Camera::tl_y();
@@ -76,7 +76,7 @@ void Tilemap<TileWidth, TileHeight>::draw(RenderSystem *system)
                 tile = defaultTile;
             }
             if (tile == uint8_t(-1)) { idx++; continue; }
-            system->sprite(sx + (i-x) * TileWidth, sy + (j-y) * TileHeight, m_tiles[tile]);
+            RenderSystem::sprite(sx + (i-x) * TileWidth, sy + (j-y) * TileHeight, m_tiles[tile]);
             idx++;
         }
         idx += (m_mapwidth - (x_upper - x_lower));
