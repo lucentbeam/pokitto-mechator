@@ -58,7 +58,7 @@ void drawGameState() {
     PlayerMode mode = Player::mode();
     UI::drawHealthBar(mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.value() : Player::s_stats.health_jeep.value(), mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.max() : Player::s_stats.health_jeep.max(), mode);
 
-//    CloudManager::draw(&renderSystem);
+//    CloudManager::draw();
     fps.update();
     fps.draw(8, 82, 9);
     fps.draw(8, 81, 37);

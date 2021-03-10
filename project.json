@@ -88,7 +88,8 @@
 			"-DDEVICE_SPI=1",
 			"-DDEVICE_ANALOGIN=1",
 			"-DDEVICE_PWMOUT=1",
-			"-DTARGET_LIKE_CORTEX_M0"
+			"-DTARGET_LIKE_CORTEX_M0",
+			"-D_OSCT=2"
 		],
 		"Desktop": [
 			"-I${projectPath}",
@@ -175,7 +176,8 @@
 			"-DDEVICE_SPI=1",
 			"-DDEVICE_ANALOGIN=1",
 			"-DDEVICE_PWMOUT=1",
-			"-DTARGET_LIKE_CORTEX_M0"
+			"-DTARGET_LIKE_CORTEX_M0",
+			"-D_OSCT=2"
 		],
 		"Desktop": [
 			"-I${projectPath}",
@@ -6930,6 +6932,24 @@
 			"sdcard": false
 		},
 		"\\core\\rendering\\rendersystem.cpp.ZgsItJ": {
+			"sdcard": false
+		},
+		"\\game\\states\\openshopprompt.cpp.XYDmeZ": {
+			"sdcard": false
+		},
+		"\\game\\states\\openshopprompt.cpp.afsHtF": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.cpp.bMYVln": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.oibpXx": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\cloudmanager.h.pghnqt": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.BroeTi": {
 			"sdcard": false
 		}
 	},

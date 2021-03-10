@@ -28,7 +28,7 @@ public:
 
     static void update(float dt);
 
-    static void draw(RenderSystem * renderer);
+    static void draw();
 };
 
 #endif // CLOUDMANAGER_H

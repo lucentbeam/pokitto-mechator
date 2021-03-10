@@ -78,6 +78,10 @@ void POIs::update(float dt)
     bool any_in_range = false;
     for(int i = s_pois.objectCount() - 1; i >= 0; --i) {
         POIs * p = s_pois.objects() + i;
+        if (!Camera::inActiveZone(p->m_position)) {
+            s_pois.deactivate(i);
+            continue;
+        }
         if ((p->m_position - c).length() < 3) {
             any_in_range = true;
             if (s_current_active_poi != p) {

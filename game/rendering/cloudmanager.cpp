@@ -34,9 +34,9 @@ void CloudManager::update(float dt)
     cam_y = new_y;
 }
 
-void CloudManager::draw(RenderSystem *renderer)
+void CloudManager::draw()
 {
     for(const Cloud &c : s_clouds) {
-        renderer->drawShadow(c.x, c.y, clouds[c.index], clouds[c.index][2]);
+        RenderSystem::drawShadow(c.x, c.y, clouds[c.index], clouds[c.index][2]);
     }
 }
