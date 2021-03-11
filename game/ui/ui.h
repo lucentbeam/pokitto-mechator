@@ -15,7 +15,7 @@ public:
     UIElement(int16_t x, int16_t y, int16_t w, int16_t h, int16_t x_hidden, int16_t y_hidden, int16_t w_hidden, int16_t h_hidden, Tween::Easing curve);
 
     void setVisibility(bool,bool=false);
-    void draw(void (*)(int16_t x, int16_t y, int16_t w, int16_t h));
+    void draw(bool,void (*)(int16_t x, int16_t y, int16_t w, int16_t h));
 };
 
 class UI {

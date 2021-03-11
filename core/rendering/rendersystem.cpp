@@ -85,7 +85,7 @@ void RenderSystem::drawLine(int x0, int y0, int x1, int y1, uint8_t color)
 void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
 {
     game.display.setColor(color);
-    game.display.fillRect(x0, y0, std::max(w-1,0), std::max(h-1,0)); // PokittoLib implementation is wrong
+    game.display.fillRect(x0, y0, w, std::max(h-1,std::min(h,1))); // PokittoLib implementation is wrong
 }
 
 
