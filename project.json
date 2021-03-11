@@ -7281,6 +7281,12 @@
 		},
 		"\\core\\rendering\\rendersystem.cpp.ffxurO": {
 			"sdcard": false
+		},
+		"\\game\\utilities\\tween.cpp.IaFOBz": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.Usvssh": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

@@ -1,5 +1,6 @@
 #include "tween.h"
 
+#include <cmath>
 #include <algorithm>
 
 #include "core/rendering/rendersystem.h"
@@ -48,6 +49,11 @@ float Tween::getInterpolation(float start, float end) const
         break;
     }
     return t * end + (1 - t) * start;
+}
+
+int Tween::getInterpolationInt(float start, float end) const
+{
+    return std::floor(getInterpolation(start, end) + 0.5f);
 }
 
 

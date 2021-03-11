@@ -23,6 +23,8 @@ public:
 
     float getInterpolation(float start, float end) const;
 
+    int getInterpolationInt(float start, float end) const;
+
 private:
     uint32_t m_start_time;
 

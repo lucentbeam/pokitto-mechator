@@ -33,10 +33,10 @@ void UIElement::setVisibility(bool vis, bool immediate)
 
 void UIElement::draw(void (*callback)(int16_t, int16_t, int16_t, int16_t) = nullptr)
 {
-    float x = visible ? tween.getInterpolation(m_xh, m_x) : tween.getInterpolation(m_x, m_xh);
-    float y = visible ? tween.getInterpolation(m_yh, m_y) : tween.getInterpolation(m_y, m_yh);
-    float w = visible ? tween.getInterpolation(m_wh, m_w) : tween.getInterpolation(m_w, m_wh);
-    float h = visible ? tween.getInterpolation(m_hh, m_h) : tween.getInterpolation(m_h, m_hh);
+    int x = visible ? tween.getInterpolationInt(m_xh, m_x) : tween.getInterpolationInt(m_x, m_xh);
+    int y = visible ? tween.getInterpolationInt(m_yh, m_y) : tween.getInterpolationInt(m_y, m_yh);
+    int w = visible ? tween.getInterpolationInt(m_wh, m_w) : tween.getInterpolationInt(m_w, m_wh);
+    int h = visible ? tween.getInterpolationInt(m_hh, m_h) : tween.getInterpolationInt(m_h, m_hh);
 
     RenderSystem::drawRect(x, y, w, h, 0);
 
@@ -49,9 +49,9 @@ UIElement healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 UIElement kitcount(66,78,19,9,66,87,19,0,Tween::Easing::OutQuad);
 UIElement dollarcount(86,78,23,9,86,87,23,0,Tween::Easing::OutQuad);
 
-UIElement keyacount(90,1,19,8,90,9,19,0,Tween::Easing::OutQuad);
-UIElement keybcount(90,10,19,8,90,18,19,0,Tween::Easing::OutQuad);
-UIElement keyccount(90,19,19,8,90,27,19,0,Tween::Easing::OutQuad);
+UIElement keyacount(90,1,19,8,119,1,0,8,Tween::Easing::OutQuad);
+UIElement keybcount(90,10,19,8,119,10,0,8,Tween::Easing::OutQuad);
+UIElement keyccount(90,19,19,8,119,19,0,8,Tween::Easing::OutQuad);
 
 void UI::setVisibility(UI::Element element, bool visible, bool immediate)
 {
