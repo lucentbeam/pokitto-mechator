@@ -19,6 +19,8 @@ public:
 
     void reset();
 
+    void end();
+
     float getInterpolation(float start, float end) const;
 
 private:

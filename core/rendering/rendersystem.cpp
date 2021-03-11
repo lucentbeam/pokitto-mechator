@@ -110,6 +110,7 @@ void RenderSystem::drawBuffer(uint8_t *buffer)
 
 const uint8_t screenwidth = 110, screenheight = 88;
 const bool four_bpp = false;
+const int screen_scale = 6;
 
 struct SfmlSystem {
     sf::RenderWindow * window;
@@ -127,7 +128,7 @@ struct SfmlSystem {
     sf::Clock clock;
 
     void create() {
-        window = new sf::RenderWindow(sf::VideoMode(screenwidth*6,screenheight*6), "Pokitto Testing");
+        window = new sf::RenderWindow(sf::VideoMode(screenwidth*screen_scale,screenheight*screen_scale), "Pokitto Testing");
         window->setView(sf::View(sf::Vector2f(screenwidth/2, screenheight/2),sf::Vector2f(screenwidth, screenheight)));
         window->setFramerateLimit(60);
         for (int i = 0; i < sizeof(palette)/sizeof(uint16_t); ++i) {

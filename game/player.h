@@ -17,8 +17,6 @@
 #include "game/enums.h"
 
 class Player {
-    Controls m_controller;
-
     Steering m_soldier;
     Steering m_jeep;
 

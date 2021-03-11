@@ -2,77 +2,83 @@
 
 #include <cmath>
 
-bool previousUp = false;
-bool previousDown = false;
-bool previousLeft = false;
-bool previousRight = false;
+Controls Controls::s_controls;
 
 #ifndef POKITTO_SFML
 
 #include "Pokitto.h"
 #include <limits>
 
+void Controls::update() {
+    s_controls.m_stats.up.update(Pokitto::Core::upBtn());
+    s_controls.m_stats.down.update(Pokitto::Core::downBtn());
+    s_controls.m_stats.left.update(Pokitto::Core::leftBtn());
+    s_controls.m_stats.right.update(Pokitto::Core::rightBtn());
+
+    s_controls.m_stats.y = 0;
+    if (s_controls.m_stats.up.downCount > 0 && s_controls.m_stats.down.downCount > 0) { // NOTE: dpad on pokitto can get stuck with both buttons down after quickly alternating
+      s_controls.m_stats.y = s_controls.m_stats.up.downCount < s_controls.m_stats.down.downCount ? -1 : 1;
+    } else if (s_controls.m_stats.up.downCount > 0) {
+      s_controls.m_stats.y = -1;
+    } else if (s_controls.m_stats.down.downCount > 0) {
+      s_controls.m_stats.y = 1;
+    }
+
+    s_controls.m_stats.x = 0;
+    if (s_controls.m_stats.right.downCount > 0 && s_controls.m_stats.left.downCount > 0) {
+      s_controls.m_stats.x = s_controls.m_stats.right.downCount < s_controls.m_stats.left.downCount ? 1 : -1;
+    } else if (s_controls.m_stats.right.downCount > 0) {
+      s_controls.m_stats.x = 1;
+    } else if (s_controls.m_stats.left.downCount > 0) {
+      s_controls.m_stats.x = -1;
+    }
+
+    s_controls.m_stats.a.update(Pokitto::Core::aBtn());
+    s_controls.m_stats.b.update(Pokitto::Core::bBtn());
+    s_controls.m_stats.c.update(Pokitto::Core::cBtn());
+}
+
 const ControlStatus Controls::getStatus(bool normalize_dir)
 {
-    m_stats.up.update(Pokitto::Core::upBtn());
-    m_stats.down.update(Pokitto::Core::downBtn());
-    m_stats.left.update(Pokitto::Core::leftBtn());
-    m_stats.right.update(Pokitto::Core::rightBtn());
+    ControlStatus out = s_controls.m_stats;
 
-    m_stats.y = 0;
-    if (m_stats.up.downCount > 0 && m_stats.down.downCount > 0) { // NOTE: dpad on pokitto can get stuck with both buttons down after quickly alternating
-      m_stats.y = m_stats.up.downCount < m_stats.down.downCount ? -1 : 1;
-    } else if (m_stats.up.downCount > 0) {
-      m_stats.y = -1;
-    } else if (m_stats.down.downCount > 0) {
-      m_stats.y = 1;
+    if (normalize_dir && fabs(out.x) > std::numeric_limits<float>::epsilon() && fabs(out.y) > std::numeric_limits<float>::epsilon()) {
+        out.x *= 0.7071f;
+        out.y *= 0.7071f;
     }
 
-    m_stats.x = 0;
-    if (m_stats.right.downCount > 0 && m_stats.left.downCount > 0) {
-      m_stats.x = m_stats.right.downCount < m_stats.left.downCount ? 1 : -1;
-    } else if (m_stats.right.downCount > 0) {
-      m_stats.x = 1;
-    } else if (m_stats.left.downCount > 0) {
-      m_stats.x = -1;
-    }
-
-    if (normalize_dir && fabs(m_stats.x) > std::numeric_limits<float>::epsilon() && fabs(m_stats.y) > std::numeric_limits<float>::epsilon()) {
-        m_stats.x *= 0.7071f;
-        m_stats.y *= 0.7071f;
-    }
-
-    m_stats.a.update(Pokitto::Core::aBtn());
-    m_stats.b.update(Pokitto::Core::bBtn());
-    m_stats.c.update(Pokitto::Core::cBtn());
-
-    return m_stats;
+    return out;
 }
 
 #else
 
 #include "SFML/Window.hpp"
 
+void Controls::update()
+{
+    s_controls.m_stats.x = (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ? 1 : 0);
+    s_controls.m_stats.y = (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ? 1 : 0);
+
+    s_controls.m_stats.up.update(s_controls.m_stats.y < 0);
+    s_controls.m_stats.down.update(s_controls.m_stats.y > 0);
+    s_controls.m_stats.left.update(s_controls.m_stats.x < 0);
+    s_controls.m_stats.right.update(s_controls.m_stats.x > 0);
+
+    s_controls.m_stats.a.update(sf::Keyboard::isKeyPressed(sf::Keyboard::Z));
+    s_controls.m_stats.b.update(sf::Keyboard::isKeyPressed(sf::Keyboard::X));
+    s_controls.m_stats.c.update(sf::Keyboard::isKeyPressed(sf::Keyboard::C));
+}
+
 const ControlStatus Controls::getStatus(bool normalize_dir)
 {
-    m_stats.x = (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ? 1 : 0);
-    m_stats.y = (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ? 1 : 0);
+    ControlStatus out = s_controls.m_stats;
 
-    if (normalize_dir && std::fabs(m_stats.x) > std::numeric_limits<float>::epsilon() && std::fabs(m_stats.y) > std::numeric_limits<float>::epsilon()) {
-        m_stats.x *= 0.7071f;
-        m_stats.y *= 0.7071f;
+    if (normalize_dir && std::fabs(out.x) > std::numeric_limits<float>::epsilon() && std::fabs(out.y) > std::numeric_limits<float>::epsilon()) {
+        out.x *= 0.7071f;
+        out.y *= 0.7071f;
     }
 
-    m_stats.up.update(m_stats.y < 0);
-    m_stats.down.update(m_stats.y > 0);
-    m_stats.left.update(m_stats.x < 0);
-    m_stats.right.update(m_stats.x > 0);
-
-    m_stats.a.update(sf::Keyboard::isKeyPressed(sf::Keyboard::Z));
-    m_stats.b.update(sf::Keyboard::isKeyPressed(sf::Keyboard::X));
-    m_stats.c.update(sf::Keyboard::isKeyPressed(sf::Keyboard::C));
-
-    return m_stats;
+    return out;
 }
 
 #endif

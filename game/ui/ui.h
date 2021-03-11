@@ -3,12 +3,37 @@
 
 #include "core/rendering/rendersystem.h"
 #include "game/enums.h"
+#include "game/utilities/tween.h"
 
-class UI
-{
+class UIElement {
+    Tween tween;
+
+    int16_t m_x,m_y,m_w,m_h,m_xh,m_yh,m_wh,m_hh;
+    bool visible = true;
+
 public:
+    UIElement(int16_t x, int16_t y, int16_t w, int16_t h, int16_t x_hidden, int16_t y_hidden, int16_t w_hidden, int16_t h_hidden, Tween::Easing curve);
 
-    static void drawHealthBar(uint8_t current, uint8_t max, PlayerMode mode);
+    void setVisibility(bool,bool=false);
+    void draw(void (*)(int16_t x, int16_t y, int16_t w, int16_t h));
+};
+
+class UI {
+
+public:
+    enum Element {
+        UIHealthbar,
+        UIHackingKitCount,
+        UIDollarCount,
+        UIKeyACount,
+        UIKeyBCount,
+        UIKeyCCount
+    };
+
+    static void setVisibility(Element,bool,bool=false);
+
+    static void draw();
+
 };
 
 #endif // UI_H

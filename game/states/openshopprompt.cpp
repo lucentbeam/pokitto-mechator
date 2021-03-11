@@ -8,8 +8,9 @@
 #include "game/states/shop.h"
 
 #include "game/utilities/tween.h"
+#include "game/constants.h"
 
-Tween open_tween(Tween::Easing::OutQuad, 0.15f);
+Tween open_tween(Tween::Easing::OutQuad, uiEasingTime);
 
 void showOpenShopPrompt()
 {
@@ -19,8 +20,7 @@ void showOpenShopPrompt()
 
 void updateOpenShopState(FSM &fsm)
 {
-    static Controls ctrl;
-    ControlStatus status = ctrl.getStatus();
+    ControlStatus status = Controls::getStatus();
 
     if (status.b.pressed()) {
         fsm.go(GameStates::Game);

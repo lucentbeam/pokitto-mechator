@@ -24,8 +24,13 @@ struct ControlStatus {
 
 class Controls {
     ControlStatus m_stats;
+
+    static Controls s_controls;
+
 public:
-    const ControlStatus getStatus(bool normalize_dir = false);
+    static void update();
+
+    static const ControlStatus getStatus(bool normalize_dir = false);
 };
 
 #endif

@@ -23,6 +23,7 @@ SOURCES += \
     game/states/game.cpp \
     game/states/opendoorprompt.cpp \
     game/states/openshopprompt.cpp \
+    game/states/pause.cpp \
     game/states/shop.cpp \
     game/ui/ui.cpp \
     game/utilities/mapmanager.cpp \
@@ -39,6 +40,7 @@ SOURCES += \
 HEADERS += \
     core/audio/audiosystem.h \
     core/utilities/objectpool.h \
+    game/constants.h \
     game/entities/barracks.h \
     game/entities/enemymech.h \
     game/entities/pickups.h \
@@ -70,6 +72,7 @@ HEADERS += \
     game/states/game.h \
     game/states/opendoorprompt.h \
     game/states/openshopprompt.h \
+    game/states/pause.h \
     game/states/shop.h \
     game/tilesets.h \
     game/ui/ui.h \

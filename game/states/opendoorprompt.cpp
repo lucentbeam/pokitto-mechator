@@ -19,8 +19,7 @@ void showOpenDoorPrompt(POIType door) {
 }
 
 void updateOpenDoorState(FSM &fsm) {
-    static Controls ctrl;
-    ControlStatus status = ctrl.getStatus();
+    ControlStatus status = Controls::getStatus();
 
     if (status.b.pressed()) {
         fsm.go(GameStates::Game);

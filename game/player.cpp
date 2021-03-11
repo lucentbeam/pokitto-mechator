@@ -15,7 +15,7 @@ Player::Player() :
 void Player::update(float dt) {
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
 
-    ControlStatus controls = m_controller.getStatus(true);
+    ControlStatus controls = Controls::getStatus(true);
     int damage = 0;
     if (m_mode == PlayerMode::Soldier) {
         m_soldier.update(dt, controls.x , controls.y);
@@ -49,13 +49,19 @@ void Player::update(float dt) {
         }
     }
     if (m_mode == PlayerMode::Soldier) {
-        if (controls.a.downEvery(1, 12)) {
+        const float shots_per_second = 3.0f;
+        float frames_per_second = 1.0f / dt;
+        float frames_per_shot = frames_per_second / shots_per_second;
+        if (controls.a.downEvery(1, int(frames_per_shot))) {
             Projectile * p = ProjectileManager::create(m_soldier.pos(), m_soldier.aim() * 100.0f, 3, 0.5f)
                 ->setSprite({projectile[0]}, 20)
                 ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
         }
     } else {
-        if (controls.a.downEvery(1, 18)) {
+        const float shots_per_second = 2.0f;
+        float frames_per_second = 1.0f / dt;
+        float frames_per_shot = frames_per_second / shots_per_second;
+        if (controls.a.downEvery(1, int(frames_per_shot))) {
             Vec2f offset = m_jeep.aim().rot90();
             ProjectileManager::create(m_jeep.pos() + offset * 4.0f, m_jeep.aim() * 150.0f, 3, 0.35f)
                     ->setSprite({projectile[0]}, 20)

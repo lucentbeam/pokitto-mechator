@@ -22,6 +22,11 @@ void Tween::reset()
     m_start_time = RenderSystem::getTimeMs();
 }
 
+void Tween::end()
+{
+    m_start_time = RenderSystem::getTimeMs() - m_duration;
+}
+
 float Tween::getInterpolation(float start, float end) const
 {
     uint32_t delta = RenderSystem::getTimeMs() - m_start_time;

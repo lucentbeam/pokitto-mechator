@@ -12,8 +12,7 @@ void showShop()
 
 void updateShopState(FSM &fsm)
 {
-    static Controls ctrl;
-    ControlStatus status = ctrl.getStatus();
+    ControlStatus status = Controls::getStatus();
 
     if (status.a.pressed()) {
         fsm.go(GameStates::Game);

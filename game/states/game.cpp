@@ -21,22 +21,30 @@
 #include "game/entities/pickups.h"
 #include "game/entities/pois.h"
 
+#include "game/constants.h"
+#include "game/states/pause.h"
+
 Player player;
 ScreenBuffer screenbuffer;
 
 void updateGameState(FSM &fsm) {
-    player.update(0.014f);
-    ProjectileManager::update(0.014f);
-    EffectManager::update(0.014f);
-    Enemy::updateMechs(0.014f);
-    Barracks::update(0.014f);
-    Pickups::update(0.014f);
-    POIs::update(0.014f);
+    player.update(physicsTimestep);
+    ProjectileManager::update(physicsTimestep);
+    EffectManager::update(physicsTimestep);
+    Enemy::updateMechs(physicsTimestep);
+    Barracks::update(physicsTimestep);
+    Pickups::update(physicsTimestep);
+    POIs::update(physicsTimestep);
 
     Camera::update(player.position().x(), player.position().y());
 
     SpawnPoint::setActiveRegion();
-//    CloudManager::update(0.014f);
+//    CloudManager::update(physicsTimestep);
+
+    ControlStatus status = Controls::getStatus();
+    if (status.c.pressed()) {
+        goPause();
+    }
 }
 
 void drawGameState() {
@@ -56,7 +64,7 @@ void drawGameState() {
     MapManager::draw(false);
 
     PlayerMode mode = Player::mode();
-    UI::drawHealthBar(mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.value() : Player::s_stats.health_jeep.value(), mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.max() : Player::s_stats.health_jeep.max(), mode);
+    UI::draw();
 
 //    CloudManager::draw();
     fps.update();
