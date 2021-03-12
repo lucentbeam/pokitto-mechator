@@ -22,6 +22,8 @@ public:
 
 class UI {
 
+    static void drawNumber(uint16_t num, int x, int y);
+
 public:
     enum Element {
         UIHealthbar,

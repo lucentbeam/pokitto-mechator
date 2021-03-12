@@ -1,5 +1,6 @@
 #include "pickups.h"
 
+#include "game/variables.h"
 
 ObjectPool<Pickups, 10> Pickups::s_temporary;
 ObjectPool<Pickups, 4> Pickups::s_special;
@@ -37,7 +38,7 @@ void Pickups::acquireAtIndex(const Vec2f &pos)
 void Pickups::spawnDollar(const Vec2f &pos)
 {
     spawnTemporary(pos, {pickup_dollar[0],pickup_dollar[1]}, 8.0f, [](const Vec2f &pos) {
-
+        GameVariables::changeDollars(1);
     }, 600);
 }
 
@@ -45,7 +46,7 @@ void Pickups::spawnHackingKit(const Vec2f &pos)
 {
     if (mapIndexUnacquired(pos)) {
         spawnSpecial(pos, {pickup_hackingkit[0], pickup_hackingkit[1]}, 8.0f, [](const Vec2f &pos) {
-            // run callback
+            GameVariables::changeHackingKits(1);
             acquireAtIndex(pos);
         });
     }
@@ -55,7 +56,7 @@ void Pickups::spawnKeycardA(const Vec2f &pos)
 {
     if (mapIndexUnacquired(pos)) {
         spawnSpecial(pos, {pickup_keycard1[0], pickup_keycard1[1]}, 8.0f, [](const Vec2f &pos) {
-            // run callback
+            GameVariables::changeKeysA(1);
             acquireAtIndex(pos);
         });
     }
@@ -65,7 +66,7 @@ void Pickups::spawnKeycardB(const Vec2f &pos)
 {
     if (mapIndexUnacquired(pos)) {
         spawnSpecial(pos, {pickup_keycard2[0], pickup_keycard2[1]}, 8.0f, [](const Vec2f &pos) {
-            // run callback
+            GameVariables::changeKeysB(1);
             acquireAtIndex(pos);
         });
     }
@@ -75,7 +76,7 @@ void Pickups::spawnKeycardC(const Vec2f &pos)
 {
     if (mapIndexUnacquired(pos)) {
         spawnSpecial(pos, {pickup_keycard3[0], pickup_keycard3[1]}, 8.0f, [](const Vec2f &pos) {
-            // run callback
+            GameVariables::changeKeysC(1);
             acquireAtIndex(pos);
         });
     }

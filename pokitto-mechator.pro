@@ -30,6 +30,7 @@ SOURCES += \
     game/utilities/playerstats.cpp \
     game/utilities/tween.cpp \
     game/utilities/vec.cpp \
+    game/variables.cpp \
     main.cpp \
     core/audio/audiosystem.cpp \
     core/utilities/rect.cpp \
@@ -81,7 +82,8 @@ HEADERS += \
     game/utilities/playerstats.h \
     game/utilities/rumbler.h \
     game/utilities/tween.h \
-    game/utilities/vec.h
+    game/utilities/vec.h \
+    game/variables.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
 win32:DEPENDPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
