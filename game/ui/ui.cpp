@@ -62,14 +62,14 @@ void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t
     }
 }
 
-UIElement healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
+static UIElement healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 
-UIElement kitcount(66,78,19,9,76,82,0,0,Tween::Easing::OutQuad);
-UIElement dollarcount(86,78,23,9,97,82,0,0,Tween::Easing::OutQuad);
+static UIElement kitcount(66,78,19,9,76,82,0,0,Tween::Easing::OutQuad);
+static UIElement dollarcount(86,78,23,9,97,82,0,0,Tween::Easing::OutQuad);
 
-UIElement keyacount(90,1,19,8,100,5,0,0,Tween::Easing::OutQuad);
-UIElement keybcount(90,10,19,8,100,14,0,0,Tween::Easing::OutQuad);
-UIElement keyccount(90,19,19,8,100,23,0,0,Tween::Easing::OutQuad);
+static UIElement keyacount(90,1,19,8,100,5,0,0,Tween::Easing::OutQuad);
+static UIElement keybcount(90,10,19,8,100,14,0,0,Tween::Easing::OutQuad);
+static UIElement keyccount(90,19,19,8,100,23,0,0,Tween::Easing::OutQuad);
 
 void UI::drawNumber(uint16_t num, int x, int y)
 {
@@ -131,7 +131,7 @@ void UI::setVisibility(UI::Element element, bool visible, uint32_t delay)
 
 void UI::draw()
 {
-    healthbar.draw(false, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+    healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
         PlayerMode mode = Player::mode();
         uint8_t current = mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.value() : Player::s_stats.health_jeep.value();
         uint8_t max = mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.max() : Player::s_stats.health_jeep.max();
@@ -142,36 +142,35 @@ void UI::draw()
         }
     });
 
-    kitcount.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+    kitcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y + 1, pickup_hackingkit[0], pickup_hackingkit[0][2]);
             drawNumber(GameVariables::hackingKits(), x + 9, y + 2);
         }
     });
 
-    dollarcount.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+    dollarcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x + 1, y + 1, pickup_dollar[0]);
             drawNumber(GameVariables::dollars(), x + 10, y + 2);
         }
     });
 
-    keyacount.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+    keyacount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard1[0], pickup_keycard1[0][2]);
             drawNumber(GameVariables::keysA(), x + 8, y + 1);
-
         }
     });
 
-    keybcount.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+    keybcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard2[0], pickup_keycard2[0][2]);
             drawNumber(GameVariables::keysB(), x + 8, y + 1);
         }
     });
 
-    keyccount.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+    keyccount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard3[0], pickup_keycard3[0][2]);
             drawNumber(GameVariables::keysC(), x + 8, y + 1);

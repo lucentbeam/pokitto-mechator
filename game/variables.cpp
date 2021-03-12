@@ -5,7 +5,7 @@ uint8_t GameVariables::hackingKitCount = 0;
 uint8_t GameVariables::keyACount = 0;
 uint8_t GameVariables::keyBCount = 0;
 uint8_t GameVariables::keyCCount = 0;
-uint16_t GameVariables::dollarCount = 200;
+uint16_t GameVariables::dollarCount = 15;
 
 void GameVariables::changeDollars(int16_t delta)
 {
