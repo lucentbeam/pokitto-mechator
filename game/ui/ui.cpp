@@ -31,6 +31,15 @@ void UIElement::setVisibility(bool vis, bool immediate)
     }
 }
 
+void UIElement::setVisibility(bool vis, uint32_t delay)
+{
+    if (vis == visible) {
+        return;
+    }
+    visible = vis;
+    tween.reset(delay);
+}
+
 void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t, int16_t) = nullptr)
 {
     int x = visible ? tween.getInterpolationInt(m_xh, m_x) : tween.getInterpolationInt(m_x, m_xh);
@@ -52,12 +61,13 @@ void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t
 }
 
 UIElement healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
-UIElement kitcount(66,78,19,9,66,87,19,0,Tween::Easing::OutQuad);
-UIElement dollarcount(86,78,23,9,86,87,23,0,Tween::Easing::OutQuad);
 
-UIElement keyacount(90,1,19,8,109,1,0,8,Tween::Easing::OutQuad);
-UIElement keybcount(90,10,19,8,109,10,0,8,Tween::Easing::OutQuad);
-UIElement keyccount(90,19,19,8,109,19,0,8,Tween::Easing::OutQuad);
+UIElement kitcount(66,78,19,9,76,82,0,0,Tween::Easing::OutQuad);
+UIElement dollarcount(86,78,23,9,97,82,0,0,Tween::Easing::OutQuad);
+
+UIElement keyacount(90,1,19,8,100,5,0,0,Tween::Easing::OutQuad);
+UIElement keybcount(90,10,19,8,100,14,0,0,Tween::Easing::OutQuad);
+UIElement keyccount(90,19,19,8,100,23,0,0,Tween::Easing::OutQuad);
 
 void UI::setVisibility(UI::Element element, bool visible, bool immediate)
 {
@@ -79,6 +89,30 @@ void UI::setVisibility(UI::Element element, bool visible, bool immediate)
         break;
     case UI::Element::UIKeyCCount:
         keyccount.setVisibility(visible,immediate);
+        break;
+    }
+}
+
+void UI::setVisibility(UI::Element element, bool visible, uint32_t delay)
+{
+    switch (element) {
+    case UI::Element::UIHealthbar:
+        healthbar.setVisibility(visible,delay);
+        break;
+    case UI::Element::UIHackingKitCount:
+        kitcount.setVisibility(visible,delay);
+        break;
+    case UI::Element::UIDollarCount:
+        dollarcount.setVisibility(visible,delay);
+        break;
+    case UI::Element::UIKeyACount:
+        keyacount.setVisibility(visible,delay);
+        break;
+    case UI::Element::UIKeyBCount:
+        keybcount.setVisibility(visible,delay);
+        break;
+    case UI::Element::UIKeyCCount:
+        keyccount.setVisibility(visible,delay);
         break;
     }
 }

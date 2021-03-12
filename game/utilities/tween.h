@@ -17,7 +17,7 @@ public:
 
     Tween(Easing c, float duration);
 
-    void reset();
+    void reset(uint32_t delay = 0);
 
     void end();
 

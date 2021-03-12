@@ -18,9 +18,9 @@ Tween::Tween(Tween::Easing c, float duration) :
     reset();
 }
 
-void Tween::reset()
+void Tween::reset(uint32_t delay)
 {
-    m_start_time = RenderSystem::getTimeMs();
+    m_start_time = RenderSystem::getTimeMs() + delay;
 }
 
 void Tween::end()
@@ -30,7 +30,7 @@ void Tween::end()
 
 float Tween::getInterpolation(float start, float end) const
 {
-    uint32_t delta = RenderSystem::getTimeMs() - m_start_time;
+    int delta = int(RenderSystem::getTimeMs()) - int(m_start_time);
     float t = std::clamp<float>(float(delta)/float(m_duration), 0.0f, 1.0f);
 
     // remappings yoinked from this list:

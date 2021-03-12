@@ -145,7 +145,8 @@ struct SfmlSystem {
 
 uint32_t RenderSystem::getTimeMs()
 {
-    return sfSys.clock.getElapsedTime().asMilliseconds();
+    int t = sfSys.clock.getElapsedTime().asMilliseconds();
+    return t < 0 || t > 30000000 ? 0 : t;
 }
 
 void RenderSystem::initialize() {
