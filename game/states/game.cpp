@@ -39,7 +39,7 @@ void goGame()
     UI::setVisibility(UI::Element::UIHackingKitCount, false);
 }
 
-void updateGameState(FSM &fsm) {
+void updateGameState(FSM&) {
     player.update(physicsTimestep);
     ProjectileManager::update(physicsTimestep);
     EffectManager::update(physicsTimestep);

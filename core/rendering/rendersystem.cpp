@@ -8,6 +8,8 @@ uint8_t RenderSystem::s_clip_width;
 uint8_t RenderSystem::s_clip_height;
 bool RenderSystem::s_clipping = false;
 
+static bool initialized = false;
+
 #ifndef POKITTO_SFML
 
 #include "Pokitto.h"
@@ -18,7 +20,7 @@ Pokitto::Core game;
 
 uint32_t RenderSystem::getTimeMs()
 {
-    return game.getTime();
+    return initialized ? game.getTime() : 0;
 }
 
 void RenderSystem::initialize()
@@ -30,6 +32,7 @@ void RenderSystem::initialize()
     game.display.setInvisibleColor(255);
     game.display.setColor(3, backgroundColor);
     game.display.font = font3x5;
+    initialized = true;
 }
 
 bool RenderSystem::running()
@@ -145,12 +148,12 @@ struct SfmlSystem {
 
 uint32_t RenderSystem::getTimeMs()
 {
-    int t = sfSys.clock.getElapsedTime().asMilliseconds();
-    return t < 0 || t > 30000000 ? 0 : t;
+    return initialized ? sfSys.clock.getElapsedTime().asMilliseconds() : 0;
 }
 
 void RenderSystem::initialize() {
     sfSys.create();
+    initialized = true;
 }
 
 bool RenderSystem::running() {

@@ -10,8 +10,9 @@
 #include "game/states/shop.h"
 #include "game/states/pause.h"
 
-#include "game/constants.h"
 #include "game/ui/ui.h"
+
+#include "game/constants.h"
 
 int main ()
 {
@@ -28,6 +29,8 @@ int main ()
     uint32_t lastGameTime = RenderSystem::getTimeMs();
 
     const uint8_t maxPhysicsStepsPerFrame = 5; // prevent death spiral
+
+    goGame();
 
     while (RenderSystem::running())
     {

@@ -1,6 +1,7 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
+#include <cstring>
 #include <cstdint>
 #include <initializer_list>
 
@@ -23,6 +24,11 @@ namespace Helpers {
             RenderSystem::drawRect(x, y + 1, w, h - 2, color);
             RenderSystem::drawLine(x + 1, y + h - 1, x + w - 2, y + h - 1, color);
         }
+    }
+
+    static void printHorizontallyCentered(int x, int y, const char * text, uint8_t color) {
+        x = x - float(strlen(text) * 3.71f) / 2.0f;
+        RenderSystem::print(x, y, text, color);
     }
 };
 
