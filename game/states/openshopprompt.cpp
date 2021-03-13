@@ -16,8 +16,8 @@
 
 static bool can_open = false;
 
-static UIElement title_box = UIElement::getExpander(55, 35, 62, 9, Tween::Easing::OutQuad);
-static UIElement alert_box = UIElement::getExpander(55, 45, 88, 9, Tween::Easing::OutQuad);
+static UIElement title_box = UIElement::getExpander(55, 35, 76, 9, Tween::Easing::OutQuad);
+static UIElement alert_box = UIElement::getExpander(55, 45, 76, 9, Tween::Easing::OutQuad);
 static UIOptions yes_no(true, {"NO", "YES"});
 
 void showOpenShopPrompt()
@@ -87,7 +87,7 @@ void drawOpenShopState()
                 yes_no.foreach([](uint8_t idx, bool active, const char * name) {
                     Helpers::drawNotchedRect(46, 51 + idx * 8, 20, 7, 0);
                     RenderSystem::sprite(38, 51 + idx * 8, poi[active ? 1 : 0]);
-                    Helpers::printHorizontallyCentered(56, 52 + idx * 8, name, active ? 41 : 13);
+                    Helpers::printHorizontallyCentered(56, 52 + idx * 8, name, active ? 41 : 25);
                 });
             }
         });

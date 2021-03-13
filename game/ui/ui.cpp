@@ -103,7 +103,16 @@ void UIOptions::update(const ControlStatus &status)
     }
 }
 
-void UIOptions::foreach(void (*callback)(uint8_t, bool, const char *))
+//void UIOptions::foreach(void (*callback)(uint8_t, bool, const char *))
+//{
+//    uint8_t i = 0;
+//    for(const char * s : m_options) {
+//        callback(i, i == m_active_index, s);
+//        i++;
+//    }
+//}
+
+void UIOptions::foreach(std::function<void (uint8_t, bool, const char *)> callback)
 {
     uint8_t i = 0;
     for(const char * s : m_options) {

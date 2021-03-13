@@ -105,7 +105,7 @@ void drawOpenDoorState() {
                 yes_no.foreach([](uint8_t idx, bool active, const char * name) {
                     Helpers::drawNotchedRect(46, 50 + idx * 8, 20, 7, 0);
                     RenderSystem::sprite(38, 50 + idx * 8, poi[active ? 1 : 0]);
-                    Helpers::printHorizontallyCentered(56, 51 + idx * 8, name, active ? 41 : 13);
+                    Helpers::printHorizontallyCentered(56, 51 + idx * 8, name, active ? 41 : 25);
                 });
             }
         }

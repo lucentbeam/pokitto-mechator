@@ -7917,6 +7917,102 @@
 		},
 		"\\game\\entities\\pickups.cpp.uJCSPL": {
 			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.autosave.RYNtzY": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.autosave.iAnhMH": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.autosave.RLNPJG": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.pzhmqk": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.BhhHmM": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.h.XQdABZ": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.vRbZDW": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.Ipyapy": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.bjgbPS": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.h.HYbYYX": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.autosave.xFrgNQ": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.TNJQDM": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.uujQqh": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.lnozCu": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.wHueIM": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.wAQDGg": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.jHUnog": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.rtfBLu": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.TTNJeQ": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.IypYRX": {
+			"sdcard": false
+		},
+		"\\game\\states\\opendoorprompt.cpp.vOCisv": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.UlPqOs": {
+			"sdcard": false
+		},
+		"\\game\\states\\opendoorprompt.cpp.sJdUyR": {
+			"sdcard": false
+		},
+		"\\game\\states\\opendoorprompt.cpp.FjlckK": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.EdFQok": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.FmRDdp": {
+			"sdcard": false
+		},
+		"\\game\\states\\openshopprompt.cpp.niMjeQ": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.fLjlDI": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.JotRhx": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.HRBUBA": {
+			"sdcard": false
+		},
+		"\\game\\states\\shop.cpp.UcWQtB": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

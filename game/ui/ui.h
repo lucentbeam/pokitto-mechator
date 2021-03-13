@@ -2,6 +2,7 @@
 #define UI_H
 
 #include <vector>
+#include <functional>
 
 #include "core/rendering/rendersystem.h"
 #include "core/controls/controls.h"
@@ -39,7 +40,8 @@ public:
 
     void update(const ControlStatus&);
 
-    void foreach(void (*)(uint8_t idx, bool active, const char *));
+//    void foreach(void (*)(uint8_t idx, bool active, const char *));
+    void foreach(std::function<void(uint8_t idx, bool active, const char *)>);
 
     uint8_t activeIndex() const { return uint8_t(m_active_index); }
 
