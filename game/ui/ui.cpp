@@ -22,6 +22,7 @@ UIElement::UIElement(int16_t x, int16_t y, int16_t w, int16_t h, int16_t x_hidde
 
 void UIElement::setVisibility(bool vis, bool immediate)
 {
+    m_showDuration = 0;
     if (vis == visible) {
         return;
     }
@@ -35,11 +36,21 @@ void UIElement::setVisibility(bool vis, bool immediate)
 
 void UIElement::setVisibility(bool vis, uint32_t delay)
 {
+    m_showDuration = 0;
     if (vis == visible) {
         return;
     }
     visible = vis;
     tween.reset(delay);
+}
+
+void UIElement::update(float dt)
+{
+    bool showing = m_showDuration > 0;
+    m_showDuration -= dt;
+    if (m_showDuration < 0 && showing) {
+        setVisibility(false);
+    }
 }
 
 void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t, int16_t) = nullptr)
@@ -166,6 +177,38 @@ void UI::setVisibility(UI::Element element, bool visible, uint32_t delay)
         keyccount.setVisibility(visible,delay);
         break;
     }
+}
+
+void UI::showForDuration(UI::Element element, float duration)
+{
+    switch (element) {
+    case UI::Element::UIHackingKitCount:
+        kitcount.showForDuration(duration);
+        break;
+    case UI::Element::UIDollarCount:
+        dollarcount.showForDuration(duration);
+        break;
+    case UI::Element::UIKeyACount:
+        keyacount.showForDuration(duration);
+        break;
+    case UI::Element::UIKeyBCount:
+        keybcount.showForDuration(duration);
+        break;
+    case UI::Element::UIKeyCCount:
+        keyccount.showForDuration(duration);
+        break;
+    default:
+        break;
+    }
+}
+
+void UI::update(float dt)
+{
+    kitcount.update(dt);
+    dollarcount.update(dt);
+    keyacount.update(dt);
+    keybcount.update(dt);
+    keyccount.update(dt);
 }
 
 void UI::draw()

@@ -47,6 +47,7 @@ void updateGameState(FSM&) {
     Barracks::update(physicsTimestep);
     Pickups::update(physicsTimestep);
     POIs::update(physicsTimestep);
+    UI::update(physicsTimestep);
 
     Camera::update(player.position().x(), player.position().y());
 
@@ -54,7 +55,7 @@ void updateGameState(FSM&) {
 //    CloudManager::update(physicsTimestep);
 
     ControlStatus status = Controls::getStatus();
-    if (status.c.pressed()) {
+    if (status.c.downEvery(61, 10)) {
         goPause();
     }
 }

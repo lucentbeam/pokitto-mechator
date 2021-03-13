@@ -20,7 +20,7 @@ void goPause()
 void updatePauseState(FSM&)
 {
     ControlStatus status = Controls::getStatus();
-    if (status.c.pressed()) {
+    if (status.c.releasedWithin(20)) {
         pause_prompt.setVisibility(false);
         goGame();
     }

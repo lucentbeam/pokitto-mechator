@@ -16,8 +16,8 @@
 
 static bool can_open = false;
 
-static UIElement title_box = UIElement::getExpander(51, 35, 62, 9, Tween::Easing::OutQuad);
-static UIElement alert_box = UIElement::getExpander(51, 45, 88, 9, Tween::Easing::OutQuad);
+static UIElement title_box = UIElement::getExpander(55, 35, 62, 9, Tween::Easing::OutQuad);
+static UIElement alert_box = UIElement::getExpander(55, 45, 88, 9, Tween::Easing::OutQuad);
 static UIOptions yes_no(true, {"NO", "YES"});
 
 void showOpenShopPrompt()
@@ -78,12 +78,12 @@ void drawOpenShopState()
     });
     if (!can_open) {
         alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
-            if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 2, "- NEED HACKING KIT -", 33);
+            if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 2, "- NO HACKING KITS -", 33);
         });
     } else {
         alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
             if (h > 8) {
-                Helpers::printHorizontallyCentered(x + w/2, y + 2, "USE HACKING KIT?", 37);
+                Helpers::printHorizontallyCentered(x + w/2, y + 2, "USE A HACKING KIT?", 37);
                 yes_no.foreach([](uint8_t idx, bool active, const char * name) {
                     Helpers::drawNotchedRect(46, 51 + idx * 8, 20, 7, 0);
                     RenderSystem::sprite(38, 51 + idx * 8, poi[active ? 1 : 0]);

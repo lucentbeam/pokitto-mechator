@@ -5,7 +5,7 @@ Player * Player::s_instance;
 PlayerStats Player::s_stats;
 
 Player::Player() :
-    m_soldier(48*6, 13*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
+    m_soldier(8*6, 15*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
     m_jeep(26*6, 8*6, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f)
 {
     m_shake.intensity = Rumbler::Slight;
@@ -37,7 +37,7 @@ void Player::update(float dt) {
             m_shake.update();
         }
     }
-    if (controls.c.pressed()) {
+    if (controls.c.releasedWithin(60)) {
         if (m_mode == PlayerMode::Soldier) {
             Vec2f dp = m_jeep.pos() - m_soldier.pos();
             if (dp.length() < 6) {

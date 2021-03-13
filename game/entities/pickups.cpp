@@ -1,6 +1,7 @@
 #include "pickups.h"
 
 #include "game/variables.h"
+#include "game/ui/ui.h"
 
 ObjectPool<Pickups, 10> Pickups::s_temporary;
 ObjectPool<Pickups, 4> Pickups::s_special;
@@ -39,6 +40,7 @@ void Pickups::spawnDollar(const Vec2f &pos)
 {
     spawnTemporary(pos, {pickup_dollar[0],pickup_dollar[1]}, 8.0f, [](const Vec2f &pos) {
         GameVariables::changeDollars(1);
+        UI::showForDuration(UI::Element::UIDollarCount, 2.0f);
     }, 600);
 }
 
@@ -48,6 +50,7 @@ void Pickups::spawnHackingKit(const Vec2f &pos)
         spawnSpecial(pos, {pickup_hackingkit[0], pickup_hackingkit[1]}, 8.0f, [](const Vec2f &pos) {
             GameVariables::changeHackingKits(1);
             acquireAtIndex(pos);
+            UI::showForDuration(UI::Element::UIHackingKitCount, 2.0f);
         });
     }
 }
@@ -58,6 +61,7 @@ void Pickups::spawnKeycardA(const Vec2f &pos)
         spawnSpecial(pos, {pickup_keycard1[0], pickup_keycard1[1]}, 8.0f, [](const Vec2f &pos) {
             GameVariables::changeKeysA(1);
             acquireAtIndex(pos);
+            UI::showForDuration(UI::Element::UIKeyACount, 2.0f);
         });
     }
 }
@@ -68,6 +72,7 @@ void Pickups::spawnKeycardB(const Vec2f &pos)
         spawnSpecial(pos, {pickup_keycard2[0], pickup_keycard2[1]}, 8.0f, [](const Vec2f &pos) {
             GameVariables::changeKeysB(1);
             acquireAtIndex(pos);
+            UI::showForDuration(UI::Element::UIKeyBCount, 2.0f);
         });
     }
 }
@@ -78,6 +83,7 @@ void Pickups::spawnKeycardC(const Vec2f &pos)
         spawnSpecial(pos, {pickup_keycard3[0], pickup_keycard3[1]}, 8.0f, [](const Vec2f &pos) {
             GameVariables::changeKeysC(1);
             acquireAtIndex(pos);
+            UI::showForDuration(UI::Element::UIKeyCCount, 2.0f);
         });
     }
 }
