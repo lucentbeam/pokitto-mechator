@@ -20,6 +20,4 @@ public:
     static void setActiveRegion();
 };
 
-const SpawnPoint world_points[] = { SpawnPoint({0,0},nullptr) };
-
 #endif // SPAWNPOINT_H

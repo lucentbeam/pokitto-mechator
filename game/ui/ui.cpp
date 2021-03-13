@@ -67,6 +67,40 @@ UIElement UIElement::getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Twe
     return UIElement(x-w/2,y-h/2,w,h,x,y,0,0,curve);
 }
 
+UIOptions::UIOptions(bool vertical, std::initializer_list<const char *> options) :
+    m_vertical(vertical),
+    m_options(options)
+{
+
+}
+
+void UIOptions::update(const ControlStatus &status)
+{
+    if (m_vertical) {
+        if (status.up.pressed() || status.down.pressed()) {
+            m_active_index += status.y < 0 ? -1 : 1;
+        }
+    } else {
+        if (status.right.pressed() || status.left.pressed()) {
+            m_active_index += status.x < 0 ? -1 : 1;
+        }
+    }
+    if (m_active_index < 0) {
+        m_active_index += m_options.size();
+    } else {
+        m_active_index %= m_options.size();
+    }
+}
+
+void UIOptions::foreach(void (*callback)(uint8_t, bool, const char *))
+{
+    uint8_t i = 0;
+    for(const char * s : m_options) {
+        callback(i, i == m_active_index, s);
+        i++;
+    }
+}
+
 static UIElement healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 
 static UIElement kitcount(66,78,19,9,76,82,0,0,Tween::Easing::OutQuad);
@@ -163,23 +197,22 @@ void UI::draw()
 
     keyacount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
-            RenderSystem::sprite(x, y, pickup_keycard1[0], pickup_keycard1[0][2]);
+            RenderSystem::sprite(x, y, pickup_keycard1[1], pickup_keycard1[1][2]);
             drawNumber(GameVariables::keysA(), x + 8, y + 1);
         }
     });
 
     keybcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
-            RenderSystem::sprite(x, y, pickup_keycard2[0], pickup_keycard2[0][2]);
+            RenderSystem::sprite(x, y, pickup_keycard2[1], pickup_keycard2[1][2]);
             drawNumber(GameVariables::keysB(), x + 8, y + 1);
         }
     });
 
     keyccount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
-            RenderSystem::sprite(x, y, pickup_keycard3[0], pickup_keycard3[0][2]);
+            RenderSystem::sprite(x, y, pickup_keycard3[1], pickup_keycard3[1][2]);
             drawNumber(GameVariables::keysC(), x + 8, y + 1);
         }
     });
 }
-

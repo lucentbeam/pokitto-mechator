@@ -18,6 +18,7 @@ static bool can_open = false;
 
 static UIElement title_box = UIElement::getExpander(51, 35, 62, 9, Tween::Easing::OutQuad);
 static UIElement alert_box = UIElement::getExpander(51, 45, 88, 9, Tween::Easing::OutQuad);
+static UIOptions yes_no(true, {"NO", "YES"});
 
 void showOpenShopPrompt()
 {
@@ -34,22 +35,37 @@ void showOpenShopPrompt()
     can_open = GameVariables::hackingKits() > 0;
     title_box.setVisibility(true, uint32_t(50));
     alert_box.setVisibility(true, uint32_t(150));
+    yes_no.reset();
+}
+
+void quitOpenShop() {
+    title_box.setVisibility(false);
+    alert_box.setVisibility(false);
+    goGame();
 }
 
 void updateOpenShopState(FSM&)
 {
     ControlStatus status = Controls::getStatus();
 
-    if (status.b.pressed()) {
-        goGame();
-    } else if (status.a.pressed()) {
-        if (can_open) {
-        POIs::unlockCurrent();
-            showShop();
-        } else {
-            goGame();
-            title_box.setVisibility(false);
-            alert_box.setVisibility(false);
+    if (can_open) {
+        if (status.b.pressed()) {
+            quitOpenShop();
+        } else if (status.a.pressed()) {
+            if (yes_no.activeIndex() == 0) {
+                quitOpenShop();
+            } else {
+                title_box.setVisibility(false);
+                alert_box.setVisibility(false);
+                GameVariables::changeHackingKits(-1);
+                POIs::unlockCurrent();
+                showShop();
+            }
+        }
+        yes_no.update(status);
+    } else {
+        if (status.a.pressed() || status.b.pressed()) {
+            quitOpenShop();
         }
     }
 }
@@ -58,15 +74,22 @@ void drawOpenShopState()
 {
     drawGameState();
     title_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
-        Helpers::printHorizontallyCentered(x + w/2, y + 2, "ENEMY BASE", 41);
+        if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 2, "ENEMY BASE", 41);
     });
     if (!can_open) {
-        alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t){
-            Helpers::printHorizontallyCentered(x + w/2, y + 2, "- NEED HACKING KIT -", 33);
+        alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
+            if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 2, "- NEED HACKING KIT -", 33);
         });
     } else {
-        alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t){
-            Helpers::printHorizontallyCentered(x + w/2, y + 2, "USE HACKING KIT?", 37);
+        alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
+            if (h > 8) {
+                Helpers::printHorizontallyCentered(x + w/2, y + 2, "USE HACKING KIT?", 37);
+                yes_no.foreach([](uint8_t idx, bool active, const char * name) {
+                    Helpers::drawNotchedRect(46, 51 + idx * 8, 20, 7, 0);
+                    RenderSystem::sprite(38, 51 + idx * 8, poi[active ? 1 : 0]);
+                    Helpers::printHorizontallyCentered(56, 52 + idx * 8, name, active ? 41 : 13);
+                });
+            }
         });
     }
 }
