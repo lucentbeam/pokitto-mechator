@@ -10,35 +10,34 @@
 #include "game/utilities/tween.h"
 #include "game/constants.h"
 
-Tween open_tween(Tween::Easing::OutQuad, uiEasingTime);
+#include "game/ui/ui.h"
 
 void showOpenShopPrompt()
 {
     FSM::instance->go(GameStates::ShowUnlockShop);
-    open_tween.reset();
+
+    UI::setVisibility(UI::Element::UIHackingKitCount, true, uint32_t(100));
+
+    UI::setVisibility(UI::Element::UIHealthbar, false);
+    UI::setVisibility(UI::Element::UIKeyACount, false);
+    UI::setVisibility(UI::Element::UIKeyBCount, false);
+    UI::setVisibility(UI::Element::UIKeyCCount, false);
+    UI::setVisibility(UI::Element::UIDollarCount, false);
 }
 
-void updateOpenShopState(FSM &fsm)
+void updateOpenShopState(FSM&)
 {
     ControlStatus status = Controls::getStatus();
 
     if (status.b.pressed()) {
-        fsm.go(GameStates::Game);
+        goGame();
     } else if (status.a.pressed()) {
         POIs::unlockCurrent();
-        fsm.go(GameStates::ShowShop);
+        showShop();
     }
 }
 
 void drawOpenShopState()
 {
     drawGameState();
-
-    float height = open_tween.getInterpolation(0, 22);
-    float width = open_tween.getInterpolation(0, 40);
-    RenderSystem::drawRect(40 + (40 - width)/2, 30 + (22-height)/2, width, height, 0);
-
-    if (height > 15) {
-        RenderSystem::print(44, 34, "open shop?", 41);
-    }
 }

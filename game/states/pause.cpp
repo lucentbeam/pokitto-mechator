@@ -4,7 +4,7 @@
 #include "game/states/game.h"
 #include "core/controls/controls.h"
 
-static UIElement pause_prompt(23, 36, 60, 11, 53, 41, 0, 0, Tween::Easing::OutQuad);
+static UIElement pause_prompt = UIElement::getExpander(53,41,60,11, Tween::Easing::OutQuad);
 
 void goPause()
 {
@@ -17,18 +17,12 @@ void goPause()
     FSM::instance->go(GameStates::Pause);
 }
 
-void updatePauseState(FSM &fsm)
+void updatePauseState(FSM&)
 {
-
     ControlStatus status = Controls::getStatus();
     if (status.c.pressed()) {
-        UI::setVisibility(UI::Element::UIKeyACount, false);
-        UI::setVisibility(UI::Element::UIKeyBCount, false);
-        UI::setVisibility(UI::Element::UIKeyCCount, false);
-        UI::setVisibility(UI::Element::UIDollarCount, false);
-        UI::setVisibility(UI::Element::UIHackingKitCount, false);
         pause_prompt.setVisibility(false);
-        FSM::instance->go(GameStates::Game);
+        goGame();
     }
 }
 

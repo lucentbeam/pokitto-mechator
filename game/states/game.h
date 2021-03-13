@@ -4,6 +4,8 @@
 #include "core/utilities/babyfsm.h"
 #include "core/rendering/rendersystem.h"
 
+void goGame();
+
 void updateGameState(FSM &fsm);
 
 void drawGameState();

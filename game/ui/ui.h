@@ -8,7 +8,7 @@
 class UIElement {
     Tween tween;
 
-    int16_t m_x,m_y,m_w,m_h,m_xh,m_yh,m_wh,m_hh;
+    const int16_t m_x,m_y,m_w,m_h,m_xh,m_yh,m_wh,m_hh;
     bool visible;
 
 public:
@@ -18,6 +18,8 @@ public:
     void setVisibility(bool,bool=false);
     void setVisibility(bool,uint32_t);
     void draw(bool,void (*)(int16_t x, int16_t y, int16_t w, int16_t h));
+
+    static UIElement getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Tween::Easing curve);
 };
 
 class UI {

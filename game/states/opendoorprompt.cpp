@@ -7,8 +7,9 @@
 #include "core/controls/controls.h"
 
 #include "game/entities/pois.h"
+#include "game/ui/ui.h"
 
-POIType currentDoor;
+static POIType currentDoor;
 
 void showOpenDoorPrompt(POIType door) {
     if (door == POIType::Shop) {
@@ -16,16 +17,23 @@ void showOpenDoorPrompt(POIType door) {
     }
     FSM::instance->go(GameStates::ShowUnlockDoor);
     currentDoor = door;
+
+    UI::setVisibility(UI::Element::UIHealthbar, false);
+    UI::setVisibility(UI::Element::UIKeyACount, door == DoorA);
+    UI::setVisibility(UI::Element::UIKeyBCount, door == DoorB);
+    UI::setVisibility(UI::Element::UIKeyCCount, door == DoorC);
+    UI::setVisibility(UI::Element::UIDollarCount, false);
+    UI::setVisibility(UI::Element::UIHackingKitCount, false);
 }
 
-void updateOpenDoorState(FSM &fsm) {
+void updateOpenDoorState(FSM&) {
     ControlStatus status = Controls::getStatus();
 
     if (status.b.pressed()) {
-        fsm.go(GameStates::Game);
+        goGame();
     } else if (status.a.pressed()) {
         POIs::unlockCurrent();
-        fsm.go(GameStates::Game);
+        goGame();
     }
 }
 

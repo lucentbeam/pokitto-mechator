@@ -24,8 +24,20 @@
 #include "game/constants.h"
 #include "game/states/pause.h"
 
-Player player;
-ScreenBuffer screenbuffer;
+static Player player;
+static ScreenBuffer screenbuffer;
+
+void goGame()
+{
+    FSM::instance->go(GameStates::Game);
+
+    UI::setVisibility(UI::Element::UIHealthbar, true);
+    UI::setVisibility(UI::Element::UIKeyACount, false);
+    UI::setVisibility(UI::Element::UIKeyBCount, false);
+    UI::setVisibility(UI::Element::UIKeyCCount, false);
+    UI::setVisibility(UI::Element::UIDollarCount, false);
+    UI::setVisibility(UI::Element::UIHackingKitCount, false);
+}
 
 void updateGameState(FSM &fsm) {
     player.update(physicsTimestep);
@@ -50,23 +62,26 @@ void updateGameState(FSM &fsm) {
 void drawGameState() {
     static FPSHelper fps(10);
 
+    // ground layer
     MapManager::draw(&screenbuffer);
     RenderSystem::drawBuffer(screenbuffer.getData());
+
+    // entities
     Pickups::draw();
     POIs::draw();
     Enemy::drawMechs();
     player.draw();
-
     ProjectileManager::draw();
     EffectManager::draw();
 
     // sky layer
     MapManager::draw(false);
+    //    CloudManager::draw();
 
-    PlayerMode mode = Player::mode();
+    // ui draw
     UI::draw();
 
-//    CloudManager::draw();
+    // debug
     fps.update();
     fps.draw(8, 82, 9);
     fps.draw(8, 81, 37);

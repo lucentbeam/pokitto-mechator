@@ -62,6 +62,11 @@ void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t
     }
 }
 
+UIElement UIElement::getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Tween::Easing curve)
+{
+    return UIElement(x-w/2,y-h/2,w,h,x,y,0,0,curve);
+}
+
 static UIElement healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 
 static UIElement kitcount(66,78,19,9,76,82,0,0,Tween::Easing::OutQuad);

@@ -17,13 +17,6 @@ int main ()
 {
     RenderSystem::initialize();
 
-    UI::setVisibility(UI::Element::UIHealthbar, true, true);
-    UI::setVisibility(UI::Element::UIKeyACount, false, true);
-    UI::setVisibility(UI::Element::UIKeyBCount, false, true);
-    UI::setVisibility(UI::Element::UIKeyCCount, false, true);
-    UI::setVisibility(UI::Element::UIDollarCount, false, true);
-    UI::setVisibility(UI::Element::UIHackingKitCount, false, true);
-
     FSM fsm;
     fsm.add(GameStates::Game, updateGameState, drawGameState);
     fsm.add(GameStates::ShowUnlockDoor, updateOpenDoorState, drawOpenDoorState);
