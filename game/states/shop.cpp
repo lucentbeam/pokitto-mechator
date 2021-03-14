@@ -5,27 +5,37 @@
 #include "game/states/game.h"
 #include "game/ui/ui.h"
 #include "core/rendering/rendersystem.h"
+#include "game/states/repairs.h"
 
-static UIElement title = UIElement::getExpander(55, 28, 70, 9, Tween::Easing::OutQuad);
+static UIElement title = UIElement::getExpander(58, 28, 70, 9, Tween::Easing::OutQuad);
 static UIOptions title_opts(true, {"LEAVE", "SAVE", "REPAIR/BUILD"});
 
-void showShop()
+void showShop(bool from_repairs)
 {
     FSM::instance->go(GameStates::ShowShop);
-    UI::setVisibility(UI::Element::UIDollarCount, true, uint32_t(100));
 
+    UI::setVisibility(UI::Element::UIDollarCount, false);
     UI::setVisibility(UI::Element::UIHealthbar, false);
     UI::setVisibility(UI::Element::UIKeyACount, false);
     UI::setVisibility(UI::Element::UIKeyBCount, false);
     UI::setVisibility(UI::Element::UIKeyCCount, false);
+
     UI::setVisibility(UI::Element::UIHackingKitCount, false);
 
     title.setVisibility(true, uint32_t(50));
+    if (!from_repairs) {
+        title_opts.reset();
+    }
 }
 
 void quitShopState() {
     goGame();
     title.setVisibility(false);
+}
+
+void goRepairState() {
+    title.setVisibility(false);
+    showRepairs();
 }
 
 void updateShopState(FSM&)
@@ -40,10 +50,10 @@ void updateShopState(FSM&)
             quitShopState();
             break;
         case 1:
-            // show UI save prompt
+            // save & show UI save prompt
             break;
         case 2:
-            // go to repair sub menu
+            goRepairState();
             break;
         default:
             break;

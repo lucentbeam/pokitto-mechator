@@ -26,6 +26,9 @@ class Player {
 
     static Player * s_instance;
 
+    uint8_t m_unlock_level = 1;
+    bool m_built_vehicles[4] = {false, false, false, false};
+
 public:
 
     static PlayerStats s_stats;
@@ -39,6 +42,8 @@ public:
     void draw();
 
     static Vec2f position();
+
+    static uint8_t unlockLevel() { return s_instance->m_unlock_level; }
 };
 
 #endif // PLAYER_H

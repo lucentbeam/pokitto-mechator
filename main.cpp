@@ -9,6 +9,7 @@
 #include "game/states/openshopprompt.h"
 #include "game/states/shop.h"
 #include "game/states/pause.h"
+#include "game/states/repairs.h"
 
 #include "game/ui/ui.h"
 
@@ -24,6 +25,7 @@ int main ()
     fsm.add(GameStates::ShowUnlockShop, updateOpenShopState, drawOpenShopState);
     fsm.add(GameStates::ShowShop, updateShopState, drawShopState);
     fsm.add(GameStates::Pause, updatePauseState, drawPauseState);
+    fsm.add(GameStates::ShowRepairs, updateRepairsState, drawRepairsState);
 
     int32_t gameTime = 0;
     uint32_t lastGameTime = RenderSystem::getTimeMs();

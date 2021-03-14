@@ -4,7 +4,7 @@
 #include "game/enums.h"
 #include "core/utilities/babyfsm.h"
 
-void showShop();
+void showShop(bool from_repairs = false);
 
 void updateShopState(FSM &fsm);
 

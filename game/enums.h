@@ -4,11 +4,11 @@
 #include <cstdint>
 
 enum PlayerMode : uint8_t {
-    Soldier = 1,
-    Jeep = 2,
-    Tank = 3,
-    Boat = 4,
-    Helicopter = 5
+    Soldier = 0,
+    Jeep = 1,
+    Tank = 2,
+    Boat = 3,
+    Helicopter = 4
 };
 
 enum Terrain : uint16_t {
@@ -38,7 +38,8 @@ enum GameStates : uint8_t {
     ShowUnlockDoor,
     ShowUnlockShop,
     ShowShop,
-    Pause
+    Pause,
+    ShowRepairs
 };
 
 #endif // ENUMS_H

@@ -24,6 +24,7 @@ SOURCES += \
     game/states/opendoorprompt.cpp \
     game/states/openshopprompt.cpp \
     game/states/pause.cpp \
+    game/states/repairs.cpp \
     game/states/shop.cpp \
     game/ui/ui.cpp \
     game/utilities/mapmanager.cpp \
@@ -74,6 +75,7 @@ HEADERS += \
     game/states/opendoorprompt.h \
     game/states/openshopprompt.h \
     game/states/pause.h \
+    game/states/repairs.h \
     game/states/shop.h \
     game/tilesets.h \
     game/ui/ui.h \

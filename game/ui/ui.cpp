@@ -53,17 +53,19 @@ void UIElement::update(float dt)
     }
 }
 
-void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t, int16_t) = nullptr)
+void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t, int16_t) = nullptr, int dx, int dy)
 {
-    int x = visible ? tween.getInterpolationInt(m_xh, m_x) : tween.getInterpolationInt(m_x, m_xh);
-    int y = visible ? tween.getInterpolationInt(m_yh, m_y) : tween.getInterpolationInt(m_y, m_yh);
-    int w = visible ? tween.getInterpolationInt(m_wh, m_w) : tween.getInterpolationInt(m_w, m_wh);
-    int h = visible ? tween.getInterpolationInt(m_hh, m_h) : tween.getInterpolationInt(m_h, m_hh);
+    int16_t x = visible ? int16_t(tween.getInterpolationInt(m_xh, m_x)) : int16_t(tween.getInterpolationInt(m_x, m_xh));
+    x += dx;
+    int16_t y = visible ? int16_t(tween.getInterpolationInt(m_yh, m_y)) : int16_t(tween.getInterpolationInt(m_y, m_yh));
+    y += dy;
+    int16_t w = visible ? int16_t(tween.getInterpolationInt(m_wh, m_w)) : int16_t(tween.getInterpolationInt(m_w, m_wh));
+    int16_t h = visible ? int16_t(tween.getInterpolationInt(m_hh, m_h)) : int16_t(tween.getInterpolationInt(m_h, m_hh));
 
     if (w <= 0 || h <= 0) { return; }
 
     if (useNotched) {
-        Helpers::drawNotchedRect(x, y, w, h, 0);
+        Helpers::drawNotchedRect(x, y, uint8_t(w), uint8_t(h), 0);
     } else {
         RenderSystem::drawRect(x, y, w, h, 0);
     }
@@ -80,7 +82,8 @@ UIElement UIElement::getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Twe
 
 UIOptions::UIOptions(bool vertical, std::initializer_list<const char *> options) :
     m_vertical(vertical),
-    m_options(options)
+    m_options(options),
+    m_available(uint8_t(options.size()))
 {
 
 }
@@ -97,26 +100,19 @@ void UIOptions::update(const ControlStatus &status)
         }
     }
     if (m_active_index < 0) {
-        m_active_index += m_options.size();
+        m_active_index += m_available;
     } else {
-        m_active_index %= m_options.size();
+        m_active_index %= m_available;
     }
 }
-
-//void UIOptions::foreach(void (*callback)(uint8_t, bool, const char *))
-//{
-//    uint8_t i = 0;
-//    for(const char * s : m_options) {
-//        callback(i, i == m_active_index, s);
-//        i++;
-//    }
-//}
 
 void UIOptions::foreach(std::function<void (uint8_t, bool, const char *)> callback)
 {
     uint8_t i = 0;
     for(const char * s : m_options) {
-        callback(i, i == m_active_index, s);
+        if (i < m_available) {
+            callback(i, i == m_active_index, s);
+        }
         i++;
     }
 }

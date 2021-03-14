@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <functional>
+#include <algorithm>
 
 #include "core/rendering/rendersystem.h"
 #include "core/controls/controls.h"
@@ -23,7 +24,7 @@ public:
     void setVisibility(bool visible, bool immediate = false);
     void setVisibility(bool visible, uint32_t delay);
     void update(float dt);
-    void draw(bool,void (*)(int16_t x, int16_t y, int16_t w, int16_t h));
+    void draw(bool notched,void (*)(int16_t x, int16_t y, int16_t w, int16_t h),int dx = 0, int dy = 0);
 
     void showForDuration(float duration) { setVisibility(true); m_showDuration = duration; }
 
@@ -34,16 +35,18 @@ class UIOptions {
     const bool m_vertical;
     std::vector<const char*> m_options;
 
+    uint8_t m_available;
     int8_t m_active_index;
 public:
     UIOptions(bool vertical, std::initializer_list<const char*> options);
 
     void update(const ControlStatus&);
 
-//    void foreach(void (*)(uint8_t idx, bool active, const char *));
     void foreach(std::function<void(uint8_t idx, bool active, const char *)>);
 
     uint8_t activeIndex() const { return uint8_t(m_active_index); }
+
+    void setAvailableCount(uint8_t avail) { m_available = std::min<uint8_t>(avail, uint8_t(m_options.size())); }
 
     void reset() { m_active_index = 0; }
 };

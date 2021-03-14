@@ -26,6 +26,9 @@ void POIs::openAtIndex(const Vec2f &pos)
 
 void POIs::spawnDoor(const Vec2f &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, POIType door)
 {
+    if (!mapIndexUnopened(pos)) {
+        return;
+    }
     POIs * p = s_pois.activateNext();
     if (p == nullptr) {
         return;
