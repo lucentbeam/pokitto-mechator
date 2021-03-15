@@ -55,6 +55,9 @@ void UIElement::update(float dt)
 
 void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t, int16_t) = nullptr, int dx, int dy)
 {
+    if (!visible && tween.getInterpolation(0, 1.0) > 0.999f) {
+        return;
+    }
     int16_t x = visible ? int16_t(tween.getInterpolationInt(m_xh, m_x)) : int16_t(tween.getInterpolationInt(m_x, m_xh));
     x += dx;
     int16_t y = visible ? int16_t(tween.getInterpolationInt(m_yh, m_y)) : int16_t(tween.getInterpolationInt(m_y, m_yh));
@@ -88,8 +91,9 @@ UIOptions::UIOptions(bool vertical, std::initializer_list<const char *> options)
 
 }
 
-void UIOptions::update(const ControlStatus &status)
+void UIOptions::update(const ControlStatus &status, void (*on_highlight)(int8_t index))
 {
+    int8_t previous = m_active_index;
     if (m_vertical) {
         if (status.up.pressed() || status.down.pressed()) {
             m_active_index += status.y < 0 ? -1 : 1;
@@ -104,6 +108,9 @@ void UIOptions::update(const ControlStatus &status)
     } else {
         m_active_index %= m_available;
     }
+    if (on_highlight != nullptr && m_active_index != previous) {
+        on_highlight(m_active_index);
+    }
 }
 
 void UIOptions::foreach(std::function<void (uint8_t, bool, const char *)> callback)
@@ -117,7 +124,11 @@ void UIOptions::foreach(std::function<void (uint8_t, bool, const char *)> callba
     }
 }
 
-static UIElement healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
+static UIElement soldier_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
+static UIElement jeep_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
+static UIElement tank_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
+static UIElement boat_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
+static UIElement heli_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 
 static UIElement kitcount(66,78,19,9,76,82,0,0,Tween::Easing::OutQuad);
 static UIElement dollarcount(86,78,23,9,97,82,0,0,Tween::Easing::OutQuad);
@@ -139,9 +150,6 @@ void UI::drawNumber(uint16_t num, int x, int y)
 void UI::setVisibility(UI::Element element, bool visible, bool immediate)
 {
     switch (element) {
-    case UI::Element::UIHealthbar:
-        healthbar.setVisibility(visible,immediate);
-        break;
     case UI::Element::UIHackingKitCount:
         kitcount.setVisibility(visible,immediate);
         break;
@@ -163,9 +171,6 @@ void UI::setVisibility(UI::Element element, bool visible, bool immediate)
 void UI::setVisibility(UI::Element element, bool visible, uint32_t delay)
 {
     switch (element) {
-    case UI::Element::UIHealthbar:
-        healthbar.setVisibility(visible,delay);
-        break;
     case UI::Element::UIHackingKitCount:
         kitcount.setVisibility(visible,delay);
         break;
@@ -207,6 +212,42 @@ void UI::showForDuration(UI::Element element, float duration)
     }
 }
 
+void UI::showHealthbar(PlayerMode mode)
+{
+    hideHealthbar();
+    switch(mode) {
+    case PlayerMode::Soldier:
+        soldier_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+        break;
+    case PlayerMode::Jeep:
+        jeep_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+        break;
+    case PlayerMode::Tank:
+        tank_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+        break;
+    case PlayerMode::Boat:
+        boat_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+        break;
+    case PlayerMode::Helicopter:
+        heli_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+        break;
+    }
+}
+
+void UI::showHealthbar()
+{
+    showHealthbar(Player::mode());
+}
+
+void UI::hideHealthbar()
+{
+    soldier_healthbar.setVisibility(false);
+    jeep_healthbar.setVisibility(false);
+    tank_healthbar.setVisibility(false);
+    boat_healthbar.setVisibility(false);
+    heli_healthbar.setVisibility(false);
+}
+
 void UI::update(float dt)
 {
     kitcount.update(dt);
@@ -218,13 +259,22 @@ void UI::update(float dt)
 
 void UI::draw()
 {
-    healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
-        PlayerMode mode = Player::mode();
-        uint8_t current = mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.value() : Player::s_stats.health_jeep.value();
-        uint8_t max = mode == PlayerMode::Soldier ? Player::s_stats.health_soldier.max() : Player::s_stats.health_jeep.max();
+    soldier_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
+        uint8_t current = Player::soldierHealth().value();
+        uint8_t max = Player::soldierHealth().max();
 
         for(uint8_t i = 0; i < max; i++) {
-            int idx = i < current ? uint8_t(mode) : 0;
+            int idx = i < current ? 1 : 0;
+            RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
+        }
+    });
+
+    jeep_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
+        uint8_t current = Player::jeepHealth().value();
+        uint8_t max = Player::jeepHealth().max();
+
+        for(uint8_t i = 0; i < max; i++) {
+            int idx = i < current ? 2 : 0;
             RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
         }
     });

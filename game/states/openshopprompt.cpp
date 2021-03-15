@@ -26,7 +26,7 @@ void showOpenShopPrompt()
 
     UI::setVisibility(UI::Element::UIHackingKitCount, true, uint32_t(100));
 
-    UI::setVisibility(UI::Element::UIHealthbar, false);
+    UI::hideHealthbar();
     UI::setVisibility(UI::Element::UIKeyACount, false);
     UI::setVisibility(UI::Element::UIKeyBCount, false);
     UI::setVisibility(UI::Element::UIKeyCCount, false);

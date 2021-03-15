@@ -16,34 +16,42 @@
 #include "game/utilities/playerstats.h"
 #include "game/enums.h"
 
+class Player;
+
+class Vehicle {
+    Steering steering;
+    Statistic health;
+    Rumbler shake;
+    bool unlocked = false;
+
+    friend Player;
+
+public:
+    Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction = 1.0f);
+
+
+};
+
 class Player {
-    Steering m_soldier;
-    Steering m_jeep;
+    static Vehicle s_soldier, s_jeep;
 
-    Rumbler m_shake;
-
-    PlayerMode m_mode = PlayerMode::Soldier;
-
-    static Player * s_instance;
-
-    uint8_t m_unlock_level = 1;
-    bool m_built_vehicles[4] = {false, false, false, false};
+    static PlayerMode s_mode;
 
 public:
 
-    static PlayerStats s_stats;
+    static PlayerMode mode() { return s_mode; }
 
-    static PlayerMode mode() { return s_instance->m_mode; }
+    static Statistic& soldierHealth() { return s_soldier.health; }
+    static Statistic& jeepHealth() { return s_jeep.health; }
+//    static Statistic& tankHealth() { return s_soldier.health; }
+//    static Statistic& boatHealth() { return s_soldier.health; }
+//    static Statistic& helicopterHealth() { return s_soldier.health; }
 
-    Player();
+    static void update(float dt);
 
-    void update(float dt);
-
-    void draw();
+    static void draw();
 
     static Vec2f position();
-
-    static uint8_t unlockLevel() { return s_instance->m_unlock_level; }
 };
 
 #endif // PLAYER_H

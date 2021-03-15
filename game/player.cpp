@@ -1,15 +1,18 @@
 #include "player.h"
+#include "game/ui/ui.h"
 
-Player * Player::s_instance;
+Vehicle Player::s_soldier(8,8*6, 15*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4);
 
-PlayerStats Player::s_stats;
+Vehicle Player::s_jeep(12, 26*6, 8*6, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f);
 
-Player::Player() :
-    m_soldier(8*6, 15*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4),
-    m_jeep(26*6, 8*6, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f)
+PlayerMode Player::s_mode = PlayerMode::Soldier;
+
+
+Vehicle::Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction) :
+    steering(x, y, speed, cornering, collisions, w, h, friction),
+    health(hp)
 {
-    m_shake.intensity = Rumbler::Slight;
-    s_instance = this;
+
 }
 
 void Player::update(float dt) {
@@ -17,43 +20,45 @@ void Player::update(float dt) {
 
     ControlStatus controls = Controls::getStatus(true);
     int damage = 0;
-    if (m_mode == PlayerMode::Soldier) {
-        m_soldier.update(dt, controls.x , controls.y);
-        m_jeep.update(dt, 0.0f, 0.0f);
-        damage = ProjectileManager::getCollisionDamage(m_soldier.rect(), bulletMask);
+    if (s_mode == PlayerMode::Soldier) {
+        s_soldier.steering.update(dt, controls.x , controls.y);
+        s_jeep.steering.update(dt, 0.0f, 0.0f);
+        damage = ProjectileManager::getCollisionDamage(s_soldier.steering.rect(), bulletMask);
         if (damage > 0) {
-            s_stats.health_soldier.change(-damage);
+            s_soldier.health.change(-damage);
         }
     } else {
-        m_jeep.update(dt, controls.x, controls.y);
-        damage = ProjectileManager::getCollisionDamage(m_jeep.rect(), bulletMask);
+        s_jeep.steering.update(dt, controls.x, controls.y);
+        damage = ProjectileManager::getCollisionDamage(s_jeep.steering.rect(), bulletMask);
         if (damage > 0) {
-            s_stats.health_jeep.change(-damage);
+            s_jeep.health.change(-damage);
         }
-        if (m_jeep.moving()) {
-            Terrain current = CollisionManager::getTerrainAt(m_jeep.pos().x(), m_jeep.pos().y());
-            m_shake.intensity = current == Terrain::Grass ? Rumbler::Vigorous : Rumbler::Slight;
-            m_jeep.scaleMaxSpeed(current == Terrain::Grass ? 0.5f : 1.0f);
-            m_shake.update();
+        if (s_jeep.steering.moving()) {
+            Terrain current = CollisionManager::getTerrainAt(s_jeep.steering.pos().x(), s_jeep.steering.pos().y());
+            s_jeep.shake.intensity = current == Terrain::Grass ? Rumbler::Vigorous : Rumbler::Slight;
+            s_jeep.steering.scaleMaxSpeed(current == Terrain::Grass ? 0.5f : 1.0f);
+            s_jeep.shake.update();
         }
     }
     if (controls.c.releasedWithin(60)) {
-        if (m_mode == PlayerMode::Soldier) {
-            Vec2f dp = m_jeep.pos() - m_soldier.pos();
+        if (s_mode == PlayerMode::Soldier) {
+            Vec2f dp = s_jeep.steering.pos() - s_soldier.steering.pos();
             if (dp.length() < 6) {
-                m_mode = PlayerMode::Jeep;
+                s_mode = PlayerMode::Jeep;
+                UI::showHealthbar();
             }
         } else {
-            m_soldier.copyPosition(m_jeep);
-            m_mode = PlayerMode::Soldier;
+            s_soldier.steering.copyPosition(s_jeep.steering);
+            s_mode = PlayerMode::Soldier;
+            UI::showHealthbar();
         }
     }
-    if (m_mode == PlayerMode::Soldier) {
+    if (s_mode == PlayerMode::Soldier) {
         const float shots_per_second = 3.0f;
         float frames_per_second = 1.0f / dt;
         float frames_per_shot = frames_per_second / shots_per_second;
         if (controls.a.downEvery(1, int(frames_per_shot))) {
-            Projectile * p = ProjectileManager::create(m_soldier.pos(), m_soldier.aim() * 100.0f, 3, 0.5f)
+            Projectile * p = ProjectileManager::create(s_soldier.steering.pos(), s_soldier.steering.aim() * 100.0f, 3, 0.5f)
                 ->setSprite({projectile[0]}, 20)
                 ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
         }
@@ -62,17 +67,17 @@ void Player::update(float dt) {
         float frames_per_second = 1.0f / dt;
         float frames_per_shot = frames_per_second / shots_per_second;
         if (controls.a.downEvery(1, int(frames_per_shot))) {
-            Vec2f offset = m_jeep.aim().rot90();
-            ProjectileManager::create(m_jeep.pos() + offset * 4.0f, m_jeep.aim() * 150.0f, 3, 0.35f)
+            Vec2f offset = s_jeep.steering.aim().rot90();
+            ProjectileManager::create(s_jeep.steering.pos() + offset * 4.0f, s_jeep.steering.aim() * 150.0f, 3, 0.35f)
                     ->setSprite({projectile[0]}, 20)
                     ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
-            ProjectileManager::create(m_jeep.pos() - offset * 4.0f, m_jeep.aim() * 150.0f, 3, 0.35f)
+            ProjectileManager::create(s_jeep.steering.pos() - offset * 4.0f, s_jeep.steering.aim() * 150.0f, 3, 0.35f)
                     ->setSprite({projectile[0]}, 20)
                     ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
         }
         if (controls.b.pressed()) {
 
-            ProjectileManager::create(m_jeep.pos(), m_jeep.vel() * 0.85f + m_jeep.facing() * 50.0f, 4, 0.5f)
+            ProjectileManager::create(s_jeep.steering.pos(), s_jeep.steering.vel() * 0.85f + s_jeep.steering.facing() * 50.0f, 4, 0.5f)
                 ->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)
                 ->setTargetMask({EnemyTarget, GroundTarget})
                 ->setDamage(0)
@@ -94,14 +99,14 @@ void Player::update(float dt) {
 
 void Player::draw() {
     // jeep rendering
-    Vec2f jpos = Camera::worldToScreen(m_jeep.pos());
-    RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - m_shake.offset(1), jeep[m_jeep.rotation_frame()], jeep[0][2], m_jeep.facing().x() > 0);
+    Vec2f jpos = Camera::worldToScreen(s_jeep.steering.pos());
+    RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_jeep.shake.offset(1), jeep[s_jeep.steering.rotation_frame()], jeep[0][2], s_jeep.steering.facing().x() > 0);
 
-    if (m_mode == PlayerMode::Soldier) {
+    if (s_mode == PlayerMode::Soldier) {
         // soldier rendering
-        uint8_t sprite = m_soldier.facing().y() < 0 ? 3 : 0;
+        uint8_t sprite = s_soldier.steering.facing().y() < 0 ? 3 : 0;
         static int counter = 0;
-        if (m_soldier.moving()) {
+        if (s_soldier.steering.moving()) {
             counter++;
             const int increment = 6;
             int mod = counter % (increment * 4);
@@ -109,8 +114,8 @@ void Player::draw() {
         } else {
             sprite += 1;
         }
-        Vec2f spos = Camera::worldToScreen(m_soldier.pos());
-        RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], m_soldier.facing().x() > 0);
+        Vec2f spos = Camera::worldToScreen(s_soldier.steering.pos());
+        RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], s_soldier.steering.facing().x() > 0);
     }
 
 
@@ -118,5 +123,11 @@ void Player::draw() {
 
 Vec2f Player::position()
 {
-    return s_instance->m_mode == PlayerMode::Soldier ? s_instance->m_soldier.pos() : s_instance->m_jeep.pos();
+    switch (s_mode) {
+    case PlayerMode::Jeep:
+        return s_jeep.steering.pos();
+        break;
+    default:
+        return s_soldier.steering.pos();
+    }
 }

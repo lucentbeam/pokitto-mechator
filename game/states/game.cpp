@@ -31,7 +31,7 @@ void goGame()
 {
     FSM::instance->go(GameStates::Game);
 
-    UI::setVisibility(UI::Element::UIHealthbar, true);
+    UI::showHealthbar();
     UI::setVisibility(UI::Element::UIKeyACount, false);
     UI::setVisibility(UI::Element::UIKeyBCount, false);
     UI::setVisibility(UI::Element::UIKeyCCount, false);

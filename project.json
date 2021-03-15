@@ -8082,6 +8082,30 @@
 		},
 		"\\pokitto-mechator.pro.user.feyvzZ": {
 			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\repairs.obj": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.AQmxsb": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.Uvqeqk": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.vgsiOy": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.h.dRMvtf": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.wcWsaA": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.JXbPlE": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.YJNRnq": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

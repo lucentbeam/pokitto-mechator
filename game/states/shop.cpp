@@ -7,15 +7,15 @@
 #include "core/rendering/rendersystem.h"
 #include "game/states/repairs.h"
 
-static UIElement title = UIElement::getExpander(58, 28, 70, 9, Tween::Easing::OutQuad);
+static UIElement title = UIElement::getExpander(55, 28, 70, 9, Tween::Easing::OutQuad);
 static UIOptions title_opts(true, {"LEAVE", "SAVE", "REPAIR/BUILD"});
 
 void showShop(bool from_repairs)
 {
     FSM::instance->go(GameStates::ShowShop);
 
+    UI::hideHealthbar();
     UI::setVisibility(UI::Element::UIDollarCount, false);
-    UI::setVisibility(UI::Element::UIHealthbar, false);
     UI::setVisibility(UI::Element::UIKeyACount, false);
     UI::setVisibility(UI::Element::UIKeyBCount, false);
     UI::setVisibility(UI::Element::UIKeyCCount, false);

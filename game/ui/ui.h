@@ -40,7 +40,7 @@ class UIOptions {
 public:
     UIOptions(bool vertical, std::initializer_list<const char*> options);
 
-    void update(const ControlStatus&);
+    void update(const ControlStatus&, void (*on_highlight)(int8_t index) = nullptr);
 
     void foreach(std::function<void(uint8_t idx, bool active, const char *)>);
 
@@ -57,7 +57,6 @@ class UI {
 
 public:
     enum Element {
-        UIHealthbar,
         UIHackingKitCount,
         UIDollarCount,
         UIKeyACount,
@@ -68,6 +67,11 @@ public:
     static void setVisibility(Element,bool,bool=false);
     static void setVisibility(Element,bool,uint32_t);
     static void showForDuration(Element,float);
+
+    static void showHealthbar(PlayerMode);
+    static void showHealthbar();
+    static void hideHealthbar();
+
 
     static void update(float dt);
     static void draw();

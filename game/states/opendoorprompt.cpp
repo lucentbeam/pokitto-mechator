@@ -26,7 +26,7 @@ void showOpenDoorPrompt(POIType door) {
     FSM::instance->go(GameStates::ShowUnlockDoor);
     currentDoor = door;
 
-    UI::setVisibility(UI::Element::UIHealthbar, false);
+    UI::hideHealthbar();
     UI::setVisibility(UI::Element::UIKeyACount, door == DoorA);
     UI::setVisibility(UI::Element::UIKeyBCount, door == DoorB);
     UI::setVisibility(UI::Element::UIKeyCCount, door == DoorC);

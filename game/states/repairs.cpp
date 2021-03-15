@@ -18,7 +18,7 @@ void showRepairs()
     FSM::instance->go(GameStates::ShowRepairs);
     UI::setVisibility(UI::Element::UIDollarCount, true, uint32_t(100));
 
-    UI::setVisibility(UI::Element::UIHealthbar, false);
+    UI::hideHealthbar();
     UI::setVisibility(UI::Element::UIKeyACount, false);
     UI::setVisibility(UI::Element::UIKeyBCount, false);
     UI::setVisibility(UI::Element::UIKeyCCount, false);
@@ -26,19 +26,30 @@ void showRepairs()
 
     title.setVisibility(true, uint32_t(50));
     repair_opts.reset();
-    repair_opts.setAvailableCount(2 + Player::unlockLevel());
+    repair_opts.setAvailableCount(3);
+}
+
+void goBack() {
+    title.setVisibility(false);
+    showShop(true);
 }
 
 void updateRepairsState(FSM &fsm)
 {
     ControlStatus status = Controls::getStatus();
 
-    repair_opts.update(status);
+    repair_opts.update(status,[](int8_t idx) {
+        if (idx == 0) {
+            UI::hideHealthbar();
+        } else {
+            UI::showHealthbar(PlayerMode(idx-1)); // todo: hide healthbar if vehicle needs building
+        }
+    });
 
     if (status.a.pressed()) {
         switch(repair_opts.activeIndex()) {
         case 0:
-            showShop(true);
+            goBack();
             break;
         case 1:
             // repair soldier
@@ -50,7 +61,7 @@ void updateRepairsState(FSM &fsm)
             break;
         }
     } else if (status.b.pressed()) {
-        showShop(true);
+        goBack();
     }
 }
 
@@ -71,5 +82,5 @@ void drawRepairsState()
             });
 
         }
-    }, 0, Player::unlockLevel() * -9);
+    }, 0, 1 * -9); // unlock level
 }
