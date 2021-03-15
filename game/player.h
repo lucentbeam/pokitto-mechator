@@ -22,20 +22,19 @@ class Vehicle {
     Steering steering;
     Statistic health;
     Rumbler shake;
-    bool unlocked = false;
 
     friend Player;
 
 public:
     Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction = 1.0f);
-
-
 };
 
 class Player {
     static Vehicle s_soldier, s_jeep;
 
     static PlayerMode s_mode;
+
+    static bool s_vehicles_available[4];
 
 public:
 
@@ -46,6 +45,12 @@ public:
 //    static Statistic& tankHealth() { return s_soldier.health; }
 //    static Statistic& boatHealth() { return s_soldier.health; }
 //    static Statistic& helicopterHealth() { return s_soldier.health; }
+
+    static bool alive(PlayerMode vehicle);
+    static bool damaged(PlayerMode vehicle);
+    static bool available(PlayerMode vehicle);
+
+    static void setPosition(PlayerMode vehicle, const Vec2f &pos);
 
     static void update(float dt);
 

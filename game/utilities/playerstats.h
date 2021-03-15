@@ -17,6 +17,8 @@ public:
     void increment() { change(1); }
     void decrement() { change(-1); }
 
+    void setMax() { m_current = m_max; }
+
     int8_t value() const { return m_current; }
     int8_t max() const { return m_max; }
 };

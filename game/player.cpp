@@ -7,12 +7,83 @@ Vehicle Player::s_jeep(12, 26*6, 8*6, 50.0f, 0.1f, {Terrain::Wall, Terrain::Wate
 
 PlayerMode Player::s_mode = PlayerMode::Soldier;
 
+bool Player::s_vehicles_available[4] = {true, false, false, false};
 
 Vehicle::Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction) :
     steering(x, y, speed, cornering, collisions, w, h, friction),
-    health(hp)
+    health(0, hp)
 {
 
+}
+
+bool Player::alive(PlayerMode vehicle)
+{
+    switch (vehicle) {
+    case PlayerMode::Soldier:
+        return true;
+    case PlayerMode::Jeep:
+        return s_jeep.health.value() > 0;
+    case PlayerMode::Tank:
+        return s_jeep.health.value() > 0;
+    case PlayerMode::Boat:
+        return s_jeep.health.value() > 0;
+    case PlayerMode::Helicopter:
+        return s_jeep.health.value() > 0;
+    }
+}
+
+bool Player::damaged(PlayerMode vehicle)
+{
+    switch (vehicle) {
+    case PlayerMode::Soldier:
+        return s_soldier.health.value() > 0 && s_soldier.health.value() < s_soldier.health.max();
+    case PlayerMode::Jeep:
+        return s_jeep.health.value() > 0 && s_jeep.health.value() < s_jeep.health.max();
+    case PlayerMode::Tank:
+        return s_soldier.health.value() > 0 && s_soldier.health.value() < s_soldier.health.max();
+    case PlayerMode::Boat:
+        return s_soldier.health.value() > 0 && s_soldier.health.value() < s_soldier.health.max();
+    case PlayerMode::Helicopter:
+        return s_soldier.health.value() > 0 && s_soldier.health.value() < s_soldier.health.max();
+    }
+}
+
+bool Player::available(PlayerMode vehicle)
+{
+    switch (vehicle) {
+    case PlayerMode::Soldier:
+        return true;
+    case PlayerMode::Jeep:
+        return s_vehicles_available[0];
+    case PlayerMode::Tank:
+        return s_vehicles_available[1];
+    case PlayerMode::Boat:
+        return s_vehicles_available[2];
+    case PlayerMode::Helicopter:
+        return s_vehicles_available[3];
+    }
+    return false;
+}
+
+void Player::setPosition(PlayerMode vehicle, const Vec2f &pos)
+{
+    switch (vehicle) {
+    case PlayerMode::Soldier:
+        s_soldier.steering.setPos(pos);
+        break;
+    case PlayerMode::Jeep:
+        s_jeep.steering.setPos(pos);
+        break;
+    case PlayerMode::Tank:
+        s_jeep.steering.setPos(pos);
+        break;
+    case PlayerMode::Boat:
+        s_jeep.steering.setPos(pos);
+        break;
+    case PlayerMode::Helicopter:
+        s_jeep.steering.setPos(pos);
+        break;
+    }
 }
 
 void Player::update(float dt) {
@@ -32,6 +103,12 @@ void Player::update(float dt) {
         damage = ProjectileManager::getCollisionDamage(s_jeep.steering.rect(), bulletMask);
         if (damage > 0) {
             s_jeep.health.change(-damage);
+            if (!alive(PlayerMode::Jeep)) {
+                s_soldier.steering.copyPosition(s_jeep.steering);
+                s_mode = PlayerMode::Soldier;
+                UI::showHealthbar();
+                EffectManager::create(s_soldier.steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+            }
         }
         if (s_jeep.steering.moving()) {
             Terrain current = CollisionManager::getTerrainAt(s_jeep.steering.pos().x(), s_jeep.steering.pos().y());
@@ -42,10 +119,12 @@ void Player::update(float dt) {
     }
     if (controls.c.releasedWithin(60)) {
         if (s_mode == PlayerMode::Soldier) {
-            Vec2f dp = s_jeep.steering.pos() - s_soldier.steering.pos();
-            if (dp.length() < 6) {
-                s_mode = PlayerMode::Jeep;
-                UI::showHealthbar();
+            if (alive(PlayerMode::Jeep)) {
+                Vec2f dp = s_jeep.steering.pos() - s_soldier.steering.pos();
+                if (dp.length() < 6) {
+                    s_mode = PlayerMode::Jeep;
+                    UI::showHealthbar();
+                }
             }
         } else {
             s_soldier.steering.copyPosition(s_jeep.steering);
@@ -98,9 +177,10 @@ void Player::update(float dt) {
 }
 
 void Player::draw() {
-    // jeep rendering
-    Vec2f jpos = Camera::worldToScreen(s_jeep.steering.pos());
-    RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_jeep.shake.offset(1), jeep[s_jeep.steering.rotation_frame()], jeep[0][2], s_jeep.steering.facing().x() > 0);
+    if (alive(PlayerMode::Jeep)) {
+        Vec2f jpos = Camera::worldToScreen(s_jeep.steering.pos());
+        RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_jeep.shake.offset(1), jeep[s_jeep.steering.rotation_frame()], jeep[0][2], s_jeep.steering.facing().x() > 0);
+    }
 
     if (s_mode == PlayerMode::Soldier) {
         // soldier rendering

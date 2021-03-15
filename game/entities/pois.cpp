@@ -114,3 +114,11 @@ void POIs::draw()
         RenderSystem::sprite(pos.x(), pos.y(), p->m_sprite.data());
     }
 }
+
+Vec2f POIs::pos()
+{
+    if (s_current_active_poi == nullptr) {
+        return Vec2f(0,0);
+    }
+    return s_current_active_poi->m_position;
+}

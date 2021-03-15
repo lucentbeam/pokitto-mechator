@@ -37,6 +37,8 @@ public:
     static void update(float dt);
 
     static void draw();
+
+    static Vec2f pos();
 };
 
 template <int l, int t, int w, int h>

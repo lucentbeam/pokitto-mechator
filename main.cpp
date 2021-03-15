@@ -14,10 +14,12 @@
 #include "game/ui/ui.h"
 
 #include "game/constants.h"
+#include "game/player.h"
 
 int main ()
 {
     RenderSystem::initialize();
+    Player::soldierHealth().setMax();
 
     FSM fsm;
     fsm.add(GameStates::Game, updateGameState, drawGameState);

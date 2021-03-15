@@ -43,6 +43,7 @@ public:
     bool moving() const { return m_moving; }
 
     Vec2f pos() const { return m_pos; }
+    void setPos(const Vec2f &pos) { m_pos = pos; m_facing = Vec2f(1.0f, 0.0f); }
     Rect rect() const { return m_rect; }
     Vec2f facing() const { return m_facing; }
     Vec2f aim() const { return m_aim; }
