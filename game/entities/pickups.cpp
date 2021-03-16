@@ -23,7 +23,7 @@ void Pickups::spawnTemporary(const Vec2f &pos, std::initializer_list<const uint8
 
 void Pickups::spawnSpecial(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&))
 {
-    s_special.activateNext()->configure(pos, spriteFrames, spriteFPS, on_collect, std::numeric_limits<uint16_t>::max());
+    s_special.activateNext()->configure(pos + Vec2f(3.0f, 3.0f), spriteFrames, spriteFPS, on_collect, std::numeric_limits<uint16_t>::max());
 }
 
 bool Pickups::mapIndexUnacquired(const Vec2f &pos)

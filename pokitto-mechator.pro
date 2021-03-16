@@ -49,6 +49,7 @@ HEADERS += \
     game/entities/pois.h \
     game/enums.h \
     game/maps/spawnpoint.h \
+    game/maps/spawnpoints.h \
     game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \
     core/rendering/tilemap.h \

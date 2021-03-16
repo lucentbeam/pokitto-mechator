@@ -15,7 +15,7 @@ class SpawnPoint
 
 public:
 
-    SpawnPoint(const Vec2f &pos, void (* const onApproach)(const Vec2f &)) : m_pos(pos), m_on_approach(onApproach) {}
+    SpawnPoint(const Vec2f &pos, void (* const onApproach)(const Vec2f &)) : m_pos(pos * 6), m_on_approach(onApproach) {}
 
     static void setActiveRegion();
 };

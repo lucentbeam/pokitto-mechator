@@ -26,7 +26,8 @@ enum POIType : uint8_t {
     Shop = 0,
     DoorA = 1,
     DoorB = 2,
-    DoorC = 3
+    DoorC = 3,
+    DoorNone = 4
 };
 
 enum SpecialTiles : uint8_t {

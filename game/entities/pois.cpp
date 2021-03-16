@@ -42,13 +42,16 @@ void POIs::spawnDoor(const Vec2f &pos, uint16_t left, uint16_t top, uint8_t widt
     p->m_sprite = SpriteWrapper({poi[1+uint8_t(door)]}, 8.0f);
 }
 
-void POIs::spawnShop(const Vec2f &pos)
+void POIs::spawnShop(const Vec2f &pos, const Vec2f &jeep_loc, const Vec2f &boat_loc, const Vec2f &heli_loc)
 {
     POIs * p = s_pois.activateNext();
     if (p == nullptr) {
         return;
     }
     p->m_position = pos;
+    p->m_jeep_loc = jeep_loc;
+    p->m_boat_loc = boat_loc;
+    p->m_heli_loc = heli_loc;
     p->m_door_type = POIType::Shop;
     int idx = mapIndexUnopened(pos) ? 0 : 1;
     p->m_sprite = SpriteWrapper({poi[idx]}, 8.0f);
@@ -96,7 +99,11 @@ void POIs::update(float dt)
                         showShop();
                     }
                 } else {
-                    showOpenDoorPrompt(s_current_active_poi->m_door_type);
+                    if (p->m_door_type == DoorNone) {
+                        unlockCurrent();
+                    } else {
+                        showOpenDoorPrompt(s_current_active_poi->m_door_type);
+                    }
                 }
             }
         }
