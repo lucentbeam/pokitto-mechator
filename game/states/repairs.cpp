@@ -91,7 +91,7 @@ void updateRepairsState(FSM &fsm)
             break;
         case 2:
             if (!Player::alive(PlayerMode::Jeep)) {
-                Player::setPosition(PlayerMode::Jeep, POIs::pos() + Vec2f(0, 8)); // TODO: make shop spawn locations
+                Player::setPosition(PlayerMode::Jeep, POIs::pos(PlayerMode::Jeep));
                 UI::showHealthbar(PlayerMode::Jeep);
             }
             Player::jeepHealth().setMax();

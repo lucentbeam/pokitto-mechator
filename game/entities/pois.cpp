@@ -122,10 +122,26 @@ void POIs::draw()
     }
 }
 
-Vec2f POIs::pos()
+Vec2f POIs::pos(PlayerMode mode)
 {
     if (s_current_active_poi == nullptr) {
         return Vec2f(0,0);
     }
-    return s_current_active_poi->m_position;
+    switch (mode) {
+    case PlayerMode::Soldier:
+        return s_current_active_poi->m_position + Vec2f(3, 3);
+        break;
+    case PlayerMode::Jeep:
+        return s_current_active_poi->m_jeep_loc + Vec2f(3, 3);
+        break;
+    case PlayerMode::Tank:
+        return s_current_active_poi->m_jeep_loc + Vec2f(3, 3);
+        break;
+    case PlayerMode::Boat:
+        return s_current_active_poi->m_boat_loc + Vec2f(3, 3);
+        break;
+    case PlayerMode::Helicopter:
+        return s_current_active_poi->m_heli_loc + Vec2f(3, 3);
+        break;
+    }
 }
