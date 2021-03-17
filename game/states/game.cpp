@@ -27,6 +27,8 @@
 static Player player;
 static ScreenBuffer screenbuffer;
 
+static float pause_hold_fraction = 0.0f;
+
 void goGame()
 {
     FSM::instance->go(GameStates::Game);
@@ -58,6 +60,11 @@ void updateGameState(FSM&) {
     if (status.c.downEvery(61, 10)) {
         goPause();
     }
+    if (status.c.held() && status.c.holdCount() < 61) {
+        pause_hold_fraction = float(status.c.holdCount())/60.0f;
+    } else {
+        pause_hold_fraction = 0.0f;
+    }
 }
 
 void drawGameState() {
@@ -81,6 +88,10 @@ void drawGameState() {
 
     // ui draw
     UI::draw();
+    if (pause_hold_fraction > 0.0f) {
+        UI::drawProgressBar(pause_hold_fraction);
+        return;
+    }
 
     // debug
     fps.update();

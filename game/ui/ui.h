@@ -76,6 +76,8 @@ public:
     static void update(float dt);
     static void draw();
 
+    static void drawProgressBar(float fraction);
+
 };
 
 #endif // UI_H

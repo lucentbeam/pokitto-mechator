@@ -8121,6 +8121,24 @@
 		},
 		"\\game\\player.cpp.hxmcsP": {
 			"sdcard": false
+		},
+		"\\content\\art\\helicopter-blades.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\helicopter.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\maps\\spawnpoints.h": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.eDjpWi": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.kKXPOy": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

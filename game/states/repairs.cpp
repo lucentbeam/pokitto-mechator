@@ -34,6 +34,7 @@ void showRepairs()
     title.setVisibility(true, uint32_t(50));
     repair_opts.reset();
 
+    // TODO: make availability also depend on if POI/shop locations exist (e.g., no heli-pad, no helicopter option)
     available_vehicles = 0;
     available_vehicles += Player::available(PlayerMode::Jeep) ? 1 : 0;
     available_vehicles += Player::available(PlayerMode::Tank) ? 1 : 0;

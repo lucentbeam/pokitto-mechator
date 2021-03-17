@@ -214,22 +214,46 @@ void UI::showForDuration(UI::Element element, float duration)
 
 void UI::showHealthbar(PlayerMode mode)
 {
-    hideHealthbar();
     switch(mode) {
     case PlayerMode::Soldier:
         soldier_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+
+        jeep_healthbar.setVisibility(false);
+        tank_healthbar.setVisibility(false);
+        boat_healthbar.setVisibility(false);
+        heli_healthbar.setVisibility(false);
         break;
     case PlayerMode::Jeep:
         jeep_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+
+        soldier_healthbar.setVisibility(false);
+        tank_healthbar.setVisibility(false);
+        boat_healthbar.setVisibility(false);
+        heli_healthbar.setVisibility(false);
         break;
     case PlayerMode::Tank:
         tank_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+
+        soldier_healthbar.setVisibility(false);
+        jeep_healthbar.setVisibility(false);
+        boat_healthbar.setVisibility(false);
+        heli_healthbar.setVisibility(false);
         break;
     case PlayerMode::Boat:
         boat_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+
+        soldier_healthbar.setVisibility(false);
+        jeep_healthbar.setVisibility(false);
+        tank_healthbar.setVisibility(false);
+        heli_healthbar.setVisibility(false);
         break;
     case PlayerMode::Helicopter:
         heli_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
+
+        soldier_healthbar.setVisibility(false);
+        jeep_healthbar.setVisibility(false);
+        tank_healthbar.setVisibility(false);
+        boat_healthbar.setVisibility(false);
         break;
     }
 }
@@ -313,4 +337,13 @@ void UI::draw()
             drawNumber(GameVariables::keysC(), x + 8, y + 1);
         }
     });
+}
+
+void UI::drawProgressBar(float fraction)
+{
+    Helpers::drawNotchedRect(9, 83, 22, 4, 0);
+    RenderSystem::drawRect(10, 84, 20, 2, 13);
+    int width = int(fraction * 20.0f);
+    RenderSystem::drawRect(10, 84, width, 1, 51);
+    RenderSystem::drawLine(10, 85, 10 + width - 1, 85, 47);
 }
