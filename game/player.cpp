@@ -84,7 +84,7 @@ void Jeep::update(float dt)
     if (damage > 0) {
         s_instance.health().change(-damage);
         if (!alive()) {
-            s_instance.m_steering.copyPosition(s_instance.m_steering);
+            Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
             EffectManager::create(s_instance.m_steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);

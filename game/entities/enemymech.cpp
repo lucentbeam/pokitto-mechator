@@ -8,12 +8,13 @@
 
 ObjectPool<EnemyMech,10> Enemy::s_mechs;
 
-void Enemy::createMech(const Vec2f &pos)
+EnemyMech * Enemy::createMech(const Vec2f &pos)
 {
     auto m = s_mechs.activateNext();
     if (m != nullptr) {
         m->setup(pos);
     }
+    return m;
 }
 
 bool Enemy::updateMech(EnemyMech *mech, float dt)
@@ -90,13 +91,15 @@ bool Enemy::updateMech(EnemyMech *mech, float dt)
 void Enemy::updateMechs(float dt)
 {
     EnemyMech * start = s_mechs.objects();
-    int i = 0;
-    while (i < s_mechs.objectCount()) {
+    int i = s_mechs.objectCount()-1;
+    while (i >= 0) {
         if (!updateMech(start + i, dt)) {
+            if ((start + i)->m_on_deactivate) {
+                (start+i)->m_on_deactivate();
+            }
             s_mechs.deactivate(i);
-        } else {
-            ++i;
         }
+        --i;
     }
 }
 
