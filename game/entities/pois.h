@@ -42,7 +42,7 @@ public:
 
     static void draw();
 
-    static Vec2f pos(PlayerMode mode = PlayerMode::Soldier);
+    static Vec2f pos(PlayerMode mode = PlayerMode::SoldierMode);
 };
 
 template <int x1, int y1, int x2, int y2, int x3, int y3>

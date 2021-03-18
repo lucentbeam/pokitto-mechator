@@ -19,7 +19,7 @@
 int main ()
 {
     RenderSystem::initialize();
-    Player::soldierHealth().setMax();
+    Soldier::health().setMax();
 
     FSM fsm;
     fsm.add(GameStates::Game, updateGameState, drawGameState);

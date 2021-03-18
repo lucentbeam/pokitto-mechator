@@ -215,7 +215,7 @@ void UI::showForDuration(UI::Element element, float duration)
 void UI::showHealthbar(PlayerMode mode)
 {
     switch(mode) {
-    case PlayerMode::Soldier:
+    case PlayerMode::SoldierMode:
         soldier_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
 
         jeep_healthbar.setVisibility(false);
@@ -223,7 +223,7 @@ void UI::showHealthbar(PlayerMode mode)
         boat_healthbar.setVisibility(false);
         heli_healthbar.setVisibility(false);
         break;
-    case PlayerMode::Jeep:
+    case PlayerMode::JeepMode:
         jeep_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
 
         soldier_healthbar.setVisibility(false);
@@ -231,7 +231,7 @@ void UI::showHealthbar(PlayerMode mode)
         boat_healthbar.setVisibility(false);
         heli_healthbar.setVisibility(false);
         break;
-    case PlayerMode::Tank:
+    case PlayerMode::TankMode:
         tank_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
 
         soldier_healthbar.setVisibility(false);
@@ -239,7 +239,7 @@ void UI::showHealthbar(PlayerMode mode)
         boat_healthbar.setVisibility(false);
         heli_healthbar.setVisibility(false);
         break;
-    case PlayerMode::Boat:
+    case PlayerMode::BoatMode:
         boat_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
 
         soldier_healthbar.setVisibility(false);
@@ -247,7 +247,7 @@ void UI::showHealthbar(PlayerMode mode)
         tank_healthbar.setVisibility(false);
         heli_healthbar.setVisibility(false);
         break;
-    case PlayerMode::Helicopter:
+    case PlayerMode::HelicopterMode:
         heli_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
 
         soldier_healthbar.setVisibility(false);
@@ -284,8 +284,8 @@ void UI::update(float dt)
 void UI::draw()
 {
     soldier_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
-        uint8_t current = Player::soldierHealth().value();
-        uint8_t max = Player::soldierHealth().max();
+        uint8_t current = Soldier::health().value();
+        uint8_t max = Soldier::health().max();
 
         for(uint8_t i = 0; i < max; i++) {
             int idx = i < current ? 1 : 0;
@@ -294,8 +294,8 @@ void UI::draw()
     });
 
     jeep_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
-        uint8_t current = Player::jeepHealth().value();
-        uint8_t max = Player::jeepHealth().max();
+        uint8_t current = Jeep::health().value();
+        uint8_t max = Jeep::health().max();
 
         for(uint8_t i = 0; i < max; i++) {
             int idx = i < current ? 2 : 0;

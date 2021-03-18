@@ -19,42 +19,58 @@
 class Player;
 
 class Vehicle {
-    Steering steering;
-    Statistic health;
-    Rumbler shake;
+protected:
+    Steering m_steering;
+    Statistic m_health;
+    Rumbler m_shake;
 
     friend Player;
 
-public:
     Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction = 1.0f);
 };
 
-class Player {
-    static Vehicle s_soldier, s_jeep;
+class Soldier : public Vehicle {
+    static Soldier s_instance;
 
+public:
+    Soldier() : Vehicle(8,8*6, 15*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
+
+    static Statistic& health() { return s_instance.m_health; }
+    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
+    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
+    static Vec2f position() { return s_instance.m_steering.pos(); }
+
+    static void update(float dt);
+    static void draw();
+};
+
+class Jeep : public Vehicle {
+    static Jeep s_instance;
+
+    static bool s_available;
+
+public:
+    Jeep() : Vehicle(12, 26*6, 8*6, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f) {}
+
+    static Statistic& health() { return s_instance.m_health; }
+    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
+    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
+    static Vec2f position() { return s_instance.m_steering.pos(); }
+    static bool alive() {return s_instance.m_health.value() > 0; }
+    static bool available() { return s_available; }
+
+    static void update(float dt);
+    static void draw();
+};
+
+class Player {
     static PlayerMode s_mode;
 
-    static bool s_vehicles_available[4];
-
+    friend class Soldier;
+    friend class Jeep;
 public:
 
     static PlayerMode mode() { return s_mode; }
-
-    static Statistic& soldierHealth() { return s_soldier.health; }
-    static Statistic& jeepHealth() { return s_jeep.health; }
-//    static Statistic& tankHealth() { return s_soldier.health; }
-//    static Statistic& boatHealth() { return s_soldier.health; }
-//    static Statistic& helicopterHealth() { return s_soldier.health; }
-
-    static bool alive(PlayerMode vehicle);
-    static bool damaged(PlayerMode vehicle);
-    static bool available(PlayerMode vehicle);
-
-    static void setPosition(PlayerMode vehicle, const Vec2f &pos);
-
-    static void update(float dt);
-
-    static void draw();
 
     static Vec2f position();
 };

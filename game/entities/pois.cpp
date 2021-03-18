@@ -128,19 +128,19 @@ Vec2f POIs::pos(PlayerMode mode)
         return Vec2f(0,0);
     }
     switch (mode) {
-    case PlayerMode::Soldier:
+    case PlayerMode::SoldierMode:
         return s_current_active_poi->m_position + Vec2f(3, 3);
         break;
-    case PlayerMode::Jeep:
+    case PlayerMode::JeepMode:
         return s_current_active_poi->m_jeep_loc + Vec2f(3, 3);
         break;
-    case PlayerMode::Tank:
+    case PlayerMode::TankMode:
         return s_current_active_poi->m_jeep_loc + Vec2f(3, 3);
         break;
-    case PlayerMode::Boat:
+    case PlayerMode::BoatMode:
         return s_current_active_poi->m_boat_loc + Vec2f(3, 3);
         break;
-    case PlayerMode::Helicopter:
+    case PlayerMode::HelicopterMode:
         return s_current_active_poi->m_heli_loc + Vec2f(3, 3);
         break;
     }

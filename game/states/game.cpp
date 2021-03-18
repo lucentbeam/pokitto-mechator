@@ -42,7 +42,8 @@ void goGame()
 }
 
 void updateGameState(FSM&) {
-    player.update(physicsTimestep);
+    Soldier::update(physicsTimestep);
+    Jeep::update(physicsTimestep);
     ProjectileManager::update(physicsTimestep);
     EffectManager::update(physicsTimestep);
     Enemy::updateMechs(physicsTimestep);
@@ -78,7 +79,8 @@ void drawGameState() {
     Pickups::draw();
     POIs::draw();
     Enemy::drawMechs();
-    player.draw();
+    Jeep::draw();
+    Soldier::draw();
     ProjectileManager::draw();
     EffectManager::draw();
 

@@ -36,10 +36,10 @@ void showRepairs()
 
     // TODO: make availability also depend on if POI/shop locations exist (e.g., no heli-pad, no helicopter option)
     available_vehicles = 0;
-    available_vehicles += Player::available(PlayerMode::Jeep) ? 1 : 0;
-    available_vehicles += Player::available(PlayerMode::Tank) ? 1 : 0;
-    available_vehicles += Player::available(PlayerMode::Boat) ? 1 : 0;
-    available_vehicles += Player::available(PlayerMode::Helicopter) ? 1 : 0;
+    available_vehicles += Jeep::available() ? 1 : 0;
+//    available_vehicles += Player::available(PlayerMode::Tank) ? 1 : 0;
+//    available_vehicles += Player::available(PlayerMode::Boat) ? 1 : 0;
+//    available_vehicles += Player::available(PlayerMode::Helicopter) ? 1 : 0;
 
     repair_opts.setAvailableCount(2 + available_vehicles);
     cost_prompt.setVisibility(false);
@@ -63,18 +63,24 @@ void updateRepairsState(FSM &fsm)
             current_cost = 0;
         } else {
             PlayerMode mode = PlayerMode(idx-1);
-            if (!Player::alive(mode)) {
-                UI::hideHealthbar();
-                const uint8_t build_costs[5] = {0, 12, 18, 24, 30};
-                current_cost = build_costs[idx-1];
-            } else {
+//            const uint8_t build_costs[5] = {0, 12, 18, 24, 30};
+//            const uint8_t repair_costs[5] = {4, 8, 12, 16, 20};
+            switch (mode) {
+            case SoldierMode:
                 UI::showHealthbar(mode);
-                if (Player::damaged(mode)) {
-                    const uint8_t repair_costs[5] = {4, 8, 12, 16, 20};
-                    current_cost = repair_costs[idx-1];
+                current_cost = Soldier::damaged() ? 4 : 0;
+                break;
+            case JeepMode:
+                if (Jeep::alive()) {
+                    UI::showHealthbar(mode);
+                    current_cost = Jeep::damaged() ? 6 : 0;
                 } else {
-                    current_cost = 0;
+                    UI::hideHealthbar();
+                    current_cost = 12;
                 }
+                break;
+            default:
+                current_cost = 0;
             }
         }
     });
@@ -86,16 +92,16 @@ void updateRepairsState(FSM &fsm)
             goBack();
             break;
         case 1:
-            Player::soldierHealth().setMax();
+            Soldier::health().setMax();
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;
             break;
         case 2:
-            if (!Player::alive(PlayerMode::Jeep)) {
-                Player::setPosition(PlayerMode::Jeep, POIs::pos(PlayerMode::Jeep));
-                UI::showHealthbar(PlayerMode::Jeep);
+            if (!Jeep::alive()) {
+                Jeep::setPosition(POIs::pos(PlayerMode::JeepMode));
+                UI::showHealthbar(PlayerMode::JeepMode);
             }
-            Player::jeepHealth().setMax();
+            Jeep::health().setMax();
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;
             break;
@@ -116,7 +122,7 @@ void drawRepairsState()
             repair_opts.foreach([&](uint8_t idx, bool active, const char * text) {
                 std::string line = text;
                 if (idx > 1) {
-                    line += !Player::alive(PlayerMode(idx-1)) ? " (BUILD)" : " (REPAIR)";
+//                    line += !Player::alive(PlayerMode(idx-1)) ? " (BUILD)" : " (REPAIR)";
                 }
                 Helpers::drawNotchedRect(x + 9, y + 10 + idx * 8, w - 9, 7, 0);
                 RenderSystem::sprite(x, y + 10 + idx * 8, poi[active ? 1 : 0]);

@@ -4,11 +4,11 @@
 #include <cstdint>
 
 enum PlayerMode : uint8_t {
-    Soldier = 0,
-    Jeep = 1,
-    Tank = 2,
-    Boat = 3,
-    Helicopter = 4
+    SoldierMode = 0,
+    JeepMode = 1,
+    TankMode = 2,
+    BoatMode = 3,
+    HelicopterMode = 4
 };
 
 enum Terrain : uint16_t {
