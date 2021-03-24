@@ -8,6 +8,7 @@
 #include "core/rendering/rendersystem.h"
 #include "game/rendering/spritewrapper.h"
 #include "core/utilities/rect.h"
+
 #include "core/utilities/objectpool.h"
 
 enum Targets {

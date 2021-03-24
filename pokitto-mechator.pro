@@ -10,6 +10,7 @@ SOURCES += \
     game/entities/pickups.cpp \
     game/entities/pois.cpp \
     game/maps/spawnpoint.cpp \
+    game/physics/pathfinding.cpp \
     game/player.cpp \
     game/rendering/cloudmanager.cpp \
     core/rendering/screenbuffer.cpp \
@@ -50,6 +51,7 @@ HEADERS += \
     game/enums.h \
     game/maps/spawnpoint.h \
     game/maps/spawnpoints.h \
+    game/physics/pathfinding.h \
     game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \
     core/rendering/tilemap.h \

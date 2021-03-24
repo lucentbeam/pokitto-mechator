@@ -101,7 +101,7 @@ void Barracks::update(float dt)
 
         // decrement counter and check for spawns
         start[i].m_spawn_timer--;
-        if (start[i].m_spawn_timer <= 0 && start[i].m_spawn_count < 2) {
+        if (start[i].m_spawn_timer <= 0 && start[i].m_spawn_count < 1) {
             EnemyMech * m = Enemy::createMech(start[i].m_spawn);
             start[i].m_spawn_timer = 140 + (rand() % 60);
             ++start[i].m_spawn_count;

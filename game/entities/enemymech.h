@@ -4,6 +4,9 @@
 #include <functional>
 
 #include "game/entities/projectile.h"
+
+#include "core/utilities/objectpool.h"
+
 #include "game/utilities/vec.h"
 
 #include "core/utilities/rect.h"
@@ -13,6 +16,8 @@ class EnemyMech;
 
 class EnemyMech
 {
+//    std::vector<Vec2f> path;
+
     Rect m_rect;
     Vec2f m_velocity;
     int8_t m_life = 3;

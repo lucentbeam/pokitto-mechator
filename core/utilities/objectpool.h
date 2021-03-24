@@ -7,52 +7,49 @@
 template <class Obj, int Count>
 class ObjectPool
 {
-    static Obj s_objects[Count];
+    Obj m_objects[Count];
 
-    static uint8_t s_activeCount;
+    uint8_t m_activeCount;
 
 public:
 
-    static Obj * activateNext();
+    Obj * activateNext();
 
-    static void deactivate(Obj*);
+    void deactivate(Obj*);
 
-    static void deactivate(uint8_t);
+    void deactivate(uint8_t);
 
-    static void iterate(void* data, void (*)(void*,Obj*,bool&));
+    void clear();
 
-    static Obj * objects() { return s_objects; }
+    void iterate(void* data, void (*)(void*,Obj*,bool&));
 
-    static uint8_t objectCount() { return s_activeCount; }
+    Obj * objects() { return m_objects; }
+
+    uint8_t objectCount() { return m_activeCount; }
 };
 
-#endif // OBJECTPOOL_H
+//#include "objectpool.cpp"
 
-template <class Obj, int Count>
-Obj ObjectPool<Obj,Count>::s_objects[Count];
-
-template <class Obj, int Count>
-uint8_t ObjectPool<Obj,Count>::s_activeCount = 0;
 
 template<class Obj, int Count>
 Obj *ObjectPool<Obj,Count>::activateNext()
 {
-    if (s_activeCount == Count) {
+    if (m_activeCount == Count) {
         return nullptr;
     }
-    s_activeCount++;
-    return s_objects + s_activeCount - 1;
+    m_activeCount++;
+    return m_objects + m_activeCount - 1;
 }
 
 template<class Obj, int Count>
 void ObjectPool<Obj,Count>::deactivate(Obj * target)
 {
-    if (s_activeCount == 0) {
+    if (m_activeCount == 0) {
         return;
     }
     int choice = -1;
     for(int i = 0; i < Count; ++i) {
-        if (target == (s_objects + i)) {
+        if (target == (m_objects + i)) {
             choice = i;
         }
     }
@@ -64,18 +61,26 @@ void ObjectPool<Obj,Count>::deactivate(Obj * target)
 template<class Obj, int Count>
 void ObjectPool<Obj,Count>::deactivate(uint8_t idx)
 {
-    std::swap(s_objects[idx], s_objects[s_activeCount - 1]);
-    --s_activeCount;
+    std::swap(m_objects[idx], m_objects[m_activeCount - 1]);
+    --m_activeCount;
+}
+
+template<class Obj, int Count>
+void ObjectPool<Obj,Count>::clear()
+{
+    m_activeCount = 0;
 }
 
 template<class Obj, int Count>
 void ObjectPool<Obj,Count>::iterate(void *data, void (*func)(void *, Obj *, bool&))
 {
-    for(int i = s_activeCount-1; i >= 0; --i) {
+    for(int i = m_activeCount-1; i >= 0; --i) {
         bool destroy = false;
-        func(data, s_objects+i, destroy);
+        func(data, m_objects+i, destroy);
         if (destroy) {
             deactivate(i);
         }
     }
 }
+
+#endif // OBJECTPOOL_H

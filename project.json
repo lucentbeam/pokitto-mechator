@@ -8139,6 +8139,330 @@
 		},
 		"\\game\\ui\\ui.cpp.kKXPOy": {
 			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pause.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\pathfinding.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\repairs.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\variables.obj": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.awJFhN": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.KGVyPi": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.ZCtLGO": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.ztHJjZ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.WhVmue": {
+			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.cpp.ivfTmC": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.UKhbdj": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.kjfQlY": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.QclFtN": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.RFABRB": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.EYnVJf": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.WtLsIw": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.woUyvG": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.IjGNYY": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.VowShd": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.eifpKf": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.YzCdWM": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.DSHOii": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.DySzdq": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.DJCFeC": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.YKKGVQ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.qcdNBp": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.HPGeWP": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.hFHPic": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.islFTu": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.twECcE": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.vLLHMd": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.autosave.DmCAFd": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.xTmIze": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.ZSiuvX": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.BWbwMZ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.aNtwtb": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.YykJkb": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.LLvhnY": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.KcLgTy": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.autosave.reWNGX": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.zeXSFb": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.bMvCgk": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.fFtBoR": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.NBUBHh": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.BFHPgz": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.eoQlKL": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.FkcobY": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.LFeTqU": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.XEJXGZ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.SYIVxr": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.wHncpe": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.opwQso": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.IpgEtx": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.wiiudW": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.kgDTTB": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.fDUJjY": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.mPwfZd": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.sjKgXQ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.AUxElz": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.cEfWua": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.Rkdqky": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.bvfoaO": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.JtMyBe": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.iqgxus": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.sKbLgB": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.JjrwkQ": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.PuVjUK": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.xTYuNN": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.aJmXGg": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.CJpcqe": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.OwXMbS": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.VBCvcL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.rreQof": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.cWGCvT": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.TIjegI": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.uLkVGe": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.kXMGEk": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.oIxgee": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.h.kTcGlB": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.VHeYVk": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.kvKNfL": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.xgkEDv": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.VeIMSQ": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.NYMyQN": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.IjQBvO": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.wqymPB": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.gyxdrA": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.GCiYwu": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.ymWcbP": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.iNVsEN": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.uZEopZ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.nKGnhY": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.JyjLVC": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.fuFfvW": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.bUnwit": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.aStKoL": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.hcxkld": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.GaJNdI": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.dKiDFu": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.pSbpRf": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.DYwqpb": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\pathfinding.obj": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.GAhQqZ": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.cpp.QQzgNB": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.SzxgDC": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

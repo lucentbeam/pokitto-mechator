@@ -5,6 +5,7 @@
 #include "game/physics/collisionmanager.h"
 #include "game/entities/effects.h"
 #include "game/entities/pickups.h"
+#include "game/physics/pathfinding.h"
 
 ObjectPool<EnemyMech,10> Enemy::s_mechs;
 
@@ -47,7 +48,15 @@ bool Enemy::updateMech(EnemyMech *mech, float dt)
         if (mech->m_counter % 40 == 0) {
             Vec2f alt = {float(rand() % 100) - 50, float(rand() % 100) - 50};
             alt = alt / 50.0f;
-            mech->m_velocity = (alt * 0.5 + dir * 0.5) * 15.0f;
+//            mech->m_velocity = (alt * 0.5 + dir * 0.5) * 15.0f;
+            Vec2f target = Pathfinding::getPath(Vec2f(mech->m_rect.centerX(), mech->m_rect.centerY()), Vec2f(tx, ty), mask) * 6 + Vec2f(3,3);
+            dir = {target.x() - mech->m_rect.centerX(), target.y() - mech->m_rect.centerY()};
+            float len = dir.length();
+            if (len > 0) {
+                dir = dir / len;
+            }
+            mech->m_velocity = dir * 15.0f;
+//            mech->path = Pathfinding::getPath(Vec2f(mech->m_rect.centerX(), mech->m_rect.centerY()), Vec2f(tx, ty), mask);
         }
         if (mech->m_counter > 180) {
             mech->status = EnemyMech::Mode::Preparing;
@@ -103,6 +112,8 @@ void Enemy::updateMechs(float dt)
     }
 }
 
+#include <string>
+
 void Enemy::drawMech(EnemyMech *mech)
 {
     auto pos = Camera::worldToScreen({mech->m_rect.centerX(), mech->m_rect.centerY()});
@@ -117,6 +128,15 @@ void Enemy::drawMech(EnemyMech *mech)
         idx = idx < increment ? 0 : idx < increment*2 ? 1 : idx < increment*3 ? 2 : 1;
         RenderSystem::sprite(pos.x()-2, pos.y()-2, enemy_ground[idx], enemy_ground[idx][2]);
     }
+//    int i = mech->path.size();
+//    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal});
+//    for(auto p : mech->path) {
+//        bool hit = CollisionManager::collides(p * 6 + Vec2f(3,3), mask);
+//        Vec2f pos = Camera::worldToScreen(p * 6);
+//        RenderSystem::drawRect(pos.x()-3, pos.y()-3, 6, 6, 38);
+//        Helpers::printHorizontallyCentered(pos.x(), pos.y() - 3, std::to_string(i).c_str(), hit ? 15 : 41);
+//        --i;
+//    }
 }
 
 void Enemy::drawMechs()
