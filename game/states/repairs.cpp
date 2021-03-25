@@ -36,7 +36,7 @@ void showRepairs()
 
     // TODO: make availability also depend on if POI/shop locations exist (e.g., no heli-pad, no helicopter option)
     available_vehicles = 0;
-    available_vehicles += Jeep::available() ? 1 : 0;
+    available_vehicles += Jeep::available() ? 4 : 0;
 //    available_vehicles += Player::available(PlayerMode::Tank) ? 1 : 0;
 //    available_vehicles += Player::available(PlayerMode::Boat) ? 1 : 0;
 //    available_vehicles += Player::available(PlayerMode::Helicopter) ? 1 : 0;
@@ -63,8 +63,6 @@ void updateRepairsState(FSM &fsm)
             current_cost = 0;
         } else {
             PlayerMode mode = PlayerMode(idx-1);
-//            const uint8_t build_costs[5] = {0, 12, 18, 24, 30};
-//            const uint8_t repair_costs[5] = {4, 8, 12, 16, 20};
             switch (mode) {
             case SoldierMode:
                 UI::showHealthbar(mode);
@@ -74,6 +72,15 @@ void updateRepairsState(FSM &fsm)
                 if (Jeep::alive()) {
                     UI::showHealthbar(mode);
                     current_cost = Jeep::damaged() ? 6 : 0;
+                } else {
+                    UI::hideHealthbar();
+                    current_cost = 12;
+                }
+                break;
+            case HelicopterMode:
+                if (Helicopter::alive()) {
+                    UI::showHealthbar(mode);
+                    current_cost = Helicopter::damaged() ? 6 : 0;
                 } else {
                     UI::hideHealthbar();
                     current_cost = 12;
@@ -105,6 +112,15 @@ void updateRepairsState(FSM &fsm)
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;
             break;
+        case 5:
+            if (!Helicopter::alive()) {
+                Helicopter::setPosition(POIs::pos(PlayerMode::HelicopterMode));
+                UI::showHealthbar(PlayerMode::HelicopterMode);
+            }
+            Helicopter::health().setMax();
+            GameVariables::changeDollars(-current_cost);
+            current_cost = 0;
+            break;
         default:
             break;
         }
@@ -128,9 +144,8 @@ void drawRepairsState()
                 RenderSystem::sprite(x, y + 10 + idx * 8, poi[active ? 1 : 0]);
                 RenderSystem::print(x + 12, y + 11 + idx * 8, line.c_str(), active ? 41 : 25);
             });
-
         }
-    }, 0, available_vehicles * -9); // scale with unlock level
+    }, 0, available_vehicles * -4); // scale with unlock level
     cost_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
             std::string line = "COST: " + std::to_string(current_cost);

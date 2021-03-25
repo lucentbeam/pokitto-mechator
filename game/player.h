@@ -64,14 +64,42 @@ public:
     static void draw();
 };
 
+class Helicopter : public Vehicle {
+    static Helicopter s_instance;
+
+    static bool s_available;
+
+    bool m_inAir = false;
+
+    float m_z = 0.0f;
+public:
+    Helicopter() : Vehicle(12, 26*6, 8*6, 60.0f, 0.15f, {}, 14, 14) {}
+
+    static Statistic& health() { return s_instance.m_health; }
+    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
+    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
+    static Vec2f position() { return s_instance.m_steering.pos() + Vec2f(0, -s_instance.m_z); }
+    static bool alive() {return s_instance.m_health.value() > 0; }
+    static bool available() { return s_available; }
+    static void launch() { s_instance.m_inAir = true; }
+
+    static void update(float dt);
+    static void drawGround();
+    static void drawAir();
+};
+
+
 class Player {
     static PlayerMode s_mode;
 
     friend class Soldier;
     friend class Jeep;
+    friend class Helicopter;
 public:
 
     static PlayerMode mode() { return s_mode; }
+
+    static bool canGetPickups() { return s_mode != PlayerMode::HelicopterMode; }
 
     static Vec2f position();
 };

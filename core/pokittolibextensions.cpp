@@ -107,7 +107,7 @@ namespace Pokitto {
         }
     }
 
-    void DisplayExtensions::drawShadow(int16_t x, int16_t y, const uint8_t *sprite, int transparent_color, const uint8_t *shading)
+    void DisplayExtensions::drawShadow(int16_t x, int16_t y, const uint8_t *sprite, int transparent_color, const uint8_t *shading, bool flip)
     {
         const uint8_t screenwidth = 110;
         const uint8_t screenheight = 88;
@@ -124,6 +124,9 @@ namespace Pokitto {
             if (dx >= w) continue;
             int dy = i / w;
             int px = x + dx;
+            if (flip) {
+                px = x + (w - dx);
+            }
             int py = y + dy;
             if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
                 continue;

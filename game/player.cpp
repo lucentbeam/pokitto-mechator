@@ -14,7 +14,11 @@ Soldier Soldier::s_instance;
 
 Jeep Jeep::s_instance;
 
+Helicopter Helicopter::s_instance;
+
 bool Jeep::s_available = true;
+
+bool Helicopter::s_available = true;
 
 PlayerMode Player::s_mode = PlayerMode::SoldierMode;
 
@@ -41,10 +45,17 @@ void Soldier::update(float dt)
     }
 
     mode_switch_counter++;
-    if (Jeep::alive() && controls.c.releasedWithin(60) && mode_switch_counter > 1) {
+    if (controls.c.releasedWithin(60) && mode_switch_counter > 1) {
         Vec2f dp = Jeep::position() - s_instance.m_steering.pos();
-        if (dp.length() < 6) {
+        if (Jeep::alive() && dp.length() < 6) {
             Player::s_mode = PlayerMode::JeepMode;
+            mode_switch_counter = 0;
+            UI::showHealthbar();
+        }
+        dp = Helicopter::position() - s_instance.m_steering.pos();
+        if (Helicopter::alive() && dp.length() < 6) {
+            Player::s_mode = PlayerMode::HelicopterMode;
+            Helicopter::launch();
             mode_switch_counter = 0;
             UI::showHealthbar();
         }
@@ -149,7 +160,73 @@ Vec2f Player::position()
     switch (s_mode) {
     case PlayerMode::JeepMode:
         return Jeep::position();
+    case PlayerMode::HelicopterMode:
+        return Helicopter::position();
     default:
         return Soldier::position();
+    }
+}
+
+void Helicopter::update(float dt)
+{
+    mode_switch_counter++;
+    if (!s_instance.m_inAir && s_instance.m_z > 0.0f) {
+        s_instance.m_z -= 20.0f * dt;
+        if (s_instance.m_z < 0.1f) {
+            s_instance.m_z = 0.0f;
+            Soldier::setPosition(s_instance.m_steering.pos());
+            Player::s_mode = PlayerMode::SoldierMode;
+            UI::showHealthbar();
+        }
+        return;
+    } else if (s_instance.m_inAir && s_instance.m_z < 20.0f) {
+        s_instance.m_z += 20.0f * dt;
+        if (s_instance.m_z > 20.0f) {
+            s_instance.m_z = 20.0f;
+        }
+        return;
+    }
+
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
+
+    if (Player::s_mode != PlayerMode::HelicopterMode) {
+        s_instance.m_steering.update(dt, 0.0f, 0.0f);
+        return;
+    }
+
+    ControlStatus controls = Controls::getStatus(true);
+    s_instance.m_steering.update(dt, controls.x, controls.y);
+
+    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
+    if (damage > 0) {
+        s_instance.health().change(-damage);
+        if (!alive()) {
+            Soldier::setPosition(s_instance.m_steering.pos());
+            Player::s_mode = PlayerMode::SoldierMode;
+            UI::showHealthbar();
+            EffectManager::create(position() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+        }
+    }
+    if (controls.c.releasedWithin(61)) {
+        s_instance.m_inAir = false;
+    }
+}
+
+void Helicopter::drawGround()
+{
+    if (!alive() || s_instance.m_z > 0.0f) return;
+    Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
+    RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+    RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[0], helicopter_blades[0][2]);
+}
+
+void Helicopter::drawAir()
+{
+    if (!alive() || s_instance.m_z < 0.01f) return;
+    Vec2f pos = Camera::worldToScreen(position());
+    RenderSystem::drawShadow(pos.x() - 9, pos.y() - 9 + s_instance.m_z, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+    RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+    if ((mode_switch_counter % 3) == 2) {
+        RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/3], helicopter_blades[0][2]);
     }
 }

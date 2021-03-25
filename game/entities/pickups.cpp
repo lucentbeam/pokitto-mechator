@@ -95,7 +95,7 @@ void Pickups::update(float dt)
     while (i >= 0) {
         Pickups * current = start + i;
         current->m_sprite.update();
-        if ((Player::position() - current->position).length() < 6) {
+        if (Player::canGetPickups() && (Player::position() - current->position).length() < 6) {
             current->m_on_collect(current->position);
             s_temporary.deactivate(i);
             --i;
@@ -120,7 +120,7 @@ void Pickups::update(float dt)
             --i;
             continue;
         }
-        if ((Player::position() - current->position).length() < 6) {
+        if (Player::canGetPickups() && (Player::position() - current->position).length() < 6) {
             current->m_on_collect(current->position);
             s_special.deactivate(i);
             --i;

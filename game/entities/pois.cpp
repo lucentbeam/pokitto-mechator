@@ -88,7 +88,7 @@ void POIs::update(float dt)
             s_pois.deactivate(i);
             continue;
         }
-        if ((p->m_position - c).length() < 3) {
+        if (Player::canGetPickups() && (p->m_position - c).length() < 3) {
             any_in_range = true;
             if (s_current_active_poi != p) {
                 s_current_active_poi = p;

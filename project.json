@@ -8652,6 +8652,219 @@
 		},
 		"\\core\\rendering\\tilemap.h.hNtJUy": {
 			"sdcard": false
+		},
+		"\\content\\art\\tank.aseprite": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\tank.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\tank.h": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.ngPUJs": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\helicopter.png": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\helicopter-blades.png": {
+			"sdcard": false
+		},
+		"\\game\\tilesets.h.GUCdGT": {
+			"sdcard": false
+		},
+		"\\game\\player.h.autosave.qngLjO": {
+			"sdcard": false
+		},
+		"\\game\\player.h.FLTmcC": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.BbPtLZ": {
+			"sdcard": false
+		},
+		"\\game\\player.h.RURjJo": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.ymupZo": {
+			"sdcard": false
+		},
+		"\\game\\player.h.dpnZCB": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.autosave.tUEHur": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.PBwjpI": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.autosave.mdWpwa": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.iNdKoI": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.pbxiPk": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.TkwbXK": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.SZmqcz": {
+			"sdcard": false
+		},
+		"\\game\\player.h.TJkroa": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.WQcyhr": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.hYlDpR": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.ZjIZat": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.Xlvobc": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.bHfoRt": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.qKKUoq": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.FZKGvb": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.bRshal": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.hryaSa": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.CBfnwe": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.vaxCao": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.KVIJsb": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.ZUSeFy": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.dTlotG": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.IWeJmg": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.YHxaHQ": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.atYpxZ": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.pKUeYd": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.apmioF": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.RfFfkL": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.SrUnUb": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.ciiKQe": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.vHJRMZ": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.autosave.tlWEns": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.wpnXUt": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.PiSExf": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.mLPTDz": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.autosave.ucSQvP": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.avuRKq": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.sgwzvH": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.h.ehIadQ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.RpUMjw": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.oawoVw": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.FJsUwU": {
+			"sdcard": false
+		},
+		"\\game\\player.h.bVUOym": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.autosave.kslDEm": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.IBIITo": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.h.KefYdh": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\rendersystem.cpp.qKblCm": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.cpp.faVKbp": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\helicopter.h": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\helicopter-blades.h": {
+			"sdcard": false
+		},
+		"\\game\\player.h.WMGxRL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pois.cpp.msEVfm": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.kwbHLa": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.jCHkca": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.nLVFvQ": {
+			"sdcard": false
+		},
+		"\\game\\player.h.oDzZNJ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.XNLsFE": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.IOCMET": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

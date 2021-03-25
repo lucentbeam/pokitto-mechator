@@ -92,9 +92,9 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
 }
 
 
-void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color)
+void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color, bool flip)
 {
-    Pokitto::DisplayExtensions::drawShadow(x, y, sprite, transparent_color, shading);
+    Pokitto::DisplayExtensions::drawShadow(x, y, sprite, transparent_color, shading, flip);
 }
 
 void RenderSystem::clear(uint8_t idx) {
@@ -344,7 +344,7 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
     }
 }
 
-void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color)
+void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transparent_color, bool flip)
 {
     if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
     uint8_t w = sprite[0];
@@ -357,6 +357,9 @@ void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transpare
         int dy = i / w;
         if (s_clipping && dy > s_clip_height) continue;
         int px = x + dx;
+        if (flip) {
+            px = x + (w - dx);
+        }
         int py = y + dy;
         if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
             continue;

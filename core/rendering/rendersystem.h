@@ -43,7 +43,7 @@ public:
 
     static void drawRect(int x0, int y0, int w, int h, uint8_t color);
 
-    static void drawShadow(int x, int y, const uint8_t * sprite, int transparent_color);
+    static void drawShadow(int x, int y, const uint8_t * sprite, int transparent_color, bool flip = false);
 
     static void drawBuffer(uint8_t * buffer);
 };

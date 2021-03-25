@@ -18,7 +18,7 @@ namespace Pokitto {
 
         static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, int transparent_color = -1, bool flip = false);
 
-        static void drawShadow(int16_t x, int16_t y, const uint8_t* bitmap, int transparent_color, const uint8_t * shading);
+        static void drawShadow(int16_t x, int16_t y, const uint8_t* bitmap, int transparent_color, const uint8_t * shading, bool flip = false);
     };
 
 }
