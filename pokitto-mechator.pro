@@ -51,6 +51,7 @@ HEADERS += \
     game/enums.h \
     game/maps/spawnpoint.h \
     game/maps/spawnpoints.h \
+    game/maps/worldmutables.h \
     game/physics/pathfinding.h \
     game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \

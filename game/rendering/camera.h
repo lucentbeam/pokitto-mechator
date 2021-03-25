@@ -25,6 +25,8 @@ public:
     static float tl_x() { return s_x; }
     static float tl_y() { return s_y; }
 
+    static Vec2f center();
+
     static Vec2f worldToScreen(const Vec2f &pos);
 
     static bool inActiveZone(const Vec2f &pos);

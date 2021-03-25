@@ -48,12 +48,14 @@ class Pathfinding
         uint16_t f() const { return g + h; }
     };
 
-    static ObjectPool<Node, 30> s_visited;
-    static ObjectPool<Node, 30> s_unvisited;
+    static ObjectPool<Node, 20> s_visited;
+    static ObjectPool<Node, 20> s_unvisited;
 
 public:
 
     static Vec2f getPath(const Vec2f &start, const Vec2f &goal, uint16_t collision_mask);
+
+    static bool canReach(const Vec2f &start, const Vec2f &goal, uint16_t collision_mask);
 };
 
 #endif // PATHFINDING_H

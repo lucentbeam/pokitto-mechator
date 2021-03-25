@@ -8463,6 +8463,174 @@
 		},
 		"\\pokitto-mechator.pro.SzxgDC": {
 			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.rbTlTQ": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.mbMzfP": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.autosave.KsWcjB": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.wgFBKF": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.cpp.yeijQm": {
+			"sdcard": false
+		},
+		"\\game\\rendering\\camera.h.czAgZN": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.YCEQQN": {
+			"sdcard": false
+		},
+		"\\game\\player.h.nYbUOm": {
+			"sdcard": false
+		},
+		"\\game\\player.h.UydgYS": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.fIPxgQ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.YkFtQl": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.PpHQoa": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.UgswaQ": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.rPMgpr": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.LIoHoi": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.RtBOJB": {
+			"sdcard": false
+		},
+		"\\game\\player.h.epsjcy": {
+			"sdcard": false
+		},
+		"\\content\\maps\\worldmutables.h": {
+			"sdcard": false
+		},
+		"\\game\\maps\\worldmutables.h": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.bVEvNO": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.LQxANc": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.FwXygi": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\tiled-map-reader": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\tiled-map-reader\\TiledMapReader": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\tiled-map-reader\\TiledMapReader\\json.hpp": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\tiled-map-reader\\TiledMapReader\\main.cpp": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\tiled-map-reader\\TiledMapReader\\TiledMapReader.pro": {
+			"sdcard": false
+		},
+		"\\content\\tiled-map-reader\\tiled-map-reader\\TiledMapReader\\TiledMapReader.pro.user": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\json.hpp": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\main.cpp": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\TiledMapReader.pro": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\TiledMapReader.pro.user": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.cpp.SnfKbt": {
+			"sdcard": false
+		},
+		"\\game\\physics\\pathfinding.h.KwcKvz": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.dxUfSu": {
+			"sdcard": false
+		},
+		"\\game\\maps\\worldmutables.h.IfKRtj": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.cpp.YVIEAj": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pois.cpp.eveRtb": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.uPQUUL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemymech.cpp.ScUWTM": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.vPYlIx": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.QoNYSs": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.gBdFZa": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.RsZjcP": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.vcHEad": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\main.cpp.XRLTIb": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\TiledMapReader.pro.user.YgfHBf": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\TiledMapReader.pro.user.vMJvHu": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader.zip": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\TiledMapReader.pro.user.VGrUxX": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.umPByZ": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.m11104": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.W11104": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.yLPcSC": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.HIJKki": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

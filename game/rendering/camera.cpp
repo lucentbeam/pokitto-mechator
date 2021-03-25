@@ -19,6 +19,11 @@ void Camera::update(int center_x, int center_y) {
     }
 }
 
+Vec2f Camera::center()
+{
+    return Vec2f(s_x, s_y) + Vec2f(55, 44);
+}
+
 Vec2f Camera::worldToScreen(const Vec2f &pos)
 {
     return pos - Vec2f(s_x, s_y);

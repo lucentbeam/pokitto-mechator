@@ -3,8 +3,9 @@
 #include "game/maps/mechator.h"
 #include "game/maps/mechator_sky.h"
 #include "game/tilesets.h"
+#include "game/maps/worldmutables.h"
 
-BackgroundMap MapManager::s_background(jungletiles, world);
+BackgroundMap MapManager::s_background(jungletiles, world, can_tile_mutate, mutable_indices, current_tiles);
 
 SkyTilemap MapManager::s_foreground(jungletiles_sky, sky);
 
@@ -35,10 +36,5 @@ uint8_t MapManager::getTileAt(float x, float y)
 void MapManager::setTileAt(float x, float y, uint8_t override)
 {
     s_background.setTileAt(x, y, override);
-}
-
-void MapManager::clearOverrideAt(float x, float y)
-{
-    s_background.clearOverrideAt(x, y);
 }
 

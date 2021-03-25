@@ -5,6 +5,9 @@
 #include "game/entities/effects.h"
 #include "game/tilesets.h"
 
+#include "game/physics/collisionmanager.h"
+#include "game/physics/pathfinding.h"
+
 ObjectPool<Barracks, 6> Barracks::s_barracks;
 
 int8_t Barracks::s_max_life = 27;
@@ -100,15 +103,20 @@ void Barracks::update(float dt)
         }
 
         // decrement counter and check for spawns
-        start[i].m_spawn_timer--;
-        if (start[i].m_spawn_timer <= 0 && start[i].m_spawn_count < 1) {
-            EnemyMech * m = Enemy::createMech(start[i].m_spawn);
-            start[i].m_spawn_timer = 140 + (rand() % 60);
-            ++start[i].m_spawn_count;
-            auto ptr = &start[i].m_spawn_count;
-            m->setDeactivateCallback([=](){
-                --(*ptr);
-            });
+        if (start[i].m_spawn_count < 2) {
+            start[i].m_spawn_timer--;
+            if (start[i].m_spawn_timer <= 0) {
+                start[i].m_spawn_timer = 140 + (rand() % 60);
+                static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
+                if (Pathfinding::canReach(start[i].m_spawn, Camera::center(), mask)) {
+                    EnemyMech * m = Enemy::createMech(start[i].m_spawn);
+                    ++start[i].m_spawn_count;
+                    auto ptr = &start[i].m_spawn_count;
+                    m->setDeactivateCallback([=](){
+                        --(*ptr);
+                    });
+                }
+            }
         }
 
 
