@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <vector>
+#include <bitset>
 
 #include "core/rendering/rendersystem.h"
 #include "game/rendering/camera.h"
@@ -22,13 +23,15 @@ class Tilemap {
 
   std::vector<Vec2f> m_redraws;
 
-  const bool * m_mutable_list;
+  const uint8_t * m_mutable_list;
   const uint16_t * m_mutable_indices;
   uint8_t * m_current_mutables;
+
+  bool canMutate(int map_index) const;
 public:
   const uint8_t render_width = 19, render_height = 15;
 
-  Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map, const bool * mutable_list = nullptr, const uint16_t * mutable_indices = nullptr, uint8_t * mutables = nullptr);
+  Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map, const uint8_t * mutable_list = nullptr, const uint16_t * mutable_indices = nullptr, uint8_t * mutables = nullptr);
 
   void draw();
   void drawToBuffer(ScreenBuffer * buffer);
@@ -46,7 +49,7 @@ public:
 };
 
 template<int TileWidth, int TileHeight>
-Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t *map, const bool *mutable_list, const uint16_t * mutable_indices, uint8_t *mutables) :
+Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t *map, const uint8_t *mutable_list, const uint16_t * mutable_indices, uint8_t *mutables) :
     m_tiles(tiles),
     m_map(map + 2),
     m_mapwidth(map[0]),
@@ -56,6 +59,14 @@ Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeig
     m_current_mutables(mutables)
 {
 
+}
+
+template<int TileWidth, int TileHeight>
+bool Tilemap<TileWidth, TileHeight>::canMutate(int map_index) const
+{
+    int idx = map_index / 8;
+    int sub_idx = (map_index % 8);
+    return (m_mutable_list[idx] & (1 << sub_idx)) > 0;
 }
 
 template<int TileWidth, int TileHeight>
@@ -235,7 +246,7 @@ uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
 template<int TileWidth, int TileHeight>
 uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(int index) const
 {
-    if (m_mutable_list != nullptr && m_mutable_list[index]) {
+    if (m_mutable_list != nullptr && canMutate(index)) {
         int i = 0;
         while (true) { // it's a bad idea...
             if (m_mutable_indices[i] == index) {
@@ -257,7 +268,7 @@ void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t overrid
     int py = (y / TileHeight);
     if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return;
     int idx = px + py * m_mapwidth;
-    if (!m_mutable_list[idx]) {
+    if (!canMutate(idx)) {
         return;
     }
 
