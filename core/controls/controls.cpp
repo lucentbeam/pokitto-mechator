@@ -59,14 +59,46 @@ void Controls::update()
     s_controls.m_stats.x = (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ? 1 : 0);
     s_controls.m_stats.y = (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ? 1 : 0);
 
+    bool kb_a = sf::Keyboard::isKeyPressed(sf::Keyboard::Z);
+    bool kb_b = sf::Keyboard::isKeyPressed(sf::Keyboard::X);
+    bool kb_c = sf::Keyboard::isKeyPressed(sf::Keyboard::C);
+    bool ctrl_a = false, ctrl_b = false, ctrl_c = false;
+
+    const int controller = 0;
+    if (sf::Joystick::isConnected(controller)) {
+        if (sf::Joystick::hasAxis(controller, sf::Joystick::Axis::X) && sf::Joystick::hasAxis(controller, sf::Joystick::Axis::Y)) {
+            float x = sf::Joystick::getAxisPosition(controller, sf::Joystick::Axis::X) / 100;
+            float y = sf::Joystick::getAxisPosition(controller, sf::Joystick::Axis::Y) / 100;
+            if (std::fabs(x) > 0.2f && std::fabs(x) > std::fabs(s_controls.m_stats.x)) {
+                s_controls.m_stats.x = x;
+            }
+            if (std::fabs(y) > 0.2f && std::fabs(y) > std::fabs(s_controls.m_stats.y)) {
+                s_controls.m_stats.y = y;
+            }
+        }
+        if (sf::Joystick::hasAxis(controller, sf::Joystick::Axis::PovX) && sf::Joystick::hasAxis(controller, sf::Joystick::Axis::PovY)) {
+            float x = sf::Joystick::getAxisPosition(controller, sf::Joystick::Axis::PovX) / 100;
+            float y = -sf::Joystick::getAxisPosition(controller, sf::Joystick::Axis::PovY) / 100;
+            if (std::fabs(x) > 0.2f && std::fabs(x) > std::fabs(s_controls.m_stats.x)) {
+                s_controls.m_stats.x = x;
+            }
+            if (std::fabs(y) > 0.2f && std::fabs(y) > std::fabs(s_controls.m_stats.y)) {
+                s_controls.m_stats.y = y;
+            }
+        }
+        ctrl_a = sf::Joystick::isButtonPressed(controller, 0);
+        ctrl_b = sf::Joystick::isButtonPressed(controller, 2);
+        ctrl_c = sf::Joystick::isButtonPressed(controller, 7);
+    }
+
+    s_controls.m_stats.a.update(kb_a || ctrl_a);
+    s_controls.m_stats.b.update(kb_b || ctrl_b);
+    s_controls.m_stats.c.update(kb_c || ctrl_c);
+
     s_controls.m_stats.up.update(s_controls.m_stats.y < 0);
     s_controls.m_stats.down.update(s_controls.m_stats.y > 0);
     s_controls.m_stats.left.update(s_controls.m_stats.x < 0);
     s_controls.m_stats.right.update(s_controls.m_stats.x > 0);
-
-    s_controls.m_stats.a.update(sf::Keyboard::isKeyPressed(sf::Keyboard::Z));
-    s_controls.m_stats.b.update(sf::Keyboard::isKeyPressed(sf::Keyboard::X));
-    s_controls.m_stats.c.update(sf::Keyboard::isKeyPressed(sf::Keyboard::C));
 }
 
 const ControlStatus Controls::getStatus(bool normalize_dir)
