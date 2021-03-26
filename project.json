@@ -8865,6 +8865,9 @@
 		},
 		"\\game\\entities\\pickups.cpp.IOCMET": {
 			"sdcard": false
+		},
+		"\\content\\art\\boat.aseprite": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

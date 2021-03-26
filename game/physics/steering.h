@@ -38,6 +38,8 @@ public:
 
     void update(float dt, float x, float y);
 
+    void stop() { m_current_speed = 0.0f; }
+
     void copyPosition(const Steering &other);
 
     bool moving() const { return m_moving; }

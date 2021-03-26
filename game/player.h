@@ -64,6 +64,25 @@ public:
     static void draw();
 };
 
+
+class Tank : public Vehicle {
+    static Tank s_instance;
+
+    static bool s_available;
+public:
+    Tank() : Vehicle(28, 12*6, 8*6, 25.0f, 0.04f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9) {}
+
+    static Statistic& health() { return s_instance.m_health; }
+    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
+    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
+    static Vec2f position() { return s_instance.m_steering.pos(); }
+    static bool alive() {return s_instance.m_health.value() > 0; }
+    static bool available() { return s_available; }
+
+    static void update(float dt);
+    static void draw();
+};
+
 class Helicopter : public Vehicle {
     static Helicopter s_instance;
 
@@ -73,7 +92,7 @@ class Helicopter : public Vehicle {
 
     float m_z = 0.0f;
 public:
-    Helicopter() : Vehicle(12, 26*6, 8*6, 60.0f, 0.15f, {}, 14, 14) {}
+    Helicopter() : Vehicle(16, 12*6, 8*6, 60.0f, 0.05f, {}, 14, 14, 0.08f) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -94,6 +113,7 @@ class Player {
 
     friend class Soldier;
     friend class Jeep;
+    friend class Tank;
     friend class Helicopter;
 public:
 

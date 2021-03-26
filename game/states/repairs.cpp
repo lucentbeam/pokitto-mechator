@@ -74,7 +74,16 @@ void updateRepairsState(FSM &fsm)
                     current_cost = Jeep::damaged() ? 6 : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = 12;
+                    current_cost = 1;
+                }
+                break;
+            case TankMode:
+                if (Tank::alive()) {
+                    UI::showHealthbar(mode);
+                    current_cost = Tank::damaged() ? 6 : 0;
+                } else {
+                    UI::hideHealthbar();
+                    current_cost = 1;
                 }
                 break;
             case HelicopterMode:
@@ -83,7 +92,7 @@ void updateRepairsState(FSM &fsm)
                     current_cost = Helicopter::damaged() ? 6 : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = 12;
+                    current_cost = 1;
                 }
                 break;
             default:
@@ -109,6 +118,15 @@ void updateRepairsState(FSM &fsm)
                 UI::showHealthbar(PlayerMode::JeepMode);
             }
             Jeep::health().setMax();
+            GameVariables::changeDollars(-current_cost);
+            current_cost = 0;
+            break;
+        case 3:
+            if (!Tank::alive()) {
+                Tank::setPosition(POIs::pos(PlayerMode::TankMode));
+                UI::showHealthbar(PlayerMode::TankMode);
+            }
+            Tank::health().setMax();
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;
             break;
