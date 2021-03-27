@@ -303,13 +303,22 @@ void UI::draw()
         }
     });
 
-
     tank_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
         uint8_t current = Tank::health().value();
         uint8_t max = Tank::health().max();
 
         for(uint8_t i = 0; i < max; i++) {
             int idx = i < current ? 3 : 0;
+            RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
+        }
+    });
+
+    boat_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
+        uint8_t current = Boat::health().value();
+        uint8_t max = Boat::health().max();
+
+        for(uint8_t i = 0; i < max; i++) {
+            int idx = i < current ? 4 : 0;
             RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
         }
     });

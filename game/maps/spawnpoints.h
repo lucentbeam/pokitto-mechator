@@ -8,7 +8,7 @@
 #include "game/maps/spawnpoint.h"
 
 const SpawnPoint points[] = {
-	SpawnPoint({28, 6}, spawnShop<25,5,24,0,22,5>),
+    SpawnPoint({28, 6}, spawnShop<25,5,24,-1,22,5>),
 	SpawnPoint({17, 16}, Pickups::spawnHackingKit),
 	SpawnPoint({45, 16}, spawnDoorA<44,15,1,3>),
 	SpawnPoint({43, 10}, spawnBarracks<42,7,4,3>),

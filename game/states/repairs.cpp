@@ -86,6 +86,15 @@ void updateRepairsState(FSM &fsm)
                     current_cost = 1;
                 }
                 break;
+            case BoatMode:
+                if (Boat::alive()) {
+                    UI::showHealthbar(mode);
+                    current_cost = Boat::damaged() ? 6 : 0;
+                } else {
+                    UI::hideHealthbar();
+                    current_cost = 1;
+                }
+                break;
             case HelicopterMode:
                 if (Helicopter::alive()) {
                     UI::showHealthbar(mode);
@@ -127,6 +136,15 @@ void updateRepairsState(FSM &fsm)
                 UI::showHealthbar(PlayerMode::TankMode);
             }
             Tank::health().setMax();
+            GameVariables::changeDollars(-current_cost);
+            current_cost = 0;
+            break;
+        case 4:
+            if (!Boat::alive()) {
+                Boat::setPosition(POIs::pos(PlayerMode::BoatMode));
+                UI::showHealthbar(PlayerMode::BoatMode);
+            }
+            Boat::health().setMax();
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;
             break;

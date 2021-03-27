@@ -8868,6 +8868,30 @@
 		},
 		"\\content\\art\\boat.aseprite": {
 			"sdcard": false
+		},
+		"\\content\\art\\exports\\boat.png": {
+			"sdcard": false
+		},
+		"\\game\\player.h.GaXuiH": {
+			"sdcard": false
+		},
+		"\\content\\art\\exports\\boat.h": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.FhcDVA": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.xNnkWg": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.WnrxHl": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.HpPMxN": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.SACIqf": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
