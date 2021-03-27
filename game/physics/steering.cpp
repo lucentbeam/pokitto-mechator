@@ -5,6 +5,13 @@ void Steering::update(float dt, float x, float y) {
     if (std::fabs(x) > 0.01f || std::fabs(y) > 0.01f) {
         m_moving = true;
         m_aim = Vec2f(x,y);
+        if (m_aim.dot(m_facing) < 0) {
+            Vec2f tmp = m_facing.rot90();
+            if (m_aim.dot(tmp) < 0) {
+                tmp = tmp * -1;
+            }
+            m_aim = tmp;
+        }
         Vec2f dp = m_aim - m_facing;
         m_facing += dp * m_cornering;
         float len = m_facing.length();
