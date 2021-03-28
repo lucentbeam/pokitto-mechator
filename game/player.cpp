@@ -124,7 +124,7 @@ void Jeep::update(float dt)
     if (s_instance.m_steering.moving()) {
         Terrain current = CollisionManager::getTerrainAt(s_instance.m_steering.pos().x(), s_instance.m_steering.pos().y());
         s_instance.m_shake.intensity = current == Terrain::Grass ? Rumbler::Vigorous : Rumbler::Slight;
-        s_instance.m_steering.scaleMaxSpeed(current == Terrain::Grass ? 0.5f : 1.0f);
+        s_instance.m_steering.scaleMaxSpeed(current == Terrain::Grass ? jeepGrassSpeedFraction : 1.0f);
         s_instance.m_shake.update();
     }
 

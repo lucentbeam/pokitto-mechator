@@ -16,6 +16,24 @@
 #include "game/utilities/playerstats.h"
 #include "game/enums.h"
 
+const float soldierSpeed = 20.0f;
+
+const float jeepSpeed = 32.0f;
+const float jeepGrassSpeedFraction = 0.5f;
+const float jeepCornering = 0.1f;
+const float jeepFriction = 0.05f;
+
+const float tankSpeed = 25.0f;
+const float tankCornering = 0.04f;
+
+const float boatSpeed = 80.0f;
+const float boatCornering = 0.1f;
+const float boatFriction = 0.01f;
+
+const float heliSpeed = 60.0f;
+const float heliCornering = 0.05f;
+const float heliFriction = 0.08f;
+
 class Player;
 
 class Vehicle {
@@ -33,7 +51,7 @@ class Soldier : public Vehicle {
     static Soldier s_instance;
 
 public:
-    Soldier() : Vehicle(8, 8*6, 15*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
+    Soldier() : Vehicle(8, 8*6, 15*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
 //    Soldier() : Vehicle(8, 36*6, 10*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
 
     static Statistic& health() { return s_instance.m_health; }
@@ -51,7 +69,7 @@ class Jeep : public Vehicle {
     static bool s_available;
 
 public:
-    Jeep() : Vehicle(12, 26*6, 8*6, 50.0f, 0.1f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, 0.05f) {}
+    Jeep() : Vehicle(12, 26*6, 8*6, jeepSpeed, jeepCornering, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 9, 9, jeepFriction) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -70,7 +88,7 @@ class Tank : public Vehicle {
 
     static bool s_available;
 public:
-    Tank() : Vehicle(28, 12*6, 8*6, 25.0f, 0.04f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 14, 14) {}
+    Tank() : Vehicle(28, 12*6, 8*6, tankSpeed, tankCornering, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 14, 14) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -88,7 +106,7 @@ class Boat : public Vehicle {
 
     static bool s_available;
 public:
-    Boat() : Vehicle(20, 12*6, 6*6, 80.0f, 0.1f, {Terrain::Wall, Terrain::None, Terrain::Grass, Terrain::Mud, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 24, 24, 0.01f) {}
+    Boat() : Vehicle(20, 12*6, 6*6, boatSpeed, boatCornering, {Terrain::Wall, Terrain::None, Terrain::Grass, Terrain::Mud, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 24, 24, boatFriction) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -110,7 +128,7 @@ class Helicopter : public Vehicle {
 
     float m_z = 0.0f;
 public:
-    Helicopter() : Vehicle(16, 12*6, 8*6, 60.0f, 0.05f, {}, 14, 14, 0.08f) {}
+    Helicopter() : Vehicle(16, 12*6, 8*6, heliSpeed, heliCornering, {}, 14, 14, heliFriction) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
