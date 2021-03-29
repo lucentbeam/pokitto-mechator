@@ -43,11 +43,15 @@ void Soldier::update(float dt)
         s_instance.health().change(-damage);
     }
 
+    if (!controls.b.held()) {
+        s_instance.m_aim = s_instance.m_steering.aim();
+    }
+
     const float shots_per_second = 3.0f;
     float frames_per_second = 1.0f / dt;
     float frames_per_shot = frames_per_second / shots_per_second;
     if (controls.a.downEvery(1, int(frames_per_shot))) {
-        Projectile * p = ProjectileManager::create(s_instance.m_steering.pos(), s_instance.m_steering.aim() * 100.0f, 3, 0.5f)
+        Projectile * p = ProjectileManager::create(s_instance.m_steering.pos(), s_instance.m_aim * 100.0f, 3, 0.5f)
             ->setSprite({projectile[0]}, 20)
             ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
     }
@@ -85,7 +89,7 @@ void Soldier::update(float dt)
 void Soldier::draw()
 {
     if (Player::s_mode != PlayerMode::SoldierMode) return;
-    uint8_t sprite = s_instance.m_steering.facing().y() < 0 ? 3 : 0;
+    uint8_t sprite = s_instance.m_aim.y() < 0 ? 3 : 0;
     static int counter = 0;
     if (s_instance.m_steering.moving()) {
         counter++;
@@ -97,6 +101,12 @@ void Soldier::draw()
     }
     Vec2f spos = Camera::worldToScreen(s_instance.m_steering.pos());
     RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], s_instance.m_steering.facing().x() > 0);
+
+    ControlStatus controls = Controls::getStatus(false);
+    if (controls.b.held()) {
+        spos += s_instance.m_aim * 8;
+        RenderSystem::pixel(spos.x(), spos.y(), 41);
+    }
 }
 
 void Jeep::update(float dt)

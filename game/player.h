@@ -50,6 +50,7 @@ protected:
 class Soldier : public Vehicle {
     static Soldier s_instance;
 
+    Vec2f m_aim = Vec2f(0,0);
 public:
     Soldier() : Vehicle(8, 8*6, 15*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
 //    Soldier() : Vehicle(8, 36*6, 10*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
@@ -142,7 +143,6 @@ public:
     static void drawGround();
     static void drawAir();
 };
-
 
 class Player {
     static PlayerMode s_mode;
