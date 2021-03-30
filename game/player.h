@@ -18,19 +18,19 @@
 
 const float soldierSpeed = 20.0f;
 
-const float jeepSpeed = 32.0f;
+const float jeepSpeed = 40.0f;
 const float jeepGrassSpeedFraction = 0.5f;
 const float jeepCornering = 0.1f;
 const float jeepFriction = 0.05f;
 
-const float tankSpeed = 25.0f;
+const float tankSpeed = 32.0f;
 const float tankCornering = 0.04f;
 
-const float boatSpeed = 80.0f;
+const float boatSpeed = 70.0f;
 const float boatCornering = 0.1f;
 const float boatFriction = 0.01f;
 
-const float heliSpeed = 60.0f;
+const float heliSpeed = 55.0f;
 const float heliCornering = 0.05f;
 const float heliFriction = 0.08f;
 

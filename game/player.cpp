@@ -141,6 +141,9 @@ void Jeep::update(float dt)
     const float shots_per_second = 2.0f;
     float frames_per_second = 1.0f / dt;
     float frames_per_shot = frames_per_second / shots_per_second;
+    if (controls.b.held()) {
+        frames_per_shot /= 3;
+    }
     if (controls.a.downEvery(1, int(frames_per_shot))) {
         Vec2f offset = s_instance.m_steering.aim().rot90();
         ProjectileManager::create(s_instance.m_steering.pos() + offset * 4.0f, s_instance.m_steering.aim() * 150.0f, 3, 0.35f)
@@ -150,6 +153,7 @@ void Jeep::update(float dt)
                 ->setSprite({projectile[0]}, 20)
                 ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
     }
+    s_instance.m_steering.setBrake(controls.b.held());
     if (controls.b.pressed()) {
         ProjectileManager::create(s_instance.m_steering.pos(), s_instance.m_steering.vel() * 0.85f + s_instance.m_steering.facing() * 50.0f, 4, 0.5f)
             ->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)

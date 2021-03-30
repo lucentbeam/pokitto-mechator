@@ -20,7 +20,7 @@ class Steering {
     const float m_cornering;
     const uint16_t m_collisions;
     const float m_friction;
-    bool m_moving;
+    bool m_moving, m_brake;
     float m_current_speed;
 public:
     Steering(float x, float y, float speed, float cornering, const std::initializer_list<uint8_t> collisions, float width, float height, float friction = 1.0f) :
@@ -43,7 +43,7 @@ public:
     void copyPosition(const Steering &other);
 
     bool moving() const { return m_moving; }
-
+    void setBrake(bool brake) { m_brake = brake; }
     Vec2f pos() const { return m_pos; }
     void setPos(const Vec2f &pos) { m_pos = pos; m_facing = Vec2f(0.0f, 1.0f); }
     Rect rect() const { return m_rect; }

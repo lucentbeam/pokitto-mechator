@@ -2,7 +2,7 @@
 
 void Steering::update(float dt, float x, float y) {
     m_moving = false;
-    if (std::fabs(x) > 0.01f || std::fabs(y) > 0.01f) {
+    if (!m_brake && (std::fabs(x) > 0.01f || std::fabs(y) > 0.01f)) {
         m_moving = true;
         m_aim = Vec2f(x,y);
         if (m_aim.dot(m_facing) < 0) {
@@ -20,6 +20,9 @@ void Steering::update(float dt, float x, float y) {
         }
         m_current_speed = m_max_speed;
     } else {
+        if (m_brake) {
+            m_aim = Vec2f(x,y);
+        }
         m_current_speed *= (1.0f - m_friction);
     }
     m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, m_collisions, m_size);
