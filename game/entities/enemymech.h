@@ -7,7 +7,7 @@
 
 #include "core/utilities/objectpool.h"
 
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 
 #include "core/utilities/rect.h"
 

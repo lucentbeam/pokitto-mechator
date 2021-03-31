@@ -1,6 +1,6 @@
 #include "cloudmanager.h"
 #include "game/tilesets.h"
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 
 Cloud CloudManager::s_clouds[4];
 

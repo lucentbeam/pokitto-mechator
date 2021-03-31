@@ -1,7 +1,7 @@
 #ifndef _RECT
 #define _RECT
 
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 
 class Rect {
   float m_l, m_t, m_r, m_b, m_w, m_h;

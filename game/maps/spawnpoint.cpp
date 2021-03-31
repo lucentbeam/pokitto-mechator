@@ -1,6 +1,6 @@
 #include "spawnpoint.h"
 
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 #include <algorithm>
 
 #include "game/maps/spawnpoints.h"

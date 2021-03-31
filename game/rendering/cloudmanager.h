@@ -2,7 +2,7 @@
 #define CLOUDMANAGER_H
 
 #include "core/rendering/rendersystem.h"
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 
 struct Cloud {
     float x, y;

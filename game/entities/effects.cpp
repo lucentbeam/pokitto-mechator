@@ -1,5 +1,5 @@
 #include "effects.h"
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 
 Effect EffectManager::s_effects[12];
 

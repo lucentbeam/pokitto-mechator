@@ -5,7 +5,7 @@
 #include <cmath>
 #include <cstdint>
 
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 #include "game/physics/collisionmanager.h"
 #include "game/utilities/helpers.h"
 

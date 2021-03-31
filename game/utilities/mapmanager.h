@@ -3,7 +3,7 @@
 
 #include "core/rendering/rendersystem.h"
 #include "core/rendering/tilemap.h"
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 #include "game/rendering/skytilemap.h"
 
 typedef Tilemap<6,6> BackgroundMap;

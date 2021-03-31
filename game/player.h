@@ -4,7 +4,7 @@
 #include "core/rendering/rendersystem.h"
 #include "core/controls/controls.h"
 
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 
 #include "game/tilesets.h"
 #include "game/physics/steering.h"

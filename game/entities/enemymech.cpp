@@ -1,5 +1,5 @@
 #include "enemymech.h"
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 #include "game/tilesets.h"
 #include "game/utilities/helpers.h"
 #include "game/physics/collisionmanager.h"

@@ -7,7 +7,7 @@
 
 #include "game/states/shop.h"
 
-#include "game/utilities/tween.h"
+#include "core/utilities/tween.h"
 #include "game/constants.h"
 
 #include "game/ui/ui.h"

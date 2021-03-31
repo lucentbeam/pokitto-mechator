@@ -4,7 +4,7 @@
 #include "core/utilities/babyfsm.h"
 #include "core/utilities/fpshelper.h"
 
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 #include "game/player.h"
 #include "game/utilities/mapmanager.h"
 #include "game/entities/projectile.h"

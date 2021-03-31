@@ -6,7 +6,7 @@
 
 #include "game/physics/body.h"
 #include "core/rendering/rendersystem.h"
-#include "game/rendering/spritewrapper.h"
+#include "core/rendering/spritewrapper.h"
 #include "core/utilities/rect.h"
 
 #include "core/utilities/objectpool.h"

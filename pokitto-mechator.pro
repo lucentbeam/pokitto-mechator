@@ -19,7 +19,7 @@ SOURCES += \
     game/physics/body.cpp \
     game/physics/collisionmanager.cpp \
     game/physics/steering.cpp \
-    game/rendering/camera.cpp \
+    core/rendering/camera.cpp \
     game/rendering/skytilemap.cpp \
     game/states/game.cpp \
     game/states/opendoorprompt.cpp \
@@ -30,8 +30,8 @@ SOURCES += \
     game/ui/ui.cpp \
     game/utilities/mapmanager.cpp \
     game/utilities/playerstats.cpp \
-    game/utilities/tween.cpp \
-    game/utilities/vec.cpp \
+    core/utilities/tween.cpp \
+    core/utilities/vec.cpp \
     game/variables.cpp \
     main.cpp \
     core/audio/audiosystem.cpp \
@@ -72,9 +72,9 @@ HEADERS += \
     game/physics/collisionmanager.h \
     game/physics/steering.h \
     game/player.h \
-    game/rendering/camera.h \
+    core/rendering/camera.h \
     game/rendering/skytilemap.h \
-    game/rendering/spritewrapper.h \
+    core/rendering/spritewrapper.h \
     game/states/game.h \
     game/states/opendoorprompt.h \
     game/states/openshopprompt.h \
@@ -87,8 +87,8 @@ HEADERS += \
     game/utilities/mapmanager.h \
     game/utilities/playerstats.h \
     game/utilities/rumbler.h \
-    game/utilities/tween.h \
-    game/utilities/vec.h \
+    core/utilities/tween.h \
+    core/utilities/vec.h \
     game/variables.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include

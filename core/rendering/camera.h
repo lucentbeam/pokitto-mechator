@@ -6,7 +6,7 @@
 #include <algorithm>
 
 #include "core/rendering/rendersystem.h"
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 #include "core/utilities/rect.h"
 
 class Camera {

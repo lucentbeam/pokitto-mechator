@@ -8,7 +8,7 @@
 #include "core/rendering/rendersystem.h"
 #include "core/controls/controls.h"
 #include "game/enums.h"
-#include "game/utilities/tween.h"
+#include "core/utilities/tween.h"
 
 class UIElement {
     Tween tween;

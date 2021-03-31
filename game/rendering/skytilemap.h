@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "core/rendering/rendersystem.h"
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 #include "core/rendering/screenbuffer.h"
 
 class SkyTilemap {

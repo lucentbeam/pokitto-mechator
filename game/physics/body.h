@@ -1,7 +1,7 @@
 #ifndef BODY_H
 #define BODY_H
 
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 
 class Body
 {

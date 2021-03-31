@@ -6,7 +6,7 @@
 #include <bitset>
 
 #include "core/rendering/rendersystem.h"
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 #include "core/rendering/screenbuffer.h"
 
 const uint8_t defaultTile = 19;

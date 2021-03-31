@@ -2,8 +2,8 @@
 #define EFFECTS_H
 
 #include "core/rendering/rendersystem.h"
-#include "game/rendering/spritewrapper.h"
-#include "game/utilities/vec.h"
+#include "core/rendering/spritewrapper.h"
+#include "core/utilities/vec.h"
 
 class EffectManager;
 

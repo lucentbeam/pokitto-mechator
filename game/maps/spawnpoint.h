@@ -3,7 +3,7 @@
 
 #include <unordered_set>
 
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 
 class SpawnPoint
 {

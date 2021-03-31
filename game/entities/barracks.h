@@ -1,7 +1,7 @@
 #ifndef BARRACKS_H
 #define BARRACKS_H
 
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 #include "core/utilities/rect.h"
 #include "game/entities/enemymech.h"
 

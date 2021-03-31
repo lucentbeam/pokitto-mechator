@@ -1,7 +1,7 @@
 #ifndef PATHFINDING_H
 #define PATHFINDING_H
 
-#include "game/utilities/vec.h"
+#include "core/utilities/vec.h"
 
 #include "core/utilities/objectpool.h"
 

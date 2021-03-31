@@ -1,5 +1,5 @@
 #include "projectile.h"
-#include "game/rendering/camera.h"
+#include "core/rendering/camera.h"
 #include "game/utilities/helpers.h"
 #include "game/physics/collisionmanager.h"
 
