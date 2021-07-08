@@ -57,6 +57,7 @@ void Soldier::update(float dt)
     }
 
     mode_switch_counter++;
+
     if (controls.c.releasedWithin(60) && mode_switch_counter > 1) {
         Vec2f dp = Jeep::position() - s_instance.m_steering.pos();
         if (Jeep::alive() && dp.length() < 6) {

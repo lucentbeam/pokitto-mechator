@@ -33,6 +33,10 @@ void goGame()
 {
     FSM::instance->go(GameStates::Game);
 
+    SpawnPoint::setActiveRegion();
+    Camera::update(player.position().x(), player.position().y());
+    SpawnPoint::setActiveRegion();
+
     UI::showHealthbar();
     UI::setVisibility(UI::Element::UIKeyACount, false);
     UI::setVisibility(UI::Element::UIKeyBCount, false);
@@ -104,7 +108,7 @@ void drawGameState() {
     }
 
     // debug
-    fps.update();
-    fps.draw(8, 82, 9);
-    fps.draw(8, 81, 37);
+//    fps.update();
+//    fps.draw(8, 82, 9);
+//    fps.draw(8, 81, 37);
 }

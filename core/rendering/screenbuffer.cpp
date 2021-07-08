@@ -8,8 +8,10 @@ void ScreenBuffer::shift(int8_t x, int8_t y)
 {
     int16_t offset = -x - y * screenwidth;
     if (offset > 0) {
+        offset = offset > buffer_size ? buffer_size : offset;
         std::memmove(m_buffer + offset, m_buffer, screenwidth * screenheight - offset);
     } else {
+        offset = offset < -buffer_size ? -buffer_size : offset;
         std::memmove(m_buffer, m_buffer - offset, screenwidth * screenheight + offset);
     }
 }

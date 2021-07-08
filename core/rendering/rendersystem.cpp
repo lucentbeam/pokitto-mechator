@@ -113,7 +113,7 @@ void RenderSystem::drawBuffer(uint8_t *buffer)
 
 const uint8_t screenwidth = 110, screenheight = 88;
 const bool four_bpp = false;
-const int screen_scale = 6;
+const int screen_scale = 3;
 
 struct SfmlSystem {
     sf::RenderWindow * window;
@@ -174,7 +174,7 @@ bool RenderSystem::update() {
         if (event.type == sf::Event::KeyPressed && sf::Keyboard::isKeyPressed(sf::Keyboard::F1)) {
             if (capture_count == 0) {
                 s_captures.clear();
-                capture_count = 240;
+                capture_count = 360;
             } else {
                 capture_count = 0;
                 int i = 0;

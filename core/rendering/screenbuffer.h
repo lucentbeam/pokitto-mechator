@@ -7,6 +7,8 @@ class ScreenBuffer
 {
     static const uint8_t screenwidth = 110, screenheight = 88;
 
+    static constexpr uint16_t buffer_size = screenheight * screenwidth;
+
     uint8_t m_buffer[screenwidth * screenheight];
 public:
     uint8_t * getData() { return m_buffer; }

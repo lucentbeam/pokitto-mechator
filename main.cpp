@@ -32,8 +32,6 @@ int main ()
     int32_t gameTime = 0;
     uint32_t lastGameTime = RenderSystem::getTimeMs();
 
-    const uint8_t maxPhysicsStepsPerFrame = 5; // prevent death spiral
-
     goGame();
 
     while (RenderSystem::running())
@@ -42,12 +40,12 @@ int main ()
 
         gameTime += RenderSystem::getTimeMs() - lastGameTime;
         lastGameTime = RenderSystem::getTimeMs();
-        uint8_t step_counter = 0;
-        while (gameTime > 0 && step_counter < maxPhysicsStepsPerFrame) {
+        while (gameTime > 0) {
             Controls::update();
             fsm.update();
             gameTime -= physicsTimestepMs;
-            step_counter++;
+            gameTime += RenderSystem::getTimeMs() - lastGameTime;
+            lastGameTime = RenderSystem::getTimeMs();
         }
 
         if (draws) {
