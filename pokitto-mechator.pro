@@ -107,4 +107,9 @@ mac: LIBS += -framework SFML -framework sfml-system -framework sfml-window -fram
 mac: INCLUDEPATH += $$PWD/../../SFML-2.5.1/include
 mac: DEPENDPATH += $$PWD/../../SFML-2.5.1/include
 
+QMAKE_CXXFLAGS += -Wno-narrowing
+
 DEFINES += POKITTO_SFML
+
+unix: LIBS += -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
+unix: LIBS += -lSDL2 -lSDL2main
