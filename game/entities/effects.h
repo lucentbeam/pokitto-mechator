@@ -1,7 +1,7 @@
 #ifndef EFFECTS_H
 #define EFFECTS_H
 
-#include "core/rendering/rendersystem.h"
+#include "core/rendersystem.h"
 #include "core/rendering/spritewrapper.h"
 #include "core/utilities/vec.h"
 

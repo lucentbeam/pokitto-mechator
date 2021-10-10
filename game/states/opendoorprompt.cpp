@@ -4,7 +4,7 @@
 #include "game/states/game.h"
 
 #include "game/enums.h"
-#include "core/controls/controls.h"
+#include "core//controls.h"
 
 #include "game/entities/pois.h"
 #include "game/ui/ui.h"

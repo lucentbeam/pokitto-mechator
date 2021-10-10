@@ -8,6 +8,7 @@ const uint8_t maxStates = 9;
 class FSM {
     void (*updates[maxStates])(FSM&);
     void (*draws[maxStates])();
+    void (*gos[maxStates])();
 
     uint8_t m_current;
 
@@ -18,12 +19,13 @@ public:
         instance = this;
     }
 
-    FSM &add(uint8_t s, void (*upd)(FSM&) = nullptr, void (*drw)() = nullptr) {
+    FSM &add(uint8_t s, void (*upd)(FSM&) = nullptr, void (*drw)() = nullptr, void (*ongo)() = nullptr) {
         updates[s] = upd;
         draws[s] = drw;
+        gos[s] = ongo;
 
         if (!m_initialized) {
-            m_current = s;
+            go(s);
             m_initialized = true;
         }
         return *this;
@@ -34,6 +36,9 @@ public:
             return;
         }
         m_current = s;
+        if (gos[m_current] != nullptr) {
+            gos[m_current]();
+        }
     }
 
     void update() {

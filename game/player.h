@@ -1,8 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "core/rendering/rendersystem.h"
-#include "core/controls/controls.h"
+#include "core/rendersystem.h"
+#include "core/controls.h"
 
 #include "core/rendering/camera.h"
 

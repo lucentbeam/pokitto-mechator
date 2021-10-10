@@ -5,7 +5,7 @@
 #include <cmath>
 #include <algorithm>
 
-#include "core/rendering/rendersystem.h"
+#include "core//rendersystem.h"
 #include "core/utilities/vec.h"
 #include "core/utilities/rect.h"
 

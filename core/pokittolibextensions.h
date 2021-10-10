@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-#ifndef POKITTO_SFML
+#ifndef DESKTOP_BUILD
 
 namespace Pokitto {
 
@@ -16,7 +16,13 @@ namespace Pokitto {
 
         static void drawTile(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* tile);
 
+        static void spriteWrapped(int x, int y, const uint8_t * sprite, int transparent_color);
+
+        static void drawCenterScaled(int xc, int yc, const uint8_t* sprite, float scale, int transparent_color, float yscale);
+
         static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, int transparent_color = -1, bool flip = false);
+
+        static void drawBitmap(int16_t x, int16_t y, const uint8_t* bitmap, int transparent_color, int target_color, int replacement_color);
 
         static void drawShadow(int16_t x, int16_t y, const uint8_t* bitmap, int transparent_color, const uint8_t * shading, bool flip = false);
     };

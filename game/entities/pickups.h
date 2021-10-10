@@ -1,7 +1,7 @@
 #ifndef PICKUPS_H
 #define PICKUPS_H
 
-#include "core/rendering/rendersystem.h"
+#include "core/rendersystem.h"
 #include "core/utilities/vec.h"
 #include "core/rendering/spritewrapper.h"
 #include "game/player.h"

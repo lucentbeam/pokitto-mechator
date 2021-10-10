@@ -1,7 +1,7 @@
 #ifndef CLOUDMANAGER_H
 #define CLOUDMANAGER_H
 
-#include "core/rendering/rendersystem.h"
+#include "core//rendersystem.h"
 #include "core/utilities/vec.h"
 
 struct Cloud {

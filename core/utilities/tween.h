@@ -13,24 +13,47 @@ public:
         InOutQuad
     };
 
-    Tween(float duration);
+    Tween(float duration, bool repeat = false);
 
-    Tween(Easing c, float duration);
+    Tween(Easing c, float duration, bool repeat = false);
 
-    void reset(uint32_t delay = 0);
+    Tween(Easing c_out, Easing c_back, float duration, bool repeat = false);
+
+    void reset(int32_t delay = 0);
 
     void end();
 
+    void setDelay(float duration);
+
+    void setRepeat(bool repeats);
+
     float getInterpolation(float start, float end) const;
+
+    float getInterpolation(float start, float apex, float end, float threshold = 0.5f) const;
 
     int getInterpolationInt(float start, float end) const;
 
+    bool done() const;
+
+    bool started() const;
+
+    int32_t length() const { return m_duration + m_delay; }
+
 private:
-    uint32_t m_start_time;
+    int32_t m_start_time;
 
-    const uint32_t m_duration;
+    int32_t m_duration;
 
-    const Easing m_curve = Easing::Linear;
+    int32_t m_delay = 0;
+
+    bool m_repeats = false;
+
+    bool m_out_and_back = false;
+
+    Easing m_curve = Easing::Linear;
+    Easing m_curve_back = Easing::Linear;
+
+    float map(float t, const Easing curve) const;
 };
 
 #endif // TWEEN_H

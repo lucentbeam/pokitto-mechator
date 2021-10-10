@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 
-#include "core/rendering/rendersystem.h"
+#include "core/rendersystem.h"
 #include "core/rendering/camera.h"
 #include "core/rendering/screenbuffer.h"
 

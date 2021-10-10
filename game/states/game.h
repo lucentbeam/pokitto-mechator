@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "core/utilities/babyfsm.h"
-#include "core/rendering/rendersystem.h"
+#include "core//rendersystem.h"
 
 void goGame();
 

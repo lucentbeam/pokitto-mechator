@@ -1,9 +1,9 @@
 #include "openshopprompt.h"
 
-#include "core/controls/controls.h"
+#include "core//controls.h"
 #include "game/entities/pois.h"
 #include "game/states/game.h"
-#include "core/rendering/rendersystem.h"
+#include "core//rendersystem.h"
 
 #include "game/states/shop.h"
 

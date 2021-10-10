@@ -1,7 +1,7 @@
 #include <math.h>
 
-#include "core/rendering/rendersystem.h"
-#include "core/controls/controls.h"
+#include "core//rendersystem.h"
+#include "core//controls.h"
 #include "core/utilities/babyfsm.h"
 
 #include "game/states/game.h"

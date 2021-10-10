@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <initializer_list>
 
-#include "core/rendering/rendersystem.h"
+#include "core//rendersystem.h"
 
 namespace Helpers {
     static uint16_t getMask(std::initializer_list<uint8_t> collisions) {

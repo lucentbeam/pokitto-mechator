@@ -4,8 +4,8 @@
 
 #include "game/states/game.h"
 #include "game/ui/ui.h"
-#include "core/rendering/rendersystem.h"
-#include "core/controls/controls.h"
+#include "core//rendersystem.h"
+#include "core//controls.h"
 #include "game/enums.h"
 #include "game/states/shop.h"
 #include "game/utilities/helpers.h"

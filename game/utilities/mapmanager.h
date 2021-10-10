@@ -1,7 +1,7 @@
 #ifndef MAPMANAGER_H
 #define MAPMANAGER_H
 
-#include "core/rendering/rendersystem.h"
+#include "core/rendersystem.h"
 #include "core/rendering/tilemap.h"
 #include "core/rendering/camera.h"
 #include "game/rendering/skytilemap.h"

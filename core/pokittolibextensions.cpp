@@ -3,7 +3,7 @@
 #include <cstring>
 #include <algorithm>
 
-#ifndef POKITTO_SFML
+#ifndef DESKTOP_BUILD
 
 #include "PokittoDisplay.h"
 
@@ -15,6 +15,62 @@ namespace Pokitto {
           uint8_t * loc = m_scrbuf + 110 * j;
           std::memcpy(loc, loc+x, 110-x);
       }
+    }
+
+    void DisplayExtensions::spriteWrapped(int x, int y, const uint8_t * sprite, int transparent_color) {
+        // todo: optimize this
+        uint8_t w = sprite[0];
+        uint8_t h = sprite[1];
+        const uint8_t * start = sprite + 2;
+        int xct = 0;
+        int yct = 0;
+        uint8_t* m_scrbuf = Display::getBuffer();
+        for (float ycounter = 0; ycounter < h; ycounter += 1) {
+            int yidx = y + yct;
+            yidx %= Display::height;
+            yct++;
+            xct = 0;
+            if (yidx < 0) continue;
+            for (float xcounter = 0; xcounter < w; xcounter += 1) {
+                int xidx = x + xct;
+                xidx %= Display::width;
+                xct++;
+                if (xidx < 0 || xidx >= Display::width) continue;
+                int idx = start[int(ycounter) * w + int(xcounter)];
+                if (idx == transparent_color) continue;
+                uint8_t * loc = m_scrbuf + xidx + yidx * Display::width;
+                *loc = idx;
+            }
+        }
+    }
+
+    void DisplayExtensions::drawCenterScaled(int xc, int yc, const uint8_t* sprite, float scale, int transparent_color, float yscale) {
+        if (yscale < 0) yscale = scale;
+        uint8_t w = sprite[0];
+        uint8_t h = sprite[1];
+        int x = xc - int(float(w) * scale / 2.0);
+        int y = yc - int(float(h) * yscale / 2.0);
+        float xstep = 1.0 / scale;
+        float ystep = 1.0 / yscale;
+        const uint8_t * start = sprite + 2;
+        int xct = 0;
+        int yct = 0;
+        uint8_t* m_scrbuf = Display::getBuffer();
+        for (float ycounter = 0; ycounter < h; ycounter += ystep) {
+            int yidx = y + yct;
+            yct++;
+            xct = 0;
+            if (yidx < 0 || yidx >= Display::height) continue;
+            for (float xcounter = 0; xcounter < w; xcounter += xstep) {
+                int xidx = x + xct;
+                xct++;
+                if (xidx < 0 || xidx >= Display::width) continue;
+                int idx = start[int(ycounter) * w + int(xcounter)];
+                if (idx == transparent_color) continue;
+                uint8_t * loc = m_scrbuf + xidx + yidx * Display::width;
+                *loc = idx;
+            }
+        }
     }
 
     void DisplayExtensions::drawTile(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* tile) {
@@ -104,6 +160,33 @@ namespace Pokitto {
             Display::drawBitmapDataXFlipped(x, y, w, h, bitmap);
         } else {
             Display::drawBitmapData(x, y, w, h, bitmap);
+        }
+    }
+
+    void DisplayExtensions::drawBitmap(int16_t x, int16_t y, const uint8_t* sprite, int transparent_color, int target_color, int replacement_color)
+    {
+        const uint8_t screenwidth = 110;
+        const uint8_t screenheight = 88;
+        uint8_t w = sprite[0];
+        uint8_t h = sprite[1];
+        const uint8_t * start = sprite + 2;
+        uint8_t* m_scrbuf = Display::getBuffer();
+        for (int i = 0; i < w * h; ++i) {
+            int idx = start[i];
+            if (idx == transparent_color) {
+                continue;
+            }
+            int dx = i % w;
+            if (dx >= w) continue;
+            int dy = i / w;
+            int px = x + dx;
+            int py = y + dy;
+            if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
+                continue;
+            }
+            int col_idx = m_scrbuf[px + py * screenwidth];
+            if (col_idx == target_color) col_idx = replacement_color;
+            m_scrbuf[px + py * screenwidth] = col_idx;
         }
     }
 

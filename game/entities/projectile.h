@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "game/physics/body.h"
-#include "core/rendering/rendersystem.h"
+#include "core/rendersystem.h"
 #include "core/rendering/spritewrapper.h"
 #include "core/utilities/rect.h"
 

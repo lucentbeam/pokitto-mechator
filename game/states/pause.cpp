@@ -2,7 +2,7 @@
 
 #include "game/ui/ui.h"
 #include "game/states/game.h"
-#include "core/controls/controls.h"
+#include "core//controls.h"
 
 static UIElement pause_prompt = UIElement::getExpander(53,41,60,11, Tween::Easing::OutQuad);
 

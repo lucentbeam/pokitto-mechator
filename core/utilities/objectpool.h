@@ -3,6 +3,7 @@
 
 #include <cstdint>
 #include <algorithm>
+#include <functional>
 
 template <class Obj, int Count>
 class ObjectPool
@@ -22,6 +23,8 @@ public:
     void clear();
 
     void iterate(void* data, void (*)(void*,Obj*,bool&));
+
+    void iterate(std::function<bool(Obj*)> func);
 
     Obj * objects() { return m_objects; }
 
@@ -78,6 +81,16 @@ void ObjectPool<Obj,Count>::iterate(void *data, void (*func)(void *, Obj *, bool
         bool destroy = false;
         func(data, m_objects+i, destroy);
         if (destroy) {
+            deactivate(i);
+        }
+    }
+}
+
+template<class Obj, int Count>
+void ObjectPool<Obj, Count>::iterate(std::function<bool (Obj*)> func)
+{
+    for(int i = m_activeCount-1; i >= 0; --i) {
+        if (func(m_objects+i)) {
             deactivate(i);
         }
     }

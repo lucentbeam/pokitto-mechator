@@ -5,8 +5,8 @@
 #include <functional>
 #include <algorithm>
 
-#include "core/rendering/rendersystem.h"
-#include "core/controls/controls.h"
+#include "core//rendersystem.h"
+#include "core//controls.h"
 #include "game/enums.h"
 #include "core/utilities/tween.h"
 

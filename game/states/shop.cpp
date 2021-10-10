@@ -1,10 +1,10 @@
 #include "shop.h"
 
-#include "core/controls/controls.h"
+#include "core//controls.h"
 #include "game/entities/pois.h"
 #include "game/states/game.h"
 #include "game/ui/ui.h"
-#include "core/rendering/rendersystem.h"
+#include "core//rendersystem.h"
 #include "game/states/repairs.h"
 
 static UIElement title = UIElement::getExpander(55, 28, 70, 9, Tween::Easing::OutQuad);

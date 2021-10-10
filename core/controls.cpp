@@ -4,12 +4,13 @@
 
 Controls Controls::s_controls;
 
-#ifndef POKITTO_SFML
+#ifndef DESKTOP_BUILD
 
 #include "Pokitto.h"
 #include <limits>
 
 void Controls::update() {
+    Pokitto::Buttons::pollButtons();
     s_controls.m_stats.up.update(Pokitto::Core::upBtn());
     s_controls.m_stats.down.update(Pokitto::Core::downBtn());
     s_controls.m_stats.left.update(Pokitto::Core::leftBtn());
@@ -52,6 +53,7 @@ const ControlStatus Controls::getStatus(bool normalize_dir)
 
 #else
 
+#ifdef SFML_CORE
 #include "SFML/Window.hpp"
 
 void Controls::update()
@@ -101,6 +103,35 @@ void Controls::update()
     s_controls.m_stats.right.update(s_controls.m_stats.x > 0);
 }
 
+#else
+
+#include "SDL2/SDL.h"
+
+void Controls::update() {
+    const uint8_t * state = SDL_GetKeyboardState(NULL);
+
+    s_controls.m_stats.x = state[SDL_SCANCODE_RIGHT] - state[SDL_SCANCODE_LEFT];
+    s_controls.m_stats.y = state[SDL_SCANCODE_DOWN] - state[SDL_SCANCODE_UP];
+
+    bool kb_a = state[SDL_SCANCODE_Z];
+    bool kb_b = state[SDL_SCANCODE_X];
+    bool kb_c = state[SDL_SCANCODE_C];
+    bool ctrl_a = false, ctrl_b = false, ctrl_c = false;
+
+    // read joystick states
+
+    s_controls.m_stats.a.update(kb_a || ctrl_a);
+    s_controls.m_stats.b.update(kb_b || ctrl_b);
+    s_controls.m_stats.c.update(kb_c || ctrl_c);
+
+    s_controls.m_stats.up.update(s_controls.m_stats.y < 0);
+    s_controls.m_stats.down.update(s_controls.m_stats.y > 0);
+    s_controls.m_stats.left.update(s_controls.m_stats.x < 0);
+    s_controls.m_stats.right.update(s_controls.m_stats.x > 0);
+}
+
+#endif
+
 const ControlStatus Controls::getStatus(bool normalize_dir)
 {
     ControlStatus out = s_controls.m_stats;
@@ -112,6 +143,7 @@ const ControlStatus Controls::getStatus(bool normalize_dir)
 
     return out;
 }
+
 
 #endif
 

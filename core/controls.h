@@ -13,6 +13,7 @@ public:
     void update(bool held) { lastDownCount = downCount; downCount = held ? downCount + 1 : 0; }
     bool pressed() const { return downCount == 1; }
     bool held() const { return downCount > 0; }
+    bool justReleased() const { return downCount == 0 && lastDownCount != 0;}
 
     uint16_t holdCount() const { return downCount; }
     bool releasedWithin(int count) const { return lastDownCount > 0 && lastDownCount < count && downCount == 0; }

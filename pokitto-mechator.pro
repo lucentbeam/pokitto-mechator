@@ -34,14 +34,14 @@ SOURCES += \
     core/utilities/vec.cpp \
     game/variables.cpp \
     main.cpp \
-    core/audio/audiosystem.cpp \
+    core/audiosystem.cpp \
     core/utilities/rect.cpp \
-    core/controls/controls.cpp \
+    core/controls.cpp \
     core/pokittolibextensions.cpp \
-    core/rendering/rendersystem.cpp
+    core/rendersystem.cpp
 
 HEADERS += \
-    core/audio/audiosystem.h \
+    core/audiosystem.h \
     core/utilities/objectpool.h \
     game/constants.h \
     game/entities/barracks.h \
@@ -58,11 +58,11 @@ HEADERS += \
     core/rendering/tilemap.h \
     core/utilities/babyfsm.h \
     core/pokittolibextensions.h \
-    core/rendering/rendersystem.h \
-    core/serialization/serialization.h \
+    core/rendersystem.h \
+    core/serialization.h \
     core/utilities/fpshelper.h \
     core/utilities/rect.h \
-    core/controls/controls.h \
+    core/controls.h \
     core/settings_pokitto.h \
     game/entities/effects.h \
     game/entities/projectile.h \
@@ -109,7 +109,8 @@ mac: DEPENDPATH += $$PWD/../../SFML-2.5.1/include
 
 QMAKE_CXXFLAGS += -Wno-narrowing
 
-DEFINES += POKITTO_SFML
+DEFINES += DESKTOP_BUILD
+DEFINES += SDL_CORE
 
 unix: LIBS += -lsfml-system -lsfml-window -lsfml-graphics -lsfml-audio
 unix: LIBS += -lSDL2 -lSDL2main
