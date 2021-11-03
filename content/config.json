@@ -1,0 +1,11 @@
+{
+    "palette" : "/home/benjamin/pokitto-mechator/content/art/jungle.hex",
+	"output_path" : "/home/benjamin/pokitto-mechator/game/",
+	"input_path" : "/home/benjamin/pokitto-mechator/content/art/exports/",
+	
+	"files": [ 
+		
+        { "output" : "jungletiles", "hcount": 18, "vcount": 14  }
+
+	]
+}

@@ -331,7 +331,7 @@ struct SDLSystem {
 
     void create() {
         SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK);
-        window = SDL_CreateWindow("Button City Pokitto", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 110 * screen_scale, 88 * screen_scale, SDL_WINDOW_RESIZABLE);
+        window = SDL_CreateWindow("Infiltrator! Rise of the Mechator", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 110 * screen_scale, 88 * screen_scale, SDL_WINDOW_RESIZABLE);
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
         screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 110, 88);
         running = true;

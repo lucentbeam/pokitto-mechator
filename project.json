@@ -9717,6 +9717,657 @@
 		},
 		"\\game\\states\\game.cpp.YQGcCn": {
 			"sdcard": false
+		},
+		"/content": {
+			"sdcard": false
+		},
+		"/copy_over.bat": {
+			"sdcard": false
+		},
+		"/core": {
+			"sdcard": false
+		},
+		"/game": {
+			"sdcard": false
+		},
+		"/img2pok.exe": {
+			"sdcard": false
+		},
+		"/pokitto-mechator.pro": {
+			"sdcard": false
+		},
+		"/pokitto-mechator.pro.user": {
+			"sdcard": false
+		},
+		"/pokitto-mechator.pro.user.4.10-pre1": {
+			"sdcard": false
+		},
+		"/pokitto-mechator.pro.user.f1d6e7c": {
+			"sdcard": false
+		},
+		"/content/art": {
+			"sdcard": false
+		},
+		"/content/font": {
+			"sdcard": false
+		},
+		"/content/maps": {
+			"sdcard": false
+		},
+		"/content/tiled-map-reader.zip": {
+			"sdcard": false
+		},
+		"/core/audiosystem.cpp": {
+			"sdcard": false
+		},
+		"/core/audiosystem.h": {
+			"sdcard": false
+		},
+		"/core/controls.cpp": {
+			"sdcard": false
+		},
+		"/core/controls.h": {
+			"sdcard": false
+		},
+		"/core/pokittolibextensions.cpp": {
+			"sdcard": false
+		},
+		"/core/pokittolibextensions.h": {
+			"sdcard": false
+		},
+		"/core/rendering": {
+			"sdcard": false
+		},
+		"/core/rendersystem.cpp": {
+			"sdcard": false
+		},
+		"/core/rendersystem.h": {
+			"sdcard": false
+		},
+		"/core/serialization.h": {
+			"sdcard": false
+		},
+		"/core/utilities": {
+			"sdcard": false
+		},
+		"/game/constants.h": {
+			"sdcard": false
+		},
+		"/game/entities": {
+			"sdcard": false
+		},
+		"/game/enums.h": {
+			"sdcard": false
+		},
+		"/game/maps": {
+			"sdcard": false
+		},
+		"/game/physics": {
+			"sdcard": false
+		},
+		"/game/player.cpp": {
+			"sdcard": false
+		},
+		"/game/player.h": {
+			"sdcard": false
+		},
+		"/game/rendering": {
+			"sdcard": false
+		},
+		"/game/states": {
+			"sdcard": false
+		},
+		"/game/tilesets.h": {
+			"sdcard": false
+		},
+		"/game/ui": {
+			"sdcard": false
+		},
+		"/game/utilities": {
+			"sdcard": false
+		},
+		"/game/variables.cpp": {
+			"sdcard": false
+		},
+		"/game/variables.h": {
+			"sdcard": false
+		},
+		"/content/art/boat.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/clouds.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/enemy_ground.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/explosion-small.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/explosion.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/exports": {
+			"sdcard": false
+		},
+		"/content/art/health_pips.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/helicopter-blades.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/helicopter.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/hit.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/jeep.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/jungletiles.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/jungletiles_18x.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/jungletilesterrain.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/mechator_mocks.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/pickup-dollar.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/pickup_hackingkit.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/pickup_keycard1.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/pickup_keycard2.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/pickup_keycard3.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/poi.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/projectile-grenade.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/projectile-grenade.h": {
+			"sdcard": false
+		},
+		"/content/art/projectile-grenade.png": {
+			"sdcard": false
+		},
+		"/content/art/projectile.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/resurrect-64.hex": {
+			"sdcard": false
+		},
+		"/content/art/shading.ase": {
+			"sdcard": false
+		},
+		"/content/art/shading_2.ase": {
+			"sdcard": false
+		},
+		"/content/art/soldier.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/tank.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/terrainindices.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/ui-mocks.ase": {
+			"sdcard": false
+		},
+		"/content/font/3X5.TTF": {
+			"sdcard": false
+		},
+		"/content/maps/TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"/content/maps/mechator.h": {
+			"sdcard": false
+		},
+		"/content/maps/mechator.json": {
+			"sdcard": false
+		},
+		"/content/maps/mechator.png": {
+			"sdcard": false
+		},
+		"/content/maps/mechator.tmx": {
+			"sdcard": false
+		},
+		"/content/maps/mechator_sky.h": {
+			"sdcard": false
+		},
+		"/content/maps/mechator_sky.json": {
+			"sdcard": false
+		},
+		"/content/maps/mechator_sky.png": {
+			"sdcard": false
+		},
+		"/content/maps/mechator_sky.tmx": {
+			"sdcard": false
+		},
+		"/content/maps/mechator_world.h": {
+			"sdcard": false
+		},
+		"/content/maps/mechator_world.png": {
+			"sdcard": false
+		},
+		"/content/maps/spawnpoints.h": {
+			"sdcard": false
+		},
+		"/content/maps/worldmutables.h": {
+			"sdcard": false
+		},
+		"/core/rendering/camera.cpp": {
+			"sdcard": false
+		},
+		"/core/rendering/camera.h": {
+			"sdcard": false
+		},
+		"/core/rendering/screenbuffer.cpp": {
+			"sdcard": false
+		},
+		"/core/rendering/screenbuffer.h": {
+			"sdcard": false
+		},
+		"/core/rendering/sprites.cpp": {
+			"sdcard": false
+		},
+		"/core/rendering/sprites.h": {
+			"sdcard": false
+		},
+		"/core/rendering/spritewrapper.h": {
+			"sdcard": false
+		},
+		"/core/rendering/tilemap.h": {
+			"sdcard": false
+		},
+		"/core/rendering/tiny4x7h.h": {
+			"sdcard": false
+		},
+		"/core/utilities/babyfsm.cpp": {
+			"sdcard": false
+		},
+		"/core/utilities/babyfsm.h": {
+			"sdcard": false
+		},
+		"/core/utilities/fpshelper.h": {
+			"sdcard": false
+		},
+		"/core/utilities/objectpool.h": {
+			"sdcard": false
+		},
+		"/core/utilities/rect.cpp": {
+			"sdcard": false
+		},
+		"/core/utilities/rect.h": {
+			"sdcard": false
+		},
+		"/core/utilities/tween.cpp": {
+			"sdcard": false
+		},
+		"/core/utilities/tween.h": {
+			"sdcard": false
+		},
+		"/core/utilities/vec.cpp": {
+			"sdcard": false
+		},
+		"/core/utilities/vec.h": {
+			"sdcard": false
+		},
+		"/game/entities/barracks.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/barracks.h": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/effects.h": {
+			"sdcard": false
+		},
+		"/game/entities/enemymech.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/enemymech.h": {
+			"sdcard": false
+		},
+		"/game/entities/pickups.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/pickups.h": {
+			"sdcard": false
+		},
+		"/game/entities/pois.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/pois.h": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h": {
+			"sdcard": false
+		},
+		"/game/maps/TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"/game/maps/mechator.h": {
+			"sdcard": false
+		},
+		"/game/maps/mechator_sky.h": {
+			"sdcard": false
+		},
+		"/game/maps/spawnpoint.cpp": {
+			"sdcard": false
+		},
+		"/game/maps/spawnpoint.h": {
+			"sdcard": false
+		},
+		"/game/maps/spawnpoints.h": {
+			"sdcard": false
+		},
+		"/game/maps/worldmutables.h": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp": {
+			"sdcard": false
+		},
+		"/game/physics/body.h": {
+			"sdcard": false
+		},
+		"/game/physics/collisionmanager.cpp": {
+			"sdcard": false
+		},
+		"/game/physics/collisionmanager.h": {
+			"sdcard": false
+		},
+		"/game/physics/pathfinding.cpp": {
+			"sdcard": false
+		},
+		"/game/physics/pathfinding.h": {
+			"sdcard": false
+		},
+		"/game/physics/steering.cpp": {
+			"sdcard": false
+		},
+		"/game/physics/steering.h": {
+			"sdcard": false
+		},
+		"/game/rendering/cloudmanager.cpp": {
+			"sdcard": false
+		},
+		"/game/rendering/cloudmanager.h": {
+			"sdcard": false
+		},
+		"/game/rendering/skytilemap.cpp": {
+			"sdcard": false
+		},
+		"/game/rendering/skytilemap.h": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp": {
+			"sdcard": false
+		},
+		"/game/states/game.h": {
+			"sdcard": false
+		},
+		"/game/states/opendoorprompt.cpp": {
+			"sdcard": false
+		},
+		"/game/states/opendoorprompt.h": {
+			"sdcard": false
+		},
+		"/game/states/openshopprompt.cpp": {
+			"sdcard": false
+		},
+		"/game/states/openshopprompt.h": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp": {
+			"sdcard": false
+		},
+		"/game/states/pause.h": {
+			"sdcard": false
+		},
+		"/game/states/repairs.cpp": {
+			"sdcard": false
+		},
+		"/game/states/repairs.h": {
+			"sdcard": false
+		},
+		"/game/states/shop.cpp": {
+			"sdcard": false
+		},
+		"/game/states/shop.h": {
+			"sdcard": false
+		},
+		"/game/ui/ui.cpp": {
+			"sdcard": false
+		},
+		"/game/ui/ui.h": {
+			"sdcard": false
+		},
+		"/game/utilities/helpers.h": {
+			"sdcard": false
+		},
+		"/game/utilities/mapmanager.cpp": {
+			"sdcard": false
+		},
+		"/game/utilities/mapmanager.h": {
+			"sdcard": false
+		},
+		"/game/utilities/playerstats.cpp": {
+			"sdcard": false
+		},
+		"/game/utilities/playerstats.h": {
+			"sdcard": false
+		},
+		"/game/utilities/rumbler.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/boat.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/boat.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/clouds.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/clouds.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_ground.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_ground.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/explosion-small.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/explosion-small.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/explosion.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/explosion.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/health_pips.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/health_pips.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/helicopter-blades.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/helicopter.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/helicopter-blades.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/helicopter.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/hit.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/hit.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/jeep.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/jeep.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/jungletiles.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/jungletiles.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/jungletiles_sky.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/jungletiles_sky.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/jungletilesterrain.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/jungletilesterrain.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/mechator_palette.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/mechator_palette.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_dollar.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_dollar.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_hackingkit.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_hackingkit.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_keycard1.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_keycard1.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_keycard2.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_keycard2.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_keycard3.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_keycard3.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/poi.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/poi.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile-grenade.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile-grenade.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/shading.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/shading.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/soldier.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/soldier.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/tank.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/tank.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/terrainindices.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/terrainindices.png": {
+			"sdcard": false
+		},
+		"/pokitto-mechator.elf": {
+			"sdcard": false
+		},
+		"/pokitto-mechator.bin": {
+			"sdcard": false
+		},
+		"/deploy.js": {
+			"sdcard": false
+		},
+		"/content/config.json": {
+			"sdcard": false
+		},
+		"/content/pokitto-img-processor": {
+			"sdcard": false
+		},
+		"/game/palette.h": {
+			"sdcard": false
+		},
+		"/game/sprites.h": {
+			"sdcard": false
+		},
+		"/content/art/collisions.hex": {
+			"sdcard": false
+		},
+		"/content/art/jungle.hex": {
+			"sdcard": false
+		},
+		"/content/maps/TiledMapReader": {
+			"sdcard": false
+		},
+		"/content/maps/build_world.sh": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

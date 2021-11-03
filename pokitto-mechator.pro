@@ -89,7 +89,8 @@ HEADERS += \
     game/utilities/rumbler.h \
     core/utilities/tween.h \
     core/utilities/vec.h \
-    game/variables.h
+    game/variables.h \
+    game/sprites.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
 win32:DEPENDPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include

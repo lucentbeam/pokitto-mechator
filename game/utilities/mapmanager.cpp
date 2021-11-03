@@ -4,6 +4,7 @@
 #include "game/maps/mechator_sky.h"
 #include "game/tilesets.h"
 #include "game/maps/worldmutables.h"
+#include "game/sprites.h"
 
 BackgroundMap MapManager::s_background(jungletiles, world, can_tile_mutate, mutable_indices, current_tiles);
 
