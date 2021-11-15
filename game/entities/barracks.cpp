@@ -3,7 +3,7 @@
 #include "game/utilities/helpers.h"
 #include "game/utilities/mapmanager.h"
 #include "game/entities/effects.h"
-#include "game/tilesets.h"
+#include "game/sprites.h"
 
 #include "game/physics/collisionmanager.h"
 #include "game/physics/pathfinding.h"

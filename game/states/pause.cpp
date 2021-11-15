@@ -33,7 +33,7 @@ void drawPauseState()
         if (h > 10) {
             static int counter = 0;
             counter++;
-            RenderSystem::print(x + w/2 - 22, y + 3, "GAME PAUSED", counter % 60 < 48 ? 41 : 33);
+            RenderSystem::print(x + w/2 - 22, y + 3, "GAME PAUSED", counter % 60 < 48 ? 10 : 6);
         }
     });
 }

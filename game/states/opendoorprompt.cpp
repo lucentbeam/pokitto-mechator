@@ -100,12 +100,12 @@ void drawOpenDoorState() {
     drawGameState();
     prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
-            Helpers::printHorizontallyCentered(x + w/2, y + 2, can_open ? open_text : not_enough_text, can_open ? 41 : 33);
+            Helpers::printHorizontallyCentered(x + w/2, y + 2, can_open ? open_text : not_enough_text, can_open ? 10 : 6);
             if (can_open) {
                 yes_no.foreach([](uint8_t idx, bool active, const char * name) {
                     Helpers::drawNotchedRect(46, 50 + idx * 8, 20, 7, 0);
                     RenderSystem::sprite(38, 50 + idx * 8, poi[active ? 1 : 0]);
-                    Helpers::printHorizontallyCentered(56, 51 + idx * 8, name, active ? 41 : 25);
+                    Helpers::printHorizontallyCentered(56, 51 + idx * 8, name, active ? 10 : 6);
                 });
             }
         }

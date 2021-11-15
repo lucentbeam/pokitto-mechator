@@ -6,7 +6,7 @@
 
 #include "core/rendering/camera.h"
 
-#include "game/tilesets.h"
+#include "game/sprites.h"
 #include "game/physics/steering.h"
 #include "game/entities/projectile.h"
 

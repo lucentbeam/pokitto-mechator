@@ -2,7 +2,7 @@
 
 #include "game/maps/mechator.h"
 #include "game/maps/mechator_sky.h"
-#include "game/tilesets.h"
+#include "game/sprites.h"
 #include "game/maps/worldmutables.h"
 #include "game/sprites.h"
 

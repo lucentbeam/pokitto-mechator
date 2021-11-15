@@ -81,7 +81,6 @@ HEADERS += \
     game/states/pause.h \
     game/states/repairs.h \
     game/states/shop.h \
-    game/tilesets.h \
     game/ui/ui.h \
     game/utilities/helpers.h \
     game/utilities/mapmanager.h \

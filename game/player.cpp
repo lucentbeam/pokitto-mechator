@@ -106,7 +106,7 @@ void Soldier::draw()
     ControlStatus controls = Controls::getStatus(false);
     if (controls.b.held()) {
         spos += s_instance.m_aim * 8;
-        RenderSystem::pixel(spos.x(), spos.y(), 41);
+        RenderSystem::pixel(spos.x(), spos.y(), 10);
     }
 }
 

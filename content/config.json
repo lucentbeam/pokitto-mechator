@@ -5,7 +5,29 @@
 	
 	"files": [ 
 		
-        { "output" : "jungletiles", "hcount": 18, "vcount": 14  }
+        { "output" : "jungletiles", "hcount": 18, "vcount": 14  },
+        { "output" : "jungletiles_sky", "hcount": 6, "vcount": 5  },
+		
+		{ "output" : "health_pips", "vcount": 6},
+		{ "output" : "pickup_keycard1", "vcount": 2},
+		{ "output" : "pickup_keycard2", "vcount": 2},
+		{ "output" : "pickup_keycard3", "vcount": 2},
+		{ "output" : "pickup_hackingkit", "vcount": 2},
+		{ "output" : "poi", "vcount": 6},
+		{ "output" : "pickup_dollar", "vcount": 2},
+		{ "output" : "hit", "vcount": 5},
+		{ "output" : "explosion_small", "vcount": 7},
+		{ "output" : "enemy_ground", "vcount": 5},
+		{ "output" : "explosion", "vcount": 7},
+		{ "output" : "projectile_grenade", "vcount": 2},
+		{ "output" : "projectile", "vcount": 2},
+		{ "output" : "soldier", "vcount": 6},
+		{ "output" : "jeep", "vcount": 9},
+		{ "output" : "tank", "vcount": 18},
+		{ "output" : "boat", "vcount": 9},
+		{ "output" : "helicopter", "vcount": 9},
+		{ "output" : "helicopter_blades", "vcount": 5},
+		{ "output" : "clouds", "vcount": 3}
 
 	]
 }

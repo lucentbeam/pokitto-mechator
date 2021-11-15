@@ -1,9 +1,9 @@
 #include "ui.h"
 
-#include "game/tilesets.h"
+#include "game/sprites.h"
 #include "game/player.h"
 #include "game/constants.h"
-#include "game/tilesets.h"
+#include "game/sprites.h"
 #include "game/variables.h"
 
 UIElement::UIElement(int16_t x, int16_t y, int16_t w, int16_t h, int16_t x_hidden, int16_t y_hidden, int16_t w_hidden, int16_t h_hidden, Tween::Easing curve) :
@@ -144,7 +144,7 @@ void UI::drawNumber(uint16_t num, int x, int y)
     if (num < 10) {
         x += 1;
     }
-    RenderSystem::print(x, y, buf, num == 0 ? 13 : 41);
+    RenderSystem::print(x, y, buf, num == 0 ? 6 : 10);
 }
 
 void UI::setVisibility(UI::Element element, bool visible, bool immediate)
@@ -336,35 +336,35 @@ void UI::draw()
     kitcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y + 1, pickup_hackingkit[0], pickup_hackingkit[0][2]);
-            drawNumber(GameVariables::hackingKits(), x + 9, y + 2);
+            drawNumber(GameVariables::hackingKits(), x + 9, y+1);
         }
     });
 
     dollarcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x + 1, y + 1, pickup_dollar[0]);
-            drawNumber(GameVariables::dollars(), x + 10, y + 2);
+            drawNumber(GameVariables::dollars(), x + 10, y+1);
         }
     });
 
     keyacount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard1[1], pickup_keycard1[1][2]);
-            drawNumber(GameVariables::keysA(), x + 8, y + 1);
+            drawNumber(GameVariables::keysA(), x + 8, y);
         }
     });
 
     keybcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard2[1], pickup_keycard2[1][2]);
-            drawNumber(GameVariables::keysB(), x + 8, y + 1);
+            drawNumber(GameVariables::keysB(), x + 8, y);
         }
     });
 
     keyccount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard3[1], pickup_keycard3[1][2]);
-            drawNumber(GameVariables::keysC(), x + 8, y + 1);
+            drawNumber(GameVariables::keysC(), x + 8, y);
         }
     });
 }

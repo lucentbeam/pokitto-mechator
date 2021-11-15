@@ -9,7 +9,7 @@
 #include "game/enums.h"
 #include "game/states/shop.h"
 #include "game/utilities/helpers.h"
-#include "game/tilesets.h"
+#include "game/sprites.h"
 #include "game/player.h"
 #include "game/variables.h"
 #include "game/entities/pois.h"
@@ -170,7 +170,7 @@ void drawRepairsState()
     drawGameState();
     title.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
-            Helpers::printHorizontallyCentered(x + w/2, y + 2, "WORKSHOP", 41);
+            Helpers::printHorizontallyCentered(x + w/2, y + 2, "WORKSHOP", 10);
             repair_opts.foreach([&](uint8_t idx, bool active, const char * text) {
                 std::string line = text;
                 if (idx > 1) {
@@ -178,14 +178,14 @@ void drawRepairsState()
                 }
                 Helpers::drawNotchedRect(x + 9, y + 10 + idx * 8, w - 9, 7, 0);
                 RenderSystem::sprite(x, y + 10 + idx * 8, poi[active ? 1 : 0]);
-                RenderSystem::print(x + 12, y + 11 + idx * 8, line.c_str(), active ? 41 : 25);
+                RenderSystem::print(x + 12, y + 11 + idx * 8, line.c_str(), active ? 10 : 6);
             });
         }
     }, 0, available_vehicles * -4); // scale with unlock level
     cost_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
             std::string line = "COST: " + std::to_string(current_cost);
-            Helpers::printHorizontallyCentered(x + w/2, y + 2, line.c_str(), 41);
+            Helpers::printHorizontallyCentered(x + w/2, y + 2, line.c_str(), 10);
         }
     });
 }
