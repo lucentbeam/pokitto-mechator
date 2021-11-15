@@ -372,8 +372,8 @@ void UI::draw()
 void UI::drawProgressBar(float fraction)
 {
     Helpers::drawNotchedRect(9, 83, 22, 4, 0);
-    RenderSystem::drawRect(10, 84, 20, 2, 13);
+    RenderSystem::drawRect(10, 84, 20, 2, 2);
     int width = int(fraction * 20.0f);
-    RenderSystem::drawRect(10, 84, width, 1, 51);
-    RenderSystem::drawLine(10, 85, 10 + width - 1, 85, 47);
+    RenderSystem::drawRect(10, 84, width, 1, 43);
+    RenderSystem::drawLine(10, 85, 10 + width - 1, 85, 42);
 }

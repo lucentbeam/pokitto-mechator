@@ -3,6 +3,7 @@
 #include "game/ui/ui.h"
 #include "game/states/game.h"
 #include "core//controls.h"
+#include "game/utilities/helpers.h"
 
 static UIElement pause_prompt = UIElement::getExpander(53,41,60,11, Tween::Easing::OutQuad);
 
@@ -33,7 +34,7 @@ void drawPauseState()
         if (h > 10) {
             static int counter = 0;
             counter++;
-            RenderSystem::print(x + w/2 - 22, y + 3, "GAME PAUSED", counter % 60 < 48 ? 10 : 6);
+            Helpers::printHorizontallyCentered(x + w/2, y + 2, "GAME PAUSED", counter % 60 < 48 ? 10 : 6);
         }
     });
 }

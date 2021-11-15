@@ -74,20 +74,20 @@ void drawOpenShopState()
 {
     drawGameState();
     title_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
-        if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 2, "ENEMY BASE", 10);
+        if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 1, "ENEMY BASE", 10);
     });
     if (!can_open) {
         alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
-            if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 2, "- NO HACKING KITS -", 6);
+            if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 1, "- NO HACKING KITS -", 6);
         });
     } else {
         alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
             if (h > 8) {
-                Helpers::printHorizontallyCentered(x + w/2, y + 2, "USE A HACKING KIT?", 10);
+                Helpers::printHorizontallyCentered(x + w/2, y + 1, "USE A HACKING KIT?", 10);
                 yes_no.foreach([](uint8_t idx, bool active, const char * name) {
                     Helpers::drawNotchedRect(46, 51 + idx * 8, 20, 7, 0);
                     RenderSystem::sprite(38, 51 + idx * 8, poi[active ? 1 : 0]);
-                    Helpers::printHorizontallyCentered(56, 52 + idx * 8, name, active ? 10 : 6);
+                    Helpers::printHorizontallyCentered(56, 51 + idx * 8, name, active ? 10 : 6);
                 });
             }
         });

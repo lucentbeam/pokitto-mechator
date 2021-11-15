@@ -27,7 +27,7 @@ namespace Helpers {
     }
 
     static void printHorizontallyCentered(int x, int y, const char * text, uint8_t color) {
-        x = x - float(strlen(text) * 3.71f) / 2.0f;
+        x = x - RenderSystem::getLineLength(text)/2;
         RenderSystem::print(x, y, text, color);
     }
 };
