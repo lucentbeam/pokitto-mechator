@@ -148,6 +148,11 @@ void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transpare
     Pokitto::DisplayExtensions::drawShadow(x, y, sprite, transparent_color, shading, flip);
 }
 
+void RenderSystem::shadeAll(int steps)
+{
+    Pokitto::DisplayExtensions::shadeAll(steps, shading);
+}
+
 void RenderSystem::clear(uint8_t idx) {
     game.display.bgcolor = idx;
     if (game.display.persistence) {
@@ -666,6 +671,7 @@ void RenderSystem::drawLine(int x0, int y0, int x1, int y1, uint8_t color)
 
 void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
 {
+    w -= 1;
     for (int i = x0; i < (x0 + w); ++i) {
         for (int j = y0; j < (y0 + h); j++) {
             RenderSystem::pixel(i, j, color);
@@ -709,6 +715,20 @@ void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transpare
         }
         int col_idx = getPixel(px, py);
         RenderSystem::pixel(px, py, shading[col_idx]);
+    }
+}
+
+void RenderSystem::shadeAll(int steps)
+{
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
+    for (int i = 0; i < 110; ++i) {
+        for (int j = 0; j < 88; ++j) {
+            int col_idx = getPixel(i, j);
+            for(int k = 0; k < steps - 1; ++k) {
+                col_idx = shading[col_idx];
+            }
+            RenderSystem::pixel(i, j, shading[col_idx]);
+        }
     }
 }
 

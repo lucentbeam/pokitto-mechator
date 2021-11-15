@@ -10368,6 +10368,120 @@
 		},
 		"/content/maps/build_world.sh": {
 			"sdcard": false
+		},
+		"/content/art/exports/explosion_small.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/helicopter_blades.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile_grenade.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/explosion_small.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/helicopter_blades.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile_grenade.h": {
+			"sdcard": false
+		},
+		"/game/ui/ui.cpp.byPRNB": {
+			"sdcard": false
+		},
+		"/core/rendersystem.h.gxtgrJ": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.xArQPw": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.HYfVza": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.feLMFl": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.SuNtpu": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.BsmXZD": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.aqNhvZ": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.qrfVdk": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.dFOKkm": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.xKvLZu": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.bJMPoQ": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.sSWBDC": {
+			"sdcard": false
+		},
+		"/game/states/openshopprompt.cpp.aDQoGs": {
+			"sdcard": false
+		},
+		"/core/rendersystem.cpp.autosave.wCHUJG": {
+			"sdcard": false
+		},
+		"/core/pokittolibextensions.cpp.pBfAOr": {
+			"sdcard": false
+		},
+		"/core/pokittolibextensions.cpp.nRQjKi": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.vpMQht": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.MpMBTa": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.GIzbVp": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.TIkdkl": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.icNZcS": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.waosRl": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.AaHCLy": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.yjlrJx": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.PkrVdh": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.gWZuSN": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.bSlgzx": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.grhgOU": {
+			"sdcard": false
+		},
+		"/core/rendersystem.cpp.ckxJBE": {
+			"sdcard": false
+		},
+		"/core/pokittolibextensions.cpp.RgfNSN": {
+			"sdcard": false
+		},
+		"/game/states/pause.cpp.XnHhxz": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

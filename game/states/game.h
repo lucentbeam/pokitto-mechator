@@ -10,4 +10,6 @@ void updateGameState(FSM &fsm);
 
 void drawGameState();
 
+void drawShadedGame(int shading = 1);
+
 #endif // GAME_H

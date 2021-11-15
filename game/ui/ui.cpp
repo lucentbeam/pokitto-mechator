@@ -350,21 +350,21 @@ void UI::draw()
     keyacount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard1[1], pickup_keycard1[1][2]);
-            drawNumber(GameVariables::keysA(), x + 8, y);
+            drawNumber(GameVariables::keysA(), x + 8, y+1);
         }
     });
 
     keybcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard2[1], pickup_keycard2[1][2]);
-            drawNumber(GameVariables::keysB(), x + 8, y);
+            drawNumber(GameVariables::keysB(), x + 8, y+1);
         }
     });
 
     keyccount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard3[1], pickup_keycard3[1][2]);
-            drawNumber(GameVariables::keysC(), x + 8, y);
+            drawNumber(GameVariables::keysC(), x + 8, y+1);
         }
     });
 }

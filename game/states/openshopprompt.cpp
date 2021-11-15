@@ -72,7 +72,7 @@ void updateOpenShopState(FSM&)
 
 void drawOpenShopState()
 {
-    drawGameState();
+    drawShadedGame();
     title_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
         if (h > 8) Helpers::printHorizontallyCentered(x + w/2, y + 1, "ENEMY BASE", 10);
     });

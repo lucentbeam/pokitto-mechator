@@ -218,6 +218,23 @@ namespace Pokitto {
             m_scrbuf[px + py * screenwidth] = shading[col_idx];
         }
     }
+
+    void DisplayExtensions::shadeAll(int steps, const uint8_t *shading) {
+        uint8_t* m_scrbuf = Display::getBuffer();
+        uint8_t* end = m_scrbuf + 110 * 88;
+        int k = 0;
+        steps -= 1;
+        while(m_scrbuf != end) {
+            int col_idx = shading[*m_scrbuf];
+            while (k < steps) {
+                col_idx = shading[col_idx];
+                ++k;
+            }
+            *m_scrbuf = col_idx;
+            k = 0;
+            m_scrbuf++;
+        }
+    }
 }
 
 #endif

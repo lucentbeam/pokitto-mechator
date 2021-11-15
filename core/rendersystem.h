@@ -71,6 +71,8 @@ public:
 
     static void drawShadow(int x, int y, const uint8_t * sprite, int transparent_color, bool flip = false);
 
+    static void shadeAll(int steps = 1);
+
     static void drawBuffer(uint8_t * buffer);
 
     static void shiftScreen(int x, int y = 0);

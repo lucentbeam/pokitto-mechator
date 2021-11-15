@@ -112,3 +112,35 @@ void drawGameState() {
 //    fps.draw(8, 82, 9);
 //    fps.draw(8, 81, 37);
 }
+
+void drawShadedGame(int shading)
+{
+    // ground layer
+    MapManager::draw(&screenbuffer);
+    RenderSystem::drawBuffer(screenbuffer.getData());
+
+    // entities
+    Pickups::draw();
+    POIs::draw();
+    Enemy::drawMechs();
+    Jeep::draw();
+    Tank::draw();
+    Boat::draw();
+    Helicopter::drawGround();
+    Soldier::draw();
+    ProjectileManager::draw();
+    EffectManager::draw();
+
+    // sky layer
+    MapManager::draw(false);
+    //    CloudManager::draw();
+
+    Helicopter::drawAir();
+    RenderSystem::shadeAll(shading);
+    // ui draw
+    UI::draw();
+    if (pause_hold_fraction > 0.0f) {
+        UI::drawProgressBar(pause_hold_fraction);
+        return;
+    }
+}

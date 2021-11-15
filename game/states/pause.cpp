@@ -29,12 +29,12 @@ void updatePauseState(FSM&)
 
 void drawPauseState()
 {
-    drawGameState();
+    drawShadedGame();
     pause_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+        static int counter = 0;
+        counter++;
         if (h > 10) {
-            static int counter = 0;
-            counter++;
-            Helpers::printHorizontallyCentered(x + w/2, y + 2, "GAME PAUSED", counter % 60 < 48 ? 10 : 6);
+            Helpers::printHorizontallyCentered(x + w/2, y + 2, "GAME PAUSED", (counter % 90) < 78 ? 10 : 6);
         }
     });
 }
