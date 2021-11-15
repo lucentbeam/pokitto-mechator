@@ -10482,6 +10482,9 @@
 		},
 		"/game/states/pause.cpp.XnHhxz": {
 			"sdcard": false
+		},
+		"/game/physics/collisionmanager.h.tTNJHr": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
