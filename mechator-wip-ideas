@@ -1,0 +1,16 @@
+
+enemies:
+- walkers
+- bombers
+- mines
+- turrets
+- tanks
+- helicopters
+- lasers
+- boats
+- subs
+
+areas:
+- tutorial
+- panhandle
+  - 
