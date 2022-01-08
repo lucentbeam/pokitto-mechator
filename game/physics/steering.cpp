@@ -33,10 +33,14 @@ void Steering::copyPosition(const Steering &other) {
     m_pos = other.m_pos;
 }
 
-uint8_t Steering::rotation_frame() const {
-    const float anglePerFrame = 22.5f;
-    const float frameCount = 8.0f;
-    float angle = std::atan2(m_facing.y(), std::abs(m_facing.x())) * 180.0f / 3.1415926f;
+uint8_t Steering::rotation_frame(float frame_count) const {
+    return getRotationFrame(m_facing, frame_count);
+}
+
+uint8_t Steering::getRotationFrame(const Vec2f dir, float frame_count)
+{
+    float anglePerFrame = 180.0f / frame_count;
+    float angle = std::atan2(dir.y(), std::abs(dir.x())) * 180.0f / 3.1415926f;
     angle = angle + 90.0f + anglePerFrame / 2.0f; // shift atan2 to [0,180]
-    return uint8_t(angle / 180.0f * frameCount);
+    return uint8_t(angle / 180.0f * frame_count);
 }

@@ -18,6 +18,8 @@
 		{ "output" : "hit", "vcount": 5},
 		{ "output" : "explosion_small", "vcount": 7},
 		{ "output" : "enemy_ground", "vcount": 5},
+		{ "output" : "enemy_tank", "hcount": 5},
+		{ "output" : "enemy_tank_cannon", "hcount": 5},
 		{ "output" : "explosion", "vcount": 7},
 		{ "output" : "projectile_grenade", "vcount": 2},
 		{ "output" : "projectile", "vcount": 2},

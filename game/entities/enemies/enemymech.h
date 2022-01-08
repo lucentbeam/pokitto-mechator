@@ -2,22 +2,15 @@
 #define ENEMYMECH_H
 
 #include <functional>
-
-#include "game/entities/projectile.h"
-
-#include "core/utilities/objectpool.h"
+#include <stdint.h>
 
 #include "core/utilities/vec.h"
-
 #include "core/utilities/rect.h"
 
 class Enemy;
-class EnemyMech;
 
 class EnemyMech
 {
-//    std::vector<Vec2f> path;
-
     Rect m_rect;
     Vec2f m_velocity;
     int8_t m_life = 3;
@@ -38,23 +31,9 @@ public:
 
     int8_t life() const { return m_life; }
 
+    bool update(float dt);
+
     void setDeactivateCallback(std::function<void()> on_deactivate) { m_on_deactivate = on_deactivate; }
-};
-
-class Enemy
-{
-    static ObjectPool<EnemyMech, 10> s_mechs;
-
-public:    
-    static EnemyMech * createMech(const Vec2f &pos);
-
-    static bool updateMech(EnemyMech * mech, float dt); // returns true if still alive
-
-    static void updateMechs(float dt);
-
-    static void drawMech(EnemyMech * mech);
-
-    static void drawMechs();
 };
 
 #endif // ENEMYMECH_H

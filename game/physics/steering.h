@@ -13,13 +13,13 @@ class Steering {
     Vec2f m_pos;
     Vec2f m_facing = Vec2f(1.0f, 0.0f);
     Vec2f m_aim = Vec2f(1.0f, 0.0f);
-    const Vec2f m_size;
+    Vec2f m_size;
     Rect m_rect;
     float m_max_speed;
-    const float m_max_speed_reference;
-    const float m_cornering;
-    const uint16_t m_collisions;
-    const float m_friction;
+    float m_max_speed_reference;
+    float m_cornering;
+    uint16_t m_collisions;
+    float m_friction;
     bool m_moving, m_brake;
     float m_current_speed;
 public:
@@ -50,9 +50,11 @@ public:
     Vec2f facing() const { return m_facing; }
     Vec2f aim() const { return m_aim; }
     Vec2f vel() const { return m_facing * m_current_speed; }
-    uint8_t rotation_frame() const;
+    uint8_t rotation_frame(float frame_count = 8.0f) const;
 
     void scaleMaxSpeed(float val) { m_max_speed = m_max_speed_reference * val; }
+
+    static uint8_t getRotationFrame(const Vec2f dir, float frame_count);
 };
 
 #endif // STEERING_H

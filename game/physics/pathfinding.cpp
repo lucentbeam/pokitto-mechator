@@ -88,7 +88,7 @@ Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t colli
     }
 
     if (current == nullptr || current->index == 0) {
-        return start;
+        return goal;
     }
 
     int8_t current_idx = current->index;

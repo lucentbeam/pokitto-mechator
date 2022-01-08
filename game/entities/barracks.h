@@ -3,7 +3,7 @@
 
 #include "core/utilities/vec.h"
 #include "core/utilities/rect.h"
-#include "game/entities/enemymech.h"
+#include "game/entities/enemy.h"
 
 #include <list>
 

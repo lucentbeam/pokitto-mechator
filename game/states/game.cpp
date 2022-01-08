@@ -16,7 +16,7 @@
 #include "game/ui/ui.h"
 
 #include "game/maps/spawnpoint.h"
-#include "game/entities/enemymech.h"
+#include "game/entities/enemy.h"
 #include "game/entities/barracks.h"
 #include "game/entities/pickups.h"
 #include "game/entities/pois.h"
@@ -46,14 +46,17 @@ void goGame()
 }
 
 void updateGameState(FSM&) {
+    // player characters
     Soldier::update(physicsTimestep);
     Jeep::update(physicsTimestep);
     Tank::update(physicsTimestep);
     Boat::update(physicsTimestep);
     Helicopter::update(physicsTimestep);
+
+    // enemies
     ProjectileManager::update(physicsTimestep);
     EffectManager::update(physicsTimestep);
-    Enemy::updateMechs(physicsTimestep);
+    Enemy::update(physicsTimestep);
     Barracks::update(physicsTimestep);
     Pickups::update(physicsTimestep);
     POIs::update(physicsTimestep);
@@ -85,7 +88,7 @@ void drawGameState() {
     // entities
     Pickups::draw();
     POIs::draw();
-    Enemy::drawMechs();
+    Enemy::draw();
     Jeep::draw();
     Tank::draw();
     Boat::draw();
@@ -122,7 +125,7 @@ void drawShadedGame(int shading)
     // entities
     Pickups::draw();
     POIs::draw();
-    Enemy::drawMechs();
+    Enemy::draw();
     Jeep::draw();
     Tank::draw();
     Boat::draw();
