@@ -27,8 +27,6 @@
 static Player player;
 static ScreenBuffer screenbuffer;
 
-static float pause_hold_fraction = 0.0f;
-
 void goGame()
 {
     FSM::instance->go(GameStates::Game);
@@ -68,13 +66,8 @@ void updateGameState(FSM&) {
 //    CloudManager::update(physicsTimestep);
 
     ControlStatus status = Controls::getStatus();
-    if (status.c.downEvery(61, 10)) {
+    if (status.c.pressed()) {
         goPause();
-    }
-    if (status.c.held() && status.c.holdCount() < 61) {
-        pause_hold_fraction = float(status.c.holdCount())/60.0f;
-    } else {
-        pause_hold_fraction = 0.0f;
     }
 }
 
@@ -105,10 +98,6 @@ void drawGameState() {
 
     // ui draw
     UI::draw();
-    if (pause_hold_fraction > 0.0f) {
-        UI::drawProgressBar(pause_hold_fraction);
-        return;
-    }
 
     // debug
 //    fps.update();
@@ -136,14 +125,11 @@ void drawShadedGame(int shading)
 
     // sky layer
     MapManager::draw(false);
-    //    CloudManager::draw();
+//    CloudManager::draw();
 
     Helicopter::drawAir();
     RenderSystem::shadeAll(shading);
+
     // ui draw
     UI::draw();
-    if (pause_hold_fraction > 0.0f) {
-        UI::drawProgressBar(pause_hold_fraction);
-        return;
-    }
 }

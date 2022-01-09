@@ -9,13 +9,13 @@
 
 #include "game/physics/steering.h"
 
-const float enemyTankSpeed = 18.0f;
+const float enemyTankSpeed = 12.0f;
 
 class Enemy;
 
 class EnemyTank
 {
-    Vec2f m_aim, m_origin;
+    Vec2f m_aim, m_smoothaim, m_origin;
     Steering m_steering;
     int8_t m_life = 3;
     uint8_t m_damage_frames = 0;
@@ -29,7 +29,7 @@ class EnemyTank
     friend Enemy; // I suppose that makes Enemy the enemy of this's enemy?
 public:
 
-    EnemyTank() : m_aim(0, 0), m_origin(0, 0), m_steering(0.0f, 0.0f, enemyTankSpeed, 0.04f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 10, 10) {}
+    EnemyTank() : m_aim(0, 0), m_smoothaim(0,0), m_origin(0, 0), m_steering(0.0f, 0.0f, enemyTankSpeed, 0.04f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal}, 10, 10) {}
 
     void setup(const Vec2f &pos) { m_origin = pos; m_life = 3; m_on_deactivate = std::function<void()>(); m_steering.setPos(pos); }
 

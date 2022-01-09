@@ -1,14 +1,33 @@
 
-enemies:
-- walkers
-- bombers
-- mines
-- turrets
-- tanks
+- bombers (art)
+  x art
+  - prog
+- mines (art)
+  x art
+  - prog
+- turrets (art)
+  x art
+  - prog
+
+- update level editor
+
+- pause menu
+  - weapon cycling
+  - per vehicle
+    - jeep bombs
+
 - helicopters
+  - art
+  - prog
 - lasers
+  - art
+  - prog
 - boats
+  - art
+  - prog
 - subs
+  - art
+  - prog
 
 areas:
 - tutorial

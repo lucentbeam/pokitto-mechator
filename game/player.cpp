@@ -5,7 +5,8 @@ static uint32_t mode_switch_counter = 0;
 
 Vehicle::Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction) :
     m_steering(x, y, speed, cornering, collisions, w, h, friction),
-    m_health(0, hp)
+    m_health(0, hp),
+    m_aim(0, 0)
 {
 
 }
@@ -43,11 +44,11 @@ void Soldier::update(float dt)
         s_instance.health().change(-damage);
     }
 
-    if (!controls.b.held()) {
+    if (!controls.a.held()) {
         s_instance.m_aim = s_instance.m_steering.aim();
     }
 
-    const float shots_per_second = 3.0f;
+    const float shots_per_second = 1.6f;
     float frames_per_second = 1.0f / dt;
     float frames_per_shot = frames_per_second / shots_per_second;
     if (controls.a.downEvery(1, int(frames_per_shot))) {
@@ -58,7 +59,7 @@ void Soldier::update(float dt)
 
     mode_switch_counter++;
 
-    if (controls.c.releasedWithin(60) && mode_switch_counter > 1) {
+    if (controls.b.pressed() && mode_switch_counter > 1) {
         Vec2f dp = Jeep::position() - s_instance.m_steering.pos();
         if (Jeep::alive() && dp.length() < 6) {
             Player::s_mode = PlayerMode::JeepMode;
@@ -139,43 +140,44 @@ void Jeep::update(float dt)
         s_instance.m_shake.update();
     }
 
-    const float shots_per_second = 2.0f;
+    const float shots_per_second = 2.2f;
     float frames_per_second = 1.0f / dt;
     float frames_per_shot = frames_per_second / shots_per_second;
-    if (controls.b.held()) {
-        frames_per_shot /= 3;
+    if (controls.a.pressed()) {
+        s_instance.m_aim = Vec2f(controls.x, controls.y);
     }
     if (controls.a.downEvery(1, int(frames_per_shot))) {
-        Vec2f offset = s_instance.m_steering.aim().rot90();
-        ProjectileManager::create(s_instance.m_steering.pos() + offset * 4.0f, s_instance.m_steering.aim() * 150.0f, 3, 0.35f)
+        Vec2f offset = s_instance.m_aim.rot90();
+        ProjectileManager::create(s_instance.m_steering.pos() + offset * 3.0f, s_instance.m_aim * 150.0f, 3, 0.35f)
                 ->setSprite({projectile[0]}, 20)
                 ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
-        ProjectileManager::create(s_instance.m_steering.pos() - offset * 4.0f, s_instance.m_steering.aim() * 150.0f, 3, 0.35f)
+        ProjectileManager::create(s_instance.m_steering.pos() - offset * 3.0f, s_instance.m_aim * 150.0f, 3, 0.35f)
                 ->setSprite({projectile[0]}, 20)
                 ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
-    }
-    s_instance.m_steering.setBrake(controls.b.held());
-    if (controls.b.pressed()) {
-        ProjectileManager::create(s_instance.m_steering.pos(), s_instance.m_steering.vel() * 0.85f + s_instance.m_steering.facing() * 50.0f, 4, 0.5f)
-            ->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)
-            ->setTargetMask({EnemyTarget, GroundTarget})
-            ->setDamage(0)
-            ->setExpireCallback([](Projectile*p) {
-            for(int i = -4; i <= 4; i+=4) {
-                for (int j = -4; j <= 4; j+= 4) {
-                    Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
-                    if (t == Terrain::DestrucableWood) {
-                        MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
-                    }
-                }
-            }
-            ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls();
-            EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
-        });
     }
 
+    //    s_instance.m_steering.setBrake(controls.b.held());
+//    if (controls.b.pressed()) {
+//        ProjectileManager::create(s_instance.m_steering.pos(), s_instance.m_steering.vel() * 0.85f + s_instance.m_steering.facing() * 50.0f, 4, 0.5f)
+//            ->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)
+//            ->setTargetMask({EnemyTarget, GroundTarget})
+//            ->setDamage(0)
+//            ->setExpireCallback([](Projectile*p) {
+//            for(int i = -4; i <= 4; i+=4) {
+//                for (int j = -4; j <= 4; j+= 4) {
+//                    Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
+//                    if (t == Terrain::DestrucableWood) {
+//                        MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
+//                    }
+//                }
+//            }
+//            ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls();
+//            EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+//        });
+//    }
+
     mode_switch_counter++;
-    if (controls.c.releasedWithin(60) && mode_switch_counter > 1) {
+    if (controls.b.pressed() && mode_switch_counter > 1) {
         Soldier::setPosition(position());
         Player::s_mode = PlayerMode::SoldierMode;
         mode_switch_counter = 0;
@@ -247,7 +249,7 @@ void Helicopter::update(float dt)
             EffectManager::create(position() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
         }
     }
-    if (controls.c.releasedWithin(61)) {
+    if (controls.b.pressed()) { // TODO: check valid landing loc
         s_instance.m_inAir = false;
     }
 }
@@ -299,7 +301,7 @@ void Tank::update(float dt)
     }
 
     mode_switch_counter++;
-    if (controls.c.releasedWithin(60) && mode_switch_counter > 1) {
+    if (controls.b.pressed() && mode_switch_counter > 1) {
         Soldier::setPosition(position());
         Player::s_mode = PlayerMode::SoldierMode;
         mode_switch_counter = 0;
@@ -342,7 +344,7 @@ void Boat::update(float dt)
     static uint16_t disembarkPoints = Helpers::getMask({Terrain::None, Terrain::Mud, Terrain::Grass, Terrain::WaterShallow});
     Vec2f projection = position() + s_instance.m_steering.facing() * 15.0f;
     mode_switch_counter++;
-    if (controls.c.releasedWithin(60) && mode_switch_counter > 1 && CollisionManager::collides(projection, disembarkPoints)) { // project forward and look for ground
+    if (controls.b.pressed() && mode_switch_counter > 1 && CollisionManager::collides(projection, disembarkPoints)) { // project forward and look for ground
         Soldier::setPosition(projection);
         Player::s_mode = PlayerMode::SoldierMode;
         mode_switch_counter = 0;

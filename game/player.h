@@ -42,6 +42,8 @@ protected:
     Statistic m_health;
     Rumbler m_shake;
 
+    Vec2f m_aim;
+
     friend Player;
 
     Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction = 1.0f);
