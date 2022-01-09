@@ -16,6 +16,7 @@ public:
 
     void update();
     void draw(int x, int y, int color) const;
+    void draw(int x, int y, int color_bg, int color_fg) const;
 };
 
 #endif // FPSHELPER_H
@@ -38,5 +39,17 @@ void FPSHelper::draw(int x, int y, int color) const
     char fpses[10];
     std::sprintf(fpses, "fps:%d", int(avg));
     RenderSystem::print(x, y, fpses, color);
+}
+
+void FPSHelper::draw(int x, int y, int color_bg, int color_fg) const
+{
+    float avg = 0.0f;
+    for(auto t : m_fps_list) {
+        avg += t / m_fps_list.size();
+    }
+    char fpses[10];
+    std::sprintf(fpses, "fps:%d", int(avg));
+    RenderSystem::print(x, y + 1, fpses, color_bg);
+    RenderSystem::print(x, y, fpses, color_fg);
 }
 

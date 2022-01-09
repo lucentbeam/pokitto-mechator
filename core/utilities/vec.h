@@ -21,6 +21,16 @@ public:
 
     Vec2f rot90() const { return Vec2f(m_y, -m_x); }
 
+    void rotBy(float angle, bool normalize = true) {
+        float l = 1.0f;
+        if (!normalize) l = length();
+        if (l == 0) return;
+        float a = std::atan2(m_y, m_x);
+        a += angle / 180.0f * 3.1415926f;
+        m_x = std::cos(a) * l;
+        m_y = std::sin(a) * l;
+    }
+
     float dot(const Vec2f &other) { return m_x * other.m_x + m_y * other.m_y; }
 
     Vec2f operator-(const Vec2f &other) const {

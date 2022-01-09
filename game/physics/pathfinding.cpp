@@ -6,10 +6,10 @@
 uint16_t Pathfinding::Node::goal_x = 0;
 uint16_t Pathfinding::Node::goal_y = 0;
 
-ObjectPool<Pathfinding::Node,20> Pathfinding::s_visited;
-ObjectPool<Pathfinding::Node,20> Pathfinding::s_unvisited;
+ObjectPool<Pathfinding::Node,30> Pathfinding::s_visited;
+ObjectPool<Pathfinding::Node,30> Pathfinding::s_unvisited;
 
-Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t collision_mask)
+Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t collision_mask, std::vector<Vec2f> * pts)
 {
     s_unvisited.clear();
     s_visited.clear();
@@ -96,6 +96,7 @@ Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t colli
     while (current_idx > 0) {
         output = Vec2f(s_visited.objects()[current_idx].x, s_visited.objects()[current_idx].y);
         current_idx = s_visited.objects()[current_idx].parent_index;
+        if (pts != nullptr) pts->push_back(output);
     }
     return output;
 }

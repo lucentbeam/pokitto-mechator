@@ -34,6 +34,8 @@ public:
     bool update(float dt);
 
     void setDeactivateCallback(std::function<void()> on_deactivate) { m_on_deactivate = on_deactivate; }
+
+    void draw();
 };
 
 #endif // ENEMYMECH_H

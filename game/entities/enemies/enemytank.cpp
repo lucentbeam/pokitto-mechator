@@ -64,7 +64,7 @@ bool EnemyTank::update(float dt)
     default:
         break;
     }
-    int damage = ProjectileManager::getCollisionDamage(m_steering.pos(), 4, bulletMask);
+    int damage = ProjectileManager::getCollisionDamage(m_steering.pos(), 10, bulletMask);
     m_life -= damage;
     if (m_life <= 0) {
         Pickups::spawnDollar(m_steering.pos());
@@ -89,4 +89,16 @@ void EnemyTank::draw() const
     RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], m_steering.facing().x() > 0);
     int ox = m_steering.facing().x() > 0 && m_smoothaim.x() < 0 ? 1 : 0;
     RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_smoothaim, 8.0f)], enemy_tank_cannon[0][2], m_smoothaim.x() > 0);
+
+//    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal});
+//    std::vector<Vec2f> path;
+//    Pathfinding::getPath(m_steering.pos(), Camera::center(), mask, &path);
+//    int i = path.size();
+//    for(auto p : path) {
+//        bool hit = CollisionManager::collides(p * 6 + Vec2f(3,3), mask);
+//        Vec2f pos = Camera::worldToScreen(p * 6);
+//        RenderSystem::drawRect(pos.x()-3, pos.y()-3, 6, 6, 38);
+//        Helpers::printHorizontallyCentered(pos.x(), pos.y() - 3, std::to_string(i).c_str(), hit ? 15 : 41);
+//        --i;
+//    }
 }

@@ -6,8 +6,10 @@ CONFIG -= qt
 SOURCES += \
     core/utilities/babyfsm.cpp \
     game/entities/barracks.cpp \
+    game/entities/enemies/enemybomber.cpp \
     game/entities/enemies/enemymech.cpp \
     game/entities/enemies/enemytank.cpp \
+    game/entities/enemies/enemyturret.cpp \
     game/entities/enemy.cpp \
     game/entities/pickups.cpp \
     game/entities/pois.cpp \
@@ -47,8 +49,10 @@ HEADERS += \
     core/utilities/objectpool.h \
     game/constants.h \
     game/entities/barracks.h \
+    game/entities/enemies/enemybomber.h \
     game/entities/enemies/enemymech.h \
     game/entities/enemies/enemytank.h \
+    game/entities/enemies/enemyturret.h \
     game/entities/enemy.h \
     game/entities/pickups.h \
     game/entities/pois.h \

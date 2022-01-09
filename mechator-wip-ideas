@@ -7,10 +7,14 @@
   - prog
 - turrets (art)
   x art
-  - prog
+  x prog
 
+- soldier sprint
 - update level editor
+- add turret destruction persistence
+- add barracks max $$ count
 
+- ui prompt to enter vehicles
 - pause menu
   - weapon cycling
   - per vehicle
@@ -29,7 +33,6 @@
   - art
   - prog
 
-areas:
-- tutorial
-- panhandle
-  - 
+- areas alerts:
+	- tutorial
+	- panhandle

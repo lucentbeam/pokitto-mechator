@@ -10485,6 +10485,96 @@
 		},
 		"/game/physics/collisionmanager.h.tTNJHr": {
 			"sdcard": false
+		},
+		"/mechator-wip-ideas": {
+			"sdcard": false
+		},
+		"/content/art/enemy_plane.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/enemy_tank.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/enemy_tank_cannon.aseprite": {
+			"sdcard": false
+		},
+		"/content/maps/build_map.sh": {
+			"sdcard": false
+		},
+		"/content/maps/mechator_tiles.tsx": {
+			"sdcard": false
+		},
+		"/content/maps/rule1.tmx": {
+			"sdcard": false
+		},
+		"/content/maps/rules.txt": {
+			"sdcard": false
+		},
+		"/game/entities/enemies": {
+			"sdcard": false
+		},
+		"/game/entities/enemy.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/enemy.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_plane.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_tank.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_tank_cannon.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_turret_base.png": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemybomber.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemybomber.h": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemymech.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemymech.h": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemytank.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemytank.h": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemyturret.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemyturret.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_plane.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_tank.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_tank_cannon.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_turret_base.h": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemyturret.cpp.DqQEvw": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.FnANUH": {
+			"sdcard": false
+		},
+		"/main.cpp.kxNyji": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

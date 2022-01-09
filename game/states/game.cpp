@@ -72,15 +72,13 @@ void updateGameState(FSM&) {
 }
 
 void drawGameState() {
-    static FPSHelper fps(10);
-
     // ground layer
     MapManager::draw(&screenbuffer);
     RenderSystem::drawBuffer(screenbuffer.getData());
 
     // entities
-    Pickups::draw();
     POIs::draw();
+    Pickups::draw();
     Enemy::draw();
     Jeep::draw();
     Tank::draw();
@@ -92,7 +90,7 @@ void drawGameState() {
 
     // sky layer
     MapManager::draw(false);
-    //    CloudManager::draw();
+//    CloudManager::draw();
 
     Helicopter::drawAir();
 
@@ -100,9 +98,9 @@ void drawGameState() {
     UI::draw();
 
     // debug
+//    static FPSHelper fps(10);
 //    fps.update();
-//    fps.draw(8, 82, 9);
-//    fps.draw(8, 81, 37);
+//    fps.draw(2, 1, 2, 9);
 }
 
 void drawShadedGame(int shading)
@@ -112,8 +110,8 @@ void drawShadedGame(int shading)
     RenderSystem::drawBuffer(screenbuffer.getData());
 
     // entities
-    Pickups::draw();
     POIs::draw();
+    Pickups::draw();
     Enemy::draw();
     Jeep::draw();
     Tank::draw();
@@ -132,4 +130,9 @@ void drawShadedGame(int shading)
 
     // ui draw
     UI::draw();
+
+    // debug
+//    static FPSHelper fps(10);
+//    fps.update();
+//    fps.draw(2, 1, 2, 9);
 }

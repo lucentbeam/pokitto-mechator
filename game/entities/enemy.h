@@ -8,24 +8,37 @@
 #include "game/entities/projectile.h"
 #include "enemies/enemymech.h"
 #include "enemies/enemytank.h"
+#include "enemies/enemyturret.h"
+#include "enemies/enemybomber.h"
 
 class Enemy
 {
     static ObjectPool<EnemyMech, 10> s_mechs;
     static ObjectPool<EnemyTank, 3> s_tanks;
+    static ObjectPool<EnemyTurret, 4> s_turrets;
+    static ObjectPool<EnemyBomber, 2> s_bombers;
 
     static void updateMechs(float dt);
-    static void drawMech(EnemyMech * mech);
     static void drawMechs();
 
     static void updateTanks(float dt);
     static void drawTanks();
 
+    static void updateTurrets(float dt);
+    static void drawTurrets();
+
+    static void updateBombers(float dt);
+    static void drawBombers();
+
 public:    
     static EnemyMech * createMech(const Vec2f &pos);
     static EnemyTank * createTank(const Vec2f &pos);
+    static EnemyTurret * createTurret(const Vec2f &pos);
+    static EnemyBomber * createBomber(const Vec2f &pos);
 
     static void spawnTank(const Vec2f &pos);
+    static void spawnBomber(const Vec2f &pos);
+    static void spawnTurret(const Vec2f &pos);
 
     static void update(float dt);
     static void draw();
