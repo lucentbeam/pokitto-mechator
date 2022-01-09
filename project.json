@@ -10575,6 +10575,15 @@
 		},
 		"/main.cpp.kxNyji": {
 			"sdcard": false
+		},
+		"/content/art/projectile_med.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile_med.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile_med.h": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

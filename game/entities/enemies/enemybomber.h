@@ -16,6 +16,8 @@ class EnemyBomber
     int8_t m_life = 3;
     uint8_t m_damage_frames = 0;
 
+    bool in_sky;
+
     friend Enemy; // I suppose that makes Enemy the enemy of this's enemy?
 public:
 
@@ -24,6 +26,7 @@ public:
     void setup(const Vec2f &pos);
     bool update(float dt);
     void draw() const;
+    void drawAir() const;
 };
 
 #endif // ENEMYBOMBER_H

@@ -21,6 +21,8 @@ void Projectile::configure(const Vec2f &pos, const Vec2f &vel, int size, float l
     damage = 1;
     struck = false;
     ignore_walls = false;
+    z = 0;
+    vz = 0;
 }
 
 Projectile * Projectile::setExpireCallback(void (*expire_callback)(Projectile *))
@@ -47,12 +49,28 @@ Projectile * Projectile::setTargetMask(std::initializer_list<uint8_t> mask_enums
     return this;
 }
 
+Projectile *Projectile::setInAir(float pz, float pvz, bool destroy_at_ground)
+{
+    z = pz;
+    vz = pvz;
+    destroy_on_ground = destroy_at_ground;
+}
+
 void Projectile::update(float dt)
 {
     m_body.update(dt);
     m_lifetime -= dt;
     sprite.update();
-    m_rect.setCenter(m_body.pos().x(), m_body.pos().y());
+    if (z != 0 || vz != 0) {
+        z += vz * dt;
+        vz = -3000 * dt;
+        if (z <= 0) {
+            z = 0;
+            vz = 0;
+            if (destroy_on_ground) m_lifetime -= 100000.0f; // hell yeah! that's a big number. no reason anything would ever be larger, amirite?
+        }
+    }
+    m_rect.setCenter(m_body.pos().x(), m_body.pos().y() - z);
 }
 
 void Projectile::draw()
@@ -60,7 +78,21 @@ void Projectile::draw()
     Vec2f pos = Camera::worldToScreen(m_body.pos());
     const uint8_t * spriteData = sprite.data();
     if (spriteData != nullptr) {
-        RenderSystem::sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2]);
+        if (int(z) > 0) {
+            RenderSystem::drawShadow(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2]);
+        } else {
+            RenderSystem::sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2]);
+        }
+    }
+}
+
+void Projectile::drawAir()
+{
+    if (z == 0) return;
+    Vec2f pos = Camera::worldToScreen(m_body.pos());
+    const uint8_t * spriteData = sprite.data();
+    if (spriteData != nullptr) {
+        RenderSystem::sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2 - z, spriteData, spriteData[2]);
     }
 }
 
@@ -76,7 +108,7 @@ ObjectPool<Projectile,32> ProjectileManager::s_projectiles;
 Projectile *ProjectileManager::create(const Vec2f &pos, const Vec2f &vel, int size, float lifetime)
 {
     Projectile * p = s_projectiles.activateNext();
-    p->configure(pos, vel, size, lifetime);
+    if (p != nullptr) p->configure(pos, vel, size, lifetime);
     return p;
 }
 
@@ -103,6 +135,16 @@ void ProjectileManager::draw()
     Projectile * start = s_projectiles.objects();
     while (i < s_projectiles.objectCount()) {
         start[i].draw();
+        ++i;
+    }
+}
+
+void ProjectileManager::drawAir()
+{
+    int i = 0;
+    Projectile * start = s_projectiles.objects();
+    while (i < s_projectiles.objectCount()) {
+        start[i].drawAir();
         ++i;
     }
 }

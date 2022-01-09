@@ -42,6 +42,7 @@ public:
 
     static void update(float dt);
     static void draw();
+    static void drawAir();
 };
 
 #endif // ENEMY_H

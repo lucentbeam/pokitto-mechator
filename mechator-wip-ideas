@@ -1,14 +1,9 @@
 
-- bombers (art)
-  x art
-  - prog
 - mines (art)
   x art
   - prog
-- turrets (art)
-  x art
-  x prog
 
+- fix fluent projectiles if nullptr
 - soldier sprint
 - update level editor
 - add turret destruction persistence
@@ -32,6 +27,8 @@
 - subs
   - art
   - prog
+
+- consider reworking bombers: constantly come while within range of spawn point?
 
 - areas alerts:
 	- tutorial

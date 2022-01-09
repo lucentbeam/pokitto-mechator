@@ -176,3 +176,11 @@ void Enemy::draw()
 
     drawBombers();
 }
+
+void Enemy::drawAir()
+{
+    EnemyBomber * start = s_bombers.objects();
+    for (int i = 0; i < s_bombers.objectCount(); ++i) {
+        (start + i)->drawAir();
+    }
+}

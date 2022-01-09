@@ -24,7 +24,7 @@ class Projectile
 {
     Body m_body;
     Rect m_rect;
-    float m_lifetime;
+    float m_lifetime, z, vz;
     void (*m_on_expire)(Projectile*);
 
     SpriteWrapper sprite;
@@ -33,6 +33,7 @@ class Projectile
     uint8_t damage;
     bool struck = false;
     bool ignore_walls = false;
+    bool destroy_on_ground = false;
 
     friend ProjectileManager;
 public:
@@ -52,9 +53,13 @@ public:
 
     Projectile * setIgnoreWalls() { ignore_walls = true; return this; }
 
+    Projectile * setInAir(float pz, float pvz, bool destroy_at_ground = true);
+
     void update(float dt);
 
     void draw();
+
+    void drawAir();
 
     Vec2f pos() const { return m_body.pos(); }
 
@@ -74,6 +79,8 @@ public:
     static void update(float dt);
 
     static void draw();
+
+    static void drawAir();
 
     static int getCollisionDamage(const Vec2f &pos, int size, uint16_t mask);
 

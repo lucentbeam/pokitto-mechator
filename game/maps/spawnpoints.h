@@ -39,7 +39,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({140, 25}, spawnDoorC<141,24,3,3>),
 	SpawnPoint({16, 37}, Pickups::spawnHackingKit),
 
-    SpawnPoint({26, 40}, Enemy::spawnTurret),
+    SpawnPoint({26, 40}, Enemy::spawnBomber),
 
 	SpawnPoint({24, 43}, spawnShop<21,42,20,37,18,42>),
 	SpawnPoint({79, 66}, spawnBarracks<78,63,3,3>),

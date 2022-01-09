@@ -24,9 +24,7 @@ bool EnemyTurret::update(float dt)
     Vec2f dir = Camera::center() - m_pos;
     if (std::abs(dir.x()) > 60 || std::abs(dir.y()) > 50) return true;
     float len = dir.length();
-    if (len > 0) {
-        dir = dir / len;
-    }
+    if (len > 0) dir = dir / len;
     m_counter++;
     m_aim = dir;
     static int shotcount = 0;

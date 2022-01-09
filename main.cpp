@@ -20,6 +20,7 @@ int main ()
 {
     RenderSystem::initialize();
     Soldier::health().setMax();
+    Camera::update(Soldier::position().x(), Soldier::position().y());
 
     FSM fsm;
     fsm.add(GameStates::Game, updateGameState, drawGameState);
