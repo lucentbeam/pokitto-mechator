@@ -41,6 +41,7 @@ class Soldier : public Vehicle {
     float sprint_timer = 0.0f;
     static constexpr float sprint_duration = 0.6f;
     static constexpr float sprint_cooldown = 3.0f;
+    bool m_overlaps = false;
 public:
     Soldier() : Vehicle(8, playerStartTileX*6, playerStartTileY*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 4, 4) {}
 
@@ -50,6 +51,7 @@ public:
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
+    static bool overlaps() { return s_instance.m_overlaps; }
     static float sprintCooldown() { return s_instance.sprint_timer; }
 
     static void update(float dt);

@@ -54,6 +54,7 @@ Projectile *Projectile::setInAir(float pz, float pvz, bool destroy_at_ground)
     z = pz;
     vz = pvz;
     destroy_on_ground = destroy_at_ground;
+    return this;
 }
 
 void Projectile::update(float dt)

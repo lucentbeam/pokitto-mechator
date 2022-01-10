@@ -32,7 +32,9 @@
 		{ "output" : "boat", "vcount": 9},
 		{ "output" : "helicopter", "vcount": 9},
 		{ "output" : "helicopter_blades", "vcount": 5},
-		{ "output" : "clouds", "vcount": 3}
+		{ "output" : "clouds", "vcount": 3},
+		
+		{ "output" : "ui_circle"}
 
 	]
 }

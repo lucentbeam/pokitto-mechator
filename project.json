@@ -10584,6 +10584,21 @@
 		},
 		"/content/art/exports/projectile_med.h": {
 			"sdcard": false
+		},
+		"/content/tile-map-reader.zip": {
+			"sdcard": false
+		},
+		"/content/art/exports/ui_circle.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/exports/ui_circle.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/ui_circle.h": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.jDoCyB": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

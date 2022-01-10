@@ -79,31 +79,34 @@ void Soldier::update(float dt)
 
     mode_switch_counter++;
 
+
+    bool overlap_jeep = Jeep::alive() && (Jeep::position() - s_instance.m_steering.pos()).length() < 6;
+    bool overlap_heli = Helicopter::alive() && (Helicopter::position() - s_instance.m_steering.pos()).length() < 6;
+    bool overlap_tank = Tank::alive() && (Tank::position() - s_instance.m_steering.pos()).length() < 6;
+    bool overlap_boat = Boat::alive() && (Boat::position() - s_instance.m_steering.pos()).length() < 18;
+    s_instance.m_overlaps = overlap_jeep || overlap_heli || overlap_tank || overlap_boat;
+
     if (controls.b.pressed() && mode_switch_counter > 1) {
-        Vec2f dp = Jeep::position() - s_instance.m_steering.pos();
-        if (Jeep::alive() && dp.length() < 6) {
+        if (overlap_jeep) {
             Player::s_mode = PlayerMode::JeepMode;
             mode_switch_counter = 0;
             UI::showHealthbar();
             s_instance.sprint_timer = 0.0f;
         }
-        dp = Helicopter::position() - s_instance.m_steering.pos();
-        if (Helicopter::alive() && dp.length() < 6) {
+        if (overlap_heli) {
             Player::s_mode = PlayerMode::HelicopterMode;
             Helicopter::launch();
             mode_switch_counter = 0;
             UI::showHealthbar();
             s_instance.sprint_timer = 0.0f;
         }
-        dp = Tank::position() - s_instance.m_steering.pos();
-        if (Tank::alive() && dp.length() < 6) {
+        if (overlap_tank) {
             Player::s_mode = PlayerMode::TankMode;
             mode_switch_counter = 0;
             UI::showHealthbar();
             s_instance.sprint_timer = 0.0f;
         }
-        dp = Boat::position() - s_instance.m_steering.pos();
-        if (Boat::alive() && dp.length() < 18) {
+        if (overlap_boat) {
             Player::s_mode = PlayerMode::BoatMode;
             mode_switch_counter = 0;
             UI::showHealthbar();

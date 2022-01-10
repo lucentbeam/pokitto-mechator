@@ -6,6 +6,8 @@
 #include "game/sprites.h"
 #include "game/variables.h"
 
+#include "core/utilities/babyfsm.h"
+
 UIElement::UIElement(int16_t x, int16_t y, int16_t w, int16_t h, int16_t x_hidden, int16_t y_hidden, int16_t w_hidden, int16_t h_hidden, Tween::Easing curve) :
     tween(curve, uiEasingTime),
     m_x(x),
@@ -368,8 +370,9 @@ void UI::draw()
         }
     });
 
-    if (Player::mode() == PlayerMode::SoldierMode && Soldier::sprintCooldown() > 0.05f) {
-        drawProgressBar(Soldier::sprintCooldown());
+    if (Player::mode() == PlayerMode::SoldierMode) {
+        if (Soldier::sprintCooldown() > 0.05f) drawProgressBar(Soldier::sprintCooldown());
+        if (!FSM::instance->is(GameStates::Pause) && Soldier::overlaps()) drawBPrompt();
     }
 }
 
@@ -380,4 +383,10 @@ void UI::drawProgressBar(float fraction)
     int width = int(fraction * 20.0f);
     RenderSystem::drawRect(10, 84, width, 1, 43);
     RenderSystem::drawLine(10, 85, 10 + width - 1, 85, 42);
+}
+
+void UI::drawBPrompt()
+{
+    RenderSystem::sprite(2, 2, ui_circle, ui_circle[2]);
+    RenderSystem::print(4, 2, "B", 1);
 }

@@ -54,6 +54,8 @@ public:
     }
 
     static FSM * instance;
+
+    bool is(uint8_t mode) { return m_current == mode; }
 };
 
 #endif // BABYFSM_H

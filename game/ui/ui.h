@@ -77,6 +77,7 @@ public:
     static void draw();
 
     static void drawProgressBar(float fraction);
+    static void drawBPrompt();
 
 };
 
