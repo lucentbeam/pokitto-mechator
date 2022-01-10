@@ -19,7 +19,8 @@ enum Terrain : uint16_t {
     Grass = 4,
     Mud = 5,
     DestrucableWood = 6,
-    DestructableMetal = 7
+    DestructableMetal = 7,
+    LowWall = 8,
 };
 
 enum POIType : uint8_t {
