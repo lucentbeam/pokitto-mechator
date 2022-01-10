@@ -36,7 +36,7 @@ public:
 
     }
 
-    void update(float dt, float x, float y);
+    void update(float dt, float x, float y, float speed_mult = 1.0f);
 
     void stop() { m_current_speed = 0.0f; }
 

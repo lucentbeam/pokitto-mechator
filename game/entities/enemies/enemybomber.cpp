@@ -29,6 +29,7 @@ bool EnemyBomber::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::AirTarget});
     int damage = in_sky ? 0 : ProjectileManager::getCollisionDamage(m_pos, 17, bulletMask);
     m_life -= damage;
+    m_damage_frames--;
     if (m_life <= 0) {
         EffectManager::create(m_pos, {explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
         EffectManager::create(m_pos + Vec2f(-2, -3), {explosion_small[0], explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);

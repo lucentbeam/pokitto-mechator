@@ -11,12 +11,19 @@
 #include "enemies/enemyturret.h"
 #include "enemies/enemybomber.h"
 
+struct Mine {
+    Vec2f pos;
+    int beep_freq;
+    static int timer;
+};
+
 class Enemy
 {
     static ObjectPool<EnemyMech, 10> s_mechs;
     static ObjectPool<EnemyTank, 3> s_tanks;
     static ObjectPool<EnemyTurret, 4> s_turrets;
     static ObjectPool<EnemyBomber, 2> s_bombers;
+    static ObjectPool<Mine, 20> s_mines;
 
     static void updateMechs(float dt);
     static void drawMechs();
@@ -30,6 +37,9 @@ class Enemy
     static void updateBombers(float dt);
     static void drawBombers();
 
+    static void updateMines(float dt);
+    static void drawMines();
+
 public:    
     static EnemyMech * createMech(const Vec2f &pos);
     static EnemyTank * createTank(const Vec2f &pos);
@@ -39,6 +49,7 @@ public:
     static void spawnTank(const Vec2f &pos);
     static void spawnBomber(const Vec2f &pos);
     static void spawnTurret(const Vec2f &pos);
+    static void spawnMine(const Vec2f &pos);
 
     static void update(float dt);
     static void draw();

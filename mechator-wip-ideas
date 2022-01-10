@@ -6,6 +6,8 @@
 - fix fluent projectiles if nullptr
 - soldier sprint
 - update level editor
+- add top left area stuff to try out
+- add enemy flash frames (tank, turret, bomber)
 - add turret destruction persistence
 - add barracks max $$ count
 

@@ -8,6 +8,7 @@ class Vec2f
     float m_x, m_y;
 
 public:
+    Vec2f() : Vec2f(0, 0) {}
     Vec2f(float x, float y) : m_x(x), m_y(y) {}
     Vec2f(const Vec2f &other) : m_x(other.m_x), m_y(other.m_y) {}
 

@@ -38,7 +38,7 @@ void Soldier::update(float dt)
     if (Player::s_mode != PlayerMode::SoldierMode) return;
     ControlStatus controls = Controls::getStatus(true);
 
-    s_instance.m_steering.update(dt, controls.x , controls.y);
+    s_instance.m_steering.update(dt, controls.x , controls.y, controls.b.held() ? 2.0f : 1.0f);
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0) {
         s_instance.health().change(-damage);
@@ -103,12 +103,6 @@ void Soldier::draw()
     }
     Vec2f spos = Camera::worldToScreen(s_instance.m_steering.pos());
     RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], s_instance.m_steering.facing().x() > 0);
-
-    ControlStatus controls = Controls::getStatus(false);
-    if (controls.b.held()) {
-        spos += s_instance.m_aim * 8;
-        RenderSystem::pixel(spos.x(), spos.y(), 10);
-    }
 }
 
 void Jeep::update(float dt)
@@ -205,6 +199,22 @@ Vec2f Player::position()
         return Boat::position();
     default:
         return Soldier::position();
+    }
+}
+
+Rect Player::bounds()
+{
+    switch (s_mode) {
+    case PlayerMode::JeepMode:
+        return Jeep::bounds();
+    case PlayerMode::HelicopterMode:
+        return Helicopter::bounds();
+    case PlayerMode::TankMode:
+        return Tank::bounds();
+    case PlayerMode::BoatMode:
+        return Boat::bounds();
+    default:
+        return Soldier::bounds();
     }
 }
 

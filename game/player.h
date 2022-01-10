@@ -62,6 +62,7 @@ public:
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos(); }
+    static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
     static void draw();
@@ -81,6 +82,7 @@ public:
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
     static bool available() { return s_available; }
+    static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
     static void draw();
@@ -100,6 +102,7 @@ public:
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
     static bool available() { return s_available; }
+    static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
     static void draw();
@@ -118,6 +121,7 @@ public:
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
     static bool available() { return s_available; }
+    static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
     static void draw();
@@ -141,6 +145,7 @@ public:
     static bool alive() {return s_instance.m_health.value() > 0; }
     static bool available() { return s_available; }
     static void launch() { s_instance.m_inAir = true; }
+    static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
     static void drawGround();
@@ -162,6 +167,7 @@ public:
     static bool canGetPickups() { return s_mode != PlayerMode::HelicopterMode; }
 
     static Vec2f position();
+    static Rect bounds();
 };
 
 #endif // PLAYER_H
