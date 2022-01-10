@@ -100,7 +100,7 @@ void Enemy::spawnBomber(const Vec2f &pos)
 
 void Enemy::spawnTurret(const Vec2f &pos)
 {
-    createTurret(pos + Vec2f(3, 3));
+    createTurret(pos + Vec2f(3, 2));
 }
 
 void Enemy::spawnMine(const Vec2f &pos)

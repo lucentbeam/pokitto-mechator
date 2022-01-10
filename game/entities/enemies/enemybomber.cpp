@@ -29,7 +29,7 @@ bool EnemyBomber::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::AirTarget});
     int damage = in_sky ? 0 : ProjectileManager::getCollisionDamage(m_pos, 17, bulletMask);
     m_life -= damage;
-    m_damage_frames--;
+    if (m_damage_frames > 0) m_damage_frames--;
     if (m_life <= 0) {
         EffectManager::create(m_pos, {explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
         EffectManager::create(m_pos + Vec2f(-2, -3), {explosion_small[0], explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
@@ -41,7 +41,7 @@ bool EnemyBomber::update(float dt)
         return false;
     } else {
         if (damage > 0) {
-            m_damage_frames = 10;
+            m_damage_frames = 6;
             EffectManager::create(m_pos, {hit[0], hit[1], hit[2], hit[3], hit[4]}, 20.0f);
         }
     }
@@ -70,7 +70,7 @@ void EnemyBomber::draw() const
 {
     if (m_life <= 0) return;
     auto pos = Camera::worldToScreen(m_pos) - Vec2f(8.5f, 8.5f);
-    RenderSystem::drawShadow(pos.x(), pos.y() + 10, enemy_plane, enemy_plane[2], in_sky);
+    RenderSystem::drawShadow(pos.x(), pos.y() + 10, enemy_plane[0], enemy_plane[0][2], in_sky);
 
 }
 
@@ -78,5 +78,5 @@ void EnemyBomber::drawAir() const
 {
     if (in_sky || m_life <= 0) return;
     auto pos = Camera::worldToScreen(m_pos) - Vec2f(8.5f, 8.5f);
-    RenderSystem::sprite(pos.x(), pos.y(), enemy_plane, enemy_plane[2]);
+    RenderSystem::sprite(pos.x(), pos.y(), enemy_plane[m_damage_frames > 0 ? 1 : 0], enemy_plane[0][2]);
 }
