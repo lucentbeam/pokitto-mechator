@@ -40,7 +40,7 @@ void Soldier::update(float dt)
 
     static bool running = false;
     if (controls.b.pressed()) {
-        if (s_instance.sprint_timer == 0.0f) {
+        if (s_instance.sprint_timer < 1.0f) {
             running = true;
         }
     }
@@ -58,7 +58,7 @@ void Soldier::update(float dt)
 
 
 
-    s_instance.m_steering.update(dt, controls.x , controls.y, running ? 2.0f : 1.0f);
+    s_instance.m_steering.update(dt, controls.x , controls.y, running ? 2.2f : 1.0f);
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0) {
         s_instance.health().change(-damage);

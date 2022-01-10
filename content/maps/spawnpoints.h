@@ -1,7 +1,7 @@
 #pragma once
 
 #include "core/utilities/vec.h"
-#include "game/entities/enemymech.h"
+#include "game/entities/enemy.h"
 #include "game/entities/barracks.h"
 #include "game/entities/pickups.h"
 #include "game/entities/pois.h"
@@ -47,5 +47,9 @@ const SpawnPoint points[] = {
 	SpawnPoint({159, 47}, spawnDoorNone<153,54,5,3>),
 	SpawnPoint({139, 139}, spawnDoorNone<159,143,3,3>),
 	SpawnPoint({166, 201}, spawnDoorNone<104,39,3,8>),
+	SpawnPoint({23, 41}, Enemy::spawnMine),
+	SpawnPoint({16, 25}, Enemy::spawnBomber),
+	SpawnPoint({38, 54}, Enemy::spawnTank),
+	SpawnPoint({38, 45}, Enemy::spawnTurret),
 };
 const int point_count = sizeof(points)/sizeof(SpawnPoint);

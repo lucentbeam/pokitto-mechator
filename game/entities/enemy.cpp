@@ -78,6 +78,11 @@ EnemyBomber *Enemy::createBomber(const Vec2f &pos)
     return m;
 }
 
+void Enemy::spawnMech(const Vec2f &pos)
+{
+    createMech(pos);
+}
+
 void Enemy::spawnTank(const Vec2f &pos)
 {
     for(int i = 0; i < s_tanks.objectCount(); ++i) {

@@ -55,7 +55,7 @@ class Soldier : public Vehicle {
     Vec2f m_aim = Vec2f(0,0);
 
     float sprint_timer = 0.0f;
-    static constexpr float sprint_duration = 0.5f;
+    static constexpr float sprint_duration = 0.6f;
     static constexpr float sprint_cooldown = 3.0f;
 public:
     Soldier() : Vehicle(8, 18*6, 33*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}

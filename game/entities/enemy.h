@@ -46,6 +46,7 @@ public:
     static EnemyTurret * createTurret(const Vec2f &pos);
     static EnemyBomber * createBomber(const Vec2f &pos);
 
+    static void spawnMech(const Vec2f &pos);
     static void spawnTank(const Vec2f &pos);
     static void spawnBomber(const Vec2f &pos);
     static void spawnTurret(const Vec2f &pos);

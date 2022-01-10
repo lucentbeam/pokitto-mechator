@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="49">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="53">
  <editorsettings>
   <export target="mechator.json" format="json"/>
  </editorsettings>
@@ -444,7 +444,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="9" name="level_elements" visible="0">
+ <objectgroup id="9" name="level_elements">
   <object id="2" name="shop_-3_-1_-4_-6_-6_-1" x="163.063" y="37.0625" width="4.8125" height="4.4375"/>
   <object id="3" name="hackingkit" x="98.273" y="98.7386" width="2.5" height="2.875"/>
   <object id="4" name="door_a_-1_-1_1_3" x="265.125" y="97.25" width="3.5" height="4.125"/>
@@ -486,5 +486,9 @@
   <object id="46" name="pattern_tank" x="163.341" y="600.71" width="3.5" height="4.125"/>
   <object id="47" name="pattern_boat" x="966.977" y="1261.27" width="3.5" height="4.125"/>
   <object id="48" name="door_none_-62_-162_3_8" x="997.5" y="1206.94" width="3.5" height="4.125"/>
+  <object id="49" name="enemy_mine" x="138.594" y="246.912" width="4.8125" height="4.4375"/>
+  <object id="50" name="enemy_bomber" x="96.2756" y="150.724" width="4.8125" height="4.4375"/>
+  <object id="51" name="enemy_tank" x="228.76" y="325.281" width="4.8125" height="4.4375"/>
+  <object id="52" name="enemy_turret" x="228.469" y="270.906" width="4.8125" height="4.4375"/>
  </objectgroup>
 </map>
