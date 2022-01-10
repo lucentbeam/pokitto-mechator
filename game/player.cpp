@@ -38,7 +38,27 @@ void Soldier::update(float dt)
     if (Player::s_mode != PlayerMode::SoldierMode) return;
     ControlStatus controls = Controls::getStatus(true);
 
-    s_instance.m_steering.update(dt, controls.x , controls.y, controls.b.held() ? 2.0f : 1.0f);
+    static bool running = false;
+    if (controls.b.pressed()) {
+        if (s_instance.sprint_timer == 0.0f) {
+            running = true;
+        }
+    }
+    if (controls.b.held() && running) {
+        s_instance.sprint_timer += 1.0f / sprint_duration * dt;
+        if (s_instance.sprint_timer > 1.0f) {
+            running = false;
+            s_instance.sprint_timer = 1.0f;
+        }
+    } else {
+        running = false;
+        s_instance.sprint_timer -= 1.0f / sprint_cooldown * dt;
+        if (s_instance.sprint_timer < 0.0f) s_instance.sprint_timer = 0.0f;
+    }
+
+
+
+    s_instance.m_steering.update(dt, controls.x , controls.y, running ? 2.0f : 1.0f);
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0) {
         s_instance.health().change(-damage);
@@ -65,6 +85,7 @@ void Soldier::update(float dt)
             Player::s_mode = PlayerMode::JeepMode;
             mode_switch_counter = 0;
             UI::showHealthbar();
+            s_instance.sprint_timer = 0.0f;
         }
         dp = Helicopter::position() - s_instance.m_steering.pos();
         if (Helicopter::alive() && dp.length() < 6) {
@@ -72,18 +93,21 @@ void Soldier::update(float dt)
             Helicopter::launch();
             mode_switch_counter = 0;
             UI::showHealthbar();
+            s_instance.sprint_timer = 0.0f;
         }
         dp = Tank::position() - s_instance.m_steering.pos();
         if (Tank::alive() && dp.length() < 6) {
             Player::s_mode = PlayerMode::TankMode;
             mode_switch_counter = 0;
             UI::showHealthbar();
+            s_instance.sprint_timer = 0.0f;
         }
         dp = Boat::position() - s_instance.m_steering.pos();
         if (Boat::alive() && dp.length() < 18) {
             Player::s_mode = PlayerMode::BoatMode;
             mode_switch_counter = 0;
             UI::showHealthbar();
+            s_instance.sprint_timer = 0.0f;
         }
     }
 }

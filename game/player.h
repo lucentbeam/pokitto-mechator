@@ -53,6 +53,10 @@ class Soldier : public Vehicle {
     static Soldier s_instance;
 
     Vec2f m_aim = Vec2f(0,0);
+
+    float sprint_timer = 0.0f;
+    static constexpr float sprint_duration = 0.5f;
+    static constexpr float sprint_cooldown = 3.0f;
 public:
     Soldier() : Vehicle(8, 18*6, 33*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
 //    Soldier() : Vehicle(8, 8*6, 15*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
@@ -63,6 +67,8 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
+
+    static float sprintCooldown() { return s_instance.sprint_timer; }
 
     static void update(float dt);
     static void draw();

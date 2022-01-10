@@ -367,6 +367,10 @@ void UI::draw()
             drawNumber(GameVariables::keysC(), x + 8, y+1);
         }
     });
+
+    if (Player::mode() == PlayerMode::SoldierMode && Soldier::sprintCooldown() > 0.05f) {
+        drawProgressBar(Soldier::sprintCooldown());
+    }
 }
 
 void UI::drawProgressBar(float fraction)
