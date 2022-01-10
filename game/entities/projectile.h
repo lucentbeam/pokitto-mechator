@@ -72,6 +72,8 @@ class ProjectileManager
 {
     static ObjectPool<Projectile, 32> s_projectiles;
 
+    static Projectile s_dummy;
+
 public:
 
     static Projectile* create(const Vec2f &pos, const Vec2f &vel, int size, float lifetime);

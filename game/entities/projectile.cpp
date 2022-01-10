@@ -105,10 +105,13 @@ void Projectile::onExpire()
 
 ObjectPool<Projectile,32> ProjectileManager::s_projectiles;
 
+Projectile ProjectileManager::s_dummy;
+
 Projectile *ProjectileManager::create(const Vec2f &pos, const Vec2f &vel, int size, float lifetime)
 {
     Projectile * p = s_projectiles.activateNext();
-    if (p != nullptr) p->configure(pos, vel, size, lifetime);
+    if (p == nullptr) p = &s_dummy;
+    p->configure(pos, vel, size, lifetime);
     return p;
 }
 

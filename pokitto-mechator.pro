@@ -117,6 +117,8 @@ mac: DEPENDPATH += $$PWD/../../SFML-2.5.1/include
 
 QMAKE_CXXFLAGS += -Wno-narrowing
 
+CONFIG(debug, debug|release): DEFINES += DEBUGS
+
 DEFINES += DESKTOP_BUILD
 DEFINES += SDL_CORE
 
