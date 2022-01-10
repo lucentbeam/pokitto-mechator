@@ -25,6 +25,7 @@ class Barracks
 
     int16_t m_spawn_timer = 160;
     int8_t m_spawn_count = 0;
+    int16_t m_barracks_index = 0;
 
     Stage stage() const { return m_life > s_max_life * 2 / 3 ? DefaultStage : m_life > s_max_life / 3 ? DamagedStage : HeavyDamagedStage; }
 

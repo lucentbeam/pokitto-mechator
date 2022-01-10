@@ -8,6 +8,10 @@
 #include "game/physics/collisionmanager.h"
 #include "game/physics/pathfinding.h"
 
+#include "game/maps/worldmutables.h"
+
+#include "game/constants.h"
+
 ObjectPool<Barracks, 6> Barracks::s_barracks;
 
 int8_t Barracks::s_max_life = 27;
@@ -22,6 +26,15 @@ void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t w
     m_life = s_max_life;
     m_collision_rect = Rect(m_left, m_top, m_width, m_height);
     m_spawn_timer = 80 + (rand() % 40);
+
+    // If this stuff ever changes, double-check the implementation in TiledMapReader!!!
+    int idx = int(left)  + int(top) * 255;
+    for(int i = 0; i < sizeof(barracks_indices); ++i) {
+        if (idx == barracks_indices[i]) {
+            m_barracks_index = i;
+            return;
+        }
+    }
 }
 
 void Barracks::create(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
@@ -112,8 +125,13 @@ void Barracks::update(float dt)
                     EnemyMech * m = Enemy::createMech(start[i].m_spawn);
                     ++start[i].m_spawn_count;
                     auto ptr = &start[i].m_spawn_count;
+                    auto ptr2 = barracks_data + start[i].m_barracks_index;
+                    m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
                     m->setDeactivateCallback([=](){
                         --(*ptr);
+                        if (*ptr2 < 5) {
+                            ++(*ptr2);
+                        }
                     });
                 }
             }

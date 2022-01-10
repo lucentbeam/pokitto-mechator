@@ -162,7 +162,7 @@ void Jeep::update(float dt)
     float frames_per_second = 1.0f / dt;
     float frames_per_shot = frames_per_second / shots_per_second;
     if (controls.a.pressed()) {
-        s_instance.m_aim = Vec2f(controls.x, controls.y);
+        s_instance.m_aim = s_instance.m_steering.aim();
     }
     if (controls.a.downEvery(1, int(frames_per_shot))) {
         Vec2f offset = s_instance.m_aim.rot90();
@@ -174,25 +174,24 @@ void Jeep::update(float dt)
                 ->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
     }
 
-    //    s_instance.m_steering.setBrake(controls.b.held());
-//    if (controls.b.pressed()) {
-//        ProjectileManager::create(s_instance.m_steering.pos(), s_instance.m_steering.vel() * 0.85f + s_instance.m_steering.facing() * 50.0f, 4, 0.5f)
-//            ->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)
-//            ->setTargetMask({EnemyTarget, GroundTarget})
-//            ->setDamage(0)
-//            ->setExpireCallback([](Projectile*p) {
-//            for(int i = -4; i <= 4; i+=4) {
-//                for (int j = -4; j <= 4; j+= 4) {
-//                    Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
-//                    if (t == Terrain::DestrucableWood) {
-//                        MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
-//                    }
-//                }
-//            }
-//            ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls();
-//            EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
-//        });
-//    }
+    if (controls.a.downEvery(1, int(frames_per_shot))) {
+        ProjectileManager::create(s_instance.m_steering.pos(), s_instance.m_steering.vel() * 0.85f + s_instance.m_aim * 50.0f, 4, 0.5f)
+            ->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)
+            ->setTargetMask({EnemyTarget, GroundTarget})
+            ->setDamage(0)
+            ->setExpireCallback([](Projectile*p) {
+            for(int i = -4; i <= 4; i+=4) {
+                for (int j = -4; j <= 4; j+= 4) {
+                    Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
+                    if (t == Terrain::DestrucableWood) {
+                        MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
+                    }
+                }
+            }
+            ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls();
+            EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+        });
+    }
 
     mode_switch_counter++;
     if (controls.b.pressed() && mode_switch_counter > 1) {

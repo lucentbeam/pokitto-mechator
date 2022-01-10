@@ -16,6 +16,8 @@ class EnemyMech
     int8_t m_life = 3;
     uint8_t m_damage_frames = 0;
 
+    bool m_drops = true;
+
     enum Mode { Walking, Preparing } status = Mode::Walking;
 
     uint16_t m_counter = rand() % 100;
@@ -34,6 +36,8 @@ public:
     bool update(float dt);
 
     void setDeactivateCallback(std::function<void()> on_deactivate) { m_on_deactivate = on_deactivate; }
+
+    void setDropsCash(bool drops) { m_drops = drops; }
 
     void draw();
 };

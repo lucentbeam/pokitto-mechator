@@ -16,23 +16,7 @@
 #include "game/utilities/playerstats.h"
 #include "game/enums.h"
 
-const float soldierSpeed = 20.0f;
-
-const float jeepSpeed = 40.0f;
-const float jeepGrassSpeedFraction = 0.5f;
-const float jeepCornering = 0.1f;
-const float jeepFriction = 0.05f;
-
-const float tankSpeed = 32.0f;
-const float tankCornering = 0.04f;
-
-const float boatSpeed = 70.0f;
-const float boatCornering = 0.1f;
-const float boatFriction = 0.01f;
-
-const float heliSpeed = 55.0f;
-const float heliCornering = 0.05f;
-const float heliFriction = 0.08f;
+#include "game/constants.h"
 
 class Player;
 
@@ -58,9 +42,7 @@ class Soldier : public Vehicle {
     static constexpr float sprint_duration = 0.6f;
     static constexpr float sprint_cooldown = 3.0f;
 public:
-    Soldier() : Vehicle(8, 18*6, 33*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 4, 4) {}
-//    Soldier() : Vehicle(8, 8*6, 15*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
-//    Soldier() : Vehicle(8, 36*6, 10*6, 20.0f, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}, 4, 4) {}
+    Soldier() : Vehicle(8, playerStartTileX*6, playerStartTileY*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 4, 4) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
