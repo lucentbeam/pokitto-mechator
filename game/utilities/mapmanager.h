@@ -18,7 +18,8 @@ public:
 
     enum SpecialTiles : uint8_t {
         UnexplodedOrdinance = 63,
-        ExplodedOrdinance = 64
+        ExplodedOrdinance = 64,
+        DestroyedTurret = 185
     };
 
     static void draw(bool bg);

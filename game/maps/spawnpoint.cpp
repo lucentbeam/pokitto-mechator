@@ -23,3 +23,4 @@ void SpawnPoint::setActiveRegion()
     }
     s_active_points = next;
 }
+

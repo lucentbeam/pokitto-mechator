@@ -8,7 +8,9 @@ void EnemyTurret::setup(const Vec2f &pos) {
     m_pos = pos;
     m_life = 8;
     m_on_deactivate = std::function<void()>();
-    // TODO: check if destroyed already
+    if (MapManager::getTileAt(pos.x(), pos.y()) == MapManager::SpecialTiles::DestroyedTurret) {
+        m_life = 0;
+    }
 }
 
 bool EnemyTurret::update(float dt)
@@ -52,7 +54,7 @@ bool EnemyTurret::update(float dt)
         EffectManager::create(m_pos + Vec2f(0, -4), {explosion_small[0], explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
         EffectManager::create(m_pos + Vec2f(-5, 1), {explosion_small[0], explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
 
-        // TODO: Mark as destroyed
+        MapManager::setTileAt(m_pos.x(), m_pos.y(), MapManager::SpecialTiles::DestroyedTurret);
     } else {
         if (damage > 0) {
             m_damage_frames = 6;

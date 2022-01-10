@@ -9,8 +9,8 @@ class Vec2f
 
 public:
     Vec2f() : Vec2f(0, 0) {}
-    Vec2f(float x, float y) : m_x(x), m_y(y) {}
-    Vec2f(const Vec2f &other) : m_x(other.m_x), m_y(other.m_y) {}
+    constexpr Vec2f(float x, float y) : m_x(x), m_y(y) {}
+    constexpr Vec2f(const Vec2f &other) : m_x(other.m_x), m_y(other.m_y) {}
 
     float x() const { return m_x; }
     float y() const { return m_y; }
@@ -49,7 +49,7 @@ public:
         return *this;
     }
 
-    Vec2f operator*(float val) const {
+    constexpr Vec2f operator*(float val) const {
         return Vec2f(m_x * val, m_y * val);
     }
 
