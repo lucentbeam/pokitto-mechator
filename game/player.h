@@ -18,6 +18,8 @@
 
 #include "game/constants.h"
 
+#include "game/weapons.h"
+
 class Player;
 
 class Vehicle {
@@ -42,6 +44,12 @@ class Soldier : public Vehicle {
     static constexpr float sprint_duration = 0.6f;
     static constexpr float sprint_cooldown = 3.0f;
     bool m_overlaps = false;
+
+    static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun;
+    static int s_owned_weapons;
+    static Weapon::Type s_current_weapon;
+
+    friend Player;
 public:
     Soldier() : Vehicle(8, playerStartTileX*6, playerStartTileY*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 4, 4) {}
 
@@ -63,6 +71,11 @@ class Jeep : public Vehicle {
 
     static bool s_available;
 
+    static constexpr const int s_possible_weapons = Weapon::DualShot | Weapon::MachineGun | Weapon::Grenade;
+    static int s_owned_weapons;
+    static Weapon::Type s_current_weapon;
+
+    friend Player;
 public:
     Jeep() : Vehicle(12, 26*6, 8*6, jeepSpeed, jeepCornering, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 9, 9, jeepFriction) {}
 
@@ -83,6 +96,12 @@ class Tank : public Vehicle {
     static Tank s_instance;
 
     static bool s_available;
+
+    static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::Missiles;
+    static int s_owned_weapons;
+    static Weapon::Type s_current_weapon;
+
+    friend Player;
 public:
     Tank() : Vehicle(28, 12*6, 8*6, tankSpeed, tankCornering, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 14, 14) {}
 
@@ -102,6 +121,12 @@ class Boat : public Vehicle {
     static Boat s_instance;
 
     static bool s_available;
+
+    static constexpr const int s_possible_weapons = Weapon::MachineGun;
+    static int s_owned_weapons;
+    static Weapon::Type s_current_weapon;
+
+    friend Player;
 public:
     Boat() : Vehicle(20, 12*6, 6*6, boatSpeed, boatCornering, {Terrain::Wall, Terrain::None, Terrain::Grass, Terrain::Mud, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 24, 24, boatFriction) {}
 
@@ -125,6 +150,12 @@ class Helicopter : public Vehicle {
     bool m_inAir = false;
 
     float m_z = 0.0f;
+
+    static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::Missiles;
+    static int s_owned_weapons;
+    static Weapon::Type s_current_weapon;
+
+    friend Player;
 public:
     Helicopter() : Vehicle(16, 12*6, 8*6, heliSpeed, heliCornering, {}, 14, 14, heliFriction) {}
 
@@ -150,6 +181,8 @@ class Player {
     friend class Tank;
     friend class Boat;
     friend class Helicopter;
+
+    static float s_shot_cooldown;
 public:
 
     static PlayerMode mode() { return s_mode; }
@@ -158,6 +191,10 @@ public:
 
     static Vec2f position();
     static Rect bounds();
+
+    static Weapon::Type currentWeapon();
+    static void cycleWeaponNext();
+    static void cycleWeaponPrev();
 };
 
 #endif // PLAYER_H

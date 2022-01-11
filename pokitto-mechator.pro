@@ -37,6 +37,7 @@ SOURCES += \
     core/utilities/tween.cpp \
     core/utilities/vec.cpp \
     game/variables.cpp \
+    game/weapons.cpp \
     main.cpp \
     core/audiosystem.cpp \
     core/utilities/rect.cpp \
@@ -97,7 +98,8 @@ HEADERS += \
     core/utilities/tween.h \
     core/utilities/vec.h \
     game/variables.h \
-    game/sprites.h
+    game/sprites.h \
+    game/weapons.h
 
 win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
 win32:DEPENDPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include

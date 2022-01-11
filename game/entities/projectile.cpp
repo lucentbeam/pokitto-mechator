@@ -57,6 +57,12 @@ Projectile *Projectile::setInAir(float pz, float pvz, bool destroy_at_ground)
     return this;
 }
 
+Projectile *Projectile::addVelocity(const Vec2f &vel)
+{
+    m_body.addVel(vel);
+    return this;
+}
+
 void Projectile::update(float dt)
 {
     m_body.update(dt);

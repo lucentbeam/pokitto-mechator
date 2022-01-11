@@ -12,6 +12,8 @@ public:
     void update(float dt);
 
     Vec2f pos() const { return m_pos; }
+
+    void addVel(const Vec2f &vel);
 };
 
 #endif // BODY_H

@@ -32,7 +32,10 @@ enum POIType : uint8_t {
 };
 
 enum SpecialTiles : uint8_t {
-    BaseGround = 184
+    UnexplodedOrdinance = 63,
+    ExplodedOrdinance = 64,
+    BaseGround = 184,
+    DestroyedTurret = 185
 };
 
 enum GameStates : uint8_t {

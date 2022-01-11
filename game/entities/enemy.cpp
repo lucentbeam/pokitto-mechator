@@ -105,7 +105,7 @@ void Enemy::spawnTurret(const Vec2f &pos)
 
 void Enemy::spawnMine(const Vec2f &pos)
 {
-    if (MapManager::getTileAt(pos.x(), pos.y()) != MapManager::UnexplodedOrdinance) return;
+    if (MapManager::getTileAt(pos.x(), pos.y()) != SpecialTiles::UnexplodedOrdinance) return;
     auto m = s_mines.activateNext();
     if (m != nullptr) {
         m->pos = pos;
@@ -186,7 +186,7 @@ void Enemy::updateMines(float dt)
     player.grow(3, 3);
     s_mines.iterate([&](Mine *m) {
         if (player.contains(m->pos)) {
-            MapManager::setTileAt(m->pos.x(), m->pos.y(), MapManager::SpecialTiles::ExplodedOrdinance);
+            MapManager::setTileAt(m->pos.x(), m->pos.y(), SpecialTiles::ExplodedOrdinance);
             ProjectileManager::create(m->pos, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
             EffectManager::create(m->pos - Vec2f(3,3), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
             return true;

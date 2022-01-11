@@ -55,6 +55,8 @@ public:
 
     Projectile * setInAir(float pz, float pvz, bool destroy_at_ground = true);
 
+    Projectile * addVelocity(const Vec2f &vel);
+
     void update(float dt);
 
     void draw();

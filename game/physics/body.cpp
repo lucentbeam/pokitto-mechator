@@ -11,3 +11,8 @@ void Body::update(float dt)
 {
     m_pos += m_vel * dt;
 }
+
+void Body::addVel(const Vec2f &vel)
+{
+    m_vel += vel;
+}
