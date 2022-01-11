@@ -11,6 +11,9 @@ const uint8_t physicsTimestepMs = uint8_t(physicsTimestep * 1000);
 
 const int barracksMaxMoneyDrops = 5;
 
+const float enemyHeliSpeed = 20.0f;
+const float enemyTankSpeed = 12.0f;
+
 // for final: 8, 15
 const int playerStartTileX = 18;
 const int playerStartTileY = 33;

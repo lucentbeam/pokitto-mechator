@@ -17,6 +17,8 @@ ObjectPool<EnemyTurret,4> Enemy::s_turrets;
 
 ObjectPool<EnemyBomber,2> Enemy::s_bombers;
 
+ObjectPool<EnemyHelicopter,2> Enemy::s_helis;
+
 ObjectPool<Mine, 20> Enemy::s_mines;
 
 EnemyMech * Enemy::createMech(const Vec2f &pos)
@@ -113,6 +115,14 @@ void Enemy::spawnMine(const Vec2f &pos)
     }
 }
 
+void Enemy::spawnHelicopter(const Vec2f &pos)
+{
+    auto m = s_helis.activateNext();
+    if (m != nullptr) {
+        m->setup(pos);
+    }
+}
+
 void Enemy::updateTanks(float dt)
 {
     EnemyTank * start = s_tanks.objects();
@@ -179,6 +189,21 @@ void Enemy::drawBombers()
     }
 }
 
+void Enemy::updateHelis(float dt)
+{
+    s_helis.iterate([&](EnemyHelicopter * h) {
+        return !h->update(dt);
+    });
+}
+
+void Enemy::drawHelis()
+{
+    EnemyHelicopter * start = s_helis.objects();
+    for (int i = 0; i < s_helis.objectCount(); ++i) {
+        (start + i)->draw();
+    }
+}
+
 void Enemy::updateMines(float dt)
 {
     Mine::timer++;
@@ -212,6 +237,7 @@ void Enemy::update(float dt)
     updateTurrets(dt);
     updateBombers(dt);
     updateMines(dt);
+    updateHelis(dt);
 }
 
 void Enemy::draw()
@@ -223,6 +249,7 @@ void Enemy::draw()
     drawTurrets();
 
     drawBombers();
+    drawHelis();
 }
 
 void Enemy::drawAir()
@@ -230,5 +257,9 @@ void Enemy::drawAir()
     EnemyBomber * start = s_bombers.objects();
     for (int i = 0; i < s_bombers.objectCount(); ++i) {
         (start + i)->drawAir();
+    }
+    EnemyHelicopter * starth = s_helis.objects();
+    for (int i = 0; i < s_helis.objectCount(); ++i) {
+        (starth + i)->drawAir();
     }
 }

@@ -6,7 +6,7 @@
 
 void EnemyTurret::setup(const Vec2f &pos) {
     m_pos = pos;
-    m_life = 8;
+    m_life = 10;
     m_on_deactivate = std::function<void()>();
     if (MapManager::getTileAt(pos.x(), pos.y()) == SpecialTiles::DestroyedTurret) {
         m_life = 0;

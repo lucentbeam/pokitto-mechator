@@ -127,7 +127,9 @@ void drawShadedGame(int shading)
     MapManager::draw(false);
 //    CloudManager::draw();
 
+    ProjectileManager::drawAir();
     Helicopter::drawAir();
+    Enemy::drawAir();
     RenderSystem::shadeAll(shading);
 
     // ui draw

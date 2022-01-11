@@ -1,6 +1,3 @@
-- helicopters
-  - art
-  - prog
 - lasers
   - art
   - prog
@@ -8,6 +5,8 @@
 - consider reworking bombers: constantly come while within range of spawn point?
 
 - player feedback on hit
+
+- clean up enemy explosions
 
 - areas alerts:
 	- tutorial
