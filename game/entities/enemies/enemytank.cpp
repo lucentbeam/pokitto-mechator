@@ -83,11 +83,16 @@ bool EnemyTank::update(float dt)
 
 void EnemyTank::draw() const
 {
-    int f_offset = m_damage_frames > 0 ? 1 : 0;
     auto pos = Camera::worldToScreen(m_steering.pos()) - Vec2f(6.0f, 6.5f);
-    RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f) + f_offset * 5], enemy_tank[0][2], m_steering.facing().x() > 0);
-    int ox = m_steering.facing().x() > 0 && m_smoothaim.x() < 0 ? 1 : 0;
-    RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_smoothaim, 8.0f) + f_offset * 9], enemy_tank_cannon[0][2], m_smoothaim.x() > 0);
+    if (m_damage_frames > 0) {
+        RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], 10, m_smoothaim.x() > 0);
+        int ox = m_steering.facing().x() > 0 && m_smoothaim.x() < 0 ? 1 : 0;
+        RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_smoothaim, 8.0f)], enemy_tank_cannon[0][2], 10, m_smoothaim.x() > 0);
+    } else {
+        RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], m_steering.facing().x() > 0);
+        int ox = m_steering.facing().x() > 0 && m_smoothaim.x() < 0 ? 1 : 0;
+        RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_smoothaim, 8.0f)], enemy_tank_cannon[0][2], m_smoothaim.x() > 0);
+    }
 
 //    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal});
 //    std::vector<Vec2f> path;

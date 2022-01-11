@@ -86,7 +86,7 @@ void EnemyMech::draw()
 {
     auto pos = Camera::worldToScreen({m_rect.centerX(), m_rect.centerY()});
     if (m_damage_frames > 0) {
-        RenderSystem::sprite(pos.x()-2, pos.y()-2, enemy_ground[4], enemy_ground[4][2]);
+        RenderSystem::sprite(pos.x()-2, pos.y()-2, enemy_ground[0], enemy_ground[0][2], 10, false);
     } else if (status == EnemyMech::Mode::Preparing) {
         int idx = m_counter % 10 < 5 ? 1 : 3;
         RenderSystem::sprite(pos.x()-2, pos.y()-2, enemy_ground[idx], enemy_ground[idx][2]);

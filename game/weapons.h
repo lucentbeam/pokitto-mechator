@@ -12,6 +12,8 @@
 #include "game/enums.h"
 #include "game/constants.h"
 
+#include <string>
+
 struct WeaponConfig {
     static constexpr float frames_per_second = 1.0f / physicsTimestep;
     const float shots_per_second;

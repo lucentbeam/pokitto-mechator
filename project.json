@@ -10599,6 +10599,24 @@
 		},
 		"/game/entities/projectile.cpp.jDoCyB": {
 			"sdcard": false
+		},
+		"/game/weapons.cpp": {
+			"sdcard": false
+		},
+		"/game/weapons.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/ui_arrow_left.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/ui_arrow_left.h": {
+			"sdcard": false
+		},
+		"/game/weapons.h.LPmGcu": {
+			"sdcard": false
+		},
+		"/content/art/enemy_helicopter.aseprite": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

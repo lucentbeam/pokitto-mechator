@@ -70,7 +70,7 @@ void EnemyBomber::draw() const
 {
     if (m_life <= 0) return;
     auto pos = Camera::worldToScreen(m_pos) - Vec2f(8.5f, 8.5f);
-    RenderSystem::drawShadow(pos.x(), pos.y() + 10, enemy_plane[0], enemy_plane[0][2], in_sky);
+    RenderSystem::drawShadow(pos.x(), pos.y() + 10, enemy_plane, enemy_plane[2], in_sky);
 
 }
 
@@ -78,5 +78,6 @@ void EnemyBomber::drawAir() const
 {
     if (in_sky || m_life <= 0) return;
     auto pos = Camera::worldToScreen(m_pos) - Vec2f(8.5f, 8.5f);
-    RenderSystem::sprite(pos.x(), pos.y(), enemy_plane[m_damage_frames > 0 ? 1 : 0], enemy_plane[0][2]);
+    if (m_damage_frames > 0) RenderSystem::sprite(pos.x(), pos.y(), enemy_plane, enemy_plane[2], 10, false);
+    else RenderSystem::sprite(pos.x(), pos.y(), enemy_plane, enemy_plane[2]);
 }

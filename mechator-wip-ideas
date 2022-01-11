@@ -1,24 +1,21 @@
-
-- pause menu
-  x weapon cycling
-  - per vehicle
-    - jeep bombs
-
 - helicopters
   - art
   - prog
 - lasers
   - art
   - prog
+
+- consider reworking bombers: constantly come while within range of spawn point?
+
+- player feedback on hit
+
+- areas alerts:
+	- tutorial
+	- panhandle
+
 - boats
   - art
   - prog
 - subs
   - art
   - prog
-
-- consider reworking bombers: constantly come while within range of spawn point?
-
-- areas alerts:
-	- tutorial
-	- panhandle

@@ -111,6 +111,11 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
     Pokitto::DisplayExtensions::drawBitmap(x, y, sprite, transparent_color, target_color, replacement_color);
 }
 
+void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_color, int replacement_color, bool flip)
+{
+    Pokitto::DisplayExtensions::drawBitmap(x, y, sprite, transparent_color, replacement_color, flip);
+}
+
 void RenderSystem::spriteWrapped(int x, int y, const uint8_t *sprite, int transparent_color)
 {
     if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
@@ -517,6 +522,40 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
             continue;
         }
         if (idx == target_color) idx = replacement_color;
+        RenderSystem::pixel(px, py, idx);
+    }
+}
+
+void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_color, int replacement_color, bool flip)
+{
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
+    uint8_t w = sprite[0];
+    uint8_t width = w;
+    if (four_bpp) {
+        width = w + (w % 2);
+    }
+    uint8_t h = sprite[1];
+    const uint8_t * start = sprite + 2;
+    for (int i = 0; i < width * h; ++i) {
+        int dx = i % width;
+        if (dx >= w) continue;
+        if (s_clipping && dx > s_clip_width) continue;
+        int dy = i / width;
+        if (s_clipping && dy > s_clip_height) continue;
+        int px = x + dx;
+        int py = y + dy;
+        if (flip) {
+            px = x + (w - dx);
+        }
+        if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
+            continue;
+        }
+        // this is for 4 bpp
+        int idx = start[i];
+        if (idx == transparent_color) {
+            continue;
+        }
+        idx = replacement_color;
         RenderSystem::pixel(px, py, idx);
     }
 }
