@@ -24,6 +24,7 @@ public:
   float height() const { return m_h; }
 
   void setCenter(float x, float y);
+  void shift(float x, float y);
 
   bool overlaps(const Rect &other) const;
   bool contains(const Vec2f &p) const;

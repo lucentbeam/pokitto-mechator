@@ -112,7 +112,7 @@ void Enemy::spawnMine(const Vec2f &pos)
     if (MapManager::getTileAt(pos.x(), pos.y()) != SpecialTiles::UnexplodedOrdinance) return;
     auto m = s_mines.activateNext();
     if (m != nullptr) {
-        m->pos = pos;
+        m->pos = pos + Vec2f(3, 3);
         m->timer = (rand() % 30);
     }
 }
@@ -223,7 +223,7 @@ void Enemy::updateMines(float dt)
         if (player.contains(m->pos)) {
             MapManager::setTileAt(m->pos.x(), m->pos.y(), SpecialTiles::ExplodedOrdinance);
             ProjectileManager::create(m->pos, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
-            EffectManager::create(m->pos - Vec2f(3,3), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+            EffectManager::create(m->pos - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
             return true;
         }
         return !Camera::inActiveZone(m->pos);
@@ -238,7 +238,7 @@ void Enemy::drawMines()
     for(int i = 0; i < s_mines.objectCount(); ++i) {
         if (((Mine::timer + (s_mines.objects() + i)->timer) % 120) <= 10) {
             Vec2f p = Camera::worldToScreen((s_mines.objects() + i)->pos);
-            RenderSystem::pixel(p.x() + 2, p.y() + 2, 16);
+            RenderSystem::pixel(p.x() - 1, p.y() - 1, 16);
         }
     }
     s_lasers.iterate([&](EnemyLasers * l) {

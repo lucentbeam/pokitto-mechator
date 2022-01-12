@@ -16,6 +16,14 @@ void Rect::setCenter(float x, float y) {
   m_b = y + m_h/2.0f;
 }
 
+void Rect::shift(float x, float y)
+{
+    m_r += x;
+    m_l += x;
+    m_t += y;
+    m_b += y;
+}
+
 bool Rect::overlaps(const Rect &other) const
 {
     return Rect::overlaps(*this, other);

@@ -232,7 +232,9 @@ void Helicopter::update(float dt)
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
-    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
+    Rect rect = s_instance.m_steering.rect();
+    rect.shift(0, -s_instance.m_z);
+    int damage = ProjectileManager::getCollisionDamage(rect, bulletMask);
     s_instance.m_iframes.update();
     if (damage > 0 && s_instance.m_iframes.ready()) {
         s_instance.m_iframes.reset(10);
