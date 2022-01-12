@@ -1,15 +1,13 @@
 
 - MOAR weapons!
-  - machinegun
+  x machinegun
   - missiles (straight)
   - missiles (steering)
 
-- boats
-  - art
-  - prog
-- subs
-  - art
-  - prog
+- barracks flash on hit
+- barracks explosion on death
+
+Fill out map a bit more
 
 - sfx
   - laser charge
@@ -21,5 +19,26 @@
   - player grenade
   - player missile
   
+- game events
+  - intro
+  - first boss
+  - tank factory
+  - bridge down
+
+- la musica
+ 
+- boats
+  - art
+  - prog
+- subs
+  - art
+  - prog 
+
+- island areas (boat)
+
+- island (heli)
+
+- final boss
+
 morphitudinous
 morphenomenal

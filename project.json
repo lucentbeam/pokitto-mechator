@@ -10911,6 +10911,12 @@
 		},
 		"/game/weapons.cpp.brmlQe": {
 			"sdcard": false
+		},
+		"/game/entities/enemy.cpp.FlsXNl": {
+			"sdcard": false
+		},
+		"/game/entities/enemy.cpp.TvKYhJ": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

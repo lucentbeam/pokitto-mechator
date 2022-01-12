@@ -217,10 +217,11 @@ void Enemy::drawHelis()
 void Enemy::updateMines(float dt)
 {
     Mine::timer++;
+    bool skip = Player::mode() == PlayerMode::HelicopterMode;
     Rect player = Player::bounds();
     player.grow(3, 3);
     s_mines.iterate([&](Mine *m) {
-        if (player.contains(m->pos)) {
+        if (!skip && player.contains(m->pos)) {
             MapManager::setTileAt(m->pos.x(), m->pos.y(), SpecialTiles::ExplodedOrdinance);
             ProjectileManager::create(m->pos, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
             EffectManager::createExplosionBig(m->pos - Vec2f(6,6));
