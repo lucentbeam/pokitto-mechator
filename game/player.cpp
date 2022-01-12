@@ -83,8 +83,7 @@ void Soldier::update(float dt)
         s_instance.m_aim = s_instance.m_steering.aim();
     }
 
-    Player::s_shot_cooldown -= physicsTimestep;
-    if (Player::s_shot_cooldown <= 0.0f) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
 
@@ -147,18 +146,17 @@ void Soldier::draw()
 
 void Jeep::update(float dt)
 {
-    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
-
+    s_instance.m_iframes.update();
     if (Player::s_mode != PlayerMode::JeepMode) {
         s_instance.m_steering.update(dt, 0.0f, 0.0f);
         return;
     }
 
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
-    s_instance.m_iframes.update();
     if (damage > 0 && s_instance.m_iframes.ready()) {
         s_instance.m_iframes.reset(10);
         s_instance.health().change(-damage);
@@ -178,8 +176,8 @@ void Jeep::update(float dt)
 
     if (controls.a.pressed()) s_instance.m_aim = s_instance.m_steering.aim();
 
-    Player::s_shot_cooldown -= physicsTimestep;
-    if (Player::s_shot_cooldown <= 0.0f) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
     if (controls.b.pressed() && mode_switch_counter > 1) {
@@ -204,6 +202,7 @@ void Jeep::draw()
 
 void Helicopter::update(float dt)
 {
+    s_instance.m_iframes.update();
     mode_switch_counter++;
     if (!s_instance.m_inAir && s_instance.m_z > 0.0f) {
         s_instance.m_z -= 20.0f * dt;
@@ -233,10 +232,11 @@ void Helicopter::update(float dt)
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+
     Rect rect = s_instance.m_steering.rect();
     rect.shift(0, -s_instance.m_z);
     int damage = ProjectileManager::getCollisionDamage(rect, bulletMask);
-    s_instance.m_iframes.update();
     if (damage > 0 && s_instance.m_iframes.ready()) {
         s_instance.m_iframes.reset(10);
         s_instance.health().change(-damage);
@@ -280,18 +280,18 @@ void Helicopter::drawAir()
 
 void Tank::update(float dt)
 {
-    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
-
+    s_instance.m_iframes.update();
     if (Player::s_mode != PlayerMode::TankMode) {
         s_instance.m_steering.update(dt, 0.0f, 0.0f);
         return;
     }
-
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
-    s_instance.m_iframes.update();
     if (damage > 0 && s_instance.m_iframes.ready()) {
         s_instance.m_iframes.reset(10);
         s_instance.health().change(-damage);
@@ -330,18 +330,19 @@ void Tank::draw()
 
 void Boat::update(float dt)
 {
-    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
-
+    s_instance.m_iframes.update();
     if (Player::s_mode != PlayerMode::BoatMode) {
         s_instance.m_steering.update(dt, 0.0f, 0.0f);
         return;
     }
 
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
-    s_instance.m_iframes.update();
     if (damage > 0 && s_instance.m_iframes.ready()) {
         s_instance.m_iframes.reset(10);
         s_instance.health().change(-damage);
@@ -495,4 +496,14 @@ void Player::cycleWeaponPrev()
         }
         break;
     }
+}
+
+bool Player::weaponCooldown(float dt)
+{
+    s_shot_cooldown -= dt;
+    if (s_shot_cooldown <= 0) {
+        s_shot_cooldown = 0;
+        return true;
+    }
+    return false;
 }

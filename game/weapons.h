@@ -15,9 +15,6 @@
 #include <string>
 
 struct WeaponConfig {
-    static constexpr float frames_per_second = 1.0f / physicsTimestep;
-    const float shots_per_second;
-    const float frames_per_shot;
     const float seconds_per_shot;
 
     const int size;
@@ -25,9 +22,7 @@ struct WeaponConfig {
     const float speed;
 
     constexpr WeaponConfig(float sps, int sz, float life, float spd) :
-        shots_per_second(sps),
-        frames_per_shot(frames_per_second / shots_per_second),
-        seconds_per_shot(1.0f / shots_per_second),
+        seconds_per_shot(1.0f / sps),
         size(sz),
         lifetime(life),
         speed(spd)

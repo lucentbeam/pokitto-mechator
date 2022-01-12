@@ -11,7 +11,7 @@ WeaponConfig grenade_config(1.8f, 4, 0.5f, 50.0f);
 
 bool Weapon::checkFire(Projectile * &p, const Button &action, const WeaponConfig &config, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel)
 {
-    if (action.downEvery(1, config.frames_per_shot)) {
+    if (action.held()) {
         p = ProjectileManager::create(pos, fac * config.speed, config.size, config.lifetime);
         return true;
     }

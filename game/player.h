@@ -197,6 +197,8 @@ public:
     static Weapon::Type currentWeapon();
     static void cycleWeaponNext();
     static void cycleWeaponPrev();
+
+    static bool weaponCooldown(float dt);
 };
 
 #endif // PLAYER_H

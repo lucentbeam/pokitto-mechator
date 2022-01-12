@@ -10860,6 +10860,27 @@
 		},
 		"/core/utilities/objectpool.h.qqBmqW": {
 			"sdcard": false
+		},
+		"/game/player.cpp.lIMhgv": {
+			"sdcard": false
+		},
+		"/game/player.cpp.dvwCiw": {
+			"sdcard": false
+		},
+		"/game/player.cpp.GHBuqM": {
+			"sdcard": false
+		},
+		"/game/player.h.zYOhIB": {
+			"sdcard": false
+		},
+		"/game/player.cpp.thCjgp": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.PdSVtf": {
+			"sdcard": false
+		},
+		"/game/weapons.h.dCXJgA": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
