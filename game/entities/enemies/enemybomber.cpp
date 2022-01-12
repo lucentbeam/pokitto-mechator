@@ -45,13 +45,13 @@ bool EnemyBomber::update(float dt)
         if (counter >= 20) {
             counter = 0;
             ProjectileManager::create(m_plane_pos + Vec2f(0, 15), Vec2f(velocity * -0.2f, (rand() % 30) - 15), 4, 1.5f)
-                ->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)
+                ->setSprite(projectile_grenade[0], 2, 4)
                 ->setTargetMask({})
                 ->setDamage(0)
                 ->setInAir(20, 0)
                 ->setExpireCallback([](Projectile*p) {
                 ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget});
-                    EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+                    EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
                 });
         }
 
@@ -65,7 +65,7 @@ bool EnemyBomber::update(float dt)
         } else {
             if (damage > 0) {
                 m_damage_frames = 6;
-                EffectManager::create(m_plane_pos, {hit[0], hit[1], hit[2], hit[3], hit[4]}, 20.0f);
+                EffectManager::createHit(m_plane_pos);
             }
         }
         if ((m_plane_pos.x() - Camera::tl_x()) < -10.0f) {

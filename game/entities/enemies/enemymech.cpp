@@ -54,7 +54,7 @@ bool EnemyMech::update(float dt)
     case EnemyMech::Mode::Preparing:
         if (m_counter > 60) {
             ProjectileManager::create({m_rect.centerX(), m_rect.centerY()}, dir * 50.0f, 2, 3.0)
-                    ->setSprite({projectile[0], projectile[1]}, 20.0)
+                    ->setSprite(projectile[0], 2, 20.0)
                     ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
             status = EnemyMech::Mode::Walking;
             m_counter = rand() % 40;
@@ -71,12 +71,12 @@ bool EnemyMech::update(float dt)
     if (m_damage_frames > 0) m_damage_frames--;
     if (m_life <= 0) {
         if (m_drops) Pickups::spawnDollar({m_rect.centerX(), m_rect.centerY()});
-        EffectManager::create(pos, {explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
+        EffectManager::createExplosion(pos, 1, 1);
         return false;
     } else {
         if (damage > 0) {
             m_damage_frames = 10;
-            EffectManager::create(pos - Vec2f(3.5f, 3.5f), {hit[0], hit[1], hit[2], hit[3], hit[4]}, 20.0f);
+            EffectManager::createHit(pos - Vec2f(3.5f, 3.5f));
         }
     }
     return true;

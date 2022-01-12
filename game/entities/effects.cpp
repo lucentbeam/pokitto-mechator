@@ -2,16 +2,19 @@
 #include "core/rendering/camera.h"
 #include "game/sprites.h"
 
-Effect EffectManager::s_effects[20];
+Effect EffectManager::s_effects[maxEffectCount];
 
 uint8_t EffectManager::s_effectCount;
 
-void EffectManager::create(const Vec2f &pos, std::initializer_list<const uint8_t *> frames, float fps, uint8_t delay)
+void EffectManager::create(const Vec2f &pos, const uint8_t *frame_start, int framecount, float fps, float delay)
 {
+    if (s_effectCount == maxEffectCount) {
+        return;
+    }
     s_effects[s_effectCount].pos = pos;
-    s_effects[s_effectCount].sprite = SpriteWrapper(frames, fps);
+    s_effects[s_effectCount].sprite = SpriteWrapper(frame_start, framecount, fps);
     s_effects[s_effectCount].lifetime = s_effects[s_effectCount].sprite.countsPerCycle();
-    s_effects[s_effectCount].delay = delay;
+    s_effects[s_effectCount].delay = uint8_t(delay / physicsTimestep);
     s_effectCount++;
 }
 
@@ -21,9 +24,19 @@ void EffectManager::createExplosion(const Vec2f &pos, int radius, int count)
     float r;
     for(int i = 0; i < count; ++i) {
         dir.rotBy(90 + (rand() % 180));
-        r = float(rand() % radius*2/3) + radius/3;
-        EffectManager::create(pos + dir * r, {explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f, rand() % 40);
+        r = float(rand() % std::max(1, radius*2/3)) + radius/3;
+        EffectManager::create(pos + dir * r, explosion_small[0], 7, 20.0f, i == 0 ? 0 : float(rand() % 40)/60.0f);
     }
+}
+
+void EffectManager::createExplosionBig(const Vec2f &pos)
+{
+    EffectManager::create(pos, explosion[0], 7, 20.0f);
+}
+
+void EffectManager::createHit(const Vec2f &pos)
+{
+    EffectManager::create(pos, hit[0], 5, 20.0f);
 }
 
 void EffectManager::update(float dt)

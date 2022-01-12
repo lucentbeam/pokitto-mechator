@@ -24,7 +24,7 @@ class POIs
 
     SpriteWrapper m_sprite;
 
-    void configure(const Vec2f &pos, std::initializer_list<const uint8_t*> spriteFrames, float spriteFPS);
+    void configure(const Vec2f &pos, const uint8_t* spriteFrames, int framecount, float spriteFPS);
 
     static bool mapIndexUnopened(const Vec2f &pos);
 

@@ -5,6 +5,8 @@
 #include "core/rendering/spritewrapper.h"
 #include "core/utilities/vec.h"
 
+const int maxEffectCount = 24;
+
 class EffectManager;
 
 class Effect
@@ -21,15 +23,19 @@ public:
 
 class EffectManager
 {
-    static Effect s_effects[20];
+    static Effect s_effects[maxEffectCount];
 
     static uint8_t s_effectCount;
 
+    static void create(const Vec2f &pos, const uint8_t* frame_start, int framecount, float fps, float delay = 0);
 public:
 
-    static void create(const Vec2f &pos, std::initializer_list<const uint8_t*> frames, float fps, uint8_t delay = 0);
 
     static void createExplosion(const Vec2f &pos, int radius, int count);
+
+    static void createExplosionBig(const Vec2f &pos);
+
+    static void createHit(const Vec2f &pos);
 
     static void update(float dt);
 

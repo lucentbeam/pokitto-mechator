@@ -21,13 +21,13 @@ struct Mine {
 
 class Enemy
 {
-    static ObjectPool<EnemyMech, 10> s_mechs;
+    static ObjectPool<EnemyMech, 8> s_mechs;
     static ObjectPool<EnemyTank, 3> s_tanks;
     static ObjectPool<EnemyTurret, 4> s_turrets;
     static ObjectPool<EnemyBomber, 2> s_bombers;
     static ObjectPool<EnemyHelicopter, 2> s_helis;
     static ObjectPool<EnemyLasers, 4> s_lasers;
-    static ObjectPool<Mine, 20> s_mines;
+    static ObjectPool<Mine, 14> s_mines;
 
     static void updateMechs(float dt);
     static void drawMechs();

@@ -1,42 +1,44 @@
 #ifndef SPRITEWRAPPER_H
 #define SPRITEWRAPPER_H
 
-#include <vector>
 #include <cstdint>
+#include "game/constants.h"
 
 class SpriteWrapper {
-    std::vector<const uint8_t*> frameData;
+    const uint8_t * frameData;
+    uint8_t frame_count = 1;
     uint8_t counter = 0;
     uint8_t currentFrame = 0;
     uint8_t countsPerFrame = 0;
 public:
     SpriteWrapper() {}
-    SpriteWrapper(std::initializer_list<const uint8_t*> sprites, float fps) :
+    SpriteWrapper(const uint8_t* sprites, int framecount, float fps) :
         frameData(sprites),
-        countsPerFrame(1.0f / (0.014f * fps) + 0.5f)
+        frame_count(framecount),
+        countsPerFrame(1.0f / (physicsTimestep * fps) + 0.5f)
     {
 
     }
 
     void update() {
-        if (frameData.size() < 2) {
+        if (frame_count < 2) {
             return;
         }
         counter++;
         if (counter >= countsPerFrame) {
             counter %= countsPerFrame;
             currentFrame++;
-            currentFrame %= frameData.size();
+            currentFrame %= frame_count;
         }
     }
     const uint8_t * data() const {
-        if (frameData.size() < 1) {
+        if (frameData == nullptr) {
             return nullptr;
         }
-        return frameData[currentFrame];
+        return frameData + (2 + frameData[0] * frameData[1]) * currentFrame;
     }
     const uint16_t countsPerCycle() const {
-        return uint16_t(countsPerFrame) * frameData.size();
+        return uint16_t(countsPerFrame) * frame_count;
     }
 };
 

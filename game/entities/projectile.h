@@ -2,7 +2,6 @@
 #define BULLET_H
 
 #include <cstdint>
-#include <vector>
 
 #include "game/physics/body.h"
 #include "core/rendersystem.h"
@@ -10,6 +9,8 @@
 #include "core/utilities/rect.h"
 
 #include "core/utilities/objectpool.h"
+
+const int maxProjectileCount = 24;
 
 enum Targets {
     PlayerTarget = 1,
@@ -43,7 +44,7 @@ public:
 
     Projectile * setExpireCallback(void (*expire_callback)(Projectile*));
 
-    Projectile * setSprite(std::initializer_list<const uint8_t*> frames, float fps);
+    Projectile * setSprite(const uint8_t* frames, int framecount, float fps);
 
     Projectile * clearSprite();
 
@@ -72,7 +73,7 @@ public:
 
 class ProjectileManager
 {
-    static ObjectPool<Projectile, 32> s_projectiles;
+    static ObjectPool<Projectile, maxProjectileCount> s_projectiles;
 
     static Projectile s_dummy;
 

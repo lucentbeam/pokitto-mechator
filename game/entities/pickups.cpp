@@ -8,22 +8,22 @@ ObjectPool<Pickups, 4> Pickups::s_special;
 
 std::vector<uint16_t> Pickups::s_acquired_specials;
 
-void Pickups::configure(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime)
+void Pickups::configure(const Vec2f &pos, const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime)
 {
     position = pos;
-    m_sprite = SpriteWrapper(spriteFrames, spriteFPS);
+    m_sprite = SpriteWrapper(spriteFrames, framecount, spriteFPS);
     m_on_collect = on_collect;
     m_lifetime = lifetime;
 }
 
-void Pickups::spawnTemporary(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime)
+void Pickups::spawnTemporary(const Vec2f &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime)
 {
-    s_temporary.activateNext()->configure(pos, spriteFrames, spriteFPS, on_collect, lifetime);
+    s_temporary.activateNext()->configure(pos, spriteFrames, framecount, spriteFPS, on_collect, lifetime);
 }
 
-void Pickups::spawnSpecial(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&))
+void Pickups::spawnSpecial(const Vec2f &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&))
 {
-    s_special.activateNext()->configure(pos + Vec2f(3.0f, 3.0f), spriteFrames, spriteFPS, on_collect, std::numeric_limits<uint16_t>::max());
+    s_special.activateNext()->configure(pos + Vec2f(3.0f, 3.0f), spriteFrames, framecount, spriteFPS, on_collect, std::numeric_limits<uint16_t>::max());
 }
 
 bool Pickups::mapIndexUnacquired(const Vec2f &pos)
@@ -38,7 +38,7 @@ void Pickups::acquireAtIndex(const Vec2f &pos)
 
 void Pickups::spawnDollar(const Vec2f &pos)
 {
-    spawnTemporary(pos, {pickup_dollar[0],pickup_dollar[1]}, 8.0f, [](const Vec2f &pos) {
+    spawnTemporary(pos, pickup_dollar[0], 2, 8.0f, [](const Vec2f &pos) {
         GameVariables::changeDollars(1);
         UI::showForDuration(UI::Element::UIDollarCount, 2.0f);
     }, 600);
@@ -47,7 +47,7 @@ void Pickups::spawnDollar(const Vec2f &pos)
 void Pickups::spawnHackingKit(const Vec2f &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, {pickup_hackingkit[0], pickup_hackingkit[1]}, 8.0f, [](const Vec2f &pos) {
+        spawnSpecial(pos, pickup_hackingkit[0], 2, 8.0f, [](const Vec2f &pos) {
             GameVariables::changeHackingKits(1);
             acquireAtIndex(pos);
             UI::showForDuration(UI::Element::UIHackingKitCount, 2.0f);
@@ -58,7 +58,7 @@ void Pickups::spawnHackingKit(const Vec2f &pos)
 void Pickups::spawnKeycardA(const Vec2f &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, {pickup_keycard1[0], pickup_keycard1[1]}, 8.0f, [](const Vec2f &pos) {
+        spawnSpecial(pos, pickup_keycard1[0], 2, 8.0f, [](const Vec2f &pos) {
             GameVariables::changeKeysA(1);
             acquireAtIndex(pos);
             UI::showForDuration(UI::Element::UIKeyACount, 2.0f);
@@ -69,7 +69,7 @@ void Pickups::spawnKeycardA(const Vec2f &pos)
 void Pickups::spawnKeycardB(const Vec2f &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, {pickup_keycard2[0], pickup_keycard2[1]}, 8.0f, [](const Vec2f &pos) {
+        spawnSpecial(pos, pickup_keycard2[0], 2, 8.0f, [](const Vec2f &pos) {
             GameVariables::changeKeysB(1);
             acquireAtIndex(pos);
             UI::showForDuration(UI::Element::UIKeyBCount, 2.0f);
@@ -80,7 +80,7 @@ void Pickups::spawnKeycardB(const Vec2f &pos)
 void Pickups::spawnKeycardC(const Vec2f &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, {pickup_keycard3[0], pickup_keycard3[1]}, 8.0f, [](const Vec2f &pos) {
+        spawnSpecial(pos, pickup_keycard3[0], 2, 8.0f, [](const Vec2f &pos) {
             GameVariables::changeKeysC(1);
             acquireAtIndex(pos);
             UI::showForDuration(UI::Element::UIKeyCCount, 2.0f);

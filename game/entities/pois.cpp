@@ -8,10 +8,10 @@ ObjectPool<POIs, 6> POIs::s_pois;
 std::vector<uint16_t> POIs::s_activated;
 POIs * POIs::s_current_active_poi = nullptr;
 
-void POIs::configure(const Vec2f &pos, std::initializer_list<const uint8_t *> spriteFrames, float spriteFPS)
+void POIs::configure(const Vec2f &pos, const uint8_t * spriteFrames, int framecount, float spriteFPS)
 {
     m_position = pos;
-    m_sprite = SpriteWrapper(spriteFrames, spriteFPS);
+    m_sprite = SpriteWrapper(spriteFrames, framecount, spriteFPS);
 }
 
 bool POIs::mapIndexUnopened(const Vec2f &pos)
@@ -39,7 +39,7 @@ void POIs::spawnDoor(const Vec2f &pos, uint16_t left, uint16_t top, uint8_t widt
     p->m_width = width;
     p->m_height = height;
     p->m_door_type = door;
-    p->m_sprite = SpriteWrapper({poi[1+uint8_t(door)]}, 8.0f);
+    p->m_sprite = SpriteWrapper(poi[1+uint8_t(door)], 1, 8.0f);
 }
 
 void POIs::spawnShop(const Vec2f &pos, const Vec2f &jeep_loc, const Vec2f &boat_loc, const Vec2f &heli_loc)
@@ -54,7 +54,7 @@ void POIs::spawnShop(const Vec2f &pos, const Vec2f &jeep_loc, const Vec2f &boat_
     p->m_heli_loc = heli_loc;
     p->m_door_type = POIType::Shop;
     int idx = mapIndexUnopened(pos) ? 0 : 1;
-    p->m_sprite = SpriteWrapper({poi[idx]}, 8.0f);
+    p->m_sprite = SpriteWrapper(poi[idx], 1, 8.0f);
 }
 
 void POIs::unlockCurrent()
@@ -66,7 +66,7 @@ void POIs::unlockCurrent()
         openAtIndex(s_current_active_poi->m_position);
         if (s_current_active_poi->m_door_type == Shop) {
             showShop();
-            s_current_active_poi->m_sprite = SpriteWrapper({poi[1]}, 8.0f);
+            s_current_active_poi->m_sprite = SpriteWrapper(poi[1], 1, 8.0f);
         } else {
             for(int x = s_current_active_poi->m_left; x < (s_current_active_poi->m_width + s_current_active_poi->m_left); x+=6) {
                 for(int y = s_current_active_poi->m_top; y < (s_current_active_poi->m_height + s_current_active_poi->m_top); y+=6) {

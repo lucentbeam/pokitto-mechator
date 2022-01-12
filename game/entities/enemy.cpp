@@ -9,7 +9,7 @@
 
 int Mine::timer = 0;
 
-ObjectPool<EnemyMech,10> Enemy::s_mechs;
+ObjectPool<EnemyMech,8> Enemy::s_mechs;
 
 ObjectPool<EnemyTank,3> Enemy::s_tanks;
 
@@ -19,7 +19,7 @@ ObjectPool<EnemyBomber,2> Enemy::s_bombers;
 
 ObjectPool<EnemyHelicopter,2> Enemy::s_helis;
 
-ObjectPool<Mine, 20> Enemy::s_mines;
+ObjectPool<Mine, 14> Enemy::s_mines;
 
 ObjectPool<EnemyLasers,4> Enemy::s_lasers;
 
@@ -223,7 +223,7 @@ void Enemy::updateMines(float dt)
         if (player.contains(m->pos)) {
             MapManager::setTileAt(m->pos.x(), m->pos.y(), SpecialTiles::ExplodedOrdinance);
             ProjectileManager::create(m->pos, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
-            EffectManager::create(m->pos - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+            EffectManager::createExplosionBig(m->pos - Vec2f(6,6));
             return true;
         }
         return !Camera::inActiveZone(m->pos);

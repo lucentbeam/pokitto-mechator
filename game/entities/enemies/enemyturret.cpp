@@ -34,7 +34,7 @@ bool EnemyTurret::update(float dt)
         Vec2f f = dir;
         f.rotBy((rand() % 40) - 20);
         ProjectileManager::create(m_pos + dir * 6.0f, f * 33.0f, 4, 3.0)
-                ->setSprite({projectile_med[0], projectile_med[1]}, 20.0)
+                ->setSprite(projectile_med[0], 2, 20.0)
                 ->setTargetMask({PlayerTarget, GroundTarget, AirTarget})
                 ->setIgnoreWalls();
         m_counter = rand() % 10;
@@ -52,7 +52,7 @@ bool EnemyTurret::update(float dt)
     } else {
         if (damage > 0) {
             m_damage_frames = 6;
-            EffectManager::create(m_pos - Vec2f(3.5f, 3.5f), {hit[0], hit[1], hit[2], hit[3], hit[4]}, 20.0f);
+            EffectManager::createHit(m_pos - Vec2f(3.5f, 3.5f));
         }
     }
     m_smoothaim = m_smoothaim * 0.9f + m_aim * 0.1f;

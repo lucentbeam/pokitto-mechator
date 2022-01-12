@@ -110,7 +110,7 @@ void Barracks::update(float dt)
         } else {
             if (damage > 0) {
                 for(auto p : hitlocs) {
-                    EffectManager::create(p - Vec2f(3.5f, 3.5f), {hit[0], hit[1], hit[2], hit[3], hit[4]}, 20.0f);
+                    EffectManager::createHit(p - Vec2f(3.5f, 3.5f));
                 }
             }
         }

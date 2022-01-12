@@ -9,7 +9,7 @@ RegionName groundregion_names[] = {
 
 RegionBounds groundregion_areas[] = {
     RegionBounds(4, 0, 44, 22, groundregion_names),
-    RegionBounds(43, 0, 76, 28, groundregion_names),
+    RegionBounds(43, 0, 76, 30, groundregion_names),
     RegionBounds(34, 164, 178, 214, groundregion_names + 1)
 };
 

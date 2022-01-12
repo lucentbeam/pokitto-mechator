@@ -18,11 +18,11 @@ class Pickups
     void (*m_on_collect)(const Vec2f&);
     uint16_t m_lifetime;
 
-    void configure(const Vec2f &pos, std::initializer_list<const uint8_t*> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime);
+    void configure(const Vec2f &pos, const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime);
 
-    static void spawnTemporary(const Vec2f &pos, std::initializer_list<const uint8_t*> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime);
+    static void spawnTemporary(const Vec2f &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime);
 
-    static void spawnSpecial(const Vec2f &pos, std::initializer_list<const uint8_t*> spriteFrames, float spriteFPS, void (*on_collect)(const Vec2f&));
+    static void spawnSpecial(const Vec2f &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&));
 
     static bool mapIndexUnacquired(const Vec2f &pos);
 

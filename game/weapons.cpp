@@ -67,25 +67,25 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
     switch(typ) {
     case Type::Gun:
         if (checkFire(p, action, gun_config, pos, fac, vel)) {
-            p->setSprite({projectile[0]}, 20);
+            p->setSprite(projectile[0], 1, 20);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
             delay = gun_config.seconds_per_shot;
         }
         break;
     case Type::DualShot:
         if (checkFire(p, action, dualshot_config, pos + fac.rot90() * 3.0f, fac, vel)) {
-            p->setSprite({projectile[0]}, 20);
+            p->setSprite(projectile[0], 1, 20);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
         }
         if (checkFire(p, action, dualshot_config, pos - fac.rot90() * 3.0f, fac, vel)) {
-            p->setSprite({projectile[0]}, 20);
+            p->setSprite(projectile[0], 1, 20);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
             delay = dualshot_config.seconds_per_shot;
         }
         break;
     case Type::Grenade:
         if (checkFire(p, action, grenade_config, pos, fac, vel)) {
-            p->setSprite({projectile_grenade[0], projectile_grenade[1]}, 4)
+            p->setSprite(projectile_grenade[0], 2, 4)
              ->addVelocity(vel)
              ->setTargetMask({EnemyTarget, GroundTarget})
              ->setDamage(0)
@@ -99,7 +99,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
                     }
                 }
                 ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget});
-                EffectManager::create(p->pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+                EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
             });
             delay = grenade_config.seconds_per_shot;
         }

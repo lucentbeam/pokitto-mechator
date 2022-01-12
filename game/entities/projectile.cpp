@@ -31,9 +31,9 @@ Projectile * Projectile::setExpireCallback(void (*expire_callback)(Projectile *)
     return this;
 }
 
-Projectile * Projectile::setSprite(std::initializer_list<const uint8_t *> frames, float fps)
+Projectile * Projectile::setSprite(const uint8_t * frames, int framecount, float fps)
 {
-    sprite = SpriteWrapper(frames, fps);
+    sprite = SpriteWrapper(frames, framecount, fps);
     return this;
 }
 
@@ -110,7 +110,7 @@ void Projectile::onExpire()
     }
 }
 
-ObjectPool<Projectile,32> ProjectileManager::s_projectiles;
+ObjectPool<Projectile,maxProjectileCount> ProjectileManager::s_projectiles;
 
 Projectile ProjectileManager::s_dummy;
 

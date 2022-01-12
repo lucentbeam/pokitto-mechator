@@ -166,7 +166,7 @@ void Jeep::update(float dt)
             Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
-            EffectManager::create(s_instance.m_steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+            EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
         }
     }
     if (s_instance.m_steering.moving()) {
@@ -244,7 +244,7 @@ void Helicopter::update(float dt)
             Soldier::setPosition(s_instance.m_steering.pos());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
-            EffectManager::create(position() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+            EffectManager::createExplosionBig(position() - Vec2f(6,6));
         }
     }
     if (controls.b.pressed()) { // TODO: check valid landing loc
@@ -299,7 +299,7 @@ void Tank::update(float dt)
             Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
-            EffectManager::create(s_instance.m_steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+            EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
         }
     }
     if (s_instance.m_steering.moving()) {
@@ -350,7 +350,7 @@ void Boat::update(float dt)
             Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
-            EffectManager::create(s_instance.m_steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+            EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
         }
     }
 
