@@ -8,6 +8,7 @@ SOURCES += \
     game/entities/barracks.cpp \
     game/entities/enemies/enemybomber.cpp \
     game/entities/enemies/enemyhelicopter.cpp \
+    game/entities/enemies/enemylasers.cpp \
     game/entities/enemies/enemymech.cpp \
     game/entities/enemies/enemytank.cpp \
     game/entities/enemies/enemyturret.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     game/entities/barracks.h \
     game/entities/enemies/enemybomber.h \
     game/entities/enemies/enemyhelicopter.h \
+    game/entities/enemies/enemylasers.h \
     game/entities/enemies/enemymech.h \
     game/entities/enemies/enemytank.h \
     game/entities/enemies/enemyturret.h \

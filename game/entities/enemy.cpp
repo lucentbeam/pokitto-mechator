@@ -21,6 +21,8 @@ ObjectPool<EnemyHelicopter,2> Enemy::s_helis;
 
 ObjectPool<Mine, 20> Enemy::s_mines;
 
+ObjectPool<EnemyLasers,4> Enemy::s_lasers;
+
 EnemyMech * Enemy::createMech(const Vec2f &pos)
 {
     auto m = s_mechs.activateNext();
@@ -123,6 +125,14 @@ void Enemy::spawnHelicopter(const Vec2f &pos)
     }
 }
 
+void Enemy::createLasers(const Vec2f &pos, bool vertical, int node, int sz)
+{
+    auto m = s_lasers.activateNext();
+    if (m != nullptr) {
+        m->setup(pos, vertical, node, sz);
+    }
+}
+
 void Enemy::updateTanks(float dt)
 {
     EnemyTank * start = s_tanks.objects();
@@ -218,6 +228,9 @@ void Enemy::updateMines(float dt)
         }
         return !Camera::inActiveZone(m->pos);
     });
+    s_lasers.iterate([&](EnemyLasers * l) {
+        return !l->update(dt);
+    });
 }
 
 void Enemy::drawMines()
@@ -228,6 +241,10 @@ void Enemy::drawMines()
             RenderSystem::pixel(p.x() + 2, p.y() + 2, 16);
         }
     }
+    s_lasers.iterate([&](EnemyLasers * l) {
+        l->draw();
+        return false;
+    });
 }
 
 void Enemy::update(float dt)

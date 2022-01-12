@@ -1,16 +1,15 @@
-- lasers
-  - art
-  - prog
-
 - consider reworking bombers: constantly come while within range of spawn point?
 
-- player feedback on hit
-
-- clean up enemy explosions
+- clean up enemy explosions (make unified static call to effectsmanager)
 
 - areas alerts:
 	- tutorial
 	- panhandle
+
+- MOAR weapons!
+  - machinegun
+  - missiles (straight)
+  - missiles (steering)
 
 - boats
   - art
@@ -18,3 +17,16 @@
 - subs
   - art
   - prog
+
+- sfx
+  - laser charge
+  - laser fire
+  - small explosion
+  - echoing explosion
+  - enemy shoot
+  - player shoot
+  - player grenade
+  - player missile
+  
+morphitudinous
+morphenomenal

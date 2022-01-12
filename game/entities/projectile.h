@@ -39,7 +39,7 @@ class Projectile
 public:
     Projectile();
 
-    void configure(const Vec2f &pos, const Vec2f &vel, int size, float lifetime);
+    void configure(const Vec2f &pos, const Vec2f &vel, int w, int h, float lifetime);
 
     Projectile * setExpireCallback(void (*expire_callback)(Projectile*));
 
@@ -78,7 +78,7 @@ class ProjectileManager
 
 public:
 
-    static Projectile* create(const Vec2f &pos, const Vec2f &vel, int size, float lifetime);
+    static Projectile* create(const Vec2f &pos, const Vec2f &vel, int size, float lifetime, int size_w = -1);
 
     static void update(float dt);
 

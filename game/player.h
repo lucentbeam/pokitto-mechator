@@ -30,6 +30,8 @@ protected:
 
     Vec2f m_aim;
 
+    Ticker m_iframes;
+
     friend Player;
 
     Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction = 1.0f);

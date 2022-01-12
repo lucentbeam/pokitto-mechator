@@ -72,8 +72,11 @@ void Soldier::update(float dt)
 
     s_instance.m_steering.update(dt, controls.x , controls.y, running ? 2.2f : 1.0f);
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
-    if (damage > 0) {
+    s_instance.m_iframes.update();
+    if (damage > 0 && s_instance.m_iframes.ready()) {
+        s_instance.m_iframes.reset(10);
         s_instance.health().change(-damage);
+        // TODO: gameover
     }
 
     if (!controls.a.held()) {
@@ -134,7 +137,11 @@ void Soldier::draw()
         sprite += 1;
     }
     Vec2f spos = Camera::worldToScreen(s_instance.m_steering.pos());
-    RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], s_instance.m_steering.facing().x() > 0);
+    if (!s_instance.m_iframes.ready()) {
+        RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], 10, s_instance.m_steering.facing().x() > 0);
+    } else {
+        RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], s_instance.m_steering.facing().x() > 0);
+    }
 }
 
 void Jeep::update(float dt)
@@ -150,7 +157,9 @@ void Jeep::update(float dt)
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
-    if (damage > 0) {
+    s_instance.m_iframes.update();
+    if (damage > 0 && s_instance.m_iframes.ready()) {
+        s_instance.m_iframes.reset(10);
         s_instance.health().change(-damage);
         if (!alive()) {
             Soldier::setPosition(position());
@@ -184,8 +193,186 @@ void Jeep::draw()
 {
     if (!alive()) return;
     Vec2f jpos = Camera::worldToScreen(s_instance.m_steering.pos());
-    RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], s_instance.m_steering.facing().x() > 0);
+    if (!s_instance.m_iframes.ready()) {
+        RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], 10, s_instance.m_steering.facing().x() > 0);
+    } else {
+        RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], s_instance.m_steering.facing().x() > 0);
+    }
 }
+
+
+void Helicopter::update(float dt)
+{
+    mode_switch_counter++;
+    if (!s_instance.m_inAir && s_instance.m_z > 0.0f) {
+        s_instance.m_z -= 20.0f * dt;
+        if (s_instance.m_z < 0.1f) {
+            s_instance.m_z = 0.0f;
+            Soldier::setPosition(s_instance.m_steering.pos());
+            Player::s_mode = PlayerMode::SoldierMode;
+            UI::showHealthbar();
+            s_instance.m_steering.stop();
+        }
+        return;
+    } else if (s_instance.m_inAir && s_instance.m_z < 20.0f) {
+        s_instance.m_z += 20.0f * dt;
+        if (s_instance.m_z > 20.0f) {
+            s_instance.m_z = 20.0f;
+        }
+        return;
+    }
+
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
+
+    if (Player::s_mode != PlayerMode::HelicopterMode) {
+        s_instance.m_steering.update(dt, 0.0f, 0.0f);
+        return;
+    }
+
+    ControlStatus controls = Controls::getStatus(true);
+    s_instance.m_steering.update(dt, controls.x, controls.y);
+
+    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
+    s_instance.m_iframes.update();
+    if (damage > 0 && s_instance.m_iframes.ready()) {
+        s_instance.m_iframes.reset(10);
+        s_instance.health().change(-damage);
+        if (!alive()) {
+            Soldier::setPosition(s_instance.m_steering.pos());
+            Player::s_mode = PlayerMode::SoldierMode;
+            UI::showHealthbar();
+            EffectManager::create(position() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+        }
+    }
+    if (controls.b.pressed()) { // TODO: check valid landing loc
+        s_instance.m_inAir = false;
+    }
+}
+
+void Helicopter::drawGround()
+{
+    if (!alive() || s_instance.m_z > 0.0f) return;
+    Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
+    RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+    RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[0], helicopter_blades[0][2]);
+}
+
+void Helicopter::drawAir()
+{
+    if (!alive() || s_instance.m_z < 0.01f) return;
+    Vec2f pos = Camera::worldToScreen(position());
+    RenderSystem::drawShadow(pos.x() - 9, pos.y() - 9 + s_instance.m_z, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+    if (!s_instance.m_iframes.ready()) {
+        RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], 10, s_instance.m_steering.facing().x() > 0);
+        if ((mode_switch_counter % 3) == 2) {
+            RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/3], helicopter_blades[0][2], 10, false);
+        }
+    } else {
+        RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+        if ((mode_switch_counter % 3) == 2) {
+            RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/3], helicopter_blades[0][2]);
+        }
+    }
+}
+
+void Tank::update(float dt)
+{
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
+
+    if (Player::s_mode != PlayerMode::TankMode) {
+        s_instance.m_steering.update(dt, 0.0f, 0.0f);
+        return;
+    }
+
+    ControlStatus controls = Controls::getStatus(true);
+    s_instance.m_steering.update(dt, controls.x, controls.y);
+
+    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
+    s_instance.m_iframes.update();
+    if (damage > 0 && s_instance.m_iframes.ready()) {
+        s_instance.m_iframes.reset(10);
+        s_instance.health().change(-damage);
+        if (!alive()) {
+            Soldier::setPosition(position());
+            Player::s_mode = PlayerMode::SoldierMode;
+            UI::showHealthbar();
+            EffectManager::create(s_instance.m_steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+        }
+    }
+    if (s_instance.m_steering.moving()) {
+        s_instance.m_shake.intensity = Rumbler::Vigorous;
+        s_instance.m_shake.update();
+    }
+
+    mode_switch_counter++;
+    if (controls.b.pressed() && mode_switch_counter > 1) {
+        Soldier::setPosition(position());
+        Player::s_mode = PlayerMode::SoldierMode;
+        mode_switch_counter = 0;
+        UI::showHealthbar();
+    }
+}
+
+void Tank::draw()
+{
+    if (!alive()) return;
+    Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
+    int offset = (mode_switch_counter % 30) < 15 && s_instance.m_steering.moving() ? 9 : 0;
+    if (!s_instance.m_iframes.ready()) {
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], 10, s_instance.m_steering.facing().x() > 0);
+    } else {
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], s_instance.m_steering.facing().x() > 0);
+    }
+}
+
+void Boat::update(float dt)
+{
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
+
+    if (Player::s_mode != PlayerMode::BoatMode) {
+        s_instance.m_steering.update(dt, 0.0f, 0.0f);
+        return;
+    }
+
+    ControlStatus controls = Controls::getStatus(true);
+    s_instance.m_steering.update(dt, controls.x, controls.y);
+
+    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
+    s_instance.m_iframes.update();
+    if (damage > 0 && s_instance.m_iframes.ready()) {
+        s_instance.m_iframes.reset(10);
+        s_instance.health().change(-damage);
+        if (!alive()) {
+            // TODO: make gameover
+            Soldier::setPosition(position());
+            Player::s_mode = PlayerMode::SoldierMode;
+            UI::showHealthbar();
+            EffectManager::create(s_instance.m_steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
+        }
+    }
+
+    static uint16_t disembarkPoints = Helpers::getMask({Terrain::None, Terrain::Mud, Terrain::Grass, Terrain::WaterShallow});
+    Vec2f projection = position() + s_instance.m_steering.facing() * 15.0f;
+    mode_switch_counter++;
+    if (controls.b.pressed() && mode_switch_counter > 1 && CollisionManager::collides(projection, disembarkPoints)) { // project forward and look for ground
+        Soldier::setPosition(projection);
+        Player::s_mode = PlayerMode::SoldierMode;
+        mode_switch_counter = 0;
+        UI::showHealthbar();
+    }
+}
+
+void Boat::draw()
+{
+    if (!alive()) return;
+    Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
+    if (!s_instance.m_iframes.ready()) {
+        RenderSystem::sprite(pos.x() - 15, pos.y() - 15, boat[s_instance.m_steering.rotation_frame()], boat[0][2], 10, s_instance.m_steering.facing().x() > 0);
+    } else {
+        RenderSystem::sprite(pos.x() - 15, pos.y() - 15, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0);
+    }
+}
+
 
 Vec2f Player::position()
 {
@@ -305,155 +492,4 @@ void Player::cycleWeaponPrev()
         }
         break;
     }
-}
-
-void Helicopter::update(float dt)
-{
-    mode_switch_counter++;
-    if (!s_instance.m_inAir && s_instance.m_z > 0.0f) {
-        s_instance.m_z -= 20.0f * dt;
-        if (s_instance.m_z < 0.1f) {
-            s_instance.m_z = 0.0f;
-            Soldier::setPosition(s_instance.m_steering.pos());
-            Player::s_mode = PlayerMode::SoldierMode;
-            UI::showHealthbar();
-            s_instance.m_steering.stop();
-        }
-        return;
-    } else if (s_instance.m_inAir && s_instance.m_z < 20.0f) {
-        s_instance.m_z += 20.0f * dt;
-        if (s_instance.m_z > 20.0f) {
-            s_instance.m_z = 20.0f;
-        }
-        return;
-    }
-
-    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
-
-    if (Player::s_mode != PlayerMode::HelicopterMode) {
-        s_instance.m_steering.update(dt, 0.0f, 0.0f);
-        return;
-    }
-
-    ControlStatus controls = Controls::getStatus(true);
-    s_instance.m_steering.update(dt, controls.x, controls.y);
-
-    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
-    if (damage > 0) {
-        s_instance.health().change(-damage);
-        if (!alive()) {
-            Soldier::setPosition(s_instance.m_steering.pos());
-            Player::s_mode = PlayerMode::SoldierMode;
-            UI::showHealthbar();
-            EffectManager::create(position() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
-        }
-    }
-    if (controls.b.pressed()) { // TODO: check valid landing loc
-        s_instance.m_inAir = false;
-    }
-}
-
-void Helicopter::drawGround()
-{
-    if (!alive() || s_instance.m_z > 0.0f) return;
-    Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
-    RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
-    RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[0], helicopter_blades[0][2]);
-}
-
-void Helicopter::drawAir()
-{
-    if (!alive() || s_instance.m_z < 0.01f) return;
-    Vec2f pos = Camera::worldToScreen(position());
-    RenderSystem::drawShadow(pos.x() - 9, pos.y() - 9 + s_instance.m_z, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
-    RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
-    if ((mode_switch_counter % 3) == 2) {
-        RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/3], helicopter_blades[0][2]);
-    }
-}
-
-void Tank::update(float dt)
-{
-    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
-
-    if (Player::s_mode != PlayerMode::TankMode) {
-        s_instance.m_steering.update(dt, 0.0f, 0.0f);
-        return;
-    }
-
-    ControlStatus controls = Controls::getStatus(true);
-    s_instance.m_steering.update(dt, controls.x, controls.y);
-
-    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
-    if (damage > 0) {
-        s_instance.health().change(-damage);
-        if (!alive()) {
-            Soldier::setPosition(position());
-            Player::s_mode = PlayerMode::SoldierMode;
-            UI::showHealthbar();
-            EffectManager::create(s_instance.m_steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
-        }
-    }
-    if (s_instance.m_steering.moving()) {
-        s_instance.m_shake.intensity = Rumbler::Vigorous;
-        s_instance.m_shake.update();
-    }
-
-    mode_switch_counter++;
-    if (controls.b.pressed() && mode_switch_counter > 1) {
-        Soldier::setPosition(position());
-        Player::s_mode = PlayerMode::SoldierMode;
-        mode_switch_counter = 0;
-        UI::showHealthbar();
-    }
-}
-
-void Tank::draw()
-{
-    if (!alive()) return;
-    Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
-    int offset = (mode_switch_counter % 30) < 15 && s_instance.m_steering.moving() ? 9 : 0;
-    RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], s_instance.m_steering.facing().x() > 0);
-}
-
-void Boat::update(float dt)
-{
-    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
-
-    if (Player::s_mode != PlayerMode::BoatMode) {
-        s_instance.m_steering.update(dt, 0.0f, 0.0f);
-        return;
-    }
-
-    ControlStatus controls = Controls::getStatus(true);
-    s_instance.m_steering.update(dt, controls.x, controls.y);
-
-    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
-    if (damage > 0) {
-        s_instance.health().change(-damage);
-        if (!alive()) {
-            // TODO: make gameover
-            Soldier::setPosition(position());
-            Player::s_mode = PlayerMode::SoldierMode;
-            UI::showHealthbar();
-            EffectManager::create(s_instance.m_steering.pos() - Vec2f(6,6), {explosion[0], explosion[1], explosion[2], explosion[3], explosion[4], explosion[5], explosion[6]}, 40.0f);
-        }
-    }
-
-    static uint16_t disembarkPoints = Helpers::getMask({Terrain::None, Terrain::Mud, Terrain::Grass, Terrain::WaterShallow});
-    Vec2f projection = position() + s_instance.m_steering.facing() * 15.0f;
-    mode_switch_counter++;
-    if (controls.b.pressed() && mode_switch_counter > 1 && CollisionManager::collides(projection, disembarkPoints)) { // project forward and look for ground
-        Soldier::setPosition(projection);
-        Player::s_mode = PlayerMode::SoldierMode;
-        mode_switch_counter = 0;
-        UI::showHealthbar();
-    }
-}
-
-void Boat::draw()
-{
-    if (!alive()) return;
-    Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
-    RenderSystem::sprite(pos.x() - 15, pos.y() - 15, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0);
 }

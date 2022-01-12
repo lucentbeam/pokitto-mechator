@@ -48,7 +48,8 @@ const SpawnPoint points[] = {
 	SpawnPoint({139, 139}, spawnDoorNone<159,143,3,3>),
 	SpawnPoint({166, 201}, spawnDoorNone<104,39,3,8>),
 	SpawnPoint({23, 41}, Enemy::spawnMine),
-    SpawnPoint({16, 35}, Enemy::spawnHelicopter),
+    SpawnPoint({14, 33}, spawnVerticalLasers<34, 4>),
+    SpawnPoint({14, 40}, spawnHorizontalLasers<13, 4>),
 	SpawnPoint({38, 54}, Enemy::spawnTank),
 	SpawnPoint({38, 45}, Enemy::spawnTurret),
 };

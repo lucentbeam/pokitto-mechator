@@ -11,9 +11,9 @@ Projectile::Projectile() :
 
 }
 
-void Projectile::configure(const Vec2f &pos, const Vec2f &vel, int size, float lifetime)
+void Projectile::configure(const Vec2f &pos, const Vec2f &vel, int w, int h, float lifetime)
 {
-    m_rect = Rect(0, 0, size, size);
+    m_rect = Rect(0, 0, w, h);
     m_rect.setCenter(pos.x(), pos.y());
     m_body = Body(pos, vel);
     m_lifetime = lifetime;
@@ -114,11 +114,12 @@ ObjectPool<Projectile,32> ProjectileManager::s_projectiles;
 
 Projectile ProjectileManager::s_dummy;
 
-Projectile *ProjectileManager::create(const Vec2f &pos, const Vec2f &vel, int size, float lifetime)
+Projectile *ProjectileManager::create(const Vec2f &pos, const Vec2f &vel, int size, float lifetime, int size_w)
 {
     Projectile * p = s_projectiles.activateNext();
     if (p == nullptr) p = &s_dummy;
-    p->configure(pos, vel, size, lifetime);
+    if (size_w == -1) size_w = size;
+    p->configure(pos, vel, size_w, size, lifetime);
     return p;
 }
 
