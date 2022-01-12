@@ -1,5 +1,3 @@
-- consider reworking bombers: constantly come while within range of spawn point?
-
 - clean up enemy explosions (make unified static call to effectsmanager)
 
 - areas alerts:

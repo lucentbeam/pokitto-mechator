@@ -11,12 +11,16 @@ class Enemy;
 
 class EnemyBomber
 {
-    Vec2f m_pos;
+    Vec2f m_pos, m_plane_pos;
     Rect m_rect;
     int8_t m_life = 3;
     uint8_t m_damage_frames = 0;
 
-    bool in_sky;
+    enum Status {
+        Waiting,
+        InSky,
+        FlyBy
+    } status;
 
     friend Enemy; // I suppose that makes Enemy the enemy of this's enemy?
 public:
