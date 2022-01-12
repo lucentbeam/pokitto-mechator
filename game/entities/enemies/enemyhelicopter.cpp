@@ -71,7 +71,7 @@ bool EnemyHelicopter::update(float dt)
     if (m_damage_frames > 0) m_damage_frames--;
     if (m_life <= 0) {
         Pickups::spawnDollar(m_steering.pos());
-        EffectManager::create(m_steering.pos(), {explosion_small[0], explosion_small[1], explosion_small[2], explosion_small[3], explosion_small[4], explosion_small[5], explosion_small[6], explosion_small[7], explosion_small[7], explosion_small[7], explosion_small[7]}, 20.0f);
+        EffectManager::createExplosion(m_steering.pos(), 10, 10);
         return false;
     } else {
         if (damage > 0) {

@@ -1,8 +1,8 @@
-- clean up enemy explosions (make unified static call to effectsmanager)
-
 - areas alerts:
 	- tutorial
 	- panhandle
+
+- fix effects to not use initializer_list (call with uint8_t *, frame_count, and fps, then back calculate lifetime)
 
 - MOAR weapons!
   - machinegun
