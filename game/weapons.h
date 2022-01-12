@@ -54,7 +54,7 @@ public:
     static Type nextWeapon(Type t);
     static Type prevWeapon(Type t);
 
-    static float checkFireWeapon(const Button &action, Type typ, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel);
+    static float checkFireWeapon(const Button &action, Type typ, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel, bool air = false);
 
 };
 
