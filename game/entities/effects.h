@@ -4,6 +4,7 @@
 #include "core/rendersystem.h"
 #include "core/rendering/spritewrapper.h"
 #include "core/utilities/vec.h"
+#include "core/utilities/objectpool.h"
 
 const int maxEffectCount = 24;
 
@@ -23,9 +24,7 @@ public:
 
 class EffectManager
 {
-    static Effect s_effects[maxEffectCount];
-
-    static uint8_t s_effectCount;
+    static ObjectPool<Effect, maxEffectCount> s_effects;
 
     static void create(const Vec2f &pos, const uint8_t* frame_start, int framecount, float fps, float delay = 0);
 public:

@@ -10848,6 +10848,18 @@
 		},
 		"/game/entities/projectile.h.rlIahV": {
 			"sdcard": false
+		},
+		"/game/entities/effects.cpp.lJfayA": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.nXlpkP": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.GNSJTs": {
+			"sdcard": false
+		},
+		"/core/utilities/objectpool.h.qqBmqW": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

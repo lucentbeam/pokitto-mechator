@@ -2,20 +2,17 @@
 #include "core/rendering/camera.h"
 #include "game/sprites.h"
 
-Effect EffectManager::s_effects[maxEffectCount];
-
-uint8_t EffectManager::s_effectCount;
+ObjectPool<Effect, maxEffectCount> EffectManager::s_effects;
 
 void EffectManager::create(const Vec2f &pos, const uint8_t *frame_start, int framecount, float fps, float delay)
 {
-    if (s_effectCount == maxEffectCount) {
-        return;
+    auto * e = s_effects.activateNext();
+    if (e != nullptr) {
+        e->pos = pos;
+        e->sprite = SpriteWrapper(frame_start, framecount, fps);
+        e->lifetime = e->sprite.countsPerCycle();
+        e->delay = uint8_t(delay / physicsTimestep);
     }
-    s_effects[s_effectCount].pos = pos;
-    s_effects[s_effectCount].sprite = SpriteWrapper(frame_start, framecount, fps);
-    s_effects[s_effectCount].lifetime = s_effects[s_effectCount].sprite.countsPerCycle();
-    s_effects[s_effectCount].delay = uint8_t(delay / physicsTimestep);
-    s_effectCount++;
 }
 
 void EffectManager::createExplosion(const Vec2f &pos, int radius, int count)
@@ -41,28 +38,26 @@ void EffectManager::createHit(const Vec2f &pos)
 
 void EffectManager::update(float dt)
 {
-    int i = 0;
-    while (i < s_effectCount) {
-        if (s_effects[i].delay == 0) {
-            s_effects[i].sprite.update();
-            --s_effects[i].lifetime;
+    s_effects.iterate([](Effect * e) {
+        if (e->delay == 0) {
+            e->sprite.update();
+            --e->lifetime;
+            if (e->lifetime < 0) {
+                return true;
+            }
         } else {
-            --s_effects[i].delay;
+            --e->delay;
         }
-        if (s_effects[i].lifetime < 0) {
-            s_effects[i] = s_effects[s_effectCount-1];
-            --s_effectCount;
-        } else {
-            ++i;
-        }
-    }
+        return false;
+    });
 }
 
 void EffectManager::draw()
 {
-    for (int i = 0; i < s_effectCount; ++i) {
-        if (s_effects[i].delay > 0) continue;
-        Vec2f pos = Camera::worldToScreen(s_effects[i].pos);
-        RenderSystem::sprite(pos.x(), pos.y(), s_effects[i].sprite.data(), s_effects[i].sprite.data()[2]);
-    }
+    s_effects.iterate([](Effect * e){
+        if (e->delay > 0) return false;
+        Vec2f pos = Camera::worldToScreen(e->pos);
+        RenderSystem::sprite(pos.x(), pos.y(), e->sprite.data(), e->sprite.data()[2]);
+        return false;
+    });
 }

@@ -22,8 +22,6 @@ public:
 
     void clear();
 
-    void iterate(void* data, void (*)(void*,Obj*,bool&));
-
     void iterate(std::function<bool(Obj*)> func);
 
     Obj * objects() { return m_objects; }
@@ -72,18 +70,6 @@ template<class Obj, int Count>
 void ObjectPool<Obj,Count>::clear()
 {
     m_activeCount = 0;
-}
-
-template<class Obj, int Count>
-void ObjectPool<Obj,Count>::iterate(void *data, void (*func)(void *, Obj *, bool&))
-{
-    for(int i = m_activeCount-1; i >= 0; --i) {
-        bool destroy = false;
-        func(data, m_objects+i, destroy);
-        if (destroy) {
-            deactivate(i);
-        }
-    }
 }
 
 template<class Obj, int Count>
