@@ -8,7 +8,7 @@ class Rect {
 
 public:
   Rect() {}
-  Rect(float x, float y, float w, float h) : m_l(x), m_t(y), m_r(x+w), m_b(y+h), m_w(w), m_h(h) {}
+  constexpr Rect(float x, float y, float w, float h) : m_l(x), m_t(y), m_r(x+w), m_b(y+h), m_w(w), m_h(h) {}
 
   void grow(float w, float h);
 

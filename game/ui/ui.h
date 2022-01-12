@@ -14,7 +14,7 @@ class UIElement {
     Tween tween;
     float m_showDuration = 0;
 
-    const int16_t m_x,m_y,m_w,m_h,m_xh,m_yh,m_wh,m_hh;
+    int16_t m_x,m_y,m_w,m_h,m_xh,m_yh,m_wh,m_hh;
     bool visible;
 
 public:
@@ -24,9 +24,12 @@ public:
     void setVisibility(bool visible, bool immediate = false);
     void setVisibility(bool visible, uint32_t delay);
     void update(float dt);
-    void draw(bool notched,void (*)(int16_t x, int16_t y, int16_t w, int16_t h),int dx = 0, int dy = 0);
+//    void draw(bool notched,void (*)(int16_t x, int16_t y, int16_t w, int16_t h),int dx = 0, int dy = 0);
+    void draw(bool notched,std::function<void(int16_t x, int16_t y, int16_t w, int16_t h)>,int dx = 0, int dy = 0);
 
     void showForDuration(float duration) { setVisibility(true); m_showDuration = duration; }
+
+    void setMaxWidth(int w);
 
     static UIElement getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Tween::Easing curve);
 };

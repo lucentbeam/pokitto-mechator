@@ -10617,6 +10617,57 @@
 		},
 		"/content/art/enemy_helicopter.aseprite": {
 			"sdcard": false
+		},
+		"/content/art/enemy_laser_ew.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/enemy_laser_ew.png": {
+			"sdcard": false
+		},
+		"/content/art/enemy_laser_ns.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_laser_ew.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_helicopter.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_laser_ns.png": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemyhelicopter.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemyhelicopter.h": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemylasers.cpp": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemylasers.h": {
+			"sdcard": false
+		},
+		"/game/maps/alertregion.cpp": {
+			"sdcard": false
+		},
+		"/game/maps/alertregion.h": {
+			"sdcard": false
+		},
+		"/content/art/enemy_laser_ew.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_helicopter.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_laser_ew.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/enemy_laser_ns.h": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.MNcVab": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

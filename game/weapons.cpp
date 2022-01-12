@@ -37,6 +37,7 @@ std::string Weapon::getName(Weapon::Type t)
         return "Missiles";
         break;
     }
+    return "Nameless Gun";
 }
 
 Weapon::Type Weapon::nextWeapon(Weapon::Type t)

@@ -15,8 +15,8 @@ const float enemyHeliSpeed = 20.0f;
 const float enemyTankSpeed = 12.0f;
 
 // for final: 8, 15
-const int playerStartTileX = 18;
-const int playerStartTileY = 33;
+const int playerStartTileX = 8;//18;
+const int playerStartTileY = 15;//33;
 
 const float soldierSpeed = 20.0f;
 

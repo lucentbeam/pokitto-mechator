@@ -23,9 +23,13 @@
 
 #include "game/constants.h"
 #include "game/states/pause.h"
+#include "game/maps/alertregion.h"
 
 static Player player;
 static ScreenBuffer screenbuffer;
+
+UIElement region_indicator = UIElement::getExpander(57, 8, 30, 9, Tween::OutQuad);
+const char * region_name = "";
 
 void goGame()
 {
@@ -42,6 +46,7 @@ void goGame()
     UI::setVisibility(UI::Element::UIDollarCount, false);
     UI::setVisibility(UI::Element::UIHackingKitCount, false);
 }
+
 
 void updateGameState(FSM&) {
     // player characters
@@ -66,6 +71,13 @@ void updateGameState(FSM&) {
 //    CloudManager::update(physicsTimestep);
 
     ControlStatus status = Controls::getStatus();
+
+    region_indicator.update(physicsTimestep);
+    if ((status.x != 0 || status.y != 0) && Player::mode() != PlayerMode::BoatMode && checkGroundRegions(region_name)) {
+        region_indicator.setMaxWidth(RenderSystem::getLineLength(region_name) + 8);
+        region_indicator.showForDuration(3.0f);
+    }
+
     if (status.c.pressed()) {
         goPause();
     }
@@ -98,6 +110,12 @@ void drawGameState() {
 
     // ui draw
     UI::draw();
+
+    region_indicator.draw(true, [&](int16_t x, int16_t y, int16_t w, int16_t h){
+        if (h > 7) {
+            Helpers::printHorizontallyCentered(x + w/2, y + 1, region_name, 10);
+        }
+    });
 
     // debug
 //    static FPSHelper fps(10);

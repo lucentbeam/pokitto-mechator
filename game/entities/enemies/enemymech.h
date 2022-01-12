@@ -29,7 +29,7 @@ public:
 
     EnemyMech() : m_rect(0, 0, 5, 5), m_velocity({0, 0}) {}
 
-    void setup(const Vec2f &pos) { m_rect.setCenter(pos.x(), pos.y()); m_life = 3; m_on_deactivate = std::function<void()>(); }
+    void setup(const Vec2f &pos) { m_rect.setCenter(pos.x(), pos.y()); m_life = 3; m_on_deactivate = std::function<void()>(); m_drops = true; }
 
     int8_t life() const { return m_life; }
 

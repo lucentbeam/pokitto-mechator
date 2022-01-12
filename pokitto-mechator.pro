@@ -15,6 +15,7 @@ SOURCES += \
     game/entities/enemy.cpp \
     game/entities/pickups.cpp \
     game/entities/pois.cpp \
+    game/maps/alertregion.cpp \
     game/maps/spawnpoint.cpp \
     game/physics/pathfinding.cpp \
     game/player.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     game/entities/pickups.h \
     game/entities/pois.h \
     game/enums.h \
+    game/maps/alertregion.h \
     game/maps/spawnpoint.h \
     game/maps/spawnpoints.h \
     game/maps/worldmutables.h \

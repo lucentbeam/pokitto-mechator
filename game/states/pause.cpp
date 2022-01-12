@@ -14,13 +14,13 @@ Weapon::Type selected_weapon = Weapon::MachineGun;
 
 void goPause()
 {
-    UI::setVisibility(UI::Element::UIKeyACount, true, uint32_t(0));
-    UI::setVisibility(UI::Element::UIKeyBCount, true, uint32_t(50));
-    UI::setVisibility(UI::Element::UIKeyCCount, true, uint32_t(100));
-    UI::setVisibility(UI::Element::UIDollarCount, true, uint32_t(150));
-    UI::setVisibility(UI::Element::UIHackingKitCount, true, uint32_t(200));
+    UI::setVisibility(UI::Element::UIKeyACount, true, uint32_t(150));
+    UI::setVisibility(UI::Element::UIKeyBCount, true, uint32_t(150));
+    UI::setVisibility(UI::Element::UIKeyCCount, true, uint32_t(150));
+    UI::setVisibility(UI::Element::UIDollarCount,     true, uint32_t(300));
+    UI::setVisibility(UI::Element::UIHackingKitCount, true, uint32_t(300));
     pause_prompt.setVisibility(true, uint32_t(0));
-    equip_prompt.setVisibility(true, uint32_t(400));
+    equip_prompt.setVisibility(true, uint32_t(0));
 
     selected_weapon = Player::currentWeapon();
     FSM::instance->go(GameStates::Pause);
@@ -29,10 +29,11 @@ void goPause()
 void updatePauseState(FSM&)
 {
     ControlStatus status = Controls::getStatus();
-    if (status.c.pressed()) {
+    if (status.c.pressed() || status.b.pressed()) {
         pause_prompt.setVisibility(false);
         equip_prompt.setVisibility(false);
         goGame();
+        return;
     }
     if (status.right.pressed()) {
         Player::cycleWeaponNext();

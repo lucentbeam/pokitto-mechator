@@ -55,7 +55,32 @@ void UIElement::update(float dt)
     }
 }
 
-void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t, int16_t) = nullptr, int dx, int dy)
+//void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t, int16_t) = nullptr, int dx, int dy)
+//{
+//    if (!visible && tween.getInterpolation(0, 1.0) > 0.999f) {
+//        return;
+//    }
+//    int16_t x = visible ? int16_t(tween.getInterpolationInt(m_xh, m_x)) : int16_t(tween.getInterpolationInt(m_x, m_xh));
+//    x += dx;
+//    int16_t y = visible ? int16_t(tween.getInterpolationInt(m_yh, m_y)) : int16_t(tween.getInterpolationInt(m_y, m_yh));
+//    y += dy;
+//    int16_t w = visible ? int16_t(tween.getInterpolationInt(m_wh, m_w)) : int16_t(tween.getInterpolationInt(m_w, m_wh));
+//    int16_t h = visible ? int16_t(tween.getInterpolationInt(m_hh, m_h)) : int16_t(tween.getInterpolationInt(m_h, m_hh));
+
+//    if (w <= 0 || h <= 0) { return; }
+
+//    if (useNotched) {
+//        Helpers::drawNotchedRect(x, y, uint8_t(w), uint8_t(h), 0);
+//    } else {
+//        RenderSystem::drawRect(x, y, w, h, 0);
+//    }
+
+//    if (callback != nullptr) {
+//        callback(x,y,w,h);
+//    }
+//}
+
+void UIElement::draw(bool notched, std::function<void (int16_t, int16_t, int16_t, int16_t)> callback, int dx, int dy)
 {
     if (!visible && tween.getInterpolation(0, 1.0) > 0.999f) {
         return;
@@ -69,7 +94,7 @@ void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t
 
     if (w <= 0 || h <= 0) { return; }
 
-    if (useNotched) {
+    if (notched) {
         Helpers::drawNotchedRect(x, y, uint8_t(w), uint8_t(h), 0);
     } else {
         RenderSystem::drawRect(x, y, w, h, 0);
@@ -78,6 +103,13 @@ void UIElement::draw(bool useNotched, void (*callback)(int16_t, int16_t, int16_t
     if (callback != nullptr) {
         callback(x,y,w,h);
     }
+}
+
+void UIElement::setMaxWidth(int w)
+{
+    m_x += m_w / 2;
+    m_w = w;
+    m_x -= m_w / 2;
 }
 
 UIElement UIElement::getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Tween::Easing curve)

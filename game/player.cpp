@@ -137,10 +137,11 @@ void Soldier::draw()
         sprite += 1;
     }
     Vec2f spos = Camera::worldToScreen(s_instance.m_steering.pos());
+    bool flip = s_instance.m_steering.facing().x() > 0;
     if (!s_instance.m_iframes.ready()) {
-        RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], 10, s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(spos.x()-(flip ? 4 : 3), spos.y() - 3, soldier[sprite], soldier[0][2], 10, flip);
     } else {
-        RenderSystem::sprite(spos.x()- 3, spos.y() - 3, soldier[sprite], soldier[0][2], s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(spos.x()-(flip ? 4 : 3), spos.y() - 3, soldier[sprite], soldier[0][2], flip);
     }
 }
 
