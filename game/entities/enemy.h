@@ -22,9 +22,9 @@ struct Mine {
 class Enemy
 {
     static ObjectPool<EnemyMech, 8> s_mechs;
-    static ObjectPool<EnemyTank, 3> s_tanks;
+    static ObjectPool<EnemyTank, 5> s_tanks;
     static ObjectPool<EnemyTurret, 4> s_turrets;
-    static ObjectPool<EnemyBomber, 2> s_bombers;
+    static ObjectPool<EnemyBomber, 3> s_bombers;
     static ObjectPool<EnemyHelicopter, 2> s_helis;
     static ObjectPool<EnemyLasers, 4> s_lasers;
     static ObjectPool<Mine, 14> s_mines;
@@ -53,13 +53,13 @@ public:
     static EnemyTurret * createTurret(const Vec2f &pos);
     static EnemyBomber * createBomber(const Vec2f &pos);
 
-    static void spawnMech(const Vec2f &pos);
-    static void spawnTank(const Vec2f &pos);
-    static void spawnBomber(const Vec2f &pos);
-    static void spawnTurret(const Vec2f &pos);
-    static void spawnMine(const Vec2f &pos);
-    static void spawnHelicopter(const Vec2f &pos);
-    static void createLasers(const Vec2f &pos, bool vertical, int node, int sz);
+    static void spawnMech(const Vec2i &pos);
+    static void spawnTank(const Vec2i &pos);
+    static void spawnBomber(const Vec2i &pos);
+    static void spawnTurret(const Vec2i &pos);
+    static void spawnMine(const Vec2i &pos);
+    static void spawnHelicopter(const Vec2i &pos);
+    static void createLasers(const Vec2i &pos, bool vertical, int node, int sz);
 
     static void update(float dt);
     static void draw();
@@ -68,12 +68,12 @@ public:
 
 
 template <int t, int h>
-void spawnVerticalLasers(const Vec2f &loc) {
+void spawnVerticalLasers(const Vec2i &loc) {
     Enemy::createLasers(loc, true, t, h);
 }
 
 template <int l, int w>
-void spawnHorizontalLasers(const Vec2f &loc) {
+void spawnHorizontalLasers(const Vec2i &loc) {
     Enemy::createLasers(loc, false, l, w);
 }
 

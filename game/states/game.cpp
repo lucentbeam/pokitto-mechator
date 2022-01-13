@@ -89,6 +89,7 @@ void drawGameState() {
     RenderSystem::drawBuffer(screenbuffer.getData());
 
     // entities
+    Barracks::draw();
     POIs::draw();
     Pickups::draw();
     Enemy::draw();

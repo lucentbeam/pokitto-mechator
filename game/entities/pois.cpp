@@ -24,7 +24,7 @@ void POIs::openAtIndex(const Vec2f &pos)
     s_activated.push_back(MapManager::getMapIndex(pos.x(), pos.y()));
 }
 
-void POIs::spawnDoor(const Vec2f &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, POIType door)
+void POIs::spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, POIType door)
 {
     if (!mapIndexUnopened(pos)) {
         return;
@@ -42,7 +42,7 @@ void POIs::spawnDoor(const Vec2f &pos, uint16_t left, uint16_t top, uint8_t widt
     p->m_sprite = SpriteWrapper(poi[1+uint8_t(door)], 1, 8.0f);
 }
 
-void POIs::spawnShop(const Vec2f &pos, const Vec2f &jeep_loc, const Vec2f &boat_loc, const Vec2f &heli_loc)
+void POIs::spawnShop(const Vec2i &pos, const Vec2f &jeep_loc, const Vec2f &boat_loc, const Vec2f &heli_loc)
 {
     POIs * p = s_pois.activateNext();
     if (p == nullptr) {

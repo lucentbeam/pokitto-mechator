@@ -3,12 +3,19 @@
 
 #include "core/utilities/vec.h"
 
+struct Bounds {
+    int8_t w, h;
+    Bounds() = default;
+    Bounds(int sz, int sh) : w(sz), h(sh) {}
+};
+
 class Rect {
   float m_l, m_t, m_r, m_b, m_w, m_h;
 
 public:
-  Rect() {}
+  Rect() = default;
   constexpr Rect(float x, float y, float w, float h) : m_l(x), m_t(y), m_r(x+w), m_b(y+h), m_w(w), m_h(h) {}
+  Rect(float x, float y, const Bounds &b) : Rect(x - b.w/2, y - b.h/2, b.w, b.h) {}
 
   void grow(float w, float h);
 

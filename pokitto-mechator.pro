@@ -35,6 +35,7 @@ SOURCES += \
     game/states/repairs.cpp \
     game/states/shop.cpp \
     game/ui/ui.cpp \
+    game/utilities/helpers.cpp \
     game/utilities/mapmanager.cpp \
     game/utilities/playerstats.cpp \
     core/utilities/tween.cpp \

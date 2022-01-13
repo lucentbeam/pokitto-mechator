@@ -6,7 +6,7 @@
 #include "core/utilities/vec.h"
 #include "core/utilities/objectpool.h"
 
-const int maxEffectCount = 24;
+const int maxEffectCount = 40;
 
 class EffectManager;
 
@@ -28,7 +28,7 @@ class EffectManager
 
     static void create(const Vec2f &pos, const uint8_t* frame_start, int framecount, float fps, float delay = 0);
 public:
-
+    static void createSmallExplosion(const Vec2f &pos, int delay);
 
     static void createExplosion(const Vec2f &pos, int radius, int count);
 

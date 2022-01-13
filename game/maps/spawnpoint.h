@@ -7,19 +7,19 @@
 
 class SpawnPoint
 {
-    const Vec2f m_pos;
+    const Vec2i m_pos;
 
 
     static std::unordered_set<const SpawnPoint*> s_active_points;
 
 public:
 
-    constexpr SpawnPoint(const Vec2f &pos, void (* const onApproach)(const Vec2f &)): m_pos(pos * 6), m_on_approach(onApproach) {}
+    constexpr SpawnPoint(const Vec2i &pos, void (* const onApproach)(const Vec2i &)): m_pos(pos * 6), m_on_approach(onApproach) {}
 
     static void setActiveRegion();
 
 
-    void (* const m_on_approach)(const Vec2f &);
+    void (* const m_on_approach)(const Vec2i &);
 };
 
 #endif // SPAWNPOINT_H

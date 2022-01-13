@@ -16,6 +16,8 @@
 #include "game/constants.h"
 #include "game/player.h"
 
+#include "game/maps/spawnpoints.h"
+
 int main ()
 {
     RenderSystem::initialize();

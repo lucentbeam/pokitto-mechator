@@ -37,7 +37,7 @@ void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t w
     }
 }
 
-void Barracks::create(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
+void Barracks::create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
 {
     Barracks * b = s_barracks.activateNext();
     if (b == nullptr) {
@@ -58,6 +58,8 @@ void Barracks::update(float dt)
             s_barracks.deactivate(i);
             continue;
         }
+
+        start[i].m_flash.update();
 
         // check if out of range. if so: deactivate and restore and damaged tiles
         if (!Camera::inActiveZone(start[i].m_spawn)) {
@@ -96,6 +98,7 @@ void Barracks::update(float dt)
             for(int x = start[i].m_left; x < (start[i].m_width + start[i].m_left); x+=6) {
                 for(int y = start[i].m_top; y < (start[i].m_height + start[i].m_top); y+=6) {
                     MapManager::setTileAt(x, y, 203);
+                    EffectManager::createSmallExplosion(Vec2f(x + 2 + (rand() % 3), y + 2 + (rand() % 3)), rand() % 20);
                 }
             }
             s_barracks.deactivate(i);
@@ -109,6 +112,7 @@ void Barracks::update(float dt)
             }
         } else {
             if (damage > 0) {
+                start[i].m_flash.reset(5);
                 for(auto p : hitlocs) {
                     EffectManager::createHit(p - Vec2f(3.5f, 3.5f));
                 }
@@ -140,4 +144,15 @@ void Barracks::update(float dt)
 
         ++i;
     }
+}
+
+void Barracks::draw()
+{
+    s_barracks.iterate([](Barracks * b){
+        if (!b->m_flash.ready()) {
+            Vec2f p = Camera::worldToScreen(Vec2f(b->m_left, b->m_top));
+            Helpers::drawNotchedRect(p.x(), p.y(), b->m_width, b->m_height, 10);
+        }
+        return false;
+    });
 }

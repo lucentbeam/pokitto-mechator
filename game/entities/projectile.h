@@ -25,7 +25,7 @@ class Projectile
 {
     Body m_body;
     SpriteWrapper sprite;
-    Rect m_rect;
+    Bounds m_bounds;
     float m_lifetime, z, vz;
     void (*m_on_expire)(Projectile*);
 
@@ -61,9 +61,9 @@ public:
 
     Projectile * addVelocity(const Vec2f &vel);
 
-    Projectile * setFlipped(bool flip) { flipped = flip; }
+    Projectile * setFlipped(bool flip) { flipped = flip; return this; }
 
-    Projectile * setMissile(const Vec2f &t, const Vec2f &d) { target = t; direction = d; is_missile = true; counter = rand() % 5; }
+    Projectile * setMissile(const Vec2f &t, const Vec2f &d) { target = t; direction = d; is_missile = true; counter = rand() % 5; return this; }
 
     void update(float dt);
 

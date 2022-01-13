@@ -15,6 +15,11 @@ void EffectManager::create(const Vec2f &pos, const uint8_t *frame_start, int fra
     }
 }
 
+void EffectManager::createSmallExplosion(const Vec2f &pos, int delay)
+{
+    EffectManager::create(pos - Vec2f(explosion_small[0][0], explosion_small[0][1])/2, explosion_small[0], 7, 14.0f, float(delay) / 60.0f);
+}
+
 void EffectManager::createExplosion(const Vec2f &pos, int radius, int count)
 {
     Vec2f dir(1, 0);
@@ -22,7 +27,7 @@ void EffectManager::createExplosion(const Vec2f &pos, int radius, int count)
     for(int i = 0; i < count; ++i) {
         dir.rotBy(90 + (rand() % 180));
         r = float(rand() % std::max(1, radius*2/3)) + radius/3;
-        EffectManager::create(pos + dir * r, explosion_small[0], 7, 20.0f, i == 0 ? 0 : float(rand() % 40)/60.0f);
+        EffectManager::create(pos + dir * r, explosion_small[0], 7, 14.0f, i == 0 ? 0 : float(rand() % 40)/60.0f);
     }
 }
 

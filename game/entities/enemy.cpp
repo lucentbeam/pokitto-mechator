@@ -11,11 +11,11 @@ int Mine::timer = 0;
 
 ObjectPool<EnemyMech,8> Enemy::s_mechs;
 
-ObjectPool<EnemyTank,3> Enemy::s_tanks;
+ObjectPool<EnemyTank,5> Enemy::s_tanks;
 
 ObjectPool<EnemyTurret,4> Enemy::s_turrets;
 
-ObjectPool<EnemyBomber,2> Enemy::s_bombers;
+ObjectPool<EnemyBomber,3> Enemy::s_bombers;
 
 ObjectPool<EnemyHelicopter,2> Enemy::s_helis;
 
@@ -82,12 +82,12 @@ EnemyBomber *Enemy::createBomber(const Vec2f &pos)
     return m;
 }
 
-void Enemy::spawnMech(const Vec2f &pos)
+void Enemy::spawnMech(const Vec2i &pos)
 {
     createMech(pos);
 }
 
-void Enemy::spawnTank(const Vec2f &pos)
+void Enemy::spawnTank(const Vec2i &pos)
 {
     for(int i = 0; i < s_tanks.objectCount(); ++i) {
         if ((s_tanks.objects() + i)->isFrom(pos)) {
@@ -97,27 +97,27 @@ void Enemy::spawnTank(const Vec2f &pos)
     createTank(pos);
 }
 
-void Enemy::spawnBomber(const Vec2f &pos)
+void Enemy::spawnBomber(const Vec2i &pos)
 {
     createBomber(pos);
 }
 
-void Enemy::spawnTurret(const Vec2f &pos)
+void Enemy::spawnTurret(const Vec2i &pos)
 {
-    createTurret(pos + Vec2f(3, 2));
+    createTurret(pos + Vec2i(3, 2));
 }
 
-void Enemy::spawnMine(const Vec2f &pos)
+void Enemy::spawnMine(const Vec2i &pos)
 {
     if (MapManager::getTileAt(pos.x(), pos.y()) != SpecialTiles::UnexplodedOrdinance) return;
     auto m = s_mines.activateNext();
     if (m != nullptr) {
-        m->pos = pos + Vec2f(3, 3);
+        m->pos = pos + Vec2i(3, 3);
         m->timer = (rand() % 30);
     }
 }
 
-void Enemy::spawnHelicopter(const Vec2f &pos)
+void Enemy::spawnHelicopter(const Vec2i &pos)
 {
     auto m = s_helis.activateNext();
     if (m != nullptr) {
@@ -125,7 +125,7 @@ void Enemy::spawnHelicopter(const Vec2f &pos)
     }
 }
 
-void Enemy::createLasers(const Vec2f &pos, bool vertical, int node, int sz)
+void Enemy::createLasers(const Vec2i &pos, bool vertical, int node, int sz)
 {
     auto m = s_lasers.activateNext();
     if (m != nullptr) {

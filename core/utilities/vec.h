@@ -9,7 +9,7 @@ class Vec2f
     float m_x, m_y;
 
 public:
-    Vec2f() : Vec2f(0, 0) {}
+    Vec2f() = default;
     constexpr Vec2f(float x, float y) : m_x(x), m_y(y) {}
     constexpr Vec2f(const Vec2f &other) : m_x(other.m_x), m_y(other.m_y) {}
 
@@ -80,4 +80,64 @@ public:
     }
 };
 
+
+class Vec2i
+{
+    int16_t m_x, m_y;
+
+public:
+    Vec2i() = default;
+    constexpr Vec2i(float x, float y) : m_x(x), m_y(y) {}
+    constexpr Vec2i(const Vec2i &other) : m_x(other.m_x), m_y(other.m_y) {}
+
+    uint16_t x() const { return m_x; }
+    uint16_t y() const { return m_y; }
+    float length() const { return std::sqrt(m_x*m_x+m_y*m_y); }
+
+    void set(uint16_t x, uint16_t y) { m_x = x; m_y = y; }
+    void setX(uint16_t x) { m_x = x; }
+    void setY(uint16_t y) { m_y = y; }
+
+    Vec2i rot90() const { return Vec2i(m_y, -m_x); }
+
+    float dot(const Vec2i &other) { return m_x * other.m_x + m_y * other.m_y; }
+
+    Vec2i operator-(const Vec2i &other) const {
+        return Vec2i(m_x - other.m_x, m_y - other.m_y);
+    }
+
+    Vec2i operator+(const Vec2i &other) const {
+        return Vec2i(m_x + other.m_x, m_y + other.m_y);
+    }
+
+    Vec2i& operator+=(const Vec2i &other) {
+        m_x += other.m_x;
+        m_y += other.m_y;
+        return *this;
+    }
+
+    constexpr Vec2i operator*(float val) const {
+        return Vec2i(m_x * val, m_y * val);
+    }
+
+    operator Vec2f() const {
+        return Vec2f(m_x, m_y);
+    }
+
+    Vec2i& operator*=(float val) {
+        m_x *= val;
+        m_y *= val;
+        return *this;
+    }
+
+    Vec2i operator/(float val) const {
+        return Vec2i(float(m_x) / val, float(m_y) / val);
+    }
+
+    Vec2i& operator/=(float val) {
+        m_x = float(m_x)/val;
+        m_y = float(m_y)/val;
+        return *this;
+    }
+};
 #endif // VEC_H

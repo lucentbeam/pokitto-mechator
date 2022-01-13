@@ -13,29 +13,29 @@ class Pickups
 
     static std::vector<uint16_t> s_acquired_specials; // store map indices of specials that have already been acquired
 
-    Vec2f position{0,0};
+    Vec2i position{0,0};
     SpriteWrapper m_sprite;
-    void (*m_on_collect)(const Vec2f&);
+    void (*m_on_collect)(const Vec2i&);
     uint16_t m_lifetime;
 
-    void configure(const Vec2f &pos, const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime);
+    void configure(const Vec2i &pos, const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2i&), uint16_t lifetime);
 
-    static void spawnTemporary(const Vec2f &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&), uint16_t lifetime);
+    static void spawnTemporary(const Vec2i &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2i&), uint16_t lifetime);
 
-    static void spawnSpecial(const Vec2f &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2f&));
+    static void spawnSpecial(const Vec2i &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2i&));
 
-    static bool mapIndexUnacquired(const Vec2f &pos);
+    static bool mapIndexUnacquired(const Vec2i &pos);
 
-    static void acquireAtIndex(const Vec2f &pos);
+    static void acquireAtIndex(const Vec2i &pos);
 public:
 
     static void spawnDollar(const Vec2f &pos);
 
-    static void spawnHackingKit(const Vec2f &pos);
+    static void spawnHackingKit(const Vec2i &pos);
 
-    static void spawnKeycardA(const Vec2f &pos);
-    static void spawnKeycardB(const Vec2f &pos);
-    static void spawnKeycardC(const Vec2f &pos);
+    static void spawnKeycardA(const Vec2i &pos);
+    static void spawnKeycardB(const Vec2i &pos);
+    static void spawnKeycardC(const Vec2i &pos);
 
     static void update(float dt);
 

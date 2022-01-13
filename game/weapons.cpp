@@ -42,6 +42,9 @@ std::string Weapon::getName(Weapon::Type t)
     case Type::Missiles:
         return "Missiles";
         break;
+    case Type::MultiMissiles:
+        return "Cluster Missiles";
+        break;
     }
     return "Nameless Gun";
 }

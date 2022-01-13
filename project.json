@@ -11352,6 +11352,72 @@
 		},
 		"/game/entities/projectile.cpp.gnNgVp": {
 			"sdcard": false
+		},
+		"/pokitto-mechator.pro.user.pViHLz": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile_missile.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/smoke.h": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.fAsbyb": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader": {
+			"sdcard": false
+		},
+		"/content/build-TiledMapReader-Desktop-Release": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/TiledMapReader.pro.user": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/TiledMapReader.pro": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/TiledMapReader.pro.user.f1d6e7c.4.10-pre1": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/json.hpp": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/main.cpp": {
+			"sdcard": false
+		},
+		"/content/build-TiledMapReader-Desktop-Release/Makefile": {
+			"sdcard": false
+		},
+		"/content/build-TiledMapReader-Desktop-Release/TiledMapReader": {
+			"sdcard": false
+		},
+		"/content/build-TiledMapReader-Desktop-Release/main.o": {
+			"sdcard": false
+		},
+		"/game/utilities/helpers.cpp": {
+			"sdcard": false
+		},
+		"/main.cpp.HpwiwW": {
+			"sdcard": false
+		},
+		"/main.cpp.XkBliF": {
+			"sdcard": false
+		},
+		"/main.cpp.hHzeKk": {
+			"sdcard": false
+		},
+		"/game/maps/spawnpoints.h.FbqJcl": {
+			"sdcard": false
+		},
+		"/main.cpp.EgMszD": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/TiledMapReader.pro.user.WSjCGT": {
+			"sdcard": false
+		},
+		"/game/maps/spawnpoints.h.DCQXuK": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

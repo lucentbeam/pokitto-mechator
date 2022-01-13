@@ -15,8 +15,7 @@ Projectile::Projectile() :
 
 void Projectile::configure(const Vec2f &pos, const Vec2f &vel, int w, int h, float lifetime)
 {
-    m_rect = Rect(0, 0, w, h);
-    m_rect.setCenter(pos.x(), pos.y());
+    m_bounds = Bounds(w, h);
     m_body = Body(pos, vel);
     m_lifetime = lifetime;
     m_on_expire = nullptr;
@@ -91,7 +90,6 @@ void Projectile::update(float dt)
             if (destroy_on_ground) m_lifetime -= 100000.0f; // hell yeah! that's a big number. no reason anything would ever be larger, amirite?
         }
     }
-    m_rect.setCenter(m_body.pos().x(), m_body.pos().y() - z);
 }
 
 void Projectile::draw()
@@ -187,7 +185,8 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask)
     int i = 0;
     Projectile * start = s_projectiles.objects();
     while (i < s_projectiles.objectCount()) {
-        if (((mask & start[i].mask) == mask) && rect.overlaps(start[i].m_rect)) {
+        Rect r(start[i].m_body.pos().x(), start[i].m_body.pos().y() - start[i].z, start[i].m_bounds);
+        if (((mask & start[i].mask) == mask) && rect.overlaps(r)) {
             damage += start[i].damage;
             start[i].m_lifetime -= 100000.0f;
         }
@@ -202,7 +201,8 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask, std::
     int i = 0;
     Projectile * start = s_projectiles.objects();
     while (i < s_projectiles.objectCount()) {
-        if (((mask & start[i].mask) == mask) && rect.overlaps(start[i].m_rect)) {
+        Rect r(start[i].m_body.pos().x(), start[i].m_body.pos().y() - start[i].z, start[i].m_bounds);
+        if (((mask & start[i].mask) == mask) && rect.overlaps(r)) {
             damage += start[i].damage;
             start[i].m_lifetime -= 100000.0f;
             at.push_back(start[i].m_body.pos());
