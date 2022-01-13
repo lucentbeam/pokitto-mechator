@@ -2,6 +2,8 @@
 #include "core/rendering/camera.h"
 #include "game/utilities/helpers.h"
 #include "game/physics/collisionmanager.h"
+#include "game/sprites.h"
+#include "game/entities/effects.h"
 
 Projectile::Projectile() :
     m_body({0, 0}, {0, 0}),
@@ -19,11 +21,11 @@ void Projectile::configure(const Vec2f &pos, const Vec2f &vel, int w, int h, flo
     m_lifetime = lifetime;
     m_on_expire = nullptr;
     damage = 1;
-    struck = false;
     ignore_walls = false;
     z = 0;
     vz = 0;
     flipped = false;
+    is_missile = false;
 }
 
 Projectile * Projectile::setExpireCallback(void (*expire_callback)(Projectile *))
@@ -66,9 +68,20 @@ Projectile *Projectile::addVelocity(const Vec2f &vel)
 
 void Projectile::update(float dt)
 {
+    if (is_missile) {
+        target += direction * dt;
+        m_body.steerToward(target);
+        sprite = SpriteWrapper(projectile_missile[m_body.vel().getRotationFrame(8.0f)], 1, 10.0f);
+        flipped = m_body.vel().x() > 0;
+        counter++;
+        if (counter % 10 == 0) {
+            EffectManager::createSmoke(m_body.pos());
+            counter = rand() % 5;
+        }
+    }
     m_body.update(dt);
-    m_lifetime -= dt;
     sprite.update();
+    m_lifetime -= dt;
     if (z != 0 || vz != 0) {
         z += vz * dt;
         vz = -3000 * dt;
@@ -176,7 +189,7 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask)
     while (i < s_projectiles.objectCount()) {
         if (((mask & start[i].mask) == mask) && rect.overlaps(start[i].m_rect)) {
             damage += start[i].damage;
-            start[i].struck = true;
+            start[i].m_lifetime -= 100000.0f;
         }
         ++i;
     }
@@ -191,7 +204,7 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask, std::
     while (i < s_projectiles.objectCount()) {
         if (((mask & start[i].mask) == mask) && rect.overlaps(start[i].m_rect)) {
             damage += start[i].damage;
-            start[i].struck = true;
+            start[i].m_lifetime -= 100000.0f;
             at.push_back(start[i].m_body.pos());
         }
         ++i;

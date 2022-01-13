@@ -36,6 +36,8 @@ public:
 
     static void createHit(const Vec2f &pos);
 
+    static void createSmoke(const Vec2f &pos);
+
     static void update(float dt);
 
     static void draw();

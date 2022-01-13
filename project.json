@@ -11085,6 +11085,273 @@
 		},
 		"/game/player.cpp.jxYBFK": {
 			"sdcard": false
+		},
+		"/game/player.cpp.sOyNSL": {
+			"sdcard": false
+		},
+		"/game/player.cpp.ujGLyC": {
+			"sdcard": false
+		},
+		"/main.cpp.rltiwV": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.xFXcwr": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.autosave": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.qEtbMZ": {
+			"sdcard": false
+		},
+		"/game/physics/body.h.qblOmR": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.EJHpaU": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.YUPCap": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.RxagvZ": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.zaLIgZ": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.urarhF": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.VfEaIi": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.WQdzyf": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.wAgIbm": {
+			"sdcard": false
+		},
+		"/core/utilities/vec.h.ofeUsV": {
+			"sdcard": false
+		},
+		"/core/utilities/vec.h.HmIDFV": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.iIsARG": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.qVSXjJ": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.Isnsqd": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.npLMbN": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.ImnXoO": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.fqmIym": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.jakbmr": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.BldFHz": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.oeGLxM": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.jSsxws": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.hTtixE": {
+			"sdcard": false
+		},
+		"/main.cpp.iYsvDY": {
+			"sdcard": false
+		},
+		"/main.cpp.DAjpSJ": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.aBbgRJ": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.qKBPnB": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.fwEsUD": {
+			"sdcard": false
+		},
+		"/game/physics/body.h.LspDVv": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.byeDJg": {
+			"sdcard": false
+		},
+		"/game/physics/body.h.RQiSkJ": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.eVaqTT": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.VLwxUa": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.XfuxRF": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.PGueBS": {
+			"sdcard": false
+		},
+		"/game/player.cpp.tfNPHf": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.autosave.eYxIpS": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.RqSeEx": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.EKRZmj": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.ikorKE": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.fcZTTm": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.LxCGAt": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.fSdNjb": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.tSsNvf": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.klCuAr": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.yVFuCB": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.ugDSPj": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.IaqbRK": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.DErxbu": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.ZrrzJc": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.autosave.UduukY": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.BqULRI": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.FRNhMB": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.PjycGK": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.FwPEJr": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.vChjma": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.autosave.PLkzIb": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.autosave": {
+			"sdcard": false
+		},
+		"/game/physics/body.h.QEHIhy": {
+			"sdcard": false
+		},
+		"/game/physics/body.h.QGFwmP": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.UzJgRB": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.ZyXSVX": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.iulkvk": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.prDPtg": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.autosave.GXGcli": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.AeFEda": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.fDEnMR": {
+			"sdcard": false
+		},
+		"/game/physics/body.cpp.nDYnbJ": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.ecUIhf": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.OoMvmI": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.HNXedL": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.YObwBE": {
+			"sdcard": false
+		},
+		"/content/art/exports/smoke.png": {
+			"sdcard": false
+		},
+		"/content/art/smoke.aseprite": {
+			"sdcard": false
+		},
+		"/game/entities/effects.h.UxwHFI": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.GwWaPo": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.dYDDow": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.autosave.CBibpr": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.autosave": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.XiQLiS": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.dwbMgQ": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.eQoUZt": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.uYuvaM": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.gnNgVp": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

@@ -44,7 +44,10 @@ public:
         Grenade = 8,
 
         // tank
-        Missiles = 16
+        Missiles = 16,
+
+        // helicopter
+        MultiMissiles = 32
     };
     static constexpr const Type AllWeapons[] = { Gun, MachineGun, DualShot, Grenade, Missiles };
     static constexpr const int WeaponCount = 5;

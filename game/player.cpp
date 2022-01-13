@@ -14,7 +14,7 @@ Vehicle::Vehicle(int8_t hp, float x, float y, float speed, float cornering, std:
 Soldier Soldier::s_instance;
 int Soldier::s_owned_weapons = Weapon::Gun;
 #ifdef DEBUGS
-Weapon::Type Soldier::s_current_weapon = Weapon::Missiles;
+Weapon::Type Soldier::s_current_weapon = Weapon::MultiMissiles;
 #else
 Weapon::Type Soldier::s_current_weapon = Weapon::Gun;
 #endif
@@ -524,6 +524,9 @@ void Player::drawReticle(PlayerMode mode, const Vec2f &dir)
     if (s_mode != mode) return;
     if (!Controls::getStatus().a.held()) return;
     auto spos = Vec2f(52, 42) + dir * reticleDistance;
-    RenderSystem::drawShadow(spos.x(), spos.y(), reticle, 0);
+    static int fcounter = 0;
+    fcounter++;
+    if ((fcounter % 50) < 6) RenderSystem::sprite(spos.x(), spos.y(), reticle, 0);
+    else RenderSystem::drawShadow(spos.x(), spos.y(), reticle, 0);
     RenderSystem::pixel(spos.x() + 2, spos.y() + 2, 10);
 }

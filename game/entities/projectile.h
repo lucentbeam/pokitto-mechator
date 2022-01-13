@@ -24,18 +24,20 @@ class ProjectileManager;
 class Projectile
 {
     Body m_body;
+    SpriteWrapper sprite;
     Rect m_rect;
     float m_lifetime, z, vz;
     void (*m_on_expire)(Projectile*);
 
-    SpriteWrapper sprite;
+    Vec2f target, direction;
 
     uint16_t mask;
     uint8_t damage;
-    bool struck = false;
     bool ignore_walls = false;
     bool destroy_on_ground = false;
     bool flipped = false;
+    bool is_missile = false;
+    uint8_t counter = 0;
 
     friend ProjectileManager;
 public:
@@ -61,6 +63,8 @@ public:
 
     Projectile * setFlipped(bool flip) { flipped = flip; }
 
+    Projectile * setMissile(const Vec2f &t, const Vec2f &d) { target = t; direction = d; is_missile = true; counter = rand() % 5; }
+
     void update(float dt);
 
     void draw();
@@ -69,7 +73,7 @@ public:
 
     Vec2f pos() const { return m_body.pos(); }
 
-    bool expired() const { return m_lifetime <= 0 || struck; }
+    bool expired() const { return m_lifetime <= 0; }
 
     void onExpire();
 };

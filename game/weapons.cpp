@@ -13,6 +13,8 @@ const WeaponConfig grenade_config(1.8f, 4, 0.5f, 65.0f);
 
 const WeaponConfig missile_config(1.2f, 4, 0.35f, 140.0f);
 
+const WeaponConfig multimissile_config(0.8f, 4, 0.4f, 85.0f);
+
 bool Weapon::checkFire(Projectile * &p, const Button &action, const WeaponConfig &config, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel)
 {
     if (action.held()) {
@@ -131,7 +133,8 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
             p->setSprite(projectile_missile[fac.getRotationFrame(8.0f)], 1, 4)
              ->setTargetMask({EnemyTarget, GroundTarget, AirTarget})
              ->setDamage(0)
-             ->setFlipped(fac.x() > 0)
+             ->setMissile(pos + fac * 5.0f, fac * missile_config.speed)
+             ->setFlipped(dir.x() > 0)
              ->setExpireCallback([](Projectile*p) {
                 for(int i = -4; i <= 4; i+=4) {
                     for (int j = -4; j <= 4; j+= 4) {
@@ -146,6 +149,36 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
             });
             if (air) p->setIgnoreWalls();
             delay = missile_config.seconds_per_shot;
+        }
+        break;
+    case Type::MultiMissiles:
+        for(int i = 0; i < 6; ++i) {
+            dir = fac * 1;
+            dir.rotBy((i * 15 + (rand() % 25)) * (i % 2 == 0 ? 1 : -1));
+            if (checkFire(p, action, multimissile_config, pos, dir, vel)) {
+                p->setSprite(projectile_missile[fac.getRotationFrame(8.0f)], 1, 4)
+                 ->setTargetMask({EnemyTarget, GroundTarget, AirTarget})
+                 ->setDamage(0)
+                 ->setMissile(pos + fac * 5.0f, fac * multimissile_config.speed)
+                 ->setFlipped(dir.x() > 0)
+                 ->setIgnoreWalls()
+                 ->setExpireCallback([](Projectile*p) {
+                    for(int i = -4; i <= 4; i+=4) {
+                        for (int j = -4; j <= 4; j+= 4) {
+                            Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
+                            if (t == Terrain::DestructableMetal || t == Terrain::DestrucableWood) {
+                                MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
+                            }
+                        }
+                    }
+                    ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(4)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
+                    EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                });
+                if (air) p->setIgnoreWalls();
+                delay = multimissile_config.seconds_per_shot;
+            } else {
+                break;
+            }
         }
         break;
     }

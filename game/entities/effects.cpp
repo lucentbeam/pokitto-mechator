@@ -36,6 +36,11 @@ void EffectManager::createHit(const Vec2f &pos)
     EffectManager::create(pos, hit[0], 5, 20.0f);
 }
 
+void EffectManager::createSmoke(const Vec2f &pos)
+{
+    EffectManager::create(pos, smoke[0], 6, 24.0f);
+}
+
 void EffectManager::update(float dt)
 {
     s_effects.iterate([](Effect * e) {
