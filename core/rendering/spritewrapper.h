@@ -24,12 +24,8 @@ public:
         if (frame_count < 2) {
             return;
         }
-        counter++;
-        if (counter >= countsPerFrame) {
-            counter %= countsPerFrame;
-            currentFrame++;
-            currentFrame %= frame_count;
-        }
+        counter = (counter + 1) % countsPerFrame;
+        if (counter == 0) currentFrame = (currentFrame + 1) % frame_count;
     }
     const uint8_t * data() const {
         if (frameData == nullptr) {

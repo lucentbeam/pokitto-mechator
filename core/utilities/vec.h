@@ -2,6 +2,7 @@
 #define VEC_H
 
 #include <cmath>
+#include <stdint.h>
 
 class Vec2f
 {
@@ -69,6 +70,13 @@ public:
         m_y /= val;
 //        m_length /= val;
         return *this;
+    }
+
+    int getRotationFrame(int frame_count) const {
+        float anglePerFrame = 180.0f / frame_count;
+        float angle = std::atan2(m_y, std::abs(m_x)) * 180.0f / 3.1415926f;
+        angle = angle + 90.0f + anglePerFrame / 2.0f; // shift atan2 to [0,180]
+        return uint8_t(angle / 180.0f * frame_count);
     }
 };
 

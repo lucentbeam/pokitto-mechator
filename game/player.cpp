@@ -13,7 +13,11 @@ Vehicle::Vehicle(int8_t hp, float x, float y, float speed, float cornering, std:
 
 Soldier Soldier::s_instance;
 int Soldier::s_owned_weapons = Weapon::Gun;
+#ifdef DEBUGS
+Weapon::Type Soldier::s_current_weapon = Weapon::Missiles;
+#else
 Weapon::Type Soldier::s_current_weapon = Weapon::Gun;
+#endif
 
 Jeep Jeep::s_instance;
 int Jeep::s_owned_weapons = Weapon::DualShot | Weapon::Grenade;
@@ -21,7 +25,7 @@ Weapon::Type Jeep::s_current_weapon = Weapon::DualShot;
 
 Tank Tank::s_instance;
 int Tank::s_owned_weapons = Weapon::MachineGun | Weapon::Missiles;
-Weapon::Type Tank::s_current_weapon = Weapon::MachineGun;
+Weapon::Type Tank::s_current_weapon = Weapon::Missiles;
 
 Boat Boat::s_instance;
 int Boat::s_owned_weapons = Weapon::MachineGun;
@@ -42,6 +46,9 @@ bool Boat::s_available = true;
 PlayerMode Player::s_mode = PlayerMode::SoldierMode;
 
 float Player::s_shot_cooldown = 0.0f;
+
+const uint8_t reticle[] = {5, 5, 10, 10, 0, 10, 10, 10, 0, 0, 0, 10, 0, 0, 0, 0, 0, 10, 0, 0, 0, 10, 10, 10, 0, 10, 10 };
+const float reticleDistance = 18.0f;
 
 void Soldier::update(float dt)
 {
@@ -79,9 +86,7 @@ void Soldier::update(float dt)
         // TODO: gameover
     }
 
-    if (!controls.a.held()) {
-        s_instance.m_aim = s_instance.m_steering.aim();
-    }
+    if (!controls.a.held()) s_instance.m_aim = s_instance.m_steering.aim();
 
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
@@ -142,6 +147,7 @@ void Soldier::draw()
     } else {
         RenderSystem::sprite(spos.x()-(flip ? 4 : 3), spos.y() - 3, soldier[sprite], soldier[0][2], flip);
     }
+    Player::drawReticle(SoldierMode, s_instance.m_aim);
 }
 
 void Jeep::update(float dt)
@@ -174,7 +180,7 @@ void Jeep::update(float dt)
         s_instance.m_shake.update();
     }
 
-    if (controls.a.pressed()) s_instance.m_aim = s_instance.m_steering.aim();
+    if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
@@ -195,6 +201,7 @@ void Jeep::draw()
     } else {
         RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], s_instance.m_steering.facing().x() > 0);
     }
+    Player::drawReticle(JeepMode, s_instance.m_aim);
 }
 
 
@@ -230,7 +237,7 @@ void Helicopter::update(float dt)
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
-    if (controls.a.pressed()) s_instance.m_aim = s_instance.m_steering.aim();
+    if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos() - Vec2f(0, s_instance.m_z), s_instance.m_aim, s_instance.m_steering.vel(), true);
 
     Rect rect = s_instance.m_steering.rect();
@@ -275,6 +282,7 @@ void Helicopter::drawAir()
             RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/3], helicopter_blades[0][2]);
         }
     }
+    Player::drawReticle(HelicopterMode, s_instance.m_aim);
 }
 
 void Tank::update(float dt)
@@ -288,7 +296,7 @@ void Tank::update(float dt)
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
-    if (controls.a.pressed()) s_instance.m_aim = s_instance.m_steering.aim();
+    if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
@@ -326,6 +334,7 @@ void Tank::draw()
     } else {
         RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], s_instance.m_steering.facing().x() > 0);
     }
+    Player::drawReticle(TankMode, s_instance.m_aim);
 }
 
 void Boat::update(float dt)
@@ -340,7 +349,7 @@ void Boat::update(float dt)
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
 
-    if (controls.a.pressed()) s_instance.m_aim = s_instance.m_steering.aim();
+    if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
@@ -376,6 +385,7 @@ void Boat::draw()
     } else {
         RenderSystem::sprite(pos.x() - 15, pos.y() - 15, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0);
     }
+    Player::drawReticle(BoatMode, s_instance.m_aim);
 }
 
 
@@ -507,4 +517,13 @@ bool Player::weaponCooldown(float dt)
         return true;
     }
     return false;
+}
+
+void Player::drawReticle(PlayerMode mode, const Vec2f &dir)
+{
+    if (s_mode != mode) return;
+    if (!Controls::getStatus().a.held()) return;
+    auto spos = Vec2f(52, 42) + dir * reticleDistance;
+    RenderSystem::drawShadow(spos.x(), spos.y(), reticle, 0);
+    RenderSystem::pixel(spos.x() + 2, spos.y() + 2, 10);
 }

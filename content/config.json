@@ -31,6 +31,7 @@
 		{ "output" : "projectile_grenade", "vcount": 2},
 		{ "output" : "projectile", "vcount": 2},
 		{ "output" : "projectile_med", "hcount": 2},
+		{ "output" : "projectile_missile", "hcount": 9},
 		{ "output" : "soldier", "vcount": 6},
 		{ "output" : "jeep", "vcount": 9},
 		{ "output" : "tank", "vcount": 18},

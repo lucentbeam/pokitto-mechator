@@ -23,6 +23,7 @@ void Projectile::configure(const Vec2f &pos, const Vec2f &vel, int w, int h, flo
     ignore_walls = false;
     z = 0;
     vz = 0;
+    flipped = false;
 }
 
 Projectile * Projectile::setExpireCallback(void (*expire_callback)(Projectile *))
@@ -86,9 +87,9 @@ void Projectile::draw()
     const uint8_t * spriteData = sprite.data();
     if (spriteData != nullptr) {
         if (int(z) > 0) {
-            RenderSystem::drawShadow(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2]);
+            RenderSystem::drawShadow(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2], flipped);
         } else {
-            RenderSystem::sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2]);
+            RenderSystem::sprite(pos.x()-spriteData[0]/2, pos.y()-spriteData[1]/2, spriteData, spriteData[2], flipped);
         }
     }
 }

@@ -199,6 +199,8 @@ public:
     static void cycleWeaponPrev();
 
     static bool weaponCooldown(float dt);
+
+    static void drawReticle(PlayerMode mode, const Vec2f &dir);
 };
 
 #endif // PLAYER_H

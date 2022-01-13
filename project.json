@@ -10917,6 +10917,174 @@
 		},
 		"/game/entities/enemy.cpp.TvKYhJ": {
 			"sdcard": false
+		},
+		"/content/art/projectile_missile.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/exports/projectile_missile.png": {
+			"sdcard": false
+		},
+		"/core/rendering/spritewrapper.h.tDKMbY": {
+			"sdcard": false
+		},
+		"/core/rendering/spritewrapper.h.HmQpdh": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.autosave.IALImC": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.bDExRb": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.oQqKGA": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.XezvMk": {
+			"sdcard": false
+		},
+		"/core/utilities/vec.h.twDzsq": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.OPxRXI": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.vfLHFm": {
+			"sdcard": false
+		},
+		"/game/player.cpp.dLGYoF": {
+			"sdcard": false
+		},
+		"/game/player.cpp.WBONNr": {
+			"sdcard": false
+		},
+		"/core/utilities/vec.h.VkKwtX": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.sdxYyg": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.beWNvu": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.VizKdP": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.LxVYWB": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.EzduWW": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.aZDxja": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.lmSgrk": {
+			"sdcard": false
+		},
+		"/game/player.cpp.uwiIQm": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.CkmeAh": {
+			"sdcard": false
+		},
+		"/game/player.cpp.shvAXq": {
+			"sdcard": false
+		},
+		"/game/player.cpp.autosave.aXTNgz": {
+			"sdcard": false
+		},
+		"/game/player.cpp.autosave": {
+			"sdcard": false
+		},
+		"/game/player.cpp.cFpZCP": {
+			"sdcard": false
+		},
+		"/game/player.cpp.NOAqMc": {
+			"sdcard": false
+		},
+		"/game/player.cpp.YUdgvI": {
+			"sdcard": false
+		},
+		"/game/player.cpp.IIXXjW": {
+			"sdcard": false
+		},
+		"/game/player.cpp.kAvKPG": {
+			"sdcard": false
+		},
+		"/game/player.cpp.hqKHQh": {
+			"sdcard": false
+		},
+		"/game/player.cpp.hshmBI": {
+			"sdcard": false
+		},
+		"/game/player.cpp.bEzlgN": {
+			"sdcard": false
+		},
+		"/game/player.cpp.biEavr": {
+			"sdcard": false
+		},
+		"/game/player.cpp.zgpPKm": {
+			"sdcard": false
+		},
+		"/game/player.cpp.KOCfjr": {
+			"sdcard": false
+		},
+		"/game/player.cpp.nCybiM": {
+			"sdcard": false
+		},
+		"/game/player.cpp.sKmHhM": {
+			"sdcard": false
+		},
+		"/game/player.cpp.QHbXsI": {
+			"sdcard": false
+		},
+		"/game/player.cpp.pUgVaf": {
+			"sdcard": false
+		},
+		"/game/player.cpp.rRWUVy": {
+			"sdcard": false
+		},
+		"/game/player.cpp.VjKWOr": {
+			"sdcard": false
+		},
+		"/game/player.cpp.autosave.JoXUwk": {
+			"sdcard": false
+		},
+		"/game/player.cpp.xoQkZq": {
+			"sdcard": false
+		},
+		"/game/player.cpp.TKgZNu": {
+			"sdcard": false
+		},
+		"/game/player.cpp.ESbWPK": {
+			"sdcard": false
+		},
+		"/game/player.cpp.ZLdaTe": {
+			"sdcard": false
+		},
+		"/game/player.cpp.lqOIjh": {
+			"sdcard": false
+		},
+		"/game/player.cpp.iIbpzT": {
+			"sdcard": false
+		},
+		"/game/player.cpp.autosave.azzrLU": {
+			"sdcard": false
+		},
+		"/game/player.h.autosave": {
+			"sdcard": false
+		},
+		"/game/player.h.fzoHoS": {
+			"sdcard": false
+		},
+		"/game/player.cpp.DzcZtu": {
+			"sdcard": false
+		},
+		"/game/player.cpp.CpsrWe": {
+			"sdcard": false
+		},
+		"/game/player.cpp.jxYBFK": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

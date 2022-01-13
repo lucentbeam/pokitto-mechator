@@ -35,6 +35,7 @@ class Projectile
     bool struck = false;
     bool ignore_walls = false;
     bool destroy_on_ground = false;
+    bool flipped = false;
 
     friend ProjectileManager;
 public:
@@ -57,6 +58,8 @@ public:
     Projectile * setInAir(float pz, float pvz, bool destroy_at_ground = true);
 
     Projectile * addVelocity(const Vec2f &vel);
+
+    Projectile * setFlipped(bool flip) { flipped = flip; }
 
     void update(float dt);
 
