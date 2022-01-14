@@ -228,7 +228,7 @@ void Helicopter::update(float dt)
         return;
     }
 
-    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
+    static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::AirTarget});
 
     if (Player::s_mode != PlayerMode::HelicopterMode) {
         s_instance.m_steering.update(dt, 0.0f, 0.0f);
@@ -525,7 +525,7 @@ void Player::drawReticle(PlayerMode mode, const Vec2f &dir)
     if (s_mode != mode) return;
     static int fcounter = 0;
     fcounter++;
-    if (!Controls::getStatus().a.held() || fcounter < 120) {
+    if (!Controls::getStatus().a.held() || fcounter < 40) {
         auto spos = Vec2f(52, 42) + dir * reticleDistance;
         if ((fcounter % 50) < 6) RenderSystem::sprite(spos.x(), spos.y(), reticle, 0);
         else RenderSystem::drawShadow(spos.x(), spos.y(), reticle, 0);

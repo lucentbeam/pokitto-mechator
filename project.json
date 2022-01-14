@@ -11487,6 +11487,30 @@
 		},
 		"/game/entities/enemies/enemybomber.cpp.CrpgvG": {
 			"sdcard": false
+		},
+		"/game/player.cpp.NnDavY": {
+			"sdcard": false
+		},
+		"/game/physics/collisionmanager.h.QvWoHd": {
+			"sdcard": false
+		},
+		"/game/physics/collisionmanager.h.TVvmUd": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/main.cpp.yHkdtZ": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/main.cpp.zkslZQ": {
+			"sdcard": false
+		},
+		"/game/player.cpp.eYRtyq": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemylasers.cpp.ttfrGs": {
+			"sdcard": false
+		},
+		"/content/TiledMapReader/TiledMapReader.pro.user.OhOtMK": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

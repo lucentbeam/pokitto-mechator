@@ -16,7 +16,7 @@ void EnemyLasers::setup(const Vec2f &pos, bool vert, int node, int sz)
     vertical = vert;
     m_pos.set(vert ? pos.x() : node * 6, vert ? node * 6 : pos.y());
     size = sz;
-    m_counter = 0;
+    m_counter = rand() % laserDelayVariation;
 }
 
 bool EnemyLasers::update(float dt)
@@ -34,7 +34,7 @@ bool EnemyLasers::update(float dt)
                     ->setDamage(3)
                     ->setIgnoreWalls()
                     ->clearSprite()
-                    ->setTargetMask({PlayerTarget, GroundTarget});
+                    ->setTargetMask({PlayerTarget, EnemyTarget, GroundTarget});
         }
     }
 

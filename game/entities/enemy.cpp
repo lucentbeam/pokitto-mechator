@@ -115,7 +115,7 @@ void Enemy::spawnMine(const Vec2i &pos)
     auto m = s_mines.activateNext();
     if (m != nullptr) {
         m->pos = pos + Vec2i(3, 3);
-        m->timer = (rand() % 30);
+        m->beep_freq = (rand() % 30);
     }
 }
 
@@ -239,7 +239,7 @@ void Enemy::updateMines(float dt)
 void Enemy::drawMines()
 {
     for(int i = 0; i < s_mines.objectCount(); ++i) {
-        if (((Mine::timer + (s_mines.objects() + i)->timer) % 120) <= 10) {
+        if (((Mine::timer + (s_mines.objects() + i)->beep_freq) % 120) <= 10) {
             Vec2f p = Camera::worldToScreen((s_mines.objects() + i)->pos);
             RenderSystem::pixel(p.x() - 1, p.y() - 1, 16);
         }

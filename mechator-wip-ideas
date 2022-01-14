@@ -20,7 +20,16 @@ Fill out map a bit more
 - ui iconography:
   - "run" active
   - "enter vehicle" icon
+  - "exit vehicle" icon (most useful for boat and heli)
   - play with reticle. show while NOT aiming? disappear after aim?
+
+- tweaks:
+  - offscreen enemies don't fire
+  - "low wall" to put near turrets
+  - faster fire rates altogether
+  - don't show reticle while player is dashing
+  - bombers spawn closer to spawn point
+  - barracks go down faster
 
 - la musica
  
