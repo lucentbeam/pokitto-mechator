@@ -28,7 +28,7 @@ bool EnemyBomber::update(float dt)
         }
         if (counter == 0 && delta.length() < 45) {
             status = InSky;
-            m_plane_pos.set(m_pos.x() - 70, Camera::center().y() - 20);
+            m_plane_pos.set(Camera::center().x() - 70, Camera::center().y() - 20);
             m_life = 5;
         }
         break;

@@ -58,26 +58,27 @@ void Soldier::update(float dt)
     ControlStatus controls = Controls::getStatus(true);
 
     static bool running = false;
-    if (controls.b.pressed()) {
-        if (s_instance.sprint_timer < 1.0f) {
-            running = true;
-        }
-    }
-    if (controls.b.held() && running) {
-        s_instance.sprint_timer += 1.0f / sprint_duration * dt;
-        if (s_instance.sprint_timer > 1.0f) {
-            running = false;
-            s_instance.sprint_timer = 1.0f;
-        }
-    } else {
-        running = false;
-        s_instance.sprint_timer -= 1.0f / sprint_cooldown * dt;
-        if (s_instance.sprint_timer < 0.0f) s_instance.sprint_timer = 0.0f;
-    }
+    running = controls.b.held();
+//    if (controls.b.pressed()) {
+//        if (s_instance.sprint_timer < 1.0f) {
+//            running = true;
+//        }
+//    }
+//    if (controls.b.held() && running) {
+//        s_instance.sprint_timer += 1.0f / sprint_duration * dt;
+//        if (s_instance.sprint_timer > 1.0f) {
+//            running = false;
+//            s_instance.sprint_timer = 1.0f;
+//        }
+//    } else {
+//        running = false;
+//        s_instance.sprint_timer -= 1.0f / sprint_cooldown * dt;
+//        if (s_instance.sprint_timer < 0.0f) s_instance.sprint_timer = 0.0f;
+//    }
 
 
 
-    s_instance.m_steering.update(dt, controls.x , controls.y, running ? 2.2f : 1.0f);
+    s_instance.m_steering.update(dt, controls.x , controls.y, running ? 1.7f : 1.0f);
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     s_instance.m_iframes.update();
     if (damage > 0 && s_instance.m_iframes.ready()) {
@@ -88,7 +89,7 @@ void Soldier::update(float dt)
 
     if (!controls.a.held()) s_instance.m_aim = s_instance.m_steering.aim();
 
-    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt) && !running) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
 
@@ -522,11 +523,14 @@ bool Player::weaponCooldown(float dt)
 void Player::drawReticle(PlayerMode mode, const Vec2f &dir)
 {
     if (s_mode != mode) return;
-    if (!Controls::getStatus().a.held()) return;
-    auto spos = Vec2f(52, 42) + dir * reticleDistance;
     static int fcounter = 0;
     fcounter++;
-    if ((fcounter % 50) < 6) RenderSystem::sprite(spos.x(), spos.y(), reticle, 0);
-    else RenderSystem::drawShadow(spos.x(), spos.y(), reticle, 0);
-    RenderSystem::pixel(spos.x() + 2, spos.y() + 2, 10);
+    if (!Controls::getStatus().a.held() || fcounter < 120) {
+        auto spos = Vec2f(52, 42) + dir * reticleDistance;
+        if ((fcounter % 50) < 6) RenderSystem::sprite(spos.x(), spos.y(), reticle, 0);
+        else RenderSystem::drawShadow(spos.x(), spos.y(), reticle, 0);
+        RenderSystem::pixel(spos.x() + 2, spos.y() + 2, 10);
+    } else if (Controls::getStatus().a.holdCount() < 10) {
+        fcounter = 0;
+    }
 }

@@ -46,8 +46,8 @@ int main ()
                 Controls::update();
                 fsm.update();
                 gameTime -= physicsTimestepMs;
-                gameTime += RenderSystem::getTimeMs() - lastGameTime;
-                lastGameTime = RenderSystem::getTimeMs();
+//                gameTime += RenderSystem::getTimeMs() - lastGameTime;
+//                lastGameTime = RenderSystem::getTimeMs();
             }
             fsm.draw(); // TODO: add frame interpolation?
         }

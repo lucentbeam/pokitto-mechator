@@ -11427,6 +11427,66 @@
 		},
 		"/game/states/game.cpp.JaRaOC": {
 			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.dvuZNc": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.eYUNFm": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.suSgYj": {
+			"sdcard": false
+		},
+		"/main.cpp.VYnXlv": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.autosave.upzgPX": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.cpp.QXMFnv": {
+			"sdcard": false
+		},
+		"/game/entities/enemy.cpp.eiUqjb": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemymech.cpp.aRCOde": {
+			"sdcard": false
+		},
+		"/game/player.cpp.autosave.pORgEb": {
+			"sdcard": false
+		},
+		"/game/player.cpp.UAKnEs": {
+			"sdcard": false
+		},
+		"/game/player.cpp.OCcHok": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.pFgqtR": {
+			"sdcard": false
+		},
+		"/game/player.cpp.autosave.wECbIV": {
+			"sdcard": false
+		},
+		"/game/player.cpp.NDoSpe": {
+			"sdcard": false
+		},
+		"/game/player.cpp.MztYBa": {
+			"sdcard": false
+		},
+		"/game/player.cpp.ESgLbZ": {
+			"sdcard": false
+		},
+		"/game/player.cpp.autosave.FBTHgo": {
+			"sdcard": false
+		},
+		"/game/player.cpp.ZyiiWv": {
+			"sdcard": false
+		},
+		"/game/player.cpp.HNggIK": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemybomber.cpp.CrpgvG": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

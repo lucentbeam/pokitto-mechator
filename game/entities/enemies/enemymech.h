@@ -29,11 +29,11 @@ public:
 
     EnemyMech() = default;
 
-    void setup(const Vec2f &pos) { m_rect.setCenter(pos.x(), pos.y()); m_life = 3; m_on_deactivate = std::function<void()>(); m_drops = true; }
+    void setup(const Vec2f &pos) { m_rect.setCenter(pos.x(), pos.y()); m_life = 3; m_on_deactivate = std::function<void()>(); m_drops = true; m_counter = rand() % 30; status = Mode::Walking; }
 
     int8_t life() const { return m_life; }
 
-    bool update(float dt);
+    bool update(float dt, bool check_collisions = true);
 
     void setDeactivateCallback(std::function<void()> on_deactivate) { m_on_deactivate = on_deactivate; }
 

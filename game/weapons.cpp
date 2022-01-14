@@ -5,7 +5,7 @@
 
 const WeaponConfig gun_config(3.0f, 3, 0.5f, 100.0f);
 
-const WeaponConfig mgun_config(8.0f, 2, 0.35f, 150.0f);
+const WeaponConfig mgun_config(9.0f, 2, 0.4f, 150.0f);
 
 const WeaponConfig dualshot_config(2.2f, 3, 0.35f, 130.0f);
 
@@ -85,7 +85,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         }
         break;
     case Type::MachineGun:
-        dir.rotBy((rand() % 30) - 15);
+        dir.rotBy((rand() % 16) - 8);
         if (checkFire(p, action, mgun_config, pos, dir, vel)) {
             p->setSprite(BulletSmall);
             p->setDamage(1);

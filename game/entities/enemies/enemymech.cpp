@@ -5,7 +5,7 @@
 #include "game/physics/pathfinding.h"
 
 
-bool EnemyMech::update(float dt)
+bool EnemyMech::update(float dt, bool check_collisions)
 {
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
@@ -66,7 +66,7 @@ bool EnemyMech::update(float dt)
     Vec2f pos = CollisionManager::resolveMovement({m_rect.centerX(), m_rect.centerY() + 2}, m_velocity * 0.014f, mask);
     pos.setY(pos.y()-2);
     m_rect.setCenter(pos.x(), pos.y());
-    int damage = ProjectileManager::getCollisionDamage(pos, 4, bulletMask);
+    int damage = !check_collisions ? 0 : ProjectileManager::getCollisionDamage(pos, 4, bulletMask);
     m_life -= damage;
     if (m_damage_frames > 0) m_damage_frames--;
     if (m_life <= 0) {

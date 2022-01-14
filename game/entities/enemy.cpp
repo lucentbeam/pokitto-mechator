@@ -36,8 +36,10 @@ void Enemy::updateMechs(float dt)
 {
     EnemyMech * start = s_mechs.objects();
     int i = s_mechs.objectCount()-1;
+    static int spacer = 0;
+    spacer++;
     while (i >= 0) {
-        if (!(start + i)->update(dt)) {
+        if (!(start + i)->update(dt, (i % 2) == (spacer % 2))) {
             if ((start + i)->m_on_deactivate) {
                 (start+i)->m_on_deactivate();
             }

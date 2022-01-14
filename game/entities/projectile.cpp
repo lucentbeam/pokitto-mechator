@@ -139,8 +139,10 @@ void ProjectileManager::update(float dt)
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal});
     int i = s_projectiles.objectCount() - 1;
     Projectile * start = s_projectiles.objects();
+    static int spacer = 0;
+    spacer++;
     while (i >= 0) {
-        bool hitWall = !start[i].ignore_walls && CollisionManager::collision(start[i].pos(), mask, Vec2f(2,2));
+        bool hitWall = (i % 2) == (spacer % 2) && !start[i].ignore_walls && CollisionManager::collision(start[i].pos(), mask, Vec2f(2,2));
         if (start[i].expired() || hitWall) {
             start[i].onExpire();
             s_projectiles.deactivate(i);
@@ -183,9 +185,14 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask)
     int damage = 0;
     int i = 0;
     Projectile * start = s_projectiles.objects();
+    Rect r;
     while (i < s_projectiles.objectCount()) {
-        Rect r(start[i].m_body.pos().x(), start[i].m_body.pos().y() - start[i].z, start[i].m_bounds);
-        if (((mask & start[i].mask) == mask) && rect.overlaps(r)) {
+        if ((mask & start[i].mask) != mask) {
+            ++i;
+            continue;
+        }
+        r = Rect(start[i].m_body.pos().x(), start[i].m_body.pos().y() - start[i].z, start[i].m_bounds);
+        if (rect.overlaps(r)) {
             damage += start[i].damage;
             start[i].m_lifetime -= 100000.0f;
         }
@@ -200,8 +207,12 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask, std::
     int i = 0;
     Projectile * start = s_projectiles.objects();
     while (i < s_projectiles.objectCount()) {
+        if ((mask & start[i].mask) != mask) {
+            ++i;
+            continue;
+        }
         Rect r(start[i].m_body.pos().x(), start[i].m_body.pos().y() - start[i].z, start[i].m_bounds);
-        if (((mask & start[i].mask) == mask) && rect.overlaps(r)) {
+        if (rect.overlaps(r)) {
             damage += start[i].damage;
             start[i].m_lifetime -= 100000.0f;
             at.push_back(start[i].m_body.pos());

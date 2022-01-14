@@ -30,7 +30,7 @@ public:
 
     EnemyTank() : m_aim(0, 0), m_smoothaim(0,0), m_origin(0, 0), m_steering(0.0f, 0.0f, enemyTankSpeed, 0.04f, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 10, 10) {}
 
-    void setup(const Vec2f &pos) { m_origin = pos; m_life = 10; m_on_deactivate = std::function<void()>(); m_steering.setPos(pos); }
+    void setup(const Vec2f &pos) { m_origin = pos; m_life = 10; m_on_deactivate = std::function<void()>(); m_steering.setPos(pos); m_counter = rand() % 30; status = Mode::Walking; }
 
     bool isFrom(const Vec2f &pos) { return (m_origin - pos).length() < 0.5f; }
 

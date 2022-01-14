@@ -19,6 +19,7 @@ bool CollisionManager::rectCollides(const Rect &rect, uint16_t collisionMask)
 
 bool CollisionManager::collision(const Vec2f &pos, uint16_t collisionMask, const Vec2f &size)
 {
+    if (collisionMask == 0) return false;
     Rect rect = Rect(0, 0, size.x(), size.y());
     rect.setCenter(pos.x(), pos.y());
     return rectCollides(rect, collisionMask);
