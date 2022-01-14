@@ -23,6 +23,8 @@
 class Player;
 
 class Vehicle {
+    Ticker m_iframes;
+
 protected:
     Steering m_steering;
     Statistic m_health;
@@ -30,11 +32,19 @@ protected:
 
     Vec2f m_aim;
 
-    Ticker m_iframes;
 
     friend Player;
 
     Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction = 1.0f);
+
+    void flash() { m_iframes.reset(playerIframeLength); }
+
+public:
+    bool flashing() const { return !m_iframes.ready(); }
+
+    void updateFlash() {
+        m_iframes.update();
+    }
 };
 
 class Soldier : public Vehicle {
@@ -191,6 +201,8 @@ public:
 
     static bool canGetPickups() { return s_mode != PlayerMode::HelicopterMode; }
 
+    static bool hurting();
+
     static Vec2f position();
     static Rect bounds();
 
@@ -198,7 +210,7 @@ public:
     static void cycleWeaponNext();
     static void cycleWeaponPrev();
 
-    static bool weaponCooldown(float dt);
+    static bool weaponCooldown(float dt);    
 
     static void drawReticle(PlayerMode mode, const Vec2f &dir);
 };

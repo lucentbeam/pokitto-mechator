@@ -1,6 +1,4 @@
 
-Fill out map a bit more
-
 - sfx
   - laser charge
   - laser fire
@@ -10,6 +8,17 @@ Fill out map a bit more
   - player shoot
   - player grenade
   - player missile
+  - item get
+  - dollar get
+  - ui select
+  - ui confirm
+  - ui cancel
+  - ui deny
+  
+- blueprints (jeep, tank, boat, helicopter, gemini gun, soldier health, soldier sprint, spreader shot, multinade, cluster shot... ?)
+  - pickup
+  - unlock (cost)
+  - serializeable
   
 - game events
   - intro
@@ -21,8 +30,11 @@ Fill out map a bit more
   - "run" active
   - "enter vehicle" icon
   - "exit vehicle" icon (most useful for boat and heli)
-  - play with reticle. show while NOT aiming? disappear after aim?
+  - "aim lock" icon
 
+- la musica
+
+- playthroughs!!
 - tweaks:
   - offscreen enemies don't fire
   - "low wall" to put near turrets
@@ -31,8 +43,6 @@ Fill out map a bit more
   - bombers spawn closer to spawn point
   - barracks go down faster
 
-- la musica
- 
 - boats
   - art
   - prog

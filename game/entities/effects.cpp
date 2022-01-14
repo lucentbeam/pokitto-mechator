@@ -27,7 +27,8 @@ void EffectManager::createExplosion(const Vec2f &pos, int radius, int count)
     for(int i = 0; i < count; ++i) {
         dir.rotBy(90 + (rand() % 180));
         r = float(rand() % std::max(1, radius*2/3)) + radius/3;
-        EffectManager::create(pos + dir * r, ExplosionSmall, i == 0 ? 0 : float(rand() % 40)/60.0f);
+        if (i == 0 || (rand() % 10) < 8) EffectManager::createSmallExplosion(pos + dir * r, i == 0 ? 0 : float(rand() % 20)/60.0f);
+        else EffectManager::createExplosionBig(pos + dir * r);
     }
 }
 

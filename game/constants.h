@@ -18,10 +18,12 @@ const float enemyTankSpeed = 12.0f;
 const int playerStartTileX = 8;//18;
 const int playerStartTileY = 15;//33;
 
+const int playerIframeLength = 8;
+
 const float soldierSpeed = 20.0f;
 
-const float jeepSpeed = 40.0f;
-const float jeepGrassSpeedFraction = 0.5f;
+const float jeepSpeed = 50.0f;
+const float jeepGrassSpeedFraction = 0.64f;
 const float jeepCornering = 0.1f;
 const float jeepFriction = 0.05f;
 

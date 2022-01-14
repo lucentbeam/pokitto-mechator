@@ -321,9 +321,11 @@ void UI::draw()
         uint8_t current = Soldier::health().value();
         uint8_t max = Soldier::health().max();
 
+        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
+        bool hurt = Player::hurting();
         for(uint8_t i = 0; i < max; i++) {
             int idx = i < current ? 1 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
+            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
         }
     });
 
@@ -331,9 +333,11 @@ void UI::draw()
         uint8_t current = Jeep::health().value();
         uint8_t max = Jeep::health().max();
 
+        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
+        bool hurt = Player::hurting();
         for(uint8_t i = 0; i < max; i++) {
-            int idx = i < current ? 2 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
+            int idx = i < current ? 2: 0;
+            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
         }
     });
 
@@ -341,9 +345,11 @@ void UI::draw()
         uint8_t current = Tank::health().value();
         uint8_t max = Tank::health().max();
 
+        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
+        bool hurt = Player::hurting();
         for(uint8_t i = 0; i < max; i++) {
             int idx = i < current ? 3 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
+            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
         }
     });
 
@@ -351,9 +357,11 @@ void UI::draw()
         uint8_t current = Boat::health().value();
         uint8_t max = Boat::health().max();
 
+        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
+        bool hurt = Player::hurting();
         for(uint8_t i = 0; i < max; i++) {
             int idx = i < current ? 4 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
+            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
         }
     });
 
@@ -361,9 +369,11 @@ void UI::draw()
         uint8_t current = Helicopter::health().value();
         uint8_t max = Helicopter::health().max();
 
+        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
+        bool hurt = Player::hurting();
         for(uint8_t i = 0; i < max; i++) {
             int idx = i < current ? 5 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, health_pips[idx]);
+            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
         }
     });
 

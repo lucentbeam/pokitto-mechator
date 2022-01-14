@@ -53,9 +53,11 @@ bool EnemyHelicopter::update(float dt)
         m_aim = dir;
         m_steering.update(0, m_aim.x(), m_aim.y());
         if (m_counter > (shotcount == 0 ? 120 : 45)) {
-            ProjectileManager::create({m_steering.pos().x(), m_steering.pos().y()}, dir * 50.0f, 2, 3.0)
-                    ->setSprite(BulletSmall)
-                    ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
+            if (Camera::inViewingZone(m_steering.pos())) {
+                ProjectileManager::create({m_steering.pos().x(), m_steering.pos().y()}, dir * 50.0f, 2, 3.0)
+                        ->setSprite(BulletSmall)
+                        ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
+            }
             m_counter = rand() % 10;
             shotcount++;
             if (shotcount >= 3) {

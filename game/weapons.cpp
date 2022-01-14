@@ -3,17 +3,17 @@
 #include "game/utilities/mapmanager.h"
 #include "game/physics/collisionmanager.h"
 
-const WeaponConfig gun_config(3.0f, 3, 0.5f, 100.0f);
+const WeaponConfig gun_config(5.0f, 3, 0.5f, 100.0f);
 
-const WeaponConfig mgun_config(9.0f, 2, 0.4f, 150.0f);
+const WeaponConfig mgun_config(14.0f, 2, 0.4f, 150.0f);
 
-const WeaponConfig dualshot_config(2.2f, 3, 0.35f, 130.0f);
+const WeaponConfig dualshot_config(4.2f, 3, 0.35f, 130.0f);
 
-const WeaponConfig grenade_config(1.8f, 4, 0.5f, 65.0f);
+const WeaponConfig grenade_config(2.8f, 4, 0.5f, 65.0f);
 
-const WeaponConfig missile_config(1.2f, 4, 0.35f, 140.0f);
+const WeaponConfig missile_config(2.0f, 4, 0.35f, 140.0f);
 
-const WeaponConfig multimissile_config(0.8f, 4, 0.4f, 85.0f);
+const WeaponConfig multimissile_config(1.6f, 4, 0.4f, 85.0f);
 
 bool Weapon::checkFire(Projectile * &p, const Button &action, const WeaponConfig &config, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel)
 {
@@ -43,7 +43,7 @@ std::string Weapon::getName(Weapon::Type t)
         return "Missiles";
         break;
     case Type::MultiMissiles:
-        return "Cluster Missiles";
+        return "Cluster Shot";
         break;
     }
     return "Nameless Gun";

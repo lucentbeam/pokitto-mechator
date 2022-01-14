@@ -1,6 +1,6 @@
 #include "steering.h"
 
-void Steering::update(float dt, float x, float y, float speed_mult) {
+void Steering::update(float dt, float x, float y, float speed_mult, bool instant) {
     m_moving = false;
     if (!m_brake && (std::fabs(x) > 0.01f || std::fabs(y) > 0.01f)) {
         m_moving = true;
@@ -18,7 +18,13 @@ void Steering::update(float dt, float x, float y, float speed_mult) {
         if (len > 0) {
             m_facing /= len;
         }
-        m_current_speed = m_max_speed * speed_mult;
+        if (instant) {
+            m_current_speed = m_max_speed * speed_mult;
+        } else {
+            float s = m_max_speed * speed_mult - m_current_speed;
+            m_current_speed += s * (dt / 0.2f);
+            if (m_current_speed > s) m_current_speed = s;
+        }
     } else {
         if (m_brake) {
             m_aim = Vec2f(x,y);

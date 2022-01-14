@@ -53,9 +53,11 @@ bool EnemyMech::update(float dt, bool check_collisions)
         break;
     case EnemyMech::Mode::Preparing:
         if (m_counter > 60) {
-            ProjectileManager::create({m_rect.centerX(), m_rect.centerY()}, dir * 50.0f, 2, 3.0)
-                    ->setSprite(BulletSmall)
-                    ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
+            if (Camera::inViewingZone({m_rect.centerX(), m_rect.centerY()})) {
+                ProjectileManager::create({m_rect.centerX(), m_rect.centerY()}, dir * 50.0f, 2, 3.0)
+                        ->setSprite(BulletSmall)
+                        ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
+            }
             status = EnemyMech::Mode::Walking;
             m_counter = rand() % 40;
         }

@@ -11511,6 +11511,177 @@
 		},
 		"/content/TiledMapReader/TiledMapReader.pro.user.OhOtMK": {
 			"sdcard": false
+		},
+		"/game/maps/alertregion.cpp.byjZjY": {
+			"sdcard": false
+		},
+		"/game/maps/alertregion.cpp.ZjQHiE": {
+			"sdcard": false
+		},
+		"/core/rendering/camera.h.ceLYjJ": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemymech.cpp.autosave.JpyGNV": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemytank.cpp.GejbFn": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemyturret.cpp.kPRVYk": {
+			"sdcard": false
+		},
+		"/game/entities/enemies/enemyhelicopter.cpp.NGXJQK": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.iDhBdT": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.NWvyjf": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.eIaVXk": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.autosave.gpGYFt": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.WXwkhV": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.FuXvUE": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.KRggoH": {
+			"sdcard": false
+		},
+		"/game/entities/effects.cpp.ePZnTe": {
+			"sdcard": false
+		},
+		"/game/entities/barracks.cpp.autosave.CgMrfc": {
+			"sdcard": false
+		},
+		"/game/entities/barracks.cpp.rPvphC": {
+			"sdcard": false
+		},
+		"/game/player.cpp.pDbdMy": {
+			"sdcard": false
+		},
+		"/game/constants.h.jRclpi": {
+			"sdcard": false
+		},
+		"/game/constants.h.zGhFce": {
+			"sdcard": false
+		},
+		"/game/physics/steering.cpp.ClvQXe": {
+			"sdcard": false
+		},
+		"/game/physics/steering.cpp.autosave.QkQhiU": {
+			"sdcard": false
+		},
+		"/game/physics/steering.cpp.CoXSVv": {
+			"sdcard": false
+		},
+		"/game/weapons.cpp.autosave.bwsRif": {
+			"sdcard": false
+		},
+		"/game/physics/steering.cpp.qkCOoe": {
+			"sdcard": false
+		},
+		"/game/constants.h.qloASw": {
+			"sdcard": false
+		},
+		"/game/player.h.autosave.YNwUCy": {
+			"sdcard": false
+		},
+		"/game/player.h.kpxDDR": {
+			"sdcard": false
+		},
+		"/game/player.h.dcdoCK": {
+			"sdcard": false
+		},
+		"/game/player.cpp.OguQBQ": {
+			"sdcard": false
+		},
+		"/game/player.h.dZbpBL": {
+			"sdcard": false
+		},
+		"/game/player.h.UlDFQC": {
+			"sdcard": false
+		},
+		"/game/player.h.qvDpPG": {
+			"sdcard": false
+		},
+		"/game/player.cpp.AALmFK": {
+			"sdcard": false
+		},
+		"/game/player.cpp.autosave.DyoqEN": {
+			"sdcard": false
+		},
+		"/game/player.cpp.eVdjGX": {
+			"sdcard": false
+		},
+		"/game/player.cpp.TiFFaA": {
+			"sdcard": false
+		},
+		"/game/player.cpp.oiWTBx": {
+			"sdcard": false
+		},
+		"/game/player.cpp.HOiJut": {
+			"sdcard": false
+		},
+		"/game/player.cpp.tAMAYD": {
+			"sdcard": false
+		},
+		"/content/sfx_source": {
+			"sdcard": false
+		},
+		"/content/sfx_source/cancel.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/confirm.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/deny.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/enemy_shoot.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/enemy_shoot_medium.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/explosion_big.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/explosion_small.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/get_dollar.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/grenade.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/get_item.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/laser.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/laser_charge.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/missile.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/playergun.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/playergun_2x.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/select.wav": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

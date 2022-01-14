@@ -31,12 +31,14 @@ bool EnemyTurret::update(float dt)
     m_aim = dir;
     static int shotcount = 0;
     if (m_counter > (shotcount == 0 ? 180 : 40)) {
-        Vec2f f = dir;
-        f.rotBy((rand() % 40) - 20);
-        ProjectileManager::create(m_pos + dir * 6.0f, f * 33.0f, 4, 3.0)
-                ->setSprite(BulletMedium)
-                ->setTargetMask({PlayerTarget, GroundTarget, AirTarget})
-                ->setIgnoreWalls();
+        if (Camera::inViewingZone(m_pos)) {
+            Vec2f f = dir;
+            f.rotBy((rand() % 40) - 20);
+            ProjectileManager::create(m_pos + dir * 6.0f, f * 33.0f, 4, 3.0)
+                    ->setSprite(BulletMedium)
+                    ->setTargetMask({PlayerTarget, GroundTarget, AirTarget})
+                    ->setIgnoreWalls();
+        }
         m_counter = rand() % 10;
         shotcount++;
         if (shotcount >= 2) {
