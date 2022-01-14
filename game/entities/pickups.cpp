@@ -8,22 +8,22 @@ ObjectPool<Pickups, 4> Pickups::s_special;
 
 std::vector<uint16_t> Pickups::s_acquired_specials;
 
-void Pickups::configure(const Vec2i &pos, const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2i&), uint16_t lifetime)
+void Pickups::configure(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime)
 {
     position = pos;
-    m_sprite = SpriteWrapper(spriteFrames, framecount, spriteFPS);
+    m_sprite = SpriteWrapper(spr);
     m_on_collect = on_collect;
     m_lifetime = lifetime;
 }
 
-void Pickups::spawnTemporary(const Vec2i &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2i&), uint16_t lifetime)
+void Pickups::spawnTemporary(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime)
 {
-    s_temporary.activateNext()->configure(pos, spriteFrames, framecount, spriteFPS, on_collect, lifetime);
+    s_temporary.activateNext()->configure(pos, spr, on_collect, lifetime);
 }
 
-void Pickups::spawnSpecial(const Vec2i &pos,  const uint8_t * spriteFrames, int framecount, float spriteFPS, void (*on_collect)(const Vec2i&))
+void Pickups::spawnSpecial(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&))
 {
-    s_special.activateNext()->configure(pos + Vec2i(3, 3), spriteFrames, framecount, spriteFPS, on_collect, std::numeric_limits<uint16_t>::max());
+    s_special.activateNext()->configure(pos + Vec2i(3, 3), spr, on_collect, std::numeric_limits<uint16_t>::max());
 }
 
 bool Pickups::mapIndexUnacquired(const Vec2i &pos)
@@ -38,7 +38,7 @@ void Pickups::acquireAtIndex(const Vec2i &pos)
 
 void Pickups::spawnDollar(const Vec2f &pos)
 {
-    spawnTemporary({pos.x(), pos.y()}, pickup_dollar[0], 2, 8.0f, [](const Vec2i &pos) {
+    spawnTemporary({pos.x(), pos.y()}, DollarSprite, [](const Vec2i &pos) {
         GameVariables::changeDollars(1);
         UI::showForDuration(UI::Element::UIDollarCount, 2.0f);
     }, 600);
@@ -47,7 +47,7 @@ void Pickups::spawnDollar(const Vec2f &pos)
 void Pickups::spawnHackingKit(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, pickup_hackingkit[0], 2, 8.0f, [](const Vec2i &pos) {
+        spawnSpecial(pos, HackingKitSprite, [](const Vec2i &pos) {
             GameVariables::changeHackingKits(1);
             acquireAtIndex(pos);
             UI::showForDuration(UI::Element::UIHackingKitCount, 2.0f);
@@ -58,7 +58,7 @@ void Pickups::spawnHackingKit(const Vec2i &pos)
 void Pickups::spawnKeycardA(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, pickup_keycard1[0], 2, 8.0f, [](const Vec2i &pos) {
+        spawnSpecial(pos, Keycard1Sprite, [](const Vec2i &pos) {
             GameVariables::changeKeysA(1);
             acquireAtIndex(pos);
             UI::showForDuration(UI::Element::UIKeyACount, 2.0f);
@@ -69,7 +69,7 @@ void Pickups::spawnKeycardA(const Vec2i &pos)
 void Pickups::spawnKeycardB(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, pickup_keycard2[0], 2, 8.0f, [](const Vec2i &pos) {
+        spawnSpecial(pos, Keycard2Sprite, [](const Vec2i &pos) {
             GameVariables::changeKeysB(1);
             acquireAtIndex(pos);
             UI::showForDuration(UI::Element::UIKeyBCount, 2.0f);
@@ -80,7 +80,7 @@ void Pickups::spawnKeycardB(const Vec2i &pos)
 void Pickups::spawnKeycardC(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, pickup_keycard3[0], 2, 8.0f, [](const Vec2i &pos) {
+        spawnSpecial(pos, Keycard3Sprite, [](const Vec2i &pos) {
             GameVariables::changeKeysC(1);
             acquireAtIndex(pos);
             UI::showForDuration(UI::Element::UIKeyCCount, 2.0f);
@@ -94,7 +94,6 @@ void Pickups::update(float dt)
     Pickups * start = s_temporary.objects();
     while (i >= 0) {
         Pickups * current = start + i;
-        current->m_sprite.update();
         if (Player::canGetPickups() && (Player::position() - current->position).length() < 6) {
             current->m_on_collect(current->position);
             s_temporary.deactivate(i);
@@ -114,7 +113,6 @@ void Pickups::update(float dt)
     start = s_special.objects();
     while (i >= 0) {
         Pickups * current = start + i;
-        current->m_sprite.update();
         if (!Camera::inActiveZone(start[i].position)) {
             s_special.deactivate(i);
             --i;

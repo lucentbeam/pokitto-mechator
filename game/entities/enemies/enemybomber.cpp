@@ -45,7 +45,7 @@ bool EnemyBomber::update(float dt)
         if (counter >= 20) {
             counter = 0;
             ProjectileManager::create(m_plane_pos + Vec2f(0, 15), Vec2f(velocity * -0.2f, (rand() % 30) - 15), 4, 1.5f)
-                ->setSprite(projectile_grenade[0], 2, 4)
+                ->setSprite(GrenadeSprite)
                 ->setTargetMask({})
                 ->setDamage(0)
                 ->setInAir(20, 0)

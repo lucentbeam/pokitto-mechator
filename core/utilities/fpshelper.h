@@ -23,6 +23,7 @@ public:
 
 void FPSHelper::update()
 {
+    if (RenderSystem::getTimeMs() == lastTime) return;
     m_fps_list.push_front(1000.0f/float(RenderSystem::getTimeMs() - lastTime));
     lastTime = RenderSystem::getTimeMs();
     while (m_fps_list.size() > averageCount) {
@@ -32,6 +33,7 @@ void FPSHelper::update()
 
 void FPSHelper::draw(int x, int y, int color) const
 {
+    if (m_fps_list.size() == 0) return;
     float avg = 0.0f;
     for(auto t : m_fps_list) {
         avg += t / m_fps_list.size();
@@ -43,6 +45,7 @@ void FPSHelper::draw(int x, int y, int color) const
 
 void FPSHelper::draw(int x, int y, int color_bg, int color_fg) const
 {
+    if (m_fps_list.size() == 0) return;
     float avg = 0.0f;
     for(auto t : m_fps_list) {
         avg += t / m_fps_list.size();

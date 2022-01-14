@@ -33,15 +33,15 @@ Projectile * Projectile::setExpireCallback(void (*expire_callback)(Projectile *)
     return this;
 }
 
-Projectile * Projectile::setSprite(const uint8_t * frames, int framecount, float fps)
+Projectile * Projectile::setSprite(SpriteName spr)
 {
-    sprite = SpriteWrapper(frames, framecount, fps);
+    sprite = SpriteWrapper(spr);
     return this;
 }
 
 Projectile *Projectile::clearSprite()
 {
-    sprite = SpriteWrapper();
+    sprite = SpriteWrapper(SpriteName::NoSprite);
     return this;
 }
 
@@ -70,7 +70,7 @@ void Projectile::update(float dt)
     if (is_missile) {
         target += direction * dt;
         m_body.steerToward(target);
-        sprite = SpriteWrapper(projectile_missile[m_body.vel().getRotationFrame(8.0f)], 1, 10.0f);
+        sprite = SpriteWrapper(SpriteName(int(SpriteName::MissileSprite1) + m_body.vel().getRotationFrame(8.0f)));
         flipped = m_body.vel().x() > 0;
         counter++;
         if (counter % 10 == 0) {
@@ -79,7 +79,6 @@ void Projectile::update(float dt)
         }
     }
     m_body.update(dt);
-    sprite.update();
     m_lifetime -= dt;
     if (z != 0 || vz != 0) {
         z += vz * dt;

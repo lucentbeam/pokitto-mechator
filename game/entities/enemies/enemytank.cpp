@@ -52,7 +52,7 @@ bool EnemyTank::update(float dt)
         m_aim = dir;
         if (m_counter > (shotcount == 0 ? 120 : 45)) {
             ProjectileManager::create({m_steering.pos().x(), m_steering.pos().y()}, dir * 50.0f, 2, 3.0)
-                    ->setSprite(projectile[0], 2, 20.0)
+                    ->setSprite(BulletSmall)
                     ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
             m_counter = rand() % 10;
             shotcount++;

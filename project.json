@@ -11418,6 +11418,15 @@
 		},
 		"/game/maps/spawnpoints.h.DCQXuK": {
 			"sdcard": false
+		},
+		"/core/rendering/spritewrapper.cpp": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.zOlxeO": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.JaRaOC": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

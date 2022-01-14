@@ -54,7 +54,7 @@ bool EnemyMech::update(float dt)
     case EnemyMech::Mode::Preparing:
         if (m_counter > 60) {
             ProjectileManager::create({m_rect.centerX(), m_rect.centerY()}, dir * 50.0f, 2, 3.0)
-                    ->setSprite(projectile[0], 2, 20.0)
+                    ->setSprite(BulletSmall)
                     ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
             status = EnemyMech::Mode::Walking;
             m_counter = rand() % 40;

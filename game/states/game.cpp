@@ -49,6 +49,8 @@ void goGame()
 
 
 void updateGameState(FSM&) {
+    SpriteWrapper::update();
+
     // player characters
     Soldier::update(physicsTimestep);
     Jeep::update(physicsTimestep);

@@ -14,7 +14,7 @@ Vehicle::Vehicle(int8_t hp, float x, float y, float speed, float cornering, std:
 Soldier Soldier::s_instance;
 int Soldier::s_owned_weapons = Weapon::Gun;
 #ifdef DEBUGS
-Weapon::Type Soldier::s_current_weapon = Weapon::MultiMissiles;
+Weapon::Type Soldier::s_current_weapon = Weapon::Grenade;
 #else
 Weapon::Type Soldier::s_current_weapon = Weapon::Gun;
 #endif

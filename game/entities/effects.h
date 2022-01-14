@@ -26,7 +26,7 @@ class EffectManager
 {
     static ObjectPool<Effect, maxEffectCount> s_effects;
 
-    static void create(const Vec2f &pos, const uint8_t* frame_start, int framecount, float fps, float delay = 0);
+    static void create(const Vec2f &pos, SpriteName spr, float delay = 0);
 public:
     static void createSmallExplosion(const Vec2f &pos, int delay);
 

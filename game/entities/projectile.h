@@ -47,7 +47,7 @@ public:
 
     Projectile * setExpireCallback(void (*expire_callback)(Projectile*));
 
-    Projectile * setSprite(const uint8_t* frames, int framecount, float fps);
+    Projectile * setSprite(SpriteName spr);
 
     Projectile * clearSprite();
 

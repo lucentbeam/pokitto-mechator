@@ -34,7 +34,7 @@ bool EnemyTurret::update(float dt)
         Vec2f f = dir;
         f.rotBy((rand() % 40) - 20);
         ProjectileManager::create(m_pos + dir * 6.0f, f * 33.0f, 4, 3.0)
-                ->setSprite(projectile_med[0], 2, 20.0)
+                ->setSprite(BulletMedium)
                 ->setTargetMask({PlayerTarget, GroundTarget, AirTarget})
                 ->setIgnoreWalls();
         m_counter = rand() % 10;

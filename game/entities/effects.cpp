@@ -4,12 +4,12 @@
 
 ObjectPool<Effect, maxEffectCount> EffectManager::s_effects;
 
-void EffectManager::create(const Vec2f &pos, const uint8_t *frame_start, int framecount, float fps, float delay)
+void EffectManager::create(const Vec2f &pos, SpriteName spr, float delay)
 {
     auto * e = s_effects.activateNext();
     if (e != nullptr) {
         e->pos = pos;
-        e->sprite = SpriteWrapper(frame_start, framecount, fps);
+        e->sprite = SpriteWrapper(spr);
         e->lifetime = e->sprite.countsPerCycle();
         e->delay = uint8_t(delay / physicsTimestep);
     }
@@ -17,7 +17,7 @@ void EffectManager::create(const Vec2f &pos, const uint8_t *frame_start, int fra
 
 void EffectManager::createSmallExplosion(const Vec2f &pos, int delay)
 {
-    EffectManager::create(pos - Vec2f(explosion_small[0][0], explosion_small[0][1])/2, explosion_small[0], 7, 14.0f, float(delay) / 60.0f);
+    EffectManager::create(pos - Vec2f(explosion_small[0][0], explosion_small[0][1])/2, ExplosionSmall, float(delay) / 60.0f);
 }
 
 void EffectManager::createExplosion(const Vec2f &pos, int radius, int count)
@@ -27,30 +27,29 @@ void EffectManager::createExplosion(const Vec2f &pos, int radius, int count)
     for(int i = 0; i < count; ++i) {
         dir.rotBy(90 + (rand() % 180));
         r = float(rand() % std::max(1, radius*2/3)) + radius/3;
-        EffectManager::create(pos + dir * r, explosion_small[0], 7, 14.0f, i == 0 ? 0 : float(rand() % 40)/60.0f);
+        EffectManager::create(pos + dir * r, ExplosionSmall, i == 0 ? 0 : float(rand() % 40)/60.0f);
     }
 }
 
 void EffectManager::createExplosionBig(const Vec2f &pos)
 {
-    EffectManager::create(pos, explosion[0], 7, 20.0f);
+    EffectManager::create(pos, ExplosionBig);
 }
 
 void EffectManager::createHit(const Vec2f &pos)
 {
-    EffectManager::create(pos, hit[0], 5, 20.0f);
+    EffectManager::create(pos, HitSprite);
 }
 
 void EffectManager::createSmoke(const Vec2f &pos)
 {
-    EffectManager::create(pos, smoke[0], 6, 24.0f);
+    EffectManager::create(pos, SmokeSprite);
 }
 
 void EffectManager::update(float dt)
 {
     s_effects.iterate([](Effect * e) {
         if (e->delay == 0) {
-            e->sprite.update();
             --e->lifetime;
             if (e->lifetime < 0) {
                 return true;

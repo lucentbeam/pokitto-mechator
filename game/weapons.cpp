@@ -77,7 +77,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
     switch(typ) {
     case Type::Gun:
         if (checkFire(p, action, gun_config, pos, fac, vel)) {
-            p->setSprite(projectile[0], 1, 20);
+            p->setSprite(BulletSmall);
             p->setDamage(1);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
             if (air) p->setIgnoreWalls();
@@ -87,7 +87,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
     case Type::MachineGun:
         dir.rotBy((rand() % 30) - 15);
         if (checkFire(p, action, mgun_config, pos, dir, vel)) {
-            p->setSprite(projectile[0], 1, 20);
+            p->setSprite(BulletSmall);
             p->setDamage(1);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
             if (air) p->setIgnoreWalls();
@@ -96,13 +96,13 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         break;
     case Type::DualShot:
         if (checkFire(p, action, dualshot_config, pos + fac.rot90() * 3.0f, fac, vel)) {
-            p->setSprite(projectile[0], 1, 20);
+            p->setSprite(BulletSmall);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
             p->setDamage(1);
             if (air) p->setIgnoreWalls();
         }
         if (checkFire(p, action, dualshot_config, pos - fac.rot90() * 3.0f, fac, vel)) {
-            p->setSprite(projectile[0], 1, 20);
+            p->setSprite(BulletSmall);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
             p->setDamage(1);
             if (air) p->setIgnoreWalls();
@@ -111,7 +111,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         break;
     case Type::Grenade:
         if (checkFire(p, action, grenade_config, pos, fac, vel)) {
-            p->setSprite(projectile_grenade[0], 2, 4)
+            p->setSprite(GrenadeSprite)
              ->addVelocity(vel * 0.5f)
              ->setTargetMask({EnemyTarget, GroundTarget})
              ->setDamage(0)
@@ -133,7 +133,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         break;
     case Type::Missiles:
         if (checkFire(p, action, missile_config, pos, fac, vel)) {
-            p->setSprite(projectile_missile[fac.getRotationFrame(8.0f)], 1, 4)
+            p->setSprite(MissileSprite1)
              ->setTargetMask({EnemyTarget, GroundTarget, AirTarget})
              ->setDamage(0)
              ->setMissile(pos + fac * 5.0f, fac * missile_config.speed)
@@ -159,7 +159,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
             dir = fac * 1;
             dir.rotBy((i * 15 + (rand() % 25)) * (i % 2 == 0 ? 1 : -1));
             if (checkFire(p, action, multimissile_config, pos, dir, vel)) {
-                p->setSprite(projectile_missile[fac.getRotationFrame(8.0f)], 1, 4)
+                p->setSprite(MissileSprite1)
                  ->setTargetMask({EnemyTarget, GroundTarget, AirTarget})
                  ->setDamage(0)
                  ->setMissile(pos + fac * 5.0f, fac * multimissile_config.speed)

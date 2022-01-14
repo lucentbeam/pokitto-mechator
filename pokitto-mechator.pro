@@ -4,6 +4,7 @@ CONFIG += app_bundle
 CONFIG -= qt
 
 SOURCES += \
+    core/rendering/spritewrapper.cpp \
     core/utilities/babyfsm.cpp \
     game/entities/barracks.cpp \
     game/entities/enemies/enemybomber.cpp \
