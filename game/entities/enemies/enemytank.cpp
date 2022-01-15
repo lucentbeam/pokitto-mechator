@@ -3,6 +3,7 @@
 #include "game/entities/projectile.h"
 #include "game/entities/pickups.h"
 #include "game/physics/pathfinding.h"
+#include "core/audiosystem.h"
 
 bool EnemyTank::update(float dt)
 {
@@ -52,6 +53,7 @@ bool EnemyTank::update(float dt)
         m_aim = dir;
         if (m_counter > (shotcount == 0 ? 120 : 45)) {
             if (Camera::inViewingZone(m_steering.pos())) {
+                AudioSystem::play(sfxEnemyShoot);
                 ProjectileManager::create({m_steering.pos().x(), m_steering.pos().y()}, dir * 50.0f, 2, 3.0)
                         ->setSprite(BulletSmall)
                         ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
@@ -72,10 +74,12 @@ bool EnemyTank::update(float dt)
     if (m_life <= 0) {
         Pickups::spawnDollar(m_steering.pos());
         EffectManager::createExplosion(m_steering.pos(), 8, 6);
+        AudioSystem::play(sfxExplosionSmall);
         return false;
     } else {
         if (damage > 0) {
             m_damage_frames = 12;
+            AudioSystem::play(sfxHit1);
             EffectManager::createHit(m_steering.pos() - Vec2f(3.5f, 3.5f));
         }
     }

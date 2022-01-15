@@ -1,24 +1,14 @@
-
-- sfx
-  - laser charge
-  - laser fire
-  - small explosion
-  - echoing explosion
-  - enemy shoot
-  - player shoot
-  - player grenade
-  - player missile
-  - item get
-  - dollar get
-  - ui select
-  - ui confirm
-  - ui cancel
-  - ui deny
   
 - blueprints (jeep, tank, boat, helicopter, gemini gun, soldier health, soldier sprint, spreader shot, multinade, cluster shot... ?)
   - pickup
   - unlock (cost)
   - serializeable
+  
+- ui iconography:
+  - "run" active
+  - "enter vehicle" icon
+  - "exit vehicle" icon (most useful for boat and heli)
+  - "aim lock" icon
   
 - game events
   - intro
@@ -26,11 +16,6 @@
   - tank factory
   - bridge down
 
-- ui iconography:
-  - "run" active
-  - "enter vehicle" icon
-  - "exit vehicle" icon (most useful for boat and heli)
-  - "aim lock" icon
 
 - la musica
 

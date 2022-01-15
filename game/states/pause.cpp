@@ -6,6 +6,7 @@
 #include "game/utilities/helpers.h"
 #include "game/weapons.h"
 #include "game/player.h"
+#include "core/audiosystem.h"
 
 static UIElement pause_prompt = UIElement::getExpander(53,35,60,11, Tween::Easing::OutQuad);
 static UIElement equip_prompt = UIElement::getExpander(53,47,60,11, Tween::Easing::OutQuad);
@@ -24,6 +25,8 @@ void goPause()
 
     selected_weapon = Player::currentWeapon();
     FSM::instance->go(GameStates::Pause);
+
+    AudioSystem::play(sfxConfirm);
 }
 
 void updatePauseState(FSM&)
@@ -32,15 +35,18 @@ void updatePauseState(FSM&)
     if (status.c.pressed() || status.b.pressed()) {
         pause_prompt.setVisibility(false);
         equip_prompt.setVisibility(false);
+        AudioSystem::play(sfxCancel);
         goGame();
         return;
     }
     if (status.right.pressed()) {
         Player::cycleWeaponNext();
         selected_weapon = Player::currentWeapon();
+        AudioSystem::play(sfxSelect);
     } else if (status.left.pressed()) {
         Player::cycleWeaponPrev();
         selected_weapon = Player::currentWeapon();
+        AudioSystem::play(sfxSelect);
     }
 }
 

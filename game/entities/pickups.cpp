@@ -2,6 +2,7 @@
 
 #include "game/variables.h"
 #include "game/ui/ui.h"
+#include "core/audiosystem.h"
 
 ObjectPool<Pickups, 10> Pickups::s_temporary;
 ObjectPool<Pickups, 4> Pickups::s_special;
@@ -40,6 +41,7 @@ void Pickups::spawnDollar(const Vec2f &pos)
 {
     spawnTemporary({pos.x(), pos.y()}, DollarSprite, [](const Vec2i &pos) {
         GameVariables::changeDollars(1);
+        AudioSystem::play(sfxGetDollar);
         UI::showForDuration(UI::Element::UIDollarCount, 2.0f);
     }, 600);
 }
@@ -50,6 +52,7 @@ void Pickups::spawnHackingKit(const Vec2i &pos)
         spawnSpecial(pos, HackingKitSprite, [](const Vec2i &pos) {
             GameVariables::changeHackingKits(1);
             acquireAtIndex(pos);
+            AudioSystem::play(sfxGetItem);
             UI::showForDuration(UI::Element::UIHackingKitCount, 2.0f);
         });
     }
@@ -61,6 +64,7 @@ void Pickups::spawnKeycardA(const Vec2i &pos)
         spawnSpecial(pos, Keycard1Sprite, [](const Vec2i &pos) {
             GameVariables::changeKeysA(1);
             acquireAtIndex(pos);
+            AudioSystem::play(sfxGetItem);
             UI::showForDuration(UI::Element::UIKeyACount, 2.0f);
         });
     }
@@ -72,6 +76,7 @@ void Pickups::spawnKeycardB(const Vec2i &pos)
         spawnSpecial(pos, Keycard2Sprite, [](const Vec2i &pos) {
             GameVariables::changeKeysB(1);
             acquireAtIndex(pos);
+            AudioSystem::play(sfxGetItem);
             UI::showForDuration(UI::Element::UIKeyBCount, 2.0f);
         });
     }
@@ -83,6 +88,7 @@ void Pickups::spawnKeycardC(const Vec2i &pos)
         spawnSpecial(pos, Keycard3Sprite, [](const Vec2i &pos) {
             GameVariables::changeKeysC(1);
             acquireAtIndex(pos);
+            AudioSystem::play(sfxGetItem);
             UI::showForDuration(UI::Element::UIKeyCCount, 2.0f);
         });
     }

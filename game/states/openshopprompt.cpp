@@ -13,6 +13,7 @@
 #include "game/ui/ui.h"
 
 #include "game/variables.h"
+#include "core/audiosystem.h"
 
 static bool can_open = false;
 
@@ -33,12 +34,18 @@ void showOpenShopPrompt()
     UI::setVisibility(UI::Element::UIDollarCount, false);
 
     can_open = GameVariables::hackingKits() > 0;
+    if (!can_open) {
+        AudioSystem::play(sfxDeny);
+    } else {
+        AudioSystem::play(sfxConfirm);
+    }
     title_box.setVisibility(true, uint32_t(50));
     alert_box.setVisibility(true, uint32_t(150));
     yes_no.reset();
 }
 
 void quitOpenShop() {
+    AudioSystem::play(sfxCancel);
     title_box.setVisibility(false);
     alert_box.setVisibility(false);
     goGame();
@@ -55,6 +62,7 @@ void updateOpenShopState(FSM&)
             if (yes_no.activeIndex() == 0) {
                 quitOpenShop();
             } else {
+                AudioSystem::play(sfxConfirm);
                 title_box.setVisibility(false);
                 alert_box.setVisibility(false);
                 GameVariables::changeHackingKits(-1);

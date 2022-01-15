@@ -31,29 +31,32 @@ private:
 enum SFX {
     sfxConfirm = 0,
     sfxCancel = 1,
-    sfxBlip = 2,
-    sfxHurt = 3,
-    sfxZoomIn = 4,
-    sfxZoomOut = 5,
-    sfxTimeUp = 6,
-    sfxDoor = 7,
-    sfxCollect = 8,
-    sfxCrash = 9,
-    sfxWhoosh = 10,
-    sfxStrike = 11,
-    sfxJump = 12
+    sfxSelect = 2,
+    sfxDeny = 3,
+    sfxEnemyShoot,
+    sfxEnemyShootMedium,
+    sfxExplosionSmall,
+    sfxExplosionBig,
+    sfxGetDollar,
+    sfxGetItem,
+    sfxGrenade,
+    sfxLaser,
+    sfxLaserCharge,
+    sfxMissile,
+    sfxPlayerGun,
+    sfxPlayerGun2x,
+    sfxHit1,
+    sfxHit2,
 };
 
-const int sfx_count = 13;
+const int sfx_count = 18;
 
 enum Song {
     musNone = 0,
     musTown,
-    musWind,
-    musArcade,
-    musUpcycle,
-    musGame
 };
+
+const int song_count = 2;
 
 class AudioSystem
 {
@@ -98,7 +101,7 @@ public:
 
     static std::vector<Sint16> raw_buffers[sfx_count];
 
-    static RawMusic music[5];
+    static RawMusic music[song_count];
 
     static int s_active_music;
 

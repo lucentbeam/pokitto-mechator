@@ -3,7 +3,7 @@
 #include "game/entities/projectile.h"
 #include "game/entities/pickups.h"
 #include "game/physics/pathfinding.h"
-
+#include "core/audiosystem.h"
 
 bool EnemyMech::update(float dt, bool check_collisions)
 {
@@ -54,6 +54,7 @@ bool EnemyMech::update(float dt, bool check_collisions)
     case EnemyMech::Mode::Preparing:
         if (m_counter > 60) {
             if (Camera::inViewingZone({m_rect.centerX(), m_rect.centerY()})) {
+                AudioSystem::play(sfxEnemyShoot);
                 ProjectileManager::create({m_rect.centerX(), m_rect.centerY()}, dir * 50.0f, 2, 3.0)
                         ->setSprite(BulletSmall)
                         ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
@@ -74,10 +75,12 @@ bool EnemyMech::update(float dt, bool check_collisions)
     if (m_life <= 0) {
         if (m_drops) Pickups::spawnDollar({m_rect.centerX(), m_rect.centerY()});
         EffectManager::createExplosion(pos, 1, 1);
+        AudioSystem::play(sfxExplosionSmall);
         return false;
     } else {
         if (damage > 0) {
             m_damage_frames = 10;
+            AudioSystem::play(sfxHit1);
             EffectManager::createHit(pos - Vec2f(3.5f, 3.5f));
         }
     }

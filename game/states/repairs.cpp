@@ -13,6 +13,7 @@
 #include "game/player.h"
 #include "game/variables.h"
 #include "game/entities/pois.h"
+#include "core/audiosystem.h"
 
 static UIElement title = UIElement::getExpander(55, 35, 76, 9, Tween::Easing::OutQuad);
 static UIOptions repair_opts(true, {"BACK", "SOLDIER (REST)", "JEEP", "TANK", "BOAT", "HELI"});
@@ -47,6 +48,7 @@ void showRepairs()
 }
 
 void goBack() {
+    AudioSystem::play(sfxCancel);
     title.setVisibility(false);
     cost_prompt.setVisibility(false);
     current_cost = 0;
@@ -110,8 +112,11 @@ void updateRepairsState(FSM &fsm)
         }
     });
     cost_prompt.setVisibility(current_cost > 0);
-
+    if (status.a.pressed() && GameVariables::dollars() < current_cost) {
+        AudioSystem::play(sfxDeny);
+    }
     if (status.a.pressed() && GameVariables::dollars() >= current_cost) {
+        AudioSystem::play(sfxConfirm);
         switch(repair_opts.activeIndex()) {
         case 0:
             goBack();

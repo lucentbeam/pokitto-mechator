@@ -6,6 +6,7 @@
 #include "game/entities/effects.h"
 #include "game/entities/pickups.h"
 #include "game/physics/pathfinding.h"
+#include "core/audiosystem.h"
 
 int Mine::timer = 0;
 
@@ -224,6 +225,7 @@ void Enemy::updateMines(float dt)
     player.grow(3, 3);
     s_mines.iterate([&](Mine *m) {
         if (!skip && player.contains(m->pos)) {
+            AudioSystem::play(sfxExplosionSmall);
             MapManager::setTileAt(m->pos.x(), m->pos.y(), SpecialTiles::ExplodedOrdinance);
             ProjectileManager::create(m->pos, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
             EffectManager::createExplosionBig(m->pos - Vec2f(6,6));

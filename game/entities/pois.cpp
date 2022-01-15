@@ -3,6 +3,7 @@
 #include "game/states/opendoorprompt.h"
 #include "game/states/openshopprompt.h"
 #include "game/states/shop.h"
+#include "core/audiosystem.h"
 
 ObjectPool<POIs, 6> POIs::s_pois;
 std::vector<uint16_t> POIs::s_activated;
@@ -63,6 +64,7 @@ void POIs::unlockCurrent()
         return;
     }
     if (mapIndexUnopened(s_current_active_poi->m_position)) {
+        AudioSystem::play(sfxGetItem);
         openAtIndex(s_current_active_poi->m_position);
         if (s_current_active_poi->m_door_type == Shop) {
             showShop();
@@ -96,6 +98,7 @@ void POIs::update(float dt)
                     if (mapIndexUnopened(p->m_position)) {
                         showOpenShopPrompt();
                     } else {
+                        AudioSystem::play(sfxConfirm);
                         showShop();
                     }
                 } else {

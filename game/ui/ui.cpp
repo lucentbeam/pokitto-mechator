@@ -6,6 +6,7 @@
 #include "game/sprites.h"
 #include "game/variables.h"
 
+#include "core/audiosystem.h"
 #include "core/utilities/babyfsm.h"
 
 UIElement::UIElement(int16_t x, int16_t y, int16_t w, int16_t h, int16_t x_hidden, int16_t y_hidden, int16_t w_hidden, int16_t h_hidden, Tween::Easing curve) :
@@ -131,10 +132,12 @@ void UIOptions::update(const ControlStatus &status, void (*on_highlight)(int8_t 
     if (m_vertical) {
         if (status.up.pressed() || status.down.pressed()) {
             m_active_index += status.y < 0 ? -1 : 1;
+            AudioSystem::play(sfxSelect);
         }
     } else {
         if (status.right.pressed() || status.left.pressed()) {
             m_active_index += status.x < 0 ? -1 : 1;
+            AudioSystem::play(sfxSelect);
         }
     }
     if (m_active_index < 0) {

@@ -3,6 +3,7 @@
 #include "game/entities/projectile.h"
 #include "game/entities/pickups.h"
 #include "game/physics/pathfinding.h"
+#include "core/audiosystem.h"
 
 void EnemyBomber::setup(const Vec2f &pos)
 {
@@ -44,6 +45,7 @@ bool EnemyBomber::update(float dt)
         counter++;
         if (counter >= 20) {
             counter = 0;
+            AudioSystem::play(sfxGrenade);
             ProjectileManager::create(m_plane_pos + Vec2f(0, 15), Vec2f(velocity * -0.2f, (rand() % 30) - 15), 4, 1.5f)
                 ->setSprite(GrenadeSprite)
                 ->setTargetMask({})
@@ -52,6 +54,7 @@ bool EnemyBomber::update(float dt)
                 ->setExpireCallback([](Projectile*p) {
                 ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget});
                     EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                    AudioSystem::play(sfxExplosionBig);
                 });
         }
 
@@ -62,9 +65,11 @@ bool EnemyBomber::update(float dt)
             Pickups::spawnDollar(m_plane_pos);
             EffectManager::createExplosion(m_plane_pos, 10, 8);
             status = Waiting;
+            AudioSystem::play(sfxExplosionBig);
         } else {
             if (damage > 0) {
                 m_damage_frames = 6;
+                AudioSystem::play(sfxHit1);
                 EffectManager::createHit(m_plane_pos);
             }
         }

@@ -1,6 +1,8 @@
 #include "player.h"
 #include "game/ui/ui.h"
 
+#include "core/audiosystem.h"
+
 static uint32_t mode_switch_counter = 0;
 
 Vehicle::Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction) :
@@ -65,6 +67,7 @@ void Soldier::update(float dt)
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
         s_instance.health().change(-damage);
+        AudioSystem::play(sfxHit2);
         // TODO: gameover
     }
 
@@ -149,6 +152,7 @@ void Jeep::update(float dt)
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
+        AudioSystem::play(sfxHit2);
         s_instance.health().change(-damage);
         if (!alive()) {
             Soldier::setPosition(position());
@@ -228,6 +232,7 @@ void Helicopter::update(float dt)
     int damage = ProjectileManager::getCollisionDamage(rect, bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
+        AudioSystem::play(sfxHit2);
         s_instance.health().change(-damage);
         if (!alive()) {
             Soldier::setPosition(s_instance.m_steering.pos());
@@ -285,6 +290,7 @@ void Tank::update(float dt)
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
+        AudioSystem::play(sfxHit2);
         s_instance.health().change(-damage);
         if (!alive()) {
             Soldier::setPosition(position());
@@ -339,6 +345,7 @@ void Boat::update(float dt)
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
         s_instance.health().change(-damage);
+        AudioSystem::play(sfxHit2);
         if (!alive()) {
             // TODO: make gameover
             Soldier::setPosition(position());

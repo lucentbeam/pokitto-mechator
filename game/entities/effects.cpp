@@ -1,6 +1,7 @@
 #include "effects.h"
 #include "core/rendering/camera.h"
 #include "game/sprites.h"
+#include "core/audiosystem.h"
 
 ObjectPool<Effect, maxEffectCount> EffectManager::s_effects;
 

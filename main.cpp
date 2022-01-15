@@ -3,6 +3,7 @@
 #include "core//rendersystem.h"
 #include "core//controls.h"
 #include "core/utilities/babyfsm.h"
+#include "core/audiosystem.h"
 
 #include "game/states/game.h"
 #include "game/states/opendoorprompt.h"
@@ -21,6 +22,7 @@
 int main ()
 {
     RenderSystem::initialize();
+    AudioSystem::initialize();
     Soldier::health().setMax();
     Camera::update(Soldier::position().x(), Soldier::position().y());
 

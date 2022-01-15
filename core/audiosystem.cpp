@@ -100,7 +100,7 @@ AudioSystem::SoundClip AudioSystem::s_clips[4];
 
 std::vector<Sint16> AudioSystem::raw_buffers[sfx_count];
 
-AudioSystem::RawMusic AudioSystem::music[5];
+AudioSystem::RawMusic AudioSystem::music[song_count];
 
 float AudioSystem::s_current_time = 0.0f;
 
@@ -204,11 +204,10 @@ void AudioSystem::initialize() {
     SDL_AudioSpec result;
     s_device_id = SDL_OpenAudioDevice(NULL, 0, &spec, &result, 0);
 
-//    SDL_OpenAudio(&spec, NULL);
-//    SDL_PauseAudio(0);
-
-    std::string path = "../desktop/buttoncity/";
-    std::string names[] = {"confirm","cancel","blip","hurt","zoomin","zoomout","timeup","door","collect","crash","woosh","strike","jump"};
+#ifdef DESKTOP_BUILD
+    std::string path = "../pokitto-mechator/content/sfx_desktop/";
+#endif
+    std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
     for(int i = 0; i < sfx_count; ++i) {
         std::ifstream input;
         input.open(path + names[i] + ".raw", std::ios::binary | std::ios::in);
@@ -226,7 +225,7 @@ void AudioSystem::initialize() {
     }
 
     std::string musics[] = {"bctown", "wind", "bcarcade", "bcupcycle", "prismabops"};
-    for(int i = 0; i < 5; ++i) {
+    for(int i = 0; i < song_count; ++i) {
         music[i].open(path + musics[i] + ".raw");
     }
 

@@ -9,6 +9,7 @@
 #include "game/entities/pois.h"
 #include "game/ui/ui.h"
 #include "game/variables.h"
+#include "core/audiosystem.h"
 
 static POIType currentDoor;
 
@@ -52,6 +53,11 @@ void showOpenDoorPrompt(POIType door) {
     default:
         can_open = false;
         break;
+    }
+    if (can_open) {
+        AudioSystem::play(sfxSelect);
+    } else {
+        AudioSystem::play(sfxDeny);
     }
 
     prompt.setVisibility(true);

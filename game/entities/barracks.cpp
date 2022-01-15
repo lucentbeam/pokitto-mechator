@@ -125,7 +125,7 @@ void Barracks::update(float dt)
             start[i].m_spawn_timer--;
             if (start[i].m_spawn_timer <= 0) {
                 start[i].m_spawn_timer = 140 + (rand() % 60);
-                static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
+                static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::LowWall, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
                 if (Pathfinding::canReach(start[i].m_spawn, Camera::center(), mask)) {
                     EnemyMech * m = Enemy::createMech(start[i].m_spawn);
                     ++start[i].m_spawn_count;

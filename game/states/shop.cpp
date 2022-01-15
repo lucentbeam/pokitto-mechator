@@ -6,6 +6,7 @@
 #include "game/ui/ui.h"
 #include "core//rendersystem.h"
 #include "game/states/repairs.h"
+#include "core/audiosystem.h"
 
 static UIElement title = UIElement::getExpander(55, 28, 70, 9, Tween::Easing::OutQuad);
 static UIOptions title_opts(true, {"LEAVE", "SAVE", "REPAIR/BUILD"});
@@ -45,6 +46,7 @@ void updateShopState(FSM&)
     title_opts.update(status);
 
     if (status.a.pressed()) {
+        AudioSystem::play(sfxConfirm);
         switch(title_opts.activeIndex()) {
         case 0:
             quitShopState();
@@ -59,6 +61,7 @@ void updateShopState(FSM&)
             break;
         }
     } else if (status.b.pressed()) {
+        AudioSystem::play(sfxCancel);
         quitShopState();
     }
 }

@@ -2,6 +2,7 @@
 
 #include "game/utilities/mapmanager.h"
 #include "game/physics/collisionmanager.h"
+#include "core/audiosystem.h"
 
 const WeaponConfig gun_config(5.0f, 3, 0.5f, 100.0f);
 
@@ -77,6 +78,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
     switch(typ) {
     case Type::Gun:
         if (checkFire(p, action, gun_config, pos, fac, vel)) {
+            AudioSystem::play(sfxPlayerGun);
             p->setSprite(BulletSmall);
             p->setDamage(1);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
@@ -87,6 +89,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
     case Type::MachineGun:
         dir.rotBy((rand() % 16) - 8);
         if (checkFire(p, action, mgun_config, pos, dir, vel)) {
+            AudioSystem::play(sfxPlayerGun);
             p->setSprite(BulletSmall);
             p->setDamage(1);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
@@ -96,6 +99,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         break;
     case Type::DualShot:
         if (checkFire(p, action, dualshot_config, pos + fac.rot90() * 3.0f, fac, vel)) {
+            AudioSystem::play(sfxPlayerGun2x);
             p->setSprite(BulletSmall);
             p->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
             p->setDamage(1);
@@ -111,11 +115,13 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         break;
     case Type::Grenade:
         if (checkFire(p, action, grenade_config, pos, fac, vel)) {
+            AudioSystem::play(sfxGrenade);
             p->setSprite(GrenadeSprite)
              ->addVelocity(vel * 0.5f)
              ->setTargetMask({EnemyTarget, GroundTarget})
              ->setDamage(0)
              ->setExpireCallback([](Projectile*p) {
+                AudioSystem::play(sfxExplosionBig);
                 for(int i = -4; i <= 4; i+=4) {
                     for (int j = -4; j <= 4; j+= 4) {
                         Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
@@ -133,12 +139,14 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         break;
     case Type::Missiles:
         if (checkFire(p, action, missile_config, pos, fac, vel)) {
+            AudioSystem::play(sfxMissile);
             p->setSprite(MissileSprite1)
              ->setTargetMask({EnemyTarget, GroundTarget, AirTarget})
              ->setDamage(0)
              ->setMissile(pos + fac * 5.0f, fac * missile_config.speed)
              ->setFlipped(dir.x() > 0)
              ->setExpireCallback([](Projectile*p) {
+                AudioSystem::play(sfxExplosionBig);
                 for(int i = -4; i <= 4; i+=4) {
                     for (int j = -4; j <= 4; j+= 4) {
                         Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
@@ -159,6 +167,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
             dir = fac * 1;
             dir.rotBy((i * 15 + (rand() % 25)) * (i % 2 == 0 ? 1 : -1));
             if (checkFire(p, action, multimissile_config, pos, dir, vel)) {
+                if (i == 0) AudioSystem::play(sfxMissile);
                 p->setSprite(MissileSprite1)
                  ->setTargetMask({EnemyTarget, GroundTarget, AirTarget})
                  ->setDamage(0)
@@ -174,6 +183,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
                             }
                         }
                     }
+                    AudioSystem::play(sfxExplosionBig);
                     ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(4)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
                     EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
                 });
