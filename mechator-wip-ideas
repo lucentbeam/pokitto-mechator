@@ -1,8 +1,8 @@
   
 - blueprints (jeep, tank, boat, helicopter, gemini gun, soldier health, soldier sprint, spreader shot, multinade, cluster shot... ?)
-  - pickup
+  x pickup
   - unlock (cost)
-  - serializeable
+  x serializeable
   
 - ui iconography:
   - "run" active
@@ -16,6 +16,13 @@
   - tank factory
   - bridge down
 
+- figure out way to deal with events that spawn things... (helicopter tutorial battle)
+
+- revisit tutorial island
+  - jeep blueprint
+  - "alley" before event, encourage player to try to open door first
+
+- world map: sky layer
 
 - la musica
 

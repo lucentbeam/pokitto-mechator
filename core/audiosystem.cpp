@@ -304,9 +304,9 @@ Audio::Sink<4, PROJ_AUD_FREQ> audio;
 
 template <int N>
 void playOnChannel(SFX sfx) {
-    std::string path = "data/buttoncity/";
+    std::string path = "data/mechator/";
     std::string options[] = {
-        "confirm","cancel","blip","hurt","zoomin","zoomout","timeup","door","collect","crash","woosh","strike","jump"
+        std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
     };
     path += options[int(sfx)];
     path += ".raw";

@@ -29,6 +29,7 @@ SOURCES += \
     game/physics/steering.cpp \
     core/rendering/camera.cpp \
     game/rendering/skytilemap.cpp \
+    game/states/collectblueprintprompt.cpp \
     game/states/game.cpp \
     game/states/opendoorprompt.cpp \
     game/states/openshopprompt.cpp \
@@ -92,6 +93,7 @@ HEADERS += \
     core/rendering/camera.h \
     game/rendering/skytilemap.h \
     core/rendering/spritewrapper.h \
+    game/states/collectblueprintprompt.h \
     game/states/game.h \
     game/states/opendoorprompt.h \
     game/states/openshopprompt.h \

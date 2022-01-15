@@ -13,6 +13,7 @@
 		{ "output" : "pickup_keycard2", "vcount": 2},
 		{ "output" : "pickup_keycard3", "vcount": 2},
 		{ "output" : "pickup_hackingkit", "vcount": 2},
+		{ "output" : "pickup_blueprint", "hcount": 2},
 		{ "output" : "poi", "vcount": 6},
 		{ "output" : "pickup_dollar", "vcount": 2},
 		{ "output" : "hit", "vcount": 5},

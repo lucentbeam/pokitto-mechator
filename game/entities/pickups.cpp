@@ -1,11 +1,15 @@
 #include "pickups.h"
 
+#include "game/enums.h"
+#include "game/constants.h"
 #include "game/variables.h"
 #include "game/ui/ui.h"
 #include "core/audiosystem.h"
+#include "game/states/collectblueprintprompt.h"
+#include "game/maps/worldmutables.h"
 
 ObjectPool<Pickups, 10> Pickups::s_temporary;
-ObjectPool<Pickups, 4> Pickups::s_special;
+ObjectPool<Pickups, 6> Pickups::s_special;
 
 std::vector<uint16_t> Pickups::s_acquired_specials;
 
@@ -90,6 +94,30 @@ void Pickups::spawnKeycardC(const Vec2i &pos)
             acquireAtIndex(pos);
             AudioSystem::play(sfxGetItem);
             UI::showForDuration(UI::Element::UIKeyCCount, 2.0f);
+        });
+    }
+}
+
+int fetchBlueprintIndex(const Vec2i &pos) {
+    const int bpcount = Blueprints::LastIdxBP;
+    int pidx = MapManager::getMapIndex(pos.x(), pos.y());
+    int idx = 0;
+    while(pidx != *(blueprints_data + idx) && idx < bpcount) {
+        idx++;
+    }
+    if (idx >= bpcount) return -1;
+    return idx;
+}
+
+void Pickups::spawnBlueprint(const Vec2i &pos)
+{
+    int idx = fetchBlueprintIndex(pos);
+    if (idx == -1) return;
+    if (!GameVariables::hasBlueprint(idx)) {
+        spawnSpecial(pos, BlueprintSprite, [](const Vec2i &pos) {
+            int idx = fetchBlueprintIndex(pos);
+            GameVariables::acquireBlueprint(idx);
+            showBlueprint(Blueprints(idx));
         });
     }
 }

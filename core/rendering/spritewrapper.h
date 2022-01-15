@@ -37,6 +37,7 @@ enum SpriteName {
     Keycard1Sprite  = 24,
     Keycard2Sprite  = 25,
     Keycard3Sprite  = 26,
+    BlueprintSprite = 27,
 
     NoSprite = 50000,
 };
@@ -84,6 +85,7 @@ const SpriteConfig sprite_configs[] = {
     { pickup_keycard1[0], 2, 8.0f },
     { pickup_keycard2[0], 2, 8.0f },
     { pickup_keycard3[0], 2, 8.0f },
+    { pickup_blueprint[0], 2, 8.0f }
 };
 
 class SpriteWrapper {

@@ -31,6 +31,9 @@ public:
 
     void setMaxWidth(int w);
 
+    bool active() const { return tween.started() && !tween.done(); }
+    bool done() const { return tween.started() && tween.done(); }
+
     static UIElement getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Tween::Easing curve);
 };
 

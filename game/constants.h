@@ -38,4 +38,16 @@ const float heliSpeed = 55.0f;
 const float heliCornering = 0.05f;
 const float heliFriction = 0.08f;
 
+const char * const bp_names[] = {
+    "Jeep Schematics",
+    "Tank Schematics",
+    "Boat Schematics",
+    "Helicopter Schematics",
+    "Gemini Gun [Jeep]",
+    "Tactical Armor [Soldier]",
+    "Ninja Shoes [Soldier]",
+    "Spreader Shot [Jeep]",
+    "Multinade [Jeep]",
+    "Cluster Shot [Heli]",
+};
 #endif // CONSTANTS_H

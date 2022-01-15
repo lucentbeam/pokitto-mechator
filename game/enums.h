@@ -44,7 +44,23 @@ enum GameStates : uint8_t {
     ShowUnlockShop,
     ShowShop,
     Pause,
-    ShowRepairs
+    ShowRepairs,
+    ShowBlueprint
+};
+
+enum Blueprints {
+    JeepBP              = 0,
+    TankBP              = 1,
+    BoatBP              = 2,
+    HeliBP              = 3,
+    GeminiGunBP         = 4,
+    TacticalArmorBP     = 5,
+    NinjaShoesBP        = 6,
+    SpreaderShotBP      = 7,
+    MultinadeBP         = 8,
+    ClustershotBP       = 9,
+
+    LastIdxBP           = 10
 };
 
 #endif // ENUMS_H

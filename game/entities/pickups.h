@@ -9,7 +9,7 @@
 class Pickups
 {
     static ObjectPool<Pickups, 10> s_temporary;
-    static ObjectPool<Pickups, 4> s_special;
+    static ObjectPool<Pickups, 6> s_special;
 
     static std::vector<uint16_t> s_acquired_specials; // store map indices of specials that have already been acquired
 
@@ -36,6 +36,8 @@ public:
     static void spawnKeycardA(const Vec2i &pos);
     static void spawnKeycardB(const Vec2i &pos);
     static void spawnKeycardC(const Vec2i &pos);
+
+    static void spawnBlueprint(const Vec2i &pos);
 
     static void update(float dt);
 

@@ -23,7 +23,7 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
         } else {
             float s = m_max_speed * speed_mult - m_current_speed;
             m_current_speed += s * (dt / 0.2f);
-            if (m_current_speed > s) m_current_speed = s;
+            if (m_current_speed > m_max_speed * speed_mult) m_current_speed = m_max_speed * speed_mult;
         }
     } else {
         if (m_brake) {

@@ -864,7 +864,7 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":152.927333333333,
+                 "x":152.927,
                  "y":400.531
                 }, 
                 {
@@ -875,8 +875,8 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":202.177333333333,
-                 "y":398.447666666667
+                 "x":202.177,
+                 "y":398.448
                 }, 
                 {
                  "height":4.4375,
@@ -2481,8 +2481,8 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":87.59375,
-                 "y":397.78125
+                 "x":87.5938,
+                 "y":397.781
                 }, 
                 {
                  "height":4.4375,
@@ -2492,8 +2492,19 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":165.927083333333,
-                 "y":376.78125
+                 "x":165.927,
+                 "y":376.781
+                }, 
+                {
+                 "height":2.875,
+                 "id":243,
+                 "name":"blueprint_9",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2.5,
+                 "x":139.659090909091,
+                 "y":62.0170454545455
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2502,7 +2513,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":243,
+ "nextobjectid":245,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",
