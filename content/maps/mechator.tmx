@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="245">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="250">
  <editorsettings>
   <export target="mechator.json" format="json"/>
  </editorsettings>
@@ -670,5 +670,10 @@
   <object id="241" name="enemy_mech" x="87.5938" y="397.781" width="4.8125" height="4.4375"/>
   <object id="242" name="enemy_mech" x="165.927" y="376.781" width="4.8125" height="4.4375"/>
   <object id="243" name="blueprint_9" x="139.659" y="62.017" width="2.5" height="2.875"/>
+  <object id="245" name="blueprint_3" x="97.5" y="68.0625" width="2.5" height="2.875"/>
+  <object id="246" name="blueprint_0" x="103.25" y="44.0625" width="2.5" height="2.875"/>
+  <object id="247" name="blueprint_1" x="110.25" y="61.8125" width="2.5" height="2.875"/>
+  <object id="248" name="blueprint_2" x="133.875" y="50.1875" width="2.5" height="2.875"/>
+  <object id="249" name="blueprint_4" x="157.75" y="49.6875" width="2.5" height="2.875"/>
  </objectgroup>
 </map>

@@ -10,7 +10,7 @@
 
 #include "core/utilities/objectpool.h"
 
-const int maxProjectileCount = 24;
+const int maxProjectileCount = 18;
 
 enum Targets {
     PlayerTarget = 1,

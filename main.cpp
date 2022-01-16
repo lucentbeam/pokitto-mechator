@@ -12,6 +12,7 @@
 #include "game/states/pause.h"
 #include "game/states/repairs.h"
 #include "game/states/collectblueprintprompt.h"
+#include "game/states/blueprints.h"
 
 #include "game/ui/ui.h"
 
@@ -35,6 +36,7 @@ int main ()
     fsm.add(GameStates::Pause, updatePauseState, drawPauseState);
     fsm.add(GameStates::ShowRepairs, updateRepairsState, drawRepairsState);
     fsm.add(GameStates::ShowBlueprint, updateShowBlueprint, drawShowBlueprint);
+    fsm.add(GameStates::ShowBlueprintShop, updateBlueprintsShopState, drawBlueprintsShopState);
 
     int32_t gameTime = 0;
     uint32_t lastGameTime = RenderSystem::getTimeMs();

@@ -50,4 +50,17 @@ const char * const bp_names[] = {
     "Multinade [Jeep]",
     "Cluster Shot [Heli]",
 };
+
+const int bp_costs[] = {
+    1, // jeep
+    1, // tank
+    1, // boat
+    1, // heli
+    1, // gemini gun
+    1, // tactical armor
+    1, // ninja shoes
+    1, // spreader shot
+    1, // multinade
+    1, // cluster shot
+};
 #endif // CONSTANTS_H

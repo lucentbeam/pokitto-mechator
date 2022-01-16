@@ -8,8 +8,8 @@
 #include "game/states/collectblueprintprompt.h"
 #include "game/maps/worldmutables.h"
 
-ObjectPool<Pickups, 10> Pickups::s_temporary;
-ObjectPool<Pickups, 6> Pickups::s_special;
+ObjectPool<Pickups, 4> Pickups::s_temporary;
+ObjectPool<Pickups, 12> Pickups::s_special;
 
 std::vector<uint16_t> Pickups::s_acquired_specials;
 
@@ -23,7 +23,10 @@ void Pickups::configure(const Vec2i &pos, SpriteName spr, void (*on_collect)(con
 
 void Pickups::spawnTemporary(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime)
 {
-    s_temporary.activateNext()->configure(pos, spr, on_collect, lifetime);
+    Pickups * p = s_temporary.activateNext();
+    if (p != nullptr) {
+        p->configure(pos, spr, on_collect, lifetime);
+    }
 }
 
 void Pickups::spawnSpecial(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&))

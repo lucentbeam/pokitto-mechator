@@ -30,6 +30,7 @@ public:
     void showForDuration(float duration) { setVisibility(true); m_showDuration = duration; }
 
     void setMaxWidth(int w);
+    void setCenter(float x, float y);
 
     bool active() const { return tween.started() && !tween.done(); }
     bool done() const { return tween.started() && tween.done(); }
@@ -38,15 +39,16 @@ public:
 };
 
 class UIOptions {
-    const bool m_vertical;
+    bool m_vertical;
     std::vector<const char*> m_options;
 
     uint8_t m_available;
     int8_t m_active_index;
 public:
     UIOptions(bool vertical, std::initializer_list<const char*> options);
+    UIOptions(bool vertical, std::vector<const char*> options);
 
-    void update(const ControlStatus&, void (*on_highlight)(int8_t index) = nullptr);
+    void update(const ControlStatus&, void (*on_highlight)(int8_t index) = nullptr, bool cycle = false);
 
     void foreach(std::function<void(uint8_t idx, bool active, const char *)>);
 

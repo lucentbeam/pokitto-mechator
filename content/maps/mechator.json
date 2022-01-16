@@ -2503,8 +2503,63 @@
                  "type":"",
                  "visible":true,
                  "width":2.5,
-                 "x":139.659090909091,
-                 "y":62.0170454545455
+                 "x":139.659,
+                 "y":62.017
+                }, 
+                {
+                 "height":2.875,
+                 "id":245,
+                 "name":"blueprint_3",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2.5,
+                 "x":97.5,
+                 "y":68.0625
+                }, 
+                {
+                 "height":2.875,
+                 "id":246,
+                 "name":"blueprint_0",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2.5,
+                 "x":103.25,
+                 "y":44.0625
+                }, 
+                {
+                 "height":2.875,
+                 "id":247,
+                 "name":"blueprint_1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2.5,
+                 "x":110.25,
+                 "y":61.8125
+                }, 
+                {
+                 "height":2.875,
+                 "id":248,
+                 "name":"blueprint_2",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2.5,
+                 "x":133.875,
+                 "y":50.1875
+                }, 
+                {
+                 "height":2.875,
+                 "id":249,
+                 "name":"blueprint_4",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2.5,
+                 "x":157.75,
+                 "y":49.6875
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2513,7 +2568,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":245,
+ "nextobjectid":250,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

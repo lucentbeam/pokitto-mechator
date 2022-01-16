@@ -6,7 +6,7 @@
 #include "core/utilities/vec.h"
 #include "core/utilities/objectpool.h"
 
-const int maxEffectCount = 40;
+const int maxEffectCount = 18;
 
 class EffectManager;
 

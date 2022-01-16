@@ -54,6 +54,16 @@ void GameVariables::unlockBlueprint(int bp)
     unlockedBlueprints = unlockedBlueprints | (1 << bp);
 }
 
+bool GameVariables::hasBlueprintToUnlock(int bp)
+{
+    return hasBlueprint(bp) && !hasBlueprintUnlocked(bp);
+}
+
+bool GameVariables::hasUnusedBlueprints()
+{
+    return acquiredBlueprints != unlockedBlueprints;
+}
+
 uint8_t GameVariables::keysA() { return keyACount; }
 
 uint8_t GameVariables::keysB() { return keyBCount; }

@@ -48,8 +48,8 @@ class Pathfinding
         uint16_t f() const { return g + h; }
     };
 
-    static ObjectPool<Node, 30> s_visited;
-    static ObjectPool<Node, 30> s_unvisited;
+    static ObjectPool<Node, 24> s_visited;
+    static ObjectPool<Node, 24> s_unvisited;
 
 public:
 

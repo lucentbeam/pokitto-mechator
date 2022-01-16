@@ -11682,6 +11682,249 @@
 		},
 		"/content/sfx_source/select.wav": {
 			"sdcard": false
+		},
+		"/content/sfx": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop": {
+			"sdcard": false
+		},
+		"/content/art/pickup_blueprint.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/ui_icons.aseprite": {
+			"sdcard": false
+		},
+		"/content/sfx/cancel.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/confirm.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/deny.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/enemy_shoot.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/enemy_shoot_big.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/explosion_big.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/explosion_small.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/get_dollar.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/get_item.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/grenade.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/laser.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/laser_charge.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/missile.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/playergun_2x.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/playergun.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/playerhit.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/playerhit2.raw": {
+			"sdcard": false
+		},
+		"/content/sfx/select.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/cancel.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/confirm.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/deny.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/enemy_shoot.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/enemy_shoot_big.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/explosion_big.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/explosion_small.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/get_dollar.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/get_item.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/grenade.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/laser.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/laser_charge.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/missile.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/playergun.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/playergun_2x.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/playerhit.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/playerhit2.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_desktop/select.raw": {
+			"sdcard": false
+		},
+		"/content/sfx_source/playerhit.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/playerhit2.wav": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples.aup": {
+			"sdcard": false
+		},
+		"/game/states/blueprints.cpp": {
+			"sdcard": false
+		},
+		"/game/states/blueprints.h": {
+			"sdcard": false
+		},
+		"/game/states/collectblueprintprompt.cpp": {
+			"sdcard": false
+		},
+		"/game/states/collectblueprintprompt.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_blueprint.png": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f439.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f684.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f78e.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f815.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f8ba.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f959.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fa8e.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fb59.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fb84.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fba0.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fd06.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fd38.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fded.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fe6f.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1fec6.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f0fa.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f197.au": {
+			"sdcard": false
+		},
+		"/content/sfx_source/sfx_resamples_data/eff/d1f/eff1f19a.au": {
+			"sdcard": false
+		},
+		"/content/art/exports/pickup_blueprint.h": {
+			"sdcard": false
+		},
+		"/game/entities/pickups.cpp.IOekNX": {
+			"sdcard": false
+		},
+		"/core/audiosystem.cpp.fSyDAK": {
+			"sdcard": false
+		},
+		"/core/audiosystem.cpp.DUjFMW": {
+			"sdcard": false
+		},
+		"/game/entities/pickups.h.OcJKtI": {
+			"sdcard": false
+		},
+		"/game/entities/pickups.cpp.JzTVXv": {
+			"sdcard": false
+		},
+		"/main.cpp.hPUnTc": {
+			"sdcard": false
+		},
+		"/main.cpp.lEKMry": {
+			"sdcard": false
+		},
+		"/core/utilities/babyfsm.h.jobbpc": {
+			"sdcard": false
+		},
+		"/game/physics/pathfinding.cpp.kbUvJz": {
+			"sdcard": false
+		},
+		"/core/audiosystem.cpp.wSlXsl": {
+			"sdcard": false
+		},
+		"/game/entities/projectile.h.fsUHsz": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

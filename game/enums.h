@@ -45,7 +45,8 @@ enum GameStates : uint8_t {
     ShowShop,
     Pause,
     ShowRepairs,
-    ShowBlueprint
+    ShowBlueprint,
+    ShowBlueprintShop
 };
 
 enum Blueprints {

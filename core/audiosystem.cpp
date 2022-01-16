@@ -300,31 +300,26 @@ float AudioSystem::getVolume()
     return float(Pokitto::Sound::getVolume()) / 128.0f;
 }
 
-Audio::Sink<4, PROJ_AUD_FREQ> audio;
+Audio::Sink<3, PROJ_AUD_FREQ> audio;
 
 template <int N>
 void playOnChannel(SFX sfx) {
     std::string path = "data/mechator/";
-    std::string options[] = {
-        std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
-    };
-    path += options[int(sfx)];
+    std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
+    path += names[int(sfx)];
     path += ".raw";
     Audio::play<N>(path.c_str())->setLoop(false);
 }
 
 void AudioSystem::play(SFX sfx) {
     static int channel = 0;
-    channel = (channel + 1) % 3;
+    channel = (channel + 1) % 2;
     switch(channel) {
         case 0:
             playOnChannel<1>(sfx);
             break;
         case 1:
             playOnChannel<2>(sfx);
-            break;
-        case 2:
-            playOnChannel<3>(sfx);
             break;
         default:
             break;
@@ -336,21 +331,21 @@ void AudioSystem::playSong(Song song) {
     case musNone:
         Audio::stop<0>();
         break;
-    case musWind:
-        Audio::play<0>("data/buttoncity/wind.raw");
-        break;
-    case musTown:
-        Audio::play<0>("data/buttoncity/bctown.raw");
-        break;
-    case musArcade:
-        Audio::play<0>("data/buttoncity/bcarcade.raw");
-        break;
-    case musUpcycle:
-        Audio::play<0>("data/buttoncity/bcupcycle.raw");
-        break;
-    case musGame:
-        Audio::play<0>("data/buttoncity/prismabops.raw");
-        break;
+//    case musWind:
+//        Audio::play<0>("data/buttoncity/wind.raw");
+//        break;
+//    case musTown:
+//        Audio::play<0>("data/buttoncity/bctown.raw");
+//        break;
+//    case musArcade:
+//        Audio::play<0>("data/buttoncity/bcarcade.raw");
+//        break;
+//    case musUpcycle:
+//        Audio::play<0>("data/buttoncity/bcupcycle.raw");
+//        break;
+//    case musGame:
+//        Audio::play<0>("data/buttoncity/prismabops.raw");
+//        break;
     }
 }
 

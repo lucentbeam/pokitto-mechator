@@ -23,6 +23,10 @@ public:
     static bool hasBlueprintUnlocked(int bp);
     static void unlockBlueprint(int bp);
 
+    static bool hasBlueprintToUnlock(int bp);
+
+    static bool hasUnusedBlueprints();
+
     static uint8_t keysA();
     static uint8_t keysB();
     static uint8_t keysC();

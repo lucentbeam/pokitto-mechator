@@ -113,6 +113,14 @@ void UIElement::setMaxWidth(int w)
     m_x -= m_w / 2;
 }
 
+void UIElement::setCenter(float x, float y)
+{
+    m_x = x - m_w/2;
+    m_y = y - m_h/2;
+    m_xh = x;
+    m_yh = y;
+}
+
 UIElement UIElement::getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Tween::Easing curve)
 {
     return UIElement(x-w/2,y-h/2,w,h,x,y,0,0,curve);
@@ -126,7 +134,15 @@ UIOptions::UIOptions(bool vertical, std::initializer_list<const char *> options)
 
 }
 
-void UIOptions::update(const ControlStatus &status, void (*on_highlight)(int8_t index))
+UIOptions::UIOptions(bool vertical, std::vector<const char *> options) :
+    m_vertical(vertical),
+    m_options(options),
+    m_available(uint8_t(options.size()))
+{
+
+}
+
+void UIOptions::update(const ControlStatus &status, void (*on_highlight)(int8_t index), bool cycle)
 {
     int8_t previous = m_active_index;
     if (m_vertical) {
@@ -141,9 +157,11 @@ void UIOptions::update(const ControlStatus &status, void (*on_highlight)(int8_t 
         }
     }
     if (m_active_index < 0) {
-        m_active_index += m_available;
-    } else {
-        m_active_index %= m_available;
+        if (cycle) m_active_index += m_available;
+        else m_active_index = 0;
+    } else if (m_active_index >= m_available) {
+        if (cycle) m_active_index %= m_available;
+        else m_active_index = (m_available - 1);
     }
     if (on_highlight != nullptr && m_active_index != previous) {
         on_highlight(m_active_index);

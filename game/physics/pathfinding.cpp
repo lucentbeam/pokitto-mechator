@@ -6,8 +6,8 @@
 uint16_t Pathfinding::Node::goal_x = 0;
 uint16_t Pathfinding::Node::goal_y = 0;
 
-ObjectPool<Pathfinding::Node,30> Pathfinding::s_visited;
-ObjectPool<Pathfinding::Node,30> Pathfinding::s_unvisited;
+ObjectPool<Pathfinding::Node,24> Pathfinding::s_visited;
+ObjectPool<Pathfinding::Node,24> Pathfinding::s_unvisited;
 
 Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t collision_mask, std::vector<Vec2f> * pts)
 {
