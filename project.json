@@ -11937,6 +11937,9 @@
 		},
 		"/game/entities/barracks.cpp.rCtffk": {
 			"sdcard": false
+		},
+		"/content/maps/build_sky.sh": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

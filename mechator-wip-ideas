@@ -1,8 +1,8 @@
 
 - optimizations
-  - RLE map data
+  x RLE map data
   - speed up mutable lookup? shortcuts to mutable tile indices
-  - RLE sky tiles
+  - Restructure sky tiles to not have empty textures
   - RLE jungle tiles
 
 - blueprints (jeep, tank, boat, helicopter, gemini gun, soldier health, soldier sprint, spreader shot, multinade, cluster shot... ?)

@@ -8,7 +8,7 @@
 
 BackgroundMap MapManager::s_background(jungletiles, world, world_indices, mutable_indices, current_tiles);
 
-SkyTilemap MapManager::s_foreground(jungletiles_sky, sky);
+SkyTilemap MapManager::s_foreground(jungletiles_sky, sky, sky_indices);
 
 void MapManager::draw(bool bg)
 {

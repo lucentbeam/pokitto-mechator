@@ -246,9 +246,8 @@ uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
     if (m_mutable_indices != nullptr && canMutate(index, idx)) {
         return m_current_mutables[idx];
     }
-    const uint8_t * tile = py == 0 ? m_map : m_map + m_map_y_indices[(py - 1) * 2] ;
+    const uint8_t * tile = py == 0 ? m_map : m_map + m_map_y_indices[py - 1] ;
     int counter = *(tile + 1);
-    if (py > 0) counter = m_map_y_indices[(py-1)*2 + 1];
     while (px >= counter) {
         tile += 2;
         counter += *(tile + 1);
