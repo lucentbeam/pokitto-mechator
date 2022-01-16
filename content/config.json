@@ -38,7 +38,7 @@
 		{ "output" : "soldier", "vcount": 6},
 		{ "output" : "jeep", "vcount": 9},
 		{ "output" : "tank", "vcount": 18},
-		{ "output" : "boat", "vcount": 9},
+		{ "output" : "boat", "hcount": 9},
 		{ "output" : "helicopter", "vcount": 9},
 		{ "output" : "helicopter_blades", "vcount": 5},
 		{ "output" : "clouds", "vcount": 3},

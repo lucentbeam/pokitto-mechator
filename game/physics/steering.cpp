@@ -31,8 +31,7 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
         }
         m_current_speed *= (1.0f - m_friction);
     }
-    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, m_collisions, m_size);
-    m_rect.setCenter(m_pos.x(), m_pos.y());
+    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, m_collisions, {m_size.w, m_size.h});
 }
 
 void Steering::copyPosition(const Steering &other) {

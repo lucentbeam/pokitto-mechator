@@ -487,7 +487,7 @@
   <object id="47" name="pattern_boat" x="966.977" y="1261.27" width="3.5" height="4.125"/>
   <object id="48" name="door_none_-62_-162_3_8" x="997.5" y="1206.94" width="3.5" height="4.125"/>
   <object id="49" name="enemy_mine" x="138.594" y="246.912" width="4.8125" height="4.4375"/>
-  <object id="50" name="enemy_bomber" x="99.2756" y="192.974" width="4.8125" height="4.4375"/>
+  <object id="50" name="enemy_bomber" x="96.5256" y="192.911" width="4.8125" height="4.4375"/>
   <object id="51" name="enemy_tank" x="103.01" y="319.781" width="4.8125" height="4.4375"/>
   <object id="52" name="enemy_turret" x="228.469" y="270.906" width="4.8125" height="4.4375"/>
   <object id="53" name="enemy_tank" x="205.844" y="301.781" width="4.8125" height="4.4375"/>
@@ -502,11 +502,11 @@
   <object id="62" name="enemy_mine" x="696.503" y="361.054" width="4.8125" height="4.4375"/>
   <object id="63" name="enemy_tank" x="516.927" y="318.448" width="4.8125" height="4.4375"/>
   <object id="64" name="enemy_mech" x="522.594" y="265.115" width="4.8125" height="4.4375"/>
-  <object id="65" name="enemy_mech" x="595.594" y="313.781" width="4.8125" height="4.4375"/>
-  <object id="66" name="enemy_bomber" x="691.26" y="318.448" width="4.8125" height="4.4375"/>
+  <object id="65" name="enemy_mech" x="594.685" y="313.054" width="4.8125" height="4.4375"/>
+  <object id="66" name="enemy_bomber" x="690.533" y="318.63" width="4.8125" height="4.4375"/>
   <object id="67" name="enemy_bomber" x="847.26" y="318.781" width="4.8125" height="4.4375"/>
-  <object id="68" name="enemy_mech" x="788.26" y="294.781" width="4.8125" height="4.4375"/>
-  <object id="69" name="enemy_mech" x="781.927" y="328.115" width="4.8125" height="4.4375"/>
+  <object id="68" name="enemy_mech" x="792.987" y="294.963" width="4.8125" height="4.4375"/>
+  <object id="69" name="enemy_mech" x="780.654" y="325.024" width="4.8125" height="4.4375"/>
   <object id="70" name="enemy_mine" x="138.469" y="462.906" width="4.8125" height="4.4375"/>
   <object id="71" name="enemy_mine" x="114.969" y="492.906" width="4.8125" height="4.4375"/>
   <object id="72" name="enemy_mine" x="174.594" y="486.781" width="4.8125" height="4.4375"/>
@@ -621,14 +621,14 @@
   <object id="192" name="enemy_mech" x="1070.34" y="588.281" width="4.8125" height="4.4375"/>
   <object id="193" name="enemy_tank" x="1080.59" y="330.281" width="4.8125" height="4.4375"/>
   <object id="194" name="enemy_tank" x="1040.09" y="382.781" width="4.8125" height="4.4375"/>
-  <object id="195" name="enemy_tank" x="881.094" y="286.781" width="4.8125" height="4.4375"/>
+  <object id="195" name="enemy_tank" x="882.912" y="288.599" width="4.8125" height="4.4375"/>
   <object id="196" name="enemy_tank" x="373.344" y="387.531" width="4.8125" height="4.4375"/>
   <object id="197" name="enemy_tank" x="435.594" y="467.281" width="4.8125" height="4.4375"/>
   <object id="198" name="enemy_tank" x="400.344" y="475.781" width="4.8125" height="4.4375"/>
   <object id="199" name="enemy_heli" x="463.344" y="432.781" width="4.8125" height="4.4375"/>
   <object id="200" name="enemy_heli" x="793.594" y="404.031" width="4.8125" height="4.4375"/>
   <object id="201" name="enemy_heli" x="1127.59" y="157.531" width="4.8125" height="4.4375"/>
-  <object id="202" name="enemy_heli" x="642.844" y="84.5313" width="4.8125" height="4.4375"/>
+  <object id="202" name="enemy_heli" x="642.662" y="85.2586" width="4.8125" height="4.4375"/>
   <object id="203" name="enemy_heli" x="290.594" y="839.781" width="4.8125" height="4.4375"/>
   <object id="204" name="enemy_tank" x="549.594" y="1068.11" width="4.8125" height="4.4375"/>
   <object id="205" name="enemy_tank" x="704.26" y="1206.11" width="4.8125" height="4.4375"/>
@@ -650,30 +650,23 @@
   <object id="221" name="enemy_mech" x="223.26" y="921.115" width="4.8125" height="4.4375"/>
   <object id="222" name="enemy_mech" x="122.594" y="806.115" width="4.8125" height="4.4375"/>
   <object id="223" name="enemy_mech" x="101.927" y="716.781" width="4.8125" height="4.4375"/>
-  <object id="224" name="enemy_mech" x="703.594" y="53.7813" width="4.8125" height="4.4375"/>
-  <object id="225" name="enemy_mech" x="704.927" y="73.1146" width="4.8125" height="4.4375"/>
-  <object id="226" name="enemy_mech" x="732.927" y="52.7813" width="4.8125" height="4.4375"/>
-  <object id="227" name="enemy_mech" x="741.927" y="72.7813" width="4.8125" height="4.4375"/>
-  <object id="228" name="enemy_mech" x="674.26" y="47.1146" width="4.8125" height="4.4375"/>
-  <object id="229" name="enemy_mech" x="599.26" y="82.1146" width="4.8125" height="4.4375"/>
-  <object id="230" name="enemy_mech" x="610.927" y="96.1146" width="4.8125" height="4.4375"/>
+  <object id="224" name="enemy_mech" x="702.867" y="67.4177" width="4.8125" height="4.4375"/>
+  <object id="226" name="enemy_mech" x="738.563" y="60.7813" width="4.8125" height="4.4375"/>
+  <object id="227" name="enemy_mech" x="738.654" y="84.9631" width="4.8125" height="4.4375"/>
+  <object id="228" name="enemy_mech" x="666.987" y="43.1146" width="4.8125" height="4.4375"/>
+  <object id="230" name="enemy_mech" x="612.563" y="97.3873" width="4.8125" height="4.4375"/>
   <object id="231" name="enemy_tank" x="638.594" y="180.448" width="4.8125" height="4.4375"/>
   <object id="232" name="enemy_tank" x="757.594" y="165.448" width="4.8125" height="4.4375"/>
   <object id="233" name="enemy_tank" x="1040.59" y="168.781" width="4.8125" height="4.4375"/>
-  <object id="234" name="enemy_tank" x="1239.26" y="140.781" width="4.8125" height="4.4375"/>
-  <object id="235" name="enemy_mech" x="1220.59" y="135.781" width="4.8125" height="4.4375"/>
-  <object id="236" name="enemy_mech" x="1256.93" y="147.448" width="4.8125" height="4.4375"/>
+  <object id="234" name="enemy_tank" x="1242.76" y="133.031" width="4.8125" height="4.4375"/>
+  <object id="235" name="enemy_mech" x="1218.84" y="144.656" width="4.8125" height="4.4375"/>
+  <object id="236" name="enemy_mech" x="1260.56" y="145.573" width="4.8125" height="4.4375"/>
   <object id="237" name="enemy_tank" x="1106.26" y="791.781" width="4.8125" height="4.4375"/>
   <object id="238" name="enemy_tank" x="1119.93" y="869.781" width="4.8125" height="4.4375"/>
   <object id="239" name="enemy_tank" x="1127.26" y="750.448" width="4.8125" height="4.4375"/>
   <object id="240" name="enemy_bomber" x="713.094" y="742.781" width="4.8125" height="4.4375"/>
   <object id="241" name="enemy_mech" x="87.5938" y="397.781" width="4.8125" height="4.4375"/>
   <object id="242" name="enemy_mech" x="165.927" y="376.781" width="4.8125" height="4.4375"/>
-  <object id="243" name="blueprint_9" x="139.659" y="62.017" width="2.5" height="2.875"/>
-  <object id="245" name="blueprint_3" x="97.5" y="68.0625" width="2.5" height="2.875"/>
-  <object id="246" name="blueprint_0" x="103.25" y="44.0625" width="2.5" height="2.875"/>
-  <object id="247" name="blueprint_1" x="110.25" y="61.8125" width="2.5" height="2.875"/>
-  <object id="248" name="blueprint_2" x="133.875" y="50.1875" width="2.5" height="2.875"/>
-  <object id="249" name="blueprint_4" x="157.75" y="49.6875" width="2.5" height="2.875"/>
+  <object id="246" name="blueprint_0" x="139.625" y="14.1875" width="2.5" height="2.875"/>
  </objectgroup>
 </map>

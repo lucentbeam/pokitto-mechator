@@ -11925,6 +11925,18 @@
 		},
 		"/game/entities/projectile.h.fsUHsz": {
 			"sdcard": false
+		},
+		"/game/entities/effects.h.JRsxYk": {
+			"sdcard": false
+		},
+		"/game/entities/barracks.cpp.NnDedi": {
+			"sdcard": false
+		},
+		"/game/entities/barracks.cpp.ljxicB": {
+			"sdcard": false
+		},
+		"/game/entities/barracks.cpp.rCtffk": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

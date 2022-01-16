@@ -13,8 +13,7 @@ class Steering {
     Vec2f m_pos;
     Vec2f m_facing = Vec2f(1.0f, 0.0f);
     Vec2f m_aim = Vec2f(1.0f, 0.0f);
-    Vec2f m_size;
-    Rect m_rect;
+    Bounds m_size;
     float m_max_speed;
     float m_max_speed_reference;
     float m_cornering;
@@ -26,7 +25,6 @@ public:
     Steering(float x, float y, float speed, float cornering, const std::initializer_list<uint8_t> collisions, float width, float height, float friction = 1.0f) :
         m_pos(x,y),
         m_size(width,height),
-        m_rect(x - width/2, y - height/2, width, height),
         m_max_speed(speed),
         m_max_speed_reference(speed),
         m_cornering(cornering),
@@ -46,7 +44,7 @@ public:
     void setBrake(bool brake) { m_brake = brake; }
     Vec2f pos() const { return m_pos; }
     void setPos(const Vec2f &pos) { m_pos = pos; m_facing = Vec2f(0.0f, 1.0f); }
-    Rect rect() const { return m_rect; }
+    Rect rect() const { return Rect(m_pos.x(), m_pos.y(), m_size); }
     Vec2f facing() const { return m_facing; }
     Vec2f aim() const { return m_aim; }
     Vec2f vel() const { return m_facing * m_current_speed; }

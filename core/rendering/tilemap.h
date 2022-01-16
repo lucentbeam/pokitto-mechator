@@ -16,6 +16,7 @@ class Tilemap {
   const uint8_t (*m_tiles)[TileWidth*TileHeight+2];
 
   const uint8_t * m_map;
+  const uint16_t * m_map_y_indices;
   const uint8_t m_mapwidth, m_mapheight;
 
   bool clearBuffer = true;
@@ -23,15 +24,14 @@ class Tilemap {
 
   std::vector<Vec2f> m_redraws;
 
-  const uint8_t * m_mutable_list;
   const uint16_t * m_mutable_indices;
   uint8_t * m_current_mutables;
 
-  bool canMutate(int map_index) const;
+  bool canMutate(int map_index, int &store_idx) const;
 public:
   const uint8_t render_width = 19, render_height = 15;
 
-  Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map, const uint8_t * mutable_list = nullptr, const uint16_t * mutable_indices = nullptr, uint8_t * mutables = nullptr);
+  Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map, const uint16_t * map_y_vals, const uint16_t * mutable_indices = nullptr, uint8_t * mutables = nullptr);
 
   void draw();
   void drawToBuffer(ScreenBuffer * buffer);
@@ -43,18 +43,17 @@ public:
 
   uint16_t getMapIndex(float x, float y) const;
   uint8_t getTileAt(float x, float y) const;
-  uint8_t getTileAt(int index) const;
   void setTileAt(float x, float y, uint8_t override);
   void clearOverrideAt(float x, float y);
 };
 
 template<int TileWidth, int TileHeight>
-Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t *map, const uint8_t *mutable_list, const uint16_t * mutable_indices, uint8_t *mutables) :
+Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t *map, const uint16_t * map_y_vals, const uint16_t * mutable_indices, uint8_t *mutables) :
     m_tiles(tiles),
     m_map(map + 2),
+    m_map_y_indices(map_y_vals),
     m_mapwidth(map[0]),
     m_mapheight(map[1]),
-    m_mutable_list(mutable_list),
     m_mutable_indices(mutable_indices),
     m_current_mutables(mutables)
 {
@@ -62,11 +61,15 @@ Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeig
 }
 
 template<int TileWidth, int TileHeight>
-bool Tilemap<TileWidth, TileHeight>::canMutate(int map_index) const
+bool Tilemap<TileWidth, TileHeight>::canMutate(int map_index, int &store_idx) const
 {
-    int idx = map_index / 8;
-    int sub_idx = (map_index % 8);
-    return (m_mutable_list[idx] & (1 << sub_idx)) > 0;
+    const uint16_t * idx = m_mutable_indices;
+    store_idx = 0;
+    while (map_index > *idx) {
+        idx++;
+        store_idx++;
+    }
+    return map_index == *idx;
 }
 
 template<int TileWidth, int TileHeight>
@@ -135,9 +138,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
                 int sx = left * TileWidth - x;
                 int sy = top * TileHeight - y;
 
-                int idx = left + top * m_mapwidth;
-
-                buffer->drawTile(sx, sy, m_tiles[getTileAt(idx)]);
+                buffer->drawTile(sx, sy, m_tiles[getTileAt(p.x(), p.y())]);
             }
             m_redraws.clear();
         }
@@ -240,47 +241,39 @@ uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
     int py = (y / TileHeight);
     const uint8_t defaultTileIndex = 19; // deep water; TODO: find a better place for this
     if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return defaultTileIndex;
-    return getTileAt(px + py * m_mapwidth);
+    int index = px + py * m_mapwidth;
+    int idx = 0;
+    if (m_mutable_indices != nullptr && canMutate(index, idx)) {
+        return m_current_mutables[idx];
+    }
+    const uint8_t * tile = py == 0 ? m_map : m_map + m_map_y_indices[(py - 1) * 2] ;
+    int counter = *(tile + 1);
+    if (py > 0) counter = m_map_y_indices[(py-1)*2 + 1];
+    while (px >= counter) {
+        tile += 2;
+        counter += *(tile + 1);
+    }
+    return *tile;
 }
 
-template<int TileWidth, int TileHeight>
-uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(int index) const
-{
-    if (m_mutable_list != nullptr && canMutate(index)) {
-        int i = 0;
-        while (true) { // it's a bad idea...
-            if (m_mutable_indices[i] == index) {
-                return m_current_mutables[i];
-            }
-            ++i;
-        }
-    }
-    return m_map[index];
-}
 
 template<int TileWidth, int TileHeight>
 void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t override)
 {
-    if (m_mutable_list == nullptr) {
+    if (m_mutable_indices == nullptr) {
         return;
     }
     int px = (x / TileWidth);
     int py = (y / TileHeight);
     if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return;
     int idx = px + py * m_mapwidth;
-    if (!canMutate(idx)) {
+    int mut_idx = 0;
+    if (!canMutate(idx, mut_idx)) {
         return;
     }
 
-    int i = 0;
-    while (true) { // like.. seriously. a bad idea
-        if (m_mutable_indices[i] == idx) {
-            m_current_mutables[i] = override;
-            m_redraws.push_back({x,y});
-            return;
-        }
-        ++i;
-    }
+    m_current_mutables[mut_idx] = override;
+    m_redraws.push_back({x,y});
 }
 
 #endif

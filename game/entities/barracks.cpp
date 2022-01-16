@@ -95,11 +95,15 @@ void Barracks::update(float dt)
         Stage current = start[i].stage();
         start[i].m_life -= damage;
         if (start[i].m_life <= 0) {
+            int idx = 0;
             for(int x = start[i].m_left; x < (start[i].m_width + start[i].m_left); x+=6) {
                 for(int y = start[i].m_top; y < (start[i].m_height + start[i].m_top); y+=6) {
                     MapManager::setTileAt(x, y, 203);
-                    if ((rand() % 10) < 7) EffectManager::createSmallExplosion(Vec2f(x + 2 + (rand() % 3), y + 2 + (rand() % 3)), rand() % 20);
-                    else EffectManager::createExplosionBig(Vec2f(x - 3 + (rand() % 3), y - 3 + (rand() % 3)));
+                    idx++;
+                    if ((idx % 2) == 0) {
+                        if ((rand() % 10) < 7) EffectManager::createSmallExplosion(Vec2f(x + 2 + (rand() % 3), y + 2 + (rand() % 3)), rand() % 20);
+                        else EffectManager::createExplosionBig(Vec2f(x - 3 + (rand() % 3), y - 3 + (rand() % 3)));
+                    }
                 }
             }
             s_barracks.deactivate(i);

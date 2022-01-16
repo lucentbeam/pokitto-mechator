@@ -9,7 +9,7 @@ void EffectManager::create(const Vec2f &pos, SpriteName spr, float delay)
 {
     auto * e = s_effects.activateNext();
     if (e != nullptr) {
-        e->pos = pos;
+        e->pos = Vec2i(pos.x(), pos.y());
         e->sprite = SpriteWrapper(spr);
         e->lifetime = e->sprite.countsPerCycle();
         e->delay = uint8_t(delay / physicsTimestep);

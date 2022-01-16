@@ -1,4 +1,10 @@
-  
+
+- optimizations
+  - RLE map data
+  - speed up mutable lookup? shortcuts to mutable tile indices
+  - RLE sky tiles
+  - RLE jungle tiles
+
 - blueprints (jeep, tank, boat, helicopter, gemini gun, soldier health, soldier sprint, spreader shot, multinade, cluster shot... ?)
   x pickup
   - unlock (cost)

@@ -13,7 +13,7 @@ class EffectManager;
 class Effect
 {
     SpriteWrapper sprite;
-    Vec2f pos;
+    Vec2i pos;
     int16_t lifetime;
     uint8_t delay;
 

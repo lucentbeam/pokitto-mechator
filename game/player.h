@@ -140,7 +140,7 @@ class Boat : public Vehicle {
 
     friend Player;
 public:
-    Boat() : Vehicle(20, 12*6, 6*6, boatSpeed, boatCornering, {Terrain::Wall, Terrain::None, Terrain::Grass, Terrain::Mud, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 24, 24, boatFriction) {}
+    Boat() : Vehicle(20, 12*6, 6*6, boatSpeed, boatCornering, {Terrain::Wall, Terrain::None, Terrain::Grass, Terrain::Mud, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 12, 12, boatFriction) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }

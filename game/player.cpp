@@ -371,9 +371,9 @@ void Boat::draw()
     if (!alive()) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
     if (s_instance.flashing()) {
-        RenderSystem::sprite(pos.x() - 15, pos.y() - 15, boat[s_instance.m_steering.rotation_frame()], boat[0][2], 10, s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], 10, s_instance.m_steering.facing().x() > 0);
     } else {
-        RenderSystem::sprite(pos.x() - 15, pos.y() - 15, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0);
     }
     Player::drawReticle(BoatMode, s_instance.m_aim);
 }
