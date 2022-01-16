@@ -205,7 +205,11 @@ void AudioSystem::initialize() {
     s_device_id = SDL_OpenAudioDevice(NULL, 0, &spec, &result, 0);
 
 #ifdef DESKTOP_BUILD
+#ifdef WIN32
+    std::string path = "../content/sfx_desktop/";
+#else
     std::string path = "../pokitto-mechator/content/sfx_desktop/";
+#endif
 #endif
     std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
     for(int i = 0; i < sfx_count; ++i) {

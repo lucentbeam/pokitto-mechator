@@ -113,15 +113,19 @@ HEADERS += \
     game/sprites.h \
     game/weapons.h
 
-win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
-win32:DEPENDPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
+#win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
+#win32:DEPENDPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
+#win32:DEFINES += SFML_STATIC
 
-win32:DEFINES += SFML_STATIC
+win32:CONFIG(release, debug|release): LIBS += -LC:/SDL/lib/x64/ -lSDL2 -lSDL2main
+else:win32:CONFIG(debug, debug|release): LIBS += -LC:/SDL/lib/x64/ -lSDL2 -lSDL2main
 
-win32:CONFIG(release, debug|release): LIBS += -LC:/SFML/SFML-2.5.1_msvc2017_64/lib/ -lsfml-main -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lfreetype #-ljpeg
-else:win32:CONFIG(debug, debug|release): LIBS += -LC:/SFML/SFML-2.5.1_msvc2017_64/lib/ -lsfml-main-d -lsfml-graphics-s-d -lsfml-window-s-d -lsfml-system-s-d -lfreetype #-ljpeg
+win32:INCLUDEPATH += C:/SDL/include/
+win32:DEPENDPATH += C:/SDL/lib/x64/
 
-win32: LIBS += -L"$$PWD/../../../../../Program Files (x86)/Windows Kits/10/Lib/10.0.16299.0/um/x64/" -lwinmm -lgdi32 -lopengl32 -luser32 -ladvapi32
+#win32:CONFIG(release, debug|release): LIBS += -LC:/SFML/SFML-2.5.1_msvc2017_64/lib/ -lsfml-main -lsfml-graphics-s -lsfml-window-s -lsfml-system-s -lfreetype #-ljpeg
+#else:win32:CONFIG(debug, debug|release): LIBS += -LC:/SFML/SFML-2.5.1_msvc2017_64/lib/ -lsfml-main-d -lsfml-graphics-s-d -lsfml-window-s-d -lsfml-system-s-d -lfreetype #-ljpeg
+#win32: LIBS += -L"$$PWD/../../../../../Program Files (x86)/Windows Kits/10/Lib/10.0.16299.0/um/x64/" -lwinmm -lgdi32 -lopengl32 -luser32 -ladvapi32
 
 mac: QMAKE_LFLAGS += -F$$PWD/../../SFML-2.5.1/Frameworks/
 mac: LIBS += -framework SFML -framework sfml-system -framework sfml-window -framework sfml-graphics
@@ -129,7 +133,7 @@ mac: LIBS += -framework SFML -framework sfml-system -framework sfml-window -fram
 mac: INCLUDEPATH += $$PWD/../../SFML-2.5.1/include
 mac: DEPENDPATH += $$PWD/../../SFML-2.5.1/include
 
-QMAKE_CXXFLAGS += -Wno-narrowing
+unix: QMAKE_CXXFLAGS += -Wno-narrowing
 
 CONFIG(debug, debug|release): DEFINES += DEBUGS
 

@@ -105,7 +105,13 @@ void Controls::update()
 
 #else
 
-#include "SDL2/SDL.h"
+#ifdef WIN32
+#include <SDL.h>
+#undef main
+#else
+#include <SDL2/SDL.h>
+#endif
+
 
 void Controls::update() {
     const uint8_t * state = SDL_GetKeyboardState(NULL);
@@ -130,6 +136,10 @@ void Controls::update() {
     s_controls.m_stats.right.update(s_controls.m_stats.x > 0);
 }
 
+#endif
+
+#ifdef WIN32
+#include <limits>
 #endif
 
 const ControlStatus Controls::getStatus(bool normalize_dir)

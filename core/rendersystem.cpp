@@ -323,7 +323,13 @@ void RenderSystem::shiftScreen(int x, int y)
 
 #else
 
+#ifdef WIN32
+#include <SDL.h>
+#undef main
+#else
 #include <SDL2/SDL.h>
+#endif
+
 #include <iostream>
 
 struct SDLSystem {
