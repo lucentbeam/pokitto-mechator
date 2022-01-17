@@ -52,7 +52,7 @@ const char * const bp_names[] = {
 };
 
 const int bp_costs[] = {
-    1, // jeep
+    100, // jeep
     1, // tank
     1, // boat
     1, // heli

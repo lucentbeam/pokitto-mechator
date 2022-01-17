@@ -84,9 +84,6 @@ public:
     static void update(float dt);
     static void draw();
 
-    static void drawProgressBar(float fraction);
-    static void drawBPrompt();
-
 };
 
 #endif // UI_H

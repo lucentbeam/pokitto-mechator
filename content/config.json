@@ -43,7 +43,7 @@
 		{ "output" : "helicopter_blades", "vcount": 5},
 		{ "output" : "clouds", "vcount": 3},
 		
-		{ "output" : "ui_circle"},
+		{ "output" : "ui_icons", "hcount": 4},
 		{ "output" : "ui_arrow_left"}
 
 	]

@@ -2,6 +2,7 @@
 #include "game/ui/ui.h"
 
 #include "core/audiosystem.h"
+#include "core/utilities/babyfsm.h"
 
 static uint32_t mode_switch_counter = 0;
 
@@ -61,7 +62,7 @@ void Soldier::update(float dt)
     s_instance.updateFlash();
     if (Player::s_mode != PlayerMode::SoldierMode) return;
     ControlStatus controls = Controls::getStatus(true);
-    bool running = controls.b.held();
+    s_instance.sprinting = controls.b.held();
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
@@ -71,11 +72,11 @@ void Soldier::update(float dt)
         // TODO: gameover
     }
 
-    s_instance.m_steering.update(dt, controls.x , controls.y, running ? 1.7f : 1.0f, true);
+    s_instance.m_steering.update(dt, controls.x , controls.y, s_instance.sprinting ? 1.7f : 1.0f, true);
 
     if (!controls.a.held()) s_instance.m_aim = s_instance.m_steering.aim();
 
-    if (Player::weaponCooldown(dt) && !running) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt) && !s_instance.sprinting) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
 
@@ -90,26 +91,22 @@ void Soldier::update(float dt)
             Player::s_mode = PlayerMode::JeepMode;
             mode_switch_counter = 0;
             UI::showHealthbar();
-            s_instance.sprint_timer = 0.0f;
         }
         else if (overlap_heli) {
             Player::s_mode = PlayerMode::HelicopterMode;
             Helicopter::launch();
             mode_switch_counter = 0;
             UI::showHealthbar();
-            s_instance.sprint_timer = 0.0f;
         }
         else if (overlap_tank) {
             Player::s_mode = PlayerMode::TankMode;
             mode_switch_counter = 0;
             UI::showHealthbar();
-            s_instance.sprint_timer = 0.0f;
         }
         else if (overlap_boat) {
             Player::s_mode = PlayerMode::BoatMode;
             mode_switch_counter = 0;
             UI::showHealthbar();
-            s_instance.sprint_timer = 0.0f;
         }
     }
 }
@@ -119,13 +116,15 @@ void Soldier::draw()
     if (Player::s_mode != PlayerMode::SoldierMode) return;
     uint8_t sprite = s_instance.m_aim.y() < 0 ? 3 : 0;
     static int counter = 0;
-    if (s_instance.m_steering.moving()) {
-        counter++;
-        int increment = Controls::getStatus().b.held() ? 4 : 6;
-        int mod = counter % (increment * 4);
-        sprite += mod < increment ? 0 : mod < increment * 2 ? 1 : mod < increment * 3 ? 2 : 1;
-    } else {
-        sprite += 1;
+    if (!FSM::instance->is(GameStates::Pause)) {
+        if (s_instance.m_steering.moving()) {
+            counter++;
+            int increment = Controls::getStatus().b.held() ? 4 : 6;
+            int mod = counter % (increment * 4);
+            sprite += mod < increment ? 0 : mod < increment * 2 ? 1 : mod < increment * 3 ? 2 : 1;
+        } else {
+            sprite += 1;
+        }
     }
     Vec2f spos = Camera::worldToScreen(s_instance.m_steering.pos());
     bool flip = s_instance.m_steering.facing().x() > 0;
@@ -517,6 +516,7 @@ bool Player::weaponCooldown(float dt)
 void Player::drawReticle(PlayerMode mode, const Vec2f &dir)
 {
     if (s_mode != mode) return;
+    if (FSM::instance->is(GameStates::Pause)) return;
     static int fcounter = 0;
     fcounter++;
     if (!Controls::getStatus().a.held() || fcounter < 40) {

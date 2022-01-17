@@ -433,23 +433,24 @@ void UI::draw()
         }
     });
 
-    if (Player::mode() == PlayerMode::SoldierMode) {
-        if (Soldier::sprintCooldown() > 0.05f) drawProgressBar(Soldier::sprintCooldown());
-        if (!FSM::instance->is(GameStates::Pause) && Soldier::overlaps()) drawBPrompt();
+    if (FSM::instance->is(GameStates::Game)) {
+        ControlStatus ctrl = Controls::getStatus();
+        if (ctrl.a.held()) {
+            Helpers::drawNotchedRect(-2, 1, 11, 7, 10);
+            RenderSystem::sprite(1, 2, ui_icons[3], 0);
+        }
+        if (Player::mode() == PlayerMode::SoldierMode) {
+            if (Soldier::isSprinting()) {
+                Helpers::drawNotchedRect(-2, 9, 11, 7, 10);
+                RenderSystem::sprite(1, 10, ui_icons[0], 0);
+            } else if (Soldier::overlaps()) {
+                Helpers::drawNotchedRect(-2, 9, 11, 7, 10);
+                RenderSystem::sprite(1, 10, ui_icons[1], 0);
+            }
+        } else {
+            // check for valid heli and boat positions
+            Helpers::drawNotchedRect(-2, 9, 11, 7, 10);
+            RenderSystem::sprite(1, 10, ui_icons[2], 0);
+        }
     }
-}
-
-void UI::drawProgressBar(float fraction)
-{
-    Helpers::drawNotchedRect(9, 83, 22, 4, 0);
-    RenderSystem::drawRect(10, 84, 20, 2, 2);
-    int width = int(fraction * 20.0f);
-    RenderSystem::drawRect(10, 84, width, 1, 43);
-    RenderSystem::drawLine(10, 85, 10 + width - 1, 85, 42);
-}
-
-void UI::drawBPrompt()
-{
-    RenderSystem::sprite(2, 2, ui_circle, ui_circle[2]);
-    RenderSystem::print(4, 2, "B", 1);
 }

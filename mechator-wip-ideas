@@ -1,26 +1,14 @@
 
-- optimizations
-  x RLE map data
+- optimizations ?
   - speed up mutable lookup? shortcuts to mutable tile indices
-  - Restructure sky tiles to not have empty textures
-  - RLE jungle tiles
-
-- blueprints (jeep, tank, boat, helicopter, gemini gun, soldier health, soldier sprint, spreader shot, multinade, cluster shot... ?)
-  x pickup
-  - unlock (cost)
-  x serializeable
-  
-- ui iconography:
-  - "run" active
-  - "enter vehicle" icon
-  - "exit vehicle" icon (most useful for boat and heli)
-  - "aim lock" icon
+  - RLE world tiles
   
 - game events
   - intro
   - first boss
   - tank factory
   - bridge down
+sequences: Camera::tweenTo, ShowDialogue, Wait, SpawnHelicopter, MoveHelicopter, OnHelicopterDestroy
 
 - figure out way to deal with events that spawn things... (helicopter tutorial battle)
 
@@ -41,6 +29,16 @@
   - bombers spawn closer to spawn point
   - barracks go down faster
 
+- sfx:
+  - bomber coming (bbbrrrrreeeewwww....)
+  - enemy hit
+
+- island areas (boat)
+
+- island (heli)
+
+- final boss
+
 - boats
   - art
   - prog
@@ -48,11 +46,6 @@
   - art
   - prog 
 
-- island areas (boat)
-
-- island (heli)
-
-- final boss
 
 morphitudinous
 morphenomenal

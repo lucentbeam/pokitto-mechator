@@ -16,9 +16,12 @@
 #include "core/audiosystem.h"
 
 static UIElement title = UIElement::getExpander(59, 35, 88, 9, Tween::Easing::OutQuad);
-//static UIElement alert_box = UIElement::getExpander(55, 45, 76, 9, Tween::Easing::OutQuad);
+static UIElement bp_cost_prompt(47,78,38,9,66,82,0,0,Tween::Easing::OutQuad);
+
 static UIOptions options(true, {"NO", "YES"});
 std::vector<int> bps_avail;
+
+int flashing = 0;
 
 void showBlueprintsShop()
 {
@@ -32,6 +35,7 @@ void showBlueprintsShop()
     UI::setVisibility(UI::Element::UIDollarCount, true);
 
     std::vector<const char *> opts;
+    opts.push_back("BACK");
     bps_avail.clear();
     for(int i = 0; i < int(Blueprints::LastIdxBP); ++i) {
         if (GameVariables::hasBlueprintToUnlock(Blueprints(i))) {
@@ -44,6 +48,8 @@ void showBlueprintsShop()
     int v = 8 * opts.size() + 10;
     title.setCenter(59, 44 - v / 2);
     title.setVisibility(true, uint32_t(0));
+    flashing = 0;
+    bp_cost_prompt.setVisibility(false);
 }
 
 void updateBlueprintsShopState(FSM &fsm)
@@ -51,13 +57,20 @@ void updateBlueprintsShopState(FSM &fsm)
     ControlStatus status = Controls::getStatus();
     options.update(status);
 
-    // update cost pill
+    bp_cost_prompt.setVisibility(options.activeIndex() != 0);
 
+    if (flashing > 0) flashing--;
     if (status.a.pressed()) {
-        GameVariables::unlockBlueprint(bps_avail[options.activeIndex()]);
-        AudioSystem::play(sfxGetItem);
-        showShop(true);
-        return;
+        if (GameVariables::dollars() >= bp_costs[options.activeIndex()-1]) {
+            GameVariables::unlockBlueprint(bps_avail[options.activeIndex()-1]);
+            AudioSystem::play(sfxGetItem);
+            showShop(true);
+            GameVariables::changeDollars(-bp_costs[options.activeIndex()-1]);
+            return;
+        } else {
+            AudioSystem::play(sfxDeny);
+            flashing = 20;
+        }
     }
 
     if (status.b.pressed()) {
@@ -84,6 +97,16 @@ void drawBlueprintsShopState()
                 Helpers::printHorizontallyCentered(x + w/2 + 4, y + 10 + idx * 8, text, !active ? 6 : 10);
             });
 
+        }
+    });
+
+    bp_cost_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+        if (flashing > 0 && (flashing % 6 < 4)) {
+            Helpers::drawNotchedRect(x, y, w, h, 15);
+        }
+        if (h > 8 && options.activeIndex() > 0) {
+            std::string line = "COST: " + std::to_string(bp_costs[options.activeIndex()-1]);
+            Helpers::printHorizontallyCentered(x + w/2, y + 1, line.c_str(), 10);
         }
     });
 }

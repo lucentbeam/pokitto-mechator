@@ -1,4 +1,4 @@
-#ifndef PLAYER_H
+﻿#ifndef PLAYER_H
 #define PLAYER_H
 
 #include "core/rendersystem.h"
@@ -52,9 +52,7 @@ class Soldier : public Vehicle {
 
     Vec2f m_aim = Vec2f(0,0);
 
-    float sprint_timer = 0.0f;
-    static constexpr float sprint_duration = 0.6f;
-    static constexpr float sprint_cooldown = 3.0f;
+    bool sprinting = false;
     bool m_overlaps = false;
 
     static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun;
@@ -72,7 +70,7 @@ public:
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static bool overlaps() { return s_instance.m_overlaps; }
-    static float sprintCooldown() { return s_instance.sprint_timer; }
+    static bool isSprinting() { return s_instance.sprinting; }
 
     static void update(float dt);
     static void draw();

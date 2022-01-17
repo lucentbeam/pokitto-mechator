@@ -308,7 +308,7 @@ Audio::Sink<3, PROJ_AUD_FREQ> audio;
 
 template <int N>
 void playOnChannel(SFX sfx) {
-    std::string path = "data/mechator/";
+    std::string path = "/data/mechator/";
     std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
     path += names[int(sfx)];
     path += ".raw";
