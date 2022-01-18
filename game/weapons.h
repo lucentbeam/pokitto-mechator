@@ -20,12 +20,22 @@ struct WeaponConfig {
     const int size;
     const float lifetime;
     const float speed;
+    const float speedvar;
 
     constexpr WeaponConfig(float sps, int sz, float life, float spd) :
         seconds_per_shot(1.0f / sps),
         size(sz),
         lifetime(life),
-        speed(spd)
+        speed(spd),
+        speedvar(0)
+    {}
+
+    constexpr WeaponConfig(float sps, int sz, float life, float spd, float spdvar) :
+        seconds_per_shot(1.0f / sps),
+        size(sz),
+        lifetime(life),
+        speed(spd),
+        speedvar(spdvar)
     {}
 };
 

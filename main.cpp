@@ -29,7 +29,8 @@ int main ()
     Soldier::health().setMax();
 
 #ifdef DEBUGS
-    Soldier::setPosition({36 * 6, 8 * 6});
+    Soldier::setPosition({36 * 6, 8 * 6}); // tutorial island
+    Soldier::setPosition({38 * 6, 118 * 6}); // tank factory
 #endif
 
     Camera::update(Soldier::position().x(), Soldier::position().y());

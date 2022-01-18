@@ -14,12 +14,12 @@ const WeaponConfig grenade_config(2.8f, 4, 0.5f, 65.0f);
 
 const WeaponConfig missile_config(2.0f, 4, 0.35f, 140.0f);
 
-const WeaponConfig multimissile_config(1.6f, 4, 0.4f, 85.0f);
+const WeaponConfig multimissile_config(1.6f, 4, 0.4f, 85.0f, 30.0f);
 
 bool Weapon::checkFire(Projectile * &p, const Button &action, const WeaponConfig &config, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel)
 {
     if (action.held()) {
-        p = ProjectileManager::create(pos, fac * config.speed, config.size, config.lifetime);
+        p = ProjectileManager::create(pos, fac * (config.speed + config.speedvar * (float(rand() % 200)/100.0f - 1.0f)), config.size, config.lifetime);
         return true;
     }
     return false;
