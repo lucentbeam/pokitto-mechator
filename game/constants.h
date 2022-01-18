@@ -10,6 +10,7 @@ constexpr float physicsTimestep = 0.012f;
 const uint8_t physicsTimestepMs = uint8_t(physicsTimestep * 1000);
 
 const float baseTextSpeedLPS = 25.0f;
+const float cameraCutsceneSpeed = 12.0f;
 
 const int barracksMaxMoneyDrops = 5;
 

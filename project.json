@@ -12312,6 +12312,36 @@
 		},
 		"/pokitto-mechator.pro.user.YDkwUH": {
 			"sdcard": false
+		},
+		"/game/sequences.cpp": {
+			"sdcard": false
+		},
+		"/game/sequences.h": {
+			"sdcard": false
+		},
+		"/content/art/mechator_mock_dialogue.aseprite": {
+			"sdcard": false
+		},
+		"/game/maps/sequencetrigger.cpp": {
+			"sdcard": false
+		},
+		"/game/maps/sequencetrigger.h": {
+			"sdcard": false
+		},
+		"/game/utilities/sceneobjects.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/parachute.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/parachute.h": {
+			"sdcard": false
+		},
+		"/main.cpp.IgBpNB": {
+			"sdcard": false
+		},
+		"/game/maps/sequencetrigger.cpp.vkUIrr": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

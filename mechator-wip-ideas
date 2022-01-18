@@ -16,6 +16,8 @@ sequences: Camera::tweenTo, ShowDialogue, Wait, SpawnHelicopter, MoveHelicopter,
   - register func for when all are destroyed (unlock door)
 - lock tutorial boss area on combat start
 - make tanks fire missiles
+- disable turrets in tank factory until entry
+- lock tank factory boss area on combat start
 
 - world map: sky layer
 
