@@ -14,6 +14,8 @@ bool EnemyMech::update(float dt, bool check_collisions)
         return false;
     }
 
+    if (!Pathfinding::canReach(Vec2f(m_rect.centerX(), m_rect.centerY()), Camera::center(), mask)) return true;
+
     float px = Camera::tl_x();
     float py = Camera::tl_y();
     float tx = px + 55;

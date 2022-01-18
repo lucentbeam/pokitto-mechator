@@ -5,12 +5,16 @@
   
 - game events
   x intro
-  - first boss
+  x first boss
   - tank factory
   - bridge down
 sequences: Camera::tweenTo, ShowDialogue, Wait, SpawnHelicopter, MoveHelicopter, OnHelicopterDestroy
 
-- figure out way to deal with events that spawn things... (helicopter tutorial battle)
+- boss life bar
+- register boss entities:
+  - getBarracksAt() function
+  - register func for when all are destroyed (unlock door)
+- lock tutorial boss area on combat start
 
 - revisit tutorial island
   - jeep blueprint
