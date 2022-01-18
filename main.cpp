@@ -30,8 +30,8 @@ int main ()
 
 #ifdef DEBUGS
     Soldier::setPosition({36 * 6, 8 * 6}); // tutorial island
-    Soldier::setPosition({38 * 6, 118 * 6}); // tank factory
-    Soldier::setPosition({138 * 6, 195 * 6}); // boat yard
+//    Soldier::setPosition({38 * 6, 118 * 6}); // tank factory
+//    Soldier::setPosition({138 * 6, 195 * 6}); // boat yard
 #endif
 
     Camera::update(Soldier::position().x(), Soldier::position().y());

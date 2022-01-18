@@ -43,6 +43,8 @@ public:
 
     Steering &getSteering() { return m_steering; }
     void tick() { m_counter++; }
+    int8_t * getLifePtr() { return &m_life; }
+    void setMaxLife(int8_t l) { m_life = l; }
 };
 
 #endif // ENEMYHELICOPTER_H

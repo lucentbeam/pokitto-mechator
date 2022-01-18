@@ -185,12 +185,17 @@ static UIElement tank_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 static UIElement boat_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 static UIElement heli_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 
+static UIElement boss_healthbar(104,0,7,88,110,0,7,88,Tween::Easing::OutQuad);
+
 static UIElement kitcount(66,78,19,9,76,82,0,0,Tween::Easing::OutQuad);
 static UIElement dollarcount(86,78,23,9,97,82,0,0,Tween::Easing::OutQuad);
 
 static UIElement keyacount(90,1,19,8,100,5,0,0,Tween::Easing::OutQuad);
 static UIElement keybcount(90,10,19,8,100,14,0,0,Tween::Easing::OutQuad);
 static UIElement keyccount(90,19,19,8,100,23,0,0,Tween::Easing::OutQuad);
+
+int8_t * UI::m_boss_life = nullptr;
+int8_t UI::m_max_boss_life = 0;
 
 void UI::drawNumber(uint16_t num, int x, int y)
 {
@@ -316,6 +321,7 @@ void UI::showHealthbar(PlayerMode mode)
 void UI::showHealthbar()
 {
     showHealthbar(Player::mode());
+    if (m_boss_life != nullptr) boss_healthbar.setVisibility(true);
 }
 
 void UI::hideHealthbar()
@@ -325,6 +331,13 @@ void UI::hideHealthbar()
     tank_healthbar.setVisibility(false);
     boat_healthbar.setVisibility(false);
     heli_healthbar.setVisibility(false);
+    boss_healthbar.setVisibility(false);
+}
+
+void UI::showBoss(int8_t *life_ref)
+{
+    m_boss_life = life_ref;
+    m_max_boss_life = *m_boss_life;
 }
 
 void UI::update(float dt)
@@ -334,6 +347,9 @@ void UI::update(float dt)
     keyacount.update(dt);
     keybcount.update(dt);
     keyccount.update(dt);
+    if (m_boss_life != nullptr && *m_boss_life <= 0) {
+        m_boss_life = nullptr;
+    }
 }
 
 void UI::draw()
@@ -373,6 +389,15 @@ void UI::draw()
             RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
         }
     });
+
+    if (m_boss_life != nullptr) {
+        boss_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
+            for(uint8_t i = 0; i < m_max_boss_life; i++) {
+                int idx = i < *m_boss_life ? 3 : 0;
+                RenderSystem::sprite(1 + x, 84 - i * 3, health_pips[idx]);
+            }
+        });
+    }
 
     boat_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
         uint8_t current = Boat::health().value();

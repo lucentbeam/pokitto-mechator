@@ -67,6 +67,8 @@ class UI {
 
     static void drawNumber(uint16_t num, int x, int y);
 
+    static int8_t * m_boss_life;
+    static int8_t m_max_boss_life;
 public:
     enum Element {
         UIHackingKitCount,
@@ -84,6 +86,7 @@ public:
     static void showHealthbar();
     static void hideHealthbar();
 
+    static void showBoss(int8_t * life_ref);
 
     static void update(float dt);
     static void draw();

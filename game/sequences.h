@@ -45,6 +45,8 @@ const SceneSequence intro_scene[] = {
 const SceneFunc tb_f0 = SceneFunc([](){
     EnemyHelicopter * h = Enemy::createHelicopter({80 * 6, 14 * 6});
     EventScene::setTextSpeed(baseTextSpeedLPS / 2.0f);
+    h->setMaxLife(18);
+    UI::showBoss(h->getLifePtr());
     EventScene::registerUpdate([h](){
         h->tick();
         Vec2f d = Camera::center() - h->getSteering().pos();

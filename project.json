@@ -12369,6 +12369,18 @@
 		},
 		"/game/sequences.h.FadYLi": {
 			"sdcard": false
+		},
+		"/game/ui/ui.cpp.autosave.fNiQsA": {
+			"sdcard": false
+		},
+		"/game/ui/ui.cpp.autosave": {
+			"sdcard": false
+		},
+		"/game/ui/ui.h.levhcR": {
+			"sdcard": false
+		},
+		"/game/ui/ui.cpp.slpkNT": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
