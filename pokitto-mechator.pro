@@ -29,6 +29,7 @@ SOURCES += \
     game/physics/steering.cpp \
     core/rendering/camera.cpp \
     game/rendering/skytilemap.cpp \
+    game/sequences.cpp \
     game/states/blueprints.cpp \
     game/states/collectblueprintprompt.cpp \
     game/states/eventscene.cpp \
@@ -44,6 +45,7 @@ SOURCES += \
     game/utilities/playerstats.cpp \
     core/utilities/tween.cpp \
     core/utilities/vec.cpp \
+    game/maps/sequencetrigger.cpp \
     game/variables.cpp \
     game/weapons.cpp \
     main.cpp \
@@ -95,6 +97,7 @@ HEADERS += \
     core/rendering/camera.h \
     game/rendering/skytilemap.h \
     core/rendering/spritewrapper.h \
+    game/sequences.h \
     game/states/blueprints.h \
     game/states/collectblueprintprompt.h \
     game/states/eventscene.h \
@@ -111,6 +114,8 @@ HEADERS += \
     game/utilities/rumbler.h \
     core/utilities/tween.h \
     core/utilities/vec.h \
+    game/utilities/sceneobjects.h \
+    game/maps/sequencetrigger.h \
     game/variables.h \
     game/sprites.h \
     game/weapons.h

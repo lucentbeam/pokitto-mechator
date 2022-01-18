@@ -24,6 +24,7 @@
 #include "game/constants.h"
 #include "game/states/pause.h"
 #include "game/maps/alertregion.h"
+#include "game/maps/sequencetrigger.h"
 
 static Player player;
 static ScreenBuffer screenbuffer;
@@ -69,15 +70,19 @@ void updateGameState(FSM&) {
 
     Camera::update(player.position().x(), player.position().y());
 
+    if (SequenceTrigger::checkForTriggers()) return;
+
     SpawnPoint::setActiveRegion();
 //    CloudManager::update(physicsTimestep);
 
     ControlStatus status = Controls::getStatus();
 
     region_indicator.update(physicsTimestep);
-    if ((status.x != 0 || status.y != 0) && Player::mode() != PlayerMode::BoatMode && checkGroundRegions(region_name)) {
-        region_indicator.setMaxWidth(RenderSystem::getLineLength(region_name) + 8);
-        region_indicator.showForDuration(3.0f);
+    if ((status.x != 0 || status.y != 0) && Player::mode() != PlayerMode::BoatMode) {
+        if (checkGroundRegions(region_name)) {
+            region_indicator.setMaxWidth(RenderSystem::getLineLength(region_name) + 8);
+            region_indicator.showForDuration(3.0f);
+        }
     }
 
     if (status.c.pressed()) {

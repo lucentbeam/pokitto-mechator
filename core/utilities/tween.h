@@ -33,9 +33,11 @@ public:
 
     int getInterpolationInt(float start, float end) const;
 
-    bool done() const;
+    bool done(int for_at_least_ms = 0) const;
 
     bool started() const;
+
+    void advance(int by_ms);
 
     int32_t length() const { return m_duration + m_delay; }
 

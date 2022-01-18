@@ -1,5 +1,6 @@
 #include "variables.h"
 
+#include "game/maps/sequencetrigger.h"
 
 uint8_t GameVariables::hackingKitCount = 0;
 uint8_t GameVariables::keyACount = 0;
@@ -8,6 +9,7 @@ uint8_t GameVariables::keyCCount = 0;
 uint16_t GameVariables::dollarCount = 15;
 uint16_t GameVariables::acquiredBlueprints = 0;
 uint16_t GameVariables::unlockedBlueprints = 0;
+bool GameVariables::visitedEvents[SequenceTrigger::LastID] = { false };
 
 void GameVariables::changeDollars(int16_t delta)
 {
@@ -73,3 +75,7 @@ uint8_t GameVariables::keysC() { return keyCCount; }
 uint8_t GameVariables::hackingKits() { return hackingKitCount; }
 
 uint16_t GameVariables::dollars() { return dollarCount; }
+
+void GameVariables::visitEvent(int index) { visitedEvents[index] = true; }
+
+bool GameVariables::eventVisited(int index) { return visitedEvents[index]; }

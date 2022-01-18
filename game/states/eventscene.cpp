@@ -24,7 +24,7 @@ void EventScene::updateMove()
 void EventScene::updateShowDialogue()
 {
     ControlStatus ctrl = Controls::getStatus();
-    if (s_data.dialogue_box.showing() && ctrl.a.pressed()) {
+    if (s_data.text_tween.done(100) && ctrl.a.pressed()) {
         if (getDialogue()->close) {
             s_data.dialogue_box.setVisibility(false);
         } else {
@@ -32,6 +32,10 @@ void EventScene::updateShowDialogue()
         }
     } else if (s_data.dialogue_box.hidden()) {
         goNext();
+    } else if (ctrl.a.held() && !s_data.text_tween.done()) {
+        s_data.text_tween.advance(physicsTimestepMs * 2);
+    } else if (ctrl.b.pressed() && !s_data.text_tween.done()) {
+        s_data.text_tween.advance(20000);
     }
 }
 
@@ -69,7 +73,7 @@ void EventScene::goNext()
         break;
     case SceneSequence::ShowDialogue:
         s_data.dialogue_box.setVisibility(true);
-        s_data.text_tween = Tween(float(getDialogue()->length())/30.0f);
+        s_data.text_tween = Tween(float(getDialogue()->length())/baseTextSpeedLPS);
         if (!s_data.dialogue_box.showing()) s_data.text_tween.reset(int32_t(uiEasingTimeMs + 50));
         else s_data.text_tween.reset(int32_t(150));
         break;
@@ -171,6 +175,11 @@ void EventScene::draw()
                 } else {
                     std::strncpy(helper, getDialogue()->text1, letter_ct);
                     RenderSystem::print(x + 22, y + 6, helper, 9);
+                }
+
+                if (s_data.text_tween.done(100)) {
+                    Helpers::drawNotchedRect(105, 80, 6, 7, 10);
+                    RenderSystem::print(107, 80, ">", 1);
                 }
             }
         });

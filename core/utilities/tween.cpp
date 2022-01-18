@@ -98,10 +98,10 @@ int Tween::getInterpolationInt(float start, float end) const
     return std::floor(getInterpolation(start, end) + 0.5f);
 }
 
-bool Tween::done() const
+bool Tween::done(int for_at_least_ms) const
 {
     if (m_repeats) return false;
-    int delta = int(RenderSystem::getTimeMs()) - int(m_start_time);
+    int delta = int(RenderSystem::getTimeMs()) - int(m_start_time) - for_at_least_ms;
     return (delta - m_delay) > m_duration;
 }
 
@@ -109,6 +109,11 @@ bool Tween::started() const
 {
     int delta = int(RenderSystem::getTimeMs()) - int(m_start_time);
     return delta >= m_delay;
+}
+
+void Tween::advance(int by_ms)
+{
+    m_start_time -= by_ms;
 }
 
 float Tween::map(float t, const Easing curve) const

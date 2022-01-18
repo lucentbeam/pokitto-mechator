@@ -9,6 +9,8 @@ const uint8_t uiEasingTimeMs = uint8_t(uiEasingTime * 1000);
 constexpr float physicsTimestep = 0.012f;
 const uint8_t physicsTimestepMs = uint8_t(physicsTimestep * 1000);
 
+const float baseTextSpeedLPS = 25.0f;
+
 const int barracksMaxMoneyDrops = 5;
 
 const float enemyHeliSpeed = 20.0f;

@@ -10,6 +10,8 @@ class GameVariables {
 
     static uint16_t acquiredBlueprints;
     static uint16_t unlockedBlueprints;
+
+    static bool visitedEvents[];
 public:
     static void changeDollars(int16_t delta);
     static void changeHackingKits(int8_t delta);
@@ -32,6 +34,9 @@ public:
     static uint8_t keysC();
     static uint8_t hackingKits();
     static uint16_t dollars();
+
+    static void visitEvent(int index);
+    static bool eventVisited(int index);
 };
 
 #endif // VARIABLES_H
