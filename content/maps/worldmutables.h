@@ -10,5 +10,5 @@ const uint16_t barracks_indices[] = { 1826, 3093, 2604, 4913, 16143, 16158, 2127
 
 static uint8_t barracks_data[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, };
 
-const uint16_t blueprints_data[] = { 462, 21412, };
+const uint16_t blueprints_data[] = { 462, 21412, 45305, };
 

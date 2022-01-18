@@ -8,13 +8,14 @@
 #include "core//rendersystem.h"
 #include "core//controls.h"
 #include "game/enums.h"
+#include "game/constants.h"
 #include "core/utilities/tween.h"
 
 class UIElement {
     Tween tween;
-    float m_showDuration = 0;
 
     int16_t m_x,m_y,m_w,m_h,m_xh,m_yh,m_wh,m_hh;
+    uint8_t m_showDuration = 0;
     bool visible;
 
 public:
@@ -27,7 +28,7 @@ public:
 //    void draw(bool notched,void (*)(int16_t x, int16_t y, int16_t w, int16_t h),int dx = 0, int dy = 0);
     void draw(bool notched,std::function<void(int16_t x, int16_t y, int16_t w, int16_t h)>,int dx = 0, int dy = 0);
 
-    void showForDuration(float duration) { setVisibility(true); m_showDuration = duration; }
+    void showForDuration(float duration) { setVisibility(true); m_showDuration = std::min(int(duration/physicsTimestep), 255); }
 
     void setMaxWidth(int w);
     void setCenter(float x, float y);

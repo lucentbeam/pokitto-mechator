@@ -2,13 +2,6 @@
 - optimizations ?
   - speed up mutable lookup? shortcuts to mutable tile indices
   - RLE world tiles
-  
-- game events
-  x intro
-  x first boss
-  - tank factory
-  - bridge down
-sequences: Camera::tweenTo, ShowDialogue, Wait, SpawnHelicopter, MoveHelicopter, OnHelicopterDestroy
 
 - boss life bar
 - register boss entities:
@@ -34,7 +27,14 @@ sequences: Camera::tweenTo, ShowDialogue, Wait, SpawnHelicopter, MoveHelicopter,
 
 - sfx:
   - bomber coming (bbbrrrrreeeewwww....)
-  - enemy hit
+  - connect hit to tanks. others?
+
+- ram ideas:
+  - trim down UIElement (draw func to ingest const refs)
+  - look at reducing audio buffer from 1k to 512?
+
+- add boat yard boss? turret with special maneuvers? slow health regen? moves walls around yard/itself?
+	- camera shake
 
 - island areas (boat)
 

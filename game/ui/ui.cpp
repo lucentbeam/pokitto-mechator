@@ -50,8 +50,8 @@ void UIElement::setVisibility(bool vis, uint32_t delay)
 void UIElement::update(float dt)
 {
     bool showing = m_showDuration > 0;
-    m_showDuration -= dt;
-    if (m_showDuration < 0 && showing) {
+    if (showing) m_showDuration--;
+    if (m_showDuration == 0 && showing) {
         setVisibility(false);
     }
 }

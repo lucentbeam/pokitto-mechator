@@ -117,4 +117,32 @@ const SceneSequence tank_boss_scene[] = {
     {SceneSequence::MoveCamera, &cam_return },
     {SceneSequence::End, &cam_release}
 };
+
+const SceneMoveCam by_m0 = SceneMoveCam(cameraCutsceneSpeed, {165, 206});
+
+const SceneDialogue by_dlog0 = SceneDialogue("Soldier, come in.", nullptr, false, false);
+//const SceneDialogue dlog1 = SceneDialogue("This is central.", nullptr, false, false);
+const SceneDialogue by_dlog2 = SceneDialogue("Great job making it", "to the boat yard.", false, true);
+
+const SceneDialogue by_dlog3 = SceneDialogue("But it looks like","it's out of order.", false, true);
+const SceneDialogue by_dlog4 = SceneDialogue("Get the blueprint","and hit that switch.", false, false);
+const SceneDialogue by_dlog5 = SceneDialogue("That will lower a","bridge in the north.", false, false);
+const SceneDialogue by_dlog6 = SceneDialogue("We've detected a","boat yard up there.", false, false);
+
+const SceneSequence boatyard_scene[] = {
+    {SceneSequence::ShowDialogue, &by_dlog0 },
+    {SceneSequence::ShowDialogue, &dlog1 },
+    {SceneSequence::ShowDialogue, &by_dlog2 },
+
+    {SceneSequence::MoveCamera, &by_m0 },
+    {SceneSequence::Wait, &wait60 },
+    {SceneSequence::ShowDialogue, &by_dlog3 },
+    {SceneSequence::ShowDialogue, &by_dlog4 },
+    {SceneSequence::ShowDialogue, &by_dlog5 },
+    {SceneSequence::ShowDialogue, &by_dlog6 },
+    {SceneSequence::ShowDialogue, &dlog6 },
+
+    {SceneSequence::MoveCamera, &cam_return },
+    {SceneSequence::End, &cam_release}
+};
 #endif // SEQUENCES_H
