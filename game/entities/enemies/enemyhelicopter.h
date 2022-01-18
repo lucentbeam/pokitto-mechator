@@ -40,6 +40,9 @@ public:
 
     void draw() const;
     void drawAir() const;
+
+    Steering &getSteering() { return m_steering; }
+    void tick() { m_counter++; }
 };
 
 #endif // ENEMYHELICOPTER_H

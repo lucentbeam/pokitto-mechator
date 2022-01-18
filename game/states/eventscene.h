@@ -2,6 +2,7 @@
 #define EVENTSCENE_H
 
 #include <cstring>
+#include <functional>
 
 #include "core/utilities/babyfsm.h"
 #include "core/utilities/vec.h"
@@ -19,6 +20,9 @@ class EventScene
         int counter;
         UIElement dialogue_box = UIElement::getExpander(55, 74, 108, 21, Tween::OutQuad);
         Tween text_tween = Tween(0.0f);
+        bool has_update_func = false;
+        std::function<bool()> update_callback;
+        float text_lps = 25.0f;
     } s_data;
 
     static void updateMove();
@@ -39,6 +43,10 @@ public:
     static void update(FSM &fsm);
 
     static void draw();
+
+    static void registerUpdate(std::function<bool()> fnc);
+
+    static void setTextSpeed(float lps);
 };
 
 #endif // EVENTSCENE_H

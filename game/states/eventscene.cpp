@@ -73,7 +73,7 @@ void EventScene::goNext()
         break;
     case SceneSequence::ShowDialogue:
         s_data.dialogue_box.setVisibility(true);
-        s_data.text_tween = Tween(float(getDialogue()->length())/baseTextSpeedLPS);
+        s_data.text_tween = Tween(float(getDialogue()->length())/s_data.text_lps);
         if (!s_data.dialogue_box.showing()) s_data.text_tween.reset(int32_t(uiEasingTimeMs + 50));
         else s_data.text_tween.reset(int32_t(150));
         break;
@@ -100,12 +100,17 @@ void EventScene::startScene(const SceneSequence *sequence)
     FSM::instance->go(GameStates::EventState);
     UI::hideHealthbar();
     goNext();
+    s_data.text_lps = baseTextSpeedLPS;
 }
 
 void EventScene::update(FSM &fsm)
 {
     void(*fncs[])() = {updateMove, updateShowDialogue, updateWait, updateDoFunction };
     fncs[int(s_active_sequence[s_counter].type)]();
+
+    if (s_data.has_update_func) {
+        s_data.has_update_func = !s_data.update_callback();
+    }
 
     Camera::update(Player::position().x(), Player::position().y());
 }
@@ -184,4 +189,15 @@ void EventScene::draw()
             }
         });
     }
+}
+
+void EventScene::registerUpdate(std::function<bool ()> fnc)
+{
+    s_data.update_callback = fnc;
+    s_data.has_update_func = true;
+}
+
+void EventScene::setTextSpeed(float lps)
+{
+    s_data.text_lps = lps;
 }

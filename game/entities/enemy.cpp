@@ -85,6 +85,15 @@ EnemyBomber *Enemy::createBomber(const Vec2f &pos)
     return m;
 }
 
+EnemyHelicopter *Enemy::createHelicopter(const Vec2f &pos)
+{
+    auto m = s_helis.activateNext();
+    if (m != nullptr) {
+        m->setup(pos);
+    }
+    return m;
+}
+
 void Enemy::spawnMech(const Vec2i &pos)
 {
     createMech(pos);
@@ -122,10 +131,7 @@ void Enemy::spawnMine(const Vec2i &pos)
 
 void Enemy::spawnHelicopter(const Vec2i &pos)
 {
-    auto m = s_helis.activateNext();
-    if (m != nullptr) {
-        m->setup(pos);
-    }
+    createHelicopter(pos);
 }
 
 void Enemy::createLasers(const Vec2i &pos, bool vertical, int node, int sz)

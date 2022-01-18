@@ -175,7 +175,10 @@ void Pickups::draw()
 {
     int i = s_temporary.objectCount()-1;
     Pickups * start = s_temporary.objects();
+
+    uint16_t mask = Helpers::getMask({Terrain::Wall});
     while (i >= 0) {
+        if (CollisionManager::collides(start[i].position, mask)) { --i; continue; }
         Vec2f p = Camera::worldToScreen(start[i].position);
         RenderSystem::sprite(p.x() - 4, p.y() - 4, start[i].m_sprite.data(), start[i].m_sprite.data()[2]);
 
@@ -184,6 +187,7 @@ void Pickups::draw()
     i = s_special.objectCount()-1;
     start = s_special.objects();
     while (i >= 0) {
+        if (CollisionManager::collides(start[i].position, mask)) { --i; continue; }
         Vec2f p = Camera::worldToScreen(start[i].position);
         RenderSystem::sprite(p.x() - 4, p.y() - 4, start[i].m_sprite.data(), start[i].m_sprite.data()[2]);
 

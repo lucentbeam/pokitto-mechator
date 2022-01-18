@@ -52,6 +52,7 @@ public:
     static EnemyTank * createTank(const Vec2f &pos);
     static EnemyTurret * createTurret(const Vec2f &pos);
     static EnemyBomber * createBomber(const Vec2f &pos);
+    static EnemyHelicopter * createHelicopter(const Vec2f &pos);
 
     static void spawnMech(const Vec2i &pos);
     static void spawnTank(const Vec2i &pos);

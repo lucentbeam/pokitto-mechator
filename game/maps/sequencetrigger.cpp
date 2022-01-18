@@ -6,6 +6,7 @@
 
 const SequenceTrigger SequenceTrigger::trigger_list[] = {
     {4, 14, 9, 19, intro_scene, SequenceTrigger::Intro},
+    {54, 18, 55, 23, tutorial_boss_scene, SequenceTrigger::TutorialBoss}
 };
 
 bool SequenceTrigger::checkForTriggers()

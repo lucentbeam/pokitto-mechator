@@ -27,6 +27,11 @@ int main ()
     RenderSystem::initialize();
     AudioSystem::initialize();
     Soldier::health().setMax();
+
+#ifdef DEBUGS
+    Soldier::setPosition({36 * 6, 8 * 6});
+#endif
+
     Camera::update(Soldier::position().x(), Soldier::position().y());
 
     FSM fsm;
