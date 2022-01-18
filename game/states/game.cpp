@@ -109,6 +109,7 @@ void drawGameState() {
 
     ProjectileManager::drawAir();
     Helicopter::drawAir();
+    Soldier::drawAir();
     Enemy::drawAir();
 
     // ui draw

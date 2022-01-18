@@ -195,7 +195,7 @@ uint8_t * RenderSystem::getBuffer()
 
 const uint8_t screenwidth = 110, screenheight = 88;
 const bool four_bpp = false;
-const int screen_scale = 3;
+const int screen_scale = 4;
 
 #ifdef SFML_CORE
 #include <SFML/Graphics.hpp>

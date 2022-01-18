@@ -11,6 +11,9 @@ namespace  Helpers {
     }
 
     void drawNotchedRect(int x, int y, uint8_t w, uint8_t h, uint8_t color) {
+#if DESKTOP_BUILD
+        w += 1;
+#endif
         if (w < 3 || h < 3) {
             RenderSystem::drawRect(x, y, w, h, color);
         } else {

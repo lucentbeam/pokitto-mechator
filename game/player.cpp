@@ -113,6 +113,7 @@ void Soldier::update(float dt)
 
 void Soldier::draw()
 {
+    if (s_instance.m_z != 0) return;
     if (Player::s_mode != PlayerMode::SoldierMode) return;
     uint8_t sprite = s_instance.m_aim.y() < 0 ? 3 : 0;
     static int counter = 0;
@@ -134,6 +135,17 @@ void Soldier::draw()
         RenderSystem::sprite(spos.x()-(flip ? 4 : 3), spos.y() - 3, soldier[sprite], soldier[0][2], flip);
     }
     Player::drawReticle(SoldierMode, s_instance.m_aim);
+}
+
+void Soldier::drawAir()
+{
+    if (s_instance.m_z == 0) return;
+    Vec2f spos = Camera::worldToScreen(s_instance.m_steering.pos());
+
+    RenderSystem::drawShadow(spos.x() - 6, spos.y() - 6, parachute, parachute[2]);
+
+    RenderSystem::sprite(spos.x() - 3, spos.y() - 3 - s_instance.m_z, soldier[1], soldier[0][2], 1, false);
+    RenderSystem::sprite(spos.x() - 6, spos.y() - 11 - s_instance.m_z, parachute, parachute[2]);
 }
 
 void Jeep::update(float dt)
@@ -516,7 +528,7 @@ bool Player::weaponCooldown(float dt)
 void Player::drawReticle(PlayerMode mode, const Vec2f &dir)
 {
     if (s_mode != mode) return;
-    if (FSM::instance->is(GameStates::Pause)) return;
+    if (!FSM::instance->is(GameStates::Game)) return;
     static int fcounter = 0;
     fcounter++;
     if (!Controls::getStatus().a.held() || fcounter < 40) {

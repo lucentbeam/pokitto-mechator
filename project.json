@@ -11940,6 +11940,375 @@
 		},
 		"/content/maps/build_sky.sh": {
 			"sdcard": false
+		},
+		"/game/states/eventscene.cpp": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.h": {
+			"sdcard": false
+		},
+		"/content/art/exports/ui_icons.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/ui_icons.h": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.cxwxbq": {
+			"sdcard": false
+		},
+		"/content/art/portrait_enemy.aseprite": {
+			"sdcard": false
+		},
+		"/content/art/exports/portrait_enemy.png": {
+			"sdcard": false
+		},
+		"/content/art/exports/portrait_enemy.h": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.feIVtX": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.SqbDXW": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.xzBYZG": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.OQiRNM": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.fKIonb": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.tWxgWC": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.QIpPuP": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.gEPXNW": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.nHViJt": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.autosave.oUsnXm": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.VRwbXI": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.oIDuHr": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.mayPtu": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.yLwulv": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.MjpVrl": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.kjhjSu": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.dcLTsu": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.ubIdMI": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.KBkfQi": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.wmUrJM": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.GeMkJy": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.lwCSvz": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.iXVvmw": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.VXivxp": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.FywSvA": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.sJLfnI": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.PArAVQ": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.fOvyjF": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.YUFDyz": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.ondFMM": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.FPDkFn": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.OjIeCW": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.GYaPVx": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.ZsolDW": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.NmkgJj": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.jnROlr": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.GYjTod": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.autosave.IYsoEM": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.autosave": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.xvFchw": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.GuDxAd": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.lugtNW": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.GHQBqD": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.qzQEWS": {
+			"sdcard": false
+		},
+		"/main.cpp.EmhXOG": {
+			"sdcard": false
+		},
+		"/main.cpp.JZmVmo": {
+			"sdcard": false
+		},
+		"/main.cpp.SBNWze": {
+			"sdcard": false
+		},
+		"/main.cpp.HSDxzk": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.dpOGTR": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.pYFCrO": {
+			"sdcard": false
+		},
+		"/game/player.cpp.QuEuEs": {
+			"sdcard": false
+		},
+		"/game/player.h.WRVoEV": {
+			"sdcard": false
+		},
+		"/game/states/game.cpp.UEJuao": {
+			"sdcard": false
+		},
+		"/game/player.cpp.FWsUIn": {
+			"sdcard": false
+		},
+		"/game/player.cpp.XCWcZp": {
+			"sdcard": false
+		},
+		"/game/player.cpp.odtzBk": {
+			"sdcard": false
+		},
+		"/game/player.cpp.qNjRxN": {
+			"sdcard": false
+		},
+		"/game/player.cpp.fbSRYm": {
+			"sdcard": false
+		},
+		"/game/player.cpp.fStXHu": {
+			"sdcard": false
+		},
+		"/main.cpp.AyrrZT": {
+			"sdcard": false
+		},
+		"/game/player.cpp.eTbXYs": {
+			"sdcard": false
+		},
+		"/game/player.cpp.gKsvrG": {
+			"sdcard": false
+		},
+		"/game/player.cpp.PjkJDf": {
+			"sdcard": false
+		},
+		"/main.cpp.WtFrOS": {
+			"sdcard": false
+		},
+		"/main.cpp.DykUBS": {
+			"sdcard": false
+		},
+		"/game/player.h.jRgyRh": {
+			"sdcard": false
+		},
+		"/game/player.cpp.dNwWIL": {
+			"sdcard": false
+		},
+		"/game/constants.h.iyySmr": {
+			"sdcard": false
+		},
+		"/game/constants.h.MguwdW": {
+			"sdcard": false
+		},
+		"/game/player.h.QjoNYM": {
+			"sdcard": false
+		},
+		"/game/constants.h.FsuhnY": {
+			"sdcard": false
+		},
+		"/main.cpp.mqJoKr": {
+			"sdcard": false
+		},
+		"/main.cpp.OEMEiq": {
+			"sdcard": false
+		},
+		"/main.cpp.LBfhBH": {
+			"sdcard": false
+		},
+		"/main.cpp.jDOMQk": {
+			"sdcard": false
+		},
+		"/main.cpp.ZLoueE": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.EiAykv": {
+			"sdcard": false
+		},
+		"/main.cpp.NFFuNQ": {
+			"sdcard": false
+		},
+		"/main.cpp.ugKtYy": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.h.autosave.vBrbPQ": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.h.autosave": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.aEMQMO": {
+			"sdcard": false
+		},
+		"/main.cpp.OOOFou": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.JoCtag": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.kniXOD": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.ZAVzfK": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.aOylFz": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.GAaQMM": {
+			"sdcard": false
+		},
+		"/main.cpp.autosave.IpaSNq": {
+			"sdcard": false
+		},
+		"/main.cpp.autosave": {
+			"sdcard": false
+		},
+		"/main.cpp.gXrybR": {
+			"sdcard": false
+		},
+		"/main.cpp.CFpUhR": {
+			"sdcard": false
+		},
+		"/main.cpp.JjAxjj": {
+			"sdcard": false
+		},
+		"/main.cpp.kZmsNO": {
+			"sdcard": false
+		},
+		"/main.cpp.DecmEu": {
+			"sdcard": false
+		},
+		"/main.cpp.RqWCxO": {
+			"sdcard": false
+		},
+		"/main.cpp.LOVzuW": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.h.TVJhBb": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.h.lIHlAY": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.autosave.LQgIie": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.wAmQyP": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.oVcbLa": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.NmSpoc": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.h.QfooQh": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.bCVbDF": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.VuJiZJ": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.ovoJyp": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.h.URmoAC": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.h.nQpCtc": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.bABElQ": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.OaHMxa": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.yhbxMZ": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.yULOGi": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.yGVvWc": {
+			"sdcard": false
+		},
+		"/game/states/eventscene.cpp.JASJVo": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

@@ -31,6 +31,7 @@ SOURCES += \
     game/rendering/skytilemap.cpp \
     game/states/blueprints.cpp \
     game/states/collectblueprintprompt.cpp \
+    game/states/eventscene.cpp \
     game/states/game.cpp \
     game/states/opendoorprompt.cpp \
     game/states/openshopprompt.cpp \
@@ -96,6 +97,7 @@ HEADERS += \
     core/rendering/spritewrapper.h \
     game/states/blueprints.h \
     game/states/collectblueprintprompt.h \
+    game/states/eventscene.h \
     game/states/game.h \
     game/states/opendoorprompt.h \
     game/states/openshopprompt.h \

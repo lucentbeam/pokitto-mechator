@@ -54,6 +54,7 @@ class Soldier : public Vehicle {
 
     bool sprinting = false;
     bool m_overlaps = false;
+    uint8_t m_z = 0;
 
     static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun;
     static int s_owned_weapons;
@@ -61,7 +62,7 @@ class Soldier : public Vehicle {
 
     friend Player;
 public:
-    Soldier() : Vehicle(8, playerStartTileX*6, playerStartTileY*6, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 4, 4) {}
+    Soldier() : Vehicle(8, playerStartTileX*6 + 3, playerStartTileY*6 + 3, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 4, 4) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -71,9 +72,11 @@ public:
 
     static bool overlaps() { return s_instance.m_overlaps; }
     static bool isSprinting() { return s_instance.sprinting; }
+    static void setZ(uint8_t z) { s_instance.m_z = z; }
 
     static void update(float dt);
     static void draw();
+    static void drawAir();
 };
 
 class Jeep : public Vehicle {
