@@ -6,7 +6,7 @@
 #include "game/maps/worldmutables.h"
 #include "game/sprites.h"
 
-BackgroundMap MapManager::s_background(jungletiles, world, world_indices, mutable_indices, current_tiles);
+BackgroundMap MapManager::s_background(jungletiles, world, world_indices, mutable_indices, mutable_index_indices, current_tiles);
 
 SkyTilemap MapManager::s_foreground(jungletiles_sky, sky, sky_indices);
 

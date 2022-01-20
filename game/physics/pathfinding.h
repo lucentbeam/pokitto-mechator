@@ -17,11 +17,12 @@ class Pathfinding
         static uint16_t goal_x, goal_y;
         uint8_t parent_index = 0;
         uint8_t index = 0;
-        int16_t x, y, g = 0, h = 0;
+        int16_t x, y, n_idx, g = 0, h = 0;
         void config(int8_t parent, uint16_t g, int16_t lx, int16_t ly) {
             parent_index = parent;
             x = (lx/6);
             y = (ly/6);
+            n_idx = y * 1000 + x;
             int dx = std::abs(int(x) - int(goal_x));
             int dy = std::abs(int(y) - int(goal_y));
             h = std::min(dx, dy) * 4 + std::max(dx, dy) * 10; // reduced form of [ min * 14 + (max - min) * 10 ]
@@ -33,7 +34,7 @@ class Pathfinding
             g = other->g;
             h = other->h;
         }
-        bool operator==(const Node &n) const { return x == n.x && y == n.y; }
+        bool operator==(const Node &n) const { return n_idx == n.n_idx; }
         void update(int8_t potential_parent, uint16_t g_cost) {
             if (g_cost < g) {
                 parent_index = potential_parent;

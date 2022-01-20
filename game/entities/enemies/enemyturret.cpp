@@ -18,9 +18,8 @@ bool EnemyTurret::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
     if (!Camera::inActiveZone(m_pos)) return false;
+    if (m_life <= 0) return true;
     if (!Camera::inViewingZone(m_pos)) return true;
-
-    if (m_life <= 0) return false;
 
     Vec2f dir = Camera::center() - m_pos;
     if (std::abs(dir.x()) > 60 || std::abs(dir.y()) > 50) return true;

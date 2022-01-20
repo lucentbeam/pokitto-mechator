@@ -301,8 +301,8 @@
 	},
 	"meta": {
 		"My_settings.h": {},
-		"content": {},
 		"copy_over.bat": {},
+		"content": {},
 		"core": {},
 		"data": {
 			"sdcard": true
@@ -321,11 +321,13 @@
 		"pokitto-mechator.pro.user.f1d6e7c": {},
 		"project.json": {},
 		"": {},
+		"content/TiledMapReader": {},
 		"content/art": {},
+		"content/build-TiledMapReader-Desktop-Release": {},
 		"content/config.json": {},
 		"content/font": {},
-		"content/pokitto-img-processor": {},
 		"content/maps": {},
+		"content/pokitto-img-processor": {},
 		"content/sfx": {},
 		"content/sfx_desktop": {},
 		"content/sfx_source": {},
@@ -364,6 +366,11 @@
 		"game/variables.h": {},
 		"game/weapons.cpp": {},
 		"game/weapons.h": {},
+		"content/TiledMapReader/TiledMapReader.pro": {},
+		"content/TiledMapReader/TiledMapReader.pro.user": {},
+		"content/TiledMapReader/TiledMapReader.pro.user.f1d6e7c.4.10-pre1": {},
+		"content/TiledMapReader/json.hpp": {},
+		"content/TiledMapReader/main.cpp": {},
 		"content/art/boat.aseprite": {},
 		"content/art/clouds.aseprite": {},
 		"content/art/collisions.hex": {},
@@ -413,6 +420,9 @@
 		"content/art/terrainindices.aseprite": {},
 		"content/art/ui-mocks.ase": {},
 		"content/art/ui_icons.aseprite": {},
+		"content/build-TiledMapReader-Desktop-Release/Makefile": {},
+		"content/build-TiledMapReader-Desktop-Release/TiledMapReader": {},
+		"content/build-TiledMapReader-Desktop-Release/main.o": {},
 		"content/font/3X5.TTF": {},
 		"content/maps/TiledMapReader": {},
 		"content/maps/TiledMapReader.exe": {},
@@ -719,7 +729,8 @@
 		"content/sfx_source/sfx_resamples_data/eff/d1f/eff1fd38.au": {},
 		"content/sfx_source/sfx_resamples_data/eff/d1f/eff1fded.au": {},
 		"content/sfx_source/sfx_resamples_data/eff/d1f/eff1fe6f.au": {},
-		"content/sfx_source/sfx_resamples_data/eff/d1f/eff1fec6.au": {}
+		"content/sfx_source/sfx_resamples_data/eff/d1f/eff1fec6.au": {},
+		"content/TiledMapReader/TiledMapReader.pro.user.jWdvoR": {}
 	},
 	"ideVersion": 10000,
 	"BUILDFlags": {
