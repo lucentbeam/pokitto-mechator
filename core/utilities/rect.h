@@ -6,7 +6,7 @@
 struct Bounds {
     int8_t w, h;
     Bounds() = default;
-    Bounds(int sz, int sh) : w(sz), h(sh) {}
+    constexpr Bounds(int sz, int sh) : w(sz), h(sh) {}
 };
 
 class Rect {

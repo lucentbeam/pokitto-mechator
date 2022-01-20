@@ -8,7 +8,6 @@
 void EnemyTurret::setup(const Vec2f &pos) {
     m_pos = pos;
     m_life = 10;
-    m_on_deactivate = std::function<void()>();
     if (MapManager::getTileAt(pos.x(), pos.y()) == SpecialTiles::DestroyedTurret) {
         m_life = 0;
     }
@@ -18,11 +17,10 @@ bool EnemyTurret::update(float dt)
 {
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
-    if (!Camera::inActiveZone(m_pos)) {
-        return false;
-    }
+    if (!Camera::inActiveZone(m_pos)) return false;
+    if (!Camera::inViewingZone(m_pos)) return true;
 
-    if (m_life <= 0) return true;
+    if (m_life <= 0) return false;
 
     Vec2f dir = Camera::center() - m_pos;
     if (std::abs(dir.x()) > 60 || std::abs(dir.y()) > 50) return true;

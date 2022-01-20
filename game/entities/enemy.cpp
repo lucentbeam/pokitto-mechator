@@ -148,9 +148,6 @@ void Enemy::updateTanks(float dt)
     int i = s_tanks.objectCount()-1;
     while (i >= 0) {
         if (!(start + i)->update(dt)) {
-            if ((start + i)->m_on_deactivate) {
-                (start+i)->m_on_deactivate();
-            }
             s_tanks.deactivate(i);
         }
         --i;
@@ -171,9 +168,6 @@ void Enemy::updateTurrets(float dt)
     int i = s_turrets.objectCount()-1;
     while (i >= 0) {
         if (!(start + i)->update(dt)) {
-            if ((start + i)->m_on_deactivate) {
-                (start+i)->m_on_deactivate();
-            }
             s_turrets.deactivate(i);
         }
         --i;

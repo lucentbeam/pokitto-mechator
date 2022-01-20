@@ -24,8 +24,10 @@ void SkyTilemap::draw()
     if (y_upper > m_mapheight) y_upper = m_mapheight;
     uint16_t x_lower = x < 0 ? 0 : x;
     uint16_t y_lower = y < 0 ? 0 : y;
+    int current_tile;
     for(int16_t j = y_lower; j < y_upper; j++) {
         const uint8_t * tile = j == 0 ? m_map : m_map + m_map_indices[(j-1)];
+        current_tile = *tile;
         int counter = *(tile + 1);
         for (int t = 0; t < x_lower; ++t) {
             --counter;
@@ -35,13 +37,14 @@ void SkyTilemap::draw()
             }
         }
         for(int16_t i = x_lower; i < x_upper; ++i) {
-            if (*tile != uint8_t(-1)) {
+            if (current_tile != uint8_t(-1)) {
                 RenderSystem::drawShadow(sx + (i-x) * 18, sy + (j-y) * 18 + 3, m_tiles[*tile], m_tiles[*tile][2]);
                 RenderSystem::sprite(sx + (i-x) * 18, sy + (j-y) * 18, m_tiles[*tile], m_tiles[*tile][2]);
             }
             counter--;
             if (counter <= 0) {
                 tile += 2;
+                current_tile = *tile;
                 counter = *(tile + 1);
             }
         }

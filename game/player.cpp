@@ -6,8 +6,8 @@
 
 static uint32_t mode_switch_counter = 0;
 
-Vehicle::Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction) :
-    m_steering(x, y, speed, cornering, collisions, w, h, friction),
+Vehicle::Vehicle(int8_t hp, float x, float y, const SteeringConfig * config) :
+    m_steering(x, y, config),
     m_health(0, hp),
     m_aim(0, 0)
 {

@@ -2,7 +2,7 @@
 
 void Steering::update(float dt, float x, float y, float speed_mult, bool instant) {
     m_moving = false;
-    if (!m_brake && (std::fabs(x) > 0.01f || std::fabs(y) > 0.01f)) {
+    if ((std::fabs(x) > 0.01f || std::fabs(y) > 0.01f)) {
         m_moving = true;
         m_aim = Vec2f(x,y);
         if (m_aim.dot(m_facing) < 0) {
@@ -13,7 +13,7 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
             m_aim = tmp;
         }
         Vec2f dp = m_aim - m_facing;
-        m_facing += dp * m_cornering;
+        m_facing += dp * config->cornering;
         float len = m_facing.length();
         if (len > 0) {
             m_facing /= len;
@@ -26,12 +26,9 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
             if (m_current_speed > m_max_speed * speed_mult) m_current_speed = m_max_speed * speed_mult;
         }
     } else {
-        if (m_brake) {
-            m_aim = Vec2f(x,y);
-        }
-        m_current_speed *= (1.0f - m_friction);
+        m_current_speed *= (1.0f - config->friction);
     }
-    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, m_collisions, {m_size.w, m_size.h});
+    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, config->collisions, {config->size.w, config->size.h});
 }
 
 void Steering::copyPosition(const Steering &other) {

@@ -20,6 +20,25 @@
 
 #include "game/weapons.h"
 
+
+const SteeringConfig steering_soldier(soldierSpeed, 1.0,
+       (1 << Terrain::Wall) | (1 << Terrain::WaterDeep) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
+       4, 4);
+
+const SteeringConfig steering_jeep(jeepSpeed, jeepCornering,
+       (1 << Terrain::Wall) | (1 << Terrain::WaterDeep) | (1 << Terrain::WaterShallow) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
+       9, 9, jeepFriction);
+
+const SteeringConfig steering_tank(tankSpeed, tankCornering,
+       (1 << Terrain::Wall) | (1 << Terrain::WaterDeep) | (1 << Terrain::WaterShallow) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
+       14, 14);
+
+const SteeringConfig steering_boat(boatSpeed, boatCornering,
+       (1 << Terrain::Wall) | (1 << Terrain::WaterShallow) | (1 << Terrain::None) | (1 << Terrain::Grass) | (1 << Terrain::Mud) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
+       12, 12, boatFriction);
+
+const SteeringConfig steering_heli(heliSpeed, heliCornering, 0, 14, 14, heliFriction);
+
 class Player;
 
 class Vehicle {
@@ -35,7 +54,7 @@ protected:
 
     friend Player;
 
-    Vehicle(int8_t hp, float x, float y, float speed, float cornering, std::initializer_list<uint8_t> collisions, float w, float h, float friction = 1.0f);
+    Vehicle(int8_t hp, float x, float y, const SteeringConfig * config);
 
     void flash() { m_iframes.reset(playerIframeLength); }
 
@@ -62,7 +81,7 @@ class Soldier : public Vehicle {
 
     friend Player;
 public:
-    Soldier() : Vehicle(8, playerStartTileX*6 + 3, playerStartTileY*6 + 3, soldierSpeed, 1.0f, {Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 4, 4) {}
+    Soldier() : Vehicle(8, playerStartTileX*6 + 3, playerStartTileY*6 + 3, &steering_soldier) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -90,7 +109,7 @@ class Jeep : public Vehicle {
 
     friend Player;
 public:
-    Jeep() : Vehicle(12, 26*6, 8*6, jeepSpeed, jeepCornering, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 9, 9, jeepFriction) {}
+    Jeep() : Vehicle(12, 26*6, 8*6, &steering_jeep) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -116,7 +135,7 @@ class Tank : public Vehicle {
 
     friend Player;
 public:
-    Tank() : Vehicle(28, 12*6, 8*6, tankSpeed, tankCornering, {Terrain::Wall, Terrain::WaterDeep, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 14, 14) {}
+    Tank() : Vehicle(28, 12*6, 8*6, &steering_tank) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -141,7 +160,7 @@ class Boat : public Vehicle {
 
     friend Player;
 public:
-    Boat() : Vehicle(20, 12*6, 6*6, boatSpeed, boatCornering, {Terrain::Wall, Terrain::None, Terrain::Grass, Terrain::Mud, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall}, 12, 12, boatFriction) {}
+    Boat() : Vehicle(20, 12*6, 6*6, &steering_boat) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
@@ -170,7 +189,7 @@ class Helicopter : public Vehicle {
 
     friend Player;
 public:
-    Helicopter() : Vehicle(16, 12*6, 8*6, heliSpeed, heliCornering, {}, 14, 14, heliFriction) {}
+    Helicopter() : Vehicle(16, 12*6, 8*6, &steering_heli) {}
 
     static Statistic& health() { return s_instance.m_health; }
     static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }

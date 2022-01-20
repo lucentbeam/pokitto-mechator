@@ -10,11 +10,9 @@ bool EnemyMech::update(float dt, bool check_collisions)
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
-    if (!Camera::inActiveZone({m_rect.centerX(), m_rect.centerY()})) {
-        return false;
-    }
-
-    if (!Pathfinding::canReach(Vec2f(m_rect.centerX(), m_rect.centerY()), Camera::center(), mask)) return true;
+    if (!Camera::inActiveZone(m_pos)) return false;
+    if (!Camera::inViewingZone(m_pos)) return true;
+    if (!Pathfinding::canReach(m_pos, Camera::center(), mask)) return true;
 
     float px = Camera::tl_x();
     float py = Camera::tl_y();
@@ -22,7 +20,7 @@ bool EnemyMech::update(float dt, bool check_collisions)
     float ty = py + 44;
 
     m_counter++;
-    Vec2f dir = {tx - m_rect.centerX(), ty - m_rect.centerY()};
+    Vec2f dir = Camera::center() - m_pos;
     float len = dir.length();
     if (len > 0) {
         dir = dir / len;
@@ -37,15 +35,13 @@ bool EnemyMech::update(float dt, bool check_collisions)
         if (m_counter % 40 == 0) {
             Vec2f alt = {float(rand() % 100) - 50, float(rand() % 100) - 50};
             alt = alt / 50.0f;
-//            mech->m_velocity = (alt * 0.5 + dir * 0.5) * 15.0f;
-            Vec2f target = Pathfinding::getPath(Vec2f(m_rect.centerX(), m_rect.centerY()), Vec2f(tx, ty), mask) * 6 + Vec2f(3,3);
-            dir = {target.x() - m_rect.centerX(), target.y() - m_rect.centerY()};
+            Vec2f target = Pathfinding::getPath(m_pos, Vec2f(tx, ty), mask) * 6 + Vec2f(3,3);
+            dir = target - m_pos;
             float len = dir.length();
             if (len > 0) {
                 dir = dir / len;
             }
             m_velocity = dir * 15.0f;
-//            mech->path = Pathfinding::getPath(Vec2f(mech->m_rect.centerX(), mech->m_rect.centerY()), Vec2f(tx, ty), mask);
         }
         if (m_counter > 180) {
             status = EnemyMech::Mode::Preparing;
@@ -55,9 +51,9 @@ bool EnemyMech::update(float dt, bool check_collisions)
         break;
     case EnemyMech::Mode::Preparing:
         if (m_counter > 60) {
-            if (Camera::inViewingZone({m_rect.centerX(), m_rect.centerY()})) {
+            if (Camera::inViewingZone(m_pos)) {
                 AudioSystem::play(sfxEnemyShoot);
-                ProjectileManager::create({m_rect.centerX(), m_rect.centerY()}, dir * 50.0f, 2, 3.0)
+                ProjectileManager::create(m_pos, dir * 50.0f, 2, 3.0)
                         ->setSprite(BulletSmall)
                         ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
             }
@@ -68,14 +64,13 @@ bool EnemyMech::update(float dt, bool check_collisions)
     default:
         break;
     }
-    Vec2f pos = CollisionManager::resolveMovement({m_rect.centerX(), m_rect.centerY() + 2}, m_velocity * 0.014f, mask);
-    pos.setY(pos.y()-2);
-    m_rect.setCenter(pos.x(), pos.y());
+    Vec2f pos = CollisionManager::resolveMovement(m_pos + Vec2f(0, 2), m_velocity * 0.014f, mask);
+    m_pos.set(pos.x(), pos.y() - 2);
     int damage = !check_collisions ? 0 : ProjectileManager::getCollisionDamage(pos, 4, bulletMask);
     m_life -= damage;
     if (m_damage_frames > 0) m_damage_frames--;
     if (m_life <= 0) {
-        if (m_drops) Pickups::spawnDollar({m_rect.centerX(), m_rect.centerY()});
+        if (m_drops) Pickups::spawnDollar(m_pos);
         EffectManager::createExplosion(pos, 1, 1);
         AudioSystem::play(sfxExplosionSmall);
         return false;
@@ -91,7 +86,7 @@ bool EnemyMech::update(float dt, bool check_collisions)
 
 void EnemyMech::draw()
 {
-    auto pos = Camera::worldToScreen({m_rect.centerX(), m_rect.centerY()});
+    auto pos = Camera::worldToScreen(m_pos);
     if (m_damage_frames > 0) {
         RenderSystem::sprite(pos.x()-2, pos.y()-2, enemy_ground[0], enemy_ground[0][2], 10, false);
     } else if (status == EnemyMech::Mode::Preparing) {

@@ -23,6 +23,7 @@ void EnemyLasers::setup(const Vec2f &pos, bool vert, int node, int sz)
 bool EnemyLasers::update(float dt)
 {
     if (!Camera::inActiveZone(m_pos)) return false;
+    if (!Camera::inViewingZone(m_pos)) return true;
 
     m_counter++;
 
@@ -32,7 +33,7 @@ bool EnemyLasers::update(float dt)
             m_counter = rand() % laserDelayVariation;
         } else if ((d % laserFireLength) == 0) {
             AudioSystem::play(sfxLaser);
-            ProjectileManager::create(m_pos + Vec2f(vertical ? 3 : size * 3, vertical ? size * 3 : 3), {0, 0}, vertical ? size * 6 : 6, float(laserFireLength) * 2/3 * physicsTimestep, vertical ? 6 : size * 6)
+            ProjectileManager::create(Vec2f(m_pos.x(), m_pos.y()) + Vec2f(vertical ? 3 : size * 3, vertical ? size * 3 : 3), {0, 0}, vertical ? size * 6 : 6, float(laserFireLength) * 2/3 * physicsTimestep, vertical ? 6 : size * 6)
                     ->setDamage(3)
                     ->setIgnoreWalls()
                     ->clearSprite()

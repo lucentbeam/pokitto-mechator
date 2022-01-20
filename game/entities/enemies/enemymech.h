@@ -11,7 +11,8 @@ class Enemy;
 
 class EnemyMech
 {
-    Rect m_rect;
+    Vec2f m_pos;
+//    Bounds m_size;
     Vec2f m_velocity;
     int8_t m_life;
     uint8_t m_damage_frames;
@@ -29,7 +30,7 @@ public:
 
     EnemyMech() = default;
 
-    void setup(const Vec2f &pos) { m_rect.setCenter(pos.x(), pos.y()); m_life = 3; m_on_deactivate = std::function<void()>(); m_drops = true; m_counter = rand() % 30; status = Mode::Walking; }
+    void setup(const Vec2f &pos) { m_pos = pos; m_life = 3; m_on_deactivate = std::function<void()>(); m_drops = true; m_counter = rand() % 30; status = Mode::Walking; }
 
     int8_t life() const { return m_life; }
 

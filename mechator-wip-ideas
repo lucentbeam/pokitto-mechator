@@ -3,20 +3,23 @@
   - speed up mutable lookup? shortcuts to mutable tile indices
   - RLE world tiles
 
-- boss life bar
 - register boss entities:
   - getBarracksAt() function
   - register func for when all are destroyed (unlock door)
+  
 - lock tutorial boss area on combat start
-- make tanks fire missiles
-- disable turrets in tank factory until entry
-- lock tank factory boss area on combat start
+
+- factory:
+	- disable turrets in tank factory until entry
+	- boss life for barracks in tank yard
+	- lock tank factory boss area on combat start
+	- make tanks fire missiles
 
 - pause screen:
   - weapon carousel
   - map subscreen
 
-- world map: sky layer
+- world map & sky layer greebles
 
 - la musica
 

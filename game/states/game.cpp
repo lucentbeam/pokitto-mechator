@@ -69,8 +69,9 @@ void updateGameState(FSM&) {
     UI::update(physicsTimestep);
 
     Camera::update(player.position().x(), player.position().y());
+    MapManager::update();
 
-    if (SequenceTrigger::checkForTriggers()) return;
+//    if (SequenceTrigger::checkForTriggers()) return;
 
     SpawnPoint::setActiveRegion();
 //    CloudManager::update(physicsTimestep);

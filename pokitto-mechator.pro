@@ -46,6 +46,7 @@ SOURCES += \
     core/utilities/tween.cpp \
     core/utilities/vec.cpp \
     game/maps/sequencetrigger.cpp \
+    game/utilities/screentilestore.cpp \
     game/variables.cpp \
     game/weapons.cpp \
     main.cpp \
@@ -116,6 +117,7 @@ HEADERS += \
     core/utilities/vec.h \
     game/utilities/sceneobjects.h \
     game/maps/sequencetrigger.h \
+    game/utilities/screentilestore.h \
     game/variables.h \
     game/sprites.h \
     game/weapons.h

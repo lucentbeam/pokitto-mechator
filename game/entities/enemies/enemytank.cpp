@@ -10,9 +10,8 @@ bool EnemyTank::update(float dt)
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
-    if (!Camera::inActiveZone(m_steering.pos())) {
-        return false;
-    }
+    if (!Camera::inActiveZone(m_steering.pos())) return false;
+    if (!Camera::inViewingZone(m_steering.pos())) return true;
 
     float px = Camera::tl_x();
     float py = Camera::tl_y();
@@ -41,7 +40,7 @@ bool EnemyTank::update(float dt)
             if (len > 0) {
                 dir = dir / len;
             }
-            m_aim = dir;
+            m_aim = {dir.x(), dir.y()};
         }
         if (m_counter > 180) {
             status = EnemyTank::Mode::Preparing;
@@ -50,7 +49,7 @@ bool EnemyTank::update(float dt)
         }
         break;
     case EnemyTank::Mode::Preparing:
-        m_aim = dir;
+        m_aim = {dir.x(), dir.y()};
         if (m_counter > (shotcount == 0 ? 120 : 45)) {
             if (Camera::inViewingZone(m_steering.pos())) {
                 AudioSystem::play(sfxEnemyShoot);
@@ -83,7 +82,6 @@ bool EnemyTank::update(float dt)
             EffectManager::createHit(m_steering.pos() - Vec2f(3.5f, 3.5f));
         }
     }
-    m_smoothaim = m_smoothaim * 0.9f + m_aim * 0.1f;
     return true;
 }
 
@@ -91,13 +89,13 @@ void EnemyTank::draw() const
 {
     auto pos = Camera::worldToScreen(m_steering.pos()) - Vec2f(6.0f, 6.5f);
     if (m_damage_frames > 0) {
-        RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], 10, m_smoothaim.x() > 0);
-        int ox = m_steering.facing().x() > 0 && m_smoothaim.x() < 0 ? 1 : 0;
-        RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_smoothaim, 8.0f)], enemy_tank_cannon[0][2], 10, m_smoothaim.x() > 0);
+        RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], 10, m_aim.x() > 0);
+        int ox = m_steering.facing().x() > 0 && m_aim.x() < 0 ? 1 : 0;
+        RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_aim, 8.0f)], enemy_tank_cannon[0][2], 10, m_aim.x() > 0);
     } else {
         RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], m_steering.facing().x() > 0);
-        int ox = m_steering.facing().x() > 0 && m_smoothaim.x() < 0 ? 1 : 0;
-        RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_smoothaim, 8.0f)], enemy_tank_cannon[0][2], m_smoothaim.x() > 0);
+        int ox = m_steering.facing().x() > 0 && m_aim.x() < 0 ? 1 : 0;
+        RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_aim, 8.0f)], enemy_tank_cannon[0][2], m_aim.x() > 0);
     }
 
 //    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal});

@@ -10,11 +10,11 @@ class Enemy;
 
 class EnemyLasers
 {
-    Vec2f m_pos;
+    Vec2i m_pos;
     bool vertical;
     int size;
 
-    int m_counter = 0;
+    uint16_t m_counter = 0;
 
     friend Enemy; // I suppose that makes Enemy the enemy of this's enemy?
 public:

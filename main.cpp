@@ -29,7 +29,17 @@ int main ()
     Soldier::health().setMax();
 
 #ifdef DEBUGS
-    Soldier::setPosition({36 * 6, 8 * 6}); // tutorial island
+    std::cout << sizeof(Projectile) << std::endl;
+    std::cout << sizeof(Effect) << std::endl;
+    std::cout << sizeof(EnemyMech) << std::endl;
+    std::cout << sizeof(EnemyTank) << std::endl;
+    std::cout << sizeof(Steering) << std::endl;
+    std::cout << sizeof(EnemyBomber) << std::endl;
+    std::cout << sizeof(EnemyLasers) << std::endl;
+    std::cout << sizeof(EnemyHelicopter) << std::endl;
+    std::cout << sizeof(EnemyTurret) << std::endl;
+
+//    Soldier::setPosition({36 * 6, 8 * 6}); // tutorial island
 //    Soldier::setPosition({38 * 6, 118 * 6}); // tank factory
 //    Soldier::setPosition({138 * 6, 195 * 6}); // boat yard
 #endif
@@ -57,13 +67,19 @@ int main ()
         if (RenderSystem::update()) {
             gameTime += RenderSystem::getTimeMs() - lastGameTime;
             lastGameTime = RenderSystem::getTimeMs();
-            while (gameTime > 0) {
+            int count = 0;
+            while (gameTime > 0 && count < 2) {
                 Controls::update();
                 fsm.update();
                 gameTime -= physicsTimestepMs;
+                count++;
 //                gameTime += RenderSystem::getTimeMs() - lastGameTime;
 //                lastGameTime = RenderSystem::getTimeMs();
             }
+            while (gameTime > physicsTimestepMs) {
+                gameTime -= physicsTimestepMs;
+            }
+
             fsm.draw(); // TODO: add frame interpolation?
         }
     }

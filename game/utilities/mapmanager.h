@@ -5,6 +5,7 @@
 #include "core/rendering/tilemap.h"
 #include "core/rendering/camera.h"
 #include "game/rendering/skytilemap.h"
+#include "game/utilities/screentilestore.h"
 
 typedef Tilemap<6,6> BackgroundMap;
 
@@ -14,7 +15,9 @@ class MapManager
 
     static SkyTilemap s_foreground;
 
+    static ScreenTileStore s_camera_tiles;
 public:
+    static void update();
 
     static void draw(bool bg);
 

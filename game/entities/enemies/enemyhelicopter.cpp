@@ -3,17 +3,14 @@
 
 #include "game/entities/projectile.h"
 #include "game/entities/pickups.h"
-#include "game/physics/pathfinding.h"
 #include "core/audiosystem.h"
 
 bool EnemyHelicopter::update(float dt)
 {
-    static uint16_t mask = Helpers::getMask({});
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::AirTarget});
 
-    if (!Camera::inActiveZone(m_steering.pos())) {
-        return false;
-    }
+    if (!Camera::inActiveZone(m_steering.pos())) return false;
+    if (!Camera::inViewingZone(m_steering.pos())) return true;
 
     float px = Camera::tl_x();
     float py = Camera::tl_y();
@@ -37,7 +34,6 @@ bool EnemyHelicopter::update(float dt)
         if (m_counter % 40 == 0) {
             Vec2f alt = {float(rand() % 100) - 50, float(rand() % 100) - 50};
             alt = alt / 50.0f;
-            dir = Pathfinding::getPath(Vec2f(m_steering.pos().x(), m_steering.pos().y()), Vec2f(tx, ty), mask) * 6 + Vec2f(3,3) - m_steering.pos();
             float len = dir.length();
             if (len > 0) {
                 dir = dir / len;
