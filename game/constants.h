@@ -6,8 +6,12 @@
 const float uiEasingTime = 0.2f;
 const uint8_t uiEasingTimeMs = uint8_t(uiEasingTime * 1000);
 
-constexpr float physicsTimestep = 0.02f;
+constexpr float physicsTimestep = 0.04f;
 const uint8_t physicsTimestepMs = uint8_t(physicsTimestep * 1000);
+
+constexpr int asCounts(float time) {
+    return time / physicsTimestep;
+}
 
 const float baseTextSpeedLPS = 25.0f;
 const float cameraCutsceneSpeed = 12.0f;

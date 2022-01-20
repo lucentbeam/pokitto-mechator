@@ -5,8 +5,8 @@
 
 #include "core/utilities/vec.h"
 
-constexpr int storeTilesW = int(110/6) + 2;
-constexpr int storeTilesH = int(88/6) + 2;
+constexpr int storeTilesW = 20;//int(110/6) + 2;
+constexpr int storeTilesH = 16;//int(88/6) + 2;
 
 class ScreenTileStore
 {

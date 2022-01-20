@@ -27,7 +27,7 @@
 #include "game/maps/sequencetrigger.h"
 
 static Player player;
-static ScreenBuffer screenbuffer;
+//static ScreenBuffer screenbuffer;
 
 UIElement region_indicator = UIElement::getExpander(57, 8, 30, 9, Tween::OutQuad);
 const char * region_name = "";
@@ -93,8 +93,10 @@ void updateGameState(FSM&) {
 
 void drawGameState() {
     // ground layer
-    MapManager::draw(&screenbuffer);
-    RenderSystem::drawBuffer(screenbuffer.getData());
+    MapManager::draw(true);
+
+//    MapManager::draw(&screenbuffer);
+//    RenderSystem::drawBuffer(screenbuffer.getData());
 
     // entities
     Barracks::draw();
@@ -136,8 +138,10 @@ void drawGameState() {
 void drawShadedGame(int shading)
 {
     // ground layer
-    MapManager::draw(&screenbuffer);
-    RenderSystem::drawBuffer(screenbuffer.getData());
+    MapManager::draw(true);
+
+//    MapManager::draw(&screenbuffer);
+//    RenderSystem::drawBuffer(screenbuffer.getData());
 
     // entities
     POIs::draw();

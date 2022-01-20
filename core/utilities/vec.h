@@ -90,8 +90,8 @@ public:
     constexpr Vec2i(float x, float y) : m_x(x), m_y(y) {}
     constexpr Vec2i(const Vec2i &other) : m_x(other.m_x), m_y(other.m_y) {}
 
-    uint16_t x() const { return m_x; }
-    uint16_t y() const { return m_y; }
+    int x() const { return m_x; }
+    int y() const { return m_y; }
     float length() const { return std::sqrt(m_x*m_x+m_y*m_y); }
 
     void set(uint16_t x, uint16_t y) { m_x = x; m_y = y; }

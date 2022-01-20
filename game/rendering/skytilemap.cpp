@@ -12,15 +12,13 @@ SkyTilemap::SkyTilemap(const uint8_t tiles[][18*18+2], const uint8_t *map, const
 
 void SkyTilemap::draw()
 {
-    int16_t x = Camera::tl_x();
-    int16_t y = Camera::tl_y();
-    float sx = -std::fmod(x, 18);
-    float sy = -std::fmod(y, 18);
-    x /= 18;
-    y /= 18;
-    uint16_t x_upper = x + render_width;
+    int16_t x = std::floor(Camera::tl_x()/18.0f) - 1;
+    int16_t y = std::floor(Camera::tl_y()/18.0f) - 1;
+    int sx = int(x) * 18 - Camera::tl_x();
+    int sy = int(y) * 18 - Camera::tl_y();
+    uint16_t x_upper = x + render_width + 1;
     if (x_upper > m_mapwidth) x_upper = m_mapwidth;
-    uint16_t y_upper = y + render_height;
+    uint16_t y_upper = y + render_height + 1;
     if (y_upper > m_mapheight) y_upper = m_mapheight;
     uint16_t x_lower = x < 0 ? 0 : x;
     uint16_t y_lower = y < 0 ? 0 : y;

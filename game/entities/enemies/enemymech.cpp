@@ -12,7 +12,6 @@ bool EnemyMech::update(float dt, bool check_collisions)
 
     if (!Camera::inActiveZone(m_pos)) return false;
     if (!Camera::inViewingZone(m_pos)) return true;
-    if (!Pathfinding::canReach(m_pos, Camera::center(), mask)) return true;
 
     float px = Camera::tl_x();
     float py = Camera::tl_y();
@@ -32,9 +31,7 @@ bool EnemyMech::update(float dt, bool check_collisions)
         } else if (len < 20) {
             dir *= 0;
         }
-        if (m_counter % 40 == 0) {
-            Vec2f alt = {float(rand() % 100) - 50, float(rand() % 100) - 50};
-            alt = alt / 50.0f;
+        if (m_counter % asCounts(0.66f) == 0) {
             Vec2f target = Pathfinding::getPath(m_pos, Vec2f(tx, ty), mask) * 6 + Vec2f(3,3);
             dir = target - m_pos;
             float len = dir.length();
@@ -43,14 +40,14 @@ bool EnemyMech::update(float dt, bool check_collisions)
             }
             m_velocity = dir * 15.0f;
         }
-        if (m_counter > 180) {
+        if (m_counter > asCounts(3.0f)) {
             status = EnemyMech::Mode::Preparing;
             m_velocity = {0, 0};
             m_counter = rand() % 10;
         }
         break;
     case EnemyMech::Mode::Preparing:
-        if (m_counter > 60) {
+        if (m_counter > asCounts(1.0f)) {
             if (Camera::inViewingZone(m_pos)) {
                 AudioSystem::play(sfxEnemyShoot);
                 ProjectileManager::create(m_pos, dir * 50.0f, 2, 3.0)
@@ -58,13 +55,13 @@ bool EnemyMech::update(float dt, bool check_collisions)
                         ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
             }
             status = EnemyMech::Mode::Walking;
-            m_counter = rand() % 40;
+            m_counter = rand() % asCounts(0.66f);
         }
         break;
     default:
         break;
     }
-    Vec2f pos = CollisionManager::resolveMovement(m_pos + Vec2f(0, 2), m_velocity * 0.014f, mask);
+    Vec2f pos = CollisionManager::resolveMovement(m_pos + Vec2f(0, 2), m_velocity * physicsTimestep, mask);
     m_pos.set(pos.x(), pos.y() - 2);
     int damage = !check_collisions ? 0 : ProjectileManager::getCollisionDamage(pos, 4, bulletMask);
     m_life -= damage;

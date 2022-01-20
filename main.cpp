@@ -28,6 +28,7 @@ int main ()
     AudioSystem::initialize();
     Soldier::health().setMax();
 
+
 #ifdef DEBUGS
     std::cout << sizeof(Projectile) << std::endl;
     std::cout << sizeof(Effect) << std::endl;
@@ -39,6 +40,7 @@ int main ()
     std::cout << sizeof(EnemyHelicopter) << std::endl;
     std::cout << sizeof(EnemyTurret) << std::endl;
 
+//    Soldier::setPosition({73 * 6, 110 * 6}); // canyons
 //    Soldier::setPosition({36 * 6, 8 * 6}); // tutorial island
 //    Soldier::setPosition({38 * 6, 118 * 6}); // tank factory
 //    Soldier::setPosition({138 * 6, 195 * 6}); // boat yard
@@ -67,18 +69,18 @@ int main ()
         if (RenderSystem::update()) {
             gameTime += RenderSystem::getTimeMs() - lastGameTime;
             lastGameTime = RenderSystem::getTimeMs();
-            int count = 0;
-            while (gameTime > 0 && count < 2) {
+//            int count = 0;
+            while (gameTime > 0) {// && count < 2) {
                 Controls::update();
                 fsm.update();
                 gameTime -= physicsTimestepMs;
-                count++;
+//                count++;
 //                gameTime += RenderSystem::getTimeMs() - lastGameTime;
 //                lastGameTime = RenderSystem::getTimeMs();
             }
-            while (gameTime > physicsTimestepMs) {
-                gameTime -= physicsTimestepMs;
-            }
+//            while (gameTime > physicsTimestepMs) {
+//                gameTime -= physicsTimestepMs;
+//            }
 
             fsm.draw(); // TODO: add frame interpolation?
         }

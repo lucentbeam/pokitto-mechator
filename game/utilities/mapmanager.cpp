@@ -31,7 +31,18 @@ void MapManager::update()
 void MapManager::draw(bool bg)
 {
     if (bg) {
-//        s_background.draw();
+        RenderSystem::clear(0);
+        float x = Camera::tl_x();
+        float y = Camera::tl_y();
+        int sx = int(std::floor(x/6.0f)) * 6 - x;
+        int sy = int(std::floor(y/6.0f)) * 6 - y;
+        uint8_t * t = s_camera_tiles.getMap();
+        for(int j = 0; j < s_camera_tiles.height(); ++j) {
+            for (int i = 0; i < s_camera_tiles.width(); ++i) {
+                RenderSystem::sprite(sx + i * 6, sy + j * 6, jungletiles[*t]);
+                t++;
+            }
+        }
     } else {
         s_foreground.draw();
     }
@@ -51,7 +62,8 @@ uint8_t MapManager::getTileAt(float x, float y)
 {
     uint8_t t = s_camera_tiles.getTileAt(x, y);
     if (t != 255) return t;
-    return s_background.getTileAt(x, y);
+    return 19;
+//    return s_background.getTileAt(x, y);
 }
 
 void MapManager::setTileAt(float x, float y, uint8_t override)

@@ -18,7 +18,7 @@ const SteeringConfig enemy_tank_steering(enemyTankSpeed, 0.04f,
 
 class EnemyTank
 {
-    Vec2i m_aim;
+    Vec2f m_aim;
     Vec2i m_origin;
     Steering m_steering;
     int8_t m_life = 3;

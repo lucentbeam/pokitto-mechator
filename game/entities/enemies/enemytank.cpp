@@ -32,7 +32,7 @@ bool EnemyTank::update(float dt)
             dir *= 0;
         }
         m_steering.update(dt, m_aim.x(), m_aim.y());
-        if (m_counter % 40 == 0) {
+        if (m_counter % asCounts(0.66f) == 0) {
             Vec2f alt = {float(rand() % 100) - 50, float(rand() % 100) - 50};
             alt = alt / 50.0f;
             dir = Pathfinding::getPath(Vec2f(m_steering.pos().x(), m_steering.pos().y()), Vec2f(tx, ty), mask) * 6 + Vec2f(3,3) - m_steering.pos();
@@ -42,7 +42,7 @@ bool EnemyTank::update(float dt)
             }
             m_aim = {dir.x(), dir.y()};
         }
-        if (m_counter > 180) {
+        if (m_counter > asCounts(3.0f)) {
             status = EnemyTank::Mode::Preparing;
             m_aim = {0, 0};
             m_counter = rand() % 10;
@@ -50,10 +50,10 @@ bool EnemyTank::update(float dt)
         break;
     case EnemyTank::Mode::Preparing:
         m_aim = {dir.x(), dir.y()};
-        if (m_counter > (shotcount == 0 ? 120 : 45)) {
+        if (m_counter > (shotcount == 0 ? asCounts(1.25f) : asCounts(0.5f))) {
             if (Camera::inViewingZone(m_steering.pos())) {
                 AudioSystem::play(sfxEnemyShoot);
-                ProjectileManager::create({m_steering.pos().x(), m_steering.pos().y()}, dir * 50.0f, 2, 3.0)
+                ProjectileManager::create(m_steering.pos() + dir * 6.0f, dir * 50.0f, 2, 3.0)
                         ->setSprite(BulletSmall)
                         ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
             }

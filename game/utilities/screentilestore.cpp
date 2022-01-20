@@ -37,7 +37,7 @@ int ScreenTileStore::height() const { return storeTilesH; }
 
 bool ScreenTileStore::requiresUpdate() const
 {
-    return uint16_t(std::floor(Camera::tl_x() / 6.0f)) != topleft.x() || uint16_t(std::floor(Camera::tl_y() / 6.0f)) != topleft.y();
+    return int(std::floor(Camera::tl_x() / 6.0f)) != topleft.x() || int(std::floor(Camera::tl_y() / 6.0f)) != topleft.y();
 }
 
 void ScreenTileStore::update()

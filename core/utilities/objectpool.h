@@ -26,7 +26,7 @@ public:
 
     Obj * objects() { return m_objects; }
 
-    uint8_t objectCount() { return m_activeCount; }
+    int objectCount() const { return m_activeCount; }
 };
 
 //#include "objectpool.cpp"

@@ -241,8 +241,8 @@ uint16_t Tilemap<TileWidth, TileHeight>::getMapIndex(float x, float y) const
 template<int TileWidth, int TileHeight>
 uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
 {
-    int px = (x / TileWidth);
-    int py = (y / TileHeight);
+    int px = std::floor(x / TileWidth);
+    int py = std::floor(y / TileHeight);
     const uint8_t defaultTileIndex = 19; // deep water; TODO: find a better place for this
     if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return defaultTileIndex;
     int idx = 0;
