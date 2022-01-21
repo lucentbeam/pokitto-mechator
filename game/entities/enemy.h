@@ -51,6 +51,8 @@ public:
     static EnemyMech * createMech(const Vec2f &pos);
     static EnemyTank * createTank(const Vec2f &pos);
     static EnemyTurret * createTurret(const Vec2f &pos);
+    static EnemyTurret * createTurretDisabled(const Vec2f &pos);
+    static EnemyTurret * getTurretAt(Vec2i loc);
     static EnemyBomber * createBomber(const Vec2f &pos);
     static EnemyHelicopter * createHelicopter(const Vec2f &pos);
 
@@ -58,6 +60,7 @@ public:
     static void spawnTank(const Vec2i &pos);
     static void spawnBomber(const Vec2i &pos);
     static void spawnTurret(const Vec2i &pos);
+    static void spawnTurretDisabled(const Vec2i &pos);
     static void spawnMine(const Vec2i &pos);
     static void spawnHelicopter(const Vec2i &pos);
     static void createLasers(const Vec2i &pos, bool vertical, int node, int sz);

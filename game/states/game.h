@@ -10,6 +10,8 @@ void goGame();
 
 void updateGameState(FSM &fsm);
 
+void updateRegionIndicator();
+
 void drawGameState();
 
 void drawShadedGame(int shading = 1);

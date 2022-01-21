@@ -76,6 +76,29 @@ EnemyTurret *Enemy::createTurret(const Vec2f &pos)
     return m;
 }
 
+EnemyTurret *Enemy::createTurretDisabled(const Vec2f &pos)
+{
+    auto m = s_turrets.activateNext();
+    if (m != nullptr) {
+        m->setup(pos);
+        m->setDisabled(true);
+    }
+    return m;
+}
+
+EnemyTurret *Enemy::getTurretAt(Vec2i loc)
+{
+    loc *= 6;
+    EnemyTurret * t = nullptr;
+    s_turrets.iterate([&](EnemyTurret * tur) {
+        if (tur->rect().contains(loc.x(), loc.y())) {
+            t = tur;
+        }
+        return false;
+    });
+    return t;
+}
+
 EnemyBomber *Enemy::createBomber(const Vec2f &pos)
 {
     auto m = s_bombers.activateNext();
@@ -117,6 +140,11 @@ void Enemy::spawnBomber(const Vec2i &pos)
 void Enemy::spawnTurret(const Vec2i &pos)
 {
     createTurret(pos + Vec2i(3, 2));
+}
+
+void Enemy::spawnTurretDisabled(const Vec2i &pos)
+{
+    createTurretDisabled(pos);
 }
 
 void Enemy::spawnMine(const Vec2i &pos)

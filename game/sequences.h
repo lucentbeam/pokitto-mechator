@@ -8,10 +8,11 @@
 #include "game/entities/enemy.h"
 #include "game/states/eventscene.h"
 #include "game/states/game.h"
-
 #include "game/entities/barracks.h"
+#include "game/constants.h"
 
-const SceneWait wait60 = SceneWait(60);
+const SceneWait wait60 = SceneWait(asCounts(1.0f));
+const SceneWait wait30 = SceneWait(asCounts(0.5f));
 
 extern Tween toLand;
 
@@ -45,7 +46,6 @@ const SceneSequence intro_scene[] = {
     {SceneSequence::End, nullptr}
 };
 
-#include <iostream>
 const SceneFunc tb_f0 = SceneFunc([](){
     EnemyHelicopter * h = Enemy::createHelicopter({80 * 6, 14 * 6});
     EventScene::setTextSpeed(baseTextSpeedLPS / 2.0f);
@@ -92,7 +92,7 @@ const SceneMoveCam tb_m0 = SceneMoveCam(cameraCutsceneSpeed, {65, 15});
 
 const SceneDialogue tb_dlog0 = SceneDialogue("INFILTRATOR!",nullptr, true, false);
 const SceneDialogue tb_dlog1 = SceneDialogue("YOU WILL GET", "NO FURTHER.", true, false);
-const SceneDialogue tb_dlog2 = SceneDialogue("NOR FARTHER,         ", "FOR THAT MATTER.", true, true);
+const SceneDialogue tb_dlog2 = SceneDialogue("NOR FARTHER,   ", "FOR THAT MATTER.", true, true);
 
 const SceneSequence tutorial_boss_scene[] = {
     {SceneSequence::DoFunction, &tb_f0},
@@ -123,10 +123,24 @@ const SceneDialogue tt_dlog8 = SceneDialogue("NICE SAVE.", nullptr, true, true);
 
 const SceneDialogue tt_dlog9 = SceneDialogue("THANK YOU.", nullptr, true, true);
 
+const SceneFunc tt_f0 = SceneFunc([](){
+    // enable all turrets;
+    // configure barracks to boss life
+    UI::showBoss(Barracks::getBarracksAt({27, 99})->getLifePtr());
+    Enemy::getTurretAt({19, 94})->setDisabled(false);
+    Enemy::getTurretAt({19, 105})->setDisabled(false);
+    Enemy::getTurretAt({35, 94})->setDisabled(false);
+    Enemy::getTurretAt({35, 105})->setDisabled(false);
+    MapManager::setTileAt(26 * 6 + 3, 110 * 6 + 3, 236);
+    MapManager::setTileAt(27 * 6 + 3, 110 * 6 + 3, 236);
+    MapManager::setTileAt(28 * 6 + 3, 110 * 6 + 3, 236);
+    return true;
+});
+
 const SceneSequence tank_boss_scene[] = {
 //    {SceneSequence::DoFunction, &tb_f0},
     {SceneSequence::MoveCamera, &tt_m0 },
-    {SceneSequence::Wait, &wait60 },
+    {SceneSequence::Wait, &wait30 },
     {SceneSequence::ShowDialogue, &tt_dlog0 },
     {SceneSequence::ShowDialogue, &tt_dlog1 },
     {SceneSequence::ShowDialogue, &tt_dlog2 },
@@ -143,6 +157,7 @@ const SceneSequence tank_boss_scene[] = {
     {SceneSequence::MoveCamera, &tt_m0 },
     {SceneSequence::ShowDialogue, &tt_dlog9 },
     {SceneSequence::MoveCamera, &cam_return },
+    {SceneSequence::DoFunction, &tt_f0 },
     {SceneSequence::End, &cam_release}
 };
 

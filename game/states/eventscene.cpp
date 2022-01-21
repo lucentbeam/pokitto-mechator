@@ -111,7 +111,7 @@ void EventScene::update(FSM &fsm)
     if (s_data.has_update_func) {
         s_data.has_update_func = !s_data.update_callback();
     }
-
+    updateRegionIndicator();
     Camera::update(Player::position().x(), Player::position().y());
     MapManager::update();
 }

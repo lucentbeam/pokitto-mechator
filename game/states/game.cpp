@@ -68,6 +68,10 @@ void checkForCallback() {
     }
 }
 
+void updateRegionIndicator() {
+    region_indicator.update(physicsTimestep);
+}
+
 
 void updateGameState(FSM&) {
     SpriteWrapper::update();
@@ -100,7 +104,7 @@ void updateGameState(FSM&) {
 
     ControlStatus status = Controls::getStatus();
 
-    region_indicator.update(physicsTimestep);
+    updateRegionIndicator();
     if ((status.x != 0 || status.y != 0) && Player::mode() != PlayerMode::BoatMode) {
         if (checkGroundRegions(region_name)) {
             region_indicator.setMaxWidth(RenderSystem::getLineLength(region_name) + 8);

@@ -1,9 +1,9 @@
-- barracks can skip pathfinding checks
 
 - factory:
-	- disable turrets in tank factory until entry
-	- boss life for barracks in tank yard
-	- lock tank factory boss area on combat start
+	- disable shop on fight start
+	- enable shop on fight end
+	- give player some cash on fight complete
+    - make barracks spawn tanks
 	- make tanks fire missiles
 
 
