@@ -26,12 +26,14 @@ class EnemyHelicopter
 
     uint16_t m_counter = rand() % 100;
 
+    bool m_destroy_out_of_range;
+
     friend Enemy; // I suppose that makes Enemy the enemy of this's enemy?
 public:
 
     EnemyHelicopter() : m_aim(0, 0), m_origin(0, 0), m_steering(0.0f, 0.0f, &enemy_heli_steering) {}
 
-    void setup(const Vec2f &pos) { m_origin = Vec2i(pos.x(), pos.y()); m_life = 8; m_steering.setPos(pos); m_counter = rand() % 30; status = Mode::Walking; }
+    void setup(const Vec2f &pos) { m_origin = Vec2i(pos.x(), pos.y()); m_life = 8; m_steering.setPos(pos); m_counter = rand() % 30; status = Mode::Walking; m_destroy_out_of_range = true; }
 
     bool isFrom(const Vec2f &pos) { return (Vec2f(m_origin.x(), m_origin.y()) - pos).length() < 0.5f; }
 
@@ -44,6 +46,8 @@ public:
     void tick() { m_counter++; }
     int8_t * getLifePtr() { return &m_life; }
     void setMaxLife(int8_t l) { m_life = l; }
+
+    void disableDestroyOutOfRange() { m_destroy_out_of_range = false; }
 };
 
 #endif // ENEMYHELICOPTER_H

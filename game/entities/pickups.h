@@ -8,7 +8,7 @@
 
 class Pickups
 {
-    static ObjectPool<Pickups, 4> s_temporary;
+    static ObjectPool<Pickups, 8> s_temporary;
     static ObjectPool<Pickups, 12> s_special;
 
     static std::vector<uint16_t> s_acquired_specials; // store map indices of specials that have already been acquired

@@ -9,7 +9,7 @@ bool EnemyHelicopter::update(float dt)
 {
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::AirTarget});
 
-    if (!Camera::inActiveZone(m_steering.pos())) return false;
+    if (m_destroy_out_of_range && !Camera::inActiveZone(m_steering.pos())) return false;
     if (!Camera::inViewingZone(m_steering.pos())) return true;
 
     float px = Camera::tl_x();

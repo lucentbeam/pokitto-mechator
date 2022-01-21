@@ -26,6 +26,8 @@ void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t w
     m_life = s_max_life;
     m_collision_rect = Rect(m_left, m_top, m_width, m_height);
     m_spawn_timer = 80 + (rand() % 40);
+    m_checks_pathfinding = true;
+    m_destroy_out_of_range = true;
 
     // If this stuff ever changes, double-check the implementation in TiledMapReader!!!
     int idx = int(left)  + int(top) * 255;
@@ -37,8 +39,19 @@ void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t w
     }
 }
 
+void Barracks::disablePathfindingChecks()
+{
+    m_checks_pathfinding = false;
+}
+
+void Barracks::disableDestroyOutOfRange()
+{
+    m_destroy_out_of_range = false;
+}
+
 void Barracks::create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
 {
+    if (getBarracksAt(spawn) != nullptr) return;
     Barracks * b = s_barracks.activateNext();
     if (b == nullptr) {
         return;
@@ -50,13 +63,11 @@ void Barracks::update(float dt)
 {
     static uint16_t mask = Helpers::getMask({Targets::GroundTarget, Targets::EnemyTarget});
     s_barracks.iterate([&](Barracks * b) {
-        // check if already dead
-        if (MapManager::getTileAt(b->m_left, b->m_top) == 203) return false;
 
         b->m_flash.update();
 
         // check if out of range. if so: deactivate and restore and damaged tiles
-        if (!Camera::inActiveZone(b->m_spawn)) {
+        if (b->m_destroy_out_of_range && !Camera::inActiveZone(b->m_spawn)) {
             if (MapManager::getTileAt(b->m_left, b->m_top) != 203) {
                 switch (b->stage()) {
                 case Stage::DamagedStage:
@@ -120,9 +131,9 @@ void Barracks::update(float dt)
         if (b->m_spawn_count < 2) {
             b->m_spawn_timer--;
             if (b->m_spawn_timer <= 0) {
-                b->m_spawn_timer = 140 + (rand() % 60);
+                b->m_spawn_timer = asCounts(2.33f) + (rand() % asCounts(1.0f));
                 static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::LowWall, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
-                if (Pathfinding::canReach(b->m_spawn, Camera::center(), mask)) {
+                if (!b->m_checks_pathfinding || Pathfinding::canReach(b->m_spawn, Camera::center(), mask)) {
                     EnemyMech * m = Enemy::createMech(b->m_spawn);
                     ++b->m_spawn_count;
                     auto ptr = &b->m_spawn_count;

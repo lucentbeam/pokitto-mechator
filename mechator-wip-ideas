@@ -1,8 +1,12 @@
+- barracks can skip pathfinding checks
+
 - factory:
 	- disable turrets in tank factory until entry
 	- boss life for barracks in tank yard
 	- lock tank factory boss area on combat start
 	- make tanks fire missiles
+
+
 
 - pause screen:
   - weapon carousel

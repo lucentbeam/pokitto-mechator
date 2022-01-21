@@ -45,6 +45,7 @@ const SceneSequence intro_scene[] = {
     {SceneSequence::End, nullptr}
 };
 
+#include <iostream>
 const SceneFunc tb_f0 = SceneFunc([](){
     EnemyHelicopter * h = Enemy::createHelicopter({80 * 6, 14 * 6});
     EventScene::setTextSpeed(baseTextSpeedLPS / 2.0f);
@@ -55,7 +56,17 @@ const SceneFunc tb_f0 = SceneFunc([](){
     MapManager::setTileAt(51 * 6 + 3, 20 * 6 + 3, 218);
     MapManager::setTileAt(51 * 6 + 3, 21 * 6 + 3, 218);
     MapManager::setTileAt(51 * 6 + 3, 22 * 6 + 3, 218);
-    registerCallback({h->getLifePtr(),  Barracks::getBarracksAt({55, 11})->getLifePtr(), Barracks::getBarracksAt({69, 20})->getLifePtr()}, [](){
+    Barracks * b1 = Barracks::getBarracksAt({55, 11});
+    Barracks * b2 = Barracks::getBarracksAt({69, 20});
+    b1->disablePathfindingChecks();
+    b2->disablePathfindingChecks();
+
+    b1->disableDestroyOutOfRange();
+    b2->disableDestroyOutOfRange();
+
+    h->disableDestroyOutOfRange();
+
+    registerCallback({h->getLifePtr(), b1->getLifePtr(), b2->getLifePtr()}, [](){
         // release door as grass (86)
         MapManager::setTileAt(51 * 6 + 3, 19 * 6 + 3, 86);
         MapManager::setTileAt(51 * 6 + 3, 20 * 6 + 3, 86);

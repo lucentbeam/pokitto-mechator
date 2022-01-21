@@ -271,7 +271,6 @@ void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t overrid
     if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return;
     int mut_idx = 0;
     if (!canMutate(px, py, mut_idx)) {
-        std::cout << px << ", " << py << "? no can do " << std::endl;
         return;
     }
 
