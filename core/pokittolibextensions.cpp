@@ -91,12 +91,37 @@ namespace Pokitto {
             screeny = 0;
             offsety = -y;
         }
-        uint8_t* loc = Display::getBuffer() + 110 * screeny + screenx;
-        uint8_t* tloc = const_cast<uint8_t*>(tile) + offsetx;
-        for (int j = 0; j < screenh; j++) {
+        uint8_t* start = Display::getBuffer() + 110 * screeny + screenx;
+        uint8_t* end = Display::getBuffer() + 110 * (screeny + screenh) + screenx;
+        uint8_t* tloc = const_cast<uint8_t*>(tile) + offsetx + offsety * w;
+        for (uint8_t* loc = start; loc != end;  loc += 110) {
           std::memcpy(loc, tloc, screenw);
-          loc += 110;
           tloc += w;
+        }
+    }
+
+    void DisplayExtensions::fillRect(int x, int y, int w, int h, uint8_t color) {
+        if (y<-h || y>Display::height) return; //invisible
+        if (x<-w || x>Display::width) return;  //invisible
+        int screenh = std::min((int)h, Display::height- y);
+        int screenw = std::min((int)w, Display::width - x);
+        int screenx = x;
+        int offsetx = 0;
+        if (x < 0) {
+            screenx = 0;
+            offsetx = -x;
+            screenw -= offsetx;
+        }
+        int screeny = y;
+        int offsety = 0;
+        if (y < 0) {
+            screeny = 0;
+            offsety = -y;
+        }
+        uint8_t* start = Display::getBuffer() + 110 * screeny + screenx;
+        uint8_t* end = Display::getBuffer() + 110 * (screeny + screenh) + screenx;
+        for (uint8_t* loc = start; loc != end;  loc += 110) {
+          std::memset(loc, color, screenw);
         }
     }
 

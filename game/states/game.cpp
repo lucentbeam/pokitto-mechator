@@ -32,6 +32,10 @@ static Player player;
 UIElement region_indicator = UIElement::getExpander(57, 8, 30, 9, Tween::OutQuad);
 const char * region_name = "";
 
+static int8_t * life_list[5];
+static std::function<void()> active_callback;
+static int watchcount = 0;
+
 void goGame()
 {
     FSM::instance->go(GameStates::Game);
@@ -46,6 +50,21 @@ void goGame()
     UI::setVisibility(UI::Element::UIKeyCCount, false);
     UI::setVisibility(UI::Element::UIDollarCount, false);
     UI::setVisibility(UI::Element::UIHackingKitCount, false);
+}
+
+void checkForCallback() {
+    if (watchcount == 0) return;
+    for(int i = 0; i < 5; ++i) {
+        if (life_list[i] != nullptr) {
+            if (*(life_list[i]) <= 0) {
+                life_list[i] = nullptr;
+                watchcount--;
+            }
+        }
+    }
+    if (watchcount == 0) {
+        active_callback();
+    }
 }
 
 
@@ -71,10 +90,12 @@ void updateGameState(FSM&) {
     Camera::update(player.position().x(), player.position().y());
     MapManager::update();
 
-//    if (SequenceTrigger::checkForTriggers()) return;
+    if (SequenceTrigger::checkForTriggers()) return;
 
     SpawnPoint::setActiveRegion();
 //    CloudManager::update(physicsTimestep);
+
+    checkForCallback();
 
     ControlStatus status = Controls::getStatus();
 
@@ -130,7 +151,7 @@ void drawGameState() {
     });
 
     // debug
-//    static FPSHelper fps(10);
+//    static FPSHelper fps;
 //    fps.update();
 //    fps.draw(2, 1, 2, 9);
 }
@@ -171,4 +192,20 @@ void drawShadedGame(int shading)
 //    static FPSHelper fps(10);
 //    fps.update();
 //    fps.draw(2, 1, 2, 9);
+}
+
+void registerCallback(std::initializer_list<int8_t *> lifes, std::function<void ()> callback)
+{
+    int ct = 0;
+    watchcount = 0;
+    for(int8_t * l : lifes) {
+        life_list[ct] = l;
+        ++ct;
+        ++watchcount;
+    }
+    while (ct < 5) {
+        life_list[ct] = nullptr;
+        ++ct;
+    }
+    active_callback = callback;
 }

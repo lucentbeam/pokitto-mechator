@@ -141,6 +141,10 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
     game.display.fillRect(x0, y0, w, std::max(h-1,std::min(h,1))); // PokittoLib implementation is wrong
 }
 
+void RenderSystem::drawRect2(int x0, int y0, int w, int h, uint8_t color)
+{
+    Pokitto::DisplayExtensions::fillRect(x0, y0, w, h, color);
+}
 
 void RenderSystem::drawCircle(int x, int y, int r, int c)
 {
@@ -722,6 +726,11 @@ void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
             RenderSystem::pixel(i, j, color);
         }
     }
+}
+
+void RenderSystem::drawRect2(int x0, int y0, int w, int h, uint8_t color)
+{
+    drawRect(x0, y0, w + 1, h, color);
 }
 
 void RenderSystem::drawCircle(int x, int y, int r, int c)

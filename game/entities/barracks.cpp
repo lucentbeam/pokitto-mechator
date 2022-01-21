@@ -12,7 +12,7 @@
 
 #include "game/constants.h"
 
-ObjectPool<Barracks, 6> Barracks::s_barracks;
+SimplePool<Barracks, 6> Barracks::s_barracks;
 
 int8_t Barracks::s_max_life = 27;
 
@@ -48,34 +48,28 @@ void Barracks::create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t w
 
 void Barracks::update(float dt)
 {
-    int i = 0;
-    Barracks * start = s_barracks.objects();
     static uint16_t mask = Helpers::getMask({Targets::GroundTarget, Targets::EnemyTarget});
-    while (i < s_barracks.objectCount()) {
-
+    s_barracks.iterate([&](Barracks * b) {
         // check if already dead
-        if (MapManager::getTileAt(start[i].m_left, start[i].m_top) == 203) {
-            s_barracks.deactivate(i);
-            continue;
-        }
+        if (MapManager::getTileAt(b->m_left, b->m_top) == 203) return false;
 
-        start[i].m_flash.update();
+        b->m_flash.update();
 
         // check if out of range. if so: deactivate and restore and damaged tiles
-        if (!Camera::inActiveZone(start[i].m_spawn)) {
-            if (MapManager::getTileAt(start[i].m_left, start[i].m_top) != 203) {
-                switch (start[i].stage()) {
+        if (!Camera::inActiveZone(b->m_spawn)) {
+            if (MapManager::getTileAt(b->m_left, b->m_top) != 203) {
+                switch (b->stage()) {
                 case Stage::DamagedStage:
-                    for(int x = start[i].m_left; x < (start[i].m_width + start[i].m_left); x+=6) {
-                        for(int y = start[i].m_top; y < (start[i].m_height + start[i].m_top); y+=6) {
+                    for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
+                        for(int y = b->m_top; y < (b->m_height + b->m_top); y+=6) {
                             int t = MapManager::getTileAt(x, y);
                             MapManager::setTileAt(x, y, t - 4);
                         }
                     }
                     break;
                 case Stage::HeavyDamagedStage:
-                    for(int x = start[i].m_left; x < (start[i].m_width + start[i].m_left); x+=6) {
-                        for(int y = start[i].m_top; y < (start[i].m_height + start[i].m_top); y+=6) {
+                    for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
+                        for(int y = b->m_top; y < (b->m_height + b->m_top); y+=6) {
                             int t = MapManager::getTileAt(x, y);
                             MapManager::setTileAt(x, y, t - 8);
                         }
@@ -85,19 +79,18 @@ void Barracks::update(float dt)
                     break;
                 }
             }
-            s_barracks.deactivate(i);
-            continue;
+            return false;
         }
 
         // check for damage
         std::vector<Vec2f> hitlocs;
-        int damage = ProjectileManager::getCollisionDamage(start[i].m_collision_rect, mask, hitlocs);
-        Stage current = start[i].stage();
-        start[i].m_life -= damage;
-        if (start[i].m_life <= 0) {
+        int damage = ProjectileManager::getCollisionDamage(b->m_collision_rect, mask, hitlocs);
+        Stage current = b->stage();
+        b->m_life -= damage;
+        if (b->m_life <= 0) {
             int idx = 0;
-            for(int x = start[i].m_left; x < (start[i].m_width + start[i].m_left); x+=6) {
-                for(int y = start[i].m_top; y < (start[i].m_height + start[i].m_top); y+=6) {
+            for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
+                for(int y = b->m_top; y < (b->m_height + b->m_top); y+=6) {
                     MapManager::setTileAt(x, y, 203);
                     idx++;
                     if ((idx % 2) == 0) {
@@ -106,18 +99,17 @@ void Barracks::update(float dt)
                     }
                 }
             }
-            s_barracks.deactivate(i);
-            continue;
-        } else if (start[i].stage() != current) {
-            for(int x = start[i].m_left; x < (start[i].m_width + start[i].m_left); x+=6) {
-                for(int y = start[i].m_top; y < (start[i].m_height + start[i].m_top); y+=6) {
+            return false;
+        } else if (b->stage() != current) {
+            for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
+                for(int y = b->m_top; y < (b->m_height + b->m_top); y+=6) {
                     int t = MapManager::getTileAt(x, y);
                     MapManager::setTileAt(x, y, t + 4);
                 }
             }
         } else {
             if (damage > 0) {
-                start[i].m_flash.reset(5);
+                b->m_flash.reset(5);
                 for(auto p : hitlocs) {
                     EffectManager::createHit(p - Vec2f(3.5f, 3.5f));
                 }
@@ -125,16 +117,16 @@ void Barracks::update(float dt)
         }
 
         // decrement counter and check for spawns
-        if (start[i].m_spawn_count < 2) {
-            start[i].m_spawn_timer--;
-            if (start[i].m_spawn_timer <= 0) {
-                start[i].m_spawn_timer = 140 + (rand() % 60);
+        if (b->m_spawn_count < 2) {
+            b->m_spawn_timer--;
+            if (b->m_spawn_timer <= 0) {
+                b->m_spawn_timer = 140 + (rand() % 60);
                 static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::LowWall, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
-                if (Pathfinding::canReach(start[i].m_spawn, Camera::center(), mask)) {
-                    EnemyMech * m = Enemy::createMech(start[i].m_spawn);
-                    ++start[i].m_spawn_count;
-                    auto ptr = &start[i].m_spawn_count;
-                    auto ptr2 = barracks_data + start[i].m_barracks_index;
+                if (Pathfinding::canReach(b->m_spawn, Camera::center(), mask)) {
+                    EnemyMech * m = Enemy::createMech(b->m_spawn);
+                    ++b->m_spawn_count;
+                    auto ptr = &b->m_spawn_count;
+                    auto ptr2 = barracks_data + b->m_barracks_index;
                     m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
                     m->setDeactivateCallback([=](){
                         --(*ptr);
@@ -146,9 +138,8 @@ void Barracks::update(float dt)
             }
         }
 
-
-        ++i;
-    }
+        return true;
+    });
 }
 
 void Barracks::draw()
@@ -158,6 +149,24 @@ void Barracks::draw()
             Vec2f p = Camera::worldToScreen(Vec2f(b->m_left, b->m_top));
             Helpers::drawNotchedRect(p.x(), p.y(), b->m_width, b->m_height, 10);
         }
-        return false;
+        return true;
     });
+}
+
+int8_t *Barracks::getLifePtr()
+{
+    return &m_life;
+}
+
+Barracks *Barracks::getBarracksAt(Vec2i loc)
+{
+    loc *= 6;
+    Barracks * out = nullptr;
+    s_barracks.iterate([&](Barracks * b) {;
+        if (b->m_collision_rect.contains(loc.x(), loc.y())) {
+            out = b;
+        }
+        return true;
+    });
+    return out;
 }

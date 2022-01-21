@@ -68,6 +68,7 @@ public:
     static void drawLine(int x0, int y0, int x1, int y1, uint8_t color);
 
     static void drawRect(int x0, int y0, int w, int h, uint8_t color);
+    static void drawRect2(int x0, int y0, int w, int h, uint8_t color);
 
     static void drawCircle(int x, int y, int r, int color);
 

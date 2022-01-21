@@ -1,14 +1,3 @@
-
-- optimizations ?
-  - speed up mutable lookup? shortcuts to mutable tile indices
-  - RLE world tiles
-
-- register boss entities:
-  - getBarracksAt() function
-  - register func for when all are destroyed (unlock door)
-  
-- lock tutorial boss area on combat start
-
 - factory:
 	- disable turrets in tank factory until entry
 	- boss life for barracks in tank yard
@@ -21,10 +10,16 @@
 
 - world map & sky layer greebles
 
+- tweak SFX channels:
+  - two bullet channels
+  - one channel for damage and misc effects
+  - two explosion channels
 - la musica
 
 - playthroughs!!
 - tweaks:
+  - barracks spawns, various enemy timers:
+    - make more aggressive as they take damage from player (increment counters?)
   - offscreen enemies don't fire
   - "low wall" to put near turrets
   - faster fire rates altogether

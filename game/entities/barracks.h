@@ -12,7 +12,7 @@ class Barracks
 {
     enum Stage { DefaultStage, DamagedStage, HeavyDamagedStage };
 
-    static ObjectPool<Barracks, 6> s_barracks;
+    static SimplePool<Barracks, 6> s_barracks;
 
     static int8_t s_max_life;
 
@@ -40,6 +40,10 @@ public:
     static void update(float dt);
 
     static void draw();
+
+    int8_t * getLifePtr();
+
+    static Barracks * getBarracksAt(Vec2i loc);
 };
 
 template <int l, int t, int w, int h>

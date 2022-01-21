@@ -16,6 +16,8 @@ namespace Pokitto {
 
         static void drawTile(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* tile);
 
+        static void fillRect(int x, int y, int w, int h, uint8_t color);
+
         static void spriteWrapped(int x, int y, const uint8_t * sprite, int transparent_color);
 
         static void drawCenterScaled(int xc, int yc, const uint8_t* sprite, float scale, int transparent_color, float yscale);

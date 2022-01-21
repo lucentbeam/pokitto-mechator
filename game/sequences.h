@@ -7,6 +7,9 @@
 #include "game/utilities/sceneobjects.h"
 #include "game/entities/enemy.h"
 #include "game/states/eventscene.h"
+#include "game/states/game.h"
+
+#include "game/entities/barracks.h"
 
 const SceneWait wait60 = SceneWait(60);
 
@@ -47,6 +50,18 @@ const SceneFunc tb_f0 = SceneFunc([](){
     EventScene::setTextSpeed(baseTextSpeedLPS / 2.0f);
     h->setMaxLife(18);
     UI::showBoss(h->getLifePtr());
+    // set door behind player (218) on (51,19) through (51, 22)
+    MapManager::setTileAt(51 * 6 + 3, 19 * 6 + 3, 218);
+    MapManager::setTileAt(51 * 6 + 3, 20 * 6 + 3, 218);
+    MapManager::setTileAt(51 * 6 + 3, 21 * 6 + 3, 218);
+    MapManager::setTileAt(51 * 6 + 3, 22 * 6 + 3, 218);
+    registerCallback({h->getLifePtr(),  Barracks::getBarracksAt({55, 11})->getLifePtr(), Barracks::getBarracksAt({69, 20})->getLifePtr()}, [](){
+        // release door as grass (86)
+        MapManager::setTileAt(51 * 6 + 3, 19 * 6 + 3, 86);
+        MapManager::setTileAt(51 * 6 + 3, 20 * 6 + 3, 86);
+        MapManager::setTileAt(51 * 6 + 3, 21 * 6 + 3, 86);
+        MapManager::setTileAt(51 * 6 + 3, 22 * 6 + 3, 86);
+    });
     EventScene::registerUpdate([h](){
         h->tick();
         Vec2f d = Camera::center() - h->getSteering().pos();

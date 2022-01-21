@@ -66,9 +66,11 @@ template<int TileWidth, int TileHeight>
 bool Tilemap<TileWidth, TileHeight>::canMutate(int x, int y, int &store_idx) const
 {
     const uint16_t * idx = m_mutable_indices;
-    idx += m_mutable_index_indices[(y/(m_mapwidth * 8))];
     int map_index = x + y * m_mapwidth;
-    store_idx = 0;
+    int offset = (map_index/(m_mapwidth * 8));
+    offset = m_mutable_index_indices[offset];
+    idx += offset;
+    store_idx = offset;
     while (map_index > *idx) {
         idx++;
         store_idx++;
@@ -258,7 +260,6 @@ uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
     return *tile;
 }
 
-
 template<int TileWidth, int TileHeight>
 void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t override)
 {
@@ -270,6 +271,7 @@ void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t overrid
     if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return;
     int mut_idx = 0;
     if (!canMutate(px, py, mut_idx)) {
+        std::cout << px << ", " << py << "? no can do " << std::endl;
         return;
     }
 

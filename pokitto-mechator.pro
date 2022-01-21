@@ -6,6 +6,7 @@ CONFIG -= qt
 SOURCES += \
     core/rendering/spritewrapper.cpp \
     core/utilities/babyfsm.cpp \
+    core/utilities/fpshelper.cpp \
     game/entities/barracks.cpp \
     game/entities/enemies/enemybomber.cpp \
     game/entities/enemies/enemyhelicopter.cpp \

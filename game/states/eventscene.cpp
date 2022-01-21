@@ -113,6 +113,7 @@ void EventScene::update(FSM &fsm)
     }
 
     Camera::update(Player::position().x(), Player::position().y());
+    MapManager::update();
 }
 
 void EventScene::draw()
