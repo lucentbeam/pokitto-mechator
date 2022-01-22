@@ -4,7 +4,7 @@
 #include "core/utilities/babyfsm.h"
 #include "core//rendersystem.h"
 
-void goPause();
+void goPause(bool from_map = false);
 
 void updatePauseState(FSM &fsm);
 

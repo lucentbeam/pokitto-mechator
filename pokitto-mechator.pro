@@ -35,6 +35,7 @@ SOURCES += \
     game/states/collectblueprintprompt.cpp \
     game/states/eventscene.cpp \
     game/states/game.cpp \
+    game/states/mapviewer.cpp \
     game/states/opendoorprompt.cpp \
     game/states/openshopprompt.cpp \
     game/states/pause.cpp \
@@ -104,6 +105,7 @@ HEADERS += \
     game/states/collectblueprintprompt.h \
     game/states/eventscene.h \
     game/states/game.h \
+    game/states/mapviewer.h \
     game/states/opendoorprompt.h \
     game/states/openshopprompt.h \
     game/states/pause.h \

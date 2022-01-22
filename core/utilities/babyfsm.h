@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-const uint8_t maxStates = 9;
+const uint8_t maxStates = 10;
 
 class FSM {
     void (*updates[maxStates])(FSM&);
