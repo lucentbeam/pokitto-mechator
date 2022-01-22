@@ -1,14 +1,7 @@
 
-- factory:
-	- give player some cash on fight complete
-    - make barracks spawn tanks
-	- make tanks fire missiles
-
-
-
 - pause screen:
-  - weapon carousel
   - map subscreen
+  - rework visuals
 
 - world map & sky layer greebles
 
@@ -17,6 +10,8 @@
   - one channel for damage and misc effects
   - two explosion channels
 - la musica
+
+- make first tank build free
 
 - playthroughs!!
 - tweaks:

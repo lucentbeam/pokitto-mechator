@@ -20,7 +20,6 @@
 
 #include "game/weapons.h"
 
-
 const SteeringConfig steering_soldier(soldierSpeed, 1.0,
        (1 << Terrain::Wall) | (1 << Terrain::WaterDeep) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
        4, 4);
@@ -38,6 +37,13 @@ const SteeringConfig steering_boat(boatSpeed, boatCornering,
        12, 12, boatFriction);
 
 const SteeringConfig steering_heli(heliSpeed, heliCornering, 0, 14, 14, heliFriction);
+
+struct WeaponHelper {
+    int index = 0;
+    int count = 0;
+
+    static WeaponHelper getIndexAndMax(int current, int owned);
+};
 
 class Player;
 
@@ -229,6 +235,8 @@ public:
     static Weapon::Type currentWeapon();
     static void cycleWeaponNext();
     static void cycleWeaponPrev();
+
+    static WeaponHelper getCurrentWeaponInfo();
 
     static bool weaponCooldown(float dt);    
 

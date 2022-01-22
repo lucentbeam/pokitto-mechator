@@ -6,6 +6,19 @@
 
 static uint32_t mode_switch_counter = 0;
 
+
+WeaponHelper WeaponHelper::getIndexAndMax(int current, int owned)
+{
+    WeaponHelper h;
+    for(int i = 0; i < 16; ++i) {
+        if (current & 1 & owned) h.index = h.count;
+        if (owned & 1) h.count++;
+        current = current >> 1;
+        owned = owned >> 1;
+    }
+    return h;
+}
+
 Vehicle::Vehicle(int8_t hp, float x, float y, const SteeringConfig * config) :
     m_steering(x, y, config),
     m_health(0, hp),
@@ -14,10 +27,8 @@ Vehicle::Vehicle(int8_t hp, float x, float y, const SteeringConfig * config) :
 
 }
 
-
-
 Soldier Soldier::s_instance;
-int Soldier::s_owned_weapons = Weapon::Gun;
+int Soldier::s_owned_weapons = Weapon::Gun | Weapon::DualShot | Weapon::Missiles;
 #ifdef DEBUGS
 Weapon::Type Soldier::s_current_weapon = Weapon::MultiMissiles;
 #else
@@ -515,6 +526,22 @@ void Player::cycleWeaponPrev()
     }
 }
 
+WeaponHelper Player::getCurrentWeaponInfo()
+{
+    switch (s_mode) {
+    case PlayerMode::JeepMode:
+        return WeaponHelper::getIndexAndMax(Jeep::s_current_weapon, Jeep::s_owned_weapons);
+    case PlayerMode::HelicopterMode:
+        return WeaponHelper::getIndexAndMax(Helicopter::s_current_weapon, Helicopter::s_owned_weapons);
+    case PlayerMode::TankMode:
+        return WeaponHelper::getIndexAndMax(Tank::s_current_weapon, Tank::s_owned_weapons);
+    case PlayerMode::BoatMode:
+        return WeaponHelper::getIndexAndMax(Boat::s_current_weapon, Boat::s_owned_weapons);
+    default:
+        return WeaponHelper::getIndexAndMax(Soldier::s_current_weapon, Soldier::s_owned_weapons);
+    }
+}
+
 bool Player::weaponCooldown(float dt)
 {
     s_shot_cooldown -= dt;
@@ -540,3 +567,4 @@ void Player::drawReticle(PlayerMode mode, const Vec2f &dir)
         fcounter = 0;
     }
 }
+

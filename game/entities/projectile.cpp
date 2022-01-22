@@ -139,10 +139,8 @@ void ProjectileManager::update(float dt)
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal});
     int i = s_projectiles.objectCount() - 1;
     Projectile * start = s_projectiles.objects();
-    static int spacer = 0;
-    spacer++;
     while (i >= 0) {
-        bool hitWall = (i % 2) == (spacer % 2) && !start[i].ignore_walls && CollisionManager::collision(start[i].pos(), mask, Vec2f(2,2));
+        bool hitWall = !start[i].ignore_walls && CollisionManager::collision(start[i].pos(), mask, Vec2f(2,2));
         if (start[i].expired() || hitWall) {
             start[i].onExpire();
             s_projectiles.deactivate(i);
