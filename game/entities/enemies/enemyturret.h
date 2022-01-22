@@ -18,6 +18,7 @@ class EnemyTurret
     uint16_t m_counter = rand() % 100;
 
     bool m_disabled = false;
+    bool m_ignore_out_of_range;
 
     friend Enemy; // I suppose that makes Enemy the enemy of this's enemy?
 public:
@@ -27,9 +28,12 @@ public:
     void setup(const Vec2f &pos);
     void setDisabled(bool disable);
 
+    void disableOutOfRangeChecks() { m_ignore_out_of_range = true; }
+
     Rect rect() const { return Rect(m_pos.x(), m_pos.y(), Bounds(12, 12)); }
 
     int8_t life() const { return m_life; }
+    int8_t * getLifePtr() { return &m_life; }
 
     bool update(float dt);
     void draw() const;

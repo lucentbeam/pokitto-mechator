@@ -16,6 +16,9 @@ constexpr int asCounts(float time) {
 const float baseTextSpeedLPS = 25.0f;
 const float cameraCutsceneSpeed = 12.0f;
 
+constexpr int tankUnlockCost = 5;
+constexpr int tankBuildCost = 15;
+
 const int barracksMaxMoneyDrops = 5;
 
 const float enemyHeliSpeed = 20.0f;
@@ -58,10 +61,10 @@ const char * const bp_names[] = {
 };
 
 const int bp_costs[] = {
-    100, // jeep
-    1, // tank
-    1, // boat
-    1, // heli
+    0, // jeep
+    0, // tank
+    0, // boat
+    0, // heli
     1, // gemini gun
     1, // tactical armor
     1, // ninja shoes

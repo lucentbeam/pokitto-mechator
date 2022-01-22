@@ -8,6 +8,7 @@
 ObjectPool<POIs, 6> POIs::s_pois;
 std::vector<uint16_t> POIs::s_activated;
 POIs * POIs::s_current_active_poi = nullptr;
+bool POIs::s_disable_shops = false;
 
 void POIs::configure(const Vec2f &pos, SpriteName spr)
 {
@@ -95,6 +96,7 @@ void POIs::update(float dt)
             if (s_current_active_poi != p) {
                 s_current_active_poi = p;
                 if (p->m_door_type == Shop) {
+                    if (s_disable_shops) continue;
                     if (mapIndexUnopened(p->m_position)) {
                         showOpenShopPrompt();
                     } else {
@@ -120,6 +122,7 @@ void POIs::draw()
 {
     for(int i = s_pois.objectCount() - 1; i >= 0; --i) {
         POIs * p = s_pois.objects() + i;
+        if (p->m_door_type == Shop && s_disable_shops) continue;
         Vec2f pos = Camera::worldToScreen(p->m_position);
         RenderSystem::sprite(pos.x(), pos.y(), p->m_sprite.data());
     }

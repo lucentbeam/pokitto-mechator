@@ -28,6 +28,7 @@ void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t w
     m_spawn_timer = 80 + (rand() % 40);
     m_checks_pathfinding = true;
     m_destroy_out_of_range = true;
+    m_spawns_tanks = false;
 
     // If this stuff ever changes, double-check the implementation in TiledMapReader!!!
     int idx = int(left)  + int(top) * 255;
@@ -47,6 +48,11 @@ void Barracks::disablePathfindingChecks()
 void Barracks::disableDestroyOutOfRange()
 {
     m_destroy_out_of_range = false;
+}
+
+void Barracks::setSpawnsTanks()
+{
+    m_spawns_tanks = true;
 }
 
 void Barracks::create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
@@ -134,17 +140,32 @@ void Barracks::update(float dt)
                 b->m_spawn_timer = asCounts(2.33f) + (rand() % asCounts(1.0f));
                 static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::LowWall, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
                 if (!b->m_checks_pathfinding || Pathfinding::canReach(b->m_spawn, Camera::center(), mask)) {
-                    EnemyMech * m = Enemy::createMech(b->m_spawn);
-                    ++b->m_spawn_count;
-                    auto ptr = &b->m_spawn_count;
-                    auto ptr2 = barracks_data + b->m_barracks_index;
-                    m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
-                    m->setDeactivateCallback([=](){
-                        --(*ptr);
-                        if (*ptr2 < 5) {
-                            ++(*ptr2);
-                        }
-                    });
+                    if (b->m_spawns_tanks) {
+                        EnemyTank * m = Enemy::createTank(b->m_spawn);
+                        m->setMissiles();
+                        ++b->m_spawn_count;
+                        auto ptr = &b->m_spawn_count;
+                        auto ptr2 = barracks_data + b->m_barracks_index;
+                        m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
+                        m->setDeactivateCallback([=](){
+                            --(*ptr);
+                            if (*ptr2 < 5) {
+                                ++(*ptr2);
+                            }
+                        });
+                    } else {
+                        EnemyMech * m = Enemy::createMech(b->m_spawn);
+                        ++b->m_spawn_count;
+                        auto ptr = &b->m_spawn_count;
+                        auto ptr2 = barracks_data + b->m_barracks_index;
+                        m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
+                        m->setDeactivateCallback([=](){
+                            --(*ptr);
+                            if (*ptr2 < 5) {
+                                ++(*ptr2);
+                            }
+                        });
+                    }
                 }
             }
         }

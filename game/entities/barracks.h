@@ -28,7 +28,7 @@ class Barracks
     int8_t m_spawn_count = 0;
     int16_t m_barracks_index = 0;
     Ticker m_flash;
-    bool m_checks_pathfinding, m_destroy_out_of_range;
+    bool m_checks_pathfinding, m_destroy_out_of_range, m_spawns_tanks;
 
     Stage stage() const { return m_life > s_max_life * 2 / 3 ? DefaultStage : m_life > s_max_life / 3 ? DamagedStage : HeavyDamagedStage; }
 
@@ -40,11 +40,13 @@ public:
 
     void disableDestroyOutOfRange();
 
+    void setSpawnsTanks();
+
     static void create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height);
 
     static void update(float dt);
 
-    static void draw();
+    static void draw();    
 
     int8_t * getLifePtr();
 

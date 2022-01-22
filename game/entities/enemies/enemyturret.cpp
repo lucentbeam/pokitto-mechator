@@ -12,6 +12,7 @@ void EnemyTurret::setup(const Vec2f &pos) {
         m_life = 0;
     }
     m_disabled = false;
+    m_ignore_out_of_range = false;
 }
 
 void EnemyTurret::setDisabled(bool disable)
@@ -23,7 +24,7 @@ bool EnemyTurret::update(float dt)
 {
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
-    if (!Camera::inActiveZone(m_pos)) return false;
+    if (!m_ignore_out_of_range && !Camera::inActiveZone(m_pos)) return false;
     if (m_disabled || m_life <= 0) return true;
     if (!Camera::inViewingZone(m_pos)) return true;
 

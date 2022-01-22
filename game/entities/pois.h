@@ -11,6 +11,8 @@ class POIs
 
     static POIs * s_current_active_poi;
 
+    static bool s_disable_shops;
+
     Vec2f m_position{0,0};
 
     Vec2f m_jeep_loc{0,0};
@@ -41,6 +43,8 @@ public:
     static void update(float dt);
 
     static void draw();
+
+    static void setShopsDisabled(bool disable) { s_disable_shops = disable; }
 
     static Vec2f pos(PlayerMode mode = PlayerMode::SoldierMode);
 };

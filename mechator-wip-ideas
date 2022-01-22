@@ -1,7 +1,5 @@
 
 - factory:
-	- disable shop on fight start
-	- enable shop on fight end
 	- give player some cash on fight complete
     - make barracks spawn tanks
 	- make tanks fire missiles

@@ -9,7 +9,7 @@
 #include "game/maps/worldmutables.h"
 
 ObjectPool<Pickups, 8> Pickups::s_temporary;
-ObjectPool<Pickups, 12> Pickups::s_special;
+ObjectPool<Pickups, 6> Pickups::s_special;
 
 std::vector<uint16_t> Pickups::s_acquired_specials;
 

@@ -32,7 +32,7 @@ static Player player;
 UIElement region_indicator = UIElement::getExpander(57, 8, 30, 9, Tween::OutQuad);
 const char * region_name = "";
 
-static int8_t * life_list[5] = {nullptr};
+static int8_t * life_list[7] = {nullptr};
 static std::function<void()> active_callback;
 static int watchcount = 0;
 
@@ -52,10 +52,9 @@ void goGame()
     UI::setVisibility(UI::Element::UIHackingKitCount, false);
 }
 
-#include <iostream>
 void checkForCallback() {
     if (watchcount == 0) return;
-    for(int i = 0; i < 5; ++i) {
+    for(int i = 0; i < 7; ++i) {
         if (life_list[i] != nullptr) {
             if (*(life_list[i]) <= 0) {
                 life_list[i] = nullptr;
@@ -208,7 +207,7 @@ void registerCallback(std::initializer_list<int8_t *> lifes, std::function<void 
         ++ct;
         ++watchcount;
     }
-    while (ct < 5) {
+    while (ct < 7) {
         life_list[ct] = nullptr;
         ++ct;
     }

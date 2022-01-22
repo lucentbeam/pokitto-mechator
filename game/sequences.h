@@ -10,6 +10,8 @@
 #include "game/states/game.h"
 #include "game/entities/barracks.h"
 #include "game/constants.h"
+#include "game/entities/pois.h"
+#include "game/variables.h"
 
 const SceneWait wait60 = SceneWait(asCounts(1.0f));
 const SceneWait wait30 = SceneWait(asCounts(0.5f));
@@ -124,16 +126,25 @@ const SceneDialogue tt_dlog8 = SceneDialogue("NICE SAVE.", nullptr, true, true);
 const SceneDialogue tt_dlog9 = SceneDialogue("THANK YOU.", nullptr, true, true);
 
 const SceneFunc tt_f0 = SceneFunc([](){
-    // enable all turrets;
-    // configure barracks to boss life
+    Barracks::getBarracksAt({27, 99})->setSpawnsTanks();
+
+    Barracks::getBarracksAt({27, 99})->disablePathfindingChecks();
+    Barracks::getBarracksAt({25, 99})->disablePathfindingChecks();
+    Barracks::getBarracksAt({30, 99})->disablePathfindingChecks();
+
     UI::showBoss(Barracks::getBarracksAt({27, 99})->getLifePtr());
-    Enemy::getTurretAt({19, 94})->setDisabled(false);
-    Enemy::getTurretAt({19, 105})->setDisabled(false);
-    Enemy::getTurretAt({35, 94})->setDisabled(false);
-    Enemy::getTurretAt({35, 105})->setDisabled(false);
+    EnemyTurret * t1 = Enemy::getTurretAt({19, 94}); t1->setDisabled(false); t1->disableOutOfRangeChecks();
+    EnemyTurret * t2 = Enemy::getTurretAt({19, 105}); t2->setDisabled(false); t2->disableOutOfRangeChecks();
+    EnemyTurret * t3 = Enemy::getTurretAt({35, 94}); t3->setDisabled(false); t3->disableOutOfRangeChecks();
+    EnemyTurret * t4 = Enemy::getTurretAt({35, 105}); t4->setDisabled(false); t4->disableOutOfRangeChecks();
     MapManager::setTileAt(26 * 6 + 3, 110 * 6 + 3, 236);
     MapManager::setTileAt(27 * 6 + 3, 110 * 6 + 3, 236);
     MapManager::setTileAt(28 * 6 + 3, 110 * 6 + 3, 236);
+    POIs::setShopsDisabled(true);
+
+    registerCallback({t1->getLifePtr(), t2->getLifePtr(), t3->getLifePtr(), t4->getLifePtr(), Barracks::getBarracksAt({27, 99})->getLifePtr(), Barracks::getBarracksAt({25, 99})->getLifePtr(), Barracks::getBarracksAt({30, 99})->getLifePtr()}, [](){
+        POIs::setShopsDisabled(false);
+    });
     return true;
 });
 

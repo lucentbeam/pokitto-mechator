@@ -482,7 +482,7 @@
   <object id="40" name="door_none_5_4_1_3" x="666.75" y="481.188" width="3.5" height="4.125"/>
   <object id="44" name="door_none_-6_7_5_3" x="955.25" y="282.688" width="3.5" height="4.125"/>
   <object id="45" name="door_none_20_4_3_3" x="835.159" y="834.722" width="3.5" height="4.125"/>
-  <object id="46" name="blueprint_1" x="169.341" y="594.892" width="3.5" height="4.125"/>
+  <object id="46" name="blueprint_1" x="169.341" y="595.142" width="3.5" height="4.125"/>
   <object id="47" name="blueprint_2" x="966.977" y="1254.77" width="3.5" height="4.125"/>
   <object id="48" name="door_none_-62_-162_3_8" x="997.5" y="1206.94" width="3.5" height="4.125"/>
   <object id="49" name="enemy_mine" x="138.594" y="246.912" width="4.8125" height="4.4375"/>
