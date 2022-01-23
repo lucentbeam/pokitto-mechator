@@ -46,6 +46,7 @@
 		{ "output" : "parachute" },
 		
 		{ "output" : "portrait_enemy", "hcount": 2},
+		{ "output" : "portrait_enemy_cpu", "hcount": 5},
 		
 		{ "output" : "ui_icons", "hcount": 4},
 		{ "output" : "ui_arrow_left"}

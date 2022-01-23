@@ -38,11 +38,15 @@ struct SceneFunc {
 struct SceneDialogue {
     const char * const text1;
     const char * const text2;
-    bool enemy;
+    enum Portrait {
+        Base,
+        EnemyPilot,
+        EnemyCPU
+    } portrait;
     bool close;
     bool twoLines() const { return text2 != nullptr; }
     int length() const { return std::strlen(text1) + (text2 == nullptr ? 0 : std::strlen(text2)); }
-    constexpr SceneDialogue(const char * const txt, const char * const txt2 = nullptr, bool e = true, bool c = true) : text1(txt), text2(txt2), enemy(e), close(c) {}
+    constexpr SceneDialogue(const char * const txt, const char * const txt2 = nullptr, Portrait e = Base, bool c = true) : text1(txt), text2(txt2), portrait(e), close(c) {}
 };
 
 #endif // SCENEOBJECTS_H

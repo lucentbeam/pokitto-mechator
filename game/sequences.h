@@ -26,13 +26,13 @@ const SceneFunc func1 = SceneFunc([](){
     Soldier::setZ(z);
     return toLand.done();
 });
-const SceneDialogue dlog0 = SceneDialogue("Soldier!       ","Can you hear me?", false, false);
-const SceneDialogue dlog1 = SceneDialogue("This is central.", nullptr, false, false);
-const SceneDialogue dlog2 = SceneDialogue("You're in enemy","territory now.", false, false);
-const SceneDialogue dlog3 = SceneDialogue("Find their shops!       ","Hack them. Use them.", false, false);
-const SceneDialogue dlog4 = SceneDialogue("You can build your","own weapons...", false, false);
-const SceneDialogue dlog5 = SceneDialogue("...and infiltrate!",nullptr, false, false);
-const SceneDialogue dlog6 = SceneDialogue("Good luck.        ", "Central out.", false, true);
+const SceneDialogue dlog0 = SceneDialogue("Soldier!       ","Can you hear me?", SceneDialogue::Base, false);
+const SceneDialogue dlog1 = SceneDialogue("This is central.", nullptr, SceneDialogue::Base, false);
+const SceneDialogue dlog2 = SceneDialogue("You're in enemy","territory now.", SceneDialogue::Base, false);
+const SceneDialogue dlog3 = SceneDialogue("Find their shops!       ","Hack them. Use them.", SceneDialogue::Base, false);
+const SceneDialogue dlog4 = SceneDialogue("You can build your","own weapons...", SceneDialogue::Base, false);
+const SceneDialogue dlog5 = SceneDialogue("...and infiltrate!",nullptr, SceneDialogue::Base, false);
+const SceneDialogue dlog6 = SceneDialogue("Good luck.        ", "Central out.", SceneDialogue::Base, true);
 
 const SceneSequence intro_scene[] = {
     {SceneSequence::DoFunction, &func0},
@@ -92,9 +92,9 @@ const SceneMoveCam cam_return = SceneMoveCam(cameraCutsceneSpeed);
 
 const SceneMoveCam tb_m0 = SceneMoveCam(cameraCutsceneSpeed, {65, 15});
 
-const SceneDialogue tb_dlog0 = SceneDialogue("INFILTRATOR!",nullptr, true, false);
-const SceneDialogue tb_dlog1 = SceneDialogue("YOU WILL GET", "NO FURTHER.", true, false);
-const SceneDialogue tb_dlog2 = SceneDialogue("NOR FARTHER,   ", "FOR THAT MATTER.", true, true);
+const SceneDialogue tb_dlog0 = SceneDialogue("INFILTRATOR!",nullptr, SceneDialogue::EnemyPilot, false);
+const SceneDialogue tb_dlog1 = SceneDialogue("YOU WILL GET", "NO FURTHER.", SceneDialogue::EnemyPilot, false);
+const SceneDialogue tb_dlog2 = SceneDialogue("NOR FARTHER,   ", "FOR THAT MATTER.", SceneDialogue::EnemyPilot, true);
 
 const SceneSequence tutorial_boss_scene[] = {
     {SceneSequence::DoFunction, &tb_f0},
@@ -110,20 +110,20 @@ const SceneSequence tutorial_boss_scene[] = {
 const SceneMoveCam tt_m0 = SceneMoveCam(cameraCutsceneSpeed, {27, 99});
 const SceneMoveCam tt_m1 = SceneMoveCam(cameraCutsceneSpeed, {19, 94});
 
-const SceneDialogue tt_dlog0 = SceneDialogue("IT IS INFILTRATOR!",nullptr, true, false);
-const SceneDialogue tt_dlog1 = SceneDialogue("YOU HAVE COME FOR", "TANK BLUEPRINTS, YES?", true, false);
-const SceneDialogue tt_dlog2 = SceneDialogue("TOO BAD.", nullptr, true, false);
-const SceneDialogue tt_dlog3 = SceneDialogue("THEY HAVE ALREADY", "BEEN RELOCATED.", true, false);
-const SceneDialogue tt_dlog4 = SceneDialogue("NOW TO RELOCATE YOU.", nullptr, true, true);
+const SceneDialogue tt_dlog0 = SceneDialogue("IT IS INFILTRATOR!",nullptr, SceneDialogue::EnemyCPU, false);
+const SceneDialogue tt_dlog1 = SceneDialogue("YOU HAVE COME FOR", "TANK BLUEPRINTS, YES?", SceneDialogue::EnemyCPU, false);
+const SceneDialogue tt_dlog2 = SceneDialogue("TOO BAD.", nullptr, SceneDialogue::EnemyCPU, false);
+const SceneDialogue tt_dlog3 = SceneDialogue("THEY HAVE ALREADY", "BEEN RELOCATED.", SceneDialogue::EnemyCPU, false);
+const SceneDialogue tt_dlog4 = SceneDialogue("NOW TO RELOCATE YOU.", nullptr, SceneDialogue::EnemyCPU, true);
 
-const SceneDialogue tt_dlog5 = SceneDialogue("      ??????", nullptr, true, true);
+const SceneDialogue tt_dlog5 = SceneDialogue("      ??????", nullptr, SceneDialogue::EnemyPilot, true);
 
-const SceneDialogue tt_dlog6 = SceneDialogue("TO...    ", "    ...umm...", true, true);
-const SceneDialogue tt_dlog7 = SceneDialogue("THE AFTERLIFE!", nullptr, true, true);
+const SceneDialogue tt_dlog6 = SceneDialogue("TO...    ", "    ...umm...", SceneDialogue::EnemyCPU, true);
+const SceneDialogue tt_dlog7 = SceneDialogue("THE AFTERLIFE!", nullptr, SceneDialogue::EnemyCPU, true);
 
-const SceneDialogue tt_dlog8 = SceneDialogue("NICE SAVE.", nullptr, true, true);
+const SceneDialogue tt_dlog8 = SceneDialogue("NICE SAVE.", nullptr, SceneDialogue::EnemyPilot, true);
 
-const SceneDialogue tt_dlog9 = SceneDialogue("THANK YOU.", nullptr, true, true);
+const SceneDialogue tt_dlog9 = SceneDialogue("THANK YOU.", nullptr, SceneDialogue::EnemyCPU, true);
 
 const SceneFunc tt_f0 = SceneFunc([](){
     Barracks::getBarracksAt({27, 99})->setSpawnsTanks();
@@ -185,14 +185,14 @@ const SceneSequence tank_boss_scene[] = {
 
 const SceneMoveCam by_m0 = SceneMoveCam(cameraCutsceneSpeed, {165, 206});
 
-const SceneDialogue by_dlog0 = SceneDialogue("Soldier, come in.", nullptr, false, false);
+const SceneDialogue by_dlog0 = SceneDialogue("Soldier, come in.", nullptr, SceneDialogue::Base, false);
 //const SceneDialogue dlog1 = SceneDialogue("This is central.", nullptr, false, false);
-const SceneDialogue by_dlog2 = SceneDialogue("Great job making it", "to the boat yard.", false, true);
+const SceneDialogue by_dlog2 = SceneDialogue("Great job making it", "to the boat yard.", SceneDialogue::Base, true);
 
-const SceneDialogue by_dlog3 = SceneDialogue("But it looks like","it's out of order.", false, true);
-const SceneDialogue by_dlog4 = SceneDialogue("Get the blueprint","and hit that switch.", false, false);
-const SceneDialogue by_dlog5 = SceneDialogue("That will lower a","bridge in the north.", false, false);
-const SceneDialogue by_dlog6 = SceneDialogue("We've detected a","boat yard up there.", false, false);
+const SceneDialogue by_dlog3 = SceneDialogue("But it looks like","it's out of order.", SceneDialogue::Base, true);
+const SceneDialogue by_dlog4 = SceneDialogue("Get the blueprint","and hit that switch.", SceneDialogue::Base, false);
+const SceneDialogue by_dlog5 = SceneDialogue("That will lower a","bridge in the north.", SceneDialogue::Base, false);
+const SceneDialogue by_dlog6 = SceneDialogue("We've detected a","boat yard up there.", SceneDialogue::Base, false);
 
 const SceneSequence boatyard_scene[] = {
     {SceneSequence::ShowDialogue, &by_dlog0 },

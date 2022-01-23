@@ -127,18 +127,34 @@ void EventScene::draw()
                 counter++;
 
                 uint8_t spr[2 + 15 * 15];
-                if (getDialogue()->enemy) {
-                    std::memcpy(spr, portrait_enemy[(counter % 100) > 55 ? 1 : 0], 2 + 15*15);
-                } else {
+                switch(getDialogue()->portrait) {
+                case SceneDialogue::Base:
                     spr[0] = 15;
                     spr[1] = 15;
                     std::memset(spr + 2, 1, 15*15);
-                    int ct = rand() % 3;
-                    while (ct < 15*15-1) {
-                        static const int c[4] = { 2, 3, 6, 50};
-                        spr[2 + ct] = c[rand() % 4];
-                        ct += 2 + (rand() % 4);
+                    {
+                        int ct = rand() % 3;
+                        while (ct < 15*15-1) {
+                            static const int c[4] = { 2, 3, 6, 50};
+                            spr[2 + ct] = c[rand() % 4];
+                            ct += 2 + (rand() % 4);
+                        }
                     }
+                    break;
+                case SceneDialogue::EnemyPilot:
+                    std::memcpy(spr, portrait_enemy[(counter % asCounts(1.66f)) > asCounts(1.0f) ? 1 : 0], 2 + 15*15);
+                    break;
+                case SceneDialogue::EnemyCPU:
+                    {
+                        static int beep_frame = 1;
+                        int ctr = counter % asCounts(2.5f);
+                        if (ctr == asCounts(1.6f)) {
+                            beep_frame = 1 + (rand() % 4);
+                        }
+                        std::memcpy(spr, portrait_enemy_cpu[(ctr > asCounts(1.6f) && (ctr < asCounts(1.93f))) || (ctr > asCounts(2.17f)) ? beep_frame : 0], 2 + 15*15);
+
+                    }
+                    break;
                 }
 
                 static const int ct = 3;
@@ -160,8 +176,8 @@ void EventScene::draw()
                         std::memmove(spr + 2 + gy[i] * 15, spr + 2 + gy[i] * 15 + of[i], gh[i] * 15);
                     }
                 }
-                if (counter % 180 == 0) {
-                    freq = 40 + (rand() % 140);
+                if (counter % asCounts(3.0f) == 0) {
+                    freq = asCounts(0.66f) + (rand() % asCounts(2.33f));
                 }
                 RenderSystem::sprite(x + 3, y + 3, spr);
 
