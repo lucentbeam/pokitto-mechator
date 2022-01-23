@@ -27,7 +27,7 @@ bool EnemyBomber::update(float dt)
         if (!Camera::inActiveZone(m_pos)) {
             return false;
         }
-        if (counter == 0 && delta.length() < 45) {
+        if (counter == 0 && delta.length() < 20) {
             status = InSky;
             m_plane_pos.set(Camera::center().x() - 70, Camera::center().y() - 20);
             m_life = 5;

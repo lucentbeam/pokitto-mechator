@@ -16,8 +16,11 @@ SimplePool<Barracks, 6> Barracks::s_barracks;
 
 int8_t Barracks::s_max_life = 27;
 
+
+#include <iostream>
 void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
 {
+    std::cout << "spawning barracks at " << spawn.x() << " " << spawn.y() << std::endl;
     m_spawn = spawn;
     m_left = left * 6;
     m_top = top * 6;
@@ -57,7 +60,8 @@ void Barracks::setSpawnsTanks()
 
 void Barracks::create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
 {
-    if (getBarracksAt(spawn) != nullptr) return;
+    if (getBarracksAt({left + width/2, top + height/2}) != nullptr) return;
+    if (MapManager::getTileAt(left * 6 + 3, top * 6 + 3) == 203) return;
     Barracks * b = s_barracks.activateNext();
     if (b == nullptr) {
         return;

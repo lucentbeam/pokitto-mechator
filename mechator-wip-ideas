@@ -1,30 +1,28 @@
-
-- pause screen:
-  - map subscreen
-  - rework visuals
-
-- world map & sky layer greebles
-
-- tweak SFX channels:
-  - two bullet channels
-  - one channel for damage and misc effects
-  - two explosion channels
-- la musica
-
-- make first tank build free
+- tank factory: free tank builds
 
 - draw enemy CPU portrait
+
+- map screen second pass
+  - mark doors (visited only?)
+  - mark current loc
+  - add UI
+  - parse map as 54x54
+
+- stormy cape FX
+- screen shake
+
+- la musica
 
 - playthroughs!!
 - tweaks:
   - barracks spawns, various enemy timers:
     - make more aggressive as they take damage from player (increment counters?)
   - offscreen enemies don't fire
-  - "low wall" to put near turrets
-  - faster fire rates altogether
-  - don't show reticle while player is dashing
-  - bombers spawn closer to spawn point
-  - barracks go down faster
+  - barracks go down faster {?}
+  - more blueprints!
+  - strategically placed shops & hacking kits
+  - cost tuning
+  - $10 money boxes?
 
 - sfx:
   - bomber coming (bbbrrrrreeeewwww....)
@@ -35,7 +33,6 @@
   - look at reducing audio buffer from 1k to 512?
 
 - add boat yard boss? turret with special maneuvers? slow health regen? moves walls around yard/itself?
-	- camera shake
 
 - island areas (boat)
 
@@ -50,6 +47,9 @@
   - art
   - prog 
 
+- remove debut stuff
+
+- joyhat support?
 
 morphitudinous
 morphenomenal

@@ -304,7 +304,7 @@ float AudioSystem::getVolume()
     return float(Pokitto::Sound::getVolume()) / 128.0f;
 }
 
-Audio::Sink<4, PROJ_AUD_FREQ> audio;
+Audio::Sink<6, PROJ_AUD_FREQ> audio;
 
 template <int N>
 void playOnChannel(SFX sfx) {
@@ -318,7 +318,7 @@ void playOnChannel(SFX sfx) {
 
 void AudioSystem::play(SFX sfx) {
     static int channel = 0;
-    channel = (channel + 1) % 3;
+    channel = (channel + 1) % 5;
     switch(channel) {
         case 0:
             playOnChannel<1>(sfx);
@@ -328,6 +328,12 @@ void AudioSystem::play(SFX sfx) {
             break;
         case 2:
             playOnChannel<3>(sfx);
+            break;
+        case 3:
+            playOnChannel<4>(sfx);
+            break;
+        case 4:
+            playOnChannel<5>(sfx);
             break;
         default:
             break;

@@ -47,7 +47,7 @@ enum SFX {
     sfxGetItem = 9,
     sfxGrenade = 10,
     sfxLaser = 11,
-    sfxLaserCharge = 12,
+    sfxLaserCharge = 12,    
     sfxMissile = 13,
     sfxPlayerGun = 14,
     sfxPlayerGun2x = 15,
