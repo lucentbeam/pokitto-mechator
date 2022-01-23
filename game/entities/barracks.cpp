@@ -17,10 +17,8 @@ SimplePool<Barracks, 6> Barracks::s_barracks;
 int8_t Barracks::s_max_life = 27;
 
 
-#include <iostream>
 void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
 {
-    std::cout << "spawning barracks at " << spawn.x() << " " << spawn.y() << std::endl;
     m_spawn = spawn;
     m_left = left * 6;
     m_top = top * 6;
