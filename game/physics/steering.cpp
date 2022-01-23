@@ -13,7 +13,7 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
             m_aim = tmp;
         }
         Vec2f dp = m_aim - m_facing;
-        m_facing += dp * config->cornering;
+        m_facing += dp * (config->cornering * dt / 0.016f);
         float len = m_facing.length();
         if (len > 0) {
             m_facing /= len;

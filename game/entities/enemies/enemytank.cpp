@@ -13,7 +13,7 @@ void EnemyTank::setup(const Vec2f &pos)
     m_counter = rand() % 30;
     status = Mode::Walking;
     m_drops_cash = true;
-    m_missiles = true;
+    m_missiles = false;
     m_deactivate = [](){};
 }
 
@@ -65,26 +65,32 @@ bool EnemyTank::update(float dt)
         if (m_counter > (shotcount == 0 ? asCounts(1.25f) : asCounts(0.5f))) {
             if (Camera::inViewingZone(m_steering.pos())) {
                 AudioSystem::play(sfxEnemyShoot);
-                if (m_missiles) {
-                    ProjectileManager::create(m_steering.pos() + dir * 6.0f, dir * 50.0f, 2, 3.0)
+                if (true) {
+                    Projectile * p = ProjectileManager::create(m_steering.pos() + dir * 6.0f, dir * 50.0f, 2, 3.0)
                      ->setSprite(MissileSprite1)
                      ->setTargetMask({PlayerTarget, GroundTarget, AirTarget})
                      ->setDamage(0)
                      ->setMissile(m_steering.pos() + dir * 5.0f, dir * 90.0f)
-                     ->setFlipped(dir.x() > 0)
-                     ->setExpireCallback([](Projectile*p) {
-                        AudioSystem::play(sfxExplosionBig);
-                        for(int i = -4; i <= 4; i+=4) {
-                            for (int j = -4; j <= 4; j+= 4) {
-                                Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
-                                if (t == Terrain::DestructableMetal || t == Terrain::DestrucableWood) {
-                                    MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
-                                }
+                     ->setFlipped(dir.x() > 0);
+                    if (m_missiles) {
+                         p->setExpireCallback([](Projectile*p) {
+                            AudioSystem::play(sfxExplosionBig);
+                                for(int i = -4; i <= 4; i+=4) {
+                                    for (int j = -4; j <= 4; j+= 4) {
+                                        Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
+                                        if (t == Terrain::DestructableMetal || t == Terrain::DestrucableWood) {
+                                            MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
+                                        }
+                                    }
                             }
-                        }
-                        ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
-                        EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
-                    });
+                            ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
+                            EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                        });
+                    } else {
+                        p->setExpireCallback([](Projectile*p) {
+                           AudioSystem::play(sfxExplosionBig);
+                        });
+                    }
                 } else {
                     ProjectileManager::create(m_steering.pos() + dir * 6.0f, dir * 50.0f, 2, 3.0)
                             ->setSprite(BulletSmall)

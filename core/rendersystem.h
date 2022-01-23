@@ -33,8 +33,6 @@ private:
     static bool s_clipping;
 
 public:
-    static bool s_slim_font;
-
     static void initialize();
 
     static uint32_t getTimeMs();
@@ -50,8 +48,6 @@ public:
     static int getLineLength(const char * line, int fontSize = 1);
 
     static void setClip(bool clip, uint8_t clip_width = 0, uint8_t clip_height = 0);
-
-    static void setFontSlim(bool slim);
 
     static void sprite(int x, int y, const uint8_t * sprite, int transparent_color = -1, bool flip = false);
 

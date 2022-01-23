@@ -10,7 +10,6 @@
 uint8_t RenderSystem::s_clip_width;
 uint8_t RenderSystem::s_clip_height;
 bool RenderSystem::s_clipping = false;
-bool RenderSystem::s_slim_font = false;
 
 static bool initialized = false;
 
@@ -21,8 +20,8 @@ int RenderSystem::getLineLength(const char *line, int fontSize)
         uint8_t index = uint8_t(c);
         if (index == 195) continue;
         if (index > 128) index += 64;
-        index -= TinyUnicode5x8Slim[2];
-        const uint8_t* bitmap = s_slim_font ? TinyUnicode5x8Slim : TinyUnicode5x8;
+        index -= TinyUnicode5x8[2];
+        const uint8_t* bitmap = TinyUnicode5x8;
         uint8_t w = *bitmap;
         uint8_t h = *(bitmap + 1);
         uint8_t hbytes=0, xtra=1;
@@ -58,7 +57,7 @@ void RenderSystem::initialize()
     game.display.load565Palette(palette);
     game.display.setInvisibleColor(0);
     game.display.setColor(3, backgroundColor);
-    game.display.font = s_slim_font ? TinyUnicode5x8Slim : TinyUnicode5x8;
+    game.display.font = TinyUnicode5x8;
     initialized = true;
 }
 
@@ -814,7 +813,7 @@ int printChar(int x, int y, uint8_t index, uint8_t color, uint8_t fontSize) {
     if (index == 195) return x;
     if (index > 128) index += 64;
     index -= TinyUnicode5x8Slim[2];
-    const uint8_t* bitmap = RenderSystem::s_slim_font ? TinyUnicode5x8Slim : TinyUnicode5x8;
+    const uint8_t* bitmap = TinyUnicode5x8;
     uint8_t w = *bitmap;
     uint8_t h = *(bitmap + 1);
     uint8_t hbytes=0, xtra=1;
@@ -856,9 +855,4 @@ void RenderSystem::print(int x, int y, const char *line, uint8_t color, uint8_t 
     for (auto c : l) {
         x = printChar(x, y, c, color, size);
     }
-}
-
-void RenderSystem::setFontSlim(bool slim)
-{
-    s_slim_font = slim;
 }
