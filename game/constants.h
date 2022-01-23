@@ -16,8 +16,19 @@ constexpr int asCounts(float time) {
 const float baseTextSpeedLPS = 25.0f;
 const float cameraCutsceneSpeed = 12.0f;
 
-constexpr int tankUnlockCost = 5;
+constexpr int soldierRepairCost = 4;
+
+constexpr int jeepBuildCost = 10;
+constexpr int jeepRepairCost = 6;
+
 constexpr int tankBuildCost = 15;
+constexpr int tankRepairCost = 9;
+
+constexpr int boatBuildCost = 20;
+constexpr int boatRepairCost = 12;
+
+constexpr int heliBuildCost = 25;
+constexpr int heliRepairCost = 15;
 
 const int barracksMaxMoneyDrops = 5;
 

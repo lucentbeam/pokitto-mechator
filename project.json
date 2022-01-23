@@ -728,7 +728,15 @@
 		"game/entities/barracks.cpp.CTYuCG": {},
 		"game/entities/barracks.cpp.laznhd": {},
 		"game/entities/barracks.cpp.LEwCOP": {},
-		"game/entities/barracks.cpp.ltSIvx": {}
+		"game/entities/barracks.cpp.ltSIvx": {},
+		"main.cpp.HEtakX": {},
+		"game/maps/alertregion.cpp.YSfnqS": {},
+		"game/maps/alertregion.cpp.HfakLv": {},
+		"game/states/repairs.cpp.zQLUQV": {},
+		"game/states/repairs.cpp.JLGYfT": {},
+		"game/states/repairs.cpp.FvPChA": {},
+		"game/states/repairs.cpp.iwCiYC": {},
+		"game/entities/enemies/enemyturret.cpp.JSqvmf": {}
 	},
 	"ideVersion": 10000,
 	"BUILDFlags": {

@@ -1,6 +1,7 @@
 #include "alertregion.h"
 
 #include "game/utilities/mapmanager.h"
+#include <string.h>
 
 RegionName groundregion_names[] = {
     RegionName("Tutorial Island"),
@@ -38,4 +39,15 @@ bool checkGroundRegions(const char *&n) {
         }
     }
     return triggered;
+}
+
+bool isInRegion(const char *n)
+{
+    Vec2f cp = Camera::center();
+    if (MapManager::getTileAt(cp.x(), cp.y()) < 54) return false;
+    for(RegionBounds &r : groundregion_areas) {
+        if (r.contains(cp)) {
+            return strcmp(r.reference_region->name, n) == 0;
+        }
+    }
 }

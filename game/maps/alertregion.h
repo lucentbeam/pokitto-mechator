@@ -27,4 +27,6 @@ extern RegionBounds groundregion_areas[];
 
 bool checkGroundRegions(const char * &n);
 
+bool isInRegion(const char * n);
+
 #endif // ALERTREGIONS_H

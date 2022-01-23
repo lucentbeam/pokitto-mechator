@@ -14,6 +14,7 @@
 #include "game/variables.h"
 #include "game/entities/pois.h"
 #include "core/audiosystem.h"
+#include "game/maps/alertregion.h"
 
 static UIElement title = UIElement::getExpander(55, 35, 76, 9, Tween::Easing::OutQuad);
 static UIOptions repair_opts(true, {"BACK", "SOLDIER (REST)", "JEEP", "TANK", "BOAT", "HELI"});
@@ -68,42 +69,42 @@ void updateRepairsState(FSM &fsm)
             switch (mode) {
             case SoldierMode:
                 UI::showHealthbar(mode);
-                current_cost = Soldier::damaged() ? 4 : 0;
+                current_cost = Soldier::damaged() ? soldierRepairCost : 0;
                 break;
             case JeepMode:
                 if (Jeep::alive()) {
                     UI::showHealthbar(mode);
-                    current_cost = Jeep::damaged() ? 6 : 0;
+                    current_cost = Jeep::damaged() ? jeepRepairCost : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = 1;
+                    current_cost = isInRegion("Tutorial Island") ? 0 : jeepBuildCost;
                 }
                 break;
             case TankMode:
                 if (Tank::alive()) {
                     UI::showHealthbar(mode);
-                    current_cost = Tank::damaged() ? 6 : 0;
+                    current_cost = Tank::damaged() ? tankRepairCost : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = 1;
+                    current_cost = isInRegion("Tank Factory") ? 0 : tankBuildCost;
                 }
                 break;
             case BoatMode:
                 if (Boat::alive()) {
                     UI::showHealthbar(mode);
-                    current_cost = Boat::damaged() ? 6 : 0;
+                    current_cost = Boat::damaged() ? boatRepairCost : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = 1;
+                    current_cost = boatBuildCost;
                 }
                 break;
             case HelicopterMode:
                 if (Helicopter::alive()) {
                     UI::showHealthbar(mode);
-                    current_cost = Helicopter::damaged() ? 6 : 0;
+                    current_cost = Helicopter::damaged() ? heliRepairCost : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = 1;
+                    current_cost = heliBuildCost;
                 }
                 break;
             default:

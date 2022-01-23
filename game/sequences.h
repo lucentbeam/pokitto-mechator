@@ -142,8 +142,19 @@ const SceneFunc tt_f0 = SceneFunc([](){
     MapManager::setTileAt(28 * 6 + 3, 110 * 6 + 3, 236);
     POIs::setShopsDisabled(true);
 
+    MapManager::setTileAt(16 * 6 + 3, 100 * 6 + 3, 218);
+    MapManager::setTileAt(16 * 6 + 3, 101 * 6 + 3, 218);
+    MapManager::setTileAt(16 * 6 + 3, 102 * 6 + 3, 218);
+    MapManager::setTileAt(16 * 6 + 3, 103 * 6 + 3, 218);
+    MapManager::setTileAt(16 * 6 + 3, 104 * 6 + 3, 218);
+
     registerCallback({t1->getLifePtr(), t2->getLifePtr(), t3->getLifePtr(), t4->getLifePtr(), Barracks::getBarracksAt({27, 99})->getLifePtr(), Barracks::getBarracksAt({25, 99})->getLifePtr(), Barracks::getBarracksAt({30, 99})->getLifePtr()}, [](){
         POIs::setShopsDisabled(false);
+        MapManager::setTileAt(16 * 6 + 3, 100 * 6 + 3, 184);
+        MapManager::setTileAt(16 * 6 + 3, 101 * 6 + 3, 184);
+        MapManager::setTileAt(16 * 6 + 3, 102 * 6 + 3, 184);
+        MapManager::setTileAt(16 * 6 + 3, 103 * 6 + 3, 184);
+        MapManager::setTileAt(16 * 6 + 3, 104 * 6 + 3, 184);
     });
     return true;
 });

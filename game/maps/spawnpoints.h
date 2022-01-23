@@ -234,8 +234,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({27, 97}, spawnBarracks<26,98,3,4>),
 	SpawnPoint({23, 99}, spawnBarracks<24,98,2,4>),
 	SpawnPoint({31, 99}, spawnBarracks<29,98,2,4>),
-	SpawnPoint({34, 46}, spawnBarracks<33,43,3,3>),
-	SpawnPoint({37, 46}, spawnBarracks<36,43,3,3>),
+	SpawnPoint({37, 46}, spawnBarracks<36,42,3,4>),
 	SpawnPoint({37, 43}, Pickups::spawnBlueprint),
 	SpawnPoint({55, 48}, Enemy::spawnMech),
 	SpawnPoint({72, 45}, Enemy::spawnMech),
@@ -264,5 +263,6 @@ const SpawnPoint points[] = {
 	SpawnPoint({154, 25}, Enemy::spawnTurret),
 	SpawnPoint({161, 33}, Enemy::spawnTurret),
 	SpawnPoint({172, 26}, Enemy::spawnTurret),
+	SpawnPoint({34, 46}, spawnBarracks<33,42,3,4>),
 };
 const int point_count = sizeof(points)/sizeof(SpawnPoint);

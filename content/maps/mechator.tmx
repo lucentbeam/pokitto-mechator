@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="290">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="291">
  <editorsettings>
   <export target="mechator.json" format="json"/>
  </editorsettings>
@@ -671,8 +671,7 @@
   <object id="256" name="barracks_-1_1_3_4" x="163.434" y="583.4" width="3.375" height="3.625"/>
   <object id="257" name="barracks_1_-1_2_4" x="138.813" y="595.438" width="3.375" height="3.625"/>
   <object id="258" name="barracks_-2_-1_2_4" x="187.188" y="595.563" width="3.375" height="3.625"/>
-  <object id="259" name="barracks_-1_-3_3_3" x="205.563" y="277.188" width="3.375" height="3.625"/>
-  <object id="260" name="barracks_-1_-3_3_3" x="223.063" y="277.188" width="3.375" height="3.625"/>
+  <object id="259" name="barracks_-1_-4_3_4" x="223.29" y="276.915" width="3.375" height="3.625"/>
   <object id="261" name="blueprint_5" x="223.375" y="260.188" width="2.5" height="2.875"/>
   <object id="263" name="enemy_mech" x="330.503" y="288.69" width="4.8125" height="4.4375"/>
   <object id="264" name="enemy_mech" x="432.503" y="271.236" width="4.8125" height="4.4375"/>
@@ -701,5 +700,6 @@
   <object id="287" name="enemy_turret" x="924.344" y="150.781" width="4.8125" height="4.4375"/>
   <object id="288" name="enemy_turret" x="966.844" y="198.781" width="4.8125" height="4.4375"/>
   <object id="289" name="enemy_turret" x="1032.72" y="157.031" width="4.8125" height="4.4375"/>
+  <object id="290" name="barracks_-1_-4_3_4" x="204.858" y="277.006" width="3.375" height="3.625"/>
  </objectgroup>
 </map>

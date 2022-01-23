@@ -24,7 +24,11 @@ bool EnemyTurret::update(float dt)
 {
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
-    if (!m_ignore_out_of_range && !Camera::inActiveZone(m_pos)) return false;
+    if (!Camera::inActiveZone(m_pos)) {
+        if (!m_ignore_out_of_range || (m_ignore_out_of_range && m_life <= 0)) {
+            return false;
+        }
+    }
     if (m_disabled || m_life <= 0) return true;
     if (!Camera::inViewingZone(m_pos)) return true;
 
