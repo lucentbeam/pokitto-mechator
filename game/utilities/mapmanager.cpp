@@ -27,7 +27,7 @@ void MapManager::update()
                 t++;
             }
         }
-    }
+    }    
 }
 
 void MapManager::draw(bool bg)

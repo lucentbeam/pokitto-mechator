@@ -51,6 +51,15 @@ enum GameStates : uint8_t {
     MapState
 };
 
+enum QuestStatus : uint8_t {
+    QuestIntro = 0,
+    QuestTank = 1,
+    QuestBoat = 2,
+    QuestBuildBoat = 3,
+    QuestHeli = 4,
+    QuestFinal = 5
+};
+
 enum Blueprints {
     JeepBP              = 0,
     TankBP              = 1,

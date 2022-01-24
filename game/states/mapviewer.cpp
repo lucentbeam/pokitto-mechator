@@ -11,8 +11,10 @@
 #include "game/maps/mapsprite.h"
 #include "game/player.h"
 
-static UIElement title_prompt = UIElement::getExpander(55,7,60,11, Tween::Easing::OutQuad);
-static UIElement map_area = UIElement::getExpander(55,48,84,66, Tween::Easing::OutQuad);
+#include "game/variables.h"
+
+static UIElement title_prompt = UIElement::getExpander(48,8,60,11, Tween::Easing::OutQuad);
+static UIElement map_area = UIElement::getExpander(48,50,84,66, Tween::Easing::OutQuad);
 
 bool hiding = false;
 
@@ -29,6 +31,8 @@ public:
 };
 
 Blinker blinky(1.2f, 1.0f);
+Blinker blue_dot(3.6f, 1.2f);
+Blinker red_dot(3.6f, 2.4f);
 
 void MapViewer::go()
 {
@@ -50,6 +54,16 @@ void MapViewer::update(FSM &fsm)
         map_area.setVisibility(false);
     }
     blinky.update();
+    blue_dot.update();
+    red_dot.update();
+
+#ifdef DEBUGS
+    if (ctrl.right.pressed()) {
+        static int q = 0;
+        q = (q + 1) % 6;
+        GameVariables::setQuestStatus(q);
+    }
+#endif
 }
 
 void MapViewer::draw()
@@ -74,6 +88,18 @@ void MapViewer::draw()
                     pos.setY(y - tl.y() + h - 2);
                 }
                 RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[1], 0);
+
+            }
+            Vec2i goal = GameVariables::getGoal();
+            if (goal.x() > -200) {
+                Vec2f pos = Vec2f(goal.x() * 54.0f/216.0f, goal.y() * 54.0f/216.0f);
+                RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[4], 0);
+            }
+            RenderSystem::sprite(109 - ui_legend[0], y + h/2 - ui_legend[1]/2, ui_legend, ui_legend[2]);
+            if (blue_dot.active()) {
+                RenderSystem::pixel(109 - ui_legend[0] + 5, y + h/2 - ui_legend[1]/2 + 23, 48);
+            } else if (red_dot.active()) {
+                RenderSystem::pixel(109 - ui_legend[0] + 5, y + h/2 - ui_legend[1]/2 + 23, 16);
             }
         }
     });

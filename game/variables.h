@@ -4,12 +4,16 @@
 #include <cstdint>
 #include <cmath>
 
+#include "core/utilities/vec.h"
+
 class GameVariables {
     static uint8_t hackingKitCount, keyACount, keyBCount, keyCCount;
     static uint16_t dollarCount;
 
     static uint16_t acquiredBlueprints;
     static uint16_t unlockedBlueprints;
+
+    static uint8_t questStatus;
 
     static bool visitedEvents[];
 public:
@@ -37,6 +41,9 @@ public:
 
     static void visitEvent(int index);
     static bool eventVisited(int index);
+
+    static void setQuestStatus(uint8_t q);
+    static Vec2i getGoal();
 };
 
 #endif // VARIABLES_H

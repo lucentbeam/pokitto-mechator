@@ -1,14 +1,17 @@
 
 - map screen second pass
-  - mark doors (visited only?)
-  - mark current loc
-  - add UI
-  - parse map as 54x54
+  - add legend?
+  - mark doors? (visited only?)
 
 - stormy cape FX
+  - darken in region
+  - flashlight
+  - lightning
 - screen shake
 
 - la musica
+
+- update quest markers via sequences
 
 - playthroughs!!
 - tweaks:
