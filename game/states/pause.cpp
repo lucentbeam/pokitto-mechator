@@ -34,7 +34,7 @@ void goPause(bool from_map)
     selected_weapon = Player::currentWeapon();
     FSM::instance->go(GameStates::Pause);
 
-    AudioSystem::play(sfxConfirm);
+    if (!from_map) AudioSystem::play(sfxConfirm);
 
     goingMap = false;
 }

@@ -1,6 +1,7 @@
 #include "mapviewer.h"
 
 #include "core/controls.h"
+#include "core/audiosystem.h"
 
 #include "game/states/game.h"
 #include "game/states/pause.h"
@@ -52,6 +53,7 @@ void MapViewer::update(FSM &fsm)
         hiding = true;
         title_prompt.setVisibility(false);
         map_area.setVisibility(false);
+        AudioSystem::play(sfxCancel);
     }
     blinky.update();
     blue_dot.update();
