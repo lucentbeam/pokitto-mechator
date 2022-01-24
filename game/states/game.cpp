@@ -94,7 +94,9 @@ void updateGameState(FSM&) {
     Camera::update(player.position().x(), player.position().y());
     MapManager::update();
 
+#ifndef DEBUGS
     if (SequenceTrigger::checkForTriggers()) return;
+#endif
 
     SpawnPoint::setActiveRegion();
 //    CloudManager::update(physicsTimestep);
