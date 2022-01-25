@@ -2846,6 +2846,28 @@
                  "width":3.375,
                  "x":204.858,
                  "y":277.006
+                }, 
+                {
+                 "height":2.875,
+                 "id":291,
+                 "name":"hackingkit",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":2.5,
+                 "x":464.385,
+                 "y":998.16525
+                }, 
+                {
+                 "height":4.4375,
+                 "id":292,
+                 "name":"shop_-3_-1_-4_-6_-6_-1",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4.8125,
+                 "x":456.365,
+                 "y":996.65625
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -2854,7 +2876,7 @@
          "y":0
         }],
  "nextlayerid":17,
- "nextobjectid":291,
+ "nextobjectid":293,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.7.2",

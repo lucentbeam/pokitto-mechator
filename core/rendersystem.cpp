@@ -121,6 +121,10 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
     Pokitto::DisplayExtensions::drawBitmap(x, y, sprite, transparent_color, replacement_color, flip);
 }
 
+void RenderSystem::incrementColors(int x, int y, const uint8_t *sprite, int transparent_color, bool flip) {
+    Pokitto::DisplayExtensions::incrementColors(x, y, sprite, transparent_color, flip);
+}
+
 void RenderSystem::spriteWrapped(int x, int y, const uint8_t *sprite, int transparent_color)
 {
     if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
@@ -361,7 +365,7 @@ struct SDLSystem {
         screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 110, 88);
         running = true;
 
-        for (size_t i = 0; i < sizeof(default_palette)/sizeof(uint16_t); ++i) {
+        for (size_t i = 0; i < 130; ++i) {
             uint16_t color = default_palette[i];
             uint8_t r = (color & 0b1111100000000000) >> 11;
             r = r << 3;
@@ -377,6 +381,8 @@ struct SDLSystem {
         }
     }
 } sdlSys;
+
+uint8_t colormap[110 * 88];
 
 uint8_t getPixel(int i, int j) {
     Uint32 col = sdlSys.pixels[i + j * 110];
@@ -429,6 +435,7 @@ void RenderSystem::pixel(int x, int y, uint8_t color)
         return;
     }
     sdlSys.pixels[x + y * 110] = sdlSys.colors[color];
+    colormap[x + y * 110] = color;
 }
 
 void RenderSystem::clear(uint8_t idx) {
@@ -590,6 +597,35 @@ void RenderSystem::sprite(int x, int y, const uint8_t *sprite, int transparent_c
         }
         idx = replacement_color;
         RenderSystem::pixel(px, py, idx);
+    }
+}
+
+void RenderSystem::incrementColors(int x, int y, const uint8_t *sprite, int transparent_color, bool flip)
+{
+    if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
+    uint8_t w = sprite[0];
+    uint8_t width = w;
+    uint8_t h = sprite[1];
+    const uint8_t * start = sprite + 2;
+    for (int i = 0; i < width * h; ++i) {
+        int dx = i % width;
+        if (dx >= w) continue;
+        if (s_clipping && dx > s_clip_width) continue;
+        int dy = i / width;
+        if (s_clipping && dy > s_clip_height) continue;
+        int px = x + dx;
+        int py = y + dy;
+        if (flip) {
+            px = x + (w - dx);
+        }
+        if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
+            continue;
+        }
+        int idx = start[i];
+        if (idx == transparent_color) continue;
+        int c = colormap[px + py * 110];
+        if (c >= 65) continue;
+        pixel(px, py, c + 65);
     }
 }
 

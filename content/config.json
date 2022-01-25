@@ -29,6 +29,7 @@
 		{ "output" : "enemy_laser_ew", "hcount": 2 },
 		
 		{ "output" : "smoke", "hcount": 6 },
+		{ "output" : "flashlight", "hcount": 5 },
 		
 		{ "output" : "explosion", "vcount": 7},
 		{ "output" : "projectile_grenade", "vcount": 2},

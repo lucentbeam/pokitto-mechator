@@ -275,6 +275,36 @@ namespace Pokitto {
         }
     }
 
+    void DisplayExtensions::incrementColors(int x, int y, const uint8_t * sprite, int transparent_color, bool flip)
+    {
+        const uint8_t screenwidth = 110;
+        const uint8_t screenheight = 88;
+        uint8_t w = sprite[0];
+        uint8_t h = sprite[1];
+        const uint8_t * start = sprite + 2;
+        uint8_t* m_scrbuf = Display::getBuffer();
+        for (int i = 0; i < w * h; ++i) {
+            int idx = start[i];
+            if (idx == transparent_color) {
+                continue;
+            }
+            int dx = i % w;
+            if (dx >= w) continue;
+            int dy = i / w;
+            int px = x + dx;
+            if (flip) {
+                px = x + (w - dx);
+            }
+            int py = y + dy;
+            if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
+                continue;
+            }
+            int col_idx = m_scrbuf[px + py * screenwidth];
+            if (col_idx >= 65) continue;
+            m_scrbuf[px + py * screenwidth] = col_idx + 65;
+        }
+    }
+
     void DisplayExtensions::shadeAll(int steps, const uint8_t *shading) {
         uint8_t* m_scrbuf = Display::getBuffer();
         uint8_t* end = m_scrbuf + 110 * 88;

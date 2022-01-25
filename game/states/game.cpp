@@ -178,6 +178,10 @@ void drawGameState() {
     Soldier::drawAir();
     Enemy::drawAir();
 
+    if (isInRegion(RegionStormyCape)) {
+        Player::drawFlashlight();
+    }
+
     // ui draw
     UI::draw();
 
@@ -220,6 +224,7 @@ void drawShadedGame(int shading)
     ProjectileManager::drawAir();
     Helicopter::drawAir();
     Enemy::drawAir();
+
     RenderSystem::shadeAll(shading);
 
     // ui draw

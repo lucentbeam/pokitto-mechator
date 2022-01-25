@@ -241,6 +241,7 @@ public:
     static bool weaponCooldown(float dt);    
 
     static void drawReticle(PlayerMode mode, const Vec2f &dir);
+    static void drawFlashlight();
 };
 
 #endif // PLAYER_H

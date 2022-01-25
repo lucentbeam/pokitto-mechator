@@ -56,6 +56,8 @@ public:
 
     static void sprite(int x, int y, const uint8_t * sprite, int transparent_color, int replacement_color, bool flip);
 
+    static void incrementColors(int x, int y, const uint8_t * sprite, int transparent_color, bool flip);
+
     static void spriteWrapped(int x, int y, const uint8_t * sprite, int transparent_color);
 
     static void drawCenterScaled(int xc, int yc, const uint8_t * sprite, float xscale, int transparent_color = -1, float yscale = -1.0f);
