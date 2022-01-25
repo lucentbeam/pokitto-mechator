@@ -41,7 +41,7 @@ static std::function<void()> active_callback;
 static int watchcount = 0;
 
 static float capeTransition = 0.0f;
-static Blinker capeLightning(6.0f, 0.1);
+static Blinker capeLightning(6.0f, 0.3);
 
 void goGame()
 {
@@ -136,12 +136,12 @@ void updateGameState(FSM&) {
         } else {
             capeTransition += physicsTimestep * 12.0f;
             if (flashing) {
-                capeLightning = Blinker(3.0f + float(rand() % 100)/100.0f * 5.0f, 0.1f);
+                capeLightning = Blinker(0.35f + float(rand() % 100)/100.0f * 12.0f, 0.1f + float(rand() % 100)/100.0f * 0.2f);
             }
         }
         if (capeTransition > 5) capeTransition = 5;
     } else {
-        capeTransition -= physicsTimestep * 12.0f;
+        capeTransition -= physicsTimestep * 4.0f;
         if (capeTransition < 2) capeTransition = 2;
     }
     if (last != int(capeTransition)) {
@@ -180,6 +180,17 @@ void drawGameState() {
 
     if (isInRegion(RegionStormyCape)) {
         Player::drawFlashlight();
+        const uint8_t rain[] = { 3, 3, 0, 0, 48, 0, 48, 0, 48, 0, 0};
+        int x = 0;
+        int y = 0;
+        while (y < 85) {
+            x += (rand() % 50);
+            if (x > 110) {
+                x -= 110;
+                y += 2 + (rand() % 5);
+            }
+            RenderSystem::sprite(x, y, rain, 0);
+        }
     }
 
     // ui draw
