@@ -150,6 +150,7 @@ void updateGameState(FSM&) {
 }
 
 void drawGameState() {
+    RenderSystem::setOffset(false);
     // ground layer
     MapManager::draw(true);
 
@@ -191,6 +192,7 @@ void drawGameState() {
             }
             RenderSystem::sprite(x, y, rain, 0);
         }
+        RenderSystem::setOffset(true);
     }
 
     // ui draw
@@ -210,6 +212,7 @@ void drawGameState() {
 
 void drawShadedGame(int shading)
 {
+    RenderSystem::setOffset(false);
     // ground layer
     MapManager::draw(true);
 
@@ -237,6 +240,8 @@ void drawShadedGame(int shading)
     Enemy::drawAir();
 
     RenderSystem::shadeAll(shading);
+
+    if (isInRegion(RegionStormyCape)) RenderSystem::setOffset(true);
 
     // ui draw
     UI::draw();

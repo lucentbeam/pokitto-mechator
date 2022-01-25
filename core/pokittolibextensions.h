@@ -11,10 +11,13 @@ namespace Pokitto {
         static void shift(int16_t x, int16_t y);
 
     public:
+        static bool offset_color;
 
         static void drawClippedBitmap(int x, int y, int w, int h, int clipw, int cliph, const uint8_t* bitmap);
 
         static void drawTile(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* tile);
+
+        static void drawSpriteOffset(int x, int y, int w, int h, const uint8_t * sprite, int transparent_color, bool flip = false);
 
         static void fillRect(int x, int y, int w, int h, uint8_t color);
 
@@ -33,6 +36,7 @@ namespace Pokitto {
         static void drawShadow(int16_t x, int16_t y, const uint8_t* bitmap, int transparent_color, const uint8_t * shading, bool flip = false);
 
         static void shadeAll(int steps, const uint8_t *shading);
+
     };
 
 }

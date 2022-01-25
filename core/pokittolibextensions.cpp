@@ -9,6 +9,8 @@
 
 namespace Pokitto {
 
+    bool DisplayExtensions::offset_color = false;
+
     void DisplayExtensions::shift(int16_t x, int16_t y) {
         uint8_t* m_scrbuf = Display::getBuffer();
       for (int j = 0; j < 176; j++) {
@@ -38,6 +40,7 @@ namespace Pokitto {
                 if (xidx < 0 || xidx >= Display::width) continue;
                 int idx = start[int(ycounter) * w + int(xcounter)];
                 if (idx == transparent_color) continue;
+                if (offset_color && idx < 65) idx += 65;
                 uint8_t * loc = m_scrbuf + xidx + yidx * Display::width;
                 *loc = idx;
             }
@@ -67,6 +70,7 @@ namespace Pokitto {
                 if (xidx < 0 || xidx >= Display::width) continue;
                 int idx = start[int(ycounter) * w + int(xcounter)];
                 if (idx == transparent_color) continue;
+                if (offset_color && idx < 65) idx += 65;
                 uint8_t * loc = m_scrbuf + xidx + yidx * Display::width;
                 *loc = idx;
             }
@@ -76,6 +80,10 @@ namespace Pokitto {
     void DisplayExtensions::drawTile(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* tile) {
         if (y<-h || y>Display::height) return; //invisible
         if (x<-w || x>Display::width) return;  //invisible
+        if (offset_color) {
+            drawSpriteOffset(x, y, w, h, tile, -1);
+            return;
+        }
         int screenh = std::min((int)h, Display::height- y);
         int screenw = std::min((int)w, Display::width - x);
         int screenx = x;
@@ -100,9 +108,33 @@ namespace Pokitto {
         }
     }
 
+    void DisplayExtensions::drawSpriteOffset(int x, int y, int w, int h, const uint8_t * sprite, int transparent_color, bool flip) {
+        const uint8_t screenwidth = 110;
+        const uint8_t screenheight = 88;
+        const uint8_t * start = sprite;
+        uint8_t* m_scrbuf = Display::getBuffer();
+        for (int i = 0; i < w * h; ++i) {
+            int idx = start[i];
+            if (idx == transparent_color) {
+                continue;
+            }
+            int dx = i % w;
+            int dy = i / w;
+            int px = x + dx;
+            if (flip) px = x + w - dx;
+            int py = y + dy;
+            if (px < 0 || py < 0 || px >= screenwidth || py >= screenheight) {
+                continue;
+            }
+            if (idx < 65) idx += 65;
+            m_scrbuf[px + py * screenwidth] = idx;
+        }
+    }
+
     void DisplayExtensions::fillRect(int x, int y, int w, int h, uint8_t color) {
         if (y<-h || y>Display::height) return; //invisible
         if (x<-w || x>Display::width) return;  //invisible
+        if (offset_color && color < 65) color += 65;
         int screenh = std::min((int)h, Display::height- y);
         int screenw = std::min((int)w, Display::width - x);
         int screenx = x;
@@ -160,6 +192,7 @@ namespace Pokitto {
                     uint8_t targetpixel = *scrptr;
                     if (sourcepixel != Display::invisiblecolor )
                         targetpixel = sourcepixel;
+                    if (offset_color && targetpixel < 65) targetpixel += 65;
                     *scrptr = targetpixel;
                 }
                 bitmap++;
@@ -177,6 +210,10 @@ namespace Pokitto {
         /** visibility check */
         if (y<-h || y>Display::height) return; //invisible
         if (x<-w || x>Display::width) return;  //invisible
+        if (offset_color) {
+            drawSpriteOffset(x, y, w, h, bitmap + 2, transparent_color, flip);
+            return;
+        }
         bitmap = bitmap + 2;
         if (transparent_color >= 0) {
             Display::invisiblecolor = transparent_color;
@@ -211,6 +248,7 @@ namespace Pokitto {
             }
             int col_idx = m_scrbuf[px + py * screenwidth];
             if (col_idx == target_color) col_idx = replacement_color;
+            if (offset_color && col_idx < 65) col_idx += 65;
             m_scrbuf[px + py * screenwidth] = col_idx;
         }
     }
@@ -242,6 +280,7 @@ namespace Pokitto {
             int col_idx = m_scrbuf[px + py * screenwidth];
             if (col_idx == transparent_color) continue;
             col_idx = replacement_color;
+            if (offset_color && col_idx < 65) col_idx += 65;
             m_scrbuf[px + py * screenwidth] = col_idx;
         }
     }

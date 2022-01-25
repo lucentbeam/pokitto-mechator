@@ -30,6 +30,7 @@ struct RenderSystem
 private:
     static uint8_t s_clip_width, s_clip_height;
     static bool s_clipping;
+    static bool s_offset;
 
 public:
     static void initialize();
@@ -78,6 +79,8 @@ public:
     static void drawBuffer(uint8_t * buffer);
 
     static void shiftScreen(int x, int y = 0);
+
+    static void setOffset(bool offset);
 
     static uint8_t * getBuffer();
 };

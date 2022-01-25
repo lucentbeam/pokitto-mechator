@@ -11,6 +11,7 @@
 uint8_t RenderSystem::s_clip_width;
 uint8_t RenderSystem::s_clip_height;
 bool RenderSystem::s_clipping = false;
+bool RenderSystem::s_offset = false;
 
 static bool initialized = false;
 
@@ -44,6 +45,11 @@ int RenderSystem::getLineLength(const char *line, int fontSize)
 #include "core/pokittolibextensions.h"
 
 Pokitto::Core game;
+
+void RenderSystem::setOffset(bool offset) {
+    s_offset = offset;
+    Pokitto::DisplayExtensions::offset_color = offset;
+}
 
 uint32_t RenderSystem::getTimeMs()
 {
@@ -86,9 +92,9 @@ bool RenderSystem::update()
 //    game.display.write(line);
 //}
 
-void RenderSystem::pixel(int x, int y, uint8_t pixel_idx)
+void RenderSystem::pixel(int x, int y, uint8_t color)
 {
-    game.display.drawPixel(x, y, pixel_idx);
+    game.display.drawPixel(x, y, s_offset && color < 65 ? color + 65 : color);
 }
 
 
@@ -140,24 +146,24 @@ void RenderSystem::setClip(bool clip, uint8_t clip_width, uint8_t clip_height)
 
 void RenderSystem::drawLine(int x0, int y0, int x1, int y1, uint8_t color)
 {
-    game.display.setColor(color);
+    game.display.setColor(s_offset && color < 65 ? color + 65 : color);
     game.display.drawLine(x0, y0, x1, y1);
 }
 
 void RenderSystem::drawRect(int x0, int y0, int w, int h, uint8_t color)
 {
-    game.display.setColor(color);
+    game.display.setColor(s_offset && color < 65 ? color + 65 : color);
     game.display.fillRect(x0, y0, w, std::max(h-1,std::min(h,1))); // PokittoLib implementation is wrong
 }
 
 void RenderSystem::drawRect2(int x0, int y0, int w, int h, uint8_t color)
 {
-    Pokitto::DisplayExtensions::fillRect(x0, y0, w, h, color);
+    Pokitto::DisplayExtensions::fillRect(x0, y0, w, h, s_offset && color < 65 ? color + 65 : color);
 }
 
-void RenderSystem::drawCircle(int x, int y, int r, int c)
+void RenderSystem::drawCircle(int x, int y, int r, int color)
 {
-    game.display.setColor(c);
+    game.display.setColor(s_offset && color < 65 ? color + 65 : color);
     game.display.drawCircle(x,y,r);
 }
 
@@ -434,7 +440,7 @@ void RenderSystem::pixel(int x, int y, uint8_t color)
     if (x < 0 || y < 0 || x >= screenwidth || y >= screenheight) {
         return;
     }
-    sdlSys.pixels[x + y * 110] = sdlSys.colors[color];
+    sdlSys.pixels[x + y * 110] = sdlSys.colors[s_offset && color < 65 ? color + 65 : color];
     colormap[x + y * 110] = color;
 }
 
@@ -864,6 +870,10 @@ uint8_t *RenderSystem::getBuffer()
         }
     }
     return r_screenbuffer;
+}
+
+void RenderSystem::setOffset(bool offset) {
+    s_offset = offset;
 }
 
 #endif
