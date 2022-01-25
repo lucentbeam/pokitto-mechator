@@ -74,7 +74,6 @@ bool EnemyTank::update(float dt)
                      ->setFlipped(dir.x() > 0);
                     if (m_missiles) {
                          p->setExpireCallback([](Projectile*p) {
-                            AudioSystem::play(sfxExplosionBig);
                                 for(int i = -4; i <= 4; i+=4) {
                                     for (int j = -4; j <= 4; j+= 4) {
                                         Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
@@ -85,10 +84,13 @@ bool EnemyTank::update(float dt)
                             }
                             ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
                             EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                            AudioSystem::play(sfxExplosionBig);
                         });
                     } else {
                         p->setExpireCallback([](Projectile*p) {
-                           AudioSystem::play(sfxExplosionBig);
+                            ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
+                            EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                            AudioSystem::play(sfxExplosionBig);
                         });
                     }
                 } else {

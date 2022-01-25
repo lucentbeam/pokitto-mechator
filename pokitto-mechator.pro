@@ -42,6 +42,7 @@ SOURCES += \
     game/states/repairs.cpp \
     game/states/shop.cpp \
     game/ui/ui.cpp \
+    game/utilities/blinker.cpp \
     game/utilities/helpers.cpp \
     game/utilities/mapmanager.cpp \
     game/utilities/playerstats.cpp \
@@ -112,6 +113,7 @@ HEADERS += \
     game/states/repairs.h \
     game/states/shop.h \
     game/ui/ui.h \
+    game/utilities/blinker.h \
     game/utilities/helpers.h \
     game/utilities/mapmanager.h \
     game/utilities/playerstats.h \
@@ -123,7 +125,8 @@ HEADERS += \
     game/utilities/screentilestore.h \
     game/variables.h \
     game/sprites.h \
-    game/weapons.h
+    game/weapons.h \
+    core/palettes.h
 
 #win32:INCLUDEPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include
 #win32:DEPENDPATH += C:/SFML\SFML-2.5.1_msvc2017_64/include

@@ -10,7 +10,7 @@ uint8_t GameVariables::keyCCount = 0;
 #ifdef DEBUGS
 uint16_t GameVariables::dollarCount = 100;
 #else
-uint16_t GameVariables::dollarCount = 15;
+uint16_t GameVariables::dollarCount = 50;
 #endif
 uint16_t GameVariables::acquiredBlueprints = 0;
 uint16_t GameVariables::unlockedBlueprints = 0;

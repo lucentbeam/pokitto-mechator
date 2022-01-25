@@ -77,7 +77,7 @@ void updateRepairsState(FSM &fsm)
                     current_cost = Jeep::damaged() ? jeepRepairCost : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = isInRegion("Tutorial Island") ? 0 : jeepBuildCost;
+                    current_cost = isInRegion(RegionTutorial) ? 0 : jeepBuildCost;
                 }
                 break;
             case TankMode:
@@ -86,7 +86,7 @@ void updateRepairsState(FSM &fsm)
                     current_cost = Tank::damaged() ? tankRepairCost : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = isInRegion("Tank Factory") ? 0 : tankBuildCost;
+                    current_cost = isInRegion(RegionTankFactory) ? 0 : tankBuildCost;
                 }
                 break;
             case BoatMode:

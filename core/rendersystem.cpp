@@ -1,6 +1,7 @@
 #include "rendersystem.h"
 
 #include "core/rendering/tiny4x7h.h"
+#include "core/palettes.h"
 
 #include <cstdio>
 #include <cmath>
@@ -49,12 +50,17 @@ uint32_t RenderSystem::getTimeMs()
     return initialized ? game.getTime() : 0;
 }
 
+void RenderSystem::setPalette(const uint16_t *ptr)
+{
+    game.display.load565Palette(ptr);
+}
+
 void RenderSystem::initialize()
 {
     game.begin();
     game.display.textWrap = false;
     game.display.persistence = true;
-    game.display.load565Palette(palette);
+    game.display.load565Palette(default_palette);
     game.display.setInvisibleColor(0);
     game.display.setColor(3, backgroundColor);
     game.display.font = TinyUnicode5x8;
@@ -355,8 +361,8 @@ struct SDLSystem {
         screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 110, 88);
         running = true;
 
-        for (size_t i = 0; i < sizeof(palette)/sizeof(uint16_t); ++i) {
-            uint16_t color = palette[i];
+        for (size_t i = 0; i < sizeof(default_palette)/sizeof(uint16_t); ++i) {
+            uint16_t color = default_palette[i];
             uint8_t r = (color & 0b1111100000000000) >> 11;
             r = r << 3;
             uint8_t g = (color & 0b0000011111100000) >> 5;
@@ -432,6 +438,24 @@ void RenderSystem::clear(uint8_t idx) {
     while(ptr != end){
         *ptr = val;
         ++ptr;
+    }
+}
+
+void RenderSystem::setPalette(const uint16_t *ptr)
+{
+    for (size_t i = 0; i < 128; ++i) {
+        uint16_t color = ptr[i];
+        uint8_t r = (color & 0b1111100000000000) >> 11;
+        r = r << 3;
+        uint8_t g = (color & 0b0000011111100000) >> 5;
+        g = g << 2;
+        uint8_t b = (color & 0b0000000000011111);
+        b = b << 3;
+        sdlSys.colors[i] = 0;
+        sdlSys.colors[i] |= (0b11111111) << 24;
+        sdlSys.colors[i] |= r << 16;
+        sdlSys.colors[i] |= g << 8;
+        sdlSys.colors[i] |= b;
     }
 }
 

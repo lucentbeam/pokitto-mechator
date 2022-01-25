@@ -4,10 +4,10 @@
 #include <string.h>
 
 RegionName groundregion_names[] = {
-    RegionName("Tutorial Island"),
-    RegionName("Stormy Cape"),
-    RegionName("Tank Factory"),
-    RegionName("Destroyed Boat Yard")
+    RegionName("Tutorial Island", RegionTutorial),
+    RegionName("Stormy Cape", RegionStormyCape),
+    RegionName("Tank Factory", RegionTankFactory),
+    RegionName("Destroyed Boat Yard", RegionBoatYard)
 };
 
 RegionBounds groundregion_areas[] = {
@@ -41,13 +41,14 @@ bool checkGroundRegions(const char *&n) {
     return triggered;
 }
 
-bool isInRegion(const char *n)
+bool isInRegion(RegionNames rn)
 {
     Vec2f cp = Camera::center();
     if (MapManager::getTileAt(cp.x(), cp.y()) < 54) return false;
     for(RegionBounds &r : groundregion_areas) {
-        if (r.contains(cp)) {
-            return strcmp(r.reference_region->name, n) == 0;
+        if (r.occupied && r.reference_region->region_enum == rn) {
+            return true;
         }
     }
+    return false;
 }

@@ -14,22 +14,12 @@
 
 #include "game/variables.h"
 
+#include "game/utilities/blinker.h"
+
 static UIElement title_prompt = UIElement::getExpander(48,8,60,11, Tween::Easing::OutQuad);
 static UIElement map_area = UIElement::getExpander(48,50,84,66, Tween::Easing::OutQuad);
 
 bool hiding = false;
-
-class Blinker {
-    float counter = 0.0f;
-    const float total, on_length;
-public:
-    Blinker(float tot, float on) : total(tot), on_length(on) {}
-    void update() {
-        counter += physicsTimestep;
-        while (counter >= total) counter -= total;
-    }
-    bool active() const { return counter < on_length; }
-};
 
 Blinker blinky(1.2f, 1.0f);
 Blinker blue_dot(3.6f, 1.2f);

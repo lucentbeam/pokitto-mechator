@@ -3,13 +3,15 @@
 
 #include "core/utilities/rect.h"
 #include "core/rendering/camera.h"
+#include "game/enums.h"
 
 struct RegionName {
     const char * name;
     int count;
+    RegionNames region_enum;
 
     // enum Mode { ThrowOnEnter, ThrowOnExit } mode;  // consider this for future use
-    RegionName(const char * n) : name(n), count(0) {}
+    RegionName(const char * n, RegionNames rn) : name(n), count(0), region_enum(rn) {}
 };
 
 struct RegionBounds : public Rect
@@ -27,6 +29,6 @@ extern RegionBounds groundregion_areas[];
 
 bool checkGroundRegions(const char * &n);
 
-bool isInRegion(const char * n);
+bool isInRegion(RegionNames rn);
 
 #endif // ALERTREGIONS_H

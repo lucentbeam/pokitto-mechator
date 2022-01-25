@@ -60,6 +60,13 @@ enum QuestStatus : uint8_t {
     QuestFinal = 5
 };
 
+enum RegionNames : uint8_t {
+    RegionTutorial,
+    RegionStormyCape,
+    RegionTankFactory,
+    RegionBoatYard,
+};
+
 enum Blueprints {
     JeepBP              = 0,
     TankBP              = 1,
