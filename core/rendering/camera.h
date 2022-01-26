@@ -19,6 +19,13 @@ class Camera {
 
     static bool s_regions_changed;
 
+    static struct ShakeData {
+        Vec2f position = Vec2f(3.56f, 2.83f);
+        Vec2f velocity = Vec2f(0.0f, 0.0f);
+        float scale, duration = 1.0f, timer = 0.0f;
+        Vec2f offset;
+    } s_shake;
+
     static struct MotionData {
         bool active = false;
         Tween motionTween = Tween(1.0f);
@@ -29,7 +36,9 @@ public:
     static void update(int center_x, int center_y);
 
     static float tl_x() { return s_x; }
+    static float draw_x() { return s_x + int(s_shake.offset.x()); }
     static float tl_y() { return s_y; }
+    static float draw_y() { return s_y + int(s_shake.offset.x()); }
 
     static Vec2f center();
 
@@ -46,6 +55,8 @@ public:
     static bool atMovementDestination();
 
     static void stopMovement();
+
+    static void shake(float intensity, float duration);
 };
 
 #endif // CAMERA_H

@@ -5,6 +5,7 @@
 #include "game/constants.h"
 #include "game/sprites.h"
 #include "game/variables.h"
+#include "game/funcs.h"
 
 #include "core/audiosystem.h"
 #include "core/utilities/babyfsm.h"
@@ -349,6 +350,7 @@ void UI::update(float dt)
     keyccount.update(dt);
     if (m_boss_life != nullptr && *m_boss_life <= 0) {
         m_boss_life = nullptr;
+        onBossDestroyed();
     }
 }
 

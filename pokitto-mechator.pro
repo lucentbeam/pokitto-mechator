@@ -74,6 +74,7 @@ HEADERS += \
     game/entities/pickups.h \
     game/entities/pois.h \
     game/enums.h \
+    game/funcs.h \
     game/maps/alertregion.h \
     game/maps/spawnpoint.h \
     game/maps/spawnpoints.h \

@@ -1,5 +1,7 @@
 #include "camera.h"
 
+#include "game/constants.h"
+
 const int regionSize = 6 * 14; // 6 pixels per tile, 14 tiles per region
 
 int Camera::s_x;
@@ -7,6 +9,8 @@ int Camera::s_y;
 
 Rect Camera::s_region_bounds(0, 0, regionSize * 3, regionSize * 3);
 bool Camera::s_regions_changed = true;
+
+Camera::ShakeData Camera::s_shake;
 
 Camera::MotionData Camera::s_motion;
 
@@ -24,6 +28,19 @@ void Camera::update(int center_x, int center_y) {
             s_region_bounds.setCenter(nextx, nexty);
         }
     }
+    s_shake.timer -= physicsTimestep;
+    float current_scale = s_shake.timer / s_shake.duration * s_shake.scale * 2.0f;
+    if (current_scale < 0) current_scale = 0;
+    else if (current_scale > 0.25f) current_scale = 1.0f;
+    else current_scale = current_scale * 4.0f;
+
+    for(int i = 0; i < 6; ++i) {
+        s_shake.position += s_shake.velocity * physicsTimestep;
+        Vec2f acc = s_shake.position * s_shake.position.abs() * -1.0f;
+        s_shake.velocity += acc * physicsTimestep * 10.0f;
+    }
+
+    s_shake.offset = s_shake.position * current_scale;
 }
 
 Vec2f Camera::center()
@@ -33,7 +50,7 @@ Vec2f Camera::center()
 
 Vec2f Camera::worldToScreen(const Vec2f &pos)
 {
-    return pos - Vec2f(s_x, s_y);
+    return pos - Vec2f(s_x, s_y) + Vec2i(s_shake.offset.x(), s_shake.offset.y());
 }
 
 bool Camera::inActiveZone(const Vec2f &pos)
@@ -63,4 +80,11 @@ bool Camera::atMovementDestination()
 void Camera::stopMovement()
 {
     s_motion.active = false;
+}
+
+void Camera::shake(float intensity, float duration)
+{
+    s_shake.scale = intensity;
+    s_shake.duration = duration;
+    s_shake.timer = duration;
 }

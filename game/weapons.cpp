@@ -3,6 +3,7 @@
 #include "game/utilities/mapmanager.h"
 #include "game/physics/collisionmanager.h"
 #include "core/audiosystem.h"
+#include "game/funcs.h"
 
 const WeaponConfig gun_config(5.0f, 3, 0.5f, 100.0f);
 
@@ -155,6 +156,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
                         }
                     }
                 }
+                onPlayerMissileExplode();
                 ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
                 EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
             });
@@ -183,6 +185,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
                             }
                         }
                     }
+                    onPlayerMissileExplode();
                     AudioSystem::play(sfxExplosionBig);
                     ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(4)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
                     EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));

@@ -4,6 +4,7 @@
 #include "game/entities/pickups.h"
 #include "game/physics/pathfinding.h"
 #include "core/audiosystem.h"
+#include "game/funcs.h"
 
 void EnemyTank::setup(const Vec2f &pos)
 {
@@ -85,12 +86,14 @@ bool EnemyTank::update(float dt)
                             ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
                             EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
                             AudioSystem::play(sfxExplosionBig);
+                            onEnemyMissileExplode();
                         });
                     } else {
                         p->setExpireCallback([](Projectile*p) {
                             ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
                             EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
                             AudioSystem::play(sfxExplosionBig);
+                            onEnemyMissileExplode();
                         });
                     }
                 } else {

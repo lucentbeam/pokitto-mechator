@@ -3,6 +3,7 @@
 
 #include "core/audiosystem.h"
 #include "core/utilities/babyfsm.h"
+#include "game/funcs.h"
 
 static uint32_t mode_switch_counter = 0;
 
@@ -139,7 +140,7 @@ void Soldier::draw()
         }
     }
     Vec2f spos = Camera::worldToScreen(s_instance.m_steering.pos());
-    bool flip = s_instance.m_steering.facing().x() > 0;
+    bool flip = s_instance.m_steering.facing().x() > 0.1f;
     if (s_instance.flashing()) {
         RenderSystem::sprite(spos.x()-(flip ? 4 : 3), spos.y() - 3, soldier[sprite], soldier[0][2], 10, flip);
     } else {
@@ -177,6 +178,7 @@ void Jeep::update(float dt)
         AudioSystem::play(sfxHit2);
         s_instance.health().change(-damage);
         if (!alive()) {
+            onVehicleDestroyed();
             Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
@@ -207,9 +209,9 @@ void Jeep::draw()
     if (!alive()) return;
     Vec2f jpos = Camera::worldToScreen(s_instance.m_steering.pos());
     if (s_instance.flashing()) {
-        RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], 10, s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
     } else {
-        RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], s_instance.m_steering.facing().x() > 0.1f);
     }
     Player::drawReticle(JeepMode, s_instance.m_aim);
 }
@@ -257,6 +259,7 @@ void Helicopter::update(float dt)
         AudioSystem::play(sfxHit2);
         s_instance.health().change(-damage);
         if (!alive()) {
+            onVehicleDestroyed();
             Soldier::setPosition(s_instance.m_steering.pos());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
@@ -272,7 +275,7 @@ void Helicopter::drawGround()
 {
     if (!alive() || s_instance.m_z > 0.0f) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
-    RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+    RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0.1f);
     RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[0], helicopter_blades[0][2]);
 }
 
@@ -280,14 +283,14 @@ void Helicopter::drawAir()
 {
     if (!alive() || s_instance.m_z < 0.01f) return;
     Vec2f pos = Camera::worldToScreen(position());
-    RenderSystem::drawShadow(pos.x() - 9, pos.y() - 9 + s_instance.m_z, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+    RenderSystem::drawShadow(pos.x() - 9, pos.y() - 9 + s_instance.m_z, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0.1f);
     if (s_instance.flashing()) {
-        RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], 10, s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
         if ((mode_switch_counter % 3) == 2) {
             RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/3], helicopter_blades[0][2], 10, false);
         }
     } else {
-        RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0.1f);
         if ((mode_switch_counter % 3) == 2) {
             RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/3], helicopter_blades[0][2]);
         }
@@ -315,6 +318,7 @@ void Tank::update(float dt)
         AudioSystem::play(sfxHit2);
         s_instance.health().change(-damage);
         if (!alive()) {
+            onVehicleDestroyed();
             Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
@@ -341,9 +345,9 @@ void Tank::draw()
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
     int offset = (mode_switch_counter % 30) < 15 && s_instance.m_steering.moving() ? 9 : 0;
     if (s_instance.flashing()) {
-        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], 10, s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
     } else {
-        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], s_instance.m_steering.facing().x() > 0.1f);
     }
     Player::drawReticle(TankMode, s_instance.m_aim);
 }
@@ -370,6 +374,7 @@ void Boat::update(float dt)
         AudioSystem::play(sfxHit2);
         if (!alive()) {
             // TODO: make gameover
+            onVehicleDestroyed();
             Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
@@ -393,9 +398,9 @@ void Boat::draw()
     if (!alive()) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
     if (s_instance.flashing()) {
-        RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], 10, s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
     } else {
-        RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0.1f);
     }
     Player::drawReticle(BoatMode, s_instance.m_aim);
 }

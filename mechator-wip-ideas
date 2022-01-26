@@ -1,6 +1,3 @@
-
-- screen shake
-
 - la musica
 
 - update quest markers via sequences
@@ -16,6 +13,7 @@
   - strategically placed shops & hacking kits
   - cost tuning
   - $10 money boxes?
+  - multiframe pathfinding
 
 - sfx:
   - bomber coming (bbbrrrrreeeewwww....)

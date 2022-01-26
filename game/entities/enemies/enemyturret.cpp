@@ -4,6 +4,7 @@
 #include "game/entities/pickups.h"
 #include "game/physics/pathfinding.h"
 #include "core/audiosystem.h"
+#include "game/funcs.h"
 
 void EnemyTurret::setup(const Vec2f &pos) {
     m_pos = pos;
@@ -59,6 +60,7 @@ bool EnemyTurret::update(float dt)
     m_life -= damage;
     if (m_damage_frames > 0) m_damage_frames--;
     if (m_life <= 0) {
+        onTurretDestroyed();
         EffectManager::createExplosion(m_pos, 8, 14);
         AudioSystem::play(sfxExplosionBig);
         MapManager::setTileAt(m_pos.x(), m_pos.y(), SpecialTiles::DestroyedTurret);

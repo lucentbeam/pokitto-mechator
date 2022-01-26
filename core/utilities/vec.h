@@ -23,6 +23,8 @@ public:
 
     Vec2f rot90() const { return Vec2f(m_y, -m_x); }
 
+    Vec2f abs() const { return Vec2f(std::fabs(m_x), std::fabs(m_y)); }
+
     void rotBy(float angle, bool normalize = true) {
         float l = 1.0f;
         if (!normalize) l = length();
@@ -52,6 +54,10 @@ public:
 
     constexpr Vec2f operator*(float val) const {
         return Vec2f(m_x * val, m_y * val);
+    }
+
+    constexpr Vec2f operator*(const Vec2f &other) const {
+        return Vec2f(m_x * other.m_x, m_y * other.m_y);
     }
 
     Vec2f& operator*=(float val) {

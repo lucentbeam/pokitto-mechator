@@ -33,8 +33,8 @@ void MapManager::update()
 void MapManager::draw(bool bg)
 {
     if (bg) {
-        float x = Camera::tl_x();
-        float y = Camera::tl_y();
+        float x = Camera::draw_x();
+        float y = Camera::draw_y();
         int sx = int(std::floor(x/6.0f)) * 6 - x;
         int sy = int(std::floor(y/6.0f)) * 6 - y;
 

@@ -11,6 +11,7 @@
 #include "game/maps/worldmutables.h"
 
 #include "game/constants.h"
+#include "game/funcs.h"
 
 SimplePool<Barracks, 6> Barracks::s_barracks;
 
@@ -118,6 +119,7 @@ void Barracks::update(float dt)
                     }
                 }
             }
+            onBarracksExplode();
             return false;
         } else if (b->stage() != current) {
             for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
