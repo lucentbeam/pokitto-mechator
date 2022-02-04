@@ -1,7 +1,16 @@
 - la musica
-
+ x cape
+ - default ground
+ - boss
+ - final boss
+ - extras:
+   - boat music
+   - cape boss?
+   
 - update quest markers via sequences
 - mark discovered doors on map
+- unlock vehicle builds
+- unlocking blueprints adds weapons / powerups
 
 - playthroughs!!
 - tweaks:
@@ -25,6 +34,8 @@
 
 - add boat yard boss? turret with special maneuvers? slow health regen? moves walls around yard/itself?
 
+- improve map RLE efficiency
+
 - island areas (boat)
 
 - island (heli)
@@ -38,7 +49,7 @@
   - art
   - prog 
 
-- remove debut stuff
+- remove debug stuff
 
 - joyhat support?
 

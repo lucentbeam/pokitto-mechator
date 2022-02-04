@@ -580,7 +580,7 @@ void Player::drawFlashlight()
     bool doubled = false;
     switch(s_mode) {
     case PlayerMode::SoldierMode:
-        distance = 6.0f;
+        distance = 5.0f;
         dir = Soldier::s_instance.m_aim;
         break;
     case PlayerMode::JeepMode:

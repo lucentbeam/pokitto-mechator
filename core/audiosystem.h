@@ -59,10 +59,10 @@ const int sfx_count = 18;
 
 enum Song {
     musNone = 0,
-    musTown,
+    musCape,
 };
 
-const int song_count = 2;
+const int song_count = 1;
 
 class AudioSystem
 {
