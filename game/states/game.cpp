@@ -144,7 +144,7 @@ void updateGameState(FSM&) {
         }
         if (capeTransition > 5) capeTransition = 5;
     } else {
-        if (capeTransition != 2) AudioSystem::playSong(musNone);
+        if (capeTransition != 2) AudioSystem::playSong(musOverworld);
         capeTransition -= physicsTimestep * 4.0f;
         if (capeTransition < 2) capeTransition = 2;
     }
