@@ -228,7 +228,7 @@ void AudioSystem::initialize() {
         input.close();
     }
 
-    std::string musics[] = {"storm", "overworld", "bcarcade", "bcupcycle", "prismabops"};
+    std::string musics[] = {"storm", "overworld", "boss"};
     for(int i = 0; i < song_count; ++i) {
         music[i].open(path + musics[i] + ".raw");
     }
@@ -351,9 +351,9 @@ void AudioSystem::playSong(Song song) {
     case musOverworld:
         Audio::play<0>("data/mechator/overworld.raw");
         break;
-//    case musArcade:
-//        Audio::play<0>("data/buttoncity/bcarcade.raw");
-//        break;
+    case musArcade:
+        Audio::play<0>("data/mechator/boss.raw");
+        break;
 //    case musUpcycle:
 //        Audio::play<0>("data/buttoncity/bcupcycle.raw");
 //        break;

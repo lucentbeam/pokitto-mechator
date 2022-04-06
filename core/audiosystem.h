@@ -61,9 +61,10 @@ enum Song {
     musNone = 0,
     musCape,
     musOverworld,
+    musBoss,
 };
 
-const int song_count = 2;
+const int song_count = 3;
 
 class AudioSystem
 {
