@@ -59,7 +59,7 @@ void Barracks::setSpawnsTanks()
 
 void Barracks::create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
 {
-    if (getBarracksAt({left + width/2, top + height/2}) != nullptr) return;
+    if (getBarracksAt({left + width/2.0f, top + height/2.0f}) != nullptr) return;
     if (MapManager::getTileAt(left * 6 + 3, top * 6 + 3) == 203) return;
     Barracks * b = s_barracks.activateNext();
     if (b == nullptr) {

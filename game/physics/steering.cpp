@@ -28,7 +28,7 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
     } else {
         m_current_speed *= (1.0f - config->friction);
     }
-    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, config->collisions, {config->size.w, config->size.h});
+    m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, config->collisions, {float(config->size.w), float(config->size.h)});
 }
 
 void Steering::copyPosition(const Steering &other) {

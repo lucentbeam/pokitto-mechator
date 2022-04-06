@@ -132,7 +132,7 @@ Uint8 AudioSystem::RawMusic::getData()
 
 Sint16 AudioSystem::RawMusic::getData16()
 {
-    if (!data.is_open()) data.open(fname);
+    if (!data.is_open()) data.open(fname, std::ifstream::binary | std::ifstream::in);
     if (data.peek() == EOF || !data.good()) {
         data.seekg(0);
     }
@@ -141,13 +141,15 @@ Sint16 AudioSystem::RawMusic::getData16()
         return 0;
     }
     Sint16 raw;
-    data.read(reinterpret_cast<char*>(&raw), sizeof(raw));
+    data.read(reinterpret_cast<char*>(&raw), sizeof(Sint16));
     return raw;
 }
 
 void AudioSystem::RawMusic::reset()
 {
-    if (!data.is_open()) data.open(fname);
+    if (!data.is_open()) {
+        data.open(fname, std::ifstream::binary | std::ifstream::in);
+    }
     else data.seekg(0);
 }
 
@@ -256,9 +258,15 @@ void AudioSystem::play(SFX sfx)
 
 void AudioSystem::playSong(Song song)
 {
+    if (s_active_music == int(song)) return;
     SDL_LockAudio();
     s_active_music = int(song);
-    if (s_active_music == musNone) return;
+    if (s_active_music == musNone)
+    {
+        SDL_UnlockAudio();
+        return;
+    }
+
     music[s_active_music-1].reset();
 
     uint64_t t = SDL_GetPerformanceCounter();
