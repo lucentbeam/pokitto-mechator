@@ -1,5 +1,10 @@
 #include "mapmanager.h"
 
+
+#include <cstring>
+#include <cmath>
+#include <algorithm>
+
 #include "game/maps/mechator.h"
 #include "game/maps/mechator_sky.h"
 #include "game/sprites.h"

@@ -319,6 +319,10 @@ float AudioSystem::getVolume()
     return float(Pokitto::Sound::getVolume()) / 128.0f;
 }
 
+void AudioSystem::setMusicFraction(float fraction) {
+    //mus_frac = fraction;
+}
+
 Audio::Sink<6, PROJ_AUD_FREQ> audio;
 
 template <int N>
@@ -366,7 +370,7 @@ void AudioSystem::playSong(Song song) {
     case musOverworld:
         Audio::play<0>("data/mechator/overworld.raw");
         break;
-    case musArcade:
+    case musBoss:
         Audio::play<0>("data/mechator/boss.raw");
         break;
 //    case musUpcycle:
