@@ -7,10 +7,11 @@
 
 constexpr int storeTilesW = 20;//int(110/6) + 2;
 constexpr int storeTilesH = 16;//int(88/6) + 2;
+constexpr int storeTileCount = storeTilesW * storeTilesH;
 
 class ScreenTileStore
 {
-    uint8_t tilemap[storeTilesH * storeTilesW];
+    uint8_t tilemap[storeTileCount];
 
     Vec2i topleft = Vec2i(-24000, -24000); // so that it updates on frame 1 (unless the camera happens to start near there
 
@@ -25,7 +26,7 @@ public:
     int height() const;
 
     bool requiresUpdate() const;
-    void update();
+    Vec2i update();
 
     uint8_t * getMap();
 };

@@ -17,14 +17,30 @@ ScreenTileStore MapManager::s_camera_tiles;
 void MapManager::update()
 {
     if (s_camera_tiles.requiresUpdate()) {
-        s_camera_tiles.update();
         float x = Camera::tl_x();
         float y = Camera::tl_y();
-        uint8_t * t = s_camera_tiles.getMap();
+
+        Vec2i delta = s_camera_tiles.update();
+        uint8_t * tile_buffer = s_camera_tiles.getMap();
+
+        int16_t offset = -delta.x() - delta.y() * s_camera_tiles.width();
+        if (offset > 0) {
+            offset = offset > storeTileCount ? storeTileCount : offset;
+            std::memmove(tile_buffer + offset, tile_buffer, storeTileCount - offset);
+        } else {
+            offset = offset < -storeTileCount ? -storeTileCount : offset;
+            std::memmove(tile_buffer, tile_buffer - offset, storeTileCount + offset);
+        }
         for(int j = 0; j < s_camera_tiles.height(); ++j) {
             for (int i = 0; i < s_camera_tiles.width(); ++i) {
-                *t = s_background.getTileAt(x + i * 6, y + j * 6);
-                t++;
+                if ( (delta.x() < 0 && i < -delta.x()) ||
+                     (delta.x() > 0 && i >= (s_camera_tiles.width()-delta.x())) ||
+                     (delta.y() < 0 && j < -delta.y()) ||
+                     (delta.y() > 0 && j >= (s_camera_tiles.height()-delta.y()))
+                     ) {
+                    *tile_buffer = s_background.getTileAt(x + i * 6, y + j * 6);
+                }
+                tile_buffer++;
             }
         }
     }    

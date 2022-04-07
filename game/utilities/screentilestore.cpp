@@ -40,10 +40,12 @@ bool ScreenTileStore::requiresUpdate() const
     return int(std::floor(Camera::tl_x() / 6.0f)) != topleft.x() || int(std::floor(Camera::tl_y() / 6.0f)) != topleft.y();
 }
 
-void ScreenTileStore::update()
+Vec2i ScreenTileStore::update()
 {
+    Vec2i prev = topleft;
     topleft.setX(std::floor(Camera::tl_x()/6.0f));
     topleft.setY(std::floor(Camera::tl_y()/6.0f));
+    return topleft - prev;
 }
 
 uint8_t *ScreenTileStore::getMap()

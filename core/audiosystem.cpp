@@ -248,11 +248,6 @@ void AudioSystem::initialize() {
     AudioSystem::s_high_res_counter = SDL_GetPerformanceCounter();
 }
 
-void AudioSystem::setMusicFraction(float fraction)
-{
-    mus_frac = fraction;
-}
-
 void AudioSystem::play(SFX sfx)
 {
     for (int i = 0; i < 4; i++) {
@@ -286,6 +281,11 @@ void AudioSystem::playSong(Song song)
 }
 
 #endif
+
+void AudioSystem::setMusicFraction(float fraction)
+{
+    mus_frac = fraction;
+}
 
 void AudioSystem::setVolume(float value)
 {
