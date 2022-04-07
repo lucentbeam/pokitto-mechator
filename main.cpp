@@ -46,7 +46,8 @@ int main ()
 //    Soldier::setPosition({138 * 6, 195 * 6}); // boat yard
 //    Soldier::setPosition({76 * 6, 158 * 6}); // before cape
 #endif
-        Soldier::setPosition({76 * 6, 158 * 6}); // before cape
+
+    Soldier::setPosition({76 * 6, 158 * 6}); // before cape
 
     Camera::update(Soldier::position().x(), Soldier::position().y());
 

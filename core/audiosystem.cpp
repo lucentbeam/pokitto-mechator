@@ -6,6 +6,8 @@
 
 float vol = 100;
 
+float mus_frac = 1.0f;
+
 #ifdef SFML_CORE
 sf::Sound AudioSystem::channels[4];
 int AudioSystem::current_channel = 0;
@@ -186,7 +188,7 @@ void audioCallback(void *userdata, Uint8 * b, int len) {
         }
 
         if (AudioSystem::s_active_music > 0) {
-            out += float(AudioSystem::music[AudioSystem::s_active_music - 1].getData16());
+            out += float(AudioSystem::music[AudioSystem::s_active_music - 1].getData16()) * mus_frac;
         }
 
         out /= 5;
@@ -244,6 +246,11 @@ void AudioSystem::initialize() {
         SDL_PauseAudioDevice(s_device_id, 0); /* start audio playing. */
     }
     AudioSystem::s_high_res_counter = SDL_GetPerformanceCounter();
+}
+
+void AudioSystem::setMusicFraction(float fraction)
+{
+    mus_frac = fraction;
 }
 
 void AudioSystem::play(SFX sfx)

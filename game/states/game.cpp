@@ -27,8 +27,9 @@
 #include "game/maps/sequencetrigger.h"
 
 #include "core/palettes.h"
-#include "game/utilities/blinker.h"
 #include "core/audiosystem.h"
+
+#include "game/maps/regiontransitionhandler.h"
 
 static Player player;
 //static ScreenBuffer screenbuffer;
@@ -39,9 +40,6 @@ const char * region_name = "";
 static int8_t * life_list[7] = {nullptr};
 static std::function<void()> active_callback;
 static int watchcount = 0;
-
-static float capeTransition = 0.0f;
-static Blinker capeLightning(6.0f, 0.3);
 
 void goGame()
 {
@@ -124,33 +122,8 @@ void updateGameState(FSM&) {
         goPause();
     }
 
-    int last = capeTransition;
-    if (isInRegion(RegionStormyCape)) {
-        if (capeTransition == 2) {
-            AudioSystem::playSong(musCape);
-        }
-        bool flashing = capeLightning.active();
-        capeLightning.update();
-        if (capeLightning.active()) {
-            if (!flashing) {
-                AudioSystem::play(sfxExplosionBig);
-            }
-            capeTransition = 0;
-        } else {
-            capeTransition += physicsTimestep * 12.0f;
-            if (flashing) {
-                capeLightning = Blinker(0.35f + float(rand() % 100)/100.0f * 12.0f, 0.1f + float(rand() % 100)/100.0f * 0.2f);
-            }
-        }
-        if (capeTransition > 5) capeTransition = 5;
-    } else {
-        if (capeTransition != 2) AudioSystem::playSong(musOverworld);
-        capeTransition -= physicsTimestep * 4.0f;
-        if (capeTransition < 2) capeTransition = 2;
-    }
-    if (last != int(capeTransition)) {
-        RenderSystem::setPalette(palette_list[int(capeTransition)]);
-    }
+    RegionTransitionHandler::goRegion(isInRegion(RegionStormyCape) ? RegionStormyCape : RegionTutorial);
+    RegionTransitionHandler::update();
 }
 
 void drawGameState() {

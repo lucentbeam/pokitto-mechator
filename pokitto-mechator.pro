@@ -18,6 +18,7 @@ SOURCES += \
     game/entities/pickups.cpp \
     game/entities/pois.cpp \
     game/maps/alertregion.cpp \
+    game/maps/regiontransitionhandler.cpp \
     game/maps/spawnpoint.cpp \
     game/physics/pathfinding.cpp \
     game/player.cpp \
@@ -76,6 +77,7 @@ HEADERS += \
     game/enums.h \
     game/funcs.h \
     game/maps/alertregion.h \
+    game/maps/regiontransitionhandler.h \
     game/maps/spawnpoint.h \
     game/maps/spawnpoints.h \
     game/maps/worldmutables.h \

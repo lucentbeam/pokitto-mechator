@@ -123,6 +123,8 @@ public:
 #endif
     static void initialize();
 
+    static void setMusicFraction(float fraction);
+
     static void setVolume(float value);
 
     static float getVolume();
