@@ -106,13 +106,20 @@ void drawPauseState()
             }
 
             WeaponHelper carousel = Player::getCurrentWeaponInfo();
-            int spacing = 2;
-            x = x + w/2 - ((carousel.count-1) * spacing + carousel.count * 4) / 2;
-            const uint8_t bullet_empty[] = {4, 4, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1};
+            int spacing = 4;
+            x = x + w/2 - ((carousel.count-1) * spacing + carousel.count * 6) / 2;
+            const uint8_t bullet_empty[] = {6, 6, 1, 1, 0, 0, 1, 1,
+                                                  1, 0, 0, 0, 0,1,
+                                                  0, 0, 0, 0, 0,0,
+                                                  0, 0, 0, 0, 0,0,
+                                                  1, 0, 0, 0, 0,1,
+                                                  1, 1, 0, 0, 1, 1,};
+            y++;
+            Helpers::drawNotchedRect(x - spacing, y + h, (spacing + 6) * carousel.count + spacing, 6, 1);
             for (int i = 0; i < carousel.count; ++i) {
-                RenderSystem::sprite(x + i * (spacing + 4), y + h + 1, bullet_empty, 1);
+                RenderSystem::sprite(x + i * (spacing + 6), y + h, bullet_empty, 1);
                 if (i == carousel.index) {
-                    RenderSystem::drawRect2(x + i * (spacing + 4) + 1, y + h + 2, 2, 2, 10);
+                    RenderSystem::drawRect2(x + i * (spacing + 6) + 2, y + h + 2, 2, 2, 10);
                 }
             }
         }
