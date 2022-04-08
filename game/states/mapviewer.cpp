@@ -22,6 +22,7 @@ static UIElement map_area = UIElement::getExpander(48,50,84,66, Tween::Easing::O
 bool hiding = false;
 
 Blinker blinky(1.2f, 1.0f);
+Blinker goal_blink(3.6f, 0.2f);
 Blinker blue_dot(3.6f, 1.2f);
 Blinker red_dot(3.6f, 2.4f);
 
@@ -48,6 +49,7 @@ void MapViewer::update(FSM &fsm)
     blinky.update();
     blue_dot.update();
     red_dot.update();
+    goal_blink.update();
 
 #ifdef DEBUGS
     if (ctrl.right.pressed()) {
@@ -85,13 +87,15 @@ void MapViewer::draw()
             Vec2i goal = GameVariables::getGoal();
             if (goal.x() > -200) {
                 Vec2f pos = Vec2f(goal.x() * 54.0f/216.0f, goal.y() * 54.0f/216.0f);
-                RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[4], 0);
+                RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[goal_blink.active() ? 0 : 4], 0);
             }
             RenderSystem::sprite(109 - ui_legend[0], y + h/2 - ui_legend[1]/2, ui_legend, ui_legend[2]);
             if (blue_dot.active()) {
-                RenderSystem::pixel(109 - ui_legend[0] + 5, y + h/2 - ui_legend[1]/2 + 23, 48);
+                RenderSystem::drawRect(109 - ui_legend[0] + 4, y + h/2 - ui_legend[1]/2 + 22, 4, 3, 48);
             } else if (red_dot.active()) {
-                RenderSystem::pixel(109 - ui_legend[0] + 5, y + h/2 - ui_legend[1]/2 + 23, 16);
+                RenderSystem::drawRect(109 - ui_legend[0] + 4, y + h/2 - ui_legend[1]/2 + 22, 4, 3, 16);
+            } else {
+                RenderSystem::drawRect(109 - ui_legend[0] + 4, y + h/2 - ui_legend[1]/2 + 22, 4, 3, 32);
             }
         }
     });

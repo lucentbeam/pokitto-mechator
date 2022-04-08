@@ -10,7 +10,7 @@ class SpawnPoint
     const Vec2i m_pos;
 
 
-    static std::unordered_set<const SpawnPoint*> s_active_points;
+    static bool s_active_points[];
 
 public:
 
