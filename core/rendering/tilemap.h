@@ -257,6 +257,17 @@ uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
         tile += 2;
         counter += *(tile + 1);
     }
+    if (*tile == 111) {
+        int v = (px + py * 13);
+        int spacer = 11;
+        if (v % 3 == 0) {
+            spacer = 7;
+        } else if (v % 3 == 1) {
+            spacer = 13;
+        }
+        int tile = v % 5 == 0 ? 99 : 82;
+        if (v % spacer == 0) return tile;
+    }
     return *tile;
 }
 

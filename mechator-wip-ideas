@@ -13,9 +13,11 @@
 - subs
   - art
   - prog 
-  
+
 - update quest markers via sequences
-- mark discovered doors on map
+- clean up in-game map
+  - detailed visual
+  - mark discovered doors on map (remove opened)
 - unlock vehicle builds
 - unlocking blueprints adds weapons / powerups
 
