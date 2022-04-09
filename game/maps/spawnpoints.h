@@ -10,7 +10,6 @@
 const SpawnPoint points[] = {
 	SpawnPoint({27, 6}, spawnShop<24,5,23,0,21,5>),
 	SpawnPoint({16, 16}, Pickups::spawnHackingKit),
-	SpawnPoint({44, 16}, spawnDoorA<43,15,1,3>),
 	SpawnPoint({42, 10}, spawnBarracks<41,7,4,3>),
 	SpawnPoint({34, 15}, spawnBarracks<33,12,3,3>),
 	SpawnPoint({55, 13}, spawnBarracks<54,10,3,3>),
@@ -28,14 +27,6 @@ const SpawnPoint points[] = {
 	SpawnPoint({170, 83}, spawnDoorNone<191,85,9,3>),
 	SpawnPoint({179, 28}, spawnDoorNone<178,26,1,5>),
 	SpawnPoint({13, 127}, spawnDoorNone<12,124,3,3>),
-	SpawnPoint({56, 58}, spawnDoorA<54,59,5,1>),
-	SpawnPoint({58, 158}, spawnDoorA<57,159,3,3>),
-	SpawnPoint({107, 20}, spawnDoorA<106,19,3,1>),
-	SpawnPoint({27, 113}, spawnDoorB<26,110,3,3>),
-	SpawnPoint({45, 154}, spawnDoorB<42,153,3,3>),
-	SpawnPoint({58, 123}, spawnDoorC<57,124,3,3>),
-	SpawnPoint({96, 181}, spawnDoorC<97,180,7,3>),
-	SpawnPoint({140, 25}, spawnDoorC<141,24,3,3>),
 	SpawnPoint({14, 49}, Pickups::spawnHackingKit),
 	SpawnPoint({13, 49}, spawnShop<10,48,9,43,7,48>),
 	SpawnPoint({79, 66}, spawnBarracks<78,63,3,3>),
@@ -268,3 +259,4 @@ const SpawnPoint points[] = {
 	SpawnPoint({76, 166}, spawnShop<73,165,72,160,70,165>),
 };
 const int point_count = sizeof(points)/sizeof(SpawnPoint);
+

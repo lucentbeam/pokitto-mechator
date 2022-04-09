@@ -13,7 +13,7 @@
 #include "game/player.h"
 
 #include "game/variables.h"
-
+#include "game/maps/doors.h"
 #include "game/utilities/blinker.h"
 
 static UIElement title_prompt = UIElement::getExpander(48,8,60,11, Tween::Easing::OutQuad);
@@ -64,13 +64,14 @@ void MapViewer::draw()
 {
     drawShadedGame();
     map_area.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
+        constexpr float world_to_loc = 54.0f / 216.0f / 6.0f;
         if (h > 8 && w > 8) RenderSystem::drawRect2(x + 2, y + 2, w - 4, h - 4, 1);
         if (h > 56) {
             Vec2i tl = Vec2i(x + w/2 - sprite_map[0]/2, y + h/2-sprite_map[1]/2);
             RenderSystem::sprite(tl.x(), tl.y(), sprite_map);
             if (blinky.active()) {
                 Vec2f pos = Player::position();
-                pos *= 54.0f/216.0f/6.0f;
+                pos *= world_to_loc;
                 if (pos.x() < (x - tl.x())) {
                     pos.setX(x - tl.x());
                 } else if (pos.x() > (x - tl.x() + w - 2)) {
@@ -82,8 +83,16 @@ void MapViewer::draw()
                     pos.setY(y - tl.y() + h - 2);
                 }
                 RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[1], 0);
-
             }
+
+            int color;
+            for (int i = 0; i < door_count; ++i) {
+                color = SpawnPoint::door_labels[i] == POIType::DoorA ? 48 : SpawnPoint::door_labels[i] == POIType::DoorB ? 16 : 32;
+                Vec2f pos = doors[i].pos();
+                pos *= world_to_loc;
+                RenderSystem::drawRect(tl.x() + pos.x() - 1, tl.y() + pos.y() - 1, 3, 2, color);
+            }
+
             Vec2i goal = GameVariables::getGoal();
             if (goal.x() > -200) {
                 Vec2f pos = Vec2f(goal.x() * 54.0f/216.0f, goal.y() * 54.0f/216.0f);
