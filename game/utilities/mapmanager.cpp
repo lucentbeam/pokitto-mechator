@@ -5,27 +5,37 @@
 #include <cmath>
 #include <algorithm>
 
-#include "game/maps/mechator.h"
-#include "game/maps/mechator_sky.h"
+#include "game/maps/worldtiles.h"
 #include "game/sprites.h"
-#include "game/maps/worldmutables.h"
-#include "game/sprites.h"
+//#include "game/maps/worldmutables.h"
+#include "game/enums.h"
 
 #include "core/utilities/fpshelper.h"
 
-BackgroundMap MapManager::s_background(jungletiles, world, world_indices, mutable_indices, mutable_index_indices, current_tiles);
+BackgroundMap MapManager::s_background(jungletiles, island_main, island_main_indices, delta_x_island_main, delta_y_island_main, island_main_mutable_indices, island_main_mutable_index_indices, island_main_current_tiles);
+BackgroundMap MapManager::s_island1(jungletiles, island_1, island_1_indices, delta_x_island_1, delta_y_island_1, island_1_mutable_indices, island_1_mutable_index_indices, island_1_current_tiles);
 
-SkyTilemap MapManager::s_foreground(jungletiles_sky, sky, sky_indices);
+SkyTilemap MapManager::s_foreground(jungletiles_sky, island_main_sky, island_main_sky_indices);
 
 ScreenTileStore MapManager::s_camera_tiles;
+
+uint8_t MapManager::getTileAtPvt(float x, float y)
+{
+    if (s_background.contains(x, y)) {
+        return s_background.getTileAt(x, y);
+    } else if (s_island1.contains(x, y)) {
+        return s_island1.getTileAt(x, y);
+    }
+    return 19;
+}
 
 void MapManager::update()
 {
     if (s_camera_tiles.requiresUpdate()) {
-        float x = Camera::tl_x();
-        float y = Camera::tl_y();
+        float x               = Camera::tl_x();
+        float y               = Camera::tl_y();
 
-        Vec2i delta = s_camera_tiles.update();
+        Vec2i delta           = s_camera_tiles.update();
         uint8_t * tile_buffer = s_camera_tiles.getMap();
 
         int16_t offset = -delta.x() - delta.y() * s_camera_tiles.width();
@@ -43,7 +53,7 @@ void MapManager::update()
                      (delta.y() < 0 && j < -delta.y()) ||
                      (delta.y() > 0 && j >= (s_camera_tiles.height()-delta.y()))
                      ) {
-                    *tile_buffer = s_background.getTileAt(x + i * 6, y + j * 6);
+                    *tile_buffer = getTileAtPvt(x + i * 6, y + j * 6);
                 }
                 tile_buffer++;
             }
@@ -89,19 +99,26 @@ void MapManager::draw(ScreenBuffer *buffer)
 
 uint16_t MapManager::getMapIndex(float x, float y)
 {
-    return s_background.getMapIndex(x, y);
+    int px = (x / 6);
+    int py = (y / 6);
+    return px + py * 1000; // arbitrary value created in level export script
+//    return s_background.getMapIndex(x, y);
 }
 
 uint8_t MapManager::getTileAt(float x, float y)
 {
     uint8_t t = s_camera_tiles.getTileAt(x, y);
     if (t != 255) return t;
-    return s_background.getTileAt(x, y);
+    return getTileAtPvt(x, y);
 }
 
 void MapManager::setTileAt(float x, float y, uint8_t override)
 {
-    s_background.setTileAt(x, y, override);
+    if (s_background.contains(x, y)) {
+        s_background.setTileAt(x, y, override);
+    } else if (s_island1.contains(x, y)) {
+        s_island1.setTileAt(x, y, override);
+    }
     s_camera_tiles.setTileAt(x, y, override);
 }
 

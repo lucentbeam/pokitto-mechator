@@ -8,7 +8,7 @@
 #include "game/physics/collisionmanager.h"
 #include "game/physics/pathfinding.h"
 
-#include "game/maps/worldmutables.h"
+#include "game/maps/worldtiles.h"
 
 #include "game/constants.h"
 #include "game/funcs.h"
@@ -17,6 +17,9 @@ SimplePool<Barracks, 6> Barracks::s_barracks;
 
 int8_t Barracks::s_max_life = 27;
 
+#ifdef SDL_CORE
+#include <iostream>
+#endif
 
 void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
 {
@@ -33,13 +36,16 @@ void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t w
     m_spawns_tanks = false;
 
     // If this stuff ever changes, double-check the implementation in TiledMapReader!!!
-    int idx = int(left)  + int(top) * 255;
-    for(int i = 0; i < sizeof(barracks_indices); ++i) {
+    int idx = int(left)  + int(top) * 1000;
+    for(int i = 0; i < barracks_count; ++i) {
         if (idx == barracks_indices[i]) {
             m_barracks_index = i;
             return;
         }
     }
+#ifdef SDL_CORE
+    std::cout << "did not find barracks for " << idx << std::endl;
+#endif
 }
 
 void Barracks::disablePathfindingChecks()
@@ -58,7 +64,7 @@ void Barracks::setSpawnsTanks()
 }
 
 void Barracks::create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
-{
+{    
     if (getBarracksAt({left + width/2.0f, top + height/2.0f}) != nullptr) return;
     if (MapManager::getTileAt(left * 6 + 3, top * 6 + 3) == 203) return;
     Barracks * b = s_barracks.activateNext();

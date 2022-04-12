@@ -11,11 +11,13 @@ typedef Tilemap<6,6> BackgroundMap;
 
 class MapManager
 {
-    static BackgroundMap s_background;
+    static BackgroundMap s_background, s_island1;
 
     static SkyTilemap s_foreground;
 
     static ScreenTileStore s_camera_tiles;
+
+    static uint8_t getTileAtPvt(float x, float y);
 public:
     static void update();
 

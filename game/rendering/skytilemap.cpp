@@ -21,7 +21,9 @@ void SkyTilemap::draw()
     uint16_t y_upper = y + render_height + 1;
     if (y_upper > m_mapheight) y_upper = m_mapheight;
     uint16_t x_lower = x < 0 ? 0 : x;
+    if (x_lower >= x_upper) return;
     uint16_t y_lower = y < 0 ? 0 : y;
+    if (y_lower >= y_upper) return;
     int current_tile;
     for(int16_t j = y_lower; j < y_upper; j++) {
         const uint8_t * tile = j == 0 ? m_map : m_map + m_map_indices[(j-1)];

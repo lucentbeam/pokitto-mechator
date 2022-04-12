@@ -18,6 +18,7 @@ class Tilemap {
   const uint8_t * m_map;
   const uint16_t * m_map_y_indices;
   const uint8_t m_mapwidth, m_mapheight;
+  const int ox, oy;
 
   bool clearBuffer = true;
   int16_t lastCameraX, lastCameraY;
@@ -32,7 +33,7 @@ class Tilemap {
 public:
   const uint8_t render_width = 19, render_height = 15;
 
-  Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map, const uint16_t * map_y_vals, const uint16_t * mutable_indices = nullptr, const uint16_t * mutable_index_indices = nullptr, uint8_t * mutables = nullptr);
+  Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map, const uint16_t * map_y_vals, int dx, int dy, const uint16_t * mutable_indices = nullptr, const uint16_t * mutable_index_indices = nullptr, uint8_t * mutables = nullptr);
 
   void draw();
   void drawToBuffer(ScreenBuffer * buffer);
@@ -46,15 +47,18 @@ public:
   uint8_t getTileAt(float x, float y) const;
   void setTileAt(float x, float y, uint8_t override);
   void clearOverrideAt(float x, float y);
+  bool contains(float x, float y);
 };
 
 template<int TileWidth, int TileHeight>
-Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t *map, const uint16_t * map_y_vals, const uint16_t * mutable_indices, const uint16_t * mutable_index_indices, uint8_t *mutables) :
+Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t *map, const uint16_t * map_y_vals, int dx, int dy, const uint16_t * mutable_indices, const uint16_t * mutable_index_indices, uint8_t *mutables) :
     m_tiles(tiles),
     m_map(map + 2),
     m_map_y_indices(map_y_vals),
     m_mapwidth(map[0]),
     m_mapheight(map[1]),
+    ox(dx * TileWidth),
+    oy(dy * TileHeight),
     m_mutable_indices(mutable_indices),
     m_mutable_index_indices(mutable_index_indices),
     m_current_mutables(mutables)
@@ -243,6 +247,8 @@ uint16_t Tilemap<TileWidth, TileHeight>::getMapIndex(float x, float y) const
 template<int TileWidth, int TileHeight>
 uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
 {
+    x -= ox;
+    y -= oy;
     int px = std::floor(x / TileWidth);
     int py = std::floor(y / TileHeight);
     const uint8_t defaultTileIndex = 19; // deep water; TODO: find a better place for this
@@ -274,6 +280,8 @@ uint8_t Tilemap<TileWidth, TileHeight>::getTileAt(float x, float y) const
 template<int TileWidth, int TileHeight>
 void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t override)
 {
+    x -= ox;
+    y -= oy;
     if (m_mutable_indices == nullptr) {
         return;
     }
@@ -287,6 +295,12 @@ void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t overrid
 
     m_current_mutables[mut_idx] = override;
     m_redraws.push_back({x,y});
+}
+
+template<int TileWidth, int TileHeight>
+bool Tilemap<TileWidth, TileHeight>::contains(float x, float y)
+{
+    return x >= ox && y >= oy && x < (ox + m_mapwidth * TileWidth) && y < (oy + m_mapheight * TileHeight);
 }
 
 #endif

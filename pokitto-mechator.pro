@@ -81,7 +81,7 @@ HEADERS += \
     game/maps/spawnpoint.h \
     game/maps/spawnpoints.h \
     game/maps/doors.h \
-    game/maps/worldmutables.h \
+    #game/maps/worldmutables.h \
     game/physics/pathfinding.h \
     game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \
@@ -96,8 +96,9 @@ HEADERS += \
     core/settings_pokitto.h \
     game/entities/effects.h \
     game/entities/projectile.h \
-    game/maps/mechator.h \
-    game/maps/mechator_sky.h \
+    game/maps/worldtiles.h \
+    #game/maps/mechator.h \
+    #game/maps/mechator_sky.h \
     game/physics/body.h \
     game/physics/collisionmanager.h \
     game/physics/steering.h \
