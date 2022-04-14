@@ -58,6 +58,13 @@ bool Camera::inActiveZone(const Vec2f &pos)
     return s_region_bounds.contains(pos.x(), pos.y());
 }
 
+bool Camera::inActiveZone(const Vec2f &pos, const Vec2f &bounds)
+{
+    Rect r = s_region_bounds;
+    r.grow(bounds.x(), bounds.y());
+    return r.contains(pos.x(), pos.y());
+}
+
 bool Camera::inViewingZone(const Vec2f &pos)
 {
     Vec2f sc = worldToScreen(pos);

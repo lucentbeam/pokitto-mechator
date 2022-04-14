@@ -18,7 +18,8 @@ class Tilemap {
   const uint8_t * m_map;
   const uint16_t * m_map_y_indices;
   const uint8_t m_mapwidth, m_mapheight;
-  const int ox, oy;
+  const float ox, oy;
+  const int last_mutable_index;
 
   bool clearBuffer = true;
   int16_t lastCameraX, lastCameraY;
@@ -33,7 +34,7 @@ class Tilemap {
 public:
   const uint8_t render_width = 19, render_height = 15;
 
-  Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map, const uint16_t * map_y_vals, int dx, int dy, const uint16_t * mutable_indices = nullptr, const uint16_t * mutable_index_indices = nullptr, uint8_t * mutables = nullptr);
+  Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t * map, const uint16_t * map_y_vals, int dx, int dy, const uint16_t * mutable_indices = nullptr, const uint16_t * mutable_index_indices = nullptr, uint8_t * mutables = nullptr, int last_mut = 0);
 
   void draw();
   void drawToBuffer(ScreenBuffer * buffer);
@@ -51,7 +52,7 @@ public:
 };
 
 template<int TileWidth, int TileHeight>
-Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t *map, const uint16_t * map_y_vals, int dx, int dy, const uint16_t * mutable_indices, const uint16_t * mutable_index_indices, uint8_t *mutables) :
+Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeight+2], const uint8_t *map, const uint16_t * map_y_vals, int dx, int dy, const uint16_t * mutable_indices, const uint16_t * mutable_index_indices, uint8_t *mutables, int last_mut) :
     m_tiles(tiles),
     m_map(map + 2),
     m_map_y_indices(map_y_vals),
@@ -59,6 +60,7 @@ Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeig
     m_mapheight(map[1]),
     ox(dx * TileWidth),
     oy(dy * TileHeight),
+    last_mutable_index(last_mut),
     m_mutable_indices(mutable_indices),
     m_mutable_index_indices(mutable_index_indices),
     m_current_mutables(mutables)
@@ -69,8 +71,9 @@ Tilemap<TileWidth, TileHeight>::Tilemap(const uint8_t tiles[][TileWidth*TileHeig
 template<int TileWidth, int TileHeight>
 bool Tilemap<TileWidth, TileHeight>::canMutate(int x, int y, int &store_idx) const
 {
-    const uint16_t * idx = m_mutable_indices;
     int map_index = x + y * m_mapwidth;
+    if (map_index > last_mutable_index) return false;
+    const uint16_t * idx = m_mutable_indices;
     int offset = (map_index/(m_mapwidth * 8));
     offset = m_mutable_index_indices[offset];
     idx += offset;

@@ -6,7 +6,7 @@
 #include "core/audiosystem.h"
 
 ObjectPool<POIs, 6> POIs::s_pois;
-std::vector<uint16_t> POIs::s_activated;
+std::vector<int> POIs::s_activated;
 POIs * POIs::s_current_active_poi = nullptr;
 bool POIs::s_disable_shops = false;
 
@@ -26,7 +26,7 @@ void POIs::openAtIndex(const Vec2f &pos)
     s_activated.push_back(MapManager::getMapIndex(pos.x(), pos.y()));
 }
 
-void POIs::spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, POIType door)
+void POIs::spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, uint8_t tile, POIType door)
 {
     if (!mapIndexUnopened(pos)) {
         return;
@@ -41,6 +41,7 @@ void POIs::spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t widt
     p->m_width = width;
     p->m_height = height;
     p->m_door_type = door;
+    p->m_tile = tile;
     p->m_sprite = SpriteWrapper(SpriteName(int(SpriteName::POIShopClosed) + int(door)));
 }
 
@@ -73,7 +74,7 @@ void POIs::unlockCurrent()
         } else {
             for(int x = s_current_active_poi->m_left; x < (s_current_active_poi->m_width + s_current_active_poi->m_left); x+=6) {
                 for(int y = s_current_active_poi->m_top; y < (s_current_active_poi->m_height + s_current_active_poi->m_top); y+=6) {
-                    MapManager::setTileAt(x, y, SpecialTiles::BaseGround);
+                    MapManager::setTileAt(x, y, s_current_active_poi->m_tile);
                 }
             }
             s_pois.deactivate(s_current_active_poi);

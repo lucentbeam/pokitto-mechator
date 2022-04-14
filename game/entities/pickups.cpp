@@ -11,7 +11,7 @@
 ObjectPool<Pickups, 8> Pickups::s_temporary;
 ObjectPool<Pickups, 6> Pickups::s_special;
 
-std::vector<uint16_t> Pickups::s_acquired_specials;
+std::vector<int> Pickups::s_acquired_specials;
 
 void Pickups::configure(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime)
 {

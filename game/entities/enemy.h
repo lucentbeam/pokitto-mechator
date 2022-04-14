@@ -63,7 +63,7 @@ public:
     static void spawnTurretDisabled(const Vec2i &pos);
     static void spawnMine(const Vec2i &pos);
     static void spawnHelicopter(const Vec2i &pos);
-    static void createLasers(const Vec2i &pos, bool vertical, int node, int sz);
+    static void createLasers(const Vec2i &pos, bool vertical, int sz);
 
     static void update(float dt);
     static void draw();
@@ -71,14 +71,14 @@ public:
 };
 
 
-template <int t, int h>
+template <int h>
 void spawnVerticalLasers(const Vec2i &loc) {
-    Enemy::createLasers(loc, true, t, h);
+    Enemy::createLasers(loc, true, h);
 }
 
-template <int l, int w>
+template <int w>
 void spawnHorizontalLasers(const Vec2i &loc) {
-    Enemy::createLasers(loc, false, l, w);
+    Enemy::createLasers(loc, false, w);
 }
 
 #endif // ENEMY_H

@@ -7,7 +7,7 @@ class POIs
 {
     static ObjectPool<POIs, 6> s_pois;
 
-    static std::vector<uint16_t> s_activated;
+    static std::vector<int> s_activated;
 
     static POIs * s_current_active_poi;
 
@@ -22,6 +22,7 @@ class POIs
     // only used for keyed doors
     uint16_t m_top, m_left;
     uint8_t m_width, m_height;
+    uint8_t m_tile;
     POIType m_door_type;
 
     SpriteWrapper m_sprite;
@@ -34,7 +35,7 @@ class POIs
 
 public:
 
-    static void spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, POIType door);
+    static void spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, uint8_t tile, POIType door);
 
     static void spawnShop(const Vec2i &pos, const Vec2f &jeep_loc, const Vec2f &boat_loc, const Vec2f &heli_loc);
 
@@ -54,24 +55,24 @@ void spawnShop(const Vec2i &loc) {
     POIs::spawnShop(loc,Vec2f(x1*6,y1*6),Vec2f(x2*6,y2*6),Vec2f(x3*6,y3*6));
 }
 
-template <int l, int t, int w, int h>
+template <int l, int t, int w, int h, int tile>
 void spawnDoorA(const Vec2i &loc) {
-    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, POIType::DoorA);
+    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, tile, POIType::DoorA);
 }
 
-template <int l, int t, int w, int h>
+template <int l, int t, int w, int h, int tile>
 void spawnDoorB(const Vec2i &loc) {
-    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, POIType::DoorB);
+    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, tile, POIType::DoorB);
 }
 
-template <int l, int t, int w, int h>
+template <int l, int t, int w, int h, int tile>
 void spawnDoorC(const Vec2i &loc) {
-    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, POIType::DoorC);
+    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, tile, POIType::DoorC);
 }
 
-template <int l, int t, int w, int h>
+template <int l, int t, int w, int h, int tile>
 void spawnDoorNone(const Vec2i &loc) {
-    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, POIType::DoorNone);
+    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, tile, POIType::DoorNone);
 }
 
 #endif // POIS_H

@@ -12,8 +12,9 @@
 
 #include "core/utilities/fpshelper.h"
 
-BackgroundMap MapManager::s_background(jungletiles, island_main, island_main_indices, delta_x_island_main, delta_y_island_main, island_main_mutable_indices, island_main_mutable_index_indices, island_main_current_tiles);
-BackgroundMap MapManager::s_island1(jungletiles, island_1, island_1_indices, delta_x_island_1, delta_y_island_1, island_1_mutable_indices, island_1_mutable_index_indices, island_1_current_tiles);
+BackgroundMap MapManager::s_background(jungletiles, island_main, island_main_indices, delta_x_island_main, delta_y_island_main, island_main_mutable_indices, island_main_mutable_index_indices, island_main_current_tiles, island_main_last_mutable_index);
+BackgroundMap MapManager::s_island1(jungletiles, island_1, island_1_indices, delta_x_island_1, delta_y_island_1, island_1_mutable_indices, island_1_mutable_index_indices, island_1_current_tiles, island_1_last_mutable_index);
+BackgroundMap MapManager::s_island2(jungletiles, island_2, island_2_indices, delta_x_island_2, delta_y_island_2, island_2_mutable_indices, island_2_mutable_index_indices, island_2_current_tiles, island_2_last_mutable_index);
 
 SkyTilemap MapManager::s_foreground(jungletiles_sky, island_main_sky, island_main_sky_indices);
 
@@ -25,6 +26,8 @@ uint8_t MapManager::getTileAtPvt(float x, float y)
         return s_background.getTileAt(x, y);
     } else if (s_island1.contains(x, y)) {
         return s_island1.getTileAt(x, y);
+    } else if (s_island2.contains(x, y)) {
+        return s_island2.getTileAt(x, y);
     }
     return 19;
 }
@@ -97,7 +100,7 @@ void MapManager::draw(ScreenBuffer *buffer)
     s_background.drawToBuffer(buffer);
 }
 
-uint16_t MapManager::getMapIndex(float x, float y)
+int MapManager::getMapIndex(float x, float y)
 {
     int px = (x / 6);
     int py = (y / 6);
@@ -118,6 +121,8 @@ void MapManager::setTileAt(float x, float y, uint8_t override)
         s_background.setTileAt(x, y, override);
     } else if (s_island1.contains(x, y)) {
         s_island1.setTileAt(x, y, override);
+    } else if (s_island2.contains(x, y)) {
+        s_island2.setTileAt(x, y, override);
     }
     s_camera_tiles.setTileAt(x, y, override);
 }

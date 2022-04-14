@@ -462,7 +462,7 @@
   <object id="19" name="keycard_b" x="728.083" y="500.229" width="2.5" height="2.875"/>
   <object id="20" name="keycard_b" x="817.25" y="398.063" width="2.5" height="2.875"/>
   <object id="21" name="keycard_a" x="1016.75" y="684.23" width="2.5" height="2.875"/>
-  <object id="23" name="door_none_21-5_2_9" x="1021.38" y="499.177" width="3.5" height="4.125"/>
+  <object id="23" name="door_none_1_-5_2_9" x="1021.38" y="499.177" width="3.5" height="4.125"/>
   <object id="24" name="door_none_-1_-2_1_5" x="1074.66" y="169.028" width="3.5" height="4.125"/>
   <object id="25" name="door_none_-1_-3_3_3" x="78.7653" y="763.514" width="3.5" height="4.125"/>
   <object id="26" name="door_a_-2_1_5_1" x="336.875" y="348.813" width="3.5" height="4.125"/>

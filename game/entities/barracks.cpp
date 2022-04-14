@@ -21,7 +21,7 @@ int8_t Barracks::s_max_life = 27;
 #include <iostream>
 #endif
 
-void Barracks::config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
+void Barracks::config(const Vec2f &spawn, int left, int top, uint8_t width, uint8_t height)
 {
     m_spawn = spawn;
     m_left = left * 6;
@@ -63,7 +63,7 @@ void Barracks::setSpawnsTanks()
     m_spawns_tanks = true;
 }
 
-void Barracks::create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height)
+void Barracks::create(const Vec2i &spawn, int left, int top, uint8_t width, uint8_t height)
 {    
     if (getBarracksAt({left + width/2.0f, top + height/2.0f}) != nullptr) return;
     if (MapManager::getTileAt(left * 6 + 3, top * 6 + 3) == 203) return;

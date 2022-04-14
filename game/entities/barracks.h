@@ -34,7 +34,7 @@ class Barracks
 
 public:
 
-    void config(const Vec2f &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height);
+    void config(const Vec2f &spawn, int left, int top, uint8_t width, uint8_t height);
 
     void disablePathfindingChecks();
 
@@ -42,7 +42,7 @@ public:
 
     void setSpawnsTanks();
 
-    static void create(const Vec2i &spawn, uint16_t left, uint16_t top, uint8_t width, uint8_t height);
+    static void create(const Vec2i &spawn, int left, int top, uint8_t width, uint8_t height);
 
     static void update(float dt);
 

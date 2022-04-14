@@ -46,6 +46,8 @@ public:
 
     static bool inActiveZone(const Vec2f &pos);
 
+    static bool inActiveZone(const Vec2f &pos, const Vec2f &bounds);
+
     static bool inViewingZone(const Vec2f &pos);
 
     static bool hasMovedRegions() { return s_regions_changed; }

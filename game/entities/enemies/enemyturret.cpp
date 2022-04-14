@@ -7,7 +7,7 @@
 #include "game/funcs.h"
 
 void EnemyTurret::setup(const Vec2f &pos) {
-    m_pos = pos;
+    m_pos = pos + Vec2f(3, 2);
     m_life = 10;
     if (MapManager::getTileAt(pos.x(), pos.y()) == SpecialTiles::DestroyedTurret) {
         m_life = 0;
@@ -25,7 +25,7 @@ bool EnemyTurret::update(float dt)
 {
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
-    if (!Camera::inActiveZone(m_pos)) {
+    if (!Camera::inActiveZone(m_pos - Vec2f(3, 2))) {
         if (!m_ignore_out_of_range || (m_ignore_out_of_range && m_life <= 0)) {
             return false;
         }

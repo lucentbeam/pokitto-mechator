@@ -20,7 +20,7 @@ class EnemyLasers
 public:
     EnemyLasers() :m_pos(0, 0) {}
 
-    void setup(const Vec2f &pos, bool vert, int node, int sz);
+    void setup(const Vec2f &pos, bool vert, int sz);
     bool update(float dt);
     void draw() const;
 };

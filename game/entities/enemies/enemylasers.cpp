@@ -12,10 +12,10 @@ constexpr int laserDelayVariation = 40; // delay = laserDelay - (rand() % laserD
 constexpr int laserFireLength = 50;
 constexpr int laserFireCount = 3;
 
-void EnemyLasers::setup(const Vec2f &pos, bool vert, int node, int sz)
+void EnemyLasers::setup(const Vec2f &pos, bool vert, int sz)
 {
     vertical = vert;
-    m_pos.set(vert ? pos.x() : node * 6, vert ? node * 6 : pos.y());
+    m_pos.set(pos.x(), pos.y());
     size = sz;
     m_counter = rand() % laserDelayVariation;
 }

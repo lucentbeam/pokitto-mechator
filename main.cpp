@@ -49,8 +49,8 @@ int main ()
     //    Soldier::setPosition({76 * 6, 158 * 6}); // before cape
 
         Soldier::setPosition({214 * 6, 8 * 6}); // tutorial island
-        Helicopter::setPosition({214 * 6, 8 * 6});
-        Helicopter::health().setMax();
+        Boat::setPosition({214 * 6, 8 * 6});
+        Boat::health().setMax();
 
 
     Camera::update(Soldier::position().x(), Soldier::position().y());

@@ -2,10 +2,10 @@
 
 bool CollisionManager::rectCollides(const Rect &rect, uint16_t collisionMask)
 {
-    int xlower = rect.left()/6.0f;
-    int xupper = rect.right()/6.0f;
-    int ylower = rect.top()/6.0f;
-    int yupper = rect.bottom()/6.0f;
+    int xlower = std::floor(rect.left()/6.0f);
+    int xupper = std::floor(rect.right()/6.0f);
+    int ylower = std::floor(rect.top()/6.0f);
+    int yupper = std::floor(rect.bottom()/6.0f);
 
     for(int px = xlower; px <= xupper; px++) {
         for (int py = ylower; py <= yupper; py++) {

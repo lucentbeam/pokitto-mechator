@@ -11,7 +11,7 @@ typedef Tilemap<6,6> BackgroundMap;
 
 class MapManager
 {
-    static BackgroundMap s_background, s_island1;
+    static BackgroundMap s_background, s_island1, s_island2;
 
     static SkyTilemap s_foreground;
 
@@ -25,7 +25,7 @@ public:
 
     static void draw(ScreenBuffer * buffer);
 
-    static uint16_t getMapIndex(float x, float y);
+    static int getMapIndex(float x, float y);
 
     static uint8_t getTileAt(float x, float y);
 

@@ -139,7 +139,7 @@ void Enemy::spawnBomber(const Vec2i &pos)
 
 void Enemy::spawnTurret(const Vec2i &pos)
 {
-    createTurret(pos + Vec2i(3, 2));
+    createTurret(pos);
 }
 
 void Enemy::spawnTurretDisabled(const Vec2i &pos)
@@ -162,11 +162,11 @@ void Enemy::spawnHelicopter(const Vec2i &pos)
     createHelicopter(pos);
 }
 
-void Enemy::createLasers(const Vec2i &pos, bool vertical, int node, int sz)
+void Enemy::createLasers(const Vec2i &pos, bool vertical, int sz)
 {
     auto m = s_lasers.activateNext();
     if (m != nullptr) {
-        m->setup(pos, vertical, node, sz);
+        m->setup(pos, vertical, sz);
     }
 }
 
@@ -192,14 +192,9 @@ void Enemy::drawTanks()
 
 void Enemy::updateTurrets(float dt)
 {
-    EnemyTurret * start = s_turrets.objects();
-    int i = s_turrets.objectCount()-1;
-    while (i >= 0) {
-        if (!(start + i)->update(dt)) {
-            s_turrets.deactivate(i);
-        }
-        --i;
-    }
+    s_turrets.iterate([&](EnemyTurret * h) {
+        return !h->update(dt);
+    });
 }
 
 void Enemy::drawTurrets()
