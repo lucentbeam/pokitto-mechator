@@ -1,5 +1,4 @@
-{ "compressionlevel":-1,
- "height":30,
+{ "height":30,
  "infinite":false,
  "layers":[
         {
@@ -94,8 +93,8 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":144.46875,
-                 "y":114.78125
+                 "x":144.469,
+                 "y":114.781
                 }, 
                 {
                  "height":4.4375,
@@ -105,8 +104,8 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":156.84375,
-                 "y":108.78125
+                 "x":156.844,
+                 "y":108.781
                 }, 
                 {
                  "height":4.4375,
@@ -116,8 +115,8 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":144.46875,
-                 "y":90.90625
+                 "x":144.469,
+                 "y":90.9063
                 }, 
                 {
                  "height":4.4375,
@@ -127,8 +126,8 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":150.59375,
-                 "y":55.03125
+                 "x":150.594,
+                 "y":55.0313
                 }, 
                 {
                  "height":4.4375,
@@ -138,8 +137,8 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":114.59375,
-                 "y":49.03125
+                 "x":114.594,
+                 "y":49.0313
                 }, 
                 {
                  "height":4.4375,
@@ -149,8 +148,30 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":132.34375,
-                 "y":30.78125
+                 "x":132.344,
+                 "y":30.7813
+                }, 
+                {
+                 "height":21.1647454545455,
+                 "id":12,
+                 "name":"enemy_watermine",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":36.8124727272727,
+                 "x":81.5028545454546,
+                 "y":79.5085363636364
+                }, 
+                {
+                 "height":21.1647,
+                 "id":13,
+                 "name":"enemy_watermine",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":36.8125,
+                 "x":86.8664772727273,
+                 "y":103.41765
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -159,10 +180,10 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":12,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "renderorder":"left-down",
- "tiledversion":"1.7.2",
+ "tiledversion":"1.2.5",
  "tileheight":6,
  "tilesets":[
         {
@@ -171,6 +192,6 @@
         }],
  "tilewidth":6,
  "type":"map",
- "version":"1.6",
+ "version":1.2,
  "width":30
 }

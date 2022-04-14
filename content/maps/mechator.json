@@ -1,5 +1,4 @@
-{ "compressionlevel":0,
- "height":216,
+{ "height":216,
  "infinite":false,
  "layers":[
         {
@@ -512,8 +511,8 @@
                  "type":"",
                  "visible":true,
                  "width":4.8125,
-                 "x":181.924,
-                 "y":246.724
+                 "x":180.651272727273,
+                 "y":246.814909090909
                 }, 
                 {
                  "height":4.4375,
@@ -2879,7 +2878,7 @@
  "nextobjectid":293,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.7.2",
+ "tiledversion":"1.2.5",
  "tileheight":6,
  "tilesets":[
         {
@@ -2888,6 +2887,6 @@
         }],
  "tilewidth":6,
  "type":"map",
- "version":"1.6",
+ "version":1.2,
  "width":216
 }

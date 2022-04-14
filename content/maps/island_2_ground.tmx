@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="37" height="42" tilewidth="6" tileheight="6" infinite="0" nextlayerid="4" nextobjectid="14">
- <editorsettings>
-  <export target="island_2_ground.json" format="json"/>
- </editorsettings>
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="37" height="42" tilewidth="6" tileheight="6" infinite="0" nextlayerid="4" nextobjectid="23">
  <tileset firstgid="1" source="mechator_tiles.tsx"/>
  <layer id="1" name="world" width="37" height="42">
   <data encoding="csv">
@@ -110,5 +107,14 @@
   <object id="11" name="door_none_-8_0_7_1_19" x="54.6136" y="175.028" width="3.5" height="4.125"/>
   <object id="12" name="door_c_0_-8_1_4_19" x="67.1591" y="121.028" width="3.5" height="4.125"/>
   <object id="13" name="keycard_b" x="193.659" y="25.6534" width="2.5" height="2.875"/>
+  <object id="14" name="enemy_boat" x="24.5938" y="139.031" width="4.8125" height="4.4375"/>
+  <object id="15" name="enemy_boat" x="180.73" y="78.804" width="4.8125" height="4.4375"/>
+  <object id="16" name="enemy_boat" x="204.776" y="79.0085" width="4.8125" height="4.4375"/>
+  <object id="17" name="enemy_watermine" x="181.957" y="98.4176" width="26.0852" height="13.7102"/>
+  <object id="18" name="enemy_watermine" x="110.957" y="169.645" width="26.0852" height="13.7102"/>
+  <object id="19" name="enemy_watermine" x="169.957" y="169.645" width="26.0852" height="13.7102"/>
+  <object id="20" name="enemy_watermine" x="182.457" y="122.145" width="26.0852" height="13.7102"/>
+  <object id="21" name="enemy_watermine" x="13.7074" y="74.8949" width="26.0852" height="13.7102"/>
+  <object id="22" name="enemy_watermine" x="140.139" y="85.7813" width="25.7216" height="49.7102"/>
  </objectgroup>
 </map>

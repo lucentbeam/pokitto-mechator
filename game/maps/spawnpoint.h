@@ -18,7 +18,7 @@ public:
 
     static void setActiveRegion();
 
-    Vec2f pos() const { return {m_pos.x(), m_pos.y()}; }
+    Vec2f pos() const { return {float(m_pos.x()), float(m_pos.y())}; }
 
     void (* const m_on_approach)(const Vec2i &);
 };

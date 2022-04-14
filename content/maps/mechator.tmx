@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" compressionlevel="0" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="293">
- <editorsettings>
-  <export target="mechator.json" format="json"/>
- </editorsettings>
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="293">
  <tileset firstgid="1" source="mechator_tiles.tsx"/>
  <layer id="15" name="world" width="216" height="216">
   <data encoding="csv">
@@ -488,7 +485,7 @@
   <object id="49" name="enemy_mine" x="138.594" y="246.912" width="4.8125" height="4.4375"/>
   <object id="50" name="enemy_bomber" x="96.5256" y="162.729" width="4.8125" height="4.4375"/>
   <object id="51" name="enemy_tank" x="103.01" y="319.781" width="4.8125" height="4.4375"/>
-  <object id="52" name="enemy_turret" x="181.924" y="246.724" width="4.8125" height="4.4375"/>
+  <object id="52" name="enemy_turret" x="180.651" y="246.815" width="4.8125" height="4.4375"/>
   <object id="53" name="enemy_tank" x="169.344" y="289.031" width="4.8125" height="4.4375"/>
   <object id="54" name="enemy_mech" x="354.594" y="344.531" width="4.8125" height="4.4375"/>
   <object id="55" name="enemy_mech" x="319.094" y="343.531" width="4.8125" height="4.4375"/>
