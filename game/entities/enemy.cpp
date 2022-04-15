@@ -22,6 +22,8 @@ ObjectPool<EnemyHelicopter,2> Enemy::s_helis;
 
 ObjectPool<Mine, 14> Enemy::s_mines;
 
+ObjectPool<WaterMine, 6> Enemy::s_watermines;
+
 ObjectPool<EnemyLasers,4> Enemy::s_lasers;
 
 EnemyMech * Enemy::createMech(const Vec2f &pos)
@@ -170,6 +172,21 @@ void Enemy::createLasers(const Vec2i &pos, bool vertical, int sz)
     }
 }
 
+void Enemy::spawnWaterMine(const Vec2i &pos, int w, int h)
+{
+    auto m = s_watermines.activateNext();
+    if (m != nullptr) {
+        m->pos = pos;
+        m->offset = Vec2i(3, 3) + Vec2i(rand() % w, rand() % h) * 6;
+        m->bob_freq = (rand() % 30);
+    }
+}
+
+void Enemy::spawnBoat(const Vec2i &pos)
+{
+
+}
+
 void Enemy::updateTanks(float dt)
 {
     EnemyTank * start = s_tanks.objects();
@@ -254,8 +271,19 @@ void Enemy::updateMines(float dt)
             EffectManager::createExplosionBig(m->pos - Vec2f(6,6));
             return true;
         }
-        return !Camera::inActiveZone(m->pos);
+        return !Camera::inActiveZone(m->pos - Vec2f(3, 3));
     });
+    if (Player::mode() == PlayerMode::BoatMode) {
+        s_watermines.iterate([&](WaterMine *m) {
+            if (player.contains(m->pos + m->offset)) {
+                AudioSystem::play(sfxExplosionSmall);
+                ProjectileManager::create(m->pos + m->offset, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
+                EffectManager::createExplosionBig(m->pos + m->offset - Vec2f(6,6));
+                return true;
+            }
+            return !Camera::inActiveZone(m->pos);
+        });
+    }
     s_lasers.iterate([&](EnemyLasers * l) {
         return !l->update(dt);
     });
@@ -269,6 +297,11 @@ void Enemy::drawMines()
             RenderSystem::pixel(p.x() - 1, p.y() - 1, 16);
         }
     }
+    for(int i = 0; i < s_watermines.objectCount(); ++i) {
+        bool bob = ((Mine::timer + (s_watermines.objects() + i)->bob_freq) % 130) <= 65;
+        Vec2f p = Camera::worldToScreen((s_watermines.objects() + i)->pos + (s_watermines.objects() + i)->offset);
+        RenderSystem::sprite(p.x(), p.y() - (bob ? 1 : 0), enemy_watermine, 0);
+    }
     s_lasers.iterate([&](EnemyLasers * l) {
         l->draw();
         return false;
@@ -281,7 +314,7 @@ void Enemy::update(float dt)
     updateTanks(dt);
     updateTurrets(dt);
     updateBombers(dt);
-    updateMines(dt);
+    updateMines(dt);    
     updateHelis(dt);
 }
 

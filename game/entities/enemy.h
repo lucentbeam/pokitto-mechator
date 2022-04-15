@@ -19,6 +19,12 @@ struct Mine {
     static int timer;
 };
 
+struct WaterMine {
+    Vec2f pos;
+    Vec2i offset;
+    int bob_freq;
+};
+
 class Enemy
 {
     static ObjectPool<EnemyMech, 8> s_mechs;
@@ -28,6 +34,7 @@ class Enemy
     static ObjectPool<EnemyHelicopter, 2> s_helis;
     static ObjectPool<EnemyLasers, 4> s_lasers;
     static ObjectPool<Mine, 14> s_mines;
+    static ObjectPool<WaterMine, 6> s_watermines;
 
     static void updateMechs(float dt);
     static void drawMechs();
@@ -64,6 +71,8 @@ public:
     static void spawnMine(const Vec2i &pos);
     static void spawnHelicopter(const Vec2i &pos);
     static void createLasers(const Vec2i &pos, bool vertical, int sz);
+    static void spawnWaterMine(const Vec2i &pos, int w, int h);
+    static void spawnBoat(const Vec2i &pos);
 
     static void update(float dt);
     static void draw();
@@ -79,6 +88,11 @@ void spawnVerticalLasers(const Vec2i &loc) {
 template <int w>
 void spawnHorizontalLasers(const Vec2i &loc) {
     Enemy::createLasers(loc, false, w);
+}
+
+template <int w, int h>
+void spawnWaterMine(const Vec2i &loc) {
+    Enemy::spawnWaterMine(loc, w, h);
 }
 
 #endif // ENEMY_H

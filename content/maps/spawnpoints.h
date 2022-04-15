@@ -268,7 +268,9 @@ const SpawnPoint points[] = {
 	SpawnPoint({255, 0}, Enemy::spawnMine),
 	SpawnPoint({249, -1}, Enemy::spawnMine),
 	SpawnPoint({252, -4}, Enemy::spawnMine),
-	SpawnPoint({247, 86}, Enemy::spawnTurret),
+	SpawnPoint({246, 5}, spawnWaterMine<7, 4>),
+	SpawnPoint({247, 9}, spawnWaterMine<7, 4>),
+	SpawnPoint({247, 87}, Enemy::spawnTurret),
 	SpawnPoint({239, 89}, spawnDoorNone<231,89,7,1,19>),
 	SpawnPoint({241, 81}, spawnVerticalLasers<6>),
 	SpawnPoint({252, 81}, spawnVerticalLasers<6>),
@@ -280,6 +282,15 @@ const SpawnPoint points[] = {
 	SpawnPoint({254, 116}, Pickups::spawnKeycardC),
 	SpawnPoint({239, 109}, spawnDoorNone<231,109,7,1,19>),
 	SpawnPoint({262, 84}, Pickups::spawnKeycardB),
+	SpawnPoint({234, 103}, Enemy::spawnBoat),
+	SpawnPoint({260, 93}, Enemy::spawnBoat),
+	SpawnPoint({264, 93}, Enemy::spawnBoat),
+	SpawnPoint({262, 97}, spawnWaterMine<5, 3>),
+	SpawnPoint({250, 109}, spawnWaterMine<5, 3>),
+	SpawnPoint({260, 109}, spawnWaterMine<5, 3>),
+	SpawnPoint({262, 101}, spawnWaterMine<5, 3>),
+	SpawnPoint({234, 93}, spawnWaterMine<5, 3>),
+	SpawnPoint({255, 98}, spawnWaterMine<5, 9>),
 };
 const int point_count = sizeof(points)/sizeof(SpawnPoint);
 

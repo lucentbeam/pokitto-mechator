@@ -27,6 +27,7 @@
 		{ "output" : "enemy_helicopter", "hcount": 5 },
 		{ "output" : "enemy_laser_ns", "hcount": 2 },
 		{ "output" : "enemy_laser_ew", "hcount": 2 },
+		{ "output" : "enemy_watermine" },
 		
 		{ "output" : "smoke", "hcount": 6 },
 		{ "output" : "flashlight", "hcount": 5 },
