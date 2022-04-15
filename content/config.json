@@ -21,6 +21,7 @@
 		
 		{ "output" : "enemy_ground", "hcount": 4},
 		{ "output" : "enemy_tank", "hcount": 5},
+		{ "output" : "enemy_boat", "hcount": 5},
 		{ "output" : "enemy_plane" },
 		{ "output" : "enemy_tank_cannon", "hcount": 9 },
 		{ "output" : "enemy_turret_base", "hcount": 2 },
