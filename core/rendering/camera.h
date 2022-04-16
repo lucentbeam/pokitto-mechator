@@ -17,7 +17,7 @@ class Camera {
 
     static Rect s_region_bounds;
 
-    static bool s_regions_changed;
+    static int s_region_dx, s_region_dy;
 
     static struct ShakeData {
         Vec2f position = Vec2f(3.56f, 2.83f);
@@ -50,7 +50,10 @@ public:
 
     static bool inViewingZone(const Vec2f &pos);
 
-    static bool hasMovedRegions() { return s_regions_changed; }
+    static bool hasMovedRegions() { return s_region_dx != 0 || s_region_dy != 0; }
+
+    static int regionDeltaX() { return s_region_dx; }
+    static int regionDeltaY() { return s_region_dy; }
 
     static void moveTo(const Vec2f &pos, float velocity);
 
@@ -59,6 +62,8 @@ public:
     static void stopMovement();
 
     static void shake(float intensity, float duration);
+
+    static int regionWidth();
 };
 
 #endif // CAMERA_H

@@ -8,7 +8,8 @@ int Camera::s_x;
 int Camera::s_y;
 
 Rect Camera::s_region_bounds(0, 0, regionSize * 3, regionSize * 3);
-bool Camera::s_regions_changed = true;
+int Camera::s_region_dx = 0;
+int Camera::s_region_dy = 0;
 
 Camera::ShakeData Camera::s_shake;
 
@@ -23,8 +24,9 @@ void Camera::update(int center_x, int center_y) {
         s_y = center_y - screen_half_y;
         int nextx = std::floor(center_x/regionSize) * regionSize + regionSize / 2;
         int nexty = std::floor(center_y/regionSize) * regionSize + regionSize / 2;
-        s_regions_changed = nextx != s_region_bounds.centerX() || nexty != s_region_bounds.centerY();
-        if (s_regions_changed) {
+        s_region_dx = nextx - s_region_bounds.centerX();
+        s_region_dy = nexty - s_region_bounds.centerY();
+        if (hasMovedRegions()) {
             s_region_bounds.setCenter(nextx, nexty);
         }
     }
@@ -94,4 +96,9 @@ void Camera::shake(float intensity, float duration)
     s_shake.scale = intensity;
     s_shake.duration = duration;
     s_shake.timer = duration;
+}
+
+int Camera::regionWidth()
+{
+    return regionSize;
 }

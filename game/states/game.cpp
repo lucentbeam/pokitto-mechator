@@ -102,6 +102,40 @@ void updateGameState(FSM&) {
 #ifndef DEBUGS
     if (SequenceTrigger::checkForTriggers()) return;
 #endif
+    if (Camera::hasMovedRegions()) {
+        int dx = Camera::regionDeltaX();
+        int dy = Camera::regionDeltaY();
+        Vec2f locs[3];
+        if (dx != 0 && dy != 0) {
+            dx = dx > 0 ? 1 : -1;
+            dy = dy > 0 ? 1 : -1;
+
+            locs[0].set(dx, dy);
+            locs[1].set(dx, 0);
+            locs[2].set(0, dy);
+        } else if (dx != 0) {
+            dx = dx > 0 ? 1 : -1;
+
+            locs[0].set(dx, -1);
+            locs[1].set(dx, 0);
+            locs[2].set(dx, 1);
+        } else {
+            dy = dy > 0 ? 1 : -1;
+
+            locs[0].set(-1, dy);
+            locs[1].set(0, dy);
+            locs[2].set(1, dy);
+        }
+        for(int i = 0; i < 3; ++i) {
+            locs[i] *= Camera::regionWidth();
+            locs[i] += Camera::center();
+            locs[i] += Vec2f((rand() % 36) - 18, (rand() % 36) - 18);
+            if (MapManager::getTileAt(locs[i].x(), locs[i].y()) == 19) {
+                if ((rand() % 10) < 3) Enemy::spawnBoat({locs[i].x(), locs[i].y()});
+                else Enemy::spawnWaterMine({locs[i].x(), locs[i].y()}, 1, 1);
+            }
+        }
+    }
 
     SpawnPoint::setActiveRegion();
 //    CloudManager::update(physicsTimestep);

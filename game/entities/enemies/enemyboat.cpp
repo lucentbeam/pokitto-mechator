@@ -41,9 +41,7 @@ bool EnemyBoat::update(float dt)
         alt = alt / 50.0f;
         dir = Pathfinding::getPath(Vec2f(m_steering.pos().x(), m_steering.pos().y()), Vec2f(tx, ty), mask) * 6 + Vec2f(3,3) - m_steering.pos();
         float len = dir.length();
-        if (len > 0) {
-            dir = dir / len;
-        }
+        if (len > 0) dir = dir / len;
         m_aim = {dir.x(), dir.y()};
     }
     m_steering.update(dt, m_aim.x(), m_aim.y());
