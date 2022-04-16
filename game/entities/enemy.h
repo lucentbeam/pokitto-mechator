@@ -12,6 +12,7 @@
 #include "enemies/enemybomber.h"
 #include "enemies/enemyhelicopter.h"
 #include "enemies/enemylasers.h"
+#include "enemies/enemyboat.h"
 
 struct Mine {
     Vec2f pos;
@@ -29,6 +30,7 @@ class Enemy
 {
     static ObjectPool<EnemyMech, 8> s_mechs;
     static ObjectPool<EnemyTank, 5> s_tanks;
+    static ObjectPool<EnemyBoat, 6> s_boats;
     static ObjectPool<EnemyTurret, 4> s_turrets;
     static ObjectPool<EnemyBomber, 3> s_bombers;
     static ObjectPool<EnemyHelicopter, 2> s_helis;
@@ -54,6 +56,9 @@ class Enemy
     static void updateMines(float dt);
     static void drawMines();
 
+    static void updateBoats(float dt);
+    static void drawBoats();
+
 public:    
     static EnemyMech * createMech(const Vec2f &pos);
     static EnemyTank * createTank(const Vec2f &pos);
@@ -62,6 +67,7 @@ public:
     static EnemyTurret * getTurretAt(Vec2i loc);
     static EnemyBomber * createBomber(const Vec2f &pos);
     static EnemyHelicopter * createHelicopter(const Vec2f &pos);
+    static EnemyBoat * createBoat(const Vec2f &pos);
 
     static void spawnMech(const Vec2i &pos);
     static void spawnTank(const Vec2i &pos);

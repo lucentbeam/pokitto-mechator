@@ -34,6 +34,7 @@ const int barracksMaxMoneyDrops = 5;
 
 const float enemyHeliSpeed = 20.0f;
 const float enemyTankSpeed = 12.0f;
+const float enemyBoatSpeed = 28.0f;
 
 const int playerStartTileX = 6;//18;
 const int playerStartTileY = 16;//33;

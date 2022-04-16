@@ -8,6 +8,7 @@ SOURCES += \
     core/utilities/babyfsm.cpp \
     core/utilities/fpshelper.cpp \
     game/entities/barracks.cpp \
+    game/entities/enemies/enemyboat.cpp \
     game/entities/enemies/enemybomber.cpp \
     game/entities/enemies/enemyhelicopter.cpp \
     game/entities/enemies/enemylasers.cpp \
@@ -65,6 +66,7 @@ HEADERS += \
     core/utilities/objectpool.h \
     game/constants.h \
     game/entities/barracks.h \
+    game/entities/enemies/enemyboat.h \
     game/entities/enemies/enemybomber.h \
     game/entities/enemies/enemyhelicopter.h \
     game/entities/enemies/enemylasers.h \

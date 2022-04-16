@@ -14,6 +14,8 @@ ObjectPool<EnemyMech,8> Enemy::s_mechs;
 
 ObjectPool<EnemyTank,5> Enemy::s_tanks;
 
+ObjectPool<EnemyBoat,6> Enemy::s_boats;
+
 ObjectPool<EnemyTurret,4> Enemy::s_turrets;
 
 ObjectPool<EnemyBomber,3> Enemy::s_bombers;
@@ -119,6 +121,15 @@ EnemyHelicopter *Enemy::createHelicopter(const Vec2f &pos)
     return m;
 }
 
+EnemyBoat *Enemy::createBoat(const Vec2f &pos)
+{
+    auto b = s_boats.activateNext();
+    if (b != nullptr) {
+        b->setup(pos);
+    }
+    return b;
+}
+
 void Enemy::spawnMech(const Vec2i &pos)
 {
     createMech(pos);
@@ -184,7 +195,7 @@ void Enemy::spawnWaterMine(const Vec2i &pos, int w, int h)
 
 void Enemy::spawnBoat(const Vec2i &pos)
 {
-
+    createBoat(pos);
 }
 
 void Enemy::updateTanks(float dt)
@@ -308,10 +319,31 @@ void Enemy::drawMines()
     });
 }
 
+void Enemy::updateBoats(float dt)
+{
+    EnemyBoat * start = s_boats.objects();
+    int i = s_boats.objectCount()-1;
+    while (i >= 0) {
+        if (!(start + i)->update(dt)) {
+            s_boats.deactivate(i);
+        }
+        --i;
+    }
+}
+
+void Enemy::drawBoats()
+{
+    EnemyBoat * start = s_boats.objects();
+    for (int i = 0; i < s_boats.objectCount(); ++i) {
+        (start + i)->draw();
+    }
+}
+
 void Enemy::update(float dt)
 {
     updateMechs(dt);
     updateTanks(dt);
+    updateBoats(dt);
     updateTurrets(dt);
     updateBombers(dt);
     updateMines(dt);    
@@ -324,6 +356,7 @@ void Enemy::draw()
 
     drawMechs();
     drawTanks();
+    drawBoats();
     drawTurrets();
 
     drawBombers();
