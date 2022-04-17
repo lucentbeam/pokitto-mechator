@@ -188,7 +188,7 @@ void Enemy::spawnWaterMine(const Vec2i &pos, int w, int h)
     auto m = s_watermines.activateNext();
     if (m != nullptr) {
         m->pos = pos;
-        m->offset = Vec2i(3, 3) + Vec2i(rand() % w, rand() % h) * 6;
+        m->offset = Vec2i(rand() % w, rand() % h) * 6;
         m->bob_freq = (rand() % 30);
     }
 }

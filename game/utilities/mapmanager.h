@@ -11,7 +11,7 @@ typedef Tilemap<6,6> BackgroundMap;
 
 class MapManager
 {
-    static BackgroundMap s_background, s_island1, s_island2;
+    static BackgroundMap s_background, s_island1, s_island2, s_island3;
 
     static SkyTilemap s_foreground;
 
