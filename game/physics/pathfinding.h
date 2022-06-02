@@ -14,14 +14,14 @@ class Pathfinding
 {
 
     struct Node {
-        static uint16_t goal_x, goal_y;
+        static int16_t goal_x, goal_y;
         uint8_t parent_index = 0;
         uint8_t index = 0;
         int16_t x, y, n_idx, g = 0, h = 0;
-        void config(int8_t parent, uint16_t g, int16_t lx, int16_t ly) {
+        void config(int8_t parent, uint16_t g, float lx, float ly) {
             parent_index = parent;
-            x = (lx/6);
-            y = (ly/6);
+            x = std::floor(lx/6.0f);
+            y = std::floor(ly/6.0f);
             n_idx = y * 1000 + x;
             int dx = std::abs(int(x) - int(goal_x));
             int dy = std::abs(int(y) - int(goal_y));
@@ -46,7 +46,7 @@ class Pathfinding
             return x == goal_x && y == goal_y;
         }
 
-        uint16_t f() const { return g + h; }
+        int16_t f() const { return g + h; }
     };
 
     static ObjectPool<Node, 24> s_visited;

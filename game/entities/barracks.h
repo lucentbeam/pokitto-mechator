@@ -17,7 +17,7 @@ class Barracks
     static int8_t s_max_life;
 
     Vec2f m_spawn{0, 0};
-    uint16_t m_top, m_left;
+    int16_t m_top, m_left;
     uint8_t m_width, m_height;
 
     int8_t m_life = s_max_life;

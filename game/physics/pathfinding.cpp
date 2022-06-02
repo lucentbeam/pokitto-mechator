@@ -3,8 +3,8 @@
 #include "game/physics/collisionmanager.h"
 #include <vector>
 
-uint16_t Pathfinding::Node::goal_x = 0;
-uint16_t Pathfinding::Node::goal_y = 0;
+int16_t Pathfinding::Node::goal_x = 0;
+int16_t Pathfinding::Node::goal_y = 0;
 
 ObjectPool<Pathfinding::Node,24> Pathfinding::s_visited;
 ObjectPool<Pathfinding::Node,24> Pathfinding::s_unvisited;
@@ -14,8 +14,8 @@ Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t colli
     s_unvisited.clear();
     s_visited.clear();
 
-    Node::goal_x = goal.x() / 6;
-    Node::goal_y = goal.y() / 6;
+    Node::goal_x = std::floor(goal.x() / 6);
+    Node::goal_y = std::floor(goal.y() / 6);
 
     s_unvisited.activateNext()->config(0, 0, start.x(), start.y());
 
@@ -106,8 +106,8 @@ bool Pathfinding::canReach(const Vec2f &start, const Vec2f &goal, uint16_t colli
     s_unvisited.clear();
     s_visited.clear();
 
-    Node::goal_x = goal.x() / 6;
-    Node::goal_y = goal.y() / 6;
+    Node::goal_x = std::floor(goal.x() / 6);
+    Node::goal_y = std::floor(goal.y() / 6);
 
     s_unvisited.activateNext()->config(0, 0, start.x(), start.y());
 
