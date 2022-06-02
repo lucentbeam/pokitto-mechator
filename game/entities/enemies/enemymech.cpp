@@ -32,8 +32,7 @@ bool EnemyMech::update(float dt, bool check_collisions)
             dir *= 0;
         }
         if (m_counter % asCounts(0.66f) == 0) {
-            Vec2f target = Pathfinding::getPath(m_pos, Vec2f(tx, ty), mask) * 6 + Vec2f(3,3);
-            dir = target - m_pos;
+            Vec2f dir = Pathfinding::getPath(m_pos, Vec2f(tx, ty), mask) * 6 + Vec2f(3,3) - m_pos;
             float len = dir.length();
             if (len > 0) {
                 dir = dir / len;

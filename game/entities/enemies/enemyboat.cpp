@@ -16,7 +16,7 @@ void EnemyBoat::setup(const Vec2f &pos)
 
 bool EnemyBoat::update(float dt)
 {
-    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
+    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterShallow, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall, Terrain::Mud, Terrain::Grass});
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
     if (!Camera::inActiveZone(m_steering.pos())) {
@@ -34,17 +34,15 @@ bool EnemyBoat::update(float dt)
 
     Vec2f dir = Vec2f(tx, ty) - m_steering.pos();
     float len = dir.length();
-    if (len > 50)  dir = dir / len;
-    else if (len > 10) dir = dir / -len;
+    if (len > 24)  dir = dir / len;
+    else if (len > 6) dir = dir / -len;
     else dir *= 0;
 
     m_counter++;
 
     // movement
     if (m_counter % asCounts(0.66f) == 0) {
-        Vec2f alt = {float(rand() % 100) - 50, float(rand() % 100) - 50};
-        alt = alt / 50.0f;
-        dir = Pathfinding::getPath(Vec2f(m_steering.pos().x(), m_steering.pos().y()), Vec2f(tx, ty), mask) * 6 + Vec2f(3,3) - m_steering.pos();
+        dir = Pathfinding::getPath(m_steering.pos(), Vec2f(tx, ty), mask) * 6 + Vec2f(3,3) - m_steering.pos();
         float len = dir.length();
         if (len > 0) dir = dir / len;
         m_aim = {dir.x(), dir.y()};
@@ -87,5 +85,7 @@ void EnemyBoat::draw() const
     } else {
         RenderSystem::sprite(pos.x(), pos.y(), enemy_boat[m_steering.rotation_frame(4.0f)], enemy_boat[0][2], m_steering.facing().x() > 0);
     }
+    pos += Vec2f(6.0f, 6.0f);
+    RenderSystem::drawLine(pos.x(), pos.y(), pos.x() + m_aim.x() * 6, pos.y() + m_aim.y() * 6, 14);
 }
 
