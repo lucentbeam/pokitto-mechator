@@ -1,20 +1,18 @@
-- island areas (boat)
+- fix -x/-y spawn & despawn bugs
 
-- island (heli)
+- choose island positions
 
-- final boss
-
-- boats
-  - art
-  - prog
-- boat mines?
-
-- update quest markers via sequences
 - clean up in-game map
   - detailed visual
   - mark discovered doors on map (remove opened)
+
+- final boss
+
+- update quest markers via sequences
 - unlock vehicle builds
 - unlocking blueprints adds weapons / powerups
+
+- game saves
 
 - playthroughs!!
  - track money vs. time
@@ -29,6 +27,8 @@
   - $10 money boxes?
   - multiframe pathfinding
 
+- title screen
+
 - sfx:
   - bomber coming (bbbrrrrreeeewwww....)
   - connect hit to tanks. others?
@@ -40,5 +40,7 @@
 - add boat yard boss? turret with special maneuvers? slow health regen? moves walls around yard/itself?
 
 - remove debug stuff
+ - spawn locs
+ - 
 
 - joyhat support?

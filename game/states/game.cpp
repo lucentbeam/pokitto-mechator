@@ -217,6 +217,7 @@ void drawGameState() {
     });
 
     // debug
+//    Camera::debugShowRegion(true);
 //    static FPSHelper fps;
 //    fps.update();
 //    fps.draw(2, 1, 2, 9);

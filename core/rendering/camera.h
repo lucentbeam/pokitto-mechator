@@ -64,6 +64,19 @@ public:
     static void shake(float intensity, float duration);
 
     static int regionWidth();
+
+#if DEBUGS
+    static void debugShowRegion(bool draw = false) {
+        if (draw) {
+            std::string str = "l: " + std::to_string(s_region_bounds.left()) + " r: " + std::to_string(s_region_bounds.right());
+            RenderSystem::print(2, 2, str.c_str(), 10);
+            str = "t: " + std::to_string(s_region_bounds.top()) + " b: " + std::to_string(s_region_bounds.bottom());
+            RenderSystem::print(2, 10, str.c_str(), 10);
+        } else {
+            s_region_bounds.debugShow();
+        }
+    }
+#endif
 };
 
 #endif // CAMERA_H

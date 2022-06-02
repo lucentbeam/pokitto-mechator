@@ -3,6 +3,10 @@
 
 #include "core/utilities/vec.h"
 
+#ifdef DEBUGS
+#include <iostream>
+#endif
+
 struct Bounds {
     int8_t w, h;
     Bounds() = default;
@@ -38,6 +42,12 @@ public:
   bool contains(float x, float y) const;
 
   static bool overlaps(const Rect &r1, const Rect &r2);
+
+#ifdef DEBUGS
+  void debugShow() {
+      std::cout << m_l << " " << m_r << " " << m_t << " " << m_b << std::endl;
+  }
+#endif
 };
 
 #endif

@@ -19,7 +19,12 @@ bool EnemyBoat::update(float dt)
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
-    if (!Camera::inActiveZone(m_steering.pos())) return false;
+    if (!Camera::inActiveZone(m_steering.pos())) {
+//        std::cout << "Despawn boat " << m_steering.pos().x() << " " << m_steering.pos().y() << " " << Camera::inActiveZone(m_steering.pos()) << std::endl;
+//        Camera::debugShowRegion();
+//        std::cout << Camera::center().x() << " " << Camera::center().y() << std::endl;
+        return false;
+    }
     if (!Camera::inViewingZone(m_steering.pos())) return true;
 
     float px = Camera::tl_x();

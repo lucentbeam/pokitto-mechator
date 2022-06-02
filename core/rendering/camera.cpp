@@ -2,12 +2,13 @@
 
 #include "game/constants.h"
 
-const int regionSize = 6 * 14; // 6 pixels per tile, 14 tiles per region
+const int regionSizeY = 6 * 14; // 6 pixels per tile, 14 tiles per region
+const int regionSizeX = 6 * 18;
 
 int Camera::s_x;
 int Camera::s_y;
 
-Rect Camera::s_region_bounds(0, 0, regionSize * 3, regionSize * 3);
+Rect Camera::s_region_bounds(0, 0, regionSizeX * 3, regionSizeY * 3);
 int Camera::s_region_dx = 0;
 int Camera::s_region_dy = 0;
 
@@ -22,8 +23,8 @@ void Camera::update(int center_x, int center_y) {
     } else {
         s_x = center_x - screen_half_x;
         s_y = center_y - screen_half_y;
-        int nextx = std::floor(center_x/regionSize) * regionSize + regionSize / 2;
-        int nexty = std::floor(center_y/regionSize) * regionSize + regionSize / 2;
+        int nextx = std::floor(s_x/regionSizeX) * regionSizeX + regionSizeX / 2;
+        int nexty = std::floor(s_y/regionSizeY) * regionSizeY + regionSizeY / 2;
         s_region_dx = nextx - s_region_bounds.centerX();
         s_region_dy = nexty - s_region_bounds.centerY();
         if (hasMovedRegions()) {
@@ -100,5 +101,5 @@ void Camera::shake(float intensity, float duration)
 
 int Camera::regionWidth()
 {
-    return regionSize;
+    return regionSizeX;
 }
