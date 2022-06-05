@@ -26,7 +26,7 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
             if (m_current_speed > m_max_speed * speed_mult) m_current_speed = m_max_speed * speed_mult;
         }
     } else {
-        m_current_speed *= (1.0f - config->friction);
+        m_current_speed *= (1.0f - config->friction) * speed_mult;
     }
     m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, config->collisions, {float(config->size.w), float(config->size.h)});
 }

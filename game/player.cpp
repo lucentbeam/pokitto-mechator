@@ -356,7 +356,7 @@ void Boat::update(float dt)
 {
     s_instance.updateFlash();
     if (Player::s_mode != PlayerMode::BoatMode) {
-        s_instance.m_steering.update(dt, 0.0f, 0.0f);
+        s_instance.m_steering.update(dt, 0.0f, 0.0f, 0.0f);
         return;
     }
 
@@ -383,13 +383,25 @@ void Boat::update(float dt)
     }
 
     static uint16_t disembarkPoints = Helpers::getMask({Terrain::None, Terrain::Mud, Terrain::Grass, Terrain::WaterShallow});
-    Vec2f projection = position() + s_instance.m_steering.facing() * 15.0f;
+    Vec2f projection = position() + s_instance.m_steering.facing() * 12.0f;
     mode_switch_counter++;
     if (controls.b.pressed() && mode_switch_counter > 1 && CollisionManager::collides(projection, disembarkPoints)) { // project forward and look for ground
-        Soldier::setPosition(projection);
-        Player::s_mode = PlayerMode::SoldierMode;
-        mode_switch_counter = 0;
-        UI::showHealthbar();
+
+        static uint16_t blocksLanding = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
+        for (int i = 3; i <= 15; i += 3) {
+            projection = position() + s_instance.m_steering.facing() * float(i);
+            if (CollisionManager::collides(projection, blocksLanding)) {
+                i = 18;
+            } else if (CollisionManager::collides(projection, disembarkPoints)) {
+                projection.setX(std::floor(projection.x() / 6.0f) * 6 + 3);
+                projection.setY(std::floor(projection.y() / 6.0f) * 6 + 3);
+                Soldier::setPosition(projection);
+                Player::s_mode = PlayerMode::SoldierMode;
+                mode_switch_counter = 0;
+                UI::showHealthbar();
+                i = 18;
+            }
+        }
     }
 }
 
