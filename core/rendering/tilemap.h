@@ -290,9 +290,17 @@ void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t overrid
     }
     int px = (x / TileWidth);
     int py = (y / TileHeight);
-    if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) return;
+    if (x < 0 || y < 0 || px >= m_mapwidth || py >= m_mapheight) {
+#ifdef DEBUGS
+      std::cout << "WARNING: Attempt to set mutable out of range at " << px << " " << py << std::endl;
+#endif
+        return;
+    }
     int mut_idx = 0;
     if (!canMutate(px, py, mut_idx)) {
+#ifdef DEBUGS
+      std::cout << "WARNING: No mutable tile at tile " << px << " " << py << std::endl;
+#endif
         return;
     }
 

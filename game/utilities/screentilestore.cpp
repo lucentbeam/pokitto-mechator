@@ -9,7 +9,7 @@ uint8_t ScreenTileStore::getTileAt(float x, float y) const
     px -= topleft.x();
     py -= topleft.y();
 
-    if (px < 0 || px > storeTilesW || py < 0 || py > storeTilesH) return 255;
+    if (px < 0 || px >= storeTilesW || py < 0 || py >= storeTilesH) return 255;
 
     return tilemap[px + py * storeTilesW];
 }
