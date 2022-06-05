@@ -27,6 +27,21 @@ const POIType SpawnPoint::door_labels[door_count] = {
     POIType::DoorA,
 };
 
+SpawnPoint::DoorStatus SpawnPoint::door_states[door_count] = {
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+    SpawnPoint::Hidden,
+};
+
 void SpawnPoint::setActiveRegion()
 {
     if (!Camera::hasMovedRegions()) return;
@@ -48,8 +63,20 @@ void SpawnPoint::setActiveRegion()
                 doors[i].m_on_approach(doors[i].m_pos);
             }
             s_active_doors[i] = true;
+            if (door_states[i] == SpawnPoint::Hidden) {
+                door_states[i] = SpawnPoint::Discovered;
+            }
         } else {
             s_active_doors[i] = false;
+        }
+    }
+}
+
+void SpawnPoint::openDoorAt(const Vec2f &pos)
+{
+    for(int i = 0; i < door_count; ++i) {
+        if (doors[i].pos().x() == int(pos.x()) && doors[i].pos().y() == int(pos.y())) {
+            door_states[i] = SpawnPoint::Opened;
         }
     }
 }

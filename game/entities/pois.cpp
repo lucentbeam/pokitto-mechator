@@ -4,6 +4,7 @@
 #include "game/states/openshopprompt.h"
 #include "game/states/shop.h"
 #include "core/audiosystem.h"
+#include "game/maps/spawnpoint.h"
 
 ObjectPool<POIs, 6> POIs::s_pois;
 std::vector<int> POIs::s_activated;
@@ -56,7 +57,7 @@ void POIs::spawnShop(const Vec2i &pos, const Vec2f &jeep_loc, const Vec2f &boat_
     p->m_boat_loc = boat_loc;
     p->m_heli_loc = heli_loc;
     p->m_door_type = POIType::Shop;
-    int idx = mapIndexUnopened(pos) ? 0 : 1;
+    //int idx = mapIndexUnopened(pos) ? 0 : 1;
     p->m_sprite = SpriteWrapper(POIShopClosed);
 }
 
@@ -77,6 +78,7 @@ void POIs::unlockCurrent()
                     MapManager::setTileAt(x, y, s_current_active_poi->m_tile);
                 }
             }
+            SpawnPoint::openDoorAt(s_current_active_poi->m_position);
             s_pois.deactivate(s_current_active_poi);
         }
     }

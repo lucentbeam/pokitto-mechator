@@ -92,10 +92,12 @@ void MapViewer::draw()
 
             int color;
             for (int i = 0; i < door_count; ++i) {
-                color = SpawnPoint::door_labels[i] == POIType::DoorA ? 48 : SpawnPoint::door_labels[i] == POIType::DoorB ? 16 : 32;
-                Vec2f pos = doors[i].pos();
-                pos *= world_to_loc;
-                RenderSystem::drawRect(tl.x() + pos.x() - 1, tl.y() + pos.y() - 1, 3, 2, color);
+                if (SpawnPoint::door_states[i] == SpawnPoint::Discovered) {
+                    color = SpawnPoint::door_labels[i] == POIType::DoorA ? 48 : SpawnPoint::door_labels[i] == POIType::DoorB ? 32 : 16;
+                    Vec2f pos = doors[i].pos();
+                    pos *= world_to_loc;
+                    RenderSystem::drawRect(tl.x() + pos.x() - 1, tl.y() + pos.y() - 1, 3, 2, color);
+                }
             }
 
             Vec2i goal = GameVariables::getGoal();

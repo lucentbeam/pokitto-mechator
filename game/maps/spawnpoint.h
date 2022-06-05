@@ -14,11 +14,21 @@ class SpawnPoint
 public:
     static const POIType door_labels[];
 
+    enum DoorStatus {
+        Hidden = 0,
+        Discovered = 1,
+        Opened = 2
+    };
+
+    static DoorStatus door_states[];
+
     constexpr SpawnPoint(const Vec2i &pos, void (* const onApproach)(const Vec2i &)): m_pos(pos * 6), m_on_approach(onApproach) {}
 
     static void setActiveRegion();
 
     Vec2f pos() const { return {float(m_pos.x()), float(m_pos.y())}; }
+
+    static void openDoorAt(const Vec2f &pos);
 
     void (* const m_on_approach)(const Vec2i &);
 };
