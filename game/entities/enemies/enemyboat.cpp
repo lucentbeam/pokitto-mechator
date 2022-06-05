@@ -36,6 +36,7 @@ bool EnemyBoat::update(float dt)
     float len = dir.length();
     bool flee = false;
     if (len < 30 && len > 6) flee = true;
+    if (len > 0) dir = dir / len;
 
     m_counter++;
 
