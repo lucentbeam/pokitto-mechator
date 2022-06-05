@@ -1,10 +1,8 @@
-- fix -x/-y spawn & despawn bugs
-
-- choose island positions
-
 - clean up in-game map
-  - detailed visual
+  x detailed visual
   - mark discovered doors on map (remove opened)
+
+- fix boat landing bugs
 
 - final boss
 
@@ -12,6 +10,8 @@
 - unlock vehicle builds
 - unlocking blueprints adds weapons / powerups
 
+- strategically placed shops & hacking kits
+  
 - game saves
 
 - playthroughs!!
@@ -19,10 +19,9 @@
 - tweak ideas:
   - barracks spawns, various enemy timers:
     - make more aggressive as they take damage from player (increment counters?)
-  - offscreen enemies don't fire
+	- occasional tanks?
   - barracks go down faster {?}
   - more blueprints!
-  - strategically placed shops & hacking kits
   - cost tuning
   - $10 money boxes?
   - multiframe pathfinding

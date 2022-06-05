@@ -8,6 +8,7 @@
 #include "game/ui/ui.h"
 #include "game/utilities/helpers.h"
 
+#include "game/maps/worldtiles.h"
 #include "game/utilities/mapmanager.h"
 #include "game/maps/mapsprite.h"
 #include "game/player.h"
@@ -67,8 +68,12 @@ void MapViewer::draw()
         constexpr float world_to_loc = 54.0f / 216.0f / 6.0f;
         if (h > 8 && w > 8) RenderSystem::drawRect2(x + 2, y + 2, w - 4, h - 4, 1);
         if (h > 56) {
-            Vec2i tl = Vec2i(x + w/2 - sprite_map[0]/2, y + h/2-sprite_map[1]/2);
-            RenderSystem::sprite(tl.x(), tl.y(), sprite_map);
+            Vec2i tl = Vec2i(x + w/2 - mechator_reduced[0]/2, y + h/2-mechator_reduced[1]/2);
+            RenderSystem::sprite(tl.x(), tl.y(), mechator_reduced, mechator_reduced[2]);
+
+            RenderSystem::sprite(tl.x() + delta_x_island_1 / 4, tl.y() + delta_y_island_1 / 4, island_1_reduced, island_1_reduced[2]);
+            RenderSystem::sprite(tl.x() + delta_x_island_2 / 4, tl.y() + delta_y_island_2 / 4, island_2_reduced, island_2_reduced[2]);
+            RenderSystem::sprite(tl.x() + delta_x_island_3 / 4, tl.y() + delta_y_island_3 / 4, island_3_reduced, island_3_reduced[2]);
             if (blinky.active()) {
                 Vec2f pos = Player::position();
                 pos *= world_to_loc;

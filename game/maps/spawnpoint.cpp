@@ -21,6 +21,10 @@ const POIType SpawnPoint::door_labels[door_count] = {
     POIType::DoorC,
     POIType::DoorC,
     POIType::DoorC,
+    POIType::DoorC,
+
+    POIType::DoorB,
+    POIType::DoorA,
 };
 
 void SpawnPoint::setActiveRegion()

@@ -30,6 +30,11 @@
 		{ "output" : "enemy_laser_ew", "hcount": 2 },
 		{ "output" : "enemy_watermine" },
 		
+		{ "output" : "island_1_reduced" },
+		{ "output" : "island_2_reduced" },
+		{ "output" : "island_3_reduced" },
+		{ "output" : "mechator_reduced" },
+		
 		{ "output" : "smoke", "hcount": 6 },
 		{ "output" : "flashlight", "hcount": 5 },
 		

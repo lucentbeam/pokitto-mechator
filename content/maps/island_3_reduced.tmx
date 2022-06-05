@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="16" height="12" tilewidth="1" tileheight="1" infinite="0" nextlayerid="3" nextobjectid="1">
+ <tileset firstgid="1" source="mapview_tiles.tsx"/>
+ <imagelayer id="2" name="background" visible="0">
+  <image source="map_images/island_3_ground.png" width="384" height="288"/>
+ </imagelayer>
+ <layer id="1" name="tiles" width="16" height="12">
+  <data encoding="csv">
+0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+0,0,0,0,0,0,0,3,3,3,3,3,3,3,2,1,
+1,0,0,0,0,0,0,3,3,4,4,4,4,3,2,1,
+1,0,0,2,0,0,0,4,4,4,4,4,4,3,2,1,
+1,0,0,2,0,0,0,0,4,4,4,4,4,3,2,1,
+1,2,0,2,2,4,4,4,4,4,4,4,4,2,2,1,
+1,2,0,2,2,4,4,4,4,4,4,4,4,2,2,1,
+1,2,0,2,2,4,4,4,4,4,4,4,4,2,2,0,
+1,2,0,2,2,4,4,4,4,4,4,4,4,2,1,0,
+1,2,0,2,2,4,4,4,4,4,4,4,4,2,2,0,
+1,2,2,2,2,4,4,4,4,4,4,4,4,2,2,1,
+1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+</data>
+ </layer>
+</map>

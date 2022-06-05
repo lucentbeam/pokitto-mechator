@@ -23,14 +23,17 @@ ScreenTileStore MapManager::s_camera_tiles;
 
 uint8_t MapManager::getTileAtPvt(float x, float y)
 {
+    if (s_island1.contains(x, y)) {
+        return s_island1.getTileAt(x, y);
+    } else
+    if (s_island2.contains(x, y)) {
+        return s_island2.getTileAt(x, y);
+    } else
+    if (s_island3.contains(x, y)) {
+        return s_island3.getTileAt(x, y);
+    } else
     if (s_background.contains(x, y)) {
         return s_background.getTileAt(x, y);
-    } else if (s_island1.contains(x, y)) {
-        return s_island1.getTileAt(x, y);
-    } else if (s_island2.contains(x, y)) {
-        return s_island2.getTileAt(x, y);
-    } else if (s_island3.contains(x, y)) {
-        return s_island3.getTileAt(x, y);
     }
     return 19;
 }

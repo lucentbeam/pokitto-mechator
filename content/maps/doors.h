@@ -17,9 +17,9 @@ const SpawnPoint doors[] = {
 	SpawnPoint({58, 123}, spawnDoorC<57,124,3,3,184>),
 	SpawnPoint({96, 181}, spawnDoorC<97,180,7,3,184>),
 	SpawnPoint({140, 25}, spawnDoorC<141,24,3,3,184>),
-	SpawnPoint({241, 100}, spawnDoorC<241,92,1,4,19>),
-	SpawnPoint({216, -52}, spawnDoorB<207,-49,7,2,19>),
-	SpawnPoint({263, -38}, spawnDoorA<262,-40,1,5,19>),
+	SpawnPoint({-34, 58}, spawnDoorC<-34,50,1,4,19>),
+	SpawnPoint({-30, 194}, spawnDoorB<-39,197,7,2,19>),
+	SpawnPoint({17, 208}, spawnDoorA<16,206,1,5,19>),
 };
 const int door_count = sizeof(doors)/sizeof(SpawnPoint);
 

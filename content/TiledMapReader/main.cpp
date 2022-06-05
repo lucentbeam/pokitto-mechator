@@ -361,6 +361,34 @@ void processLevelElements(std::vector<FileInfo> &files) {
 
 void processWorldMap(std::vector<FileInfo> &files) {
 
+//    const int spacing = 4;
+//    const int target_size = 54;
+
+//    int width = layer["width"].get<int>();
+////    int height = layer["height"].get<int>();
+
+//    file << "#ifndef _MAPSPRITE\n#define _MAPSPRITE\n\n#include <cstdint>\n\n";
+//    file << "const uint8_t sprite_map[] = {\n\t" << target_size << ", " << target_size << ", ";
+//    for(int j = 0; j < layer["data"].size(); j++) {
+//        int tile = layer["data"][j].get<int>()-1;
+//        int x = (j % width) - spacing/2;
+//        int y = (j / width) - spacing/2;
+//        if (x % spacing == 0 && y % spacing == 0) {
+//            uint8_t color = 1;
+//            if (tile == 19) { // pure water
+//                color = 1;
+//            } else if (tile < 53) { // other water tiles
+//                color = 2;
+//            } else if (tile >= 162) { // base
+//                color = 4;
+//            } else {
+//                color = 3; // ground/other
+//            }
+//            file << int(color) << ", ";
+//        }
+//    }
+//    file << "};\n\n";
+//    file << "#endif\n";
 }
 
 int main(int argc, char *argv[])
