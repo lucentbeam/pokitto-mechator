@@ -10,6 +10,8 @@ void goGame();
 
 void updateGameState(FSM &fsm);
 
+void checkWaterSpawns();
+
 void updateRegionIndicator();
 
 void drawGameState();

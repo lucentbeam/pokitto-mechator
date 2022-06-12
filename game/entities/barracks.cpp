@@ -17,7 +17,7 @@ SimplePool<Barracks, 6> Barracks::s_barracks;
 
 int8_t Barracks::s_max_life = 27;
 
-#ifdef SDL_CORE
+#ifdef DEBUGS
 #include <iostream>
 #endif
 
@@ -43,7 +43,7 @@ void Barracks::config(const Vec2f &spawn, int left, int top, uint8_t width, uint
             return;
         }
     }
-#ifdef SDL_CORE
+#ifdef DEBUGS
     std::cout << "did not find barracks for " << idx << std::endl;
 #endif
 }

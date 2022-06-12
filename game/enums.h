@@ -61,10 +61,12 @@ enum QuestStatus : uint8_t {
 };
 
 enum RegionNames : uint8_t {
+    RegionNone,
     RegionTutorial,
     RegionStormyCape,
     RegionTankFactory,
     RegionBoatYard,
+    RegionEnemyFactory,
 };
 
 enum Blueprints {

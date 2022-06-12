@@ -102,40 +102,7 @@ void updateGameState(FSM&) {
 #ifndef DEBUGS
     if (SequenceTrigger::checkForTriggers()) return;
 #endif
-    if (Camera::hasMovedRegions()) {
-        int dx = Camera::regionDeltaX();
-        int dy = Camera::regionDeltaY();
-        Vec2f locs[3];
-        if (dx != 0 && dy != 0) {
-            dx = dx > 0 ? 1 : -1;
-            dy = dy > 0 ? 1 : -1;
-
-            locs[0].set(dx, dy);
-            locs[1].set(dx, 0);
-            locs[2].set(0, dy);
-        } else if (dx != 0) {
-            dx = dx > 0 ? 1 : -1;
-
-            locs[0].set(dx, -1);
-            locs[1].set(dx, 0);
-            locs[2].set(dx, 1);
-        } else {
-            dy = dy > 0 ? 1 : -1;
-
-            locs[0].set(-1, dy);
-            locs[1].set(0, dy);
-            locs[2].set(1, dy);
-        }
-        for(int i = 0; i < 3; ++i) {
-            locs[i] *= Camera::regionWidth();
-            locs[i] += Camera::center();
-            locs[i] += Vec2f((rand() % 36) - 18, (rand() % 36) - 18);
-            if (MapManager::getTileAt(locs[i].x(), locs[i].y()) == 19) {
-                if ((rand() % 10) < 3) Enemy::spawnBoat({locs[i].x(), locs[i].y()});
-                else Enemy::spawnWaterMine({locs[i].x(), locs[i].y()}, 1, 1);
-            }
-        }
-    }
+    checkWaterSpawns();
 
     SpawnPoint::setActiveRegion();
 //    CloudManager::update(physicsTimestep);
@@ -147,8 +114,10 @@ void updateGameState(FSM&) {
     updateRegionIndicator();
     if ((status.x != 0 || status.y != 0) && Player::mode() != PlayerMode::BoatMode) {
         if (checkGroundRegions(region_name)) {
-            region_indicator.setMaxWidth(RenderSystem::getLineLength(region_name) + 8);
-            region_indicator.showForDuration(3.0f);
+            if (strlen(region_name) > 0) {
+                region_indicator.setMaxWidth(RenderSystem::getLineLength(region_name) + 8);
+                region_indicator.showForDuration(3.0f);
+            }
         }
     }
 
@@ -156,7 +125,7 @@ void updateGameState(FSM&) {
         goPause();
     }
 
-    RegionTransitionHandler::goRegion(isInRegion(RegionStormyCape) ? RegionStormyCape : RegionTutorial);
+    RegionTransitionHandler::goRegion(currentRegion());
     RegionTransitionHandler::update();
 }
 
@@ -279,4 +248,42 @@ void registerCallback(std::initializer_list<int8_t *> lifes, std::function<void 
         ++ct;
     }
     active_callback = callback;
+}
+
+void checkWaterSpawns()
+{
+    if (!Camera::hasMovedRegions()) return;
+
+    int dx = Camera::regionDeltaX();
+    int dy = Camera::regionDeltaY();
+    Vec2f locs[3];
+    if (dx != 0 && dy != 0) {
+        dx = dx > 0 ? 1 : -1;
+        dy = dy > 0 ? 1 : -1;
+
+        locs[0].set(dx, dy);
+        locs[1].set(dx, 0);
+        locs[2].set(0, dy);
+    } else if (dx != 0) {
+        dx = dx > 0 ? 1 : -1;
+
+        locs[0].set(dx, -1);
+        locs[1].set(dx, 0);
+        locs[2].set(dx, 1);
+    } else {
+        dy = dy > 0 ? 1 : -1;
+
+        locs[0].set(-1, dy);
+        locs[1].set(0, dy);
+        locs[2].set(1, dy);
+    }
+    for(int i = 0; i < 3; ++i) {
+        locs[i] *= Camera::regionWidth();
+        locs[i] += Camera::center();
+        locs[i] += Vec2f((rand() % 36) - 18, (rand() % 36) - 18);
+        if (MapManager::getTileAt(locs[i].x(), locs[i].y()) == 19) {
+            if ((rand() % 10) < 3) Enemy::spawnBoat({locs[i].x(), locs[i].y()});
+            else Enemy::spawnWaterMine({locs[i].x(), locs[i].y()}, 1, 1);
+        }
+    }
 }

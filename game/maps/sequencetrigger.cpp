@@ -9,6 +9,10 @@ const SequenceTrigger SequenceTrigger::trigger_list[] = {
     {54, 18, 55, 23, tutorial_boss_scene, SequenceTrigger::TutorialBoss},
     {25, 105, 30, 107, tank_boss_scene, SequenceTrigger::TankBoss},
     {147, 195, 149, 205, boatyard_scene, SequenceTrigger::AcquireBoat},
+
+    {91,  134, 125, 152,  boatyard_scene,  SequenceTrigger::FinalBoss},
+    {106, 150, 126, 168,  boatyard_scene,  SequenceTrigger::FinalBoss},
+    {123, 156, 142, 178,  boatyard_scene,  SequenceTrigger::FinalBoss},
 };
 
 bool SequenceTrigger::checkForTriggers()
