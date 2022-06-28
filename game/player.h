@@ -206,6 +206,8 @@ public:
     static void launch() { s_instance.m_inAir = true; }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
+    static bool active() { return s_instance.alive() && s_instance.m_inAir && s_instance.m_z >= 20.0f; }
+
     static void update(float dt);
     static void drawGround();
     static void drawAir();

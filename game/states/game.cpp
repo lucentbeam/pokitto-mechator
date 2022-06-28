@@ -41,6 +41,9 @@ static int8_t * life_list[7] = {nullptr};
 static std::function<void()> active_callback;
 static int watchcount = 0;
 
+static bool has_update_callback = false;
+static std::function<bool()> update_callback;
+
 void goGame()
 {
     FSM::instance->go(GameStates::Game);
@@ -99,15 +102,18 @@ void updateGameState(FSM&) {
     Camera::update(player.position().x(), player.position().y());
     MapManager::update();
 
-#ifndef DEBUGS
+//#ifndef DEBUGS
     if (SequenceTrigger::checkForTriggers()) return;
-#endif
+//#endif
     checkWaterSpawns();
 
     SpawnPoint::setActiveRegion();
 //    CloudManager::update(physicsTimestep);
 
     checkForCallback();
+    if (has_update_callback) {
+        has_update_callback = !update_callback();
+    }
 
     ControlStatus status = Controls::getStatus();
 
@@ -248,6 +254,11 @@ void registerCallback(std::initializer_list<int8_t *> lifes, std::function<void 
         ++ct;
     }
     active_callback = callback;
+}
+
+void registerUpdateCallback(std::function<bool()> callback) {
+    has_update_callback = true;
+    update_callback = callback;
 }
 
 void checkWaterSpawns()

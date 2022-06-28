@@ -33,7 +33,7 @@ void Barracks::config(const Vec2f &spawn, int left, int top, uint8_t width, uint
     m_spawn_timer = 80 + (rand() % 40);
     m_checks_pathfinding = true;
     m_destroy_out_of_range = true;
-    m_spawns_tanks = false;
+    m_spawntype = MechSpawn;
 
     // If this stuff ever changes, double-check the implementation in TiledMapReader!!!
     int idx = int(left)  + int(top) * 1000;
@@ -60,7 +60,12 @@ void Barracks::disableDestroyOutOfRange()
 
 void Barracks::setSpawnsTanks()
 {
-    m_spawns_tanks = true;
+    setSpawnType(TankSpawn);
+}
+
+void Barracks::setSpawnType(Barracks::SpawnType s)
+{
+    m_spawntype = s;
 }
 
 void Barracks::create(const Vec2i &spawn, int left, int top, uint8_t width, uint8_t height)
@@ -150,7 +155,19 @@ void Barracks::update(float dt)
                 b->m_spawn_timer = asCounts(2.33f) + (rand() % asCounts(1.0f));
                 static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::LowWall, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
                 if (!b->m_checks_pathfinding || Pathfinding::canReach(b->m_spawn, Camera::center(), mask)) {
-                    if (b->m_spawns_tanks) {
+                    if (b->m_spawntype == MechSpawn) {
+                        EnemyMech * m = Enemy::createMech(b->m_spawn);
+                        ++b->m_spawn_count;
+                        auto ptr = &b->m_spawn_count;
+                        auto ptr2 = barracks_data + b->m_barracks_index;
+                        m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
+                        m->setDeactivateCallback([=](){
+                            --(*ptr);
+                            if (*ptr2 < 5) {
+                                ++(*ptr2);
+                            }
+                        });
+                    } else if (b->m_spawntype == TankSpawn) {
                         EnemyTank * m = Enemy::createTank(b->m_spawn);
                         m->setMissiles();
                         ++b->m_spawn_count;
@@ -163,18 +180,14 @@ void Barracks::update(float dt)
                                 ++(*ptr2);
                             }
                         });
-                    } else {
-                        EnemyMech * m = Enemy::createMech(b->m_spawn);
-                        ++b->m_spawn_count;
-                        auto ptr = &b->m_spawn_count;
-                        auto ptr2 = barracks_data + b->m_barracks_index;
-                        m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
-                        m->setDeactivateCallback([=](){
-                            --(*ptr);
-                            if (*ptr2 < 5) {
-                                ++(*ptr2);
-                            }
-                        });
+                    } else if (b->m_spawntype == HeliSpawn) {
+                        Enemy::createHelicopter(b->m_spawn);
+                    } else if (b->m_spawntype == TurretSpawn && Enemy::getTurretAtLoc(b->m_spawn) == nullptr) {
+                        MapManager::setTileAt(b->m_spawn.x(), b->m_spawn.y(), SpecialTiles::BaseGround);
+                        EnemyTurret * m = Enemy::createTurret(b->m_spawn);
+                        if (m != nullptr) {
+                            m->disableOutOfRangeChecks();
+                        }
                     }
                 }
             }
@@ -198,6 +211,30 @@ void Barracks::draw()
 int8_t *Barracks::getLifePtr()
 {
     return &m_life;
+}
+
+int8_t Barracks::getLife()
+{
+    return m_life;
+}
+
+void Barracks::setLife(int8_t v)
+{
+    Stage current = stage();
+    m_life = v;
+    if (stage() != current) {
+        for(int x = m_left; x < (m_width + m_left); x+=6) {
+            for(int y = m_top; y < (m_height + m_top); y+=6) {
+                int t = MapManager::getTileAt(x, y);
+                MapManager::setTileAt(x, y, t + 4);
+            }
+        }
+    }
+}
+
+bool Barracks::isDestroyed(int lx, int ly)
+{
+    return MapManager::getTileAt(lx * 6 + 3, ly * 6 + 3) == 203;
 }
 
 Barracks *Barracks::getBarracksAt(Vec2i loc)

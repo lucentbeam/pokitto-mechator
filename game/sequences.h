@@ -211,34 +211,82 @@ const SceneSequence boatyard_scene[] = {
     {SceneSequence::End, &cam_release}
 };
 
+
+const SceneDialogue ah_dlog0 = SceneDialogue("Soldier, come in.", nullptr, SceneDialogue::Base, false);
+const SceneDialogue ah_dlog1 = SceneDialogue("Good job getting", "the helicopter.", SceneDialogue::Base, false);
+const SceneDialogue ah_dlog2 = SceneDialogue("I tagged the final", "target on your map.", SceneDialogue::Base, false);
+const SceneDialogue ah_dlog3 = SceneDialogue("Head over and", "finish them off.", SceneDialogue::Base, true);
+
+const SceneSequence acquiredheli_scene[] = {
+    {SceneSequence::End, nullptr},
+    {SceneSequence::ShowDialogue, &ah_dlog0 },
+    {SceneSequence::ShowDialogue, &ah_dlog1 },
+    {SceneSequence::ShowDialogue, &ah_dlog2 },
+    {SceneSequence::ShowDialogue, &ah_dlog3 },
+    {SceneSequence::End, nullptr}
+};
+
 const SceneMoveCam fb_m0 = SceneMoveCam(cameraCutsceneSpeed, {100, 140});
 const SceneMoveCam fb_m1 = SceneMoveCam(cameraCutsceneSpeed, {116, 138});
 const SceneMoveCam fb_m2 = SceneMoveCam(cameraCutsceneSpeed, {116, 159});
 const SceneMoveCam fb_m3 = SceneMoveCam(cameraCutsceneSpeed, {132, 170});
 
 const SceneDialogue fb_dlog0 = SceneDialogue("Soldier, come in.", nullptr, SceneDialogue::Base, false);
-const SceneDialogue fb_dlog1 = SceneDialogue("You've finally made it.", nullptr, SceneDialogue::Base, false);
+const SceneDialogue fb_dlog1 = SceneDialogue("You've finally made it.", nullptr, SceneDialogue::Base, true);
 const SceneDialogue fb_dlog2 = SceneDialogue("This is the enemy's", "supply depot.", SceneDialogue::Base, true);
 
 const SceneDialogue fb_dlog3 = SceneDialogue("Get a good look.",nullptr, SceneDialogue::Base, true);
-const SceneDialogue fb_dlog4 = SceneDialogue("Destroy these four bases...",nullptr, SceneDialogue::Base, false);
-const SceneDialogue fb_dlog5 = SceneDialogue("And your mission is","complete.", SceneDialogue::Base, false);
+const SceneDialogue fb_dlog4 = SceneDialogue("Destroy these four bases...",nullptr, SceneDialogue::Base, true);
+const SceneDialogue fb_dlog5 = SceneDialogue("And your mission is","complete.", SceneDialogue::Base, true);
 const SceneDialogue fb_dlog6 = SceneDialogue("Uh oh! They've detected you.","Good luck!", SceneDialogue::Base, false);
+
+inline void updateBossBarracks(int lx, int ly, int8_t * life) {
+    if (Barracks::isDestroyed(lx, ly)) {
+        *life = 0;
+        return;
+    }
+    Barracks * b1 = Barracks::getBarracksAt({lx, ly});
+    if (b1 != nullptr) {
+        b1->disablePathfindingChecks();
+        if (*life < b1->getLife()) {
+            b1->setLife(*life);
+        } else {
+            *life = b1->getLife();
+        }
+    }
+}
+
+const SceneFunc fb_triggers = SceneFunc([](){
+    static int8_t life = 27;
+    static int8_t lifes[4] = {27, 27, 27, 27};
+    UI::showBoss(&life);
+    registerUpdateCallback([life](){
+        updateBossBarracks(100, 140, lifes);
+        updateBossBarracks(116, 138, lifes+1);
+        updateBossBarracks(116, 159, lifes+2);
+        updateBossBarracks(132, 170, lifes+3);
+        life = (lifes[0] + lifes[1] + lifes[2] + lifes[3]) / 4;
+        return life == 0;
+    });
+    return true;
+});
 
 const SceneSequence finalboss_scene[] = {
     {SceneSequence::ShowDialogue, &fb_dlog0 },
     {SceneSequence::ShowDialogue, &fb_dlog1 },
 
-    {SceneSequence::MoveCamera, &fb_m0 },
-    {SceneSequence::ShowDialogue, &fb_dlog2 },
-    {SceneSequence::MoveCamera, &fb_m1 },
-    {SceneSequence::ShowDialogue, &fb_dlog3 },
-    {SceneSequence::MoveCamera, &fb_m2 },
-    {SceneSequence::ShowDialogue, &fb_dlog4 },
-    {SceneSequence::MoveCamera, &fb_m3 },
-    {SceneSequence::ShowDialogue, &fb_dlog5 },
-    {SceneSequence::MoveCamera, &cam_return },
-    {SceneSequence::ShowDialogue, &fb_dlog6 },
+//    {SceneSequence::MoveCamera, &fb_m0 },
+//    {SceneSequence::ShowDialogue, &fb_dlog2 },
+//    {SceneSequence::MoveCamera, &fb_m1 },
+//    {SceneSequence::ShowDialogue, &fb_dlog3 },
+//    {SceneSequence::MoveCamera, &fb_m2 },
+//    {SceneSequence::ShowDialogue, &fb_dlog4 },
+//    {SceneSequence::MoveCamera, &fb_m3 },
+//    {SceneSequence::ShowDialogue, &fb_dlog5 },
+//    {SceneSequence::MoveCamera, &cam_return },
+//    {SceneSequence::ShowDialogue, &fb_dlog6 },
+
+    {SceneSequence::DoFunction, &fb_triggers },
 
     {SceneSequence::End, &cam_release}
 };

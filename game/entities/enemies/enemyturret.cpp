@@ -27,6 +27,7 @@ bool EnemyTurret::update(float dt)
 
     if (!Camera::inActiveZone(m_pos - Vec2f(3, 2))) {
         if (!m_ignore_out_of_range || (m_ignore_out_of_range && m_life <= 0)) {
+            m_life = 0;
             return false;
         }
     }

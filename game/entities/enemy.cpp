@@ -95,7 +95,19 @@ EnemyTurret *Enemy::getTurretAt(Vec2i loc)
     loc *= 6;
     EnemyTurret * t = nullptr;
     s_turrets.iterate([&](EnemyTurret * tur) {
-        if (tur->rect().contains(loc.x(), loc.y())) {
+        if (tur->life() > 0 && tur->rect().contains(loc.x(), loc.y())) {
+            t = tur;
+        }
+        return false;
+    });
+    return t;
+}
+
+EnemyTurret *Enemy::getTurretAtLoc(Vec2f loc)
+{
+    EnemyTurret * t = nullptr;
+    s_turrets.iterate([&](EnemyTurret * tur) {
+        if (tur->life() > 0 && tur->rect().contains(loc.x(), loc.y())) {
             t = tur;
         }
         return false;

@@ -65,6 +65,7 @@ public:
     static EnemyTurret * createTurret(const Vec2f &pos);
     static EnemyTurret * createTurretDisabled(const Vec2f &pos);
     static EnemyTurret * getTurretAt(Vec2i loc);
+    static EnemyTurret * getTurretAtLoc(Vec2f loc);
     static EnemyBomber * createBomber(const Vec2f &pos);
     static EnemyHelicopter * createHelicopter(const Vec2f &pos);
     static EnemyBoat * createBoat(const Vec2f &pos);

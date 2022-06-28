@@ -15,6 +15,8 @@ const SequenceTrigger SequenceTrigger::trigger_list[] = {
     {123, 156, 142, 178,  finalboss_scene,  SequenceTrigger::FinalBoss},
 };
 
+const SequenceTrigger helicopter_takeoff = SequenceTrigger(0, 0, 0, 0, acquiredheli_scene, SequenceTrigger::AcquireHelicopter);
+
 bool SequenceTrigger::checkForTriggers()
 {
     for(const SequenceTrigger &st : trigger_list) {
@@ -23,6 +25,11 @@ bool SequenceTrigger::checkForTriggers()
             EventScene::startScene(st.linked_scene);
             return true;
         }
+    }
+    if (!GameVariables::eventVisited(helicopter_takeoff.id) && Helicopter::active()) {
+        GameVariables::visitEvent(helicopter_takeoff.id);
+        EventScene::startScene(helicopter_takeoff.linked_scene);
+        return true;
     }
     return false;
 }
