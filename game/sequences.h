@@ -2,6 +2,7 @@
 #define SEQUENCES_H
 
 #include "core/utilities/tween.h"
+#include "core/audiosystem.h"
 
 #include "game/player.h"
 #include "game/utilities/sceneobjects.h"
@@ -233,12 +234,12 @@ const SceneMoveCam fb_m3 = SceneMoveCam(cameraCutsceneSpeed, {132, 170});
 
 const SceneDialogue fb_dlog0 = SceneDialogue("Soldier, come in.", nullptr, SceneDialogue::Base, false);
 const SceneDialogue fb_dlog1 = SceneDialogue("You've finally made it.", nullptr, SceneDialogue::Base, true);
-const SceneDialogue fb_dlog2 = SceneDialogue("This is the enemy's", "supply depot.", SceneDialogue::Base, true);
+const SceneDialogue fb_dlog2 = SceneDialogue("This is the enemy", "supply depot.", SceneDialogue::Base, true);
 
 const SceneDialogue fb_dlog3 = SceneDialogue("Get a good look.",nullptr, SceneDialogue::Base, true);
-const SceneDialogue fb_dlog4 = SceneDialogue("Destroy these four bases...",nullptr, SceneDialogue::Base, true);
-const SceneDialogue fb_dlog5 = SceneDialogue("And your mission is","complete.", SceneDialogue::Base, true);
-const SceneDialogue fb_dlog6 = SceneDialogue("Uh oh! They've detected you.","Good luck!", SceneDialogue::Base, false);
+const SceneDialogue fb_dlog4 = SceneDialogue("Destroy these", "bases...", SceneDialogue::Base, true);
+const SceneDialogue fb_dlog5 = SceneDialogue("And your mission","is complete.", SceneDialogue::Base, true);
+const SceneDialogue fb_dlog6 = SceneDialogue("They've detected you.","Fight hard!", SceneDialogue::Base, false);
 
 inline void updateBossBarracks(int lx, int ly, int8_t * life) {
     if (Barracks::isDestroyed(lx, ly)) {
@@ -256,16 +257,44 @@ inline void updateBossBarracks(int lx, int ly, int8_t * life) {
     }
 }
 
+inline void randomEnemyShot() {
+    int x = (rand() % 10) < 5 ? 70 : -70;
+    int y = (rand() % 10) < 5 ? 60 : -60;
+    if (rand() % 10 < 6) {
+        x = rand() % 110;
+        x-= 55;
+    } else {
+        y = rand() % 88;
+        y-= 44;
+    }
+
+    AudioSystem::play(sfxEnemyShoot);
+    Vec2f loc = Camera::center() + Vec2f(x, y);
+    Vec2f dir = Vec2f(-x, -y);
+    dir = dir / dir.length();
+    ProjectileManager::create(loc, dir * 50.0f, 3, 6.0)
+            ->setSprite(BulletMedium)
+            ->setIgnoreWalls()
+            ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
+}
+
 const SceneFunc fb_triggers = SceneFunc([](){
     static int8_t life = 27;
     static int8_t lifes[4] = {27, 27, 27, 27};
     UI::showBoss(&life);
     registerUpdateCallback([life](){
+        static int timer = 20;
+        timer--;
+        if (timer < 0) {
+            timer = 28;
+            randomEnemyShot();
+        }
+
         updateBossBarracks(100, 140, lifes);
         updateBossBarracks(116, 138, lifes+1);
         updateBossBarracks(116, 159, lifes+2);
         updateBossBarracks(132, 170, lifes+3);
-        life = (lifes[0] + lifes[1] + lifes[2] + lifes[3]) / 4;
+        life = (lifes[0] + lifes[1] + lifes[2] + lifes[3]) / 4;        
         return life == 0;
     });
     return true;

@@ -24,6 +24,7 @@ class RegionTransitionHandler
     static void updateBoss();
     static void updateOverworld();
     static void updatePeninsula();
+    static void updateFinalBoss();
 public:
 
     static void goRegion(RegionNames name);

@@ -6,6 +6,7 @@
 #include "game/constants.h"
 
 #include "game/utilities/blinker.h"
+#include "game/alertpalettes.h"
 
 const int transitionTime = 25;
 
@@ -31,6 +32,7 @@ void RegionTransitionHandler::updateOverworld()
         AudioSystem::playSong(musOverworld);
     }
     was_active = active;
+    updateFinalBoss();
 }
 
 void RegionTransitionHandler::updatePeninsula()
@@ -63,6 +65,17 @@ void RegionTransitionHandler::updatePeninsula()
     }
     RenderSystem::setPalette(palette_list[int(paletteIndex)]);
     was_active = active;
+}
+
+void RegionTransitionHandler::updateFinalBoss() {
+    static float position = 0.0f;
+    position += physicsTimestep * 40.0f;
+    int idx = int(position) % 31;
+    if (idx > 15) {
+        idx = 30 - idx;
+    }
+    const uint16_t * palettes[] = {default_palette, palette_0, palette_1, palette_2, palette_3, palette_4, palette_5, palette_6, palette_7, palette_8, palette_9, palette_10, palette_11, palette_12, palette_13, palette_14};
+    RenderSystem::setPalette(palettes[idx]);
 }
 
 void RegionTransitionHandler::goRegion(RegionNames name)
