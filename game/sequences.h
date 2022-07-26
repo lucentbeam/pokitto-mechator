@@ -13,6 +13,7 @@
 #include "game/constants.h"
 #include "game/entities/pois.h"
 #include "game/variables.h"
+#include "game/maps/regiontransitionhandler.h"
 
 const SceneWait wait60 = SceneWait(asCounts(1.0f));
 const SceneWait wait30 = SceneWait(asCounts(0.5f));
@@ -279,6 +280,7 @@ inline void randomEnemyShot() {
 }
 
 const SceneFunc fb_triggers = SceneFunc([](){
+    RegionTransitionHandler::goBoss(true);
     static int8_t life = 27;
     static int8_t lifes[4] = {27, 27, 27, 27};
     UI::showBoss(&life);
@@ -313,9 +315,9 @@ const SceneSequence finalboss_scene[] = {
 //    {SceneSequence::MoveCamera, &fb_m3 },
 //    {SceneSequence::ShowDialogue, &fb_dlog5 },
 //    {SceneSequence::MoveCamera, &cam_return },
-//    {SceneSequence::ShowDialogue, &fb_dlog6 },
 
     {SceneSequence::DoFunction, &fb_triggers },
+    {SceneSequence::ShowDialogue, &fb_dlog6 },
 
     {SceneSequence::End, &cam_release}
 };

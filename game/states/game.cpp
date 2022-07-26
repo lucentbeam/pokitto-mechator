@@ -127,9 +127,7 @@ void updateGameState(FSM&) {
         }
     }
 
-    if (status.c.pressed()) {
-        goPause();
-    }
+    if (status.c.pressed()) goPause();
 
     RegionTransitionHandler::goRegion(currentRegion());
     RegionTransitionHandler::update();
@@ -166,7 +164,7 @@ void drawGameState() {
     Enemy::drawAir();
 
     if (isInRegion(RegionStormyCape)) {
-        Player::drawFlashlight();
+        if (!RegionTransitionHandler::atBoss()) Player::drawFlashlight();
         const uint8_t rain[] = { 3, 3, 0, 0, 48, 0, 48, 0, 48, 0, 0};
         int x = 0;
         int y = 0;
@@ -178,8 +176,8 @@ void drawGameState() {
             }
             RenderSystem::sprite(x, y, rain, 0);
         }
-        RenderSystem::setOffset(true);
-        ProjectileManager::draw();
+        if (!RegionTransitionHandler::atBoss()) RenderSystem::setOffset(true);
+        if (!RegionTransitionHandler::atBoss()) ProjectileManager::draw();
     }
 
     // ui draw
@@ -229,7 +227,7 @@ void drawShadedGame(int shading)
 
     RenderSystem::shadeAll(shading);
 
-    if (isInRegion(RegionStormyCape)) RenderSystem::setOffset(true);
+    if (isInRegion(RegionStormyCape) && !RegionTransitionHandler::atBoss()) RenderSystem::setOffset(true);
 
     // ui draw
     UI::draw();

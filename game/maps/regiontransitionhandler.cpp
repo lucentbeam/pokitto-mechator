@@ -32,7 +32,6 @@ void RegionTransitionHandler::updateOverworld()
         AudioSystem::playSong(musOverworld);
     }
     was_active = active;
-    updateFinalBoss();
 }
 
 void RegionTransitionHandler::updatePeninsula()
@@ -68,6 +67,14 @@ void RegionTransitionHandler::updatePeninsula()
 }
 
 void RegionTransitionHandler::updateFinalBoss() {
+    static bool active = false;
+    static bool was_active = false;
+    active = s_state.transition_trackers[int(FinalBoss)] > 0;
+    if (active && !was_active) {
+        AudioSystem::playSong(musBoss);
+    }
+    was_active = active;
+
     static float position = 0.0f;
     position += physicsTimestep * 40.0f;
     int idx = int(position) % 31;
@@ -92,11 +99,11 @@ void RegionTransitionHandler::goRegion(RegionNames name)
     }
 }
 
-void RegionTransitionHandler::goBoss()
+void RegionTransitionHandler::goBoss(bool final)
 {
     s_state.in_boss = true;
     s_state.previous = s_state.status;
-    s_state.status = Boss;
+    s_state.status = final ? FinalBoss : Boss;
 }
 
 void RegionTransitionHandler::leaveBoss()
@@ -120,6 +127,9 @@ void RegionTransitionHandler::update()
         case Boss:
             updateBoss();
             return;
+        case FinalBoss:
+            updateFinalBoss();
+            return;
         default:
             return;
         }
@@ -138,6 +148,9 @@ void RegionTransitionHandler::update()
             return;
         case Boss:
             updateBoss();
+            return;
+        case FinalBoss:
+            updateFinalBoss();
             return;
         default:
             return;

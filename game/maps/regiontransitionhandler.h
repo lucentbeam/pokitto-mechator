@@ -10,13 +10,14 @@ class RegionTransitionHandler
         Overworld = 1,
         Peninsula = 2,
         Boss = 3,
+        FinalBoss = 4,
     };
 
     struct State {
         CurrentStatus status = None;
         CurrentStatus previous = None;
         bool in_boss = false;
-        int transition_trackers[4] = {0, 0, 0, 0};
+        int transition_trackers[5] = {0, 0, 0, 0, 0};
     };
 
     static State s_state;
@@ -28,10 +29,12 @@ class RegionTransitionHandler
 public:
 
     static void goRegion(RegionNames name);
-    static void goBoss();
+    static void goBoss(bool final = false);
     static void leaveBoss();
 
     static void update();
+
+    static bool atBoss() { return s_state.in_boss; }
 };
 
 #endif // REGIONTRANSITIONHANDLER_H

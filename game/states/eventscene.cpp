@@ -7,6 +7,7 @@
 
 #include "game/states/game.h"
 #include "game/player.h"
+#include "game/maps/regiontransitionhandler.h"
 
 const SceneSequence * EventScene::s_active_sequence = nullptr;
 
@@ -111,6 +112,7 @@ void EventScene::update(FSM &fsm)
     if (s_data.has_update_func) {
         s_data.has_update_func = !s_data.update_callback();
     }
+    RegionTransitionHandler::update();
     updateRegionIndicator();
     Camera::update(Player::position().x(), Player::position().y());
     MapManager::update();
