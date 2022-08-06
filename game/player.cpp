@@ -195,7 +195,7 @@ void Jeep::update(float dt)
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
-    mode_switch_counter++;
+    Player::updateCounter();
     if (controls.b.pressed() && mode_switch_counter > 1) {
         Soldier::setPosition(position());
         Player::s_mode = PlayerMode::SoldierMode;
@@ -220,7 +220,7 @@ void Jeep::draw()
 void Helicopter::update(float dt)
 {
     s_instance.updateFlash();
-    mode_switch_counter++;
+    Player::updateCounter();
     if (!s_instance.m_inAir && s_instance.m_z > 0.0f) {
         s_instance.m_z -= 20.0f * dt;
         if (s_instance.m_z < 0.1f) {
@@ -330,7 +330,7 @@ void Tank::update(float dt)
         s_instance.m_shake.update();
     }
 
-    mode_switch_counter++;
+    Player::updateCounter();
     if (controls.b.pressed() && mode_switch_counter > 1) {
         Soldier::setPosition(position());
         Player::s_mode = PlayerMode::SoldierMode;
@@ -384,7 +384,7 @@ void Boat::update(float dt)
 
     static uint16_t disembarkPoints = Helpers::getMask({Terrain::None, Terrain::Mud, Terrain::Grass, Terrain::WaterShallow});
     Vec2f projection = position() + s_instance.m_steering.facing() * 12.0f;
-    mode_switch_counter++;
+    Player::updateCounter();
     if (controls.b.pressed() && mode_switch_counter > 1 && CollisionManager::collides(projection, disembarkPoints)) { // project forward and look for ground
 
         static uint16_t blocksLanding = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
@@ -648,5 +648,10 @@ void Player::drawFlashlight()
     } else {
         RenderSystem::incrementColors(55 - sprite_offset.x() + dir.x() * distance, 44 - sprite_offset.y() + dir.y() * distance, flashlight[dir.getRotationFrame(4.0f)], 0, dir.x() > 0);
     }
+}
+
+void Player::updateCounter()
+{
+    mode_switch_counter++;
 }
 

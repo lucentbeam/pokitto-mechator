@@ -16,6 +16,7 @@
 #include "game/states/blueprints.h"
 #include "game/states/eventscene.h"
 #include "game/states/mapviewer.h"
+#include "game/states/gamewon.h"
 
 #include "game/ui/ui.h"
 
@@ -66,6 +67,7 @@ int main ()
     fsm.add(GameStates::ShowBlueprintShop, updateBlueprintsShopState, drawBlueprintsShopState);
     fsm.add(GameStates::EventState, EventScene::update, EventScene::draw);
     fsm.add(GameStates::MapState, MapViewer::update, MapViewer::draw, MapViewer::go);
+    fsm.add(GameStates::GameWonState, updateGameWonState, drawGameWonState, goGameWonState);
 
     int32_t gameTime = 0;
     uint32_t lastGameTime = RenderSystem::getTimeMs();

@@ -244,6 +244,8 @@ public:
 
     static void drawReticle(PlayerMode mode, const Vec2f &dir);
     static void drawFlashlight();
+
+    static void updateCounter();
 };
 
 #endif // PLAYER_H

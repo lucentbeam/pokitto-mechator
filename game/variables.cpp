@@ -15,6 +15,7 @@ uint16_t GameVariables::dollarCount = 50;
 uint16_t GameVariables::acquiredBlueprints = 0;
 uint16_t GameVariables::unlockedBlueprints = 0;
 uint8_t GameVariables::questStatus = 0;
+bool GameVariables::gameWon = false;
 bool GameVariables::visitedEvents[SequenceTrigger::LastID] = { false };
 
 void GameVariables::changeDollars(int16_t delta)
@@ -109,4 +110,14 @@ Vec2i GameVariables::getGoal()
     default:
         return Vec2i(-500, -500);
     }
+}
+
+void GameVariables::setGameWon()
+{
+    gameWon = true;
+}
+
+bool GameVariables::getGameWon()
+{
+    return gameWon;
 }

@@ -17,6 +17,8 @@ const SequenceTrigger SequenceTrigger::trigger_list[] = {
 
 const SequenceTrigger helicopter_takeoff = SequenceTrigger(0, 0, 0, 0, acquiredheli_scene, SequenceTrigger::AcquireHelicopter);
 
+bool final_sequence_run = false;
+
 bool SequenceTrigger::checkForTriggers()
 {
     for(const SequenceTrigger &st : trigger_list) {
@@ -31,5 +33,13 @@ bool SequenceTrigger::checkForTriggers()
         EventScene::startScene(helicopter_takeoff.linked_scene);
         return true;
     }
+    return false;
+}
+
+bool SequenceTrigger::checkFinalSequence()
+{
+    if (final_sequence_run) return true;
+    final_sequence_run = true;
+    EventScene::startScene(win_scene);
     return false;
 }

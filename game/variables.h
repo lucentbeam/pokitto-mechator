@@ -15,6 +15,8 @@ class GameVariables {
 
     static uint8_t questStatus;
 
+    static bool gameWon;
+
     static bool visitedEvents[];
 public:
     static void changeDollars(int16_t delta);
@@ -44,6 +46,9 @@ public:
 
     static void setQuestStatus(uint8_t q);
     static Vec2i getGoal();
+
+    static void setGameWon();
+    static bool getGameWon();
 };
 
 #endif // VARIABLES_H

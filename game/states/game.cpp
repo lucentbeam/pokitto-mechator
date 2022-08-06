@@ -79,7 +79,7 @@ void updateRegionIndicator() {
     region_indicator.update(physicsTimestep);
 }
 
-void updateGameState(FSM&) {
+void updateGameState(FSM& fsm) {
 
     SpriteWrapper::update();
 
@@ -131,6 +131,12 @@ void updateGameState(FSM&) {
 
     RegionTransitionHandler::goRegion(currentRegion());
     RegionTransitionHandler::update();
+
+    if (GameVariables::getGameWon()) {
+        if (SequenceTrigger::checkFinalSequence()) {
+            fsm.go(GameStates::GameWonState);
+        }
+    }
 }
 
 void drawGameState() {

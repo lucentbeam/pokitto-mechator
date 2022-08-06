@@ -15,6 +15,8 @@ bool RenderSystem::s_offset = false;
 
 static bool initialized = false;
 
+const uint16_t * active_palette = default_palette;
+
 int RenderSystem::getLineLength(const char *line, int fontSize)
 {
     int width = 0;
@@ -39,6 +41,10 @@ int RenderSystem::getLineLength(const char *line, int fontSize)
     return width;
 }
 
+const uint16_t * RenderSystem::getPalette() {
+    return active_palette;
+}
+
 #ifndef DESKTOP_BUILD
 
 #include "Pokitto.h"
@@ -58,6 +64,7 @@ uint32_t RenderSystem::getTimeMs()
 
 void RenderSystem::setPalette(const uint16_t *ptr)
 {
+    active_palette = ptr;
     game.display.load565Palette(ptr);
 }
 
@@ -456,6 +463,7 @@ void RenderSystem::clear(uint8_t idx) {
 
 void RenderSystem::setPalette(const uint16_t *ptr)
 {
+    active_palette = ptr;
     for (size_t i = 0; i < 128; ++i) {
         uint16_t color = ptr[i];
         uint8_t r = (color & 0b1111100000000000) >> 11;

@@ -43,6 +43,7 @@ public:
 
     static void clear(uint8_t idx);
 
+    static const uint16_t * getPalette();
     static void setPalette(const uint16_t * ptr);
 
     static void print(int x, int y, const char * line, uint8_t color, uint8_t size = 1, uint8_t bgcol = backgroundColor);

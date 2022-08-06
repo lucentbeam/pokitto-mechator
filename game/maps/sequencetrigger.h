@@ -22,6 +22,8 @@ struct SequenceTrigger : public Rect
 
     static bool checkForTriggers();
 
+    static bool checkFinalSequence();
+
 private:
     static const SequenceTrigger trigger_list[];
 };

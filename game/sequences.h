@@ -213,7 +213,6 @@ const SceneSequence boatyard_scene[] = {
     {SceneSequence::End, &cam_release}
 };
 
-
 const SceneDialogue ah_dlog0 = SceneDialogue("Soldier, come in.", nullptr, SceneDialogue::Base, false);
 const SceneDialogue ah_dlog1 = SceneDialogue("Good job getting", "the helicopter.", SceneDialogue::Base, false);
 const SceneDialogue ah_dlog2 = SceneDialogue("I tagged the final", "target on your map.", SceneDialogue::Base, false);
@@ -247,7 +246,7 @@ inline void updateBossBarracks(int lx, int ly, int8_t * life) {
         *life = 0;
         return;
     }
-    Barracks * b1 = Barracks::getBarracksAt({lx, ly});
+    Barracks * b1 = Barracks::getBarracksAt({float(lx), float(ly)});
     if (b1 != nullptr) {
         b1->disablePathfindingChecks();
         if (*life < b1->getLife()) {
@@ -284,7 +283,7 @@ const SceneFunc fb_triggers = SceneFunc([](){
     static int8_t life = 27;
     static int8_t lifes[4] = {27, 27, 27, 27};
     UI::showBoss(&life);
-    registerUpdateCallback([life](){
+    registerUpdateCallback([&](){
         static int timer = 20;
         timer--;
         if (timer < 0) {
@@ -297,7 +296,10 @@ const SceneFunc fb_triggers = SceneFunc([](){
         updateBossBarracks(116, 159, lifes+2);
         updateBossBarracks(132, 170, lifes+3);
         life = (lifes[0] + lifes[1] + lifes[2] + lifes[3]) / 4;        
-        return life == 0;
+        if (life <= 81) {
+            GameVariables::setGameWon();
+        }
+        return life <= 81;
     });
     return true;
 });
@@ -320,5 +322,16 @@ const SceneSequence finalboss_scene[] = {
     {SceneSequence::ShowDialogue, &fb_dlog6 },
 
     {SceneSequence::End, &cam_release}
+};
+
+const SceneDialogue win_dlog0 = SceneDialogue("The enemy is", "defeated!", SceneDialogue::Base, false);
+const SceneDialogue win_dlog1 = SceneDialogue("You're the hero", "today, soldier.", SceneDialogue::Base, false);
+const SceneDialogue win_dlog2 = SceneDialogue("Now shutting down", "your thread.", SceneDialogue::Base, true);
+
+const SceneSequence win_scene[] = {
+    {SceneSequence::ShowDialogue, &win_dlog0 },
+    {SceneSequence::ShowDialogue, &win_dlog1 },
+    {SceneSequence::ShowDialogue, &win_dlog2 },
+    {SceneSequence::End, nullptr}
 };
 #endif // SEQUENCES_H

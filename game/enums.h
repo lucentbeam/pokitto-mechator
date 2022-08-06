@@ -48,7 +48,8 @@ enum GameStates : uint8_t {
     ShowBlueprint,
     ShowBlueprintShop,
     EventState,
-    MapState
+    MapState,
+    GameWonState
 };
 
 enum QuestStatus : uint8_t {
