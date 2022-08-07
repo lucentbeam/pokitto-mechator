@@ -17,6 +17,7 @@
 #include "game/states/eventscene.h"
 #include "game/states/mapviewer.h"
 #include "game/states/gamewon.h"
+#include "game/states/title.h"
 
 #include "game/ui/ui.h"
 
@@ -57,6 +58,7 @@ int main ()
     Camera::update(Soldier::position().x(), Soldier::position().y());
 
     FSM fsm;
+    fsm.add(GameStates::TitleState, Title::update, Title::draw, Title::go);
     fsm.add(GameStates::Game, updateGameState, drawGameState);
     fsm.add(GameStates::ShowUnlockDoor, updateOpenDoorState, drawOpenDoorState);
     fsm.add(GameStates::ShowUnlockShop, updateOpenShopState, drawOpenShopState);
@@ -72,7 +74,7 @@ int main ()
     int32_t gameTime = 0;
     uint32_t lastGameTime = RenderSystem::getTimeMs();
 
-    goGame();
+//    goGame();
 
     while (RenderSystem::running())
     {

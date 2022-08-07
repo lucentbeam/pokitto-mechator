@@ -44,6 +44,7 @@ SOURCES += \
     game/states/pause.cpp \
     game/states/repairs.cpp \
     game/states/shop.cpp \
+    game/states/title.cpp \
     game/ui/ui.cpp \
     game/utilities/blinker.cpp \
     game/utilities/helpers.cpp \
@@ -121,6 +122,7 @@ HEADERS += \
     game/states/pause.h \
     game/states/repairs.h \
     game/states/shop.h \
+    game/states/title.h \
     game/ui/ui.h \
     game/utilities/blinker.h \
     game/utilities/helpers.h \
