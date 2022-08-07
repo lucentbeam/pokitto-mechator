@@ -10,6 +10,10 @@
 #include "core/utilities/rect.h"
 #include "core/utilities/tween.h"
 
+#ifdef DEBUGS
+#include <string>
+#endif
+
 class Camera {
     static const uint8_t screen_half_x = 55, screen_half_y = 44;
 
