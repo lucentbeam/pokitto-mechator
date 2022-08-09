@@ -5,6 +5,7 @@
 #include "core/controls.h"
 
 #include "game/sprites.h"
+#include "game/states/game.h"
 
 Title::TitleState Title::s_state = Title::Select;
 
@@ -31,6 +32,9 @@ void Title::update(FSM &fsm)
         select_index = 0;
     } else if (select_index == 0 && Controls::getStatus().down.pressed()) {
         select_index = 1;
+    }
+    if (Controls::getStatus().a.pressed()) {
+        goGame();
     }
 }
 
