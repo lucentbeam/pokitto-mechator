@@ -33,7 +33,7 @@ void Title::go()
 
 void Title::update(FSM &fsm)
 {
-    timer += physicsTimestep * 10.0f;
+    timer += physicsTimestep * 20.0f;
     if (select_index > 0 && Controls::getStatus().up.pressed()) {
         select_index = 0;
     } else if (select_index == 0 && Controls::getStatus().down.pressed()) {
