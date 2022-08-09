@@ -56,11 +56,11 @@
 		{ "output" : "portrait_enemy", "hcount": 2},
 		{ "output" : "portrait_enemy_cpu", "hcount": 5},
 		
-		{ "output" : "title_text"},
-		{ "output" : "title_jeep"},
-		{ "output" : "title_dirt"},
-		{ "output" : "title_shot_1"},
-		{ "output" : "title_shot_2"},
+		{ "output" : "title_text", "rle": true},
+		{ "output" : "title_jeep", "rle": true},
+		{ "output" : "title_dirt", "rle": true},
+		{ "output" : "title_shot_1", "rle": true},
+		{ "output" : "title_shot_2", "rle": true},
 		
 		{ "output" : "ui_icons", "hcount": 4},
 		{ "output" : "ui_arrow_left"},
