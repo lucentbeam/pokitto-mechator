@@ -13,6 +13,7 @@ class Title
     static int select_index;
     static int data_index;
     static bool has_data[3];
+    static float timer;
 public:
     static void go();
 
