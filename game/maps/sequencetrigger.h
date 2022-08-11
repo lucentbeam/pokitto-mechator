@@ -7,16 +7,7 @@ struct SequenceTrigger : public Rect
 {
     const SceneSequence * const linked_scene;
 
-    enum SequenceID : int {
-        Intro = 0,
-        TutorialBoss = 1,
-        TankBoss = 2,
-        AcquireBoat = 3,
-        AcquireHelicopter = 4,
-        FinalBoss = 5,
-
-        LastID = 6
-    } id;
+    SequenceID id;
 
     constexpr SequenceTrigger(int x, int y, int x2, int y2, const SceneSequence * const ref, SequenceID id) : Rect(x * 6, y * 6, (x2 - x) * 6, (y2 - y) * 6), linked_scene(ref), id(id) {}
 

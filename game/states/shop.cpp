@@ -65,7 +65,8 @@ void updateShopState(FSM&)
             quitShopState();
             break;
         case 1:
-            // save & show UI save prompt
+            GameVariables::saveGame();
+            quitShopState();
             break;
         case 2:
             goRepairState();

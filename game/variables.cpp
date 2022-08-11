@@ -1,66 +1,57 @@
 #include "variables.h"
 
+#include "core/serialization.h"
 #include "game/maps/sequencetrigger.h"
-#include "game/enums.h"
 
-uint8_t GameVariables::hackingKitCount = 0;
-uint8_t GameVariables::keyACount = 0;
-uint8_t GameVariables::keyBCount = 0;
-uint8_t GameVariables::keyCCount = 0;
-#ifdef DEBUGS
-uint16_t GameVariables::dollarCount = 100;
-#else
-uint16_t GameVariables::dollarCount = 50;
-#endif
-uint16_t GameVariables::acquiredBlueprints = 0;
-uint16_t GameVariables::unlockedBlueprints = 0;
-uint8_t GameVariables::questStatus = 0;
 bool GameVariables::gameWon = false;
-bool GameVariables::visitedEvents[SequenceTrigger::LastID] = { false };
+
+GameStorage GameVariables::s_data;
+
+char GameVariables::savefile[30] = "/data/mechator/save1.dat";
 
 void GameVariables::changeDollars(int16_t delta)
 {
-    dollarCount += std::fmax(delta, -dollarCount);
+    s_data.dollarCount += std::fmax(delta, -s_data.dollarCount);
 }
 
 void GameVariables::changeHackingKits(int8_t delta)
 {
-    hackingKitCount += delta;
+    s_data.hackingKitCount += delta;
 }
 
 void GameVariables::changeKeysA(int8_t delta)
 {
-    keyACount += delta;
+    s_data.keyACount += delta;
 }
 
 void GameVariables::changeKeysB(int8_t delta)
 {
-    keyBCount += delta;
+    s_data.keyBCount += delta;
 }
 
 void GameVariables::changeKeysC(int8_t delta)
 {
-    keyCCount += delta;
+    s_data.keyCCount += delta;
 }
 
 bool GameVariables::hasBlueprint(int bp)
 {
-    return (acquiredBlueprints & (1 << bp)) > 0;
+    return (s_data.acquiredBlueprints & (1 << bp)) > 0;
 }
 
 void GameVariables::acquireBlueprint(int bp)
 {
-    acquiredBlueprints = acquiredBlueprints | (1 << bp);
+    s_data.acquiredBlueprints = s_data.acquiredBlueprints | (1 << bp);
 }
 
 bool GameVariables::hasBlueprintUnlocked(int bp)
 {
-    return (unlockedBlueprints & (1 << bp)) > 0;
+    return (s_data.unlockedBlueprints & (1 << bp)) > 0;
 }
 
 void GameVariables::unlockBlueprint(int bp)
 {
-    unlockedBlueprints = unlockedBlueprints | (1 << bp);
+    s_data.unlockedBlueprints = s_data.unlockedBlueprints | (1 << bp);
 }
 
 bool GameVariables::hasBlueprintToUnlock(int bp)
@@ -70,31 +61,31 @@ bool GameVariables::hasBlueprintToUnlock(int bp)
 
 bool GameVariables::hasUnusedBlueprints()
 {
-    return acquiredBlueprints != unlockedBlueprints;
+    return s_data.acquiredBlueprints != s_data.unlockedBlueprints;
 }
 
-uint8_t GameVariables::keysA() { return keyACount; }
+uint8_t GameVariables::keysA() { return s_data.keyACount; }
 
-uint8_t GameVariables::keysB() { return keyBCount; }
+uint8_t GameVariables::keysB() { return s_data.keyBCount; }
 
-uint8_t GameVariables::keysC() { return keyCCount; }
+uint8_t GameVariables::keysC() { return s_data.keyCCount; }
 
-uint8_t GameVariables::hackingKits() { return hackingKitCount; }
+uint8_t GameVariables::hackingKits() { return s_data.hackingKitCount; }
 
-uint16_t GameVariables::dollars() { return dollarCount; }
+uint16_t GameVariables::dollars() { return s_data.dollarCount; }
 
-void GameVariables::visitEvent(int index) { visitedEvents[index] = true; }
+void GameVariables::visitEvent(int index) { s_data.visitedEvents[index] = true; }
 
-bool GameVariables::eventVisited(int index) { return visitedEvents[index]; }
+bool GameVariables::eventVisited(int index) { return s_data.visitedEvents[index]; }
 
 void GameVariables::setQuestStatus(uint8_t q)
 {
-    questStatus = q;
+    s_data.questStatus = q;
 }
 
 Vec2i GameVariables::getGoal()
 {
-    switch (QuestStatus(questStatus)) {
+    switch (QuestStatus(s_data.questStatus)) {
     case QuestIntro:
         return Vec2i(26, 48);
     case QuestTank:
@@ -120,4 +111,19 @@ void GameVariables::setGameWon()
 bool GameVariables::getGameWon()
 {
     return gameWon;
+}
+
+void GameVariables::updateTime(int ms)
+{
+    s_data.elapsedMilliseconds += ms;
+}
+
+void GameVariables::saveGame()
+{
+    Serialization::tryStore<GameStorage>(savefile, &s_data);
+}
+
+void GameVariables::loadGame(GameStorage s)
+{
+    s_data = s;
 }

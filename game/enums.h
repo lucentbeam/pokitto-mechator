@@ -3,6 +3,17 @@
 
 #include <cstdint>
 
+enum SequenceID : int {
+    Intro = 0,
+    TutorialBoss = 1,
+    TankBoss = 2,
+    AcquireBoat = 3,
+    AcquireHelicopter = 4,
+    FinalBoss = 5,
+
+    LastID = 6
+};
+
 enum PlayerMode : uint8_t {
     SoldierMode = 0,
     JeepMode = 1,

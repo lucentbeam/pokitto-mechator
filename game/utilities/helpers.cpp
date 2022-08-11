@@ -28,11 +28,14 @@ namespace  Helpers {
         RenderSystem::print(x, y, text, color);
     }
 
-    void drawRLE(int x, int y, const uint8_t *sprite, int frame, uint8_t * buffer)
+    void drawRLE(int x, int y, const uint8_t *sprite, int transparent, int frame, uint8_t * buffer)
     {
         const uint8_t * input = sprite;
         while (frame > 0) {
             input += input[0];
+        }
+        if (frame < 0) {
+            input--;
         }
         uint8_t w = input[1];
         uint8_t h = input[2];
@@ -54,7 +57,7 @@ namespace  Helpers {
                 if (yidx < 0) continue;
                 xidx = x + xcounter;
                 if (xidx < 0 || xidx >= 110) continue;
-                if (c == 0) continue;
+                if (c == transparent) continue;
                 buffer[xidx + yidx * 110] = c;
     #ifdef DESKTOP_BUILD
                 RenderSystem::pixel(xidx, yidx, c);

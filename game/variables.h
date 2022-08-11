@@ -5,19 +5,29 @@
 #include <cmath>
 
 #include "core/utilities/vec.h"
+#include "game/enums.h"
+
+struct GameStorage {
+    int elapsedMilliseconds = 0;
+
+    uint8_t hackingKitCount = 0, keyACount = 0, keyBCount = 0, keyCCount = 0;
+    uint16_t dollarCount = 50;
+
+    uint16_t acquiredBlueprints = 0;
+    uint16_t unlockedBlueprints = 0;
+
+    uint8_t questStatus = 0;
+
+    bool visitedEvents[SequenceID::LastID] = { false };
+
+    float percentageComplete() { return 50.0f; }
+};
 
 class GameVariables {
-    static uint8_t hackingKitCount, keyACount, keyBCount, keyCCount;
-    static uint16_t dollarCount;
-
-    static uint16_t acquiredBlueprints;
-    static uint16_t unlockedBlueprints;
-
-    static uint8_t questStatus;
-
     static bool gameWon;
 
-    static bool visitedEvents[];
+    static GameStorage s_data;
+
 public:
     static void changeDollars(int16_t delta);
     static void changeHackingKits(int8_t delta);
@@ -49,6 +59,14 @@ public:
 
     static void setGameWon();
     static bool getGameWon();
+
+    static char savefile[];
+
+    static void updateTime(int ms);
+    static void loadGame(GameStorage);
+    static void saveGame();
 };
+
+
 
 #endif // VARIABLES_H

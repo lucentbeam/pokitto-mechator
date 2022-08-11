@@ -14,7 +14,7 @@ namespace Helpers {
 
     void printHorizontallyCentered(int x, int y, const char * text, uint8_t color);
 
-    void drawRLE(int x, int y, const uint8_t * sprite, int frame = 0, uint8_t * buffer = nullptr);
+    void drawRLE(int x, int y, const uint8_t * sprite, int transparent = 0, int frame = -1, uint8_t * buffer = nullptr);
 };
 
 #endif // HELPERS_H

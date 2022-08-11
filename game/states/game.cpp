@@ -81,13 +81,15 @@ void updateRegionIndicator() {
 
 void updateGameState(FSM& fsm) {
 
-//#ifdef DEBUGS
-//    static int counter = 60;
-//    counter--;
-//    if (counter < 0) {
+#ifdef DEBUGS
+    static int counter = 60;
+    counter--;
+    if (counter == 0) {
+//        GameVariables::updateTime(500000);
+//        GameVariables::saveGame();
 //        fsm.go(GameStates::GameWonState);
-//    }
-//#endif
+    }
+#endif
     SpriteWrapper::update();
 
     // player characters

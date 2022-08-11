@@ -5,17 +5,17 @@
 #include "game/variables.h"
 
 const SequenceTrigger SequenceTrigger::trigger_list[] = {
-    {4, 14, 9, 19, intro_scene, SequenceTrigger::Intro},
-    {54, 18, 55, 23, tutorial_boss_scene, SequenceTrigger::TutorialBoss},
-    {25, 105, 30, 107, tank_boss_scene, SequenceTrigger::TankBoss},
-    {147, 195, 149, 205, boatyard_scene, SequenceTrigger::AcquireBoat},
+    {4, 14, 9, 19, intro_scene, SequenceID::Intro},
+    {54, 18, 55, 23, tutorial_boss_scene, SequenceID::TutorialBoss},
+    {25, 105, 30, 107, tank_boss_scene, SequenceID::TankBoss},
+    {147, 195, 149, 205, boatyard_scene, SequenceID::AcquireBoat},
 
-    {91,  134, 125, 152,  finalboss_scene,  SequenceTrigger::FinalBoss},
-    {106, 150, 126, 168,  finalboss_scene,  SequenceTrigger::FinalBoss},
-    {123, 156, 142, 178,  finalboss_scene,  SequenceTrigger::FinalBoss},
+    {91,  134, 125, 152,  finalboss_scene,  SequenceID::FinalBoss},
+    {106, 150, 126, 168,  finalboss_scene,  SequenceID::FinalBoss},
+    {123, 156, 142, 178,  finalboss_scene,  SequenceID::FinalBoss},
 };
 
-const SequenceTrigger helicopter_takeoff = SequenceTrigger(0, 0, 0, 0, acquiredheli_scene, SequenceTrigger::AcquireHelicopter);
+const SequenceTrigger helicopter_takeoff = SequenceTrigger(0, 0, 0, 0, acquiredheli_scene, SequenceID::AcquireHelicopter);
 
 bool final_sequence_run = false;
 

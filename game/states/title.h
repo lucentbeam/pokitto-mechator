@@ -3,17 +3,28 @@
 
 #include "core/utilities/babyfsm.h"
 
+#include "game/variables.h"
+
 class Title
 {
     static enum TitleState {
         Select,
         DataSelect,
+        DataOverwrite,
+        ConfirmOverwrite
     } s_state;
 
     static int select_index;
-    static int data_index;
-    static bool has_data[3];
+    static GameStorage game_datas[3];
     static float timer;
+    static float move_timer;
+
+    static void nextData();
+    static void previousData();
+    static void selectData();
+
+    static void renderSaveDataInfo(int x, int y, GameStorage &s, bool highlight);
+    static void drawDataScreen();
 public:
     static void go();
 
