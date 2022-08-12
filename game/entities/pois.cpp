@@ -5,9 +5,10 @@
 #include "game/states/shop.h"
 #include "core/audiosystem.h"
 #include "game/maps/spawnpoint.h"
+#include "game/maps/spawnpoints.h"
+#include "game/variables.h"
 
 ObjectPool<POIs, 6> POIs::s_pois;
-std::vector<int> POIs::s_activated;
 POIs * POIs::s_current_active_poi = nullptr;
 bool POIs::s_disable_shops = false;
 
@@ -19,12 +20,23 @@ void POIs::configure(const Vec2f &pos, SpriteName spr)
 
 bool POIs::mapIndexUnopened(const Vec2f &pos)
 {
-    return std::find(s_activated.begin(), s_activated.end(), MapManager::getMapIndex(pos.x(), pos.y())) == s_activated.end();
+    int idx = MapManager::MapManager::getMapIndex(pos.x(), pos.y());
+    for(int i = 0; i < point_count; ++i) {
+        if (GameVariables::activatedDoors()[i]== idx) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void POIs::openAtIndex(const Vec2f &pos)
 {
-    s_activated.push_back(MapManager::getMapIndex(pos.x(), pos.y()));
+    for(int i = 0; i < point_count; ++i) {
+        if (GameVariables::activatedDoors()[i] == 0) {
+            GameVariables::activatedDoors()[i] = MapManager::getMapIndex(pos.x(), pos.y());
+            return;
+        }
+    }
 }
 
 void POIs::spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, uint8_t tile, POIType door)

@@ -14,6 +14,7 @@
 
 #include "game/utilities/rumbler.h"
 #include "game/utilities/playerstats.h"
+#include "game/utilities/ticker.h"
 #include "game/enums.h"
 
 #include "game/constants.h"
@@ -48,7 +49,7 @@ struct WeaponHelper {
 class Player;
 
 class Vehicle {
-    Ticker m_iframes;
+    GenericTicker m_iframes;
 
 protected:
     Steering m_steering;

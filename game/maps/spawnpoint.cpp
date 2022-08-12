@@ -5,6 +5,7 @@
 
 #include "game/maps/spawnpoints.h"
 #include "game/maps/doors.h"
+#include "game/variables.h"
 
 bool SpawnPoint::s_active_points[point_count];
 bool SpawnPoint::s_active_doors[door_count] = { false };
@@ -25,21 +26,6 @@ const POIType SpawnPoint::door_labels[door_count] = {
 
     POIType::DoorB,
     POIType::DoorA,
-};
-
-SpawnPoint::DoorStatus SpawnPoint::door_states[door_count] = {
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
-    SpawnPoint::Hidden,
 };
 
 void SpawnPoint::setActiveRegion()
@@ -63,8 +49,8 @@ void SpawnPoint::setActiveRegion()
                 doors[i].m_on_approach(doors[i].m_pos);
             }
             s_active_doors[i] = true;
-            if (door_states[i] == SpawnPoint::Hidden) {
-                door_states[i] = SpawnPoint::Discovered;
+            if (GameVariables::doorStates()[i] == Hidden && Camera::inViewingZone(doors[i].m_pos)) {
+                GameVariables::doorStates()[i] = Discovered;
             }
         } else {
             s_active_doors[i] = false;
@@ -76,7 +62,7 @@ void SpawnPoint::openDoorAt(const Vec2f &pos)
 {
     for(int i = 0; i < door_count; ++i) {
         if (doors[i].pos().x() == int(pos.x()) && doors[i].pos().y() == int(pos.y())) {
-            door_states[i] = SpawnPoint::Opened;
+            GameVariables::doorStates()[i] = Opened;
         }
     }
 }

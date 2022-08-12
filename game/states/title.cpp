@@ -13,12 +13,13 @@
 #include "game/sprites.h"
 #include "game/states/game.h"
 #include "game/utilities/helpers.h"
+#include "game/utilities/mapmanager.h"
 
 Title::TitleState Title::s_state = Title::Select;
 
 int Title::select_index = 0;
 
-GameStorage Title::game_datas[3];
+GameStorageHeader Title::game_datas[3];
 
 float Title::timer = 0.0f;
 float Title::move_timer = 0.0f;
@@ -48,7 +49,10 @@ void Title::selectData() {
 #endif
 
     if (s_state == DataSelect) {
-        GameVariables::loadGame(game_datas[select_index]);
+        GameStorage dat;
+        Serialization::tryGet<GameStorage>(GameVariables::savefile, &dat);
+        GameVariables::loadGame(dat);
+        MapManager::loadMutables(GameVariables::savefile);
     } else {
         GameVariables::loadGame(GameStorage());
     }
@@ -56,7 +60,7 @@ void Title::selectData() {
     goGame();
 }
 
-void Title::renderSaveDataInfo(int x, int y, GameStorage &s, bool highlight)
+void Title::renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highlight)
 {
     int col = highlight ? 10 : 8;
     if (s.elapsedMilliseconds < 5000) {
@@ -79,7 +83,11 @@ void Title::renderSaveDataInfo(int x, int y, GameStorage &s, bool highlight)
 
     RenderSystem::print(x - 2, y, "-", col);
 
+#ifdef DEBUGS
     sprintf(buf, "%02d:%02d", min, sec);
+#else
+    sprintf(buf, "%02d:%02d", hou, min);
+#endif
     len = RenderSystem::getLineLength(buf);
     RenderSystem::print(x - 20 - len/2, y, buf, col);
 }
@@ -91,16 +99,17 @@ void Title::go()
     s_state = Select;
 
 #ifdef DESKTOP_BUILD
-    Serialization::tryGet<GameStorage>("../data/mechator/save1.dat", game_datas);
-    Serialization::tryGet<GameStorage>("../data/mechator/save2.dat", game_datas + 1);
-    Serialization::tryGet<GameStorage>("../data/mechator/save3.dat", game_datas + 2);
+    Serialization::tryGet<GameStorageHeader>("../data/mechator/save1.dat", game_datas);
+    Serialization::tryGet<GameStorageHeader>("../data/mechator/save2.dat", game_datas + 1);
+    Serialization::tryGet<GameStorageHeader>("../data/mechator/save3.dat", game_datas + 2);
 #else
-    Serialization::tryGet<GameStorage>("data/mechator/save1.dat", game_datas);
-    Serialization::tryGet<GameStorage>("data/mechator/save2.dat", game_datas + 1);
-    Serialization::tryGet<GameStorage>("data/mechator/save3.dat", game_datas + 2);
+    Serialization::tryGet<GameStorageHeader>("data/mechator/save1.dat", game_datas);
+    Serialization::tryGet<GameStorageHeader>("data/mechator/save2.dat", game_datas + 1);
+    Serialization::tryGet<GameStorageHeader>("data/mechator/save3.dat", game_datas + 2);
 #endif
 
     RenderSystem::setPalette(default_palette);
+    MapManager::resetMutables();
 }
 
 void Title::update(FSM &fsm)

@@ -23,13 +23,4 @@ public:
     int8_t max() const { return m_max; }
 };
 
-class Ticker {
-    uint8_t m_count;
-
-public:
-    void reset(uint8_t count) { m_count = count; }
-    void update() { if (m_count > 0) m_count--; }
-    bool ready() const { return m_count == 0; }
-};
-
 #endif // PLAYERSTATS_H

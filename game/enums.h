@@ -3,6 +3,12 @@
 
 #include <cstdint>
 
+enum DoorStatus {
+    Hidden = 0,
+    Discovered = 1,
+    Opened = 2
+};
+
 enum SequenceID : int {
     Intro = 0,
     TutorialBoss = 1,

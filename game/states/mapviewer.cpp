@@ -92,7 +92,7 @@ void MapViewer::draw()
 
             int color;
             for (int i = 0; i < door_count; ++i) {
-                if (SpawnPoint::door_states[i] == SpawnPoint::Discovered) {
+                if (GameVariables::doorStates()[i] == Discovered) {
                     color = SpawnPoint::door_labels[i] == POIType::DoorA ? 48 : SpawnPoint::door_labels[i] == POIType::DoorB ? 32 : 16;
                     Vec2f pos = doors[i].pos();
                     pos *= world_to_loc;

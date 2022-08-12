@@ -7,6 +7,23 @@ bool GameVariables::gameWon = false;
 
 GameStorage GameVariables::s_data;
 
+//DoorStatus GameStorage::s_door_states[door_count] = {
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//    Hidden,
+//};
+
+//int GameStorage::s_activated_doors[point_count] = {0};
+
 char GameVariables::savefile[30] = "/data/mechator/save1.dat";
 
 void GameVariables::changeDollars(int16_t delta)
@@ -74,9 +91,9 @@ uint8_t GameVariables::hackingKits() { return s_data.hackingKitCount; }
 
 uint16_t GameVariables::dollars() { return s_data.dollarCount; }
 
-void GameVariables::visitEvent(int index) { s_data.visitedEvents[index] = true; }
+void GameVariables::visitEvent(int index) { s_data.header.visitedEvents[index] = true; }
 
-bool GameVariables::eventVisited(int index) { return s_data.visitedEvents[index]; }
+bool GameVariables::eventVisited(int index) { return s_data.header.visitedEvents[index]; }
 
 void GameVariables::setQuestStatus(uint8_t q)
 {
@@ -115,12 +132,27 @@ bool GameVariables::getGameWon()
 
 void GameVariables::updateTime(int ms)
 {
-    s_data.elapsedMilliseconds += ms;
+    s_data.header.elapsedMilliseconds += ms;
 }
 
 void GameVariables::saveGame()
 {
     Serialization::tryStore<GameStorage>(savefile, &s_data);
+}
+
+DoorStatus *GameVariables::doorStates()
+{
+    return s_data.door_states;
+}
+
+int *GameVariables::activatedDoors()
+{
+    return s_data.activated_doors;
+}
+
+int *GameVariables::acquiredSpecials()
+{
+    return s_data.acquired_specials;
 }
 
 void GameVariables::loadGame(GameStorage s)

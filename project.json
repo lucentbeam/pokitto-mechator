@@ -4886,6 +4886,33 @@
 		},
 		"\\game\\states\\title.cpp.BNTufI": {
 			"sdcard": false
+		},
+		"\\data\\mechator\\save1.dat": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\playerstats.cpp.rcnzrH": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\playerstats.cpp.oNKZTz": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\ticker.obj": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\ticker.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\ticker.h": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.jyKFUP": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.PFFBVj": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\ticker.h.VhgNvF": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

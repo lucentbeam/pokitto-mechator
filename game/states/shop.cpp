@@ -66,6 +66,7 @@ void updateShopState(FSM&)
             break;
         case 1:
             GameVariables::saveGame();
+            MapManager::dumpMutables(GameVariables::savefile);
             quitShopState();
             break;
         case 2:

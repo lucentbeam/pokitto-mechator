@@ -6,9 +6,16 @@
 
 #include "core/utilities/vec.h"
 #include "game/enums.h"
+#include "game/constants.h"
+
+struct GameStorageHeader {
+    int elapsedMilliseconds = 0;
+    bool visitedEvents[SequenceID::LastID] = { false };
+    float percentageComplete() { return 50.0f; }
+};
 
 struct GameStorage {
-    int elapsedMilliseconds = 0;
+    GameStorageHeader header;
 
     uint8_t hackingKitCount = 0, keyACount = 0, keyBCount = 0, keyCCount = 0;
     uint16_t dollarCount = 50;
@@ -18,9 +25,9 @@ struct GameStorage {
 
     uint8_t questStatus = 0;
 
-    bool visitedEvents[SequenceID::LastID] = { false };
-
-    float percentageComplete() { return 50.0f; }
+    DoorStatus door_states[doors_count];
+    int activated_doors[points_count];
+    int acquired_specials[specials_count];
 };
 
 class GameVariables {
@@ -65,6 +72,10 @@ public:
     static void updateTime(int ms);
     static void loadGame(GameStorage);
     static void saveGame();
+
+    static DoorStatus * doorStates();
+    static int * activatedDoors();
+    static int * acquiredSpecials();
 };
 
 

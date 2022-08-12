@@ -7,8 +7,6 @@ class POIs
 {
     static ObjectPool<POIs, 6> s_pois;
 
-    static std::vector<int> s_activated;
-
     static POIs * s_current_active_poi;
 
     static bool s_disable_shops;

@@ -49,6 +49,7 @@ public:
   void setTileAt(float x, float y, uint8_t override);
   void clearOverrideAt(float x, float y);
   bool contains(float x, float y);
+
 };
 
 template<int TileWidth, int TileHeight>

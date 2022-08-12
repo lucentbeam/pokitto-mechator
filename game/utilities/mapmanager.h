@@ -30,6 +30,12 @@ public:
     static uint8_t getTileAt(float x, float y);
 
     static void setTileAt(float x, float y, uint8_t override);
+
+    static void loadMutables(char * file);
+
+    static void dumpMutables(char * file);
+
+    static void resetMutables();
 };
 
 #endif // MAPMANAGER_H

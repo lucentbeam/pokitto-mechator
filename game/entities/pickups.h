@@ -11,8 +11,6 @@ class Pickups
     static ObjectPool<Pickups, 8> s_temporary;
     static ObjectPool<Pickups, 6> s_special;
 
-    static std::vector<int> s_acquired_specials; // store map indices of specials that have already been acquired
-
     Vec2i position{0,0};
     SpriteWrapper m_sprite;
     void (*m_on_collect)(const Vec2i&);

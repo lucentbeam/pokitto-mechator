@@ -11,8 +11,6 @@
 ObjectPool<Pickups, 8> Pickups::s_temporary;
 ObjectPool<Pickups, 6> Pickups::s_special;
 
-std::vector<int> Pickups::s_acquired_specials;
-
 void Pickups::configure(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime)
 {
     position = pos;
@@ -36,12 +34,24 @@ void Pickups::spawnSpecial(const Vec2i &pos, SpriteName spr, void (*on_collect)(
 
 bool Pickups::mapIndexUnacquired(const Vec2i &pos)
 {
-    return std::find(s_acquired_specials.begin(), s_acquired_specials.end(), MapManager::getMapIndex(pos.x(), pos.y())) == s_acquired_specials.end();
+    int idx = MapManager::getMapIndex(pos.x(), pos.y());
+    for (int i = 0; i < 100; ++i) {
+        if (GameVariables::acquiredSpecials()[i] == idx) {
+            return false;
+        }
+    }
+    return true;
 }
 
 void Pickups::acquireAtIndex(const Vec2i &pos)
 {
-    s_acquired_specials.push_back(MapManager::getMapIndex(pos.x(), pos.y()));
+    int idx = MapManager::getMapIndex(pos.x(), pos.y());
+    for (int i = 0; i < 100; ++i) {
+        if (GameVariables::acquiredSpecials()[i] == 0) {
+            GameVariables::acquiredSpecials()[i] = idx;
+            return;
+        }
+    }
 }
 
 void Pickups::spawnDollar(const Vec2f &pos)

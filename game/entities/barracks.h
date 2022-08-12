@@ -5,6 +5,7 @@
 #include "core/utilities/rect.h"
 #include "game/entities/enemy.h"
 #include "game/utilities/playerstats.h"
+#include "game/utilities/ticker.h"
 
 #include <list>
 
@@ -32,7 +33,7 @@ private:
     int16_t m_spawn_timer = 160;
     int8_t m_spawn_count = 0;
     int16_t m_barracks_index = 0;
-    Ticker m_flash;
+    GenericTicker m_flash;
     SpawnType m_spawntype;
     bool m_checks_pathfinding, m_destroy_out_of_range;
 

@@ -15,7 +15,7 @@ class Title
     } s_state;
 
     static int select_index;
-    static GameStorage game_datas[3];
+    static GameStorageHeader game_datas[3];
     static float timer;
     static float move_timer;
 
@@ -23,7 +23,7 @@ class Title
     static void previousData();
     static void selectData();
 
-    static void renderSaveDataInfo(int x, int y, GameStorage &s, bool highlight);
+    static void renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highlight);
     static void drawDataScreen();
 public:
     static void go();
