@@ -4,6 +4,7 @@
 #include "core/audiosystem.h"
 #include "core/utilities/babyfsm.h"
 #include "game/funcs.h"
+#include "game/variables.h"
 
 static uint32_t mode_switch_counter = 0;
 
@@ -171,6 +172,7 @@ void Jeep::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
+    Soldier::setPosition(position());
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
@@ -179,7 +181,6 @@ void Jeep::update(float dt)
         s_instance.health().change(-damage);
         if (!alive()) {
             onVehicleDestroyed();
-            Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
             EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
@@ -225,7 +226,6 @@ void Helicopter::update(float dt)
         s_instance.m_z -= 20.0f * dt;
         if (s_instance.m_z < 0.1f) {
             s_instance.m_z = 0.0f;
-            Soldier::setPosition(s_instance.m_steering.pos());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
             s_instance.m_steering.stop();
@@ -247,6 +247,7 @@ void Helicopter::update(float dt)
 
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
+    Soldier::setPosition(s_instance.m_steering.pos());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos() - Vec2f(0, s_instance.m_z), s_instance.m_aim, s_instance.m_steering.vel(), true);
@@ -292,7 +293,7 @@ void Helicopter::drawAir()
     } else {
         RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0.1f);
         if ((mode_switch_counter % 3) == 2) {
-            RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/3], helicopter_blades[0][2]);
+            RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[1 + (mode_switch_counter % 12)/6 * 2], helicopter_blades[0][2]);
         }
     }
     Player::drawReticle(HelicopterMode, s_instance.m_aim);
@@ -308,6 +309,7 @@ void Tank::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
+    Soldier::setPosition(position());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
@@ -319,7 +321,6 @@ void Tank::update(float dt)
         s_instance.health().change(-damage);
         if (!alive()) {
             onVehicleDestroyed();
-            Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
             EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
@@ -363,6 +364,7 @@ void Boat::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
+    Soldier::setPosition(position());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
@@ -375,7 +377,6 @@ void Boat::update(float dt)
         if (!alive()) {
             // TODO: make gameover
             onVehicleDestroyed();
-            Soldier::setPosition(position());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
             EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
@@ -653,5 +654,33 @@ void Player::drawFlashlight()
 void Player::updateCounter()
 {
     mode_switch_counter++;
+}
+
+void Player::storeData()
+{
+    GameStorage * dat = GameVariables::getData();
+
+    dat->soldierPosition = Soldier::position() + Vec2f(0, 6);
+    dat->jeepPosition =    Jeep::position() + (Player::mode() == JeepMode ? Vec2f(0, 6) : Vec2f(0,0));
+    dat->boatPosition =    Boat::position();
+    dat->heliPosition =    Helicopter::position();
+
+    dat->soldierLife =     Soldier::s_instance.health().value();
+    dat->jeepLife =        Jeep::s_instance.health().value();
+    dat->boatLife =        Boat::s_instance.health().value();
+    dat->heliLife =        Helicopter::s_instance.health().value();
+}
+
+void Player::loadData()
+{
+    GameStorage * dat = GameVariables::getData();
+    Soldier::setPosition(dat->soldierPosition);
+    Soldier::health().set(dat->soldierLife);
+    Jeep::setPosition(dat->jeepPosition);
+    Jeep::health().set(dat->jeepLife);
+    Boat::setPosition(dat->boatPosition);
+    Boat::health().set(dat->boatLife);
+    Helicopter::setPosition(dat->heliPosition);
+    Helicopter::health().set(dat->heliLife);
 }
 

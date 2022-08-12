@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-enum DoorStatus {
+enum DoorStatus : uint8_t {
     Hidden = 0,
     Discovered = 1,
     Opened = 2

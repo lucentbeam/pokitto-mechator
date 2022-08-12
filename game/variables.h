@@ -25,9 +25,12 @@ struct GameStorage {
 
     uint8_t questStatus = 0;
 
-    DoorStatus door_states[doors_count];
-    int activated_doors[points_count];
+    DoorStatus door_states[20];
+    int activated_doors[doors_count];
     int acquired_specials[specials_count];
+
+    Vec2f soldierPosition, jeepPosition, boatPosition, heliPosition;
+    int8_t soldierLife, jeepLife, boatLife, heliLife;
 };
 
 class GameVariables {
@@ -76,6 +79,8 @@ public:
     static DoorStatus * doorStates();
     static int * activatedDoors();
     static int * acquiredSpecials();
+
+    static GameStorage * getData();
 };
 
 

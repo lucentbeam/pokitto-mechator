@@ -51,6 +51,25 @@ std::string Weapon::getName(Weapon::Type t)
     return "Nameless Gun";
 }
 
+WeaponConfig Weapon::getConfig(Type t)
+{
+    switch(t) {
+    case Type::Gun:
+        return gun_config;
+    case Type::MachineGun:
+        return mgun_config;
+    case Type::DualShot:
+        return dualshot_config;
+    case Type::Grenade:
+        return grenade_config;
+    case Type::Missiles:
+        return missile_config;
+    case Type::MultiMissiles:
+        return multimissile_config;
+    }
+    return gun_config;
+}
+
 Weapon::Type Weapon::nextWeapon(Weapon::Type t)
 {
     bool next = false;

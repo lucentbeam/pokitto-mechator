@@ -247,6 +247,9 @@ public:
     static void drawFlashlight();
 
     static void updateCounter();
+
+    static void storeData();
+    static void loadData();
 };
 
 #endif // PLAYER_H

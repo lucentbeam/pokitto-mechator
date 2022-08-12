@@ -287,14 +287,12 @@
 	"target": "Pokitto",
 	"pipelines": {
 		"Pokitto": [
-			"img-to-c",
 			"compile-cpp",
 			"compile-ld",
 			"compile-bin",
 			"make-img"
 		],
 		"Desktop": [
-			"img-to-c",
 			"compile-cpp",
 			"compile-ld"
 		],
@@ -4912,6 +4910,21 @@
 			"sdcard": false
 		},
 		"\\game\\utilities\\ticker.h.VhgNvF": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.blOSrw": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.dmrwMa": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\weapons.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.hVeqGg": {
 			"sdcard": false
 		}
 	},

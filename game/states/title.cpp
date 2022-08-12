@@ -14,6 +14,7 @@
 #include "game/states/game.h"
 #include "game/utilities/helpers.h"
 #include "game/utilities/mapmanager.h"
+#include "game/player.h"
 
 Title::TitleState Title::s_state = Title::Select;
 
@@ -53,8 +54,14 @@ void Title::selectData() {
         Serialization::tryGet<GameStorage>(GameVariables::savefile, &dat);
         GameVariables::loadGame(dat);
         MapManager::loadMutables(GameVariables::savefile);
+        Player::loadData();
     } else {
         GameVariables::loadGame(GameStorage());
+        Soldier::health().setMax();
+        Jeep::health().set(0);
+        Boat::health().set(0);
+        Helicopter::health().set(0);
+        Soldier::setPosition({6 * 6, 14 * 6}); // tutorial island
     }
 
     goGame();

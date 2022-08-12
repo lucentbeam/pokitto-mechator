@@ -1,4 +1,11 @@
-- final boss
+- reduce footprint:
+  - (1.0k) helicopter blades / 2 animation
+  - (1.2k) enemy tank cannon?
+  - (1.5k) reduce boat size?
+  - (0.7k) pokitto logo -> RLE
+  - (0.5k) unity Weapon::checkFireWeapon
+  - (0.5k) cut up UI legend & procedurally generate
+  - (? 1k) look into unifying Soldier::update/Jeep::update etc.
 
 - update quest markers via sequences
 - unlock vehicle builds

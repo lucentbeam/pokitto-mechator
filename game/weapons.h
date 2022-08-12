@@ -63,6 +63,7 @@ public:
     static constexpr const int WeaponCount = 5;
 
     static std::string getName(Type t);
+    static WeaponConfig getConfig(Type t);
 
     static Type nextWeapon(Type t);
     static Type prevWeapon(Type t);

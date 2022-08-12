@@ -17,6 +17,7 @@ public:
     void increment() { change(1); }
     void decrement() { change(-1); }
 
+    void set(int8_t v) { m_current = std::clamp<int8_t>(v, 0, m_max); }
     void setMax() { m_current = m_max; }
 
     int8_t value() const { return m_current; }

@@ -59,9 +59,8 @@ const float heliSpeed = 55.0f;
 const float heliCornering = 0.05f;
 const float heliFriction = 0.08f;
 
-const int doors_count = 100;
-const int points_count = 100;
-const int specials_count = 100;
+const int doors_count = 25;
+const int specials_count = 320;
 
 const char * const bp_names[] = {
     "Jeep Schematics",

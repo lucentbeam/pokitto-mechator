@@ -155,6 +155,11 @@ int *GameVariables::acquiredSpecials()
     return s_data.acquired_specials;
 }
 
+GameStorage *GameVariables::getData()
+{
+    return &s_data;
+}
+
 void GameVariables::loadGame(GameStorage s)
 {
     s_data = s;

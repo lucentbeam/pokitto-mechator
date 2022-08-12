@@ -29,7 +29,7 @@ namespace Serialization {
         if (!file.openRW(fname, false, true)) {
             return false;
         }
-        file.write(data, sizeof(S));
+        file.write(data, sizeof(S) * count);
         return true;
     }
 

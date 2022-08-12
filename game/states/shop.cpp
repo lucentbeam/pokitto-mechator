@@ -9,6 +9,7 @@
 #include "core/audiosystem.h"
 #include "game/states/blueprints.h"
 #include "game/variables.h"
+#include "game/player.h"
 
 static UIElement title = UIElement::getExpander(55, 28, 70, 9, Tween::Easing::OutQuad);
 static UIOptions title_opts1(true, {"LEAVE", "SAVE", "REPAIR/BUILD"});
@@ -65,6 +66,7 @@ void updateShopState(FSM&)
             quitShopState();
             break;
         case 1:
+            Player::storeData();
             GameVariables::saveGame();
             MapManager::dumpMutables(GameVariables::savefile);
             quitShopState();
