@@ -29,6 +29,7 @@ class EventScene
     static void updateShowDialogue();
     static void updateWait();
     static void updateDoFunction();
+    static void updateSetQuest();
 
     static void goNext();
 
@@ -37,6 +38,7 @@ class EventScene
     static const SceneFunc * getFunc();
     static const SceneMoveCam * getMove();
     static const SceneDialogue * getDialogue();
+    static const SceneSetQuest * getSetQuest();
 public:
     static void startScene(const SceneSequence * sequence);
 

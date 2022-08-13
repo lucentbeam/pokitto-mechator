@@ -36,6 +36,8 @@ const SceneDialogue dlog4 = SceneDialogue("You can build your","own weapons...",
 const SceneDialogue dlog5 = SceneDialogue("...and infiltrate!",nullptr, SceneDialogue::Base, false);
 const SceneDialogue dlog6 = SceneDialogue("Good luck.        ", "Central out.", SceneDialogue::Base, true);
 
+const SceneSetQuest qintro = SceneSetQuest(QuestStatus::QuestIntro);
+
 const SceneSequence intro_scene[] = {
     {SceneSequence::DoFunction, &func0},
     {SceneSequence::DoFunction, &func1},
@@ -47,6 +49,7 @@ const SceneSequence intro_scene[] = {
     {SceneSequence::ShowDialogue, &dlog4 },
     {SceneSequence::ShowDialogue, &dlog5 },
     {SceneSequence::ShowDialogue, &dlog6 },
+    {SceneSequence::SetQuestStatus, &qintro},
     {SceneSequence::End, nullptr}
 };
 

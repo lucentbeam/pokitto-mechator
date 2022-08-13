@@ -7,6 +7,7 @@
 
 #include "game/states/game.h"
 #include "game/player.h"
+#include "game/variables.h"
 #include "game/maps/regiontransitionhandler.h"
 
 const SceneSequence * EventScene::s_active_sequence = nullptr;
@@ -55,6 +56,11 @@ void EventScene::updateDoFunction()
     }
 }
 
+void EventScene::updateSetQuest()
+{
+    goNext();
+}
+
 void EventScene::goNext()
 {
     s_counter++;
@@ -78,6 +84,9 @@ void EventScene::goNext()
         if (!s_data.dialogue_box.showing()) s_data.text_tween.reset(int32_t(uiEasingTimeMs + 50));
         else s_data.text_tween.reset(int32_t(150));
         break;
+    case SceneSequence::SetQuestStatus:
+        GameVariables::setQuestStatus(getSetQuest()->target);
+        break;
     case SceneSequence::End:
         FSM::instance->go(GameStates::Game);
         UI::showHealthbar();
@@ -94,6 +103,8 @@ const SceneMoveCam *EventScene::getMove() { return ((SceneMoveCam*)(active().dat
 
 const SceneDialogue *EventScene::getDialogue() { return ((SceneDialogue*)(active().data)); }
 
+const SceneSetQuest *EventScene::getSetQuest() { return ((SceneSetQuest*)(active().data)); }
+
 void EventScene::startScene(const SceneSequence *sequence)
 {
     s_active_sequence = sequence;
@@ -106,7 +117,7 @@ void EventScene::startScene(const SceneSequence *sequence)
 
 void EventScene::update(FSM &fsm)
 {
-    void(*fncs[])() = {updateMove, updateShowDialogue, updateWait, updateDoFunction };
+    void(*fncs[])() = {updateMove, updateShowDialogue, updateWait, updateDoFunction, updateSetQuest };
     fncs[int(s_active_sequence[s_counter].type)]();
 
     if (s_data.has_update_func) {
