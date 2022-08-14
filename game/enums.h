@@ -14,10 +14,13 @@ enum SequenceID : int {
     TutorialBoss = 1,
     TankBoss = 2,
     AcquireBoat = 3,
-    AcquireHelicopter = 4,
+    EnterHelicopter = 4,
     FinalBoss = 5,
+    ExitTutorial = 6,
+    EnterBoat = 7,
+    EnterTank = 8,
 
-    LastID = 6
+    LastID = 9
 };
 
 enum PlayerMode : uint8_t {

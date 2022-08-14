@@ -20,6 +20,40 @@ const SceneWait wait30 = SceneWait(asCounts(0.5f));
 
 extern Tween toLand;
 
+const SceneSetQuest qintro = SceneSetQuest(QuestStatus::QuestIntro);
+const SceneSetQuest qgettank = SceneSetQuest(QuestStatus::QuestTank);
+const SceneSetQuest qgetboat = SceneSetQuest(QuestStatus::QuestBoat);
+const SceneSetQuest qbuildboat = SceneSetQuest(QuestStatus::QuestBuildBoat);
+const SceneSetQuest qgetheli = SceneSetQuest(QuestStatus::QuestHeli);
+const SceneSetQuest qgoend = SceneSetQuest(QuestStatus::QuestFinal);
+
+// after leaving tutorial island; set get tank
+const SceneDialogue exit_tut[] = {
+    { "Good work.", nullptr, SceneDialogue::Base, false },
+    { "Now that you", "have the jeep,", SceneDialogue::Base, false },
+    { "head to the", "tank factory.", SceneDialogue::Base, false },
+    { "We've marked it", "on your map.", SceneDialogue::Base, false },
+    { "Central out.", nullptr, SceneDialogue::Base, true },
+};
+
+// first time entering a tank; set get boat
+const SceneDialogue got_tank[] = {
+    { "Excellent! You have", "the tank.", SceneDialogue::Base, false },
+    { "Next, you'll need", "to get a boat.", SceneDialogue::Base, false },
+    { "We have records", "of a boat factory", SceneDialogue::Base, false },
+    { "at Stormy Cape.", "Your map is", SceneDialogue::Base, false },
+    { "now updated.", "Good luck!", SceneDialogue::Base, true },
+};
+
+// first time entering a boat; set get heli
+const SceneDialogue got_boat[] = {
+    { "Nice going, soldier.", nullptr, SceneDialogue::Base, false },
+    { "The final blueprint", "is the Helicopter.", SceneDialogue::Base, false },
+    { "We've marked it", "on your map.", SceneDialogue::Base, false },
+    { "But you'll need", "keys from other", SceneDialogue::Base, false },
+    { "island bases around.", "Good luck.", SceneDialogue::Base, true },
+};
+
 const SceneFunc func0 = SceneFunc([](){ toLand.reset(); return true; });
 const SceneFunc func1 = SceneFunc([](){
     int x = toLand.getInterpolationInt(-20, playerStartTileX * 6 + 3);
@@ -35,8 +69,6 @@ const SceneDialogue dlog3 = SceneDialogue("Find their bases!       ","Hack and u
 const SceneDialogue dlog4 = SceneDialogue("You can build your","own weapons...", SceneDialogue::Base, false);
 const SceneDialogue dlog5 = SceneDialogue("...and infiltrate!",nullptr, SceneDialogue::Base, false);
 const SceneDialogue dlog6 = SceneDialogue("Good luck.        ", "Central out.", SceneDialogue::Base, true);
-
-const SceneSetQuest qintro = SceneSetQuest(QuestStatus::QuestIntro);
 
 const SceneSequence intro_scene[] = {
     {SceneSequence::DoFunction, &func0},
@@ -94,6 +126,36 @@ const SceneFunc tb_f0 = SceneFunc([](){
 });
 const SceneFunc cam_release = SceneFunc([](){ Camera::stopMovement(); return true; });
 const SceneMoveCam cam_return = SceneMoveCam(cameraCutsceneSpeed);
+
+const SceneSequence exit_tut_island[] = {
+    { SceneSequence::ShowDialogue, exit_tut },
+    { SceneSequence::ShowDialogue, exit_tut + 1 },
+    { SceneSequence::ShowDialogue, exit_tut + 2},
+    { SceneSequence::ShowDialogue, exit_tut + 3},
+    { SceneSequence::ShowDialogue, exit_tut + 4},
+    { SceneSequence::SetQuestStatus, &qgettank },
+    {SceneSequence::End, nullptr}
+};
+
+const SceneSequence acquiredtank_scene[] = {
+    { SceneSequence::ShowDialogue, got_tank },
+    { SceneSequence::ShowDialogue, got_tank + 1 },
+    { SceneSequence::ShowDialogue, got_tank + 2},
+    { SceneSequence::ShowDialogue, got_tank + 3},
+    { SceneSequence::ShowDialogue, got_tank + 4},
+    { SceneSequence::SetQuestStatus, &qgetboat },
+    {SceneSequence::End, nullptr}
+};
+
+const SceneSequence acquiredboat_scene[] = {
+    { SceneSequence::ShowDialogue, got_boat },
+    { SceneSequence::ShowDialogue, got_boat + 1 },
+    { SceneSequence::ShowDialogue, got_boat + 2},
+    { SceneSequence::ShowDialogue, got_boat + 3},
+    { SceneSequence::ShowDialogue, got_boat + 4},
+    { SceneSequence::SetQuestStatus, &qgetheli },
+    {SceneSequence::End, nullptr}
+};
 
 const SceneMoveCam tb_m0 = SceneMoveCam(cameraCutsceneSpeed, {65, 15});
 
@@ -213,6 +275,7 @@ const SceneSequence boatyard_scene[] = {
     {SceneSequence::ShowDialogue, &dlog6 },
 
     {SceneSequence::MoveCamera, &cam_return },
+    { SceneSequence::SetQuestStatus, &qbuildboat },
     {SceneSequence::End, &cam_release}
 };
 
@@ -221,12 +284,14 @@ const SceneDialogue ah_dlog1 = SceneDialogue("Good job getting", "the helicopter
 const SceneDialogue ah_dlog2 = SceneDialogue("I tagged the final", "target on your map.", SceneDialogue::Base, false);
 const SceneDialogue ah_dlog3 = SceneDialogue("Head over and", "finish them off.", SceneDialogue::Base, true);
 
+
 const SceneSequence acquiredheli_scene[] = {
     {SceneSequence::End, nullptr},
     {SceneSequence::ShowDialogue, &ah_dlog0 },
     {SceneSequence::ShowDialogue, &ah_dlog1 },
     {SceneSequence::ShowDialogue, &ah_dlog2 },
     {SceneSequence::ShowDialogue, &ah_dlog3 },
+    { SceneSequence::SetQuestStatus, &qgoend },
     {SceneSequence::End, nullptr}
 };
 

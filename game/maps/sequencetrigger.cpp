@@ -13,9 +13,12 @@ const SequenceTrigger SequenceTrigger::trigger_list[] = {
     {91,  134, 125, 152,  finalboss_scene,  SequenceID::FinalBoss},
     {106, 150, 126, 168,  finalboss_scene,  SequenceID::FinalBoss},
     {123, 156, 142, 178,  finalboss_scene,  SequenceID::FinalBoss},
+    {15, 21, 19, 23, exit_tut_island, SequenceID::ExitTutorial}
 };
 
-const SequenceTrigger helicopter_takeoff = SequenceTrigger(0, 0, 0, 0, acquiredheli_scene, SequenceID::AcquireHelicopter);
+const SequenceTrigger tank_enter = SequenceTrigger(0, 0, 0, 0, acquiredtank_scene, SequenceID::EnterTank);
+const SequenceTrigger boat_enter = SequenceTrigger(0, 0, 0, 0, acquiredboat_scene, SequenceID::EnterBoat);
+const SequenceTrigger helicopter_takeoff = SequenceTrigger(0, 0, 0, 0, acquiredheli_scene, SequenceID::EnterHelicopter);
 
 bool final_sequence_run = false;
 
@@ -27,6 +30,16 @@ bool SequenceTrigger::checkForTriggers()
             EventScene::startScene(st.linked_scene);
             return true;
         }
+    }
+    if (!GameVariables::eventVisited(tank_enter.id) && Player::mode() == PlayerMode::TankMode) {
+        GameVariables::visitEvent(tank_enter.id);
+        EventScene::startScene(tank_enter.linked_scene);
+        return true;
+    }
+    if (!GameVariables::eventVisited(boat_enter.id) && Player::mode() == PlayerMode::BoatMode) {
+        GameVariables::visitEvent(boat_enter.id);
+        EventScene::startScene(boat_enter.linked_scene);
+        return true;
     }
     if (!GameVariables::eventVisited(helicopter_takeoff.id) && Helicopter::active()) {
         GameVariables::visitEvent(helicopter_takeoff.id);
