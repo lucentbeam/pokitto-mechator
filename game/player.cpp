@@ -61,6 +61,8 @@ float Player::s_shot_cooldown = 0.0f;
 const uint8_t reticle[] = {5, 5, 9, 9, 0, 9, 9, 9, 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 0, 0, 9, 9, 9, 0, 9, 9 };
 const float reticleDistance = 18.0f;
 
+static int8_t no_heli_land = 0;
+
 void Soldier::update(float dt)
 {
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
@@ -234,6 +236,8 @@ void Helicopter::update(float dt)
 
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::AirTarget});
 
+    if (no_heli_land > 0) no_heli_land--;
+
     if (Player::s_mode != PlayerMode::HelicopterMode) {
         return;
     }
@@ -260,7 +264,16 @@ void Helicopter::update(float dt)
             EffectManager::createExplosionBig(position() - Vec2f(6,6));
         }
     }
-    if (controls.b.pressed()) { // TODO: check valid landing loc
+    if (controls.b.pressed()) {
+        for(int i = -1; i <= 1; i += 2) {
+            for(int j = -1; j <= 1; j+= 2) {
+                if (CollisionManager::collides(s_instance.m_steering.pos() + Vec2f(i * 3, j * 3), steering_soldier.collisions)) {
+                    AudioSystem::play(sfxDeny);
+                    no_heli_land = 30;
+                    return;
+                }
+            }
+        }
         s_instance.m_inAir = false;
     }
 }
@@ -276,7 +289,12 @@ void Helicopter::drawGround()
 void Helicopter::drawAir()
 {
     if (!alive() || s_instance.m_z < 0.01f) return;
-    Vec2f pos = Camera::worldToScreen(position());
+    Vec2f pos;
+    if (no_heli_land > 0 && (no_heli_land % 8) < 3) {
+        pos = Camera::worldToScreen(s_instance.m_steering.pos());
+        RenderSystem::drawRect(pos.x() - 3, pos.y() - 3, 8, 6, 16);
+    }
+    pos = Camera::worldToScreen(position());
     RenderSystem::drawShadow(pos.x() - 9, pos.y() - 9 + s_instance.m_z, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0.1f);
     if (s_instance.flashing()) {
         RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);

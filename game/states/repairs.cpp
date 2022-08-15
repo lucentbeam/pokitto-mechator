@@ -37,7 +37,7 @@ void showRepairs()
     repair_opts.reset();
 
     // TODO: make availability also depend on if POI/shop locations exist (e.g., no heli-pad, no helicopter option)
-    available_vehicles = 0;
+    available_vehicles = 4;
     available_vehicles += Jeep::available() ? 1 : 0;
     available_vehicles += Tank::available() ? 1 : 0;
     available_vehicles += Boat::available() ? 1 : 0;
