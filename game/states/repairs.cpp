@@ -38,10 +38,10 @@ void showRepairs()
 
     // TODO: make availability also depend on if POI/shop locations exist (e.g., no heli-pad, no helicopter option)
     available_vehicles = 0;
-    available_vehicles += Jeep::available() ? 4 : 0;
-//    available_vehicles += Player::available(PlayerMode::Tank) ? 1 : 0;
-//    available_vehicles += Player::available(PlayerMode::Boat) ? 1 : 0;
-//    available_vehicles += Player::available(PlayerMode::Helicopter) ? 1 : 0;
+    available_vehicles += Jeep::available() ? 1 : 0;
+    available_vehicles += Tank::available() ? 1 : 0;
+    available_vehicles += Boat::available() ? 1 : 0;
+    available_vehicles += Helicopter::available() ? 1 : 0;
 
     repair_opts.setAvailableCount(2 + available_vehicles);
     cost_prompt.setVisibility(false);
@@ -180,7 +180,7 @@ void drawRepairsState()
             repair_opts.foreach([&](uint8_t idx, bool active, const char * text) {
                 std::string line = text;
                 if (idx > 1) {
-//                    line += !Player::alive(PlayerMode(idx-1)) ? " (BUILD)" : " (REPAIR)";
+                    line += !Player::alive(PlayerMode(idx-1)) ? " (BUILD)" : " (REPAIR)";
                 }
                 Helpers::drawNotchedRect(x + 9, y + 10 + idx * 8, w - 9, 7, 0);
                 RenderSystem::sprite(x, y + 10 + idx * 8, poi[active ? 1 : 0]);

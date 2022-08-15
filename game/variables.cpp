@@ -7,23 +7,6 @@ bool GameVariables::gameWon = false;
 
 GameStorage GameVariables::s_data;
 
-//DoorStatus GameStorage::s_door_states[door_count] = {
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//    Hidden,
-//};
-
-//int GameStorage::s_activated_doors[point_count] = {0};
-
 char GameVariables::savefile[30] = "/data/mechator/save1.dat";
 
 void GameVariables::changeDollars(int16_t delta)

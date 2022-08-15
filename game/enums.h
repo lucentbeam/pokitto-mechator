@@ -91,7 +91,7 @@ enum RegionNames : uint8_t {
     RegionEnemyFactory,
 };
 
-enum Blueprints {
+enum Blueprints : uint8_t {
     JeepBP              = 0,
     TankBP              = 1,
     BoatBP              = 2,

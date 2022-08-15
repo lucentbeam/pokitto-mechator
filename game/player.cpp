@@ -30,10 +30,11 @@ Vehicle::Vehicle(int8_t hp, float x, float y, const SteeringConfig * config) :
 }
 
 Soldier Soldier::s_instance;
-int Soldier::s_owned_weapons = Weapon::Gun | Weapon::DualShot | Weapon::Missiles;
 #ifdef DEBUGS
+int Soldier::s_owned_weapons = Weapon::Gun | Weapon::DualShot | Weapon::Missiles;
 Weapon::Type Soldier::s_current_weapon = Weapon::MultiMissiles;
 #else
+int Soldier::s_owned_weapons = Weapon::Gun;
 Weapon::Type Soldier::s_current_weapon = Weapon::Gun;
 #endif
 
@@ -52,14 +53,6 @@ Weapon::Type Boat::s_current_weapon = Weapon::MachineGun;
 Helicopter Helicopter::s_instance;
 int Helicopter::s_owned_weapons = Weapon::MachineGun | Weapon::Missiles;
 Weapon::Type Helicopter::s_current_weapon = Weapon::MachineGun;
-
-bool Jeep::s_available = true;
-
-bool Helicopter::s_available = true;
-
-bool Tank::s_available = true;
-
-bool Boat::s_available = true;
 
 PlayerMode Player::s_mode = PlayerMode::SoldierMode;
 
@@ -422,6 +415,21 @@ void Boat::draw()
 bool Player::hurting()
 {
     return Soldier::s_instance.flashing() || Helicopter::s_instance.flashing() || Jeep::s_instance.flashing() || Tank::s_instance.flashing() || Boat::s_instance.flashing();
+}
+
+bool Player::alive(PlayerMode m)
+{
+    switch(m) {
+    case JeepMode:
+        return Jeep::alive();
+    case TankMode:
+        return Tank::alive();
+    case BoatMode:
+        return Boat::alive();
+    case HelicopterMode:
+        return Helicopter::alive();
+    }
+    return true;
 }
 
 Vec2f Player::position()

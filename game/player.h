@@ -20,6 +20,7 @@
 #include "game/constants.h"
 
 #include "game/weapons.h"
+#include "game/variables.h"
 
 const SteeringConfig steering_soldier(soldierSpeed, 1.0,
        (1 << Terrain::Wall) | (1 << Terrain::WaterDeep) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
@@ -108,8 +109,6 @@ public:
 class Jeep : public Vehicle {
     static Jeep s_instance;
 
-    static bool s_available;
-
     static constexpr const int s_possible_weapons = Weapon::DualShot | Weapon::MachineGun | Weapon::Grenade;
     static int s_owned_weapons;
     static Weapon::Type s_current_weapon;
@@ -123,7 +122,7 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return s_available; }
+    static bool available() { return GameVariables::hasBlueprint(JeepBP); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
@@ -133,8 +132,6 @@ public:
 
 class Tank : public Vehicle {
     static Tank s_instance;
-
-    static bool s_available;
 
     static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::Missiles;
     static int s_owned_weapons;
@@ -149,7 +146,7 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return s_available; }
+    static bool available() { return GameVariables::hasBlueprint(TankBP); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
@@ -158,8 +155,6 @@ public:
 
 class Boat : public Vehicle {
     static Boat s_instance;
-
-    static bool s_available;
 
     static constexpr const int s_possible_weapons = Weapon::MachineGun;
     static int s_owned_weapons;
@@ -174,7 +169,7 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return s_available; }
+    static bool available() { return GameVariables::hasBlueprint(BoatBP); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
@@ -183,8 +178,6 @@ public:
 
 class Helicopter : public Vehicle {
     static Helicopter s_instance;
-
-    static bool s_available;
 
     bool m_inAir = false;
 
@@ -203,7 +196,7 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos() + Vec2f(0, -s_instance.m_z); }
     static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return s_available; }
+    static bool available() { return GameVariables::hasBlueprint(HeliBP); }
     static void launch() { s_instance.m_inAir = true; }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
@@ -231,6 +224,8 @@ public:
     static bool canGetPickups() { return s_mode != PlayerMode::HelicopterMode; }
 
     static bool hurting();
+
+    static bool alive(PlayerMode m);
 
     static Vec2f position();
     static Rect bounds();
