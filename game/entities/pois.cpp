@@ -161,3 +161,22 @@ Vec2f POIs::pos(PlayerMode mode)
         return s_current_active_poi->m_heli_loc + Vec2f(3, 3);
     }
 }
+
+bool POIs::canBuild(PlayerMode mode)
+{
+    if (s_current_active_poi == nullptr) {
+        return false;
+    }
+    switch (mode) {
+    default:
+        return s_current_active_poi->m_position.length() > 0;
+    case PlayerMode::JeepMode:
+        return s_current_active_poi->m_jeep_loc.length() > 0;
+    case PlayerMode::TankMode:
+        return s_current_active_poi->m_jeep_loc.length() > 0;
+    case PlayerMode::BoatMode:
+        return s_current_active_poi->m_boat_loc.length() > 0;
+    case PlayerMode::HelicopterMode:
+        return s_current_active_poi->m_heli_loc.length() > 0;
+    }
+}

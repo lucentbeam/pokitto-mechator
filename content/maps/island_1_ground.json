@@ -152,15 +152,15 @@
                  "y":30.7813
                 }, 
                 {
-                 "height":21.1647454545455,
+                 "height":21.1647,
                  "id":12,
                  "name":"enemy_watermine",
                  "rotation":0,
                  "type":"",
                  "visible":true,
-                 "width":36.8124727272727,
-                 "x":81.5028545454546,
-                 "y":79.5085363636364
+                 "width":36.8125,
+                 "x":81.5029,
+                 "y":79.5085
                 }, 
                 {
                  "height":21.1647,
@@ -170,8 +170,19 @@
                  "type":"",
                  "visible":true,
                  "width":36.8125,
-                 "x":86.8664772727273,
-                 "y":103.41765
+                 "x":86.8665,
+                 "y":103.418
+                }, 
+                {
+                 "height":3.4375,
+                 "id":14,
+                 "name":"hackingkit",
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":4,
+                 "x":48.8835227272727,
+                 "y":25.3096590909091
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -180,7 +191,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":14,
+ "nextobjectid":15,
  "orientation":"orthogonal",
  "renderorder":"left-down",
  "tiledversion":"1.2.5",

@@ -20,7 +20,16 @@ static UIElement title = UIElement::getExpander(55, 35, 76, 9, Tween::Easing::Ou
 static UIOptions repair_opts(true, {"BACK", "SOLDIER (REST)", "JEEP", "TANK", "BOAT", "HELI"});
 static uint8_t current_cost = 0;
 static UIElement cost_prompt(47,78,38,9,66,82,0,0,Tween::Easing::OutQuad);
-static uint8_t available_vehicles = 0;
+
+static PlayerMode vehicles_avail[4] = { SoldierMode, SoldierMode, SoldierMode, SoldierMode };
+
+int availableVehicleCount() {
+    int ct = 0;
+    for(int i = 0; i < 4; ++i) {
+        if (vehicles_avail[i] != SoldierMode) ct++;
+    }
+    return ct;
+}
 
 void showRepairs()
 {
@@ -36,14 +45,30 @@ void showRepairs()
     title.setVisibility(true, uint32_t(50));
     repair_opts.reset();
 
-    // TODO: make availability also depend on if POI/shop locations exist (e.g., no heli-pad, no helicopter option)
-    available_vehicles = 4;
-    available_vehicles += Jeep::available() ? 1 : 0;
-    available_vehicles += Tank::available() ? 1 : 0;
-    available_vehicles += Boat::available() ? 1 : 0;
-    available_vehicles += Helicopter::available() ? 1 : 0;
+    int counter = 0;
+    while (counter < 4) {
+        vehicles_avail[counter] = SoldierMode;
+        counter++;
+    }
+    counter = 0;
+    if (POIs::canBuild(JeepMode) && Jeep::available()) {
+        vehicles_avail[counter] = JeepMode;
+        counter++;
+    }
+    if (POIs::canBuild(TankMode) && Tank::available()) {
+        vehicles_avail[counter] = TankMode;
+        counter++;
+    }
+    if (POIs::canBuild(BoatMode) && Boat::available()) {
+        vehicles_avail[counter] = BoatMode;
+        counter++;
+    }
+    if (POIs::canBuild(HelicopterMode) && Helicopter::available()) {
+        vehicles_avail[counter] = HelicopterMode;
+        counter++;
+    }
 
-    repair_opts.setAvailableCount(2 + available_vehicles);
+    repair_opts.setAvailableCount(2 + availableVehicleCount());
     cost_prompt.setVisibility(false);
     current_cost = 0;
 }
@@ -64,13 +89,12 @@ void updateRepairsState(FSM &fsm)
         if (idx == 0) {
             UI::hideHealthbar();
             current_cost = 0;
+        } else if (idx == 1) {
+            UI::showHealthbar(SoldierMode);
+            current_cost = Soldier::damaged() ? soldierRepairCost : 0;
         } else {
-            PlayerMode mode = PlayerMode(idx-1);
+            PlayerMode mode = vehicles_avail[idx - 2];
             switch (mode) {
-            case SoldierMode:
-                UI::showHealthbar(mode);
-                current_cost = Soldier::damaged() ? soldierRepairCost : 0;
-                break;
             case JeepMode:
                 if (Jeep::alive()) {
                     UI::showHealthbar(mode);
@@ -118,53 +142,48 @@ void updateRepairsState(FSM &fsm)
     }
     if (status.a.pressed() && GameVariables::dollars() >= current_cost) {
         AudioSystem::play(sfxConfirm);
-        switch(repair_opts.activeIndex()) {
-        case 0:
+        if (repair_opts.activeIndex() == 0) {
             goBack();
-            break;
-        case 1:
+        } else if (repair_opts.activeIndex() == 1) {
             Soldier::health().setMax();
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;
-            break;
-        case 2:
-            if (!Jeep::alive()) {
-                Jeep::setPosition(POIs::pos(PlayerMode::JeepMode));
-                UI::showHealthbar(PlayerMode::JeepMode);
+        } else {
+            PlayerMode mode = vehicles_avail[repair_opts.activeIndex() - 2];
+            switch(mode) {
+            case JeepMode:
+                if (!Jeep::alive()) {
+                    Jeep::setPosition(POIs::pos(PlayerMode::JeepMode));
+                    UI::showHealthbar(PlayerMode::JeepMode);
+                }
+                Jeep::health().setMax();
+                break;
+            case TankMode:
+                if (!Tank::alive()) {
+                    Tank::setPosition(POIs::pos(PlayerMode::TankMode));
+                    UI::showHealthbar(PlayerMode::TankMode);
+                }
+                Tank::health().setMax();
+                break;
+            case BoatMode:
+                if (!Boat::alive()) {
+                    Boat::setPosition(POIs::pos(PlayerMode::BoatMode));
+                    UI::showHealthbar(PlayerMode::BoatMode);
+                }
+                Boat::health().setMax();
+                break;
+            case HelicopterMode:
+                if (!Helicopter::alive()) {
+                    Helicopter::setPosition(POIs::pos(PlayerMode::HelicopterMode));
+                    UI::showHealthbar(PlayerMode::HelicopterMode);
+                }
+                Helicopter::health().setMax();
+                break;
+            default:
+                break;
             }
-            Jeep::health().setMax();
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;
-            break;
-        case 3:
-            if (!Tank::alive()) {
-                Tank::setPosition(POIs::pos(PlayerMode::TankMode));
-                UI::showHealthbar(PlayerMode::TankMode);
-            }
-            Tank::health().setMax();
-            GameVariables::changeDollars(-current_cost);
-            current_cost = 0;
-            break;
-        case 4:
-            if (!Boat::alive()) {
-                Boat::setPosition(POIs::pos(PlayerMode::BoatMode));
-                UI::showHealthbar(PlayerMode::BoatMode);
-            }
-            Boat::health().setMax();
-            GameVariables::changeDollars(-current_cost);
-            current_cost = 0;
-            break;
-        case 5:
-            if (!Helicopter::alive()) {
-                Helicopter::setPosition(POIs::pos(PlayerMode::HelicopterMode));
-                UI::showHealthbar(PlayerMode::HelicopterMode);
-            }
-            Helicopter::health().setMax();
-            GameVariables::changeDollars(-current_cost);
-            current_cost = 0;
-            break;
-        default:
-            break;
         }
     } else if (status.b.pressed()) {
         goBack();
@@ -180,14 +199,14 @@ void drawRepairsState()
             repair_opts.foreach([&](uint8_t idx, bool active, const char * text) {
                 std::string line = text;
                 if (idx > 1) {
-                    line += !Player::alive(PlayerMode(idx-1)) ? " (BUILD)" : " (REPAIR)";
+                    line += !Player::alive(PlayerMode(idx-1)) ? " [BUILD]" : " [REPAIR]";
                 }
                 Helpers::drawNotchedRect(x + 9, y + 10 + idx * 8, w - 9, 7, 0);
                 RenderSystem::sprite(x, y + 10 + idx * 8, poi[active ? 1 : 0]);
                 RenderSystem::print(x + 12, y + 10 + idx * 8, line.c_str(), active ? 10 : 6);
             });
         }
-    }, 0, available_vehicles * -4); // scale with unlock level
+    }, 0, availableVehicleCount() * -4); // scale with unlock level
     cost_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
             std::string line = "COST: " + std::to_string(current_cost);

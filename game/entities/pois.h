@@ -46,6 +46,8 @@ public:
     static void setShopsDisabled(bool disable) { s_disable_shops = disable; }
 
     static Vec2f pos(PlayerMode mode = PlayerMode::SoldierMode);
+
+    static bool canBuild(PlayerMode mode);
 };
 
 template <int x1, int y1, int x2, int y2, int x3, int y3>

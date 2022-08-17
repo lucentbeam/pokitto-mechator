@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="37" height="42" tilewidth="6" tileheight="6" infinite="0" nextlayerid="4" nextobjectid="23">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="37" height="42" tilewidth="6" tileheight="6" infinite="0" nextlayerid="4" nextobjectid="24">
  <tileset firstgid="1" source="mechator_tiles.tsx"/>
  <layer id="1" name="world" width="37" height="42">
   <data encoding="csv">
@@ -116,5 +116,6 @@
   <object id="20" name="enemy_watermine" x="182.457" y="122.145" width="26.0852" height="13.7102"/>
   <object id="21" name="enemy_watermine" x="13.7074" y="74.8949" width="26.0852" height="13.7102"/>
   <object id="22" name="enemy_watermine" x="140.139" y="85.7813" width="25.7216" height="49.7102"/>
+  <object id="23" name="hackingkit" x="127.273" y="55.3722" width="4" height="3.4375"/>
  </objectgroup>
 </map>
