@@ -18,6 +18,7 @@
 #include "game/states/mapviewer.h"
 #include "game/states/gamewon.h"
 #include "game/states/title.h"
+#include "game/states/gameover.h"
 
 #include "game/variables.h"
 
@@ -71,6 +72,7 @@ int main ()
     fsm.add(GameStates::EventState, EventScene::update, EventScene::draw);
     fsm.add(GameStates::MapState, MapViewer::update, MapViewer::draw, MapViewer::go);
     fsm.add(GameStates::GameWonState, updateGameWonState, drawGameWonState, goGameWonState);
+    fsm.add(GameStates::GameOverState, GameOver::update, GameOver::draw, GameOver::go);
 
     int32_t gameTime = 0;
     uint32_t lastGameTime = RenderSystem::getTimeMs();

@@ -6,7 +6,7 @@
 #include "core/utilities/babyfsm.h"
 #include "core//rendersystem.h"
 
-void goGame();
+void goGame(bool from_title = false);
 
 void updateGameState(FSM &fsm);
 

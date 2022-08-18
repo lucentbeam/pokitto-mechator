@@ -87,6 +87,7 @@ public:
     static void hideHealthbar();
 
     static void showBoss(int8_t * life_ref);
+    static void clearBoss();
 
     static void update(float dt);
     static void draw();

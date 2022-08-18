@@ -341,6 +341,12 @@ void UI::showBoss(int8_t *life_ref)
     m_max_boss_life = *m_boss_life;
 }
 
+void UI::clearBoss()
+{
+    m_boss_life = 0;
+    m_max_boss_life = 0;
+}
+
 void UI::update(float dt)
 {
     kitcount.update(dt);

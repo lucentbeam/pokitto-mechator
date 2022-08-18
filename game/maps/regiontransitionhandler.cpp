@@ -157,3 +157,12 @@ void RegionTransitionHandler::update()
         }
     }
 }
+
+void RegionTransitionHandler::clear()
+{
+    s_state = State();
+    updateOverworld();
+    updateBoss();
+    updateFinalBoss();
+    updatePeninsula();
+}

@@ -226,6 +226,7 @@ public:
     static bool hurting();
 
     static bool alive(PlayerMode m);
+    static bool dead();
 
     static Vec2f position();
     static Rect bounds();

@@ -84,6 +84,8 @@ public:
     static void update(float dt);
     static void draw();
     static void drawAir();
+
+    static void clearAll();
 };
 
 

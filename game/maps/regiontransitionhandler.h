@@ -35,6 +35,8 @@ public:
     static void update();
 
     static bool atBoss() { return s_state.in_boss; }
+
+    static void clear();
 };
 
 #endif // REGIONTRANSITIONHANDLER_H

@@ -64,7 +64,7 @@ void Title::selectData() {
         Soldier::setPosition({6 * 6, 14 * 6}); // tutorial island
     }
 
-    goGame();
+    goGame(true);
 }
 
 void Title::renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highlight)

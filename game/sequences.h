@@ -89,6 +89,7 @@ const SceneFunc tb_f0 = SceneFunc([](){
     EnemyHelicopter * h = Enemy::createHelicopter({80 * 6, 14 * 6});
     EventScene::setTextSpeed(baseTextSpeedLPS / 2.0f);
     h->setMaxLife(18);
+    RegionTransitionHandler::goBoss();
     UI::showBoss(h->getLifePtr());
     // set door behind player (218) on (51,19) through (51, 22)
     MapManager::setTileAt(51 * 6 + 3, 19 * 6 + 3, 218);
@@ -107,6 +108,7 @@ const SceneFunc tb_f0 = SceneFunc([](){
 
     registerCallback({h->getLifePtr(), b1->getLifePtr(), b2->getLifePtr()}, [](){
         // release door as grass (86)
+        RegionTransitionHandler::leaveBoss();
         MapManager::setTileAt(51 * 6 + 3, 19 * 6 + 3, 86);
         MapManager::setTileAt(51 * 6 + 3, 20 * 6 + 3, 86);
         MapManager::setTileAt(51 * 6 + 3, 21 * 6 + 3, 86);
@@ -199,6 +201,7 @@ const SceneFunc tt_f0 = SceneFunc([](){
     Barracks::getBarracksAt({25, 99})->disablePathfindingChecks();
     Barracks::getBarracksAt({30, 99})->disablePathfindingChecks();
 
+    RegionTransitionHandler::goBoss(false);
     UI::showBoss(Barracks::getBarracksAt({27, 99})->getLifePtr());
     EnemyTurret * t1 = Enemy::getTurretAt({19, 94}); t1->setDisabled(false); t1->disableOutOfRangeChecks();
     EnemyTurret * t2 = Enemy::getTurretAt({19, 105}); t2->setDisabled(false); t2->disableOutOfRangeChecks();
@@ -217,6 +220,7 @@ const SceneFunc tt_f0 = SceneFunc([](){
 
     registerCallback({t1->getLifePtr(), t2->getLifePtr(), t3->getLifePtr(), t4->getLifePtr(), Barracks::getBarracksAt({27, 99})->getLifePtr(), Barracks::getBarracksAt({25, 99})->getLifePtr(), Barracks::getBarracksAt({30, 99})->getLifePtr()}, [](){
         POIs::setShopsDisabled(false);
+        RegionTransitionHandler::leaveBoss();
         MapManager::setTileAt(16 * 6 + 3, 100 * 6 + 3, 184);
         MapManager::setTileAt(16 * 6 + 3, 101 * 6 + 3, 184);
         MapManager::setTileAt(16 * 6 + 3, 102 * 6 + 3, 184);
@@ -351,6 +355,7 @@ const SceneFunc fb_triggers = SceneFunc([](){
     static int8_t life = 27;
     static int8_t lifes[4] = {27, 27, 27, 27};
     UI::showBoss(&life);
+    RegionTransitionHandler::goBoss(true);
     registerUpdateCallback([&](){
         static int timer = 20;
         timer--;
@@ -365,6 +370,7 @@ const SceneFunc fb_triggers = SceneFunc([](){
         updateBossBarracks(132, 170, lifes+3);
         life = (lifes[0] + lifes[1] + lifes[2] + lifes[3]) / 4;        
         if (life <= 81) {
+            RegionTransitionHandler::leaveBoss();
             GameVariables::setGameWon();
         }
         return life <= 81;

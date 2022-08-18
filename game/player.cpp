@@ -450,6 +450,11 @@ bool Player::alive(PlayerMode m)
     return true;
 }
 
+bool Player::dead()
+{
+    return Soldier::health().value() <= 0;
+}
+
 Vec2f Player::position()
 {
     switch (s_mode) {

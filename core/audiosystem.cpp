@@ -232,7 +232,7 @@ void AudioSystem::initialize() {
         input.close();
     }
 
-    std::string musics[] = {"storm", "overworld", "boss"};
+    std::string musics[] = {"storm", "overworld", "overworld_main", "boss"};
     for(int i = 0; i < song_count; ++i) {
         music[i].open(path + musics[i] + ".raw");
     }
@@ -368,6 +368,9 @@ void AudioSystem::playSong(Song song) {
         break;
     case musOverworld:
         Audio::play<0>("data/mechator/overworld.raw");
+        break;
+    case musOverworldMain:
+        Audio::play<0>("data/mechator/overworld_main.raw");
         break;
     case musBoss:
         Audio::play<0>("data/mechator/boss.raw");

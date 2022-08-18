@@ -386,3 +386,15 @@ void Enemy::drawAir()
         (starth + i)->drawAir();
     }
 }
+
+void Enemy::clearAll()
+{
+    s_mechs.clear();
+    s_tanks.clear();
+    s_turrets.clear();
+    s_bombers.clear();
+    s_helis.clear();
+    s_lasers.clear();
+    s_mines.clear();
+    s_watermines.clear();
+}

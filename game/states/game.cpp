@@ -44,13 +44,23 @@ static int watchcount = 0;
 static bool has_update_callback = false;
 static std::function<bool()> update_callback;
 
-void goGame()
+void goGame(bool from_title)
 {
+    if (from_title) {
+        Enemy::clearAll();
+        Barracks::clear();
+    }
+
     FSM::instance->go(GameStates::Game);
 
     SpawnPoint::setActiveRegion();
     Camera::update(player.position().x(), player.position().y());
     SpawnPoint::setActiveRegion();
+    if (from_title) {
+        RegionTransitionHandler::clear();
+        has_update_callback = false;
+        UI::clearBoss();
+    }
 
     UI::showHealthbar();
     UI::setVisibility(UI::Element::UIKeyACount, false);
@@ -80,6 +90,10 @@ void updateRegionIndicator() {
 }
 
 void updateGameState(FSM& fsm) {
+    if (Player::dead()) {
+        fsm.go(GameOverState);
+        return;
+    }
 
 #ifdef DEBUGS
     static int counter = 60;

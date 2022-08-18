@@ -62,6 +62,8 @@ public:
 
     static bool isDestroyed(int lx, int ly);
     static Barracks * getBarracksAt(Vec2i loc);
+
+    static void clear() { s_barracks.clear(); }
 };
 
 template <int l, int t, int w, int h>
