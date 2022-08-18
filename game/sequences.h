@@ -129,7 +129,13 @@ const SceneFunc tb_f0 = SceneFunc([](){
 const SceneFunc cam_release = SceneFunc([](){ Camera::stopMovement(); return true; });
 const SceneMoveCam cam_return = SceneMoveCam(cameraCutsceneSpeed);
 
+const SceneFunc exit_tut_start = SceneFunc([]{
+    RegionTransitionHandler::clear();
+    return true;
+});
+
 const SceneSequence exit_tut_island[] = {
+    { SceneSequence::DoFunction, &exit_tut_start },
     { SceneSequence::ShowDialogue, exit_tut },
     { SceneSequence::ShowDialogue, exit_tut + 1 },
     { SceneSequence::ShowDialogue, exit_tut + 2},

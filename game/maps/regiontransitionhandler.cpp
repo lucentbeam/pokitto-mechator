@@ -7,6 +7,7 @@
 
 #include "game/utilities/blinker.h"
 #include "game/alertpalettes.h"
+#include "game/maps/sequencetrigger.h"
 
 const int transitionTime = 25;
 
@@ -29,7 +30,7 @@ void RegionTransitionHandler::updateOverworld()
     static bool was_active = false;
     active = s_state.transition_trackers[int(Overworld)] > 0;
     if (active && !was_active) {
-        AudioSystem::playSong(musOverworld);
+        AudioSystem::playSong(SequenceTrigger::tutorialComplete() ? musOverworldMain : musOverworld);
     }
     was_active = active;
 }
@@ -108,8 +109,7 @@ void RegionTransitionHandler::goBoss(bool final)
 
 void RegionTransitionHandler::leaveBoss()
 {
-    s_state.in_boss = false;
-    s_state.status = s_state.previous;
+    clear();
 }
 
 void RegionTransitionHandler::update()

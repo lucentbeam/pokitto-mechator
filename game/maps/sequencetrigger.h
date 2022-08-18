@@ -15,6 +15,7 @@ struct SequenceTrigger : public Rect
 
     static bool checkFinalSequence();
 
+    static bool tutorialComplete();
 private:
     static const SequenceTrigger trigger_list[];
 };

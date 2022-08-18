@@ -370,14 +370,24 @@ struct SDLSystem {
     Uint32 colors[256] = { 0 };
 
     bool running = false;
+    bool in_fs = false;
+    bool swap_fs = false;
 
     void create() {
         SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO | SDL_INIT_JOYSTICK);
+#ifdef DEBUGS
         window = SDL_CreateWindow("Infiltrator! Rise of the Mechator", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 110 * screen_scale, 88 * screen_scale, SDL_WINDOW_RESIZABLE);
+#else
+        window = SDL_CreateWindow("Infiltrator! Rise of the Mechator", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 110 * screen_scale, 88 * screen_scale, SDL_WINDOW_RESIZABLE);
+
+#endif
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
         screen = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 110, 88);
         running = true;
-
+#ifndef DEBUGS
+        in_fs = true;
+        SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+#endif
         for (size_t i = 0; i < 130; ++i) {
             uint16_t color = default_palette[i];
             uint8_t r = (color & 0b1111100000000000) >> 11;
@@ -438,6 +448,18 @@ bool RenderSystem::update() {
                 SDL_DestroyRenderer(sdlSys.renderer);
                 SDL_Quit();
         }
+
+    }
+
+    const uint8_t * state = SDL_GetKeyboardState(NULL);
+    if ((state[SDL_SCANCODE_LALT] || state[SDL_SCANCODE_RALT]) && (state[SDL_SCANCODE_RETURN])) {
+        if (!sdlSys.swap_fs) {
+        sdlSys.in_fs = !sdlSys.in_fs;
+        SDL_SetWindowFullscreen(sdlSys.window, sdlSys.in_fs ? SDL_WINDOW_FULLSCREEN_DESKTOP : 0);
+            sdlSys.swap_fs = true;
+        }
+    } else {
+        sdlSys.swap_fs = false;
     }
     return true;
 }

@@ -56,3 +56,8 @@ bool SequenceTrigger::checkFinalSequence()
     EventScene::startScene(win_scene);
     return false;
 }
+
+bool SequenceTrigger::tutorialComplete()
+{
+    return GameVariables::eventVisited((trigger_list + 7)->id);
+}
