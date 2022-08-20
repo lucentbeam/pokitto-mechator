@@ -23,7 +23,7 @@ class Title
     static void previousData();
     static void selectData();
 
-    static void renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highlight);
+    static void renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highlight, int idx);
     static void drawDataScreen();
 public:
     static void go();

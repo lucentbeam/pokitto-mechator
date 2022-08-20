@@ -44,12 +44,16 @@ void Title::selectData() {
     AudioSystem::play(sfxConfirm);
 
 #ifdef DESKTOP_BUILD
+#ifdef DEBUGS
     sprintf(GameVariables::savefile, "../data/mechator/save%d.dat", select_index + 1);
+#else
+    sprintf(GameVariables::savefile, "data/mechator/save%d.dat", select_index + 1);
+#endif
 #else
     sprintf(GameVariables::savefile, "/data/mechator/save%d.dat", select_index + 1);
 #endif
 
-    if (s_state == DataSelect) {
+    if (s_state == DataSelect && game_datas[select_index].elapsedMilliseconds > 5000) {
         GameStorage dat;
         Serialization::tryGet<GameStorage>(GameVariables::savefile, &dat);
         GameVariables::loadGame(dat);
@@ -67,7 +71,7 @@ void Title::selectData() {
     goGame(true);
 }
 
-void Title::renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highlight)
+void Title::renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highlight, int idx)
 {
     int col = highlight ? 10 : 8;
     if (s.elapsedMilliseconds < 5000) {
@@ -79,12 +83,12 @@ void Title::renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highligh
     int min = (time - hou * 3600) / 60.0f;
     int sec = time - hou * 3600 - min * 60;
 
-    int p = s.percentageComplete();
+    int p = idx;//s.percentageComplete();
     if (p < 0) p = 0;
     if (p > 100) p = 100;
 
     char buf[12];
-    sprintf(buf, "%01.d%%", p);
+    sprintf(buf, "FILE %d", p);
     int len = RenderSystem::getLineLength(buf);
     RenderSystem::print(x + 20 - len/2, y, buf, col);
 
@@ -106,9 +110,15 @@ void Title::go()
     s_state = Select;
 
 #ifdef DESKTOP_BUILD
+#ifdef DEBUGS
     Serialization::tryGet<GameStorageHeader>("../data/mechator/save1.dat", game_datas);
     Serialization::tryGet<GameStorageHeader>("../data/mechator/save2.dat", game_datas + 1);
     Serialization::tryGet<GameStorageHeader>("../data/mechator/save3.dat", game_datas + 2);
+#else
+    Serialization::tryGet<GameStorageHeader>("data/mechator/save1.dat", game_datas);
+    Serialization::tryGet<GameStorageHeader>("data/mechator/save2.dat", game_datas + 1);
+    Serialization::tryGet<GameStorageHeader>("data/mechator/save3.dat", game_datas + 2);
+#endif
 #else
     Serialization::tryGet<GameStorageHeader>("data/mechator/save1.dat", game_datas);
     Serialization::tryGet<GameStorageHeader>("data/mechator/save2.dat", game_datas + 1);
@@ -168,9 +178,9 @@ void Title::drawDataScreen()
     if (s_state == DataSelect) RenderSystem::print(x + 16, y + 2, "- LOAD GAME -", 9);
     else RenderSystem::print(x + 14, y + 2, "- OVERWRITE -", 9);
 
-    renderSaveDataInfo(55, y + 16, game_datas[0], select_index == 0);
-    renderSaveDataInfo(55, y + 28, game_datas[1], select_index == 1);
-    renderSaveDataInfo(55, y + 40, game_datas[2], select_index == 2);
+    renderSaveDataInfo(55, y + 16, game_datas[0], select_index == 0,1);
+    renderSaveDataInfo(55, y + 28, game_datas[1], select_index == 1,2);
+    renderSaveDataInfo(55, y + 40, game_datas[2], select_index == 2,3);
     RenderSystem::sprite(x + 2, y + 17 + 12 * select_index, ui_arrow_left, 0, true);
 }
 
@@ -186,7 +196,8 @@ void Title::draw()
         start += spacing;
     }
 
-    RenderSystem::print(93, 80, "v0.8", 6);
+//    RenderSystem::print(93, 80, "v0.8", 6);
+    RenderSystem::print(6, 22, "(early access)", 6);
     Helpers::drawRLE(6, 6, title_text);
 
     if (s_state != Select) {

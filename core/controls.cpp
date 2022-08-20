@@ -107,11 +107,10 @@ void Controls::update()
 
 #ifdef WIN32
 #include <SDL.h>
-#undef main
 #else
 #include <SDL2/SDL.h>
 #endif
-
+#include <iostream>
 
 void Controls::update() {
     const uint8_t * state = SDL_GetKeyboardState(NULL);
@@ -125,6 +124,43 @@ void Controls::update() {
     bool ctrl_a = false, ctrl_b = false, ctrl_c = false;
 
     // read joystick states
+    static SDL_GameController * joy = nullptr;
+    if (joy == nullptr) {
+        joy = SDL_GameControllerOpen(0);
+    }
+    SDL_JoystickUpdate();
+    if (!SDL_GameControllerGetAttached(joy)) {
+        joy = nullptr;
+    }
+
+    if (joy) {
+        ctrl_a = SDL_GameControllerGetButton(joy, SDL_CONTROLLER_BUTTON_A) > 0;
+        ctrl_b = SDL_GameControllerGetButton(joy, SDL_CONTROLLER_BUTTON_B) > 0;
+        ctrl_c = SDL_GameControllerGetButton(joy, SDL_CONTROLLER_BUTTON_START) > 0;
+
+        {
+            float x = float(SDL_GameControllerGetAxis(joy, SDL_CONTROLLER_AXIS_LEFTX)) / 32768.0f;
+            float y = float(SDL_GameControllerGetAxis(joy, SDL_CONTROLLER_AXIS_LEFTY)) / 32768.0f;
+            if (std::fabs(x) > 0.2f && std::fabs(x) > std::fabs(s_controls.m_stats.x)) {
+                s_controls.m_stats.x = x;
+            }
+            if (std::fabs(y) > 0.2f && std::fabs(y) > std::fabs(s_controls.m_stats.y)) {
+                s_controls.m_stats.y = y;
+            }
+        }
+
+        {
+            float x = (SDL_GameControllerGetButton(joy, SDL_CONTROLLER_BUTTON_DPAD_LEFT) > 0 ? -1 : 0) + (SDL_GameControllerGetButton(joy, SDL_CONTROLLER_BUTTON_DPAD_RIGHT) > 0 ? 1 : 0);
+            float y = (SDL_GameControllerGetButton(joy, SDL_CONTROLLER_BUTTON_DPAD_UP) > 0 ? -1 : 0) + (SDL_GameControllerGetButton(joy, SDL_CONTROLLER_BUTTON_DPAD_DOWN) > 0 ? 1 : 0);
+            if (std::fabs(x) > 0.2f && std::fabs(x) > std::fabs(s_controls.m_stats.x)) {
+                s_controls.m_stats.x = x;
+            }
+            if (std::fabs(y) > 0.2f && std::fabs(y) > std::fabs(s_controls.m_stats.y)) {
+                s_controls.m_stats.y = y;
+            }
+        }
+
+    }
 
     s_controls.m_stats.a.update(kb_a || ctrl_a);
     s_controls.m_stats.b.update(kb_b || ctrl_b);

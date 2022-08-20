@@ -151,6 +151,8 @@ HEADERS += \
 win32:CONFIG(release, debug|release): LIBS += -LC:/SDL/lib/x64/ -lSDL2 -lSDL2main
 else:win32:CONFIG(debug, debug|release): LIBS += -LC:/SDL/lib/x64/ -lSDL2 -lSDL2main
 
+win32:CONFIG(release, debug|release): CONFIG -= console
+
 win32:INCLUDEPATH += C:/SDL/include/
 win32:DEPENDPATH += C:/SDL/lib/x64/
 

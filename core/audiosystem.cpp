@@ -210,7 +210,11 @@ void AudioSystem::initialize() {
 
 #ifdef DESKTOP_BUILD
 #ifdef WIN32
+#ifdef DEBUGS
     std::string path = "../content/sfx_desktop/";
+#else
+    std::string path = "data/mechator/";
+#endif
 #else
     std::string path = "../pokitto-mechator/content/sfx_desktop/";
 #endif

@@ -29,7 +29,11 @@
 
 #include "game/maps/spawnpoints.h"
 
-int main ()
+#ifdef DEBUGS
+int main (int argv, char * args[])
+#else
+int WinMain()
+#endif
 {
     RenderSystem::initialize();
     AudioSystem::initialize();
