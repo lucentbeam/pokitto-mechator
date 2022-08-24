@@ -115,6 +115,14 @@ void Controls::update()
 void Controls::update() {
     const uint8_t * state = SDL_GetKeyboardState(NULL);
 
+#ifdef DEBUGS
+    s_controls.m_stats.f1.update(state[SDL_SCANCODE_F1]);
+    s_controls.m_stats.f2.update(state[SDL_SCANCODE_F2]);
+    s_controls.m_stats.f3.update(state[SDL_SCANCODE_F3]);
+    s_controls.m_stats.f4.update(state[SDL_SCANCODE_F4]);
+    s_controls.m_stats.f5.update(state[SDL_SCANCODE_F5]);
+#endif
+
     s_controls.m_stats.x = state[SDL_SCANCODE_RIGHT] - state[SDL_SCANCODE_LEFT];
     s_controls.m_stats.y = state[SDL_SCANCODE_DOWN] - state[SDL_SCANCODE_UP];
 

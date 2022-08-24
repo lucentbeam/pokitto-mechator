@@ -17,6 +17,7 @@ const SequenceTrigger SequenceTrigger::trigger_list[] = {
 };
 
 const SequenceTrigger tank_enter = SequenceTrigger(0, 0, 0, 0, acquiredtank_scene, SequenceID::EnterTank);
+const SequenceTrigger jeep_enter = SequenceTrigger(0, 0, 0, 0, acquiredjeep_scene, SequenceID::EnterJeep);
 const SequenceTrigger boat_enter = SequenceTrigger(0, 0, 0, 0, acquiredboat_scene, SequenceID::EnterBoat);
 const SequenceTrigger helicopter_takeoff = SequenceTrigger(0, 0, 0, 0, acquiredheli_scene, SequenceID::EnterHelicopter);
 
@@ -39,6 +40,11 @@ bool SequenceTrigger::checkForTriggers()
     if (!GameVariables::eventVisited(boat_enter.id) && Player::mode() == PlayerMode::BoatMode) {
         GameVariables::visitEvent(boat_enter.id);
         EventScene::startScene(boat_enter.linked_scene);
+        return true;
+    }
+    if (!GameVariables::eventVisited(jeep_enter.id) && Player::mode() == PlayerMode::JeepMode) {
+        GameVariables::visitEvent(jeep_enter.id);
+        EventScene::startScene(jeep_enter.linked_scene);
         return true;
     }
     if (!GameVariables::eventVisited(helicopter_takeoff.id) && Helicopter::active()) {

@@ -95,6 +95,8 @@ void updateGameState(FSM& fsm) {
         return;
     }
 
+    ControlStatus status = Controls::getStatus();
+
 #ifdef DEBUGS
     static int counter = 60;
     counter--;
@@ -102,6 +104,9 @@ void updateGameState(FSM& fsm) {
 //        GameVariables::updateTime(500000);
 //        GameVariables::saveGame();
 //        fsm.go(GameStates::GameWonState);
+    }
+    if (status.f1.pressed()) {
+        DebugOptions::noclip = !DebugOptions::noclip;
     }
 #endif
     SpriteWrapper::update();
@@ -125,9 +130,7 @@ void updateGameState(FSM& fsm) {
     Camera::update(player.position().x(), player.position().y());
     MapManager::update();
 
-//#ifndef DEBUGS
     if (SequenceTrigger::checkForTriggers()) return;
-//#endif
     checkWaterSpawns();
 
     SpawnPoint::setActiveRegion();
@@ -137,8 +140,6 @@ void updateGameState(FSM& fsm) {
     if (has_update_callback) {
         has_update_callback = !update_callback();
     }
-
-    ControlStatus status = Controls::getStatus();
 
     updateRegionIndicator();
     if ((status.x != 0 || status.y != 0) && Player::mode() != PlayerMode::BoatMode) {

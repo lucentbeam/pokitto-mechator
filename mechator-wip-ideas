@@ -7,8 +7,12 @@
   - (0.5k) cut up UI legend & procedurally generate
   - (? 1k) look into unifying Soldier::update/Jeep::update etc.
 
+- add tutorial prompts (blueprint acquired)
+
+- add debug functions (insta-copter? no clip?)
+
 - fix bombers not dropping bombs
-- fix sky layer rendering glitch
+- fix all sequences that rely on checking for turrets / barracks to set modes
 
 - unlocking blueprints adds weapons / powerups
 
@@ -18,6 +22,7 @@
   - barracks spawns, various enemy timers:
     - make more aggressive as they take damage from player (increment counters?)
 	- occasional tanks?
+	- turret on top
   - barracks go down faster {?}
   - more blueprints!
   - cost tuning
@@ -25,20 +30,8 @@
   - multiframe pathfinding
 - make helicopter deny landing prettier
 
-- title screen
-
 - sfx:
   - bomber coming (bbbrrrrreeeewwww....)
   - connect hit to tanks. others?
-
-- ram ideas:
-  - trim down UIElement (draw func to ingest const refs)
-  - look at reducing audio buffer from 1k to 512?
-
-- add boat yard boss? turret with special maneuvers? slow health regen? moves walls around yard/itself?
-
-- remove debug stuff
- - spawn locs
- - 
 
 - joyhat support?

@@ -3,6 +3,10 @@
 #include "core/serialization.h"
 #include "game/maps/sequencetrigger.h"
 
+#ifdef DEBUGS
+bool DebugOptions::noclip = false;
+#endif
+
 bool GameVariables::gameWon = false;
 
 GameStorage GameVariables::s_data;

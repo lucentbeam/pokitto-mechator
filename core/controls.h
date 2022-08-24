@@ -25,6 +25,9 @@ public:
 struct ControlStatus {
   float x = 0.0f, y = 0.0f;
   Button up, down, left, right, a, b, c;
+#ifdef DEBUGS
+  Button f1, f2, f3, f4, f5;
+#endif
 };
 
 class Controls {

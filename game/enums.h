@@ -19,8 +19,9 @@ enum SequenceID : int {
     ExitTutorial = 6,
     EnterBoat = 7,
     EnterTank = 8,
+    EnterJeep = 9,
 
-    LastID = 9
+    LastID = 10
 };
 
 enum PlayerMode : uint8_t {

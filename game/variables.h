@@ -8,6 +8,12 @@
 #include "game/enums.h"
 #include "game/constants.h"
 
+#ifdef DEBUGS
+struct DebugOptions {
+    static bool noclip;
+};
+#endif
+
 struct GameStorageHeader {
     int elapsedMilliseconds = 0;
     bool visitedEvents[SequenceID::LastID] = { false };

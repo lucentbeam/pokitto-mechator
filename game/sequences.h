@@ -30,10 +30,23 @@ const SceneSetQuest qgoend = SceneSetQuest(QuestStatus::QuestFinal);
 // after leaving tutorial island; set get tank
 const SceneDialogue exit_tut[] = {
     { "Good work.", nullptr, SceneDialogue::Base, false },
-    { "Now that you", "have the jeep,", SceneDialogue::Base, false },
+    { "Now that you're", "off that island,", SceneDialogue::Base, false },
     { "head to the", "tank factory.", SceneDialogue::Base, false },
     { "We've marked it", "on your map.", SceneDialogue::Base, false },
+    { "But you might", "need to explore", SceneDialogue::Base, false },
+    { "and find some", "keycards first.", SceneDialogue::Base, false },
     { "Central out.", nullptr, SceneDialogue::Base, true },
+};
+
+// get jeep
+const SceneDialogue got_jeep[] = {
+    { "You've acquired", "the jeep!", SceneDialogue::Base, false },
+    { "It has two weapons:", "grenades or guns.", SceneDialogue::Base, false },
+    { "Open your menu", "and select grenades.", SceneDialogue::Base, false },
+    { "You'll need them", "to blast crates.", SceneDialogue::Base, false },
+    { "But they won't", "hit air targets.", SceneDialogue::Base, false },
+    { "Decide what you need", "in every situation.", SceneDialogue::Base, false },
+    { "Now get moving!", "Central out.", SceneDialogue::Base, true },
 };
 
 // first time entering a tank; set get boat
@@ -141,7 +154,20 @@ const SceneSequence exit_tut_island[] = {
     { SceneSequence::ShowDialogue, exit_tut + 2},
     { SceneSequence::ShowDialogue, exit_tut + 3},
     { SceneSequence::ShowDialogue, exit_tut + 4},
+    { SceneSequence::ShowDialogue, exit_tut + 5},
+    { SceneSequence::ShowDialogue, exit_tut + 6},
     { SceneSequence::SetQuestStatus, &qgettank },
+    {SceneSequence::End, nullptr}
+};
+
+const SceneSequence acquiredjeep_scene[] = {
+    { SceneSequence::ShowDialogue, got_jeep },
+    { SceneSequence::ShowDialogue, got_jeep + 1 },
+    { SceneSequence::ShowDialogue, got_jeep + 2},
+    { SceneSequence::ShowDialogue, got_jeep + 3},
+    { SceneSequence::ShowDialogue, got_jeep + 4},
+    { SceneSequence::ShowDialogue, got_jeep + 5},
+    { SceneSequence::ShowDialogue, got_jeep + 6},
     {SceneSequence::End, nullptr}
 };
 

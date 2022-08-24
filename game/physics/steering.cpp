@@ -1,7 +1,16 @@
 #include "steering.h"
 
+#ifdef DEBUGS
+#include "game/variables.h"
+#endif
+
 void Steering::update(float dt, float x, float y, float speed_mult, bool instant) {
     m_moving = false;
+#ifdef DEBUGS
+    if (DebugOptions::noclip) {
+        speed_mult *= 5.0f;
+    }
+#endif
     if ((std::fabs(x) > 0.01f || std::fabs(y) > 0.01f)) {
         m_moving = true;
         m_aim = Vec2f(x,y);
@@ -28,7 +37,15 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
     } else {
         m_current_speed *= (1.0f - config->friction) * speed_mult;
     }
+#ifdef DEBUGS
+    if (DebugOptions::noclip) {
+        m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, 0, {float(config->size.w), float(config->size.h)});
+    } else {
+        m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, config->collisions, {float(config->size.w), float(config->size.h)});
+    }
+#else
     m_pos = CollisionManager::resolveMovement(m_pos, m_facing * m_current_speed * dt, config->collisions, {float(config->size.w), float(config->size.h)});
+#endif
 }
 
 void Steering::copyPosition(const Steering &other) {
