@@ -31,6 +31,8 @@ public:
     bool update(float dt);
     void draw() const;
     void drawAir() const;
+
+    static int drop_counter;
 };
 
 #endif // ENEMYBOMBER_H

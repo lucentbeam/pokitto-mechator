@@ -5,6 +5,8 @@
 #include "game/physics/pathfinding.h"
 #include "core/audiosystem.h"
 
+int EnemyBomber::drop_counter = 0;
+
 void EnemyBomber::setup(const Vec2f &pos)
 {
     m_pos.set(pos.x(), pos.y());
@@ -17,17 +19,15 @@ bool EnemyBomber::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::AirTarget});
 
     int damage;
-    static int counter = 0;
 
     Vec2f delta = Camera::center() - m_pos;
 
     switch(status) {
     case Waiting:
-        if (counter > 0) counter--;
         if (!Camera::inActiveZone(m_pos)) {
             return false;
         }
-        if (counter == 0 && delta.length() < 20) {
+        if ((drop_counter % 60) == 0 && delta.length() < 40) {
             status = InSky;
             m_plane_pos.set(Camera::center().x() - 70, Camera::center().y() - 20);
             m_life = 5;
@@ -42,9 +42,7 @@ bool EnemyBomber::update(float dt)
         break;
     case FlyBy:
         m_plane_pos.setX(m_plane_pos.x() - velocity * dt);
-        counter++;
-        if (counter >= 20) {
-            counter = 0;
+        if ((drop_counter + int(m_pos.x())) % 16 == 0) {
             AudioSystem::play(sfxGrenade);
             ProjectileManager::create(m_plane_pos + Vec2f(0, 15), Vec2f(velocity * -0.2f, (rand() % 30) - 15), 4, 1.5f)
                 ->setSprite(GrenadeSprite)
@@ -75,7 +73,6 @@ bool EnemyBomber::update(float dt)
         }
         if ((m_plane_pos.x() - Camera::tl_x()) < -10.0f) {
             status = Waiting;
-            counter = 240 + (rand() % 120);
         }
         break;
     }

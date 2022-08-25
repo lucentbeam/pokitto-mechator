@@ -31,7 +31,7 @@ class Enemy
     static ObjectPool<EnemyMech, 8> s_mechs;
     static ObjectPool<EnemyTank, 5> s_tanks;
     static ObjectPool<EnemyBoat, 6> s_boats;
-    static ObjectPool<EnemyTurret, 4> s_turrets;
+    static ObjectPool<EnemyTurret, 6> s_turrets;
     static ObjectPool<EnemyBomber, 3> s_bombers;
     static ObjectPool<EnemyHelicopter, 2> s_helis;
     static ObjectPool<EnemyLasers, 4> s_lasers;

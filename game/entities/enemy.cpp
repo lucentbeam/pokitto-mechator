@@ -16,7 +16,7 @@ ObjectPool<EnemyTank,5> Enemy::s_tanks;
 
 ObjectPool<EnemyBoat,6> Enemy::s_boats;
 
-ObjectPool<EnemyTurret,4> Enemy::s_turrets;
+ObjectPool<EnemyTurret,6> Enemy::s_turrets;
 
 ObjectPool<EnemyBomber,3> Enemy::s_bombers;
 
@@ -249,6 +249,8 @@ void Enemy::updateBombers(float dt)
 {
     EnemyBomber * start = s_bombers.objects();
     int i = s_bombers.objectCount()-1;
+
+    EnemyBomber::drop_counter++;
     while (i >= 0) {
         if (!(start + i)->update(dt)) {
             s_bombers.deactivate(i);
