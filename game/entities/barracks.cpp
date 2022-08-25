@@ -183,11 +183,11 @@ void Barracks::update(float dt)
                     } else if (b->m_spawntype == HeliSpawn) {
                         Enemy::createHelicopter(b->m_spawn);
                     } else if (b->m_spawntype == TurretSpawn && Enemy::getTurretAtLoc(b->m_spawn) == nullptr) {
-                        MapManager::setTileAt(b->m_spawn.x(), b->m_spawn.y(), SpecialTiles::BaseGround);
-                        EnemyTurret * m = Enemy::createTurret(b->m_spawn);
-                        if (m != nullptr) {
-                            m->disableOutOfRangeChecks();
-                        }
+//                        MapManager::setTileAt(b->m_spawn.x(), b->m_spawn.y(), SpecialTiles::BaseGround);
+//                        EnemyTurret * m = Enemy::createTurret(b->m_spawn);
+//                        if (m != nullptr) {
+//                            m->disableOutOfRangeChecks();
+//                        }
                     }
                 }
             }

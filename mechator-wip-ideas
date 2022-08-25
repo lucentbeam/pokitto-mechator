@@ -9,9 +9,6 @@
 
 - add tutorial prompts (blueprint acquired)
 
-- add debug functions (insta-copter? no clip?)
-
-- fix bombers not dropping bombs
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
 - unlocking blueprints adds weapons / powerups

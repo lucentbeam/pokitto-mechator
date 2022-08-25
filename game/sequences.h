@@ -209,10 +209,11 @@ const SceneSequence tutorial_boss_scene[] = {
 };
 
 const SceneMoveCam tt_m0 = SceneMoveCam(cameraCutsceneSpeed, {27, 99});
-const SceneMoveCam tt_m1 = SceneMoveCam(cameraCutsceneSpeed, {19, 94});
+const SceneMoveCam tt_m1 = SceneMoveCam(cameraCutsceneSpeed * 2.3f, {27, 99});
+const SceneMoveCam tt_m2 = SceneMoveCam(cameraCutsceneSpeed * 2.3f, {19, 94});
 
-const SceneDialogue tt_dlog0 = SceneDialogue("IT IS INFILTRATOR!",nullptr, SceneDialogue::EnemyCPU, false);
-const SceneDialogue tt_dlog1 = SceneDialogue("YOU HAVE COME FOR", "TANK BLUEPRINTS, YES?", SceneDialogue::EnemyCPU, false);
+const SceneDialogue tt_dlog0 = SceneDialogue("IT IS THE","INFILTRATOR!", SceneDialogue::EnemyCPU, false);
+const SceneDialogue tt_dlog1 = SceneDialogue("HERE FOR THE", "TANK BLUEPRINTS?", SceneDialogue::EnemyCPU, false);
 const SceneDialogue tt_dlog2 = SceneDialogue("TOO BAD.", nullptr, SceneDialogue::EnemyCPU, false);
 const SceneDialogue tt_dlog3 = SceneDialogue("THEY HAVE ALREADY", "BEEN RELOCATED.", SceneDialogue::EnemyCPU, false);
 const SceneDialogue tt_dlog4 = SceneDialogue("NOW TO RELOCATE YOU.", nullptr, SceneDialogue::EnemyCPU, true);
@@ -224,7 +225,7 @@ const SceneDialogue tt_dlog7 = SceneDialogue("THE AFTERLIFE!", nullptr, SceneDia
 
 const SceneDialogue tt_dlog8 = SceneDialogue("NICE SAVE.", nullptr, SceneDialogue::EnemyPilot, true);
 
-const SceneDialogue tt_dlog9 = SceneDialogue("THANK YOU.", nullptr, SceneDialogue::EnemyCPU, true);
+const SceneDialogue tt_dlog9 = SceneDialogue("THANKS.", nullptr, SceneDialogue::EnemyCPU, true);
 
 const SceneFunc tt_f0 = SceneFunc([](){
     Barracks::getBarracksAt({27, 99})->setSpawnsTanks();
@@ -235,10 +236,7 @@ const SceneFunc tt_f0 = SceneFunc([](){
 
     RegionTransitionHandler::goBoss(false);
     UI::showBoss(Barracks::getBarracksAt({27, 99})->getLifePtr());
-    EnemyTurret * t1 = Enemy::getTurretAt({19, 94}); t1->setDisabled(false); t1->disableOutOfRangeChecks();
-    EnemyTurret * t2 = Enemy::getTurretAt({19, 105}); t2->setDisabled(false); t2->disableOutOfRangeChecks();
-    EnemyTurret * t3 = Enemy::getTurretAt({35, 94}); t3->setDisabled(false); t3->disableOutOfRangeChecks();
-    EnemyTurret * t4 = Enemy::getTurretAt({35, 105}); t4->setDisabled(false); t4->disableOutOfRangeChecks();
+    EnemyTurret::setAllEnabled(true);
     MapManager::setTileAt(26 * 6 + 3, 110 * 6 + 3, 236);
     MapManager::setTileAt(27 * 6 + 3, 110 * 6 + 3, 236);
     MapManager::setTileAt(28 * 6 + 3, 110 * 6 + 3, 236);
@@ -250,9 +248,10 @@ const SceneFunc tt_f0 = SceneFunc([](){
     MapManager::setTileAt(16 * 6 + 3, 103 * 6 + 3, 218);
     MapManager::setTileAt(16 * 6 + 3, 104 * 6 + 3, 218);
 
-    registerCallback({t1->getLifePtr(), t2->getLifePtr(), t3->getLifePtr(), t4->getLifePtr(), Barracks::getBarracksAt({27, 99})->getLifePtr(), Barracks::getBarracksAt({25, 99})->getLifePtr(), Barracks::getBarracksAt({30, 99})->getLifePtr()}, [](){
+    registerCallback({Barracks::getBarracksAt({27, 99})->getLifePtr(), Barracks::getBarracksAt({25, 99})->getLifePtr(), Barracks::getBarracksAt({30, 99})->getLifePtr()}, [](){
         POIs::setShopsDisabled(false);
         RegionTransitionHandler::leaveBoss();
+        EnemyTurret::setAllEnabled(true);
         MapManager::setTileAt(16 * 6 + 3, 100 * 6 + 3, 184);
         MapManager::setTileAt(16 * 6 + 3, 101 * 6 + 3, 184);
         MapManager::setTileAt(16 * 6 + 3, 102 * 6 + 3, 184);
@@ -271,15 +270,15 @@ const SceneSequence tank_boss_scene[] = {
     {SceneSequence::ShowDialogue, &tt_dlog2 },
     {SceneSequence::ShowDialogue, &tt_dlog3 },
     {SceneSequence::ShowDialogue, &tt_dlog4 },
-    {SceneSequence::MoveCamera, &tt_m1 },
+    {SceneSequence::MoveCamera, &tt_m2 },
     {SceneSequence::ShowDialogue, &tt_dlog5 },
-    {SceneSequence::MoveCamera, &tt_m0 },
+    {SceneSequence::MoveCamera, &tt_m1 },
     {SceneSequence::ShowDialogue, &tt_dlog6 },
     {SceneSequence::Wait, &wait60 },
     {SceneSequence::ShowDialogue, &tt_dlog7 },
-    {SceneSequence::MoveCamera, &tt_m1 },
+    {SceneSequence::MoveCamera, &tt_m2 },
     {SceneSequence::ShowDialogue, &tt_dlog8 },
-    {SceneSequence::MoveCamera, &tt_m0 },
+    {SceneSequence::MoveCamera, &tt_m1 },
     {SceneSequence::ShowDialogue, &tt_dlog9 },
     {SceneSequence::MoveCamera, &cam_return },
     {SceneSequence::DoFunction, &tt_f0 },

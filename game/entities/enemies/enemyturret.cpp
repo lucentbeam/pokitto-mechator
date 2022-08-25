@@ -6,6 +6,8 @@
 #include "core/audiosystem.h"
 #include "game/funcs.h"
 
+bool EnemyTurret::s_enable_all = false;
+
 void EnemyTurret::setup(const Vec2f &pos) {
     m_pos = pos + Vec2f(3, 2);
     m_life = 10;
@@ -13,7 +15,11 @@ void EnemyTurret::setup(const Vec2f &pos) {
         m_life = 0;
     }
     m_disabled = false;
-    m_ignore_out_of_range = false;
+}
+
+void EnemyTurret::setAllEnabled(bool enabled)
+{
+    s_enable_all = enabled;
 }
 
 void EnemyTurret::setDisabled(bool disable)
@@ -26,12 +32,12 @@ bool EnemyTurret::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
     if (!Camera::inActiveZone(m_pos - Vec2f(3, 2))) {
-        if (!m_ignore_out_of_range || (m_ignore_out_of_range && m_life <= 0)) {
+        if (!s_enable_all || (s_enable_all && m_life <= 0)) {
             m_life = 0;
             return false;
         }
     }
-    if (m_disabled || m_life <= 0) return true;
+    if ((!s_enable_all && m_disabled) || m_life <= 0) return true;
     if (!Camera::inViewingZone(m_pos)) return true;
 
     Vec2f dir = Camera::center() - m_pos;
