@@ -8,6 +8,20 @@
   - (? 1k) look into unifying Soldier::update/Jeep::update etc.
 
 - add tutorial prompts (blueprint acquired)
+- explanation for map
+
+- map: change loc to single blinking dot
+- add some enemies on east side
+- add canyon shop
+- "talking" SFX during cut scenes
+- "blip" on advance cut scene text
+- increase tank & jeep speed
+- reduce tank missile screenshake
+- fix enemy flash on spawn
+- don't draw jeep lights during cut scene at broken boat yard
+- extend stormy cape to destroyed boat yard
+
+- add unlocked shops to map?
 
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
@@ -26,6 +40,8 @@
   - $10 money boxes?
   - multiframe pathfinding
 - make helicopter deny landing prettier
+
+- Add SFX when central calls
 
 - sfx:
   - bomber coming (bbbrrrrreeeewwww....)

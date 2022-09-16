@@ -217,15 +217,21 @@ class Player {
     friend class Helicopter;
 
     static float s_shot_cooldown;
+
+    static Vehicle &getInstance(PlayerMode mode);
 public:
 
     static PlayerMode mode() { return s_mode; }
+
+
+    static bool buildVehicleAt(PlayerMode mode, Vec2f position);
 
     static bool canGetPickups() { return s_mode != PlayerMode::HelicopterMode; }
 
     static bool hurting();
 
     static bool alive(PlayerMode m);
+    static bool damaged(PlayerMode m);
     static bool dead();
 
     static Vec2f position();

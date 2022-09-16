@@ -9,6 +9,7 @@
 
 const SpawnPoint doors[] = {
 	SpawnPoint({44, 16}, spawnDoorA<43,15,1,3,184>),
+	SpawnPoint({13, 127}, spawnDoorC<12,124,3,3,184>),
 	SpawnPoint({56, 58}, spawnDoorA<54,59,5,1,184>),
 	SpawnPoint({58, 158}, spawnDoorA<57,159,3,3,184>),
 	SpawnPoint({107, 20}, spawnDoorA<106,19,3,1,184>),

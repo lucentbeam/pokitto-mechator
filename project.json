@@ -4926,6 +4926,39 @@
 		},
 		"\\game\\weapons.cpp.hVeqGg": {
 			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\gameover.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\gameover.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\ticker.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\title.obj": {
+			"sdcard": false
+		},
+		"\\content\\maps\\build_world_win.sh": {
+			"sdcard": false
+		},
+		"\\content\\sfx\\boss.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx\\overworld_main.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx_desktop\\boss.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx_desktop\\overworld_main.raw": {
+			"sdcard": false
+		},
+		"\\game\\states\\gameover.cpp": {
+			"sdcard": false
+		},
+		"\\game\\states\\gameover.h": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

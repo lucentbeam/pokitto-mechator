@@ -35,8 +35,8 @@ struct GameStorage {
     int activated_doors[doors_count];
     int acquired_specials[specials_count];
 
-    Vec2f soldierPosition, jeepPosition, boatPosition, heliPosition;
-    int8_t soldierLife, jeepLife, boatLife, heliLife;
+    Vec2f soldierPosition, jeepPosition, tankPosition, boatPosition, heliPosition;
+    int8_t soldierLife, jeepLife, tankLife, boatLife, heliLife;
 };
 
 class GameVariables {

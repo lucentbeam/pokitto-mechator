@@ -6,7 +6,8 @@
 #include "game/ui/ui.h"
 #include "core/audiosystem.h"
 #include "game/states/collectblueprintprompt.h"
-#include "game/maps/worldmutables.h"
+#include "game/maps/worldtiles.h"
+//#include "game/maps/worldmutables.h"
 
 ObjectPool<Pickups, 8> Pickups::s_temporary;
 ObjectPool<Pickups, 6> Pickups::s_special;
@@ -115,7 +116,7 @@ int fetchBlueprintIndex(const Vec2i &pos) {
     const int bpcount = Blueprints::LastIdxBP;
     int pidx = MapManager::getMapIndex(pos.x(), pos.y());
     int idx = 0;
-    while(pidx != *(blueprints_data + idx) && idx < bpcount) {
+    while(pidx != *(blueprints_indices + idx) && idx < bpcount) {
         idx++;
     }
     if (idx >= bpcount) {

@@ -94,45 +94,17 @@ void updateRepairsState(FSM &fsm)
             current_cost = Soldier::damaged() ? soldierRepairCost : 0;
         } else {
             PlayerMode mode = vehicles_avail[idx - 2];
-            switch (mode) {
-            case JeepMode:
-                if (Jeep::alive()) {
+            if (mode != SoldierMode) {
+                if (Player::alive(mode)) {
                     UI::showHealthbar(mode);
-                    current_cost = Jeep::damaged() ? jeepRepairCost : 0;
+                    current_cost = Player::damaged(mode) ? repairCosts[idx - 2] : 0;
                 } else {
                     UI::hideHealthbar();
-                    current_cost = isInRegion(RegionTutorial) ? 0 : jeepBuildCost;
+                    current_cost = buildCosts[idx - 2];
+                    if ((mode == JeepMode && isInRegion(RegionTutorial)) || (mode == TankMode && isInRegion(RegionTankFactory))) {
+                        current_cost = 0;
+                    }
                 }
-                break;
-            case TankMode:
-                if (Tank::alive()) {
-                    UI::showHealthbar(mode);
-                    current_cost = Tank::damaged() ? tankRepairCost : 0;
-                } else {
-                    UI::hideHealthbar();
-                    current_cost = isInRegion(RegionTankFactory) ? 0 : tankBuildCost;
-                }
-                break;
-            case BoatMode:
-                if (Boat::alive()) {
-                    UI::showHealthbar(mode);
-                    current_cost = Boat::damaged() ? boatRepairCost : 0;
-                } else {
-                    UI::hideHealthbar();
-                    current_cost = boatBuildCost;
-                }
-                break;
-            case HelicopterMode:
-                if (Helicopter::alive()) {
-                    UI::showHealthbar(mode);
-                    current_cost = Helicopter::damaged() ? heliRepairCost : 0;
-                } else {
-                    UI::hideHealthbar();
-                    current_cost = heliBuildCost;
-                }
-                break;
-            default:
-                current_cost = 0;
             }
         }
     });
@@ -150,37 +122,8 @@ void updateRepairsState(FSM &fsm)
             current_cost = 0;
         } else {
             PlayerMode mode = vehicles_avail[repair_opts.activeIndex() - 2];
-            switch(mode) {
-            case JeepMode:
-                if (!Jeep::alive()) {
-                    Jeep::setPosition(POIs::pos(PlayerMode::JeepMode));
-                    UI::showHealthbar(PlayerMode::JeepMode);
-                }
-                Jeep::health().setMax();
-                break;
-            case TankMode:
-                if (!Tank::alive()) {
-                    Tank::setPosition(POIs::pos(PlayerMode::TankMode));
-                    UI::showHealthbar(PlayerMode::TankMode);
-                }
-                Tank::health().setMax();
-                break;
-            case BoatMode:
-                if (!Boat::alive()) {
-                    Boat::setPosition(POIs::pos(PlayerMode::BoatMode));
-                    UI::showHealthbar(PlayerMode::BoatMode);
-                }
-                Boat::health().setMax();
-                break;
-            case HelicopterMode:
-                if (!Helicopter::alive()) {
-                    Helicopter::setPosition(POIs::pos(PlayerMode::HelicopterMode));
-                    UI::showHealthbar(PlayerMode::HelicopterMode);
-                }
-                Helicopter::health().setMax();
-                break;
-            default:
-                break;
+            if (Player::buildVehicleAt(mode, POIs::pos(mode))) {
+                UI::showHealthbar(mode);
             }
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;

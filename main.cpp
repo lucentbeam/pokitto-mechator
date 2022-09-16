@@ -50,17 +50,18 @@ int WinMain()
 //    std::cout << sizeof(EnemyTurret) << std::endl;
 
 #endif
-    //    Soldier::setPosition({73 * 6, 110 * 6}); // canyons
-//        Soldier::setPosition({28 * 6, 8 * 6}); // tutorial island
-    //    Soldier::setPosition({38 * 6, 118 * 6}); // tank factory
-    //    Soldier::setPosition({138 * 6, 195 * 6}); // boat yard
-    //    Soldier::setPosition({76 * 6, 158 * 6}); // before cape
+//    Soldier::setPosition({73 * 6, 110 * 6}); // canyons
+//    Soldier::setPosition({28 * 6, 8 * 6}); // tutorial island
+//    Soldier::setPosition({38 * 6, 118 * 6}); // tank factory
+//    Soldier::setPosition({138 * 6, 195 * 6}); // boat yard
+//    Soldier::setPosition({76 * 6, 158 * 6}); // before cape
 
-//        Soldier::setPosition({132 * 6, 114 * 6});
-//        Jeep::setPosition({132 * 6, 114 * 6});
-//        Jeep::health().setMax();
+//    Soldier::setPosition({132 * 6, 114 * 6});
+//    Jeep::setPosition({132 * 6, 114 * 6});
+//    Jeep::health().setMax();
 
 
+//    AudioSystem::setVolume(0);
     Camera::update(Soldier::position().x(), Soldier::position().y());
 
     FSM fsm;
@@ -80,8 +81,6 @@ int WinMain()
 
     int32_t gameTime = 0;
     uint32_t lastGameTime = RenderSystem::getTimeMs();
-
-//    goGame();
 
     while (RenderSystem::running())
     {

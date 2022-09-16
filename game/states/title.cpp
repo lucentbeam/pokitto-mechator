@@ -196,8 +196,8 @@ void Title::draw()
         start += spacing;
     }
 
-//    RenderSystem::print(93, 80, "v0.8", 6);
-    RenderSystem::print(6, 22, "(early access)", 6);
+    RenderSystem::print(93, 80, "v0.8", 6);
+//    RenderSystem::print(6, 22, "(early access)", 6);
     Helpers::drawRLE(6, 6, title_text);
 
     if (s_state != Select) {

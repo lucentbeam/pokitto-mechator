@@ -430,6 +430,33 @@ void Boat::draw()
 }
 
 
+Vehicle &Player::getInstance(PlayerMode mode)
+{
+    switch (mode) {
+    case JeepMode:
+        return Jeep::s_instance;
+    case TankMode:
+        return Tank::s_instance;
+    case BoatMode:
+        return Boat::s_instance;
+    case HelicopterMode:
+        return Helicopter::s_instance;
+    default:
+        return Soldier::s_instance;
+    }
+}
+
+bool Player::buildVehicleAt(PlayerMode mode, Vec2f position)
+{
+    bool was_dead = !alive(mode);
+    Vehicle &target = getInstance(mode);
+    if (target.m_health.value() <= 0 || !Camera::inViewingZone(target.m_steering.pos())) {
+        target.m_steering.setPos(position);
+    }
+    target.m_health.setMax();
+    return was_dead;
+}
+
 bool Player::hurting()
 {
     return Soldier::s_instance.flashing() || Helicopter::s_instance.flashing() || Jeep::s_instance.flashing() || Tank::s_instance.flashing() || Boat::s_instance.flashing();
@@ -437,17 +464,14 @@ bool Player::hurting()
 
 bool Player::alive(PlayerMode m)
 {
-    switch(m) {
-    case JeepMode:
-        return Jeep::alive();
-    case TankMode:
-        return Tank::alive();
-    case BoatMode:
-        return Boat::alive();
-    case HelicopterMode:
-        return Helicopter::alive();
-    }
-    return true;
+    Vehicle &target = getInstance(m);
+    return target.m_health.value() > 0;
+}
+
+bool Player::damaged(PlayerMode m)
+{
+    Vehicle &target = getInstance(m);
+    return target.m_health.value() < target.m_health.max();
 }
 
 bool Player::dead()
@@ -695,11 +719,13 @@ void Player::storeData()
     dat->jeepPosition =    Jeep::position() + (Player::mode() == JeepMode ? Vec2f(0, 6) : Vec2f(0,0));
     dat->boatPosition =    Boat::position();
     dat->heliPosition =    Helicopter::position();
+    dat->tankPosition =    Tank::position();
 
     dat->soldierLife =     Soldier::s_instance.health().value();
     dat->jeepLife =        Jeep::s_instance.health().value();
     dat->boatLife =        Boat::s_instance.health().value();
     dat->heliLife =        Helicopter::s_instance.health().value();
+    dat->tankLife =        Tank::s_instance.health().value();
 }
 
 void Player::loadData()
@@ -709,6 +735,8 @@ void Player::loadData()
     Soldier::health().set(dat->soldierLife);
     Jeep::setPosition(dat->jeepPosition);
     Jeep::health().set(dat->jeepLife);
+    Tank::setPosition(dat->tankPosition);
+    Tank::health().set(dat->tankLife);
     Boat::setPosition(dat->boatPosition);
     Boat::health().set(dat->boatLife);
     Helicopter::setPosition(dat->heliPosition);

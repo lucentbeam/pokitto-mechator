@@ -17,18 +17,8 @@ const float baseTextSpeedLPS = 25.0f;
 const float cameraCutsceneSpeed = 12.0f;
 
 constexpr int soldierRepairCost = 4;
-
-constexpr int jeepBuildCost = 10;
-constexpr int jeepRepairCost = 6;
-
-constexpr int tankBuildCost = 15;
-constexpr int tankRepairCost = 9;
-
-constexpr int boatBuildCost = 20;
-constexpr int boatRepairCost = 12;
-
-constexpr int heliBuildCost = 25;
-constexpr int heliRepairCost = 15;
+constexpr uint8_t repairCosts[] = { 6, 9, 12, 15 };
+constexpr uint8_t buildCosts[] = { 10, 15, 20, 25 };
 
 const int barracksMaxMoneyDrops = 5;
 
@@ -43,12 +33,12 @@ const int playerIframeLength = 8;
 
 const float soldierSpeed = 20.0f;
 
-const float jeepSpeed = 50.0f;
+constexpr float jeepSpeed = 50.0f * 1.25f;
 const float jeepGrassSpeedFraction = 0.64f;
 const float jeepCornering = 0.1f;
 const float jeepFriction = 0.05f;
 
-const float tankSpeed = 32.0f;
+constexpr float tankSpeed = 32.0f * 1.2f;
 const float tankCornering = 0.04f;
 
 const float boatSpeed = 70.0f;
