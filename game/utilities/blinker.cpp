@@ -9,4 +9,8 @@ void Blinker::update() {
     while (counter >= total) counter -= total;
 }
 
-bool Blinker::active() const { return counter > (total - on_length); }
+bool Blinker::active(float offset) const {
+    float val = counter + offset;
+    while (val >= total) val -= total;
+    return val > (total - on_length);
+}

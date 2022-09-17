@@ -33,13 +33,13 @@ const int playerIframeLength = 8;
 
 const float soldierSpeed = 20.0f;
 
-constexpr float jeepSpeed = 50.0f * 1.25f;
+constexpr float jeepSpeed = 50.0f * 1.2f;
 const float jeepGrassSpeedFraction = 0.64f;
 const float jeepCornering = 0.1f;
 const float jeepFriction = 0.05f;
 
-constexpr float tankSpeed = 32.0f * 1.2f;
-const float tankCornering = 0.04f;
+constexpr float tankSpeed = 32.0f * 1.15f;
+const float tankCornering = 0.06f;
 
 const float boatSpeed = 70.0f;
 const float boatCornering = 0.1f;

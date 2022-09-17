@@ -10,13 +10,10 @@
 - add tutorial prompts (blueprint acquired)
 - explanation for map
 
-- map: change loc to single blinking dot
 - add some enemies on east side
 - add canyon shop
 - "talking" SFX during cut scenes
 - "blip" on advance cut scene text
-- increase tank & jeep speed
-- reduce tank missile screenshake
 - fix enemy flash on spawn
 - don't draw jeep lights during cut scene at broken boat yard
 - extend stormy cape to destroyed boat yard

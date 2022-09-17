@@ -20,7 +20,7 @@ inline void onBossDestroyed() {
 }
 
 inline void onPlayerMissileExplode() {
-    Camera::shake(0.1f, 0.35f);
+    Camera::shake(0.1f, 0.15f);
 }
 
 inline void onEnemyMissileExplode() {

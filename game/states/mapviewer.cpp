@@ -17,15 +17,14 @@
 #include "game/maps/doors.h"
 #include "game/utilities/blinker.h"
 
-static UIElement title_prompt = UIElement::getExpander(48,8,60,11, Tween::Easing::OutQuad);
+static UIElement title_prompt = UIElement::getExpander(48,8,48,11, Tween::Easing::OutQuad);
 static UIElement map_area = UIElement::getExpander(48,50,84,66, Tween::Easing::OutQuad);
 
 bool hiding = false;
 
-Blinker blinky(1.2f, 1.0f);
-Blinker goal_blink(3.6f, 0.2f);
-Blinker blue_dot(3.6f, 1.2f);
-Blinker red_dot(3.6f, 2.4f);
+Blinker playerloc_blink(1.2f, 1.0f);
+Blinker goal_blink(3.6f, 3.25f);
+Blinker door_blink(3.6f, 1.2f);
 
 void MapViewer::go()
 {
@@ -47,9 +46,8 @@ void MapViewer::update(FSM &fsm)
         map_area.setVisibility(false);
         AudioSystem::play(sfxCancel);
     }
-    blinky.update();
-    blue_dot.update();
-    red_dot.update();
+    playerloc_blink.update();
+    door_blink.update();
     goal_blink.update();
 
 #ifdef DEBUGS
@@ -74,7 +72,7 @@ void MapViewer::draw()
             RenderSystem::sprite(tl.x() + delta_x_island_1 / 4, tl.y() + delta_y_island_1 / 4, island_1_reduced, island_1_reduced[2]);
             RenderSystem::sprite(tl.x() + delta_x_island_2 / 4, tl.y() + delta_y_island_2 / 4, island_2_reduced, island_2_reduced[2]);
             RenderSystem::sprite(tl.x() + delta_x_island_3 / 4, tl.y() + delta_y_island_3 / 4, island_3_reduced, island_3_reduced[2]);
-            if (blinky.active()) {
+            if (playerloc_blink.active()) {
                 Vec2f pos = Player::position();
                 pos *= world_to_loc;
                 if (pos.x() < (x - tl.x())) {
@@ -87,7 +85,7 @@ void MapViewer::draw()
                 } else if (pos.y() > (y - tl.y() + h - 2)) {
                     pos.setY(y - tl.y() + h - 2);
                 }
-                RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[1], 0);
+                RenderSystem::pixel(tl.x() + pos.x(), tl.y() + pos.y(), 10);
             }
 
             int color;
@@ -103,16 +101,23 @@ void MapViewer::draw()
             Vec2i goal = GameVariables::getGoal();
             if (goal.x() > -200) {
                 Vec2f pos = Vec2f(goal.x() * 54.0f/216.0f, goal.y() * 54.0f/216.0f);
-                RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[goal_blink.active() ? 0 : 4], 0);
+                RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[!goal_blink.active() ? 1 : 4], 0);
             }
-            RenderSystem::sprite(109 - ui_legend[0], y + h/2 - ui_legend[1]/2, ui_legend, ui_legend[2]);
-            if (blue_dot.active()) {
-                RenderSystem::drawRect(109 - ui_legend[0] + 4, y + h/2 - ui_legend[1]/2 + 22, 4, 3, 48);
-            } else if (red_dot.active()) {
-                RenderSystem::drawRect(109 - ui_legend[0] + 4, y + h/2 - ui_legend[1]/2 + 22, 4, 3, 16);
+            Helpers::drawNotchedRect(81, y + h/2 - 14, 28, 29, 0);
+            if (door_blink.active()) {
+                RenderSystem::drawRect(85, y + h/2 + 8, 4, 3, 48);
+            } else if (door_blink.active(1.2f)) {
+                RenderSystem::drawRect(85, y + h/2 + 8, 4, 3, 16);
             } else {
-                RenderSystem::drawRect(109 - ui_legend[0] + 4, y + h/2 - ui_legend[1]/2 + 22, 4, 3, 32);
+                RenderSystem::drawRect(85, y + h/2 + 8, 4, 3, 32);
             }
+            if (playerloc_blink.active()) RenderSystem::pixel(86, y + h/2 - 9, 10);
+            RenderSystem::print(93, y + h/2 - 12, "loc", 10);
+
+            RenderSystem::sprite(83, y + h/2 - 3, poi[!goal_blink.active() ? 1 : 4], 0);
+            RenderSystem::print(92, y + h/2 - 4, "goal", 10);
+
+            RenderSystem::print(92, y + h/2 + 5, "door", 10);
         }
     });
     title_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){

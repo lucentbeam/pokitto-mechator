@@ -7,7 +7,7 @@ class Blinker {
 public:
     Blinker(float tot, float on);
     void update();
-    bool active() const;
+    bool active(float offset = 0) const;
 };
 
 #endif // BLINKER_H
