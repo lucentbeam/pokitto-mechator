@@ -99,6 +99,8 @@ public:
     static int getCollisionDamage(const Rect &rect, uint16_t mask);
 
     static int getCollisionDamage(const Rect &rect, uint16_t mask, std::vector<Vec2f> &at);
+
+    static void clear();
 };
 
 #endif // BULLET_H

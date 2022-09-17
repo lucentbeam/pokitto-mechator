@@ -74,9 +74,7 @@ void Barracks::create(const Vec2i &spawn, int left, int top, uint8_t width, uint
     if (getBarracksAt({left + width/2.0f, top + height/2.0f}) != nullptr) return;
     if (MapManager::getTileAt(left * 6 + 3, top * 6 + 3) == 203) return;
     Barracks * b = s_barracks.activateNext();
-    if (b == nullptr) {
-        return;
-    }
+    if (b == nullptr) return;
     b->config(spawn, left, top, width, height);
 }
 
@@ -250,3 +248,13 @@ Barracks *Barracks::getBarracksAt(Vec2i loc)
     });
     return out;
 }
+
+#ifdef DEBUGS
+void Barracks::queryActive()
+{
+    s_barracks.iterate([&](Barracks * b) {
+        std::cout << "barracks at " << b->m_left / 6 << " " << b->m_top / 6 << std::endl;
+        return true;
+    });
+}
+#endif

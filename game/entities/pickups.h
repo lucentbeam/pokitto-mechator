@@ -40,6 +40,8 @@ public:
     static void update(float dt);
 
     static void draw();
+
+    static void clear();
 };
 
 #endif // PICKUPS_H

@@ -208,3 +208,9 @@ void Pickups::draw()
         --i;
     }
 }
+
+void Pickups::clear()
+{
+    s_temporary = ObjectPool<Pickups, 8>();
+    s_special = ObjectPool<Pickups, 6>();
+}

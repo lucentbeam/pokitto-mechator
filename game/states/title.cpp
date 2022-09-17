@@ -61,6 +61,7 @@ void Title::selectData() {
         Player::loadData();
     } else {
         GameVariables::loadGame(GameStorage());
+        MapManager::resetMutables();
         Soldier::health().setMax();
         Jeep::health().set(0);
         Boat::health().set(0);

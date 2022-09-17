@@ -391,12 +391,13 @@ void Enemy::drawAir()
 
 void Enemy::clearAll()
 {
-    s_mechs.clear();
-    s_tanks.clear();
-    s_turrets.clear();
-    s_bombers.clear();
-    s_helis.clear();
-    s_lasers.clear();
-    s_mines.clear();
-    s_watermines.clear();
+    s_mechs = ObjectPool<EnemyMech, 8>();
+    s_tanks = ObjectPool<EnemyTank, 5>();
+    s_boats = ObjectPool<EnemyBoat, 6>();
+    s_turrets = ObjectPool<EnemyTurret, 6>();
+    s_bombers = ObjectPool<EnemyBomber, 3>();
+    s_helis = ObjectPool<EnemyHelicopter, 2>();
+    s_lasers = ObjectPool<EnemyLasers, 4>();
+    s_mines = ObjectPool<Mine, 14>();
+    s_watermines = ObjectPool<WaterMine, 6>();
 }

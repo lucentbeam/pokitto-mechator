@@ -18,6 +18,8 @@ public:
 
     static void setActiveRegion();
 
+    static void reset();
+
     Vec2f pos() const { return {float(m_pos.x()), float(m_pos.y())}; }
 
     static void openDoorAt(const Vec2f &pos);

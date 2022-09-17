@@ -21,6 +21,8 @@ class MapManager
 public:
     static void update();
 
+    static void rebuildVisibleTiles();
+
     static void draw(bool bg);
 
     static void draw(ScreenBuffer * buffer);

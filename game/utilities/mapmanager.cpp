@@ -69,7 +69,23 @@ void MapManager::update()
                 tile_buffer++;
             }
         }
-    }    
+    }
+}
+
+void MapManager::rebuildVisibleTiles()
+{
+    float x               = Camera::tl_x();
+    float y               = Camera::tl_y();
+
+    Vec2i delta           = s_camera_tiles.update();
+    uint8_t * tile_buffer = s_camera_tiles.getMap();
+
+    for(int j = 0; j < s_camera_tiles.height(); ++j) {
+        for (int i = 0; i < s_camera_tiles.width(); ++i) {
+            *tile_buffer = getTileAtPvt(x + i * 6, y + j * 6);
+            tile_buffer++;
+        }
+    }
 }
 
 void MapManager::draw(bool bg)

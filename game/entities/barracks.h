@@ -63,7 +63,11 @@ public:
     static bool isDestroyed(int lx, int ly);
     static Barracks * getBarracksAt(Vec2i loc);
 
-    static void clear() { s_barracks.clear(); }
+    static void clear() { s_barracks = SimplePool<Barracks, 6>(); }
+
+#ifdef DEBUGS
+    static void queryActive();
+#endif
 };
 
 template <int l, int t, int w, int h>

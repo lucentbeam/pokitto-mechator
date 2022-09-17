@@ -58,6 +58,12 @@ void SpawnPoint::setActiveRegion()
     }
 }
 
+void SpawnPoint::reset()
+{
+    for (int i = 0; i < point_count; ++i) s_active_points[i] = false;
+    for (int i = 0; i < door_count; ++i) s_active_doors[i] = false;
+}
+
 void SpawnPoint::openDoorAt(const Vec2f &pos)
 {
     for(int i = 0; i < door_count; ++i) {

@@ -219,3 +219,8 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask, std::
     }
     return damage;
 }
+
+void ProjectileManager::clear()
+{
+    s_projectiles = ObjectPool<Projectile, maxProjectileCount>();
+}

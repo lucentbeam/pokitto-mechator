@@ -51,7 +51,10 @@ void goGame(bool from_title)
     if (from_title) {
         Enemy::clearAll();
         Barracks::clear();
-        Camera::update(-5000, -5000);
+        Pickups::clear();
+        ProjectileManager::clear();
+        SpawnPoint::reset();
+        MapManager::rebuildVisibleTiles();
     }
 
     FSM::instance->go(GameStates::Game);
@@ -110,6 +113,9 @@ void updateGameState(FSM& fsm) {
     }
     if (status.f1.pressed()) {
         DebugOptions::noclip = !DebugOptions::noclip;
+    }
+    if (status.f2.pressed()) {
+        Barracks::queryActive();
     }
 #endif
     SpriteWrapper::update();
