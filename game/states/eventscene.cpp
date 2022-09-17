@@ -1,6 +1,7 @@
 #include "eventscene.h"
 
 #include "core/rendering/camera.h"
+#include "core/audiosystem.h"
 
 #include "game/enums.h"
 #include "game/constants.h"
@@ -27,12 +28,21 @@ void EventScene::updateMove()
 void EventScene::updateShowDialogue()
 {
     ControlStatus ctrl = Controls::getStatus();
+    static int blip = 125;
+    blip -= physicsTimestepMs;
+    if (blip <= 0) {
+        if (!s_data.text_tween.done()) {
+            AudioSystem::play(sfxSelect);
+        }
+        blip += (rand() % 40) + 80;
+    }
     if (s_data.text_tween.done(100) && ctrl.a.pressed()) {
         if (getDialogue()->close) {
             s_data.dialogue_box.setVisibility(false);
         } else {
             goNext();
         }
+        AudioSystem::play(sfxConfirm);
     } else if (s_data.dialogue_box.hidden()) {
         goNext();
     } else if (ctrl.a.held() && !s_data.text_tween.done()) {
