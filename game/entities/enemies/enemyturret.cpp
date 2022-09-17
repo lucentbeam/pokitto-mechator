@@ -15,6 +15,7 @@ void EnemyTurret::setup(const Vec2f &pos) {
         m_life = 0;
     }
     m_disabled = false;
+    m_damage_frames = 0;
 }
 
 void EnemyTurret::setAllEnabled(bool enabled)

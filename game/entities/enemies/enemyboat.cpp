@@ -12,6 +12,7 @@ void EnemyBoat::setup(const Vec2f &pos)
     m_life = 10;
     m_steering.setPos(pos);
     m_counter = rand() % 30;
+    m_damage_frames = 0;
 }
 
 bool EnemyBoat::update(float dt)

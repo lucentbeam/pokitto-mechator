@@ -33,6 +33,7 @@ void Barracks::config(const Vec2f &spawn, int left, int top, uint8_t width, uint
     m_spawn_timer = 80 + (rand() % 40);
     m_checks_pathfinding = true;
     m_destroy_out_of_range = true;
+
     m_spawntype = MechSpawn;
 
     // If this stuff ever changes, double-check the implementation in TiledMapReader!!!

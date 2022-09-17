@@ -30,7 +30,7 @@ public:
 
     EnemyMech() = default;
 
-    void setup(const Vec2f &pos) { m_pos = pos; m_life = 3; m_on_deactivate = std::function<void()>(); m_drops = true; m_counter = rand() % 30; status = Mode::Walking; }
+    void setup(const Vec2f &pos) { m_pos = pos; m_life = 3; m_on_deactivate = std::function<void()>(); m_drops = true; m_counter = rand() % 30; status = Mode::Walking; m_damage_frames = 0; }
 
     int8_t life() const { return m_life; }
 

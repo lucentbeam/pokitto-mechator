@@ -16,6 +16,7 @@ void EnemyTank::setup(const Vec2f &pos)
     m_drops_cash = true;
     m_missiles = false;
     m_deactivate = [](){};
+    m_damage_frames = 0;
 }
 
 bool EnemyTank::update(float dt)

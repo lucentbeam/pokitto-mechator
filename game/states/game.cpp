@@ -51,6 +51,7 @@ void goGame(bool from_title)
     if (from_title) {
         Enemy::clearAll();
         Barracks::clear();
+        Camera::update(-5000, -5000);
     }
 
     FSM::instance->go(GameStates::Game);
