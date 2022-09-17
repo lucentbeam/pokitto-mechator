@@ -44,6 +44,8 @@ static int watchcount = 0;
 static bool has_update_callback = false;
 static std::function<bool()> update_callback;
 
+static bool drawflashlight;
+
 void goGame(bool from_title)
 {
     if (from_title) {
@@ -194,7 +196,7 @@ void drawGameState() {
     Enemy::drawAir();
 
     if (isInRegion(RegionStormyCape)) {
-        if (!RegionTransitionHandler::atBoss()) Player::drawFlashlight();
+        if (drawflashlight && !RegionTransitionHandler::atBoss()) Player::drawFlashlight();
         const uint8_t rain[] = { 3, 3, 0, 0, 48, 0, 48, 0, 48, 0, 0};
         int x = 0;
         int y = 0;
@@ -325,4 +327,9 @@ void checkWaterSpawns()
             else Enemy::spawnWaterMine({locs[i].x(), locs[i].y()}, 1, 1);
         }
     }
+}
+
+void setDrawFlashlight(bool val)
+{
+    drawflashlight = val;
 }

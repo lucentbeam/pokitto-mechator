@@ -19,6 +19,7 @@ EventScene::Data EventScene::s_data;
 void EventScene::updateMove()
 {
     if (Camera::atMovementDestination()) {
+        if (getMove()->to_player) setDrawFlashlight(true);
         goNext();
     }
 }
@@ -66,6 +67,7 @@ void EventScene::goNext()
     s_counter++;
     switch(active().type) {
     case SceneSequence::MoveCamera:
+        setDrawFlashlight(false);
         if (getMove()->to_player) {
             Camera::moveTo(Player::position(), getMove()->velocity);
         } else {

@@ -16,6 +16,8 @@ void updateRegionIndicator();
 
 void drawGameState();
 
+void setDrawFlashlight(bool val);
+
 void drawShadedGame(int shading = 1);
 
 void registerCallback(std::initializer_list<int8_t *> lifes, std::function<void()> callback);

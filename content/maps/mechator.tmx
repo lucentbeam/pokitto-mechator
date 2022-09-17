@@ -568,7 +568,7 @@
   <object id="135" name="enemy_mine" x="144.594" y="811.236" width="4.8125" height="4.4375"/>
   <object id="136" name="enemy_mine" x="96.5938" y="781.327" width="4.8125" height="4.4375"/>
   <object id="137" name="enemy_mine" x="138.412" y="769.145" width="4.8125" height="4.4375"/>
-  <object id="139" name="enemy_bomber" x="1224.5" y="498.903" width="4.8125" height="4.4375"/>
+  <object id="139" name="enemy_bomber" x="1236.75" y="504.716" width="4.8125" height="4.4375"/>
   <object id="140" name="enemy_bomber" x="979.927" y="592.448" width="4.8125" height="4.4375"/>
   <object id="141" name="enemy_bomber" x="548.594" y="726.448" width="4.8125" height="4.4375"/>
   <object id="142" name="enemy_bomber" x="895.927" y="664.448" width="4.8125" height="4.4375"/>
@@ -724,8 +724,8 @@
   <object id="317" name="hackingkit" x="607.902" y="283.563" width="2.5" height="2.875"/>
   <object id="318" name="hackingkit" x="848.125" y="685.813" width="2.5" height="2.875"/>
   <object id="319" name="hackingkit" x="727.477" y="1237.84" width="2.5" height="2.875"/>
-  <object id="320" name="enemy_mech" x="1230.78" y="505.054" width="4.8125" height="4.4375"/>
-  <object id="321" name="enemy_mech" x="1236.5" y="499.054" width="4.8125" height="4.4375"/>
+  <object id="320" name="enemy_mech" x="1243.03" y="510.866" width="4.8125" height="4.4375"/>
+  <object id="321" name="enemy_mech" x="1248.75" y="504.866" width="4.8125" height="4.4375"/>
   <object id="323" name="shop_3_-2_0_0_0_0" x="798.567" y="564.526" width="4.8125" height="4.4375"/>
  </objectgroup>
 </map>
