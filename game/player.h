@@ -122,7 +122,7 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return GameVariables::hasBlueprint(JeepBP); }
+    static bool available() { return GameVariables::hasBlueprintUnlocked(JeepBP); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
@@ -146,7 +146,7 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return GameVariables::hasBlueprint(TankBP); }
+    static bool available() { return GameVariables::hasBlueprintUnlocked(TankBP); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
@@ -169,7 +169,7 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return GameVariables::hasBlueprint(BoatBP); }
+    static bool available() { return GameVariables::hasBlueprintUnlocked(BoatBP); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
@@ -196,7 +196,7 @@ public:
     static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
     static Vec2f position() { return s_instance.m_steering.pos() + Vec2f(0, -s_instance.m_z); }
     static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return GameVariables::hasBlueprint(HeliBP); }
+    static bool available() { return GameVariables::hasBlueprintUnlocked(HeliBP); }
     static void launch() { s_instance.m_inAir = true; }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 

@@ -7,8 +7,6 @@
   - (0.5k) cut up UI legend & procedurally generate
   - (? 1k) look into unifying Soldier::update/Jeep::update etc.
 
-- add tutorial prompts (blueprint acquired)
-- explanation for map
 - add unlocked shops to map?
 
 - fix all sequences that rely on checking for turrets / barracks to set modes

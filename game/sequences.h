@@ -35,6 +35,8 @@ const SceneDialogue exit_tut[] = {
     { "We've marked it", "on your map.", SceneDialogue::Base, false },
     { "But you might", "need to explore", SceneDialogue::Base, false },
     { "and find some", "keycards first.", SceneDialogue::Base, false },
+    { "Be sure to open", "your map from", SceneDialogue::Base, false },
+    { "the menu and", "get your bearings.", SceneDialogue::Base, false },
     { "Central out.", nullptr, SceneDialogue::Base, true },
 };
 
@@ -47,6 +49,15 @@ const SceneDialogue got_jeep[] = {
     { "But they won't", "hit air targets.", SceneDialogue::Base, false },
     { "Decide what you need", "in every situation.", SceneDialogue::Base, false },
     { "Now get moving!", "Central out.", SceneDialogue::Base, true },
+};
+
+// get jeep blueprint
+const SceneDialogue got_jeep_bp[] = {
+    { "You've picked up", "a blueprint.", SceneDialogue::Base, false },
+    { "Now go upload it", "to a shop.", SceneDialogue::Base, false },
+    { "Vehicles then need", "to be built.", SceneDialogue::Base, false },
+    { "Other blueprints", "will apply effects", SceneDialogue::Base, false },
+    { "automatically", "after uploading.", SceneDialogue::Base, true },
 };
 
 // first time entering a tank; set get boat
@@ -156,6 +167,8 @@ const SceneSequence exit_tut_island[] = {
     { SceneSequence::ShowDialogue, exit_tut + 4},
     { SceneSequence::ShowDialogue, exit_tut + 5},
     { SceneSequence::ShowDialogue, exit_tut + 6},
+    { SceneSequence::ShowDialogue, exit_tut + 7},
+    { SceneSequence::ShowDialogue, exit_tut + 8},
     { SceneSequence::SetQuestStatus, &qgettank },
     {SceneSequence::End, nullptr}
 };
@@ -188,6 +201,16 @@ const SceneSequence acquiredboat_scene[] = {
     { SceneSequence::ShowDialogue, got_boat + 3},
     { SceneSequence::ShowDialogue, got_boat + 4},
     { SceneSequence::SetQuestStatus, &qgetheli },
+    {SceneSequence::End, nullptr}
+};
+
+
+const SceneSequence acquiredblueprint_scene[] = {
+    { SceneSequence::ShowDialogue, got_jeep_bp },
+    { SceneSequence::ShowDialogue, got_jeep_bp + 1 },
+    { SceneSequence::ShowDialogue, got_jeep_bp + 2},
+    { SceneSequence::ShowDialogue, got_jeep_bp + 3},
+    { SceneSequence::ShowDialogue, got_jeep_bp + 4},
     {SceneSequence::End, nullptr}
 };
 

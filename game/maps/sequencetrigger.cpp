@@ -19,6 +19,7 @@ const SequenceTrigger SequenceTrigger::trigger_list[] = {
 const SequenceTrigger tank_enter = SequenceTrigger(0, 0, 0, 0, acquiredtank_scene, SequenceID::EnterTank);
 const SequenceTrigger jeep_enter = SequenceTrigger(0, 0, 0, 0, acquiredjeep_scene, SequenceID::EnterJeep);
 const SequenceTrigger boat_enter = SequenceTrigger(0, 0, 0, 0, acquiredboat_scene, SequenceID::EnterBoat);
+const SequenceTrigger get_blueprint = SequenceTrigger(0, 0, 0, 0, acquiredblueprint_scene, SequenceID::GetBluePrint);
 const SequenceTrigger helicopter_takeoff = SequenceTrigger(0, 0, 0, 0, acquiredheli_scene, SequenceID::EnterHelicopter);
 
 bool final_sequence_run = false;
@@ -50,6 +51,11 @@ bool SequenceTrigger::checkForTriggers()
     if (!GameVariables::eventVisited(helicopter_takeoff.id) && Helicopter::active()) {
         GameVariables::visitEvent(helicopter_takeoff.id);
         EventScene::startScene(helicopter_takeoff.linked_scene);
+        return true;
+    }
+    if (!GameVariables::eventVisited(get_blueprint.id) && GameVariables::hasBlueprint(Blueprints::JeepBP)) {
+        GameVariables::visitEvent(get_blueprint.id);
+        EventScene::startScene(get_blueprint.linked_scene);
         return true;
     }
     return false;
