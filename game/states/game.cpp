@@ -55,11 +55,12 @@ void goGame(bool from_title)
         ProjectileManager::clear();
         SpawnPoint::reset();
         MapManager::rebuildVisibleTiles();
+        Camera::update(-5000, -5000);
+        SpawnPoint::setActiveRegion();
     }
 
     FSM::instance->go(GameStates::Game);
 
-    SpawnPoint::setActiveRegion();
     Camera::update(player.position().x(), player.position().y());
     SpawnPoint::setActiveRegion();
     if (from_title) {

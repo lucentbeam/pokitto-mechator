@@ -8,7 +8,6 @@
 
 static uint32_t mode_switch_counter = 0;
 
-
 WeaponHelper WeaponHelper::getIndexAndMax(int current, int owned)
 {
     WeaponHelper h;
@@ -77,7 +76,6 @@ void Soldier::update(float dt)
         s_instance.flash();
         s_instance.health().change(-damage);
         AudioSystem::play(sfxHit2);
-        // TODO: gameover
     }
 
     s_instance.m_steering.update(dt, controls.x , controls.y, s_instance.sprinting ? 1.7f : 1.0f, true);
@@ -88,17 +86,15 @@ void Soldier::update(float dt)
 
     mode_switch_counter++;
 
-    PlayerMode overlaps = PlayerMode::SoldierMode;
+    s_instance.m_overlaps = PlayerMode::SoldierMode;
 
-    if (Jeep::alive() && (Jeep::position() - s_instance.m_steering.pos()).length() < 6) overlaps = PlayerMode::JeepMode;
-    else if (Helicopter::alive() && (Helicopter::position() - s_instance.m_steering.pos()).length() < 6) overlaps = PlayerMode::HelicopterMode;
-    else if (Tank::alive() && (Tank::position() - s_instance.m_steering.pos()).length() < 6) overlaps = PlayerMode::TankMode;
-    else if (Boat::alive() && (Boat::position() - s_instance.m_steering.pos()).length() < 18) overlaps = PlayerMode::BoatMode;
-    s_instance.m_overlaps = overlaps != SoldierMode;
-    // TODO: store as PlayerMode instead of bool to draw highlights
+    if (Jeep::alive() && (Jeep::position() - s_instance.m_steering.pos()).length() < 6) s_instance.m_overlaps = PlayerMode::JeepMode;
+    else if (Helicopter::alive() && (Helicopter::position() - s_instance.m_steering.pos()).length() < 6) s_instance.m_overlaps = PlayerMode::HelicopterMode;
+    else if (Tank::alive() && (Tank::position() - s_instance.m_steering.pos()).length() < 8) s_instance.m_overlaps = PlayerMode::TankMode;
+    else if (Boat::alive() && (Boat::position() - s_instance.m_steering.pos()).length() < 18) s_instance.m_overlaps = PlayerMode::BoatMode;
 
-    if (controls.b.pressed() && mode_switch_counter > 1 && s_instance.m_overlaps) {
-        Player::s_mode = overlaps;
+    if (s_instance.m_overlaps != SoldierMode && controls.b.pressed() && mode_switch_counter > 1) {
+        Player::s_mode = s_instance.m_overlaps;
         mode_switch_counter = 0;
         UI::showHealthbar();
     }
@@ -189,6 +185,14 @@ void Jeep::draw()
 {
     if (!alive()) return;
     Vec2f jpos = Camera::worldToScreen(s_instance.m_steering.pos());
+    if (Player::s_mode == SoldierMode && Soldier::overlaps(JeepMode)) {
+        int f = s_instance.m_steering.rotation_frame();
+        bool flip = s_instance.m_steering.facing().x() > 0.1f;
+        RenderSystem::sprite(jpos.x() - 6, jpos.y() - 6, jeep[f], jeep[0][2], 10, flip);
+        RenderSystem::sprite(jpos.x() - 8, jpos.y() - 6, jeep[f], jeep[0][2], 10, flip);
+        RenderSystem::sprite(jpos.x() - 8, jpos.y() - 8, jeep[f], jeep[0][2], 10, flip);
+        RenderSystem::sprite(jpos.x() - 6, jpos.y() - 8, jeep[f], jeep[0][2], 10, flip);
+    }
     if (s_instance.flashing()) {
         RenderSystem::sprite(jpos.x() - 7, jpos.y() - 7 - s_instance.m_shake.offset(1), jeep[s_instance.m_steering.rotation_frame()], jeep[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
     } else {
@@ -267,6 +271,14 @@ void Helicopter::drawGround()
 {
     if (!alive() || s_instance.m_z > 0.0f) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
+    if (Player::s_mode == SoldierMode && Soldier::overlaps(HelicopterMode)) {
+        int f = s_instance.m_steering.rotation_frame();
+        bool flip = s_instance.m_steering.facing().x() > 0.1f;
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 8, helicopter[f], helicopter[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 10, helicopter[f], helicopter[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 8, pos.y() - 8, helicopter[f], helicopter[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 8, pos.y() - 10, helicopter[f], helicopter[0][2], 10, flip);
+    }
     RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0.1f);
     RenderSystem::sprite(pos.x() - 9 + (s_instance.m_steering.facing().x() > 0 ? 1 : 0), pos.y() - 9, helicopter_blades[0], helicopter_blades[0][2]);
 }
@@ -341,6 +353,14 @@ void Tank::draw()
     if (!alive()) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
     int offset = (mode_switch_counter % 30) < 15 && s_instance.m_steering.moving() ? 9 : 0;
+    if (Player::s_mode == SoldierMode && Soldier::overlaps(TankMode)) {
+        int f = s_instance.m_steering.rotation_frame() + offset;
+        bool flip = s_instance.m_steering.facing().x() > 0.1f;
+        RenderSystem::sprite(pos.x() - 9, pos.y() - 9, tank[f], tank[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 11, pos.y() - 11, tank[f], tank[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 11, pos.y() - 9, tank[f], tank[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 9, pos.y() - 11, tank[f], tank[0][2], 10, flip);
+    }
     if (s_instance.flashing()) {
         RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
     } else {
@@ -406,6 +426,15 @@ void Boat::draw()
 {
     if (!alive()) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
+
+    if (Player::s_mode == SoldierMode && Soldier::overlaps(BoatMode)) {
+        int f = s_instance.m_steering.rotation_frame();
+        bool flip = s_instance.m_steering.facing().x() > 0.1f;
+        RenderSystem::sprite(pos.x() - 10.5f, pos.y() - 9, boat[f], boat[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 8.5f, pos.y() - 9, boat[f], boat[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 8.5f, pos.y() - 11, boat[f], boat[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 10.5f, pos.y() - 11, boat[f], boat[0][2], 10, flip);
+    }
     if (s_instance.flashing()) {
         RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
     } else {

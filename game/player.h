@@ -80,7 +80,7 @@ class Soldier : public Vehicle {
     Vec2f m_aim = Vec2f(0,0);
 
     bool sprinting = false;
-    bool m_overlaps = false;
+    PlayerMode m_overlaps = SoldierMode;
     uint8_t m_z = 0;
 
     static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun;
@@ -97,7 +97,7 @@ public:
     static Vec2f position() { return s_instance.m_steering.pos(); }
     static Rect bounds() { return s_instance.m_steering.rect(); }
 
-    static bool overlaps() { return s_instance.m_overlaps; }
+    static bool overlaps(PlayerMode mode) { return s_instance.m_overlaps == mode; }
     static bool isSprinting() { return s_instance.sprinting; }
     static void setZ(uint8_t z) { s_instance.m_z = z; }
 
