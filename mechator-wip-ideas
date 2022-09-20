@@ -7,6 +7,7 @@
   - (0.5k) cut up UI legend & procedurally generate
   - (? 1k) look into unifying Soldier::update/Jeep::update etc.
 
+- add vehicle enter UI - highlight target vehicle. See Soldier::overlaps
 - add unlocked shops to map?
 
 - fix all sequences that rely on checking for turrets / barracks to set modes

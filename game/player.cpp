@@ -82,40 +82,25 @@ void Soldier::update(float dt)
 
     s_instance.m_steering.update(dt, controls.x , controls.y, s_instance.sprinting ? 1.7f : 1.0f, true);
 
-    if (!controls.a.held()) s_instance.m_aim = s_instance.m_steering.aim();
+    if (!controls.a.held() || s_instance.sprinting) s_instance.m_aim = s_instance.m_steering.aim();
 
     if (Player::weaponCooldown(dt) && !s_instance.sprinting) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
 
-    bool overlap_jeep = Jeep::alive() && (Jeep::position() - s_instance.m_steering.pos()).length() < 6;
-    bool overlap_heli = Helicopter::alive() && (Helicopter::position() - s_instance.m_steering.pos()).length() < 6;
-    bool overlap_tank = Tank::alive() && (Tank::position() - s_instance.m_steering.pos()).length() < 6;
-    bool overlap_boat = Boat::alive() && (Boat::position() - s_instance.m_steering.pos()).length() < 18;
-    s_instance.m_overlaps = overlap_jeep || overlap_heli || overlap_tank || overlap_boat;
+    PlayerMode overlaps = PlayerMode::SoldierMode;
 
-    if (controls.b.pressed() && mode_switch_counter > 1) {
-        if (overlap_jeep) {
-            Player::s_mode = PlayerMode::JeepMode;
-            mode_switch_counter = 0;
-            UI::showHealthbar();
-        }
-        else if (overlap_heli) {
-            Player::s_mode = PlayerMode::HelicopterMode;
-            Helicopter::launch();
-            mode_switch_counter = 0;
-            UI::showHealthbar();
-        }
-        else if (overlap_tank) {
-            Player::s_mode = PlayerMode::TankMode;
-            mode_switch_counter = 0;
-            UI::showHealthbar();
-        }
-        else if (overlap_boat) {
-            Player::s_mode = PlayerMode::BoatMode;
-            mode_switch_counter = 0;
-            UI::showHealthbar();
-        }
+    if (Jeep::alive() && (Jeep::position() - s_instance.m_steering.pos()).length() < 6) overlaps = PlayerMode::JeepMode;
+    else if (Helicopter::alive() && (Helicopter::position() - s_instance.m_steering.pos()).length() < 6) overlaps = PlayerMode::HelicopterMode;
+    else if (Tank::alive() && (Tank::position() - s_instance.m_steering.pos()).length() < 6) overlaps = PlayerMode::TankMode;
+    else if (Boat::alive() && (Boat::position() - s_instance.m_steering.pos()).length() < 18) overlaps = PlayerMode::BoatMode;
+    s_instance.m_overlaps = overlaps != SoldierMode;
+    // TODO: store as PlayerMode instead of bool to draw highlights
+
+    if (controls.b.pressed() && mode_switch_counter > 1 && s_instance.m_overlaps) {
+        Player::s_mode = overlaps;
+        mode_switch_counter = 0;
+        UI::showHealthbar();
     }
 }
 

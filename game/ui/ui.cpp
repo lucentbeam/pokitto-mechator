@@ -468,22 +468,14 @@ void UI::draw()
 
     if (FSM::instance->is(GameStates::Game)) {
         ControlStatus ctrl = Controls::getStatus();
-        if (ctrl.a.held()) {
-            Helpers::drawNotchedRect(-2, 1, 11, 7, 10);
-            RenderSystem::sprite(1, 2, ui_icons[3], 0);
-        }
-        if (Player::mode() == PlayerMode::SoldierMode) {
-            if (Soldier::isSprinting()) {
-                Helpers::drawNotchedRect(-2, 9, 11, 7, 10);
-                RenderSystem::sprite(1, 10, ui_icons[0], 0);
-            } else if (Soldier::overlaps()) {
-                Helpers::drawNotchedRect(-2, 9, 11, 7, 10);
-                RenderSystem::sprite(1, 10, ui_icons[1], 0);
-            }
-        } else {
-            // check for valid heli and boat positions
-            Helpers::drawNotchedRect(-2, 9, 11, 7, 10);
-            RenderSystem::sprite(1, 10, ui_icons[2], 0);
+        if (Player::mode() == PlayerMode::SoldierMode && Soldier::isSprinting()) {
+            Helpers::drawNotchedRect(110-1-27, 88-1-9, 27, 9, 0);
+            RenderSystem::print(110-1-25, 88-1-8, "sprint", 10);
+        } else if (ctrl.a.held()) {
+            Helpers::drawNotchedRect(110-1-22, 88-1-9, 22, 9, 0);
+            RenderSystem::print(110-1-14, 88-1-8, "aim", 10);
+            const uint8_t lock[] = {4, 5, 0, 10, 10, 0, 10, 0, 0, 10, 10, 0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+            RenderSystem::sprite(110-1-20, 80, lock, 0, 10, 9);
         }
     }
 }

@@ -189,6 +189,7 @@ void drawGameState() {
     Tank::draw();
     Boat::draw();
     Helicopter::drawGround();
+
     Soldier::draw();
     ProjectileManager::draw();
     EffectManager::draw();
