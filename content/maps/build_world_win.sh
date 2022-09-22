@@ -4,4 +4,4 @@ cp spawnpoints.h ../../game/maps/
 cp worldtiles.h ../../game/maps/
 #cp worldmutables.h ../../game/maps/
 #cp mapsprite.h ../../game/maps/
-cp doors.h ../../game/maps/
+#cp doors.h ../../game/maps/

@@ -86,7 +86,6 @@ HEADERS += \
     game/maps/regiontransitionhandler.h \
     game/maps/spawnpoint.h \
     game/maps/spawnpoints.h \
-    game/maps/doors.h \
     #game/maps/worldmutables.h \
     game/physics/pathfinding.h \
     game/rendering/cloudmanager.h \

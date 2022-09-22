@@ -7,6 +7,7 @@
 #include "core/utilities/vec.h"
 #include "game/enums.h"
 #include "game/constants.h"
+#include "game/maps/worldtiles.h"
 
 #ifdef DEBUGS
 struct DebugOptions {
@@ -31,7 +32,7 @@ struct GameStorage {
 
     uint8_t questStatus = 0;
 
-    DoorStatus door_states[20];
+    DoorStatus door_states[spawnpoint_data_count] = { DoorStatus::Hidden };
     int activated_doors[doors_count];
     int acquired_specials[specials_count];
 

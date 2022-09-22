@@ -88,20 +88,4 @@ public:
     static void clearAll();
 };
 
-
-template <int h>
-void spawnVerticalLasers(const Vec2i &loc) {
-    Enemy::createLasers(loc, true, h);
-}
-
-template <int w>
-void spawnHorizontalLasers(const Vec2i &loc) {
-    Enemy::createLasers(loc, false, w);
-}
-
-template <int w, int h>
-void spawnWaterMine(const Vec2i &loc) {
-    Enemy::spawnWaterMine(loc, w, h);
-}
-
 #endif // ENEMY_H

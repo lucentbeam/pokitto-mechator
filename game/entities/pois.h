@@ -50,29 +50,4 @@ public:
     static bool canBuild(PlayerMode mode);
 };
 
-template <int x1, int y1, int x2, int y2, int x3, int y3>
-void spawnShop(const Vec2i &loc) {
-    POIs::spawnShop(loc,Vec2f(x1*6,y1*6),Vec2f(x2*6,y2*6),Vec2f(x3*6,y3*6));
-}
-
-template <int l, int t, int w, int h, int tile>
-void spawnDoorA(const Vec2i &loc) {
-    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, tile, POIType::DoorA);
-}
-
-template <int l, int t, int w, int h, int tile>
-void spawnDoorB(const Vec2i &loc) {
-    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, tile, POIType::DoorB);
-}
-
-template <int l, int t, int w, int h, int tile>
-void spawnDoorC(const Vec2i &loc) {
-    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, tile, POIType::DoorC);
-}
-
-template <int l, int t, int w, int h, int tile>
-void spawnDoorNone(const Vec2i &loc) {
-    POIs::spawnDoor(loc, l*6, t*6, w*6, h*6, tile, POIType::DoorNone);
-}
-
 #endif // POIS_H

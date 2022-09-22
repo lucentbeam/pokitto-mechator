@@ -6,15 +6,40 @@
 
 class SpawnPoint
 {
-    const Vec2i m_pos;
-
-    static bool s_active_points[];
-    static bool s_active_doors[];
 
 public:
+    enum SpawnPointType : uint8_t {
+        Shop = 0,
+
+        DoorA = 1,
+        DoorB = 2,
+        DoorC = 3,
+        DoorNone = 4,
+
+        KeyA,
+        KeyB,
+        KeyC,
+
+        HackingKit,
+        Blueprint,
+
+        EnemyBarracks,
+        Mine,
+        WaterMine,
+        Boat,
+        Tank,
+        Mech,
+        Turret,
+        TurretDisabled,
+        Bomber,
+        Helicopter,
+        LasersVert,
+        LasersHoriz
+    };
+
     static const POIType door_labels[];
 
-    constexpr SpawnPoint(const Vec2i &pos, void (* const onApproach)(const Vec2i &)): m_pos(pos * 6), m_on_approach(onApproach) {}
+    constexpr SpawnPoint(const Vec2i &pos, const SpawnPointType t): m_pos(pos * 6), m_type(t) {}
 
     static void setActiveRegion();
 
@@ -24,7 +49,17 @@ public:
 
     static void openDoorAt(const Vec2f &pos);
 
-    void (* const m_on_approach)(const Vec2i &);
+    static void approach(const SpawnPoint &s, int idx);
+
+    SpawnPointType type() const { return m_type; }
+
+private:
+
+    const Vec2i m_pos;
+
+    const SpawnPointType m_type;
+
+    static bool s_active_points[];
 };
 
 #endif // SPAWNPOINT_H

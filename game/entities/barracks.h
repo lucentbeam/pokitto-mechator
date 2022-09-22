@@ -70,9 +70,4 @@ public:
 #endif
 };
 
-template <int l, int t, int w, int h>
-void spawnBarracks(const Vec2i &loc) {
-    Barracks::create(loc, l, t, w, h);
-}
-
 #endif // BARRACKS_H

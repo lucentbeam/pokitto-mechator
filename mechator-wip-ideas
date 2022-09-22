@@ -4,8 +4,9 @@
   - (1.5k) reduce boat size?
   - (0.7k) pokitto logo -> RLE
   - (0.5k) unify Weapon::checkFireWeapon
-  - (0.5k) cut up UI legend & procedurally generate
+  X (0.5k) cut up UI legend & procedurally generate
   - (? 1k) look into unifying Soldier::update/Jeep::update etc.
+  - (?0.2) merge spawnKeyCardA, spawnKeyCardB, etc.
 
 - add unlocked shops to map?
 

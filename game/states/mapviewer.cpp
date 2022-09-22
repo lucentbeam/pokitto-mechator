@@ -14,8 +14,10 @@
 #include "game/player.h"
 
 #include "game/variables.h"
-#include "game/maps/doors.h"
 #include "game/utilities/blinker.h"
+
+#include "game/maps/spawnpoint.h"
+#include "game/maps/spawnpoints.h"
 
 static UIElement title_prompt = UIElement::getExpander(48,8,48,11, Tween::Easing::OutQuad);
 static UIElement map_area = UIElement::getExpander(48,50,84,66, Tween::Easing::OutQuad);
@@ -72,28 +74,13 @@ void MapViewer::draw()
             RenderSystem::sprite(tl.x() + delta_x_island_1 / 4, tl.y() + delta_y_island_1 / 4, island_1_reduced, island_1_reduced[2]);
             RenderSystem::sprite(tl.x() + delta_x_island_2 / 4, tl.y() + delta_y_island_2 / 4, island_2_reduced, island_2_reduced[2]);
             RenderSystem::sprite(tl.x() + delta_x_island_3 / 4, tl.y() + delta_y_island_3 / 4, island_3_reduced, island_3_reduced[2]);
-            if (playerloc_blink.active()) {
-                Vec2f pos = Player::position();
-                pos *= world_to_loc;
-                if (pos.x() < (x - tl.x())) {
-                    pos.setX(x - tl.x());
-                } else if (pos.x() > (x - tl.x() + w - 2)) {
-                    pos.setX(x - tl.x() + w - 2);
-                }
-                if (pos.y() < (y - tl.y())) {
-                    pos.setY(y - tl.y());
-                } else if (pos.y() > (y - tl.y() + h - 2)) {
-                    pos.setY(y - tl.y() + h - 2);
-                }
-                RenderSystem::pixel(tl.x() + pos.x(), tl.y() + pos.y(), 10);
-            }
 
             int color;
-            for (int i = 0; i < door_count; ++i) {
+            for (int i = 0; i < spawnpoint_data_count; ++i) {
                 if (GameVariables::doorStates()[i] == Discovered) {
-                    color = SpawnPoint::door_labels[i] == POIType::DoorA ? 48 : SpawnPoint::door_labels[i] == POIType::DoorB ? 32 : 16;
-                    Vec2f pos = doors[i].pos();
-                    pos *= world_to_loc;
+                    SpawnPoint pt = points[i];
+                    color = pt.type() == SpawnPoint::SpawnPointType::DoorA ? 48 : pt.type() == SpawnPoint::SpawnPointType::DoorB ? 32 : 16;
+                    Vec2f pos = pt.pos() * world_to_loc;
                     RenderSystem::drawRect(tl.x() + pos.x() - 1, tl.y() + pos.y() - 1, 3, 2, color);
                 }
             }
@@ -118,6 +105,22 @@ void MapViewer::draw()
             RenderSystem::print(92, y + h/2 - 4, "goal", 10);
 
             RenderSystem::print(92, y + h/2 + 5, "door", 10);
+
+            if (playerloc_blink.active()) {
+                Vec2f pos = Player::position();
+                pos *= world_to_loc;
+                if (pos.x() < (x - tl.x())) {
+                    pos.setX(x - tl.x());
+                } else if (pos.x() > (x - tl.x() + w - 2)) {
+                    pos.setX(x - tl.x() + w - 2);
+                }
+                if (pos.y() < (y - tl.y())) {
+                    pos.setY(y - tl.y());
+                } else if (pos.y() > (y - tl.y() + h - 2)) {
+                    pos.setY(y - tl.y() + h - 2);
+                }
+                RenderSystem::pixel(tl.x() + pos.x(), tl.y() + pos.y(), 10);
+            }
         }
     });
     title_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){

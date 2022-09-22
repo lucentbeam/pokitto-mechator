@@ -38,30 +38,6 @@ int WinMain()
     RenderSystem::initialize();
     AudioSystem::initialize();
 
-#ifdef DEBUGS
-//    std::cout << sizeof(Projectile) << std::endl;
-//    std::cout << sizeof(Effect) << std::endl;
-//    std::cout << sizeof(EnemyMech) << std::endl;
-//    std::cout << sizeof(EnemyTank) << std::endl;
-//    std::cout << sizeof(Steering) << std::endl;
-//    std::cout << sizeof(EnemyBomber) << std::endl;
-//    std::cout << sizeof(EnemyLasers) << std::endl;
-//    std::cout << sizeof(EnemyHelicopter) << std::endl;
-//    std::cout << sizeof(EnemyTurret) << std::endl;
-
-#endif
-//    Soldier::setPosition({73 * 6, 110 * 6}); // canyons
-//    Soldier::setPosition({28 * 6, 8 * 6}); // tutorial island
-//    Soldier::setPosition({38 * 6, 118 * 6}); // tank factory
-//    Soldier::setPosition({138 * 6, 195 * 6}); // boat yard
-//    Soldier::setPosition({76 * 6, 158 * 6}); // before cape
-
-//    Soldier::setPosition({132 * 6, 114 * 6});
-//    Jeep::setPosition({132 * 6, 114 * 6});
-//    Jeep::health().setMax();
-
-
-//    AudioSystem::setVolume(0);
     Camera::update(Soldier::position().x(), Soldier::position().y());
 
     FSM fsm;
