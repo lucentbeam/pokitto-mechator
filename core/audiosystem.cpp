@@ -330,32 +330,32 @@ void AudioSystem::setMusicFraction(float fraction) {
 Audio::Sink<6, PROJ_AUD_FREQ> audio;
 
 template <int N>
-void playOnChannel(SFX sfx) {
+void playOnChannel(const char * path) {
+    Audio::play<N>(path)->setLoop(false);
+}
+
+void AudioSystem::play(SFX sfx) {
     std::string path = "/data/mechator/";
     std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
     path += names[int(sfx)];
     path += ".raw";
-    Audio::play<N>(path.c_str())->setLoop(false);
-}
-
-void AudioSystem::play(SFX sfx) {
     static int channel = 0;
     channel = (channel + 1) % 5;
     switch(channel) {
         case 0:
-            playOnChannel<1>(sfx);
+            playOnChannel<1>(path.c_str());
             break;
         case 1:
-            playOnChannel<2>(sfx);
+            playOnChannel<2>(path.c_str());
             break;
         case 2:
-            playOnChannel<3>(sfx);
+            playOnChannel<3>(path.c_str());
             break;
         case 3:
-            playOnChannel<4>(sfx);
+            playOnChannel<4>(path.c_str());
             break;
         case 4:
-            playOnChannel<5>(sfx);
+            playOnChannel<5>(path.c_str());
             break;
         default:
             break;

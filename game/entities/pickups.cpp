@@ -120,7 +120,7 @@ int fetchBlueprintIndex(const Vec2i &pos) {
         idx++;
     }
     if (idx >= bpcount) {
-        std::cout << "No blueprint at index " << pidx << std::endl;
+        //std::cout << "No blueprint at index " << pidx << std::endl;
         return -1;
     }
     return idx;

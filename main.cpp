@@ -27,12 +27,14 @@
 #include "game/constants.h"
 #include "game/player.h"
 
-#include "game/maps/spawnpoints.h"
-
 #ifdef DEBUGS
 int main (int argv, char * args[])
 #else
+#ifndef DESKTOP_BUILD
+int main (int argv, char * args[])
+#else
 int WinMain()
+#endif
 #endif
 {
     RenderSystem::initialize();

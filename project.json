@@ -4959,6 +4959,81 @@
 		},
 		"\\game\\states\\gameover.h": {
 			"sdcard": false
+		},
+		"\\content\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release": {
+			"sdcard": false
+		},
+		"\\content\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\debug": {
+			"sdcard": false
+		},
+		"\\content\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile": {
+			"sdcard": false
+		},
+		"\\content\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release": {
+			"sdcard": false
+		},
+		"\\content\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile.Release": {
+			"sdcard": false
+		},
+		"\\content\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\Makefile.Debug": {
+			"sdcard": false
+		},
+		"\\content\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release\\main.obj": {
+			"sdcard": false
+		},
+		"\\content\\build-TiledMapReader-Desktop_Qt_5_12_3_MSVC2017_64bit-Release\\release\\TiledMapReader.exe": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.VcQrUw": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\objectpool.h.DjBoGx": {
+			"sdcard": false
+		},
+		"\\main.cpp.eStkpz": {
+			"sdcard": false
+		},
+		"\\main.cpp.Zueqzz": {
+			"sdcard": false
+		},
+		"\\main.cpp.AJemes": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.Ojoypo": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.pxgMpf": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.jSxsYF": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pois.cpp.hdvEHV": {
+			"sdcard": false
+		},
+		"\\main.cpp.CqOlsR": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.mbRgzf": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.inacsO": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.sTculh": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\spawnpoints.obj": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.oAYxJV": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.brmYNI": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

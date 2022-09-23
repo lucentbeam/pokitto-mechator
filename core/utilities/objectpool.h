@@ -119,6 +119,7 @@ Obj *SimplePool<Obj,Count>::activateNext()
             return m_objects + i;
         }
     }
+    return nullptr;
 }
 
 template<class Obj, int Count>

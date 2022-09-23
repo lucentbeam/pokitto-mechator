@@ -21,6 +21,7 @@ SOURCES += \
     game/maps/alertregion.cpp \
     game/maps/regiontransitionhandler.cpp \
     game/maps/spawnpoint.cpp \
+    game/maps/spawnpoints.cpp \
     game/physics/pathfinding.cpp \
     game/player.cpp \
     game/rendering/cloudmanager.cpp \
