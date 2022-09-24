@@ -8,8 +8,6 @@
   - (? 1k) look into unifying Soldier::update/Jeep::update etc.
   - (?0.2) merge spawnKeyCardA, spawnKeyCardB, etc.
 
-- add unlocked shops to map?
-
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
 - unlocking blueprints adds weapons / powerups

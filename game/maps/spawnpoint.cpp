@@ -18,7 +18,7 @@ void SpawnPoint::setActiveRegion()
         if (Camera::inActiveZone(points[i].m_pos)) {
             if (!s_active_points[i]) {
                 SpawnPoint::approach(points[i], i);
-                bool door = points[i].m_type == DoorA || points[i].m_type == DoorB || points[i].m_type == DoorC;
+                bool door = points[i].m_type == DoorA || points[i].m_type == DoorB || points[i].m_type == DoorC || points[i].m_type == Shop;
                 if (door && i < spawnpoint_data_count && GameVariables::doorStates()[i] == Hidden) {
                     GameVariables::doorStates()[i] = Discovered;
                 }
@@ -106,10 +106,12 @@ void SpawnPoint::approach(const SpawnPoint &s, int idx)
         Enemy::createHelicopter(s.m_pos);
         break;
     case LasersVert:
-        Enemy::createLasers(s.m_pos, true, dat[0]);
+        std::cout << idx << " " << spawnpoint_data_indices[idx] << std::endl;
+//        Enemy::createLasers(s.m_pos, true, dat[0]);
         break;
     case LasersHoriz:
-        Enemy::createLasers(s.m_pos, false, dat[0]);
+        std::cout << idx << " " << spawnpoint_data_indices[idx] << std::endl;
+//        Enemy::createLasers(s.m_pos, false, dat[0]);
         break;
     }
 }

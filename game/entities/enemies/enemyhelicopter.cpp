@@ -95,9 +95,9 @@ void EnemyHelicopter::drawAir() const
     auto pos = Camera::worldToScreen(m_steering.pos()) - Vec2f(9.5f, 9.5f);
     if (m_damage_frames > 0) {
         RenderSystem::sprite(pos.x(), pos.y(), enemy_helicopter[m_steering.getRotationFrame(m_steering.aim(), 4.0f)], enemy_helicopter[0][2], 10, m_steering.aim().x() > 0);
-        if ((m_counter % 3) == 2) RenderSystem::sprite(pos.x() + (m_steering.facing().x() > 0 ? 1 : 0), pos.y(), helicopter_blades[1 + (m_counter % 12)/3], helicopter_blades[0][2], 10, false);
+        if ((m_counter % 3) == 2) RenderSystem::sprite(pos.x() + (m_steering.facing().x() > 0 ? 1 : 0), pos.y(), helicopter_blades[1 + (m_counter % 6)/3], helicopter_blades[0][2], 10, false);
     } else {
         RenderSystem::sprite(pos.x(), pos.y(), enemy_helicopter[m_steering.getRotationFrame(m_steering.aim(), 4.0f)], enemy_helicopter[0][2], m_steering.aim().x() > 0);
-        if ((m_counter % 3) == 2) RenderSystem::sprite(pos.x() + (m_steering.facing().x() > 0 ? 1 : 0), pos.y(), helicopter_blades[1 + (m_counter % 12)/3], helicopter_blades[0][2]);
+        if ((m_counter % 3) == 2) RenderSystem::sprite(pos.x() + (m_steering.facing().x() > 0 ? 1 : 0), pos.y(), helicopter_blades[1 + (m_counter % 6)/3], helicopter_blades[0][2]);
     }
 }
