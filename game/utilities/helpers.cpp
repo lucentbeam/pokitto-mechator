@@ -66,4 +66,14 @@ namespace  Helpers {
         }
     }
 
+    void drawRotatedBox(Vec2f start, Vec2f dir, float length, int threecolors[])
+    {
+        bool flip = dir.x() < 0;
+        Vec2f rot = dir.rot90() * 0.75f;
+        Vec2f offset = start + dir * length;
+        RenderSystem::drawLine(offset.x() + rot.x(), offset.y() + rot.y(), start.x() + rot.x(), start.y() + rot.y(), flip ? threecolors[2] : threecolors[0]);
+        RenderSystem::drawLine(offset.x(), offset.y(), start.x(), start.y(), threecolors[1]);
+        RenderSystem::drawLine(offset.x() - rot.x(), offset.y() - rot.y(), start.x() - rot.x(), start.y() - rot.y(), flip ? threecolors[0] : threecolors[2]);
+    }
+
 }

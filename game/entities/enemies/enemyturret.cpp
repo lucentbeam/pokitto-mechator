@@ -86,11 +86,17 @@ bool EnemyTurret::update(float dt)
 void EnemyTurret::draw() const
 {
     auto pos = Camera::worldToScreen(m_pos) - Vec2f(6.0f, 6.5f);
+    int cols[3] = {9, 8, 7};
     if (m_life > 0 && m_damage_frames > 0) {
         RenderSystem::sprite(pos.x(), pos.y(), enemy_turret_base[0], enemy_turret_base[0][2], 10, false);
-        RenderSystem::sprite(pos.x(), pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_smoothaim, 8.0f)], enemy_tank_cannon[0][2], 10, m_smoothaim.x() > 0);
+        cols[0] = 10;
+        cols[1] = 10;
+        cols[2] = 10;
+        Helpers::drawRotatedBox(pos + Vec2f(6.5f, 5.5f), m_smoothaim, 9.0f, cols);
     } else {
         RenderSystem::sprite(pos.x(), pos.y(), enemy_turret_base[m_life <= 0 ? 1 : 0], enemy_turret_base[0][2]);
-        if (m_life > 0) RenderSystem::sprite(pos.x(), pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_smoothaim, 8.0f)], enemy_tank_cannon[0][2], m_smoothaim.x() > 0);
+        if (m_life > 0) {
+            Helpers::drawRotatedBox(pos + Vec2f(6.5f, 5.5f), m_smoothaim, 9.0f, cols);
+        }
     }
 }

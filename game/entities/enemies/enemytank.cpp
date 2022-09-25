@@ -133,25 +133,15 @@ bool EnemyTank::update(float dt)
 void EnemyTank::draw() const
 {
     auto pos = Camera::worldToScreen(m_steering.pos()) - Vec2f(6.0f, 6.5f);
+    int cols[3] = {9, 8, 7};
     if (m_damage_frames > 0) {
         RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], 10, m_aim.x() > 0);
-        int ox = m_steering.facing().x() > 0 && m_aim.x() < 0 ? 1 : 0;
-        RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_aim, 8.0f)], enemy_tank_cannon[0][2], 10, m_aim.x() > 0);
+        cols[0] = 10;
+        cols[1] = 10;
+        cols[2] = 10;
+        Helpers::drawRotatedBox(pos + Vec2f(6.5f, 6.5f), m_aim, 7.0f, cols);
     } else {
         RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], m_steering.facing().x() > 0);
-        int ox = m_steering.facing().x() > 0 && m_aim.x() < 0 ? 1 : 0;
-        RenderSystem::sprite(pos.x() + ox, pos.y(), enemy_tank_cannon[Steering::getRotationFrame(m_aim, 8.0f)], enemy_tank_cannon[0][2], m_aim.x() > 0);
+        Helpers::drawRotatedBox(pos + Vec2f(6.5f, 6.5f), m_aim, 7.0f, cols);
     }
-
-//    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal});
-//    std::vector<Vec2f> path;
-//    Pathfinding::getPath(m_steering.pos(), Camera::center(), mask, &path);
-//    int i = path.size();
-//    for(auto p : path) {
-//        bool hit = CollisionManager::collides(p * 6 + Vec2f(3,3), mask);
-//        Vec2f pos = Camera::worldToScreen(p * 6);
-//        RenderSystem::drawRect(pos.x()-3, pos.y()-3, 6, 6, 38);
-//        Helpers::printHorizontallyCentered(pos.x(), pos.y() - 3, std::to_string(i).c_str(), hit ? 15 : 41);
-//        --i;
-//    }
 }

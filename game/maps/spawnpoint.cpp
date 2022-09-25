@@ -106,12 +106,10 @@ void SpawnPoint::approach(const SpawnPoint &s, int idx)
         Enemy::createHelicopter(s.m_pos);
         break;
     case LasersVert:
-        std::cout << idx << " " << spawnpoint_data_indices[idx] << std::endl;
-//        Enemy::createLasers(s.m_pos, true, dat[0]);
+        Enemy::createLasers(s.m_pos, true, dat[0]);
         break;
     case LasersHoriz:
-        std::cout << idx << " " << spawnpoint_data_indices[idx] << std::endl;
-//        Enemy::createLasers(s.m_pos, false, dat[0]);
+        Enemy::createLasers(s.m_pos, false, dat[0]);
         break;
     }
 }

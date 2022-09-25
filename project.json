@@ -5034,6 +5034,9 @@
 		},
 		"\\game\\maps\\spawnpoints.h.brmYNI": {
 			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.TxxFfe": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
