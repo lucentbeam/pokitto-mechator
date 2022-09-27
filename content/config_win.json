@@ -1,7 +1,7 @@
 {
-    "palette" : "/home/benjamin/pokitto-mechator/content/art/jungle.hex",
-	"output_path" : "/home/benjamin/pokitto-mechator/game/",
-	"input_path" : "/home/benjamin/pokitto-mechator/content/art/exports/",
+    "palette" : "art/jungle.hex",
+	"output_path" : "../game/",
+	"input_path" : "art/exports/",
 	
 	"files": [ 
 		
@@ -23,7 +23,6 @@
 		{ "output" : "enemy_tank", "hcount": 5},
 		{ "output" : "enemy_boat", "hcount": 5},
 		{ "output" : "enemy_plane" },
-		{ "output" : "enemy_tank_cannon", "hcount": 9 },
 		{ "output" : "enemy_turret_base", "hcount": 2 },
 		{ "output" : "enemy_helicopter", "hcount": 5 },
 		{ "output" : "enemy_laser_ns", "hcount": 2 },
@@ -63,8 +62,7 @@
 		{ "output" : "title_shot_2", "rle": true},
 		
 		{ "output" : "ui_icons", "hcount": 4},
-		{ "output" : "ui_arrow_left"},
-		{ "output" : "ui_legend" }
+		{ "output" : "ui_arrow_left"}
 
 	]
 }

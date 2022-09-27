@@ -5037,6 +5037,72 @@
 		},
 		"\\game\\maps\\spawnpoint.cpp.TxxFfe": {
 			"sdcard": false
+		},
+		"\\content\\config_win.json": {
+			"sdcard": false
+		},
+		"\\content\\pokitto-img-processor.exe": {
+			"sdcard": false
+		},
+		"\\content\\art\\boat_small.aseprite": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.raPVfO": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.UoIPkr": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.LKKbAi": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.cvXMHu": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.oEhxfv": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.autosave.qXQWpG": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.IEOSom": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.GTXAED": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.IuyywZ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.zyJUto": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.MSyzwk": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.cNPiyb": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.oSrgOb": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.ZWajmx": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.CFEtlI": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.DMZmXi": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.kMlMkQ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemylasers.cpp.kIKESb": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

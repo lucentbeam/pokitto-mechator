@@ -49,21 +49,22 @@ bool EnemyLasers::update(float dt)
 void EnemyLasers::draw() const
 {
     auto pos = Camera::worldToScreen(m_pos);
-    if (vertical) {
-        RenderSystem::sprite(pos.x(), pos.y(), enemy_laser_ns[1], enemy_laser_ns[0][2]);
-        RenderSystem::sprite(pos.x(), pos.y() + (size - 1) * 6 + 3, enemy_laser_ns[0], enemy_laser_ns[0][2]);
-        if (m_counter >= laserDelay) {
-            RenderSystem::drawLine(pos.x() + 3 - (rand() % 2), pos.y() + 3, pos.x() + 3 - (rand() % 2), pos.y() + (size - 1) * 6 + 3, (rand() % 3 < 1) ? 19 : 17);
-        } else if (m_counter > (laserDelay - 45) && m_counter < (laserDelay - 35)) {
-            RenderSystem::drawLine(pos.x() + 3 - (rand() % 2), pos.y() + 3, pos.x() + 3 - (rand() % 2), pos.y() + (size - 1) * 6 + 3, (rand() % 3 < 1) ? 7 : 6);
-        }
-    } else {
-        RenderSystem::sprite(pos.x(), pos.y(), enemy_laser_ew[1], enemy_laser_ew[0][2]);
-        RenderSystem::sprite(pos.x() + (size - 1) * 6 + 3, pos.y(), enemy_laser_ew[0], enemy_laser_ew[0][2]);
-        if (m_counter >= laserDelay) {
-            RenderSystem::drawLine(pos.x() + 3, pos.y() + 3 - (rand() % 2), pos.x() + 3 + (size - 1) * 6, pos.y() + 3 - (rand() % 2), (rand() % 3 < 1) ? 19 : 17);
-        } else if (m_counter > (laserDelay - 45) && m_counter < (laserDelay - 35)) {
-            RenderSystem::drawLine(pos.x() + 3, pos.y() + 3 - (rand() % 2), pos.x() + 3 + (size - 1) * 6, pos.y() + 3 - (rand() % 2), (rand() % 3 < 1) ? 7 : 6);
-        }
+    Vec2f pos2 = Vec2f(0.0f, (size - 1) * 6 + 3);
+    if (!vertical) pos2 = Vec2f(pos2.y(), pos2.x());
+    pos2 += pos;
+    const uint8_t (*spr)[20] = vertical ? enemy_laser_ns : enemy_laser_ew;
+    RenderSystem::sprite(pos.x(), pos.y(),   spr[1], spr[0][2]);
+    RenderSystem::sprite(pos2.x(), pos2.y(), spr[0], spr[0][2]);
+    bool charge = m_counter > (laserDelay - 45) && m_counter < (laserDelay - 35);
+    if (m_counter < laserDelay && !charge) return;
+    Vec2f off1 = Vec2f(3 - (rand() % 2), 3);
+    Vec2f off2 = Vec2f(3 - (rand() % 2), 0);
+    if (!vertical) {
+        off1 = Vec2f(off1.y(), off1.x());
+        off2 = Vec2f(off2.y(), off2.x());
     }
+    pos += off1;
+    pos2 += off2;
+    int color = m_counter >= laserDelay ? ((rand() % 3 < 1) ? 19 : 17) : ((rand() % 3 < 1) ? 7 : 6);
+    RenderSystem::drawLine(pos.x(), pos.y(), pos2.x(), pos2.y(), color);
 }
