@@ -65,9 +65,9 @@ void POIs::spawnShop(const Vec2i &pos, const Vec2f &jeep_loc, const Vec2f &boat_
         return;
     }
     p->m_position = pos;
-    p->m_jeep_loc = jeep_loc;
-    p->m_boat_loc = boat_loc;
-    p->m_heli_loc = heli_loc;
+    p->m_jeep_loc = jeep_loc * 6;
+    p->m_boat_loc = boat_loc * 6;
+    p->m_heli_loc = heli_loc * 6;
     p->m_door_type = POIType::Shop;
     //int idx = mapIndexUnopened(pos) ? 0 : 1;
     p->m_sprite = SpriteWrapper(POIShopClosed);

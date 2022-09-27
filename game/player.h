@@ -36,7 +36,7 @@ const SteeringConfig steering_tank(tankSpeed, tankCornering,
 
 const SteeringConfig steering_boat(boatSpeed, boatCornering,
        (1 << Terrain::Wall) | (1 << Terrain::WaterShallow) | (1 << Terrain::None) | (1 << Terrain::Grass) | (1 << Terrain::Mud) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
-       12, 12, boatFriction);
+       6, 6, boatFriction);
 
 const SteeringConfig steering_heli(heliSpeed, heliCornering, 0, 14, 14, heliFriction);
 

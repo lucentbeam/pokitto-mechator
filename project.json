@@ -5103,6 +5103,30 @@
 		},
 		"\\game\\entities\\enemies\\enemylasers.cpp.kIKESb": {
 			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.gKfwQf": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.DIqxVz": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.DRVeFo": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pois.cpp.cqMcvE": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pois.cpp.bntdrm": {
+			"sdcard": false
+		},
+		"\\game\\states\\repairs.cpp.kMNJjd": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.aiLjWY": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.YdIspQ": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

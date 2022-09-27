@@ -97,6 +97,7 @@ void Soldier::update(float dt)
         Player::s_mode = s_instance.m_overlaps;
         mode_switch_counter = 0;
         UI::showHealthbar();
+        if (Player::s_mode == HelicopterMode) Helicopter::launch();
     }
 }
 
@@ -291,7 +292,7 @@ void Helicopter::drawAir()
         pos = Camera::worldToScreen(s_instance.m_steering.pos());
         RenderSystem::drawRect(pos.x() - 3, pos.y() - 3, 8, 6, 16);
     }
-    pos = Camera::worldToScreen(position());
+    pos = Camera::worldToScreen(position());    
     RenderSystem::drawShadow(pos.x() - 9, pos.y() - 9 + s_instance.m_z, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0.1f);
     if (s_instance.flashing()) {
         RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
@@ -430,15 +431,15 @@ void Boat::draw()
     if (Player::s_mode == SoldierMode && Soldier::overlaps(BoatMode)) {
         int f = s_instance.m_steering.rotation_frame();
         bool flip = s_instance.m_steering.facing().x() > 0.1f;
-        RenderSystem::sprite(pos.x() - 10.5f, pos.y() - 9, boat[f], boat[0][2], 10, flip);
-        RenderSystem::sprite(pos.x() - 8.5f, pos.y() - 9, boat[f], boat[0][2], 10, flip);
-        RenderSystem::sprite(pos.x() - 8.5f, pos.y() - 11, boat[f], boat[0][2], 10, flip);
-        RenderSystem::sprite(pos.x() - 10.5f, pos.y() - 11, boat[f], boat[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 6, pos.y() - 4, boat[f], boat[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 4, pos.y() - 4, boat[f], boat[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 4, pos.y() - 6, boat[f], boat[0][2], 10, flip);
+        RenderSystem::sprite(pos.x() - 6, pos.y() - 6, boat[f], boat[0][2], 10, flip);
     }
     if (s_instance.flashing()) {
-        RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
+        RenderSystem::sprite(pos.x() - 5, pos.y() - 5, boat[s_instance.m_steering.rotation_frame()], boat[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
     } else {
-        RenderSystem::sprite(pos.x() - 9.5f, pos.y() - 10, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0.1f);
+        RenderSystem::sprite(pos.x() - 5, pos.y() - 5, boat[s_instance.m_steering.rotation_frame()], boat[0][2], s_instance.m_steering.facing().x() > 0.1f);
     }
     Player::drawReticle(BoatMode, s_instance.m_aim);
 }
