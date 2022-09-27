@@ -53,6 +53,8 @@ public:
 
     Projectile * setTargetMask(std::initializer_list<uint8_t> mask_enums);
 
+    Projectile * setTargetMask(uint16_t m);
+
     Projectile * setDamage(int d) { damage = d; return this; }
 
     Projectile * setIgnoreWalls() { ignore_walls = true; return this; }

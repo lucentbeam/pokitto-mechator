@@ -168,7 +168,6 @@ void Barracks::update(float dt)
                         });
                     } else if (b->m_spawntype == TankSpawn) {
                         EnemyTank * m = Enemy::createTank(b->m_spawn);
-                        m->setMissiles();
                         ++b->m_spawn_count;
                         auto ptr = &b->m_spawn_count;
                         auto ptr2 = barracks_data + b->m_barracks_index;

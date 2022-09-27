@@ -26,7 +26,6 @@ class EnemyTank
     uint8_t m_damage_frames = 0;
 
     bool m_drops_cash;
-    bool m_missiles;
 
     enum Mode : uint8_t { Walking, Preparing } status = Mode::Walking;
 
@@ -47,8 +46,6 @@ public:
     void setDropsCash(bool cash) { m_drops_cash = cash; }
 
     void setDeactivateCallback(std::function<void()> deactivate) { m_deactivate = deactivate; }
-
-    void setMissiles() { m_missiles = true; }
 
     int8_t life() const { return m_life; }
 

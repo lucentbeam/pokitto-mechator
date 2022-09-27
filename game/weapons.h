@@ -2,6 +2,7 @@
 #define WEAPONS_H
 
 #include "core/rendering/camera.h"
+#include "core/audiosystem.h"
 #include "core/utilities/vec.h"
 #include "core/controls.h"
 
@@ -21,27 +22,30 @@ struct WeaponConfig {
     const float lifetime;
     const float speed;
     const float speedvar;
+    const SFX sound;
 
-    constexpr WeaponConfig(float sps, int sz, float life, float spd) :
+    constexpr WeaponConfig(float sps, int sz, float life, float spd, SFX s) :
         seconds_per_shot(1.0f / sps),
         size(sz),
         lifetime(life),
         speed(spd),
-        speedvar(0)
+        speedvar(0),
+        sound(s)
     {}
 
-    constexpr WeaponConfig(float sps, int sz, float life, float spd, float spdvar) :
+    constexpr WeaponConfig(float sps, int sz, float life, float spd, float spdvar, SFX s) :
         seconds_per_shot(1.0f / sps),
         size(sz),
         lifetime(life),
         speed(spd),
-        speedvar(spdvar)
+        speedvar(spdvar),
+        sound(s)
     {}
 };
 
 class Weapon
 {
-    static bool checkFire(Projectile * &p, const Button &action, const WeaponConfig &config, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel);
+    static Projectile * fireWeapon(const WeaponConfig &config, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel, bool air, int dmg, SpriteName s, uint16_t mask, bool playsound = true);
 public:
 
     enum Type {

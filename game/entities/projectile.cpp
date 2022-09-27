@@ -51,6 +51,12 @@ Projectile * Projectile::setTargetMask(std::initializer_list<uint8_t> mask_enums
     return this;
 }
 
+Projectile *Projectile::setTargetMask(uint16_t m)
+{
+    mask = m;
+    return this;
+}
+
 Projectile *Projectile::setInAir(float pz, float pvz, bool destroy_at_ground)
 {
     z = pz;

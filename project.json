@@ -5127,6 +5127,57 @@
 		},
 		"\\game\\player.cpp.YdIspQ": {
 			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemytank.cpp.SrrRTS": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.knRcGR": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemytank.cpp.frVyPl": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemytank.cpp.opkKoB": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemytank.cpp.IgcDdK": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.sJPyda": {
+			"sdcard": false
+		},
+		"\\game\\entities\\projectile.h.NSustN": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.KnDfdS": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.autosave.AoOFfr": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.wpQZow": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.KVWFqG": {
+			"sdcard": false
+		},
+		"\\game\\weapons.h.XCkqkE": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.fUnEXu": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.Ibvffl": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.ZECOWB": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.NswPYC": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.hrBylv": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
