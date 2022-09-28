@@ -40,8 +40,6 @@ int WinMain()
     RenderSystem::initialize();
     AudioSystem::initialize();
 
-    Camera::update(Soldier::position().x(), Soldier::position().y());
-
     FSM fsm;
     fsm.add(GameStates::TitleState, Title::update, Title::draw, Title::go);
     fsm.add(GameStates::Game, updateGameState, drawGameState);

@@ -74,7 +74,7 @@ void Soldier::update(float dt)
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
-        s_instance.health().change(-damage);
+        s_instance.m_health.change(-damage);
         AudioSystem::play(sfxHit2);
     }
 
@@ -86,12 +86,17 @@ void Soldier::update(float dt)
 
     mode_switch_counter++;
 
-    s_instance.m_overlaps = PlayerMode::SoldierMode;
-
-    if (Jeep::alive() && (Jeep::position() - s_instance.m_steering.pos()).length() < 6) s_instance.m_overlaps = PlayerMode::JeepMode;
-    else if (Helicopter::alive() && (Helicopter::position() - s_instance.m_steering.pos()).length() < 6) s_instance.m_overlaps = PlayerMode::HelicopterMode;
-    else if (Tank::alive() && (Tank::position() - s_instance.m_steering.pos()).length() < 8) s_instance.m_overlaps = PlayerMode::TankMode;
-    else if (Boat::alive() && (Boat::position() - s_instance.m_steering.pos()).length() < 18) s_instance.m_overlaps = PlayerMode::BoatMode;
+    {
+        s_instance.m_overlaps = PlayerMode::SoldierMode;
+        const int sizes[4] = {6, 8, 10, 8};
+        const PlayerMode prefs[4] = {JeepMode, HelicopterMode, TankMode, BoatMode};
+        for(int i = 0; i < 4; ++i) {
+            if (Player::alive(prefs[i]) && (Player::position(prefs[i]) - s_instance.m_steering.pos()).length() < sizes[i]) {
+                s_instance.m_overlaps = prefs[i];
+                break;
+            }
+        }
+    }
 
     if (s_instance.m_overlaps != SoldierMode && controls.b.pressed() && mode_switch_counter > 1) {
         Player::s_mode = s_instance.m_overlaps;
@@ -149,14 +154,14 @@ void Jeep::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
-    Soldier::setPosition(position());
+    Player::setPosition(SoldierMode, s_instance.m_steering.pos());
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
         AudioSystem::play(sfxHit2);
-        s_instance.health().change(-damage);
-        if (!alive()) {
+        s_instance.m_health.change(-damage);
+        if (!Player::alive(JeepMode)) {
             onVehicleDestroyed();
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
@@ -175,7 +180,6 @@ void Jeep::update(float dt)
 
     Player::updateCounter();
     if (controls.b.pressed() && mode_switch_counter > 1) {
-        Soldier::setPosition(position());
         Player::s_mode = PlayerMode::SoldierMode;
         mode_switch_counter = 0;
         UI::showHealthbar();
@@ -184,7 +188,7 @@ void Jeep::update(float dt)
 
 void Jeep::draw()
 {
-    if (!alive()) return;
+    if (!Player::alive(JeepMode)) return;
     Vec2f jpos = Camera::worldToScreen(s_instance.m_steering.pos());
     if (Player::s_mode == SoldierMode && Soldier::overlaps(JeepMode)) {
         int f = s_instance.m_steering.rotation_frame();
@@ -202,6 +206,10 @@ void Jeep::draw()
     Player::drawReticle(JeepMode, s_instance.m_aim);
 }
 
+
+void Helicopter::launch() { s_instance.m_inAir = true; }
+
+bool Helicopter::active() { return Player::alive(HelicopterMode) && s_instance.m_inAir && s_instance.m_z >= 20.0f; }
 
 void Helicopter::update(float dt)
 {
@@ -234,7 +242,7 @@ void Helicopter::update(float dt)
 
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
-    Soldier::setPosition(s_instance.m_steering.pos());
+    Player::setPosition(SoldierMode, s_instance.m_steering.pos());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos() - Vec2f(0, s_instance.m_z), s_instance.m_aim, s_instance.m_steering.vel(), true);
@@ -245,13 +253,12 @@ void Helicopter::update(float dt)
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
         AudioSystem::play(sfxHit2);
-        s_instance.health().change(-damage);
-        if (!alive()) {
+        s_instance.m_health.change(-damage);
+        if (!Player::alive(HelicopterMode)) {
             onVehicleDestroyed();
-            Soldier::setPosition(s_instance.m_steering.pos());
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
-            EffectManager::createExplosionBig(position() - Vec2f(6,6));
+            EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
         }
     }
     if (controls.b.pressed()) {
@@ -270,7 +277,7 @@ void Helicopter::update(float dt)
 
 void Helicopter::drawGround()
 {
-    if (!alive() || s_instance.m_z > 0.0f) return;
+    if (!Player::alive(HelicopterMode) || s_instance.m_z > 0.0f) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
     if (Player::s_mode == SoldierMode && Soldier::overlaps(HelicopterMode)) {
         int f = s_instance.m_steering.rotation_frame();
@@ -286,13 +293,13 @@ void Helicopter::drawGround()
 
 void Helicopter::drawAir()
 {
-    if (!alive() || s_instance.m_z < 0.01f) return;
+    if (!Player::alive(HelicopterMode) || s_instance.m_z < 0.01f) return;
     Vec2f pos;
     if (no_heli_land > 0 && (no_heli_land % 8) < 3) {
         pos = Camera::worldToScreen(s_instance.m_steering.pos());
         RenderSystem::drawRect(pos.x() - 3, pos.y() - 3, 8, 6, 16);
     }
-    pos = Camera::worldToScreen(position());    
+    pos = Camera::worldToScreen(s_instance.m_steering.pos() + Vec2f(0, -s_instance.m_z));
     RenderSystem::drawShadow(pos.x() - 9, pos.y() - 9 + s_instance.m_z, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], s_instance.m_steering.facing().x() > 0.1f);
     if (s_instance.flashing()) {
         RenderSystem::sprite(pos.x() - 9, pos.y() - 9, helicopter[s_instance.m_steering.rotation_frame()], helicopter[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
@@ -318,7 +325,7 @@ void Tank::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
-    Soldier::setPosition(position());
+    Player::setPosition(SoldierMode, s_instance.m_steering.pos());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
@@ -327,8 +334,8 @@ void Tank::update(float dt)
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
         AudioSystem::play(sfxHit2);
-        s_instance.health().change(-damage);
-        if (!alive()) {
+        s_instance.m_health.change(-damage);
+        if (!Player::alive(TankMode)) {
             onVehicleDestroyed();
             Player::s_mode = PlayerMode::SoldierMode;
             UI::showHealthbar();
@@ -342,7 +349,6 @@ void Tank::update(float dt)
 
     Player::updateCounter();
     if (controls.b.pressed() && mode_switch_counter > 1) {
-        Soldier::setPosition(position());
         Player::s_mode = PlayerMode::SoldierMode;
         mode_switch_counter = 0;
         UI::showHealthbar();
@@ -351,7 +357,7 @@ void Tank::update(float dt)
 
 void Tank::draw()
 {
-    if (!alive()) return;
+    if (!Player::alive(TankMode)) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
     int offset = (mode_switch_counter % 30) < 15 && s_instance.m_steering.moving() ? 9 : 0;
     if (Player::s_mode == SoldierMode && Soldier::overlaps(TankMode)) {
@@ -381,7 +387,7 @@ void Boat::update(float dt)
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
     s_instance.m_steering.update(dt, controls.x, controls.y);
-    Soldier::setPosition(position());
+    Player::setPosition(SoldierMode, s_instance.m_steering.pos());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
@@ -389,9 +395,9 @@ void Boat::update(float dt)
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
-        s_instance.health().change(-damage);
+        s_instance.m_health.change(-damage);
         AudioSystem::play(sfxHit2);
-        if (!alive()) {
+        if (!Player::alive(BoatMode)) {
             // TODO: make gameover
             onVehicleDestroyed();
             Player::s_mode = PlayerMode::SoldierMode;
@@ -401,19 +407,19 @@ void Boat::update(float dt)
     }
 
     static uint16_t disembarkPoints = Helpers::getMask({Terrain::None, Terrain::Mud, Terrain::Grass, Terrain::WaterShallow});
-    Vec2f projection = position() + s_instance.m_steering.facing() * 12.0f;
+    Vec2f projection = s_instance.m_steering.pos() + s_instance.m_steering.facing() * 12.0f;
     Player::updateCounter();
     if (controls.b.pressed() && mode_switch_counter > 1 && CollisionManager::collides(projection, disembarkPoints)) { // project forward and look for ground
 
         static uint16_t blocksLanding = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
         for (int i = 3; i <= 15; i += 3) {
-            projection = position() + s_instance.m_steering.facing() * float(i);
+            projection = s_instance.m_steering.pos() + s_instance.m_steering.facing() * float(i);
             if (CollisionManager::collides(projection, blocksLanding)) {
                 i = 18;
             } else if (CollisionManager::collides(projection, disembarkPoints)) {
                 projection.setX(std::floor(projection.x() / 6.0f) * 6 + 3);
                 projection.setY(std::floor(projection.y() / 6.0f) * 6 + 3);
-                Soldier::setPosition(projection);
+                Player::setPosition(SoldierMode, projection);
                 Player::s_mode = PlayerMode::SoldierMode;
                 mode_switch_counter = 0;
                 UI::showHealthbar();
@@ -425,7 +431,7 @@ void Boat::update(float dt)
 
 void Boat::draw()
 {
-    if (!alive()) return;
+    if (!Player::alive(BoatMode)) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
 
     if (Player::s_mode == SoldierMode && Soldier::overlaps(BoatMode)) {
@@ -489,41 +495,45 @@ bool Player::damaged(PlayerMode m)
     return target.m_health.value() < target.m_health.max();
 }
 
+Statistic &Player::health(PlayerMode m)
+{
+    return getInstance(m).m_health;
+}
+
+void Player::setPosition(PlayerMode m, const Vec2f &pos)
+{
+    getInstance(m).m_steering.setPos(pos);
+}
+
+Vec2f Player::position(PlayerMode m)
+{
+    return getInstance(m).m_steering.pos();
+}
+
+bool Player::available(PlayerMode m)
+{
+    return GameVariables::hasBlueprintUnlocked(Blueprints(int(m) - 1));
+}
+
+Rect Player::bounds(PlayerMode m)
+{
+    return getInstance(m).m_steering.rect();
+}
+
 bool Player::dead()
 {
-    return Soldier::health().value() <= 0;
+    return Soldier::s_instance.m_health.value() <= 0;
 }
 
 Vec2f Player::position()
 {
-    switch (s_mode) {
-    case PlayerMode::JeepMode:
-        return Jeep::position();
-    case PlayerMode::HelicopterMode:
-        return Helicopter::position();
-    case PlayerMode::TankMode:
-        return Tank::position();
-    case PlayerMode::BoatMode:
-        return Boat::position();
-    default:
-        return Soldier::position();
-    }
+    // TODO: add helicopter offset if in air
+    return getInstance(s_mode).m_steering.pos();
 }
 
 Rect Player::bounds()
 {
-    switch (s_mode) {
-    case PlayerMode::JeepMode:
-        return Jeep::bounds();
-    case PlayerMode::HelicopterMode:
-        return Helicopter::bounds();
-    case PlayerMode::TankMode:
-        return Tank::bounds();
-    case PlayerMode::BoatMode:
-        return Boat::bounds();
-    default:
-        return Soldier::bounds();
-    }
+    return bounds(s_mode);
 }
 
 Weapon::Type Player::currentWeapon()
@@ -730,31 +740,31 @@ void Player::storeData()
 {
     GameStorage * dat = GameVariables::getData();
 
-    dat->soldierPosition = Soldier::position() + Vec2f(0, 6);
-    dat->jeepPosition =    Jeep::position() + (Player::mode() == JeepMode ? Vec2f(0, 6) : Vec2f(0,0));
-    dat->boatPosition =    Boat::position();
-    dat->heliPosition =    Helicopter::position();
-    dat->tankPosition =    Tank::position();
+    dat->soldierPosition = position(SoldierMode) + Vec2f(0, 6);
+    dat->jeepPosition =    position(JeepMode) + (Player::mode() == JeepMode ? Vec2f(0, 6) : Vec2f(0,0));
+    dat->boatPosition =    position(BoatMode);
+    dat->heliPosition =    position(HelicopterMode);
+    dat->tankPosition =    position(TankMode);
 
-    dat->soldierLife =     Soldier::s_instance.health().value();
-    dat->jeepLife =        Jeep::s_instance.health().value();
-    dat->boatLife =        Boat::s_instance.health().value();
-    dat->heliLife =        Helicopter::s_instance.health().value();
-    dat->tankLife =        Tank::s_instance.health().value();
+    dat->soldierLife =     health(SoldierMode).value();
+    dat->jeepLife =        health(JeepMode).value();
+    dat->boatLife =        health(BoatMode).value();
+    dat->heliLife =        health(HelicopterMode).value();
+    dat->tankLife =        health(TankMode).value();
 }
 
 void Player::loadData()
 {
     GameStorage * dat = GameVariables::getData();
-    Soldier::setPosition(dat->soldierPosition);
-    Soldier::health().set(dat->soldierLife);
-    Jeep::setPosition(dat->jeepPosition);
-    Jeep::health().set(dat->jeepLife);
-    Tank::setPosition(dat->tankPosition);
-    Tank::health().set(dat->tankLife);
-    Boat::setPosition(dat->boatPosition);
-    Boat::health().set(dat->boatLife);
-    Helicopter::setPosition(dat->heliPosition);
-    Helicopter::health().set(dat->heliLife);
+    setPosition(SoldierMode, dat->soldierPosition);
+    health(SoldierMode).set(dat->soldierLife);
+    setPosition(JeepMode, dat->jeepPosition);
+    health(JeepMode).set(dat->jeepLife);
+    setPosition(TankMode, dat->tankPosition);
+    health(TankMode).set(dat->tankLife);
+    setPosition(BoatMode, dat->boatPosition);
+    health(BoatMode).set(dat->boatLife);
+    setPosition(HelicopterMode, dat->heliPosition);
+    health(HelicopterMode).set(dat->heliLife);
 }
 

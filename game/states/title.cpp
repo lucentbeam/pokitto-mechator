@@ -62,11 +62,12 @@ void Title::selectData() {
     } else {
         GameVariables::loadGame(GameStorage());
         MapManager::resetMutables();
-        Soldier::health().setMax();
-        Jeep::health().set(0);
-        Boat::health().set(0);
-        Helicopter::health().set(0);
-        Soldier::setPosition({6 * 6, 14 * 6}); // tutorial island
+        Player::health(SoldierMode).setMax();
+        Player::setPosition(SoldierMode, {6 * 6, 14 * 6}); // tutorial island
+        Player::health(JeepMode).set(0);
+        Player::health(BoatMode).set(0);
+        Player::health(TankMode).set(0);
+        Player::health(HelicopterMode).set(0);
     }
 
     goGame(true);

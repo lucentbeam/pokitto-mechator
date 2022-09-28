@@ -91,12 +91,6 @@ class Soldier : public Vehicle {
 public:
     Soldier() : Vehicle(8, playerStartTileX*6 + 3, playerStartTileY*6 + 3, &steering_soldier) {}
 
-    static Statistic& health() { return s_instance.m_health; }
-    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
-    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
-    static Vec2f position() { return s_instance.m_steering.pos(); }
-    static Rect bounds() { return s_instance.m_steering.rect(); }
-
     static bool overlaps(PlayerMode mode) { return s_instance.m_overlaps == mode; }
     static bool isSprinting() { return s_instance.sprinting; }
     static void setZ(uint8_t z) { s_instance.m_z = z; }
@@ -117,14 +111,6 @@ class Jeep : public Vehicle {
 public:
     Jeep() : Vehicle(12, 26*6, 8*6, &steering_jeep) {}
 
-    static Statistic& health() { return s_instance.m_health; }
-    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
-    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
-    static Vec2f position() { return s_instance.m_steering.pos(); }
-    static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return GameVariables::hasBlueprintUnlocked(JeepBP); }
-    static Rect bounds() { return s_instance.m_steering.rect(); }
-
     static void update(float dt);
     static void draw();
 };
@@ -141,14 +127,6 @@ class Tank : public Vehicle {
 public:
     Tank() : Vehicle(28, 12*6, 8*6, &steering_tank) {}
 
-    static Statistic& health() { return s_instance.m_health; }
-    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
-    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
-    static Vec2f position() { return s_instance.m_steering.pos(); }
-    static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return GameVariables::hasBlueprintUnlocked(TankBP); }
-    static Rect bounds() { return s_instance.m_steering.rect(); }
-
     static void update(float dt);
     static void draw();
 };
@@ -163,14 +141,6 @@ class Boat : public Vehicle {
     friend Player;
 public:
     Boat() : Vehicle(20, 12*6, 6*6, &steering_boat) {}
-
-    static Statistic& health() { return s_instance.m_health; }
-    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
-    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
-    static Vec2f position() { return s_instance.m_steering.pos(); }
-    static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return GameVariables::hasBlueprintUnlocked(BoatBP); }
-    static Rect bounds() { return s_instance.m_steering.rect(); }
 
     static void update(float dt);
     static void draw();
@@ -191,16 +161,8 @@ class Helicopter : public Vehicle {
 public:
     Helicopter() : Vehicle(16, 12*6, 8*6, &steering_heli) {}
 
-    static Statistic& health() { return s_instance.m_health; }
-    static bool damaged() { return s_instance.m_health.value() < s_instance.m_health.max(); }
-    static void setPosition(const Vec2f &pos) { s_instance.m_steering.setPos(pos); }
-    static Vec2f position() { return s_instance.m_steering.pos() + Vec2f(0, -s_instance.m_z); }
-    static bool alive() {return s_instance.m_health.value() > 0; }
-    static bool available() { return GameVariables::hasBlueprintUnlocked(HeliBP); }
-    static void launch() { s_instance.m_inAir = true; }
-    static Rect bounds() { return s_instance.m_steering.rect(); }
-
-    static bool active() { return s_instance.alive() && s_instance.m_inAir && s_instance.m_z >= 20.0f; }
+    static void launch();
+    static bool active();
 
     static void update(float dt);
     static void drawGround();
@@ -230,8 +192,6 @@ public:
 
     static bool hurting();
 
-    static bool alive(PlayerMode m);
-    static bool damaged(PlayerMode m);
     static bool dead();
 
     static Vec2f position();
@@ -252,6 +212,15 @@ public:
 
     static void storeData();
     static void loadData();
+
+    // helper mode access (for shop UI)
+    static bool alive(PlayerMode m);
+    static bool damaged(PlayerMode m);
+    static Statistic& health(PlayerMode m);
+    static void setPosition(PlayerMode m, const Vec2f &pos);
+    static Vec2f position(PlayerMode m);
+    static bool available(PlayerMode m);
+    static Rect bounds(PlayerMode m);
 };
 
 #endif // PLAYER_H

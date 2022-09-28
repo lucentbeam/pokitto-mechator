@@ -82,7 +82,7 @@ const SceneFunc func0 = SceneFunc([](){ toLand.reset(); return true; });
 const SceneFunc func1 = SceneFunc([](){
     int x = toLand.getInterpolationInt(-20, playerStartTileX * 6 + 3);
     int z = toLand.getInterpolationInt(60, 0);
-    Soldier::setPosition({float(x), Soldier::position().y()});
+    Player::setPosition(SoldierMode, {float(x), Player::position().y()});
     Soldier::setZ(z);
     return toLand.done();
 });

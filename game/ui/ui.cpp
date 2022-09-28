@@ -360,43 +360,32 @@ void UI::update(float dt)
     }
 }
 
+static PlayerMode activeDrawMode;
+
+void drawHealthBar(int16_t x, int16_t, int16_t, int16_t) {
+    uint8_t current = Player::health(activeDrawMode).value();
+    uint8_t max = Player::health(activeDrawMode).max();
+
+    const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
+    bool hurt = Player::hurting();
+    for(uint8_t i = 0; i < max; i++) {
+        int idx = i < current ? int(activeDrawMode) + 1 : 0;
+        RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
+    }
+}
+
 void UI::draw()
 {
-    soldier_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
-        uint8_t current = Soldier::health().value();
-        uint8_t max = Soldier::health().max();
-
-        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
-        bool hurt = Player::hurting();
-        for(uint8_t i = 0; i < max; i++) {
-            int idx = i < current ? 1 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
-        }
-    });
-
-    jeep_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
-        uint8_t current = Jeep::health().value();
-        uint8_t max = Jeep::health().max();
-
-        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
-        bool hurt = Player::hurting();
-        for(uint8_t i = 0; i < max; i++) {
-            int idx = i < current ? 2: 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
-        }
-    });
-
-    tank_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
-        uint8_t current = Tank::health().value();
-        uint8_t max = Tank::health().max();
-
-        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
-        bool hurt = Player::hurting();
-        for(uint8_t i = 0; i < max; i++) {
-            int idx = i < current ? 3 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
-        }
-    });
+    activeDrawMode = SoldierMode;
+    soldier_healthbar.draw(false, drawHealthBar);
+    activeDrawMode = JeepMode;
+    jeep_healthbar.draw(false, drawHealthBar);
+    activeDrawMode = TankMode;
+    tank_healthbar.draw(false, drawHealthBar);
+    activeDrawMode = BoatMode;
+    boat_healthbar.draw(false, drawHealthBar);
+    activeDrawMode = HelicopterMode;
+    heli_healthbar.draw(false, drawHealthBar);
 
     if (m_boss_life != nullptr) {
         boss_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
@@ -407,29 +396,6 @@ void UI::draw()
         });
     }
 
-    boat_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
-        uint8_t current = Boat::health().value();
-        uint8_t max = Boat::health().max();
-
-        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
-        bool hurt = Player::hurting();
-        for(uint8_t i = 0; i < max; i++) {
-            int idx = i < current ? 4 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
-        }
-    });
-
-    heli_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
-        uint8_t current = Helicopter::health().value();
-        uint8_t max = Helicopter::health().max();
-
-        const uint8_t flash[] = {3, 2, 10, 10, 10, 10, 10, 10};
-        bool hurt = Player::hurting();
-        for(uint8_t i = 0; i < max; i++) {
-            int idx = i < current ? 5 : 0;
-            RenderSystem::sprite(2 + x, 84 - i * 3, hurt ? flash : health_pips[idx]);
-        }
-    });
 
     kitcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {

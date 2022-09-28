@@ -51,21 +51,13 @@ void showRepairs()
         counter++;
     }
     counter = 0;
-    if (POIs::canBuild(JeepMode) && Jeep::available()) {
-        vehicles_avail[counter] = JeepMode;
-        counter++;
-    }
-    if (POIs::canBuild(TankMode) && Tank::available()) {
-        vehicles_avail[counter] = TankMode;
-        counter++;
-    }
-    if (POIs::canBuild(BoatMode) && Boat::available()) {
-        vehicles_avail[counter] = BoatMode;
-        counter++;
-    }
-    if (POIs::canBuild(HelicopterMode) && Helicopter::available()) {
-        vehicles_avail[counter] = HelicopterMode;
-        counter++;
+
+    for(int i = 1; i < 5; ++i) {
+        PlayerMode m = PlayerMode(i);
+        if (POIs::canBuild(m) && Player::available(m)) {
+            vehicles_avail[counter] = m;
+            counter++;
+        }
     }
 
     repair_opts.setAvailableCount(2 + availableVehicleCount());
@@ -91,9 +83,9 @@ void updateRepairsState(FSM &fsm)
             current_cost = 0;
         } else if (idx == 1) {
             UI::showHealthbar(SoldierMode);
-            current_cost = Soldier::damaged() ? soldierRepairCost : 0;
+            current_cost = Player::damaged(SoldierMode) ? soldierRepairCost : 0;
         } else {
-            PlayerMode mode = vehicles_avail[idx - 2];
+            PlayerMode mode = vehicles_avail[idx - 1];
             if (mode != SoldierMode) {
                 if (Player::alive(mode)) {
                     UI::showHealthbar(mode);
@@ -117,7 +109,7 @@ void updateRepairsState(FSM &fsm)
         if (repair_opts.activeIndex() == 0) {
             goBack();
         } else if (repair_opts.activeIndex() == 1) {
-            Soldier::health().setMax();
+            Player::health(SoldierMode).setMax();
             GameVariables::changeDollars(-current_cost);
             current_cost = 0;
         } else {
