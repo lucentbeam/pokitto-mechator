@@ -5181,6 +5181,27 @@
 		},
 		"\\pokitto-mechator.pro.user.ydLack": {
 			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemyaihelper.h": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemyaihelper.cpp": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.KouMSu": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemyaihelper.h.GxdctX": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemyaihelper.h.viYDhT": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemyaihelper.cpp.tkbcDo": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\enemyaihelper.obj": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

@@ -12,7 +12,7 @@ void EnemyTank::setup(const Vec2f &pos)
     m_life = 10;
     m_steering.setPos(pos);
     m_counter = rand() % 30;
-    status = Mode::Walking;
+    status = AIMode::Walking;
     m_drops_cash = true;
     m_deactivate = [](){};
     m_damage_frames = 0;
@@ -23,83 +23,33 @@ bool EnemyTank::update(float dt)
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
-    if (!Camera::inActiveZone(m_steering.pos())) return false;
-    if (!Camera::inViewingZone(m_steering.pos())) return true;
-
-    float px = Camera::tl_x();
-    float py = Camera::tl_y();
-    float tx = px + 55;
-    float ty = py + 44;
-
-    Vec2f dir = Vec2f(tx, ty) - m_steering.pos();
-    float len = dir.length();
-    if (len > 0) {
-        dir = dir / len;
-    }
-    m_counter++;
     static int shotcount = 0;
-    switch (status) {
-    case EnemyTank::Mode::Walking:
-        shotcount = 0;
-        if (len < 20) {
-            dir *= 0;
-        }
-        m_steering.update(dt, m_aim.x(), m_aim.y());
-        if (m_counter % asCounts(0.66f) == 0) {
-            dir = Pathfinding::getPath(m_steering.pos(), Vec2f(tx, ty), mask) * 6 + Vec2f(3,3) - m_steering.pos();
-            float len = dir.length();
-            if (len > 0) {
-                dir = dir / len;
-            }
-            m_aim = {dir.x(), dir.y()};
-        }
-        if (m_counter > asCounts(3.0f)) {
-            status = EnemyTank::Mode::Preparing;
-            m_aim = {0, 0};
-            m_counter = rand() % 10;
-        }
-        break;
-    case EnemyTank::Mode::Preparing:
-        m_aim = {dir.x(), dir.y()};
-        if (m_counter > (shotcount == 0 ? asCounts(1.25f) : asCounts(0.5f))) {
-            if (Camera::inViewingZone(m_steering.pos())) {
-                AudioSystem::play(sfxEnemyShoot);
-                Projectile * p = ProjectileManager::create(m_steering.pos() + dir * 6.0f, dir * 50.0f, 2, 3.0)
-                 ->setSprite(MissileSprite1)
-                 ->setTargetMask({PlayerTarget, GroundTarget, AirTarget})
-                 ->setDamage(0)
-                 ->setMissile(m_steering.pos() + dir * 5.0f, dir * 90.0f)
-                 ->setFlipped(dir.x() > 0)
-                 ->setExpireCallback([](Projectile*p) {
-                    ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
-                    EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
-                    AudioSystem::play(sfxExplosionBig);
-                    onEnemyMissileExplode();
-                 });
-            }
+    bool shooting = (m_counter + 1) > (shotcount == 0 ? asCounts(1.25f) : asCounts(0.5f));
+    bool alive = EnemyAIHelper::updateEntity(m_steering.pos(), m_aim, m_counter, status, m_life, m_damage_frames, mask, bulletMask, true, m_drops_cash, shooting);
+    if (alive && status == AIMode::Walking) {
+        if (shooting) {
+            Projectile * p = ProjectileManager::create(m_steering.pos() + m_aim * 6.0f, m_aim * 50.0f, 2, 3.0)
+             ->setSprite(MissileSprite1)
+             ->setTargetMask({PlayerTarget, GroundTarget, AirTarget})
+             ->setDamage(0)
+             ->setMissile(m_steering.pos() + m_aim * 5.0f, m_aim * 90.0f)
+             ->setFlipped(m_aim.x() > 0)
+             ->setExpireCallback([](Projectile*p) {
+                ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
+                EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                AudioSystem::play(sfxExplosionBig);
+                onEnemyMissileExplode();
+             });
+
             m_counter = rand() % 10;
             shotcount++;
-            if (shotcount >= 3) {
-                status = EnemyTank::Mode::Walking;
-            }
+            if (shotcount < 3) status = AIMode::Preparing;
         }
-        break;
+        if (status == AIMode::Walking) {
+            m_steering.update(dt, m_aim.x(), m_aim.y());
+        }
     }
-    int damage = ProjectileManager::getCollisionDamage(m_steering.pos(), 10, bulletMask);
-    m_life -= damage;
-    if (m_damage_frames > 0) m_damage_frames--;
-    if (m_life <= 0) {
-        if (m_drops_cash) Pickups::spawnDollar(m_steering.pos());
-        m_deactivate();
-        EffectManager::createExplosion(m_steering.pos(), 8, 6);
-        AudioSystem::play(sfxExplosionSmall);
-        return false;
-    } else if (damage > 0) {
-        m_damage_frames = 12;
-        AudioSystem::play(sfxHit1);
-        EffectManager::createHit(m_steering.pos() - Vec2f(3.5f, 3.5f));
-    }
-    return true;
+    return alive;
 }
 
 void EnemyTank::draw() const

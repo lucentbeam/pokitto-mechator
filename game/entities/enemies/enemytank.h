@@ -7,6 +7,7 @@
 #include "core/utilities/vec.h"
 #include "core/utilities/rect.h"
 
+#include "game/entities/enemies/enemyaihelper.h"
 #include "game/physics/steering.h"
 #include "game/constants.h"
 
@@ -27,7 +28,7 @@ class EnemyTank
 
     bool m_drops_cash;
 
-    enum Mode : uint8_t { Walking, Preparing } status = Mode::Walking;
+    AIMode status;
 
     uint16_t m_counter = rand() % 100;
 
