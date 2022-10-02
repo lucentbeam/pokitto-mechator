@@ -11,8 +11,14 @@
 
 bool EnemyAIHelper::updateEntity(Vec2f pos, Vec2f &aim, uint16_t &action_counter, AIMode &mode, int8_t &life, uint8_t &damage_frames, uint16_t walkmask, uint16_t bulletmask, bool checkcollisions, bool drops, bool &shooting)
 {
-    if (!Camera::inActiveZone(pos)) return false;
-    if (!Camera::inViewingZone(pos)) return true;
+    if (!Camera::inActiveZone(pos)) {
+        shooting = false;
+        return false;
+    }
+    if (!Camera::inViewingZone(pos)) {
+        shooting = false;
+        return true;
+    }
 
     float px = Camera::tl_x();
     float py = Camera::tl_y();
