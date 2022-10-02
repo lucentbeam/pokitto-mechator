@@ -3,7 +3,6 @@
 #include "game/enums.h"
 #include "game/constants.h"
 #include "game/variables.h"
-#include "game/ui/ui.h"
 #include "core/audiosystem.h"
 #include "game/states/collectblueprintprompt.h"
 #include "game/maps/worldtiles.h"
@@ -44,12 +43,15 @@ bool Pickups::mapIndexUnacquired(const Vec2i &pos)
     return true;
 }
 
-void Pickups::acquireAtIndex(const Vec2i &pos)
+void Pickups::acquireAtIndex(const Vec2i &pos, void(*func)(int8_t), UI::Element id)
 {
     int idx = MapManager::getMapIndex(pos.x(), pos.y());
     for (int i = 0; i < 100; ++i) {
         if (GameVariables::acquiredSpecials()[i] == 0) {
             GameVariables::acquiredSpecials()[i] = idx;
+            AudioSystem::play(sfxGetItem);
+            func(1);
+            UI::showForDuration(id, 2.0f);
             return;
         }
     }
@@ -68,10 +70,7 @@ void Pickups::spawnHackingKit(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
         spawnSpecial(pos, HackingKitSprite, [](const Vec2i &pos) {
-            GameVariables::changeHackingKits(1);
-            acquireAtIndex(pos);
-            AudioSystem::play(sfxGetItem);
-            UI::showForDuration(UI::Element::UIHackingKitCount, 2.0f);
+            acquireAtIndex(pos, GameVariables::changeHackingKits, UI::UIHackingKitCount);
         });
     }
 }
@@ -80,10 +79,7 @@ void Pickups::spawnKeycardA(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
         spawnSpecial(pos, Keycard1Sprite, [](const Vec2i &pos) {
-            GameVariables::changeKeysA(1);
-            acquireAtIndex(pos);
-            AudioSystem::play(sfxGetItem);
-            UI::showForDuration(UI::Element::UIKeyACount, 2.0f);
+            acquireAtIndex(pos, GameVariables::changeKeysA, UI::Element::UIKeyACount);
         });
     }
 }
@@ -92,10 +88,7 @@ void Pickups::spawnKeycardB(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
         spawnSpecial(pos, Keycard2Sprite, [](const Vec2i &pos) {
-            GameVariables::changeKeysB(1);
-            acquireAtIndex(pos);
-            AudioSystem::play(sfxGetItem);
-            UI::showForDuration(UI::Element::UIKeyBCount, 2.0f);
+            acquireAtIndex(pos, GameVariables::changeKeysB, UI::Element::UIKeyBCount);
         });
     }
 }
@@ -104,10 +97,7 @@ void Pickups::spawnKeycardC(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
         spawnSpecial(pos, Keycard3Sprite, [](const Vec2i &pos) {
-            GameVariables::changeKeysC(1);
-            acquireAtIndex(pos);
-            AudioSystem::play(sfxGetItem);
-            UI::showForDuration(UI::Element::UIKeyCCount, 2.0f);
+            acquireAtIndex(pos, GameVariables::changeKeysC, UI::Element::UIKeyCCount);
         });
     }
 }
@@ -119,10 +109,7 @@ int fetchBlueprintIndex(const Vec2i &pos) {
     while(pidx != *(blueprints_indices + idx) && idx < bpcount) {
         idx++;
     }
-    if (idx >= bpcount) {
-        //std::cout << "No blueprint at index " << pidx << std::endl;
-        return -1;
-    }
+    if (idx >= bpcount) return -1;
     return idx;
 }
 

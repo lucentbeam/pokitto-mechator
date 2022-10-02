@@ -39,6 +39,7 @@ private:
 
     Stage stage() const { return m_life > s_max_life * 2 / 3 ? DefaultStage : m_life > s_max_life / 3 ? DamagedStage : HeavyDamagedStage; }
 
+    void setTiles(int t, bool offset);
 public:
 
     void config(const Vec2f &spawn, int left, int top, uint8_t width, uint8_t height);

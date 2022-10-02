@@ -21,6 +21,20 @@ int8_t Barracks::s_max_life = 27;
 #include <iostream>
 #endif
 
+void Barracks::setTiles(int t, bool offset)
+{
+    int til = t;
+    for(int x = m_left; x < (m_width + m_left); x+=6) {
+        for(int y = m_top; y < (m_height + m_top); y+=6) {
+            if (offset) {
+                til = MapManager::getTileAt(x, y);
+                til += t;
+            }
+            MapManager::setTileAt(x, y, til);
+        }
+    }
+}
+
 void Barracks::config(const Vec2f &spawn, int left, int top, uint8_t width, uint8_t height)
 {
     m_spawn = spawn;
@@ -87,27 +101,8 @@ void Barracks::update(float dt)
 
         // check if out of range. if so: deactivate and restore and damaged tiles
         if (b->m_destroy_out_of_range && !Camera::inActiveZone(b->m_spawn)) {
-            if (MapManager::getTileAt(b->m_left, b->m_top) != 203) {
-                switch (b->stage()) {
-                case Stage::DamagedStage:
-                    for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
-                        for(int y = b->m_top; y < (b->m_height + b->m_top); y+=6) {
-                            int t = MapManager::getTileAt(x, y);
-                            MapManager::setTileAt(x, y, t - 4);
-                        }
-                    }
-                    break;
-                case Stage::HeavyDamagedStage:
-                    for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
-                        for(int y = b->m_top; y < (b->m_height + b->m_top); y+=6) {
-                            int t = MapManager::getTileAt(x, y);
-                            MapManager::setTileAt(x, y, t - 8);
-                        }
-                    }
-                    break;
-                default:
-                    break;
-                }
+            if (b->stage() != Stage::DefaultStage && MapManager::getTileAt(b->m_left, b->m_top) != 203) {
+                b->setTiles(b->stage() == Stage::DamagedStage ? -4 : -8, true);
             }
             return false;
         }
@@ -118,33 +113,14 @@ void Barracks::update(float dt)
         Stage current = b->stage();
         b->m_life -= damage;
         if (b->m_life <= 0) {
-            int idx = 0;
-            for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
-                for(int y = b->m_top; y < (b->m_height + b->m_top); y+=6) {
-                    MapManager::setTileAt(x, y, 203);
-                    idx++;
-                    if ((idx % 2) == 0) {
-                        if ((rand() % 10) < 7) EffectManager::createSmallExplosion(Vec2f(x + 2 + (rand() % 3), y + 2 + (rand() % 3)), rand() % 20);
-                        else EffectManager::createExplosionBig(Vec2f(x - 3 + (rand() % 3), y - 3 + (rand() % 3)));
-                    }
-                }
-            }
+            b->setTiles(203, false);
             onBarracksExplode();
             return false;
         } else if (b->stage() != current) {
-            for(int x = b->m_left; x < (b->m_width + b->m_left); x+=6) {
-                for(int y = b->m_top; y < (b->m_height + b->m_top); y+=6) {
-                    int t = MapManager::getTileAt(x, y);
-                    MapManager::setTileAt(x, y, t + 4);
-                }
-            }
-        } else {
-            if (damage > 0) {
-                b->m_flash.reset(5);
-                for(auto p : hitlocs) {
-                    EffectManager::createHit(p - Vec2f(3.5f, 3.5f));
-                }
-            }
+            b->setTiles(4, true);
+        } else if (damage > 0) {
+            b->m_flash.reset(5);
+            for(auto p : hitlocs) EffectManager::createHit(p - Vec2f(3.5f, 3.5f));
         }
 
         // decrement counter and check for spawns
@@ -180,12 +156,6 @@ void Barracks::update(float dt)
                         });
                     } else if (b->m_spawntype == HeliSpawn) {
                         Enemy::createHelicopter(b->m_spawn);
-                    } else if (b->m_spawntype == TurretSpawn && Enemy::getTurretAtLoc(b->m_spawn) == nullptr) {
-//                        MapManager::setTileAt(b->m_spawn.x(), b->m_spawn.y(), SpecialTiles::BaseGround);
-//                        EnemyTurret * m = Enemy::createTurret(b->m_spawn);
-//                        if (m != nullptr) {
-//                            m->disableOutOfRangeChecks();
-//                        }
                     }
                 }
             }

@@ -5,6 +5,7 @@
 #include "core/utilities/vec.h"
 #include "core/rendering/spritewrapper.h"
 #include "game/player.h"
+#include "game/ui/ui.h"
 
 class Pickups
 {
@@ -24,7 +25,7 @@ class Pickups
 
     static bool mapIndexUnacquired(const Vec2i &pos);
 
-    static void acquireAtIndex(const Vec2i &pos);
+    static void acquireAtIndex(const Vec2i &pos, void(*func)(int8_t), UI::Element id);
 public:
 
     static void spawnDollar(const Vec2f &pos);

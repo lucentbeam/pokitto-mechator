@@ -48,6 +48,8 @@ bool EnemyTank::update(float dt)
         if (status == AIMode::Walking) {
             m_steering.update(dt, m_aim.x(), m_aim.y());
         }
+    } else if (!alive) {
+        m_deactivate();
     }
     return alive;
 }

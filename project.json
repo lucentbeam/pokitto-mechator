@@ -5202,6 +5202,39 @@
 		},
 		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\enemyaihelper.obj": {
 			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.iEdgvT": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.h.fhRZgN": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.hwCihx": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.ZFZOey": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.ljCHCR": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.Vyqofy": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.exaebb": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.DGkELS": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.eJEBLv": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.CpyaOt": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
