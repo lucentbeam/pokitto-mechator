@@ -1,18 +1,14 @@
 - reduce footprint:
-  X EnemyTank/EnemyMech/EnemyBoat unify updates
-  x (1.0k) helicopter blades / 2 animation
-  x (1.2k) enemy tank cannon?
-  X (1.5k) reduce boat size?
   - (0.7k) pokitto logo -> RLE
   - (????) figure out how to palette swap enemy choppers instead of using extra sprite
-  x (0.5k) unify Weapon::checkFireWeapon
-  X (0.5k) cut up UI legend & procedurally generate
-  X (? 1k) look into unifying Soldier::update/Jeep::update etc.
-  X (?0.2) merge spawnKeyCardA, spawnKeyCardB, etc.
+
+- fix vertical draw flip when sprites are at edge of pokitto screen
 
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
 - unlocking blueprints adds weapons / powerups
+  - sandals
+  - armor
 
 - playthroughs!!
  - track money vs. time
@@ -34,4 +30,3 @@
   - bomber coming (bbbrrrrreeeewwww....)
   - connect hit to tanks. others?
 
-- joyhat support?

@@ -770,7 +770,7 @@
 			"sdcard": false
 		},
 		"\\data": {
-			"sdcard": false
+			"sdcard": true
 		},
 		"\\game": {
 			"sdcard": false
@@ -5234,6 +5234,66 @@
 			"sdcard": false
 		},
 		"\\pokitto-mechator.pro.user.CpyaOt": {
+			"sdcard": false
+		},
+		"\\data\\mechator\\boss.raw": {
+			"sdcard": false
+		},
+		"\\data\\mechator\\overworld.raw": {
+			"sdcard": false
+		},
+		"\\data\\mechator\\overworld_main.raw": {
+			"sdcard": false
+		},
+		"\\data\\mechator\\storm.raw": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.exe": {
+			"sdcard": false
+		},
+		"\\game\\states\\title.cpp.ZluKxp": {
+			"sdcard": false
+		},
+		"\\game\\states\\title.cpp.eEmxNB": {
+			"sdcard": false
+		},
+		"\\core\\serialization.h.hVRFRx": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.NRLums": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.KepCaS": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.wsTHNs": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.arovOj": {
+			"sdcard": false
+		},
+		"\\game\\states\\title.cpp.VAuPDf": {
+			"sdcard": false
+		},
+		"\\core\\controls.cpp.kIZKiH": {
+			"sdcard": false
+		},
+		"\\core\\controls.h.HPbGpi": {
+			"sdcard": false
+		},
+		"\\game\\states\\title.cpp.MiPlio": {
+			"sdcard": false
+		},
+		"\\core\\controls.cpp.QofgOE": {
+			"sdcard": false
+		},
+		"\\core\\controls.cpp.Riupqh": {
+			"sdcard": false
+		},
+		"\\core\\controls.h.WkKAwD": {
+			"sdcard": false
+		},
+		"\\game\\states\\title.cpp.WikQIv": {
 			"sdcard": false
 		}
 	},
