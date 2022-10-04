@@ -2,7 +2,7 @@
 #define _TILESETTER
 
 #include <cstdint>
-#include <vector>
+#include <array>
 #include <bitset>
 
 #include "core/rendersystem.h"
@@ -24,7 +24,8 @@ class Tilemap {
   bool clearBuffer = true;
   int16_t lastCameraX, lastCameraY;
 
-  std::vector<Vec2f> m_redraws;
+  std::array<Vec2f, 30> m_redraws;
+  uint8_t m_redraw_ct;
 
   const uint16_t * m_mutable_indices;
   const uint16_t * m_mutable_index_indices;
@@ -145,7 +146,9 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
 
 
         {
-            for(const Vec2f &p : m_redraws) {
+            Vec2f p;
+            for(int i = 0; i < m_redraw_ct; ++i) {
+                p = m_redraws[i];
                 int top = p.y() / TileHeight;
                 int left = p.x() / TileWidth;
 
@@ -154,7 +157,7 @@ void Tilemap<TileWidth, TileHeight>::drawToBuffer(ScreenBuffer *buffer)
 
                 buffer->drawTile(sx, sy, m_tiles[getTileAt(p.x(), p.y())]);
             }
-            m_redraws.clear();
+            m_redraw_ct = 0;
         }
         if (dx == 0 && dy == 0) return;
 
@@ -306,7 +309,10 @@ void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t overrid
     }
 
     m_current_mutables[mut_idx] = override;
-    m_redraws.push_back({x,y});
+    if (m_redraw_ct < 30) {
+        m_redraws[m_redraw_ct] = Vec2f(x,y);
+        ++m_redraw_ct;
+    }
 }
 
 template<int TileWidth, int TileHeight>
