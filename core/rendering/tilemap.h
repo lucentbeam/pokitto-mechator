@@ -24,7 +24,7 @@ class Tilemap {
   bool clearBuffer = true;
   int16_t lastCameraX, lastCameraY;
 
-  std::array<Vec2f, 30> m_redraws;
+  std::array<Vec2i, 30> m_redraws;
   uint8_t m_redraw_ct;
 
   const uint16_t * m_mutable_indices;
@@ -310,7 +310,7 @@ void Tilemap<TileWidth, TileHeight>::setTileAt(float x, float y, uint8_t overrid
 
     m_current_mutables[mut_idx] = override;
     if (m_redraw_ct < 30) {
-        m_redraws[m_redraw_ct] = Vec2f(x,y);
+        m_redraws[m_redraw_ct].set(x, y);
         ++m_redraw_ct;
     }
 }

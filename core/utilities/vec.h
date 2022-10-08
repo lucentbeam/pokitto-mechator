@@ -100,9 +100,9 @@ public:
     int y() const { return m_y; }
     float length() const { return std::sqrt(m_x*m_x+m_y*m_y); }
 
-    void set(uint16_t x, uint16_t y) { m_x = x; m_y = y; }
-    void setX(uint16_t x) { m_x = x; }
-    void setY(uint16_t y) { m_y = y; }
+    void set(int16_t x, int16_t y) { m_x = x; m_y = y; }
+    void setX(int16_t x) { m_x = x; }
+    void setY(int16_t y) { m_y = y; }
 
     Vec2i rot90() const { return Vec2i(m_y, -m_x); }
 
