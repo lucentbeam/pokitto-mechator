@@ -57,6 +57,7 @@ void goGame(bool from_title)
         MapManager::rebuildVisibleTiles();
         Camera::update(-5000, -5000);
         SpawnPoint::setActiveRegion();
+        drawflashlight = true;
     }
 
     FSM::instance->go(GameStates::Game);

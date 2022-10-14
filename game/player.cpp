@@ -668,66 +668,31 @@ void Player::drawReticle(PlayerMode mode, const Vec2f &dir)
 
 void Player::drawFlashlight()
 {
-    Vec2f dir;
-    float distance = 18.0f;
-    bool doubled = false;
-    switch(s_mode) {
-    case PlayerMode::SoldierMode:
-        distance = 5.0f;
-        dir = Soldier::s_instance.m_aim;
-        break;
-    case PlayerMode::JeepMode:
-        doubled = true;
-        distance = 10.0f;
-        dir = Jeep::s_instance.m_steering.facing();
-        break;
-    case PlayerMode::TankMode:
-        doubled = true;
-        distance = 12.0f;
-        dir = Tank::s_instance.m_steering.facing();
-        break;
-    case PlayerMode::HelicopterMode:
-        distance = 11.0f;
-        dir = Helicopter::s_instance.m_steering.facing();
-        break;
-    case PlayerMode::BoatMode:
-        distance = 11.0f;
-        dir = Boat::s_instance.m_steering.facing();
-        break;
-    }
-    int map_to = dir.getRotationFrame(8.0f);
+    Vec2f dir = Player::getInstance(s_mode).m_steering.facing();
+    if (s_mode == PlayerMode::SoldierMode) dir = Soldier::s_instance.m_aim;
+    const float distance = 17.0f;
+    int map_to = dir.getRotationFrame(8);
     static const Vec2f mappings[] = {
         {0, 1},
-        {0.383, 0.924},
-        {0.707, 0.707},
-        {0.924, 0.383},
+        {0.383f, 0.924f},
+        {0.707f, 0.707f},
+        {0.924f, 0.383f},
         {1, 0},
-        {0.924, -0.383},
-        {0.707, -0.707},
-        {0.383, -0.924},
+        {0.924f, -0.383f},
+        {0.707f, -0.707f},
+        {0.383f, -0.924f},
         {0, -1}
     };
     bool flip = dir.x() < 0;
     dir = mappings[8 - map_to];
     if (flip) dir.setX(dir.x() * -1);
 
-    map_to = dir.getRotationFrame(4.0f);
-    static const Vec2i sprite_offsets[] = {
-        {14, 27},
-        {25, 25},
-        {27, 13},
-        {25, 2},
-        {13, 0}
-    };
-    Vec2i sprite_offset = sprite_offsets[map_to];
-    if (!flip) sprite_offset.setX(28 - sprite_offset.x());
-
-    if (doubled) {
+    if (s_mode == PlayerMode::JeepMode || s_mode == PlayerMode::TankMode) {
         Vec2f offset = dir.rot90() * 4.0f;
-        RenderSystem::incrementColors(55 - sprite_offset.x() + dir.x() * distance + offset.x(), 44 - sprite_offset.y() + dir.y() * distance + offset.y(), flashlight[dir.getRotationFrame(4.0f)], 0, dir.x() > 0);
-        RenderSystem::incrementColors(55 - sprite_offset.x() + dir.x() * distance - offset.x(), 44 - sprite_offset.y() + dir.y() * distance - offset.y(), flashlight[dir.getRotationFrame(4.0f)], 0, dir.x() > 0);
+        RenderSystem::incrementColors(49 + dir.x() * distance + offset.x(), 38 + dir.y() * distance + offset.y(), enemy_turret_base[0], 0, dir.x() > 0);
+        RenderSystem::incrementColors(49 + dir.x() * distance - offset.x(), 38 + dir.y() * distance - offset.y(), enemy_turret_base[0], 0, dir.x() > 0);
     } else {
-        RenderSystem::incrementColors(55 - sprite_offset.x() + dir.x() * distance, 44 - sprite_offset.y() + dir.y() * distance, flashlight[dir.getRotationFrame(4.0f)], 0, dir.x() > 0);
+        RenderSystem::incrementColors(49 + dir.x() * distance, 38 + dir.y() * distance, enemy_turret_base[0], 0, dir.x() > 0);
     }
 }
 
