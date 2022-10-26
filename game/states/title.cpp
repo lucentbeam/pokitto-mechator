@@ -69,6 +69,7 @@ void Title::selectData() {
         Player::health(TankMode).set(0);
         Player::health(HelicopterMode).set(0);
     }
+    Player::updateOwnedWeapons();
 
     goGame(true);
 }

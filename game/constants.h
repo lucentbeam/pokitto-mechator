@@ -31,6 +31,11 @@ const int playerStartTileY = 16;//33;
 
 const int playerIframeLength = 8;
 
+const int8_t soldierHealth = 8;
+const int8_t soldierHealthArmored = 11;
+const int8_t helicopterHealth = 16;
+const int8_t helicopterHealthArmored = 20;
+
 const float soldierSpeed = 20.0f;
 
 constexpr float jeepSpeed = 50.0f * 1.2f;
@@ -57,12 +62,29 @@ const char * const bp_names[] = {
     "Tank Schematics",
     "Boat Schematics",
     "Helicopter Schematics",
-    "Gemini Gun [Jeep]",
-    "Tactical Armor [Soldier]",
-    "Ninja Shoes [Soldier]",
-    "Spreader Shot [Jeep]",
-    "Multinade [Jeep]",
-    "Cluster Shot [Heli]",
+    "Gemini Gun",
+    "Tactical Armor",
+    "Ninja Shoes",
+    "Spreader Shot",
+    "Multinade",
+    "Cluster Shot",
+    "All Terrain Tires",
+    "Unobtainium Hull"
+};
+
+const char * const bp_descs[] = {
+    "Unlock Vehicle",
+    "Unlock Vehicle",
+    "Unlock Vehicle",
+    "Unlock Vehicle",
+    "Unlock Weapon [Jeep]",
+    "Health Bonus [Soldier]",
+    "Improved Sprint [Soldier]",
+    "Unlock Weapon [Jeep]",
+    "Unlock Weapon [Jeep]",
+    "Unlock Weapon [Heli]",
+    "Ignore Grass [Jeep]",
+    "Improved Health [Heli]"
 };
 
 const int bp_costs[] = {
@@ -76,5 +98,7 @@ const int bp_costs[] = {
     1, // spreader shot
     1, // multinade
     1, // cluster shot
+    1, // mud tires
+    1, // unobtainium
 };
 #endif // CONSTANTS_H

@@ -59,10 +59,11 @@ protected:
 
     Vec2f m_aim;
 
+    int m_valid_weapons;
 
     friend Player;
 
-    Vehicle(int8_t hp, float x, float y, const SteeringConfig * config);
+    Vehicle(int8_t hp, float x, float y, const SteeringConfig * config, int weapons, Weapon::Type default_weapon);
 
     void flash() { m_iframes.reset(playerIframeLength); }
 
@@ -72,6 +73,7 @@ public:
     void updateFlash() {
         m_iframes.update();
     }
+    Weapon::Type current_weapon;
 };
 
 class Soldier : public Vehicle {
@@ -84,12 +86,10 @@ class Soldier : public Vehicle {
     uint8_t m_z = 0;
 
     static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun;
-    static int s_owned_weapons;
-    static Weapon::Type s_current_weapon;
 
     friend Player;
 public:
-    Soldier() : Vehicle(8, playerStartTileX*6 + 3, playerStartTileY*6 + 3, &steering_soldier) {}
+    Soldier() : Vehicle(soldierHealth, playerStartTileX*6 + 3, playerStartTileY*6 + 3, &steering_soldier, s_possible_weapons, Weapon::Gun) {}
 
     static bool overlaps(PlayerMode mode) { return s_instance.m_overlaps == mode; }
     static bool isSprinting() { return s_instance.sprinting; }
@@ -104,12 +104,10 @@ class Jeep : public Vehicle {
     static Jeep s_instance;
 
     static constexpr const int s_possible_weapons = Weapon::DualShot | Weapon::MachineGun | Weapon::Grenade;
-    static int s_owned_weapons;
-    static Weapon::Type s_current_weapon;
 
     friend Player;
 public:
-    Jeep() : Vehicle(12, 26*6, 8*6, &steering_jeep) {}
+    Jeep() : Vehicle(12, 26*6, 8*6, &steering_jeep, s_possible_weapons, Weapon::DualShot) {}
 
     static void update(float dt);
     static void draw();
@@ -120,12 +118,10 @@ class Tank : public Vehicle {
     static Tank s_instance;
 
     static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::Missiles;
-    static int s_owned_weapons;
-    static Weapon::Type s_current_weapon;
 
     friend Player;
 public:
-    Tank() : Vehicle(28, 12*6, 8*6, &steering_tank) {}
+    Tank() : Vehicle(24, 12*6, 8*6, &steering_tank, s_possible_weapons, Weapon::Missiles) {}
 
     static void update(float dt);
     static void draw();
@@ -135,12 +131,10 @@ class Boat : public Vehicle {
     static Boat s_instance;
 
     static constexpr const int s_possible_weapons = Weapon::MachineGun;
-    static int s_owned_weapons;
-    static Weapon::Type s_current_weapon;
 
     friend Player;
 public:
-    Boat() : Vehicle(20, 12*6, 6*6, &steering_boat) {}
+    Boat() : Vehicle(20, 12*6, 6*6, &steering_boat, s_possible_weapons, Weapon::MachineGun) {}
 
     static void update(float dt);
     static void draw();
@@ -154,12 +148,10 @@ class Helicopter : public Vehicle {
     float m_z = 0.0f;
 
     static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::Missiles;
-    static int s_owned_weapons;
-    static Weapon::Type s_current_weapon;
 
     friend Player;
 public:
-    Helicopter() : Vehicle(16, 12*6, 8*6, &steering_heli) {}
+    Helicopter() : Vehicle(16, 12*6, 8*6, &steering_heli, s_possible_weapons, Weapon::MachineGun) {}
 
     static void launch();
     static bool active();
@@ -177,6 +169,7 @@ class Player {
     friend class Tank;
     friend class Boat;
     friend class Helicopter;
+    static int s_owned_weapons;
 
     static float s_shot_cooldown;
 
@@ -212,6 +205,7 @@ public:
 
     static void storeData();
     static void loadData();
+    static void updateOwnedWeapons();
 
     // helper mode access (for shop UI)
     static bool alive(PlayerMode m);

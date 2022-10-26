@@ -63,6 +63,7 @@ void updateBlueprintsShopState(FSM &fsm)
     if (status.a.pressed()) {
         if (GameVariables::dollars() >= bp_costs[options.activeIndex()-1]) {
             GameVariables::unlockBlueprint(bps_avail[options.activeIndex()-1]);
+            Player::updateOwnedWeapons();
             AudioSystem::play(sfxGetItem);
             showShop(true);
             GameVariables::changeDollars(-bp_costs[options.activeIndex()-1]);
@@ -105,8 +106,10 @@ void drawBlueprintsShopState()
             Helpers::drawNotchedRect(x, y, w, h, 15);
         }
         if (h > 8 && options.activeIndex() > 0) {
-            std::string line = "COST: " + std::to_string(bp_costs[options.activeIndex()-1]);
+            std::string line = "COST: " + std::to_string(bp_costs[bps_avail[options.activeIndex()-1]]);
             Helpers::printHorizontallyCentered(x + w/2, y + 1, line.c_str(), 10);
+
+            Helpers::printHorizontallyCentered(55, 4, bp_descs[bps_avail[options.activeIndex()-1]], 10);
         }
     });
 }

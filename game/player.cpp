@@ -20,40 +20,25 @@ WeaponHelper WeaponHelper::getIndexAndMax(int current, int owned)
     return h;
 }
 
-Vehicle::Vehicle(int8_t hp, float x, float y, const SteeringConfig * config) :
+Vehicle::Vehicle(int8_t hp, float x, float y, const SteeringConfig * config, int weapons, Weapon::Type default_weapon) :
     m_steering(x, y, config),
     m_health(0, hp),
-    m_aim(0, 0)
+    m_aim(1, 0),
+    m_valid_weapons(weapons),
+    current_weapon(default_weapon)
 {
 
 }
 
 Soldier Soldier::s_instance;
-#ifdef DEBUGS
-int Soldier::s_owned_weapons = Weapon::Gun | Weapon::DualShot | Weapon::Missiles;
-Weapon::Type Soldier::s_current_weapon = Weapon::MultiMissiles;
-#else
-int Soldier::s_owned_weapons = Weapon::Gun;
-Weapon::Type Soldier::s_current_weapon = Weapon::Gun;
-#endif
-
 Jeep Jeep::s_instance;
-int Jeep::s_owned_weapons = Weapon::DualShot | Weapon::Grenade;
-Weapon::Type Jeep::s_current_weapon = Weapon::DualShot;
-
 Tank Tank::s_instance;
-int Tank::s_owned_weapons = Weapon::MachineGun | Weapon::Missiles;
-Weapon::Type Tank::s_current_weapon = Weapon::Missiles;
-
 Boat Boat::s_instance;
-int Boat::s_owned_weapons = Weapon::MachineGun;
-Weapon::Type Boat::s_current_weapon = Weapon::MachineGun;
-
 Helicopter Helicopter::s_instance;
-int Helicopter::s_owned_weapons = Weapon::MachineGun | Weapon::Missiles;
-Weapon::Type Helicopter::s_current_weapon = Weapon::MachineGun;
 
 PlayerMode Player::s_mode = PlayerMode::SoldierMode;
+
+int Player::s_owned_weapons = Weapon::Gun | Weapon::Grenade | Weapon::DualShot | Weapon::Missiles | Weapon::MachineGun;
 
 float Player::s_shot_cooldown = 0.0f;
 
@@ -71,6 +56,10 @@ void Soldier::update(float dt)
     ControlStatus controls = Controls::getStatus(true);
     s_instance.sprinting = controls.b.held();
 
+    if (s_instance.m_health.max() == soldierHealth && GameVariables::hasBlueprintUnlocked(Blueprints::TacticalArmorBP)) {
+        s_instance.m_health.setMaxto(soldierHealthArmored);
+    }
+
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
@@ -78,11 +67,11 @@ void Soldier::update(float dt)
         AudioSystem::play(sfxHit2);
     }
 
-    s_instance.m_steering.update(dt, controls.x , controls.y, s_instance.sprinting ? 1.7f : 1.0f, true);
+    s_instance.m_steering.update(dt, controls.x , controls.y, s_instance.sprinting ? GameVariables::hasBlueprintUnlocked(Blueprints::NinjaShoesBP) ? 2.4f : 1.55f : 1.0f, true);
 
     if (!controls.a.held() || s_instance.sprinting) s_instance.m_aim = s_instance.m_steering.aim();
 
-    if (Player::weaponCooldown(dt) && !s_instance.sprinting) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt) && !s_instance.sprinting) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
 
@@ -171,12 +160,12 @@ void Jeep::update(float dt)
     if (s_instance.m_steering.moving()) {
         Terrain current = CollisionManager::getTerrainAt(s_instance.m_steering.pos().x(), s_instance.m_steering.pos().y());
         s_instance.m_shake.intensity = current == Terrain::Grass ? Rumbler::Vigorous : Rumbler::Slight;
-        s_instance.m_steering.scaleMaxSpeed(current == Terrain::Grass ? jeepGrassSpeedFraction : 1.0f);
+        s_instance.m_steering.scaleMaxSpeed(current == Terrain::Grass && !GameVariables::hasBlueprintUnlocked(AllTerrainTiresBP) ? jeepGrassSpeedFraction : 1.0f);
         s_instance.m_shake.update();
     }
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
-    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     Player::updateCounter();
     if (controls.b.pressed() && mode_switch_counter > 1) {
@@ -232,6 +221,10 @@ void Helicopter::update(float dt)
         return;
     }
 
+    if (s_instance.m_health.max() == helicopterHealth && GameVariables::hasBlueprintUnlocked(Blueprints::UnobtainiumHullBP)) {
+        s_instance.m_health.setMaxto(helicopterHealthArmored);
+    }
+
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::AirTarget});
 
     if (no_heli_land > 0) no_heli_land--;
@@ -245,7 +238,7 @@ void Helicopter::update(float dt)
     Player::setPosition(SoldierMode, s_instance.m_steering.pos());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
-    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos() - Vec2f(0, s_instance.m_z), s_instance.m_aim, s_instance.m_steering.vel(), true);
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos() - Vec2f(0, s_instance.m_z), s_instance.m_aim, s_instance.m_steering.vel(), true);
 
     Rect rect = s_instance.m_steering.rect();
     rect.shift(0, -s_instance.m_z);
@@ -328,7 +321,7 @@ void Tank::update(float dt)
     Player::setPosition(SoldierMode, s_instance.m_steering.pos());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
-    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
@@ -390,7 +383,7 @@ void Boat::update(float dt)
     Player::setPosition(SoldierMode, s_instance.m_steering.pos());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
-    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
     if (damage > 0 && !s_instance.flashing()) {
@@ -538,106 +531,28 @@ Rect Player::bounds()
 
 Weapon::Type Player::currentWeapon()
 {
-    switch (s_mode) {
-    case PlayerMode::JeepMode:
-        return Jeep::s_current_weapon;
-    case PlayerMode::HelicopterMode:
-        return Helicopter::s_current_weapon;
-    case PlayerMode::TankMode:
-        return Tank::s_current_weapon;
-    case PlayerMode::BoatMode:
-        return Boat::s_current_weapon;
-    default:
-        return Soldier::s_current_weapon;
-    }
+    return getInstance(s_mode).current_weapon;
 }
 
 void Player::cycleWeaponNext()
 {
-    switch (s_mode) {
-    case PlayerMode::JeepMode:
-        Jeep::s_current_weapon = Weapon::nextWeapon(Jeep::s_current_weapon);
-        while(!(Jeep::s_current_weapon & Jeep::s_owned_weapons)) {
-            Jeep::s_current_weapon = Weapon::nextWeapon(Jeep::s_current_weapon);
-        }
-        break;
-    case PlayerMode::HelicopterMode:
-        Helicopter::s_current_weapon = Weapon::nextWeapon(Helicopter::s_current_weapon);
-        while(!(Helicopter::s_current_weapon & Helicopter::s_owned_weapons)) {
-            Helicopter::s_current_weapon = Weapon::nextWeapon(Helicopter::s_current_weapon);
-        }
-        break;
-    case PlayerMode::TankMode:
-        Tank::s_current_weapon = Weapon::nextWeapon(Tank::s_current_weapon);
-        while(!(Tank::s_current_weapon & Tank::s_owned_weapons)) {
-            Tank::s_current_weapon = Weapon::nextWeapon(Tank::s_current_weapon);
-        }
-        break;
-    case PlayerMode::BoatMode:
-        Boat::s_current_weapon = Weapon::nextWeapon(Boat::s_current_weapon);
-        while(!(Boat::s_current_weapon & Boat::s_owned_weapons)) {
-            Boat::s_current_weapon = Weapon::nextWeapon(Boat::s_current_weapon);
-        }
-        break;
-    default:
-        Soldier::s_current_weapon = Weapon::nextWeapon(Soldier::s_current_weapon);
-        while(!(Soldier::s_current_weapon & Soldier::s_owned_weapons)) {
-            Soldier::s_current_weapon = Weapon::nextWeapon(Soldier::s_current_weapon);
-        }
-        break;
+    getInstance(s_mode).current_weapon = Weapon::nextWeapon(getInstance(s_mode).current_weapon);
+    while (!getInstance(s_mode).current_weapon & s_owned_weapons & getInstance(s_mode).m_valid_weapons) {
+        getInstance(s_mode).current_weapon = Weapon::nextWeapon(getInstance(s_mode).current_weapon);
     }
 }
 
 void Player::cycleWeaponPrev()
 {
-    switch (s_mode) {
-    case PlayerMode::JeepMode:
-        Jeep::s_current_weapon = Weapon::prevWeapon(Jeep::s_current_weapon);
-        while(!(Jeep::s_current_weapon & Jeep::s_owned_weapons)) {
-            Jeep::s_current_weapon = Weapon::prevWeapon(Jeep::s_current_weapon);
-        }
-        break;
-    case PlayerMode::HelicopterMode:
-        Helicopter::s_current_weapon = Weapon::prevWeapon(Helicopter::s_current_weapon);
-        while(!(Helicopter::s_current_weapon & Helicopter::s_owned_weapons)) {
-            Helicopter::s_current_weapon = Weapon::prevWeapon(Helicopter::s_current_weapon);
-        }
-        break;
-    case PlayerMode::TankMode:
-        Tank::s_current_weapon = Weapon::prevWeapon(Tank::s_current_weapon);
-        while(!(Tank::s_current_weapon & Tank::s_owned_weapons)) {
-            Tank::s_current_weapon = Weapon::prevWeapon(Tank::s_current_weapon);
-        }
-        break;
-    case PlayerMode::BoatMode:
-        Boat::s_current_weapon = Weapon::prevWeapon(Boat::s_current_weapon);
-        while(!(Boat::s_current_weapon & Boat::s_owned_weapons)) {
-            Boat::s_current_weapon = Weapon::prevWeapon(Boat::s_current_weapon);
-        }
-        break;
-    default:
-        Soldier::s_current_weapon = Weapon::prevWeapon(Soldier::s_current_weapon);
-        while(!(Soldier::s_current_weapon & Soldier::s_owned_weapons)) {
-            Soldier::s_current_weapon = Weapon::prevWeapon(Soldier::s_current_weapon);
-        }
-        break;
+    getInstance(s_mode).current_weapon = Weapon::prevWeapon(getInstance(s_mode).current_weapon);
+    while (!getInstance(s_mode).current_weapon & s_owned_weapons & getInstance(s_mode).m_valid_weapons) {
+        getInstance(s_mode).current_weapon = Weapon::prevWeapon(getInstance(s_mode).current_weapon);
     }
 }
 
 WeaponHelper Player::getCurrentWeaponInfo()
 {
-    switch (s_mode) {
-    case PlayerMode::JeepMode:
-        return WeaponHelper::getIndexAndMax(Jeep::s_current_weapon, Jeep::s_owned_weapons);
-    case PlayerMode::HelicopterMode:
-        return WeaponHelper::getIndexAndMax(Helicopter::s_current_weapon, Helicopter::s_owned_weapons);
-    case PlayerMode::TankMode:
-        return WeaponHelper::getIndexAndMax(Tank::s_current_weapon, Tank::s_owned_weapons);
-    case PlayerMode::BoatMode:
-        return WeaponHelper::getIndexAndMax(Boat::s_current_weapon, Boat::s_owned_weapons);
-    default:
-        return WeaponHelper::getIndexAndMax(Soldier::s_current_weapon, Soldier::s_owned_weapons);
-    }
+    return WeaponHelper::getIndexAndMax(getInstance(s_mode).current_weapon, s_owned_weapons & getInstance(s_mode).m_valid_weapons);
 }
 
 bool Player::weaponCooldown(float dt)
@@ -721,6 +636,13 @@ void Player::storeData()
 void Player::loadData()
 {
     GameStorage * dat = GameVariables::getData();
+
+    Soldier::s_instance = Soldier();
+    Jeep::s_instance = Jeep();
+    Tank::s_instance = Tank();
+    Boat::s_instance = Boat();
+    Helicopter::s_instance = Helicopter();
+
     setPosition(SoldierMode, dat->soldierPosition);
     health(SoldierMode).set(dat->soldierLife);
     setPosition(JeepMode, dat->jeepPosition);
@@ -731,5 +653,13 @@ void Player::loadData()
     health(BoatMode).set(dat->boatLife);
     setPosition(HelicopterMode, dat->heliPosition);
     health(HelicopterMode).set(dat->heliLife);
+}
+
+void Player::updateOwnedWeapons()
+{
+    s_owned_weapons = Weapon::Gun | Weapon::Grenade | Weapon::DualShot | Weapon::Missiles | Weapon::MachineGun;
+
+    // add the rest
+//    if (GameVariables::hasBlueprintUnlocked(GeminiGunBP)) s_owned_weapons |= Weapon::DualShot;
 }
 
