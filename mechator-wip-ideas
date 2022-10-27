@@ -6,9 +6,21 @@
 
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
-- unlocking blueprints adds weapons / powerups
-  - sandals
-  - armor
+- draw smallish segment of map while in boat / heli
+
+- fix firing bullet on first frame of FSM transition
+
+blueprints:
+ - spreader: no map
+ x armor
+ x ninja shoes
+ - flamethrower: no map
+ - multinade: no map
+ - clustershot: no map
+ - all terrain tires: no map
+ - unobtainium hull: no map
+ - machinegun: no map
+ - countermotor: no map
 
 - playthroughs!!
  - track money vs. time

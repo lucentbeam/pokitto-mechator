@@ -38,6 +38,10 @@ const SteeringConfig steering_boat(boatSpeed, boatCornering,
        (1 << Terrain::Wall) | (1 << Terrain::WaterShallow) | (1 << Terrain::None) | (1 << Terrain::Grass) | (1 << Terrain::Mud) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
        6, 6, boatFriction);
 
+const SteeringConfig steering_boat_countersteer(boatSpeed, boatCornering,
+       (1 << Terrain::Wall) | (1 << Terrain::WaterShallow) | (1 << Terrain::None) | (1 << Terrain::Grass) | (1 << Terrain::Mud) | (1 << Terrain::DestrucableWood) | (1 << Terrain::DestructableMetal) | (1 << Terrain::LowWall),
+       6, 6, heliFriction * 0.5f + jeepFriction * 0.5f);
+
 const SteeringConfig steering_heli(heliSpeed, heliCornering, 0, 14, 14, heliFriction);
 
 struct WeaponHelper {
@@ -89,7 +93,7 @@ class Soldier : public Vehicle {
 
     friend Player;
 public:
-    Soldier() : Vehicle(soldierHealth, playerStartTileX*6 + 3, playerStartTileY*6 + 3, &steering_soldier, s_possible_weapons, Weapon::Gun) {}
+    Soldier() : Vehicle(soldierHealth, playerStartTileX*6 + 3, playerStartTileY*6 + 3, &steering_soldier, s_possible_weapons, Weapon::FlameThrower) {}
 
     static bool overlaps(PlayerMode mode) { return s_instance.m_overlaps == mode; }
     static bool isSprinting() { return s_instance.sprinting; }
@@ -103,7 +107,7 @@ public:
 class Jeep : public Vehicle {
     static Jeep s_instance;
 
-    static constexpr const int s_possible_weapons = Weapon::DualShot | Weapon::MachineGun | Weapon::Grenade;
+    static constexpr const int s_possible_weapons = Weapon::DualShot | Weapon::Grenade;
 
     friend Player;
 public:
@@ -117,7 +121,7 @@ public:
 class Tank : public Vehicle {
     static Tank s_instance;
 
-    static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::Missiles;
+    static constexpr const int s_possible_weapons = Weapon::Missiles | Weapon::MachineGun;
 
     friend Player;
 public:
@@ -130,7 +134,7 @@ public:
 class Boat : public Vehicle {
     static Boat s_instance;
 
-    static constexpr const int s_possible_weapons = Weapon::MachineGun;
+    static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun;
 
     friend Player;
 public:
@@ -147,7 +151,7 @@ class Helicopter : public Vehicle {
 
     float m_z = 0.0f;
 
-    static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::Missiles;
+    static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::MultiMissiles;
 
     friend Player;
 public:

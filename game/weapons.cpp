@@ -9,13 +9,18 @@ const WeaponConfig gun_config(5.0f, 3, 0.5f, 100.0f, sfxPlayerGun);
 
 const WeaponConfig mgun_config(14.0f, 2, 0.4f, 150.0f, sfxPlayerGun);
 
+const WeaponConfig spreader_config(3.3f, 3, 0.5f, 100.0f, sfxPlayerGun);
+
 const WeaponConfig dualshot_config(4.2f, 3, 0.35f, 130.0f, sfxPlayerGun2x);
 
 const WeaponConfig grenade_config(2.8f, 4, 0.5f, 65.0f, sfxGrenade);
+const WeaponConfig multinade_config(1.5f, 4, 0.5f, 60.0f, sfxGrenade);
 
 const WeaponConfig missile_config(2.0f, 4, 0.35f, 140.0f, sfxMissile);
 
 const WeaponConfig multimissile_config(1.6f, 4, 0.4f, 85.0f, 30.0f, sfxMissile);
+
+const WeaponConfig fthrower_config(20.0f, 4, 0.5f, 50.0f, sfxMissile);
 
 Projectile * Weapon::fireWeapon(const WeaponConfig &config, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel, bool air, int dmg, SpriteName s, uint16_t mask, bool playsound)
 {
@@ -35,22 +40,22 @@ std::string Weapon::getName(Weapon::Type t)
     switch(t) {
     case Type::Gun:
         return "Gun";
-        break;
     case Type::MachineGun:
         return "Machine Gun";
-        break;
     case Type::DualShot:
         return "Dual Shot";
-        break;
     case Type::Grenade:
         return "Grenade";
-        break;
     case Type::Missiles:
         return "Missiles";
-        break;
     case Type::MultiMissiles:
         return "Cluster Shot";
-        break;
+    case Type::FlameThrower:
+        return "Flamethrower";
+    case Type::Multinade:
+        return "Multinade";
+    case Type::Spreader:
+        return "Spreader Shot";
     }
     return "Nameless Gun";
 }
@@ -70,6 +75,12 @@ WeaponConfig Weapon::getConfig(Type t)
         return missile_config;
     case Type::MultiMissiles:
         return multimissile_config;
+    case Type::Spreader:
+        return spreader_config;
+    case Type::Multinade:
+        return multinade_config;
+    case Type::FlameThrower:
+        return fthrower_config;
     }
     return gun_config;
 }
@@ -101,6 +112,8 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
     Vec2f dir = fac * 1;
     uint16_t mask = typ == Type::Grenade ? Helpers::getMask({EnemyTarget, GroundTarget}) : Helpers::getMask({EnemyTarget, GroundTarget, AirTarget});
 
+    static uint8_t counter;
+    counter++;
     switch(typ) {
     case Type::Gun:
     case Type::MachineGun:
@@ -110,8 +123,68 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         fireWeapon(cfg, pos + fac.rot90() * 3.0f, fac, vel, air, 1, BulletSmall, mask, true);
         fireWeapon(cfg, pos - fac.rot90() * 3.0f, fac, vel, air, 1, BulletSmall, mask, false);
         break;
+    case Type::Spreader:
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask, true);
+        dir.rotBy(20);
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask, false);
+        dir.rotBy(-40);
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask, false);
+        break;
+    case Type::FlameThrower:
+        dir.rotBy((rand() % 70) - 35);
+        fireWeapon(cfg, pos + dir * 4.0f, dir, vel, air, 1, (rand() % 8 == 0) ? ExplosionBig : ExplosionSmall, mask, (counter % 6) == 0);
+        break;
     case Type::Grenade:
         fireWeapon(cfg, pos, fac, vel, air, 0, GrenadeSprite, mask)
+                ->addVelocity(vel * 0.5f)
+                ->setExpireCallback([](Projectile*p) {
+                    AudioSystem::play(sfxExplosionBig);
+                    for(int i = -4; i <= 4; i+=4) {
+                        for (int j = -4; j <= 4; j+= 4) {
+                            Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
+                            if (t == Terrain::DestrucableWood) {
+                                MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
+                            }
+                        }
+                    }
+                    ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget});
+                    EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                });
+        break;
+    case Type::Multinade:
+        fireWeapon(cfg, pos, dir, vel, air, 0, GrenadeSprite, mask)
+                ->addVelocity(vel * 0.5f)
+                ->setExpireCallback([](Projectile*p) {
+                    AudioSystem::play(sfxExplosionBig);
+                    for(int i = -4; i <= 4; i+=4) {
+                        for (int j = -4; j <= 4; j+= 4) {
+                            Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
+                            if (t == Terrain::DestrucableWood) {
+                                MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
+                            }
+                        }
+                    }
+                    ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget});
+                    EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                });
+        dir.rotBy(40);
+        fireWeapon(cfg, pos, dir, vel, air, 0, GrenadeSprite, mask)
+                ->addVelocity(vel * 0.5f)
+                ->setExpireCallback([](Projectile*p) {
+                    AudioSystem::play(sfxExplosionBig);
+                    for(int i = -4; i <= 4; i+=4) {
+                        for (int j = -4; j <= 4; j+= 4) {
+                            Terrain t = CollisionManager::getTerrainAt(p->pos().x()+i, p->pos().y()+j);
+                            if (t == Terrain::DestrucableWood) {
+                                MapManager::setTileAt(p->pos().x()+i, p->pos().y()+j, 61);
+                            }
+                        }
+                    }
+                    ProjectileManager::create(p->pos(), {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget});
+                    EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                });
+        dir.rotBy(-80);
+        fireWeapon(cfg, pos, dir, vel, air, 0, GrenadeSprite, mask)
                 ->addVelocity(vel * 0.5f)
                 ->setExpireCallback([](Projectile*p) {
                     AudioSystem::play(sfxExplosionBig);

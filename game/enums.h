@@ -99,17 +99,19 @@ enum Blueprints : uint8_t {
     TankBP              = 1,
     BoatBP              = 2,
     HeliBP              = 3,
-    GeminiGunBP         = 4,  // jeep
+    SpreaderShotBP      = 4,  // jeep, boat
     TacticalArmorBP     = 5,  // soldier, player.cpp
     NinjaShoesBP        = 6,  // soldier, player.cpp
-    SpreaderShotBP      = 7,  // jeep
+    FlamethrowerBP      = 7,  // tank
     MultinadeBP         = 8,  // jeep
     ClustershotBP       = 9,  // heli
 
     AllTerrainTiresBP   = 10, // jeep, player.cpp
     UnobtainiumHullBP   = 11, // heli, player.cpp
 
-    MachineGunBP        = 12, // tank, boat
+    MachineGunBP        = 12, // tank, boat, soldier
+
+    CounterMotorBP      = 13, // boat
 
     LastIdxBP           = 20
 };

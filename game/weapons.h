@@ -61,10 +61,14 @@ public:
         Missiles = 16,
 
         // helicopter
-        MultiMissiles = 32
+        MultiMissiles = 32,
+
+        Spreader = 64,
+        Multinade = 128,
+        FlameThrower = 256
     };
-    static constexpr const Type AllWeapons[] = { Gun, MachineGun, DualShot, Grenade, Missiles };
-    static constexpr const int WeaponCount = 5;
+    static constexpr const Type AllWeapons[] = { Gun, MachineGun, DualShot, Grenade, Missiles, MultiMissiles, Spreader, Multinade, FlameThrower };
+    static constexpr const int WeaponCount = 9;
 
     static std::string getName(Type t);
     static WeaponConfig getConfig(Type t);

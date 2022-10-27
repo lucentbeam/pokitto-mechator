@@ -38,7 +38,7 @@ Helicopter Helicopter::s_instance;
 
 PlayerMode Player::s_mode = PlayerMode::SoldierMode;
 
-int Player::s_owned_weapons = Weapon::Gun | Weapon::Grenade | Weapon::DualShot | Weapon::Missiles | Weapon::MachineGun;
+int Player::s_owned_weapons = Weapon::Gun | Weapon::Grenade | Weapon::DualShot | Weapon::Missiles;
 
 float Player::s_shot_cooldown = 0.0f;
 
@@ -77,7 +77,7 @@ void Soldier::update(float dt)
 
     {
         s_instance.m_overlaps = PlayerMode::SoldierMode;
-        const int sizes[4] = {6, 8, 10, 8};
+        const int sizes[4] = {6, 8, 10, 14};
         const PlayerMode prefs[4] = {JeepMode, HelicopterMode, TankMode, BoatMode};
         for(int i = 0; i < 4; ++i) {
             if (Player::alive(prefs[i]) && (Player::position(prefs[i]) - s_instance.m_steering.pos()).length() < sizes[i]) {
@@ -376,6 +376,7 @@ void Boat::update(float dt)
         s_instance.m_steering.update(dt, 0.0f, 0.0f, 0.0f);
         return;
     }
+    if (GameVariables::hasBlueprintUnlocked(CounterMotorBP)) s_instance.m_steering.setSteering(&steering_boat_countersteer);
 
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);

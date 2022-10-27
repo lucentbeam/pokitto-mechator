@@ -50,6 +50,10 @@ public:
 
     void stop() { m_current_speed = 0.0f; }
 
+    void setSteering(const SteeringConfig * other) {
+        config = other;
+    }
+
     void copyPosition(const Steering &other);
 
     bool moving() const { return m_moving; }
