@@ -85,7 +85,7 @@ void updateRepairsState(FSM &fsm)
             UI::showHealthbar(SoldierMode);
             current_cost = Player::damaged(SoldierMode) ? soldierRepairCost : 0;
         } else {
-            PlayerMode mode = vehicles_avail[idx - 1];
+            PlayerMode mode = vehicles_avail[idx - 2];
             if (mode != SoldierMode) {
                 if (Player::alive(mode)) {
                     UI::showHealthbar(mode);

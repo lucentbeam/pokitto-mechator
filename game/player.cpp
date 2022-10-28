@@ -479,8 +479,7 @@ bool Player::hurting()
 
 bool Player::alive(PlayerMode m)
 {
-    Vehicle &target = getInstance(m);
-    return target.m_health.value() > 0;
+    return getInstance(m).m_health.value() > 0;
 }
 
 bool Player::damaged(PlayerMode m)
