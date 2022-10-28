@@ -62,14 +62,16 @@ const char * const bp_names[] = {
     "Tank Schematics",
     "Boat Schematics",
     "Helicopter Schematics",
-    "Gemini Gun",
+    "Spreadshot Gun",
     "Tactical Armor",
     "Ninja Shoes",
-    "Spreader Shot",
+    "Flamethrower",
     "Multinade",
     "Cluster Shot",
     "All Terrain Tires",
-    "Unobtainium Hull"
+    "Unobtainium Hull",
+    "Machine Gun",
+    "Counter Motor",
 };
 
 const char * const bp_descs[] = {
@@ -80,11 +82,13 @@ const char * const bp_descs[] = {
     "Unlock Weapon [Jeep]",
     "Health Bonus [Soldier]",
     "Improved Sprint [Soldier]",
-    "Unlock Weapon [Jeep]",
+    "Unlock Weapon [Tank]",
     "Unlock Weapon [Jeep]",
     "Unlock Weapon [Heli]",
     "Ignore Grass [Jeep]",
-    "Improved Health [Heli]"
+    "Improved Health [Heli]",
+    "Unlock Weapon",
+    "Reduce Drift [Boat]"
 };
 
 const int bp_costs[] = {
@@ -92,13 +96,15 @@ const int bp_costs[] = {
     0, // tank
     0, // boat
     0, // heli
-    1, // gemini gun
+    1, // spreader
     1, // tactical armor
     1, // ninja shoes
-    1, // spreader shot
+    1, // flamethrower
     1, // multinade
     1, // cluster shot
     1, // mud tires
     1, // unobtainium
+    1, // Machine Gun
+    1, // Counter Motor
 };
 #endif // CONSTANTS_H

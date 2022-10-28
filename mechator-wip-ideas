@@ -10,8 +10,6 @@
 
 - clean up blueprint unlock screen
 
-- fix jeep health not showing on repair screen
-
 blueprints:
  - spreader: no map
  x armor

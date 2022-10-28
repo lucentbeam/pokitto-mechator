@@ -38,7 +38,7 @@ void showBlueprintsShop()
     opts.push_back("BACK");
     bps_avail.clear();
     for(int i = 0; i < int(Blueprints::LastIdxBP); ++i) {
-        if (GameVariables::hasBlueprintToUnlock(Blueprints(i))) {
+        if (i > 2) {//GameVariables::hasBlueprintToUnlock(Blueprints(i))) {
             opts.push_back(bp_names[i]);
             bps_avail.push_back(i);
         }

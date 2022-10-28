@@ -113,7 +113,7 @@ enum Blueprints : uint8_t {
 
     CounterMotorBP      = 13, // boat
 
-    LastIdxBP           = 20
+    LastIdxBP           = 14
 };
 
 #endif // ENUMS_H
