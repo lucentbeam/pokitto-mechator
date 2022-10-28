@@ -35,8 +35,12 @@ class Controls {
 
     static Controls s_controls;
 
+    static int s_blockframes;
+
 public:
     static void update();
+
+    static void blockControls(int fcount);
 
     static const ControlStatus getStatus(bool normalize_dir = false);
 };

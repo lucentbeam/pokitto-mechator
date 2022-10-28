@@ -4,6 +4,8 @@
 
 Controls Controls::s_controls;
 
+int Controls::s_blockframes = 0;
+
 #ifndef DESKTOP_BUILD
 
 #include "Pokitto.h"
@@ -58,6 +60,8 @@ const ControlStatus Controls::getStatus(bool normalize_dir)
 
 void Controls::update()
 {
+    if (s_blockframes > 0) s_blockframes--;
+
     s_controls.m_stats.x = (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ? 1 : 0);
     s_controls.m_stats.y = (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ? 1 : 0) - (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) ? 1 : 0);
 
@@ -113,6 +117,8 @@ void Controls::update()
 #include <iostream>
 
 void Controls::update() {
+    if (s_blockframes > 0) s_blockframes--;
+
     const uint8_t * state = SDL_GetKeyboardState(NULL);
 
 #ifdef DEBUGS
@@ -186,8 +192,16 @@ void Controls::update() {
 #include <limits>
 #endif
 
+void Controls::blockControls(int fcount)
+{
+    s_blockframes = fcount;
+}
+
 const ControlStatus Controls::getStatus(bool normalize_dir)
 {
+    if (s_blockframes > 0) {
+        return ControlStatus();
+    }
     ControlStatus out = s_controls.m_stats;
 
     if (normalize_dir && std::fabs(out.x) > std::numeric_limits<float>::epsilon() && std::fabs(out.y) > std::numeric_limits<float>::epsilon()) {

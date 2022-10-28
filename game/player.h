@@ -93,7 +93,7 @@ class Soldier : public Vehicle {
 
     friend Player;
 public:
-    Soldier() : Vehicle(soldierHealth, playerStartTileX*6 + 3, playerStartTileY*6 + 3, &steering_soldier, s_possible_weapons, Weapon::FlameThrower) {}
+    Soldier() : Vehicle(soldierHealth, playerStartTileX*6 + 3, playerStartTileY*6 + 3, &steering_soldier, s_possible_weapons, Weapon::Gun) {}
 
     static bool overlaps(PlayerMode mode) { return s_instance.m_overlaps == mode; }
     static bool isSprinting() { return s_instance.sprinting; }

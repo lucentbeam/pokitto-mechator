@@ -8,7 +8,7 @@
 
 - draw smallish segment of map while in boat / heli
 
-- fix firing bullet on first frame of FSM transition
+- and game saved prompt
 
 blueprints:
  - spreader: no map

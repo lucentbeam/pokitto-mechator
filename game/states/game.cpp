@@ -60,6 +60,8 @@ void goGame(bool from_title)
         drawflashlight = true;
     }
 
+    Controls::blockControls(2);
+
     FSM::instance->go(GameStates::Game);
 
     Camera::update(player.position().x(), player.position().y());
