@@ -195,6 +195,8 @@ static UIElement keyacount(90,1,19,8,100,5,0,0,Tween::Easing::OutQuad);
 static UIElement keybcount(90,10,19,8,100,14,0,0,Tween::Easing::OutQuad);
 static UIElement keyccount(90,19,19,8,100,23,0,0,Tween::Easing::OutQuad);
 
+static UIElement savedprompt(40, 76, 30, 9, 55, 81, 0, 0, Tween::Easing::OutQuad);
+
 int8_t * UI::m_boss_life = nullptr;
 int8_t UI::m_max_boss_life = 0;
 
@@ -267,6 +269,9 @@ void UI::showForDuration(UI::Element element, float duration)
         break;
     case UI::Element::UIKeyCCount:
         keyccount.showForDuration(duration);
+        break;
+    case UI::Element::GameSavedPrompt:
+        savedprompt.showForDuration(duration);
         break;
     default:
         break;
@@ -354,6 +359,7 @@ void UI::update(float dt)
     keyacount.update(dt);
     keybcount.update(dt);
     keyccount.update(dt);
+    savedprompt.update(dt);
     if (m_boss_life != nullptr && *m_boss_life <= 0) {
         m_boss_life = nullptr;
         onBossDestroyed();
@@ -429,6 +435,12 @@ void UI::draw()
         if (h > 7) {
             RenderSystem::sprite(x, y, pickup_keycard3[1], pickup_keycard3[1][2]);
             drawNumber(GameVariables::keysC(), x + 8, y+1);
+        }
+    });
+
+    savedprompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
+        if (h > 7) {
+            Helpers::printHorizontallyCentered(x + w/2, y + 1, "SAVED", 10);
         }
     });
 

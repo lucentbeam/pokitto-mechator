@@ -75,7 +75,8 @@ public:
         UIDollarCount,
         UIKeyACount,
         UIKeyBCount,
-        UIKeyCCount
+        UIKeyCCount,
+        GameSavedPrompt
     };
 
     static void setVisibility(Element,bool,bool=false);

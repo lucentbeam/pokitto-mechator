@@ -70,6 +70,8 @@ void updateShopState(FSM&)
             GameVariables::saveGame();
             MapManager::dumpMutables(GameVariables::savefile);
             quitShopState();
+            UI::showForDuration(UI::Element::GameSavedPrompt, 2.0f);
+            AudioSystem::play(sfxGetItem);
             break;
         case 2:
             goRepairState();

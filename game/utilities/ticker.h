@@ -4,7 +4,7 @@
 #include <cstdint>
 
 class GenericTicker {
-    uint8_t m_count;
+    uint8_t m_count = 0;
 
 public:
     void reset(uint8_t count);

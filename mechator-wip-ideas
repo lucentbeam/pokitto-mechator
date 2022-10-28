@@ -8,7 +8,9 @@
 
 - draw smallish segment of map while in boat / heli
 
-- and game saved prompt
+- clean up blueprint unlock screen
+
+- fix jeep health not showing on repair screen
 
 blueprints:
  - spreader: no map
