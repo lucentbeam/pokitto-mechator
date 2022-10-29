@@ -108,12 +108,6 @@ void drawPauseState()
             WeaponHelper carousel = Player::getCurrentWeaponInfo();
             int spacing = 4;
             x = x + w/2 - ((carousel.count-1) * spacing + carousel.count * 6) / 2;
-            const uint8_t bullet_empty[] = {6, 6, 1, 1, 0, 0, 1, 1,
-                                                  1, 0, 0, 0, 0,1,
-                                                  0, 0, 0, 0, 0,0,
-                                                  0, 0, 0, 0, 0,0,
-                                                  1, 0, 0, 0, 0,1,
-                                                  1, 1, 0, 0, 1, 1,};
             y++;
             Helpers::drawNotchedRect(x - spacing, y + h, (spacing + 6) * carousel.count + spacing, 6, 1);
             for (int i = 0; i < carousel.count; ++i) {

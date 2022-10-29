@@ -107,4 +107,11 @@ const int bp_costs[] = {
     1, // Machine Gun
     1, // Counter Motor
 };
+
+const uint8_t bullet_empty[] = {6, 6, 1, 1, 0, 0, 1, 1,
+                                      1, 0, 0, 0, 0,1,
+                                      0, 0, 0, 0, 0,0,
+                                      0, 0, 0, 0, 0,0,
+                                      1, 0, 0, 0, 0,1,
+                                      1, 1, 0, 0, 1, 1,};
 #endif // CONSTANTS_H

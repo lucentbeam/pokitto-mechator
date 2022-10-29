@@ -15,10 +15,10 @@
 #include "game/variables.h"
 #include "core/audiosystem.h"
 
-static UIElement title = UIElement::getExpander(59, 35, 88, 9, Tween::Easing::OutQuad);
+static UIElement title = UIElement::getExpander(55, 35, 88, 9, Tween::Easing::OutQuad);
 static UIElement bp_cost_prompt(47,78,38,9,66,82,0,0,Tween::Easing::OutQuad);
 
-static UIOptions options(true, {"NO", "YES"});
+static UIOptions options(false, {"NO", "YES"});
 std::vector<int> bps_avail;
 
 int flashing = 0;
@@ -35,18 +35,17 @@ void showBlueprintsShop()
     UI::setVisibility(UI::Element::UIDollarCount, true);
 
     std::vector<const char *> opts;
-    opts.push_back("BACK");
     bps_avail.clear();
     for(int i = 0; i < int(Blueprints::LastIdxBP); ++i) {
-        if (i > 2) {//GameVariables::hasBlueprintToUnlock(Blueprints(i))) {
+        if (GameVariables::hasBlueprintToUnlock(Blueprints(i))) {
+//        if (i > 2) {
             opts.push_back(bp_names[i]);
             bps_avail.push_back(i);
         }
     }
-    options = UIOptions(true, opts);
+    options = UIOptions(false, opts);
     options.reset();
-    int v = 8 * opts.size() + 10;
-    title.setCenter(59, 44 - v / 2);
+    title.setCenter(55, 16);
     title.setVisibility(true, uint32_t(0));
     flashing = 0;
     bp_cost_prompt.setVisibility(false);
@@ -83,19 +82,33 @@ void updateBlueprintsShopState(FSM &fsm)
 
 void drawBlueprintsShopState()
 {
-
     drawShadedGame();
 
     title.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
             Helpers::printHorizontallyCentered(x + w/2, y + 1, "UNLOCKABLES", 10);
-            x -= 12;
-            w += 15;
-            options.foreach([&](uint8_t idx, bool active, const char * text) {
-                Helpers::drawNotchedRect(x + 9, y + 10 + idx * 8, w - 9, 7, 0);
-                RenderSystem::sprite(x, y + 10 + idx * 8, poi[!active ? 0 : 1]);
+            const int spacing = 2;
+            const int carousel_size = (spacing + 6) * bps_avail.size() + spacing;
+            const int carousel_x = x + w/2 - carousel_size/2;
+            Helpers::drawNotchedRect(carousel_x - spacing/2, y + h + 2, carousel_size, 6, 1);
+            if (options.activeIndex() > 0) {
+                RenderSystem::sprite(carousel_x - 5, y + h + 3, ui_arrow_left, ui_arrow_left[2]);
+            }
+            if (options.activeIndex() < bps_avail.size()-1) {
+                RenderSystem::sprite(carousel_x + carousel_size - 1, y + h + 3, ui_arrow_left, ui_arrow_left[2], true);
+            }
 
-                Helpers::printHorizontallyCentered(x + w/2 + 4, y + 10 + idx * 8, text, !active ? 6 : 10);
+            x -= 8;
+            w += 16;
+            options.foreach([&](uint8_t idx, bool active, const char * text) {
+                RenderSystem::sprite(carousel_x + idx * (spacing + 6), y + h + 2, bullet_empty, 1);
+                if (active) {
+                    RenderSystem::drawRect2(carousel_x + idx * (spacing + 6) + 2, y + h + 2 + 2, 2, 2, 10);
+
+                    Helpers::drawNotchedRect(x, y + h + 15, w, 22, 0);
+                    Helpers::printHorizontallyCentered(x + w/2, y + h + 17, text, 10);
+                    Helpers::printHorizontallyCentered(x + w/2, y + h + 27, bp_descs[bps_avail[idx]], 8);
+                }
             });
 
         }
@@ -109,7 +122,6 @@ void drawBlueprintsShopState()
             std::string line = "COST: " + std::to_string(bp_costs[bps_avail[options.activeIndex()-1]]);
             Helpers::printHorizontallyCentered(x + w/2, y + 1, line.c_str(), 10);
 
-            Helpers::printHorizontallyCentered(55, 4, bp_descs[bps_avail[options.activeIndex()-1]], 10);
         }
     });
 }
