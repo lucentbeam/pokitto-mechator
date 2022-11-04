@@ -8,12 +8,8 @@
 
 - draw smallish segment of map while in boat / heli
 
-- clean up blueprint unlock screen
-
 blueprints:
  - spreader: no map
- x armor
- x ninja shoes
  - flamethrower: no map
  - multinade: no map
  - clustershot: no map
@@ -21,6 +17,7 @@ blueprints:
  - unobtainium hull: no map
  - machinegun: no map
  - countermotor: no map
+order: spreader, multinade, flamethrower, all terrain tires, machinegun, countermotor, clustershot
 
 - playthroughs!!
  - track money vs. time

@@ -368,6 +368,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({-32, 188}, SpawnPoint::Boat),
 	SpawnPoint({-24, 188}, SpawnPoint::Boat),
 	SpawnPoint({-36, 208}, SpawnPoint::Boat),
+	SpawnPoint({-6, 203}, SpawnPoint::Blueprint),
 };
 const int point_count = sizeof(points)/sizeof(SpawnPoint);
 

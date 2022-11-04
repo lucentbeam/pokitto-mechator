@@ -144,6 +144,6 @@
   <object id="37" name="enemy_watermine" x="14.4574" y="8.3949" width="26.0852" height="13.7102"/>
   <object id="38" name="enemy_watermine" x="14.9574" y="50.1449" width="26.0852" height="13.7102"/>
   <object id="39" name="enemy_watermine" x="116.207" y="91.6449" width="37.5852" height="25.4602"/>
-  <object id="40" name="blueprint_3" x="240.503" y="162.781" width="4.8125" height="4.4375"/>
+  <object id="40" name="blueprint_3" x="240.909" y="163.062" width="4.21875" height="3.78125"/>
  </objectgroup>
 </map>

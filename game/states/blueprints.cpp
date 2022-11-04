@@ -48,7 +48,7 @@ void showBlueprintsShop()
     title.setCenter(55, 16);
     title.setVisibility(true, uint32_t(0));
     flashing = 0;
-    bp_cost_prompt.setVisibility(false);
+    bp_cost_prompt.setVisibility(true);
 }
 
 void updateBlueprintsShopState(FSM &fsm)
@@ -56,16 +56,14 @@ void updateBlueprintsShopState(FSM &fsm)
     ControlStatus status = Controls::getStatus();
     options.update(status);
 
-    bp_cost_prompt.setVisibility(options.activeIndex() != 0);
-
     if (flashing > 0) flashing--;
     if (status.a.pressed()) {
-        if (GameVariables::dollars() >= bp_costs[options.activeIndex()-1]) {
-            GameVariables::unlockBlueprint(bps_avail[options.activeIndex()-1]);
+        if (GameVariables::dollars() >= bp_costs[options.activeIndex()]) {
+            GameVariables::unlockBlueprint(bps_avail[options.activeIndex()]);
             Player::updateOwnedWeapons();
             AudioSystem::play(sfxGetItem);
             showShop(true);
-            GameVariables::changeDollars(-bp_costs[options.activeIndex()-1]);
+            GameVariables::changeDollars(-bp_costs[options.activeIndex()]);
             return;
         } else {
             AudioSystem::play(sfxDeny);
@@ -110,7 +108,6 @@ void drawBlueprintsShopState()
                     Helpers::printHorizontallyCentered(x + w/2, y + h + 27, bp_descs[bps_avail[idx]], 8);
                 }
             });
-
         }
     });
 

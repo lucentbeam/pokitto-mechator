@@ -537,7 +537,7 @@ Weapon::Type Player::currentWeapon()
 void Player::cycleWeaponNext()
 {
     getInstance(s_mode).current_weapon = Weapon::nextWeapon(getInstance(s_mode).current_weapon);
-    while (!getInstance(s_mode).current_weapon & s_owned_weapons & getInstance(s_mode).m_valid_weapons) {
+    while (!(getInstance(s_mode).current_weapon & s_owned_weapons & getInstance(s_mode).m_valid_weapons)) {
         getInstance(s_mode).current_weapon = Weapon::nextWeapon(getInstance(s_mode).current_weapon);
     }
 }
@@ -545,7 +545,7 @@ void Player::cycleWeaponNext()
 void Player::cycleWeaponPrev()
 {
     getInstance(s_mode).current_weapon = Weapon::prevWeapon(getInstance(s_mode).current_weapon);
-    while (!getInstance(s_mode).current_weapon & s_owned_weapons & getInstance(s_mode).m_valid_weapons) {
+    while (!(getInstance(s_mode).current_weapon & s_owned_weapons & getInstance(s_mode).m_valid_weapons)) {
         getInstance(s_mode).current_weapon = Weapon::prevWeapon(getInstance(s_mode).current_weapon);
     }
 }

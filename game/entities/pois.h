@@ -18,7 +18,7 @@ class POIs
     Vec2f m_heli_loc{0,0};
 
     // only used for keyed doors
-    uint16_t m_top, m_left;
+    int16_t m_top, m_left;
     uint8_t m_width, m_height;
     uint8_t m_tile;
     POIType m_door_type;
@@ -33,7 +33,7 @@ class POIs
 
 public:
 
-    static void spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, uint8_t tile, POIType door);
+    static void spawnDoor(const Vec2i &pos, int16_t left, int16_t top, uint8_t width, uint8_t height, uint8_t tile, POIType door);
 
     static void spawnShop(const Vec2i &pos, const Vec2f &jeep_loc, const Vec2f &boat_loc, const Vec2f &heli_loc);
 

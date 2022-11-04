@@ -39,7 +39,7 @@ void POIs::openAtIndex(const Vec2f &pos)
     }
 }
 
-void POIs::spawnDoor(const Vec2i &pos, uint16_t left, uint16_t top, uint8_t width, uint8_t height, uint8_t tile, POIType door)
+void POIs::spawnDoor(const Vec2i &pos, int16_t left, int16_t top, uint8_t width, uint8_t height, uint8_t tile, POIType door)
 {
     if (!mapIndexUnopened(pos)) {
         return;
