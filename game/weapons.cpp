@@ -11,7 +11,7 @@ const WeaponConfig mgun_config(14.0f, 2, 0.4f, 150.0f, sfxPlayerGun);
 
 const WeaponConfig spreader_config(3.3f, 3, 0.5f, 100.0f, sfxPlayerGun);
 
-const WeaponConfig dualshot_config(4.2f, 3, 0.35f, 130.0f, sfxPlayerGun2x);
+const WeaponConfig dualshot_config(4.4f, 3, 0.35f, 130.0f, sfxPlayerGun2x);
 
 const WeaponConfig grenade_config(2.8f, 4, 0.5f, 65.0f, sfxGrenade);
 const WeaponConfig multinade_config(1.5f, 4, 0.5f, 60.0f, sfxGrenade);

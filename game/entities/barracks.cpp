@@ -124,7 +124,7 @@ void Barracks::update(float dt)
         }
 
         // decrement counter and check for spawns
-        if (b->m_spawn_count < 2) {
+        if (b->m_spawn_count < 3) {
             b->m_spawn_timer--;
             if (b->m_spawn_timer <= 0) {
                 b->m_spawn_timer = asCounts(2.33f) + (rand() % asCounts(1.0f));
