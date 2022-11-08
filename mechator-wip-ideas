@@ -8,17 +8,6 @@
 
 - draw smallish segment of map while in boat / heli
 
-blueprints:
- - spreader: no map
- - flamethrower: no map
- - multinade: no map
- - clustershot: no map
- - all terrain tires: no map
- - unobtainium hull: no map
- - machinegun: no map
- - countermotor: no map
-order: spreader, multinade, flamethrower, all terrain tires, machinegun, countermotor, clustershot
-
 - playthroughs!!
  - track money vs. time
 - tweak ideas:

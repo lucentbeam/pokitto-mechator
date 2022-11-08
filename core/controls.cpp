@@ -11,7 +11,13 @@ int Controls::s_blockframes = 0;
 #include "Pokitto.h"
 #include <limits>
 
+void Controls::blockControls(int fcount)
+{
+    s_blockframes = fcount;
+}
+
 void Controls::update() {
+    if (s_blockframes > 0) s_blockframes--;
     Pokitto::Buttons::pollButtons();
     s_controls.m_stats.up.update(Pokitto::Core::upBtn());
     s_controls.m_stats.down.update(Pokitto::Core::downBtn());
