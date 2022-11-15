@@ -33,6 +33,7 @@ namespace  Helpers {
         const uint8_t * input = sprite;
         while (frame > 0) {
             input += input[0];
+            --frame;
         }
         if (frame < 0) {
             input--;

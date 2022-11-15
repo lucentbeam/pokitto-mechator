@@ -171,12 +171,8 @@ void EventScene::draw()
                     break;
                 case SceneDialogue::EnemyCPU:
                     {
-                        static int beep_frame = 1;
                         int ctr = counter % asCounts(2.5f);
-                        if (ctr == asCounts(1.6f)) {
-                            beep_frame = 1 + (rand() % 4);
-                        }
-                        std::memcpy(spr, portrait_enemy_cpu[(ctr > asCounts(1.6f) && (ctr < asCounts(1.93f))) || (ctr > asCounts(2.17f)) ? beep_frame : 0], 2 + 15*15);
+                        std::memcpy(spr, portrait_enemy_cpu[(ctr > asCounts(1.6f) && (ctr < asCounts(1.93f))) || (ctr > asCounts(2.17f)) ? 1 : 0], 2 + 15*15);
 
                     }
                     break;

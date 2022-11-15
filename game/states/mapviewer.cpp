@@ -69,11 +69,11 @@ void MapViewer::draw()
         if (h > 8 && w > 8) RenderSystem::drawRect2(x + 2, y + 2, w - 4, h - 4, 1);
         if (h > 56) {
             Vec2i tl = Vec2i(x + w/2 - mechator_reduced[0]/2, y + h/2-mechator_reduced[1]/2);
-            RenderSystem::sprite(tl.x(), tl.y(), mechator_reduced, mechator_reduced[2]);
+            Helpers::drawRLE(tl.x(), tl.y(), mechator_reduced, mechator_reduced[2]);
 
-            RenderSystem::sprite(tl.x() + delta_x_island_1 / 4, tl.y() + delta_y_island_1 / 4, island_1_reduced, island_1_reduced[2]);
-            RenderSystem::sprite(tl.x() + delta_x_island_2 / 4, tl.y() + delta_y_island_2 / 4, island_2_reduced, island_2_reduced[2]);
-            RenderSystem::sprite(tl.x() + delta_x_island_3 / 4, tl.y() + delta_y_island_3 / 4, island_3_reduced, island_3_reduced[2]);
+            Helpers::drawRLE(tl.x() + delta_x_island_1 / 4, tl.y() + delta_y_island_1 / 4, island_1_reduced, island_1_reduced[2]);
+            Helpers::drawRLE(tl.x() + delta_x_island_2 / 4, tl.y() + delta_y_island_2 / 4, island_2_reduced, island_2_reduced[2]);
+            Helpers::drawRLE(tl.x() + delta_x_island_3 / 4, tl.y() + delta_y_island_3 / 4, island_3_reduced, island_3_reduced[2]);
 
             int color;
             for (int i = 0; i < spawnpoint_data_count; ++i) {

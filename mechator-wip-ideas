@@ -3,7 +3,6 @@
   - (????) figure out how to palette swap enemy choppers instead of using extra sprite
 
 - fix vertical draw flip when sprites are at edge of pokitto screen
-
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
 - draw smallish segment of map while in boat / heli

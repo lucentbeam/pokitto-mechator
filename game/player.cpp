@@ -352,9 +352,8 @@ void Tank::draw()
 {
     if (!Player::alive(TankMode)) return;
     Vec2f pos = Camera::worldToScreen(s_instance.m_steering.pos());
-    int offset = (mode_switch_counter % 30) < 15 && s_instance.m_steering.moving() ? 9 : 0;
+    int f = s_instance.m_steering.rotation_frame();
     if (Player::s_mode == SoldierMode && Soldier::overlaps(TankMode)) {
-        int f = s_instance.m_steering.rotation_frame() + offset;
         bool flip = s_instance.m_steering.facing().x() > 0.1f;
         RenderSystem::sprite(pos.x() - 9, pos.y() - 9, tank[f], tank[0][2], 10, flip);
         RenderSystem::sprite(pos.x() - 11, pos.y() - 11, tank[f], tank[0][2], 10, flip);
@@ -362,9 +361,23 @@ void Tank::draw()
         RenderSystem::sprite(pos.x() - 9, pos.y() - 11, tank[f], tank[0][2], 10, flip);
     }
     if (s_instance.flashing()) {
-        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[f], tank[0][2], 10, s_instance.m_steering.facing().x() > 0.1f);
+    } else if((mode_switch_counter % 24) < 12 && s_instance.m_steering.moving()) {
+        // draw with palette to remap treads
+        uint8_t alt[19*19 + 2];
+        alt[0] = 19;
+        alt[1] = 19;
+        const uint8_t * loc = tank[f] + 2;
+        for(int i = 2; i < (2 + 19*19); ++i) {
+            uint8_t idx = *loc;
+            loc++;
+            if (idx == 3) idx = 7;
+            else if (idx == 7) idx = 3;
+            alt[i] = idx;
+        }
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), alt, tank[0][2], s_instance.m_steering.facing().x() > 0.1f);
     } else {
-        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[s_instance.m_steering.rotation_frame() + offset], tank[0][2], s_instance.m_steering.facing().x() > 0.1f);
+        RenderSystem::sprite(pos.x() - 10, pos.y() - 10 - s_instance.m_shake.offset(1), tank[f], tank[0][2], s_instance.m_steering.facing().x() > 0.1f);
     }
     Player::drawReticle(TankMode, s_instance.m_aim);
 }

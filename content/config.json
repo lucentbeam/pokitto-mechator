@@ -30,10 +30,10 @@
 		{ "output" : "enemy_laser_ew", "hcount": 2 },
 		{ "output" : "enemy_watermine" },
 		
-		{ "output" : "island_1_reduced" },
-		{ "output" : "island_2_reduced" },
-		{ "output" : "island_3_reduced" },
-		{ "output" : "mechator_reduced" },
+		{ "output" : "island_1_reduced", "rle": true },
+		{ "output" : "island_2_reduced", "rle": true },
+		{ "output" : "island_3_reduced", "rle": true },
+		{ "output" : "mechator_reduced", "rle": true },
 		
 		{ "output" : "smoke", "hcount": 6 },
 		
@@ -44,7 +44,7 @@
 		{ "output" : "projectile_missile", "hcount": 9},
 		{ "output" : "soldier", "vcount": 6},
 		{ "output" : "jeep", "vcount": 9},
-		{ "output" : "tank", "vcount": 18},
+		{ "output" : "tank", "vcount": 9},
 		{ "output" : "boat", "hcount": 9},
 		{ "output" : "helicopter", "vcount": 9},
 		{ "output" : "helicopter_blades", "hcount": 3},
@@ -53,7 +53,7 @@
 		{ "output" : "parachute" },
 		
 		{ "output" : "portrait_enemy", "hcount": 2},
-		{ "output" : "portrait_enemy_cpu", "hcount": 5},
+		{ "output" : "portrait_enemy_cpu", "hcount": 2},
 		
 		{ "output" : "title_text", "rle": true},
 		{ "output" : "title_jeep", "rle": true},

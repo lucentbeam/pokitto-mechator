@@ -280,47 +280,13 @@ void UI::showForDuration(UI::Element element, float duration)
 
 void UI::showHealthbar(PlayerMode mode)
 {
-    switch(mode) {
-    case PlayerMode::SoldierMode:
-        soldier_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
-
-        jeep_healthbar.setVisibility(false);
-        tank_healthbar.setVisibility(false);
-        boat_healthbar.setVisibility(false);
-        heli_healthbar.setVisibility(false);
-        break;
-    case PlayerMode::JeepMode:
-        jeep_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
-
-        soldier_healthbar.setVisibility(false);
-        tank_healthbar.setVisibility(false);
-        boat_healthbar.setVisibility(false);
-        heli_healthbar.setVisibility(false);
-        break;
-    case PlayerMode::TankMode:
-        tank_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
-
-        soldier_healthbar.setVisibility(false);
-        jeep_healthbar.setVisibility(false);
-        boat_healthbar.setVisibility(false);
-        heli_healthbar.setVisibility(false);
-        break;
-    case PlayerMode::BoatMode:
-        boat_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
-
-        soldier_healthbar.setVisibility(false);
-        jeep_healthbar.setVisibility(false);
-        tank_healthbar.setVisibility(false);
-        heli_healthbar.setVisibility(false);
-        break;
-    case PlayerMode::HelicopterMode:
-        heli_healthbar.setVisibility(true, uint32_t(uiEasingTimeMs));
-
-        soldier_healthbar.setVisibility(false);
-        jeep_healthbar.setVisibility(false);
-        tank_healthbar.setVisibility(false);
-        boat_healthbar.setVisibility(false);
-        break;
+    UIElement * bars[] = {&soldier_healthbar, &jeep_healthbar, &tank_healthbar, &boat_healthbar, &heli_healthbar};
+    for(int i = 0; i < 5; ++i) {
+        if (int(mode) == i) {
+            bars[i]->setVisibility(true, uint32_t(uiEasingTimeMs));
+        } else {
+            bars[i]->setVisibility(false);
+        }
     }
 }
 
