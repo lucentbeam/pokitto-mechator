@@ -78,8 +78,8 @@ namespace Pokitto {
     }
 
     void DisplayExtensions::drawTile(int16_t x, int16_t y, int16_t w, int16_t h, const uint8_t* tile) {
-        if (y<-h || y>Display::height) return; //invisible
-        if (x<-w || x>Display::width) return;  //invisible
+        if (y<=-h || y>=Display::height) return; //invisible
+        if (x<=-w || x>=Display::width) return;  //invisible
         if (offset_color) {
             drawSpriteOffset(x, y, w, h, tile, -1);
             return;
@@ -91,13 +91,14 @@ namespace Pokitto {
         if (x < 0) {
             screenx = 0;
             offsetx = -x;
-            screenw -= offsetx;
+            screenw += x;
         }
         int screeny = y;
         int offsety = 0;
         if (y < 0) {
             screeny = 0;
             offsety = -y;
+            screenh += y;
         }
         uint8_t* start = Display::getBuffer() + 110 * screeny + screenx;
         uint8_t* end = Display::getBuffer() + 110 * (screeny + screenh) + screenx;
