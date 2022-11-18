@@ -167,16 +167,24 @@ bool POIs::canBuild(PlayerMode mode)
     if (s_current_active_poi == nullptr) {
         return false;
     }
+    Vec2f ref;
     switch (mode) {
     default:
-        return s_current_active_poi->m_position.length() > 0;
+        ref = s_current_active_poi->m_position;
+        break;
     case PlayerMode::JeepMode:
-        return s_current_active_poi->m_jeep_loc.length() > 0;
+        ref = s_current_active_poi->m_jeep_loc;
+        break;
     case PlayerMode::TankMode:
-        return s_current_active_poi->m_jeep_loc.length() > 0;
+        ref = s_current_active_poi->m_jeep_loc;
+        break;
     case PlayerMode::BoatMode:
-        return s_current_active_poi->m_boat_loc.length() > 0;
+        ref = s_current_active_poi->m_boat_loc;
+        break;
     case PlayerMode::HelicopterMode:
-        return s_current_active_poi->m_heli_loc.length() > 0;
+        ref = s_current_active_poi->m_heli_loc;
+        break;
     }
+    ref = ref - s_current_active_poi->m_position;
+    return ref.length() > 0;
 }

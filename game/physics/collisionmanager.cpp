@@ -30,6 +30,11 @@ bool CollisionManager::collides(const Vec2f &pos, uint16_t collisionMask)
     return (1 << (getTerrainAt(pos.x(), pos.y())) & collisionMask) > 0;
 }
 
+bool CollisionManager::collides(Terrain t, uint16_t collisionMask)
+{
+    return ((1 << t) & collisionMask) > 0;
+}
+
 Terrain CollisionManager::getTerrainAt(float x, float y)
 {
     return Terrain(jungletilesterrain[MapManager::getTileAt(x,y)]);

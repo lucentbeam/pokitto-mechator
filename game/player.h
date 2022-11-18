@@ -107,7 +107,7 @@ public:
 class Jeep : public Vehicle {
     static Jeep s_instance;
 
-    static constexpr const int s_possible_weapons = Weapon::DualShot | Weapon::Grenade;
+    static constexpr const int s_possible_weapons = Weapon::DualShot | Weapon::Grenade | Weapon::Spreader | Weapon::Multinade;
 
     friend Player;
 public:
@@ -121,7 +121,7 @@ public:
 class Tank : public Vehicle {
     static Tank s_instance;
 
-    static constexpr const int s_possible_weapons = Weapon::Missiles | Weapon::MachineGun;
+    static constexpr const int s_possible_weapons = Weapon::Missiles | Weapon::MachineGun | Weapon::FlameThrower;
 
     friend Player;
 public:
@@ -134,11 +134,11 @@ public:
 class Boat : public Vehicle {
     static Boat s_instance;
 
-    static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun;
+    static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun | Weapon::FlameThrower;
 
     friend Player;
 public:
-    Boat() : Vehicle(20, 12*6, 6*6, &steering_boat, s_possible_weapons, Weapon::MachineGun) {}
+    Boat() : Vehicle(20, 12*6, 6*6, &steering_boat, s_possible_weapons, Weapon::Gun) {}
 
     static void update(float dt);
     static void draw();
@@ -151,11 +151,11 @@ class Helicopter : public Vehicle {
 
     float m_z = 0.0f;
 
-    static constexpr const int s_possible_weapons = Weapon::MachineGun | Weapon::MultiMissiles;
+    static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun | Weapon::MultiMissiles;
 
     friend Player;
 public:
-    Helicopter() : Vehicle(16, 12*6, 8*6, &steering_heli, s_possible_weapons, Weapon::MachineGun) {}
+    Helicopter() : Vehicle(16, 12*6, 8*6, &steering_heli, s_possible_weapons, Weapon::Gun) {}
 
     static void launch();
     static bool active();
@@ -181,7 +181,6 @@ class Player {
 public:
 
     static PlayerMode mode() { return s_mode; }
-
 
     static bool buildVehicleAt(PlayerMode mode, Vec2f position);
 

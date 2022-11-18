@@ -249,8 +249,8 @@ void Helicopter::update(float dt)
         s_instance.m_health.change(-damage);
         if (!Player::alive(HelicopterMode)) {
             onVehicleDestroyed();
-            Player::s_mode = PlayerMode::SoldierMode;
-            UI::showHealthbar();
+//            Player::s_mode = PlayerMode::SoldierMode;
+//            UI::showHealthbar();
             EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
         }
     }
@@ -407,8 +407,8 @@ void Boat::update(float dt)
         if (!Player::alive(BoatMode)) {
             // TODO: make gameover
             onVehicleDestroyed();
-            Player::s_mode = PlayerMode::SoldierMode;
-            UI::showHealthbar();
+//            Player::s_mode = PlayerMode::SoldierMode;
+//            UI::showHealthbar();
             EffectManager::createExplosionBig(s_instance.m_steering.pos() - Vec2f(6,6));
         }
     }
@@ -416,14 +416,15 @@ void Boat::update(float dt)
     static uint16_t disembarkPoints = Helpers::getMask({Terrain::None, Terrain::Mud, Terrain::Grass, Terrain::WaterShallow});
     Vec2f projection = s_instance.m_steering.pos() + s_instance.m_steering.facing() * 12.0f;
     Player::updateCounter();
-    if (controls.b.pressed() && mode_switch_counter > 1 && CollisionManager::collides(projection, disembarkPoints)) { // project forward and look for ground
+    if (controls.b.pressed() && mode_switch_counter > 1) { // project forward and look for ground
 
         static uint16_t blocksLanding = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
         for (int i = 3; i <= 15; i += 3) {
             projection = s_instance.m_steering.pos() + s_instance.m_steering.facing() * float(i);
-            if (CollisionManager::collides(projection, blocksLanding)) {
+            Terrain target_terrain = CollisionManager::getTerrainAt(projection.x(), projection.y());
+            if (CollisionManager::collides(target_terrain, blocksLanding)) {
                 i = 18;
-            } else if (CollisionManager::collides(projection, disembarkPoints)) {
+            } else if (CollisionManager::collides(target_terrain, disembarkPoints)) {
                 projection.setX(std::floor(projection.x() / 6.0f) * 6 + 3);
                 projection.setY(std::floor(projection.y() / 6.0f) * 6 + 3);
                 Player::setPosition(SoldierMode, projection);
@@ -528,7 +529,8 @@ Rect Player::bounds(PlayerMode m)
 
 bool Player::dead()
 {
-    return Soldier::s_instance.m_health.value() <= 0;
+    if (s_mode == JeepMode || s_mode == TankMode) return false;
+    return getInstance(s_mode).m_health.value() <= 0;
 }
 
 Vec2f Player::position()
@@ -656,6 +658,8 @@ void Player::loadData()
     Boat::s_instance = Boat();
     Helicopter::s_instance = Helicopter();
 
+    s_mode = SoldierMode; // todo: make it boat mode if floating bases?
+
     setPosition(SoldierMode, dat->soldierPosition);
     health(SoldierMode).set(dat->soldierLife);
     setPosition(JeepMode, dat->jeepPosition);
@@ -670,9 +674,14 @@ void Player::loadData()
 
 void Player::updateOwnedWeapons()
 {
-    s_owned_weapons = Weapon::Gun | Weapon::Grenade | Weapon::DualShot | Weapon::Missiles | Weapon::MachineGun;
+    // defaults
+    s_owned_weapons = Weapon::Gun | Weapon::Grenade | Weapon::DualShot | Weapon::Missiles;
 
     // add the rest
-//    if (GameVariables::hasBlueprintUnlocked(GeminiGunBP)) s_owned_weapons |= Weapon::DualShot;
+    if (GameVariables::hasBlueprintUnlocked(Blueprints::MachineGunBP)) s_owned_weapons |= Weapon::MachineGun;
+    if (GameVariables::hasBlueprintUnlocked(Blueprints::MultinadeBP)) s_owned_weapons |= Weapon::Multinade;
+    if (GameVariables::hasBlueprintUnlocked(Blueprints::SpreaderShotBP)) s_owned_weapons |= Weapon::Spreader;
+    if (GameVariables::hasBlueprintUnlocked(Blueprints::ClustershotBP)) s_owned_weapons |= Weapon::MultiMissiles;
+    if (GameVariables::hasBlueprintUnlocked(Blueprints::FlamethrowerBP)) s_owned_weapons |= Weapon::FlameThrower;
 }
 

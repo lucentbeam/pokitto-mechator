@@ -1,11 +1,7 @@
-- reduce footprint:
-  - (0.7k) pokitto logo -> RLE
-  - (????) figure out how to palette swap enemy choppers instead of using extra sprite
-
-- fix vertical draw flip when sprites are at edge of pokitto screen
-- fix all sequences that rely on checking for turrets / barracks to set modes
-
-- draw smallish segment of map while in boat / heli
+- fix enemy boat damage issue
+- fix dying in boat and restarting
+- consider some water-based bases for boat saves/repair
+- consider blueprint on stormy cape
 
 - playthroughs!!
  - track money vs. time
@@ -19,11 +15,19 @@
   - cost tuning
   - $10 money boxes?
   - multiframe pathfinding
+
+- check: figure out why turrets don't spawn after tank boss
+- fix all sequences that rely on checking for turrets / barracks to set modes
+
+- fix audio zeroing
+  
+::::IF I REALLY WANT TO::::::::
 - make helicopter deny landing prettier
-
-- Add SFX when central calls
-
+- palette swap enemy helis
+- draw smallish segment of map while in boat / heli
+ - optimize if I like it
 - sfx:
+  - when central calls
   - bomber coming (bbbrrrrreeeewwww....)
   - connect hit to tanks. others?
 

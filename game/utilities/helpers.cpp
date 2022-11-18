@@ -28,7 +28,7 @@ namespace  Helpers {
         RenderSystem::print(x, y, text, color);
     }
 
-    void drawRLE(int x, int y, const uint8_t *sprite, int transparent, int frame, uint8_t * buffer)
+    void drawRLE(int x, int y, const uint8_t *sprite, int transparent, int frame, uint8_t * buffer, int subx, int suby, int subw, int subh)
     {
         const uint8_t * input = sprite;
         while (frame > 0) {
@@ -38,8 +38,13 @@ namespace  Helpers {
         if (frame < 0) {
             input--;
         }
+        bool dosub = subw > 0 && subh > 0;
         uint8_t w = input[1];
         uint8_t h = input[2];
+        if (dosub) {
+            x = x - subx;
+            y = y - suby;
+        }
         input += 3;
         if (buffer == nullptr) buffer = RenderSystem::getBuffer();
         int col = *input++;
@@ -59,6 +64,9 @@ namespace  Helpers {
                 xidx = x + xcounter;
                 if (xidx < 0 || xidx >= 110) continue;
                 if (c == transparent) continue;
+                if (dosub) {
+                    if (xcounter < subx || xcounter >= (subx + subw) || ycounter < suby || ycounter >= (suby + subh)) continue;
+                }
                 buffer[xidx + yidx * 110] = c;
     #ifdef DESKTOP_BUILD
                 RenderSystem::pixel(xidx, yidx, c);

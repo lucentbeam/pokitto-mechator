@@ -359,6 +359,13 @@ void UI::draw()
     activeDrawMode = HelicopterMode;
     heli_healthbar.draw(false, drawHealthBar);
 
+    if (Player::mode() == HelicopterMode || Player::mode() == BoatMode) {
+        Helpers::drawNotchedRect(85, 1, 24, 24, 0);
+        Vec2f ppos = Player::position() * 54.0f / 216.0f / 6.0f;
+        Helpers::drawRLE(86, 2, mechator_reduced, -1, -1, nullptr, ppos.x() - 11, ppos.y() - 11, 22, 22);
+        RenderSystem::pixel(86 + 11, 2 + 11, 10);
+    }
+
     if (m_boss_life != nullptr) {
         boss_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
             for(uint8_t i = 0; i < m_max_boss_life; i++) {

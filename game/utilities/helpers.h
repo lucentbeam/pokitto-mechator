@@ -15,7 +15,7 @@ namespace Helpers {
 
     void printHorizontallyCentered(int x, int y, const char * text, uint8_t color);
 
-    void drawRLE(int x, int y, const uint8_t * sprite, int transparent = 0, int frame = -1, uint8_t * buffer = nullptr);
+    void drawRLE(int x, int y, const uint8_t * sprite, int transparent = 0, int frame = -1, uint8_t * buffer = nullptr, int subx = 0, int suby = 0, int subw = 0, int subh = 0 );
 
     void drawRotatedBox(Vec2f start, Vec2f dir, float length, int threecolors[3]);
 };

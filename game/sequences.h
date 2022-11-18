@@ -274,7 +274,7 @@ const SceneFunc tt_f0 = SceneFunc([](){
     registerCallback({Barracks::getBarracksAt({27, 99})->getLifePtr(), Barracks::getBarracksAt({25, 99})->getLifePtr(), Barracks::getBarracksAt({30, 99})->getLifePtr()}, [](){
         POIs::setShopsDisabled(false);
         RegionTransitionHandler::leaveBoss();
-        EnemyTurret::setAllEnabled(true);
+        EnemyTurret::setAllEnabled(false);
         MapManager::setTileAt(16 * 6 + 3, 100 * 6 + 3, 184);
         MapManager::setTileAt(16 * 6 + 3, 101 * 6 + 3, 184);
         MapManager::setTileAt(16 * 6 + 3, 102 * 6 + 3, 184);
@@ -285,7 +285,6 @@ const SceneFunc tt_f0 = SceneFunc([](){
 });
 
 const SceneSequence tank_boss_scene[] = {
-//    {SceneSequence::DoFunction, &tb_f0},
     {SceneSequence::MoveCamera, &tt_m0 },
     {SceneSequence::Wait, &wait30 },
     {SceneSequence::ShowDialogue, &tt_dlog0 },

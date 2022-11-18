@@ -15,7 +15,7 @@
 
 SimplePool<Barracks, 6> Barracks::s_barracks;
 
-int8_t Barracks::s_max_life = 27;
+int8_t Barracks::s_max_life = 21;
 
 #ifdef DEBUGS
 #include <iostream>

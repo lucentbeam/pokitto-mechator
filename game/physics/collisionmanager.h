@@ -34,6 +34,8 @@ public:
 
     static bool collides(const Vec2f &pos, uint16_t collisionMask);
 
+    static bool collides(Terrain t, uint16_t collisionMask);
+
     static Terrain getTerrainAt(float x, float y);
 
     static Vec2f resolveMovement(Vec2f pos, const Vec2f &delta, uint16_t collisionMask, const Vec2f &size);
