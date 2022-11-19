@@ -12,6 +12,7 @@ void EnemyBomber::setup(const Vec2f &pos)
     m_pos.set(pos.x(), pos.y());
     status = Waiting;
     m_damage_frames = 0;
+    m_life = 4;
 }
 
 bool EnemyBomber::update(float dt)

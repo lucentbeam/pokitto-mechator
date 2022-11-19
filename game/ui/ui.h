@@ -43,22 +43,24 @@ public:
 };
 
 class UIOptions {
-    bool m_vertical;
-    std::vector<const char*> m_options;
+    bool m_active[16] = { true };
 
     uint8_t m_available;
     int8_t m_active_index;
 public:
-    UIOptions(bool vertical, std::initializer_list<const char*> options);
-    UIOptions(bool vertical, std::vector<const char*> options);
+    UIOptions(int count) { m_available = count; for (int i = 0; i < count; ++i) m_active[i] = true; }
 
-    void update(const ControlStatus&, void (*on_highlight)(int8_t index) = nullptr, bool cycle = false);
+    void update(bool forward, bool back, void (*on_highlight)(int8_t index) = nullptr, bool cycle = false);
 
-    void foreach(std::function<void(uint8_t idx, bool active, const char *)>);
+    void foreach(std::function<void(uint8_t idx, bool active)>);
+
+    void foreach(std::function<void(uint8_t idx, uint8_t actual_idx, bool active)>);
 
     uint8_t activeIndex() const { return uint8_t(m_active_index); }
 
-    void setAvailableCount(uint8_t avail) { m_available = std::min<uint8_t>(avail, uint8_t(m_options.size())); }
+    void setAvailableCount(uint8_t avail) { m_available = avail; for (int i = 0; i < avail; ++i) m_active[i] = true; }
+
+    void setActiveAt(int idx, bool active) { m_active[idx] = active; }
 
     void reset() { m_active_index = 0; }
 };

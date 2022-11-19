@@ -18,7 +18,7 @@ static bool can_open = false;
 static UIElement prompt = UIElement::getExpander(55, 44, 90, 9, Tween::Easing::OutQuad);
 static char not_enough_text[24];
 static char open_text[17];
-static UIOptions yes_no(true, {"NO", "YES"});
+static UIOptions yes_no(2);
 
 void showOpenDoorPrompt(POIType door) {
     if (door == POIType::Shop) {
@@ -68,7 +68,7 @@ void updateOpenDoorState(FSM&) {
     ControlStatus status = Controls::getStatus();
 
     if (can_open) {
-        yes_no.update(status);
+        yes_no.update(status.down.pressed(), status.up.pressed());
         if (status.a.pressed()) {
             if (yes_no.activeIndex() == 0) {
                 prompt.setVisibility(false);
@@ -108,10 +108,10 @@ void drawOpenDoorState() {
         if (h > 8) {
             Helpers::printHorizontallyCentered(x + w/2, y + 1, can_open ? open_text : not_enough_text, can_open ? 10 : 6);
             if (can_open) {
-                yes_no.foreach([](uint8_t idx, bool active, const char * name) {
+                yes_no.foreach([](uint8_t idx, bool active) {
                     Helpers::drawNotchedRect(46, 50 + idx * 8, 20, 7, 0);
                     RenderSystem::sprite(38, 50 + idx * 8, poi[active ? 1 : 0]);
-                    Helpers::printHorizontallyCentered(56, 50 + idx * 8, name, active ? 10 : 6);
+                    Helpers::printHorizontallyCentered(56, 50 + idx * 8, idx == 0 ? "NO" : "YES", active ? 10 : 6);
                 });
             }
         }

@@ -67,7 +67,7 @@ namespace  Helpers {
                 if (dosub) {
                     if (xcounter < subx || xcounter >= (subx + subw) || ycounter < suby || ycounter >= (suby + subh)) continue;
                 }
-                buffer[xidx + yidx * 110] = c;
+                buffer[xidx + yidx * 110] = c + 65;
     #ifdef DESKTOP_BUILD
                 RenderSystem::pixel(xidx, yidx, c);
     #endif

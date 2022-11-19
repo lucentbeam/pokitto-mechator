@@ -51,14 +51,6 @@ void MapViewer::update(FSM &fsm)
     playerloc_blink.update();
     door_blink.update();
     goal_blink.update();
-
-#ifdef DEBUGS
-    if (ctrl.right.pressed()) {
-        static int q = 0;
-        q = (q + 1) % 6;
-        GameVariables::setQuestStatus(q);
-    }
-#endif
 }
 
 void MapViewer::draw()

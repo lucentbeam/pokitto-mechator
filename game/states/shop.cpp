@@ -12,10 +12,11 @@
 #include "game/player.h"
 
 static UIElement title = UIElement::getExpander(55, 28, 70, 9, Tween::Easing::OutQuad);
-static UIOptions title_opts1(true, {"LEAVE", "SAVE", "REPAIR/BUILD"});
-static UIOptions title_opts2(true, {"LEAVE", "SAVE", "REPAIR/BUILD", "BLUEPRINTS"});
+static UIOptions title_opts(4);
+//static UIOptions title_opts2(true, {"LEAVE", "SAVE", "REPAIR/BUILD", "BLUEPRINTS"});
+static const char * title_opt_lines[4] = {"LEAVE", "SAVE", "REPAIR/BUILD", "BLUEPRINTS"};
 
-UIOptions * active_options;
+//UIOptions * active_options;
 
 void showShop(bool from_repairs)
 {
@@ -30,11 +31,9 @@ void showShop(bool from_repairs)
     UI::setVisibility(UI::Element::UIHackingKitCount, false);
 
     title.setVisibility(true, uint32_t(50));
-    if (!from_repairs) {
-        title_opts1.reset();
-        title_opts2.reset();
-    }
-    active_options = GameVariables::hasUnusedBlueprints() ? &title_opts2 : &title_opts1;
+    if (!from_repairs) title_opts.reset();
+    title_opts.setAvailableCount(GameVariables::hasUnusedBlueprints() ? 4 : 3);
+//    active_options = GameVariables::hasUnusedBlueprints() ? &title_opts2 : &title_opts1;
 }
 
 void quitShopState() {
@@ -56,12 +55,11 @@ void updateShopState(FSM&)
 {
     ControlStatus status = Controls::getStatus();
 
-    title_opts1.update(status);
-    title_opts2.update(status);
+    title_opts.update(status.down.pressed(), status.up.pressed());
 
     if (status.a.pressed()) {
         AudioSystem::play(sfxConfirm);
-        switch(active_options->activeIndex()) {
+        switch(title_opts.activeIndex()) {
         case 0:
             quitShopState();
             break;
@@ -98,11 +96,11 @@ void drawShopState()
     title.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
             Helpers::printHorizontallyCentered(x + w/2, y + 1, "HACKED BASE", 10);
-            active_options->foreach([&](uint8_t idx, bool active, const char * text) {
+            title_opts.foreach([&](uint8_t idx, bool active) {
                 Helpers::drawNotchedRect(x + 9, y + 10 + idx * 8, w - 9, 7, 0);
                 RenderSystem::sprite(x, y + 10 + idx * 8, poi[!active ? 0 : 1]);
 
-                RenderSystem::print(x + 12, y + 10 + idx * 8, text, !active ? 6 : 10);
+                RenderSystem::print(x + 12, y + 10 + idx * 8, title_opt_lines[idx], !active ? 6 : 10);
             });
 
         }

@@ -19,7 +19,7 @@ static bool can_open = false;
 
 static UIElement title_box = UIElement::getExpander(55, 35, 76, 9, Tween::Easing::OutQuad);
 static UIElement alert_box = UIElement::getExpander(55, 45, 76, 9, Tween::Easing::OutQuad);
-static UIOptions yes_no(true, {"NO", "YES"});
+static UIOptions yes_no(2);
 
 void showOpenShopPrompt()
 {
@@ -70,7 +70,7 @@ void updateOpenShopState(FSM&)
                 showShop();
             }
         }
-        yes_no.update(status);
+        yes_no.update(status.down.pressed(), status.up.pressed());
     } else {
         if (status.a.pressed() || status.b.pressed()) {
             quitOpenShop();
@@ -92,10 +92,10 @@ void drawOpenShopState()
         alert_box.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
             if (h > 8) {
                 Helpers::printHorizontallyCentered(x + w/2, y + 1, "USE A HACKING KIT?", 10);
-                yes_no.foreach([](uint8_t idx, bool active, const char * name) {
+                yes_no.foreach([](uint8_t idx, bool active) {
                     Helpers::drawNotchedRect(46, 51 + idx * 8, 20, 7, 0);
                     RenderSystem::sprite(38, 51 + idx * 8, poi[active ? 1 : 0]);
-                    Helpers::printHorizontallyCentered(56, 51 + idx * 8, name, active ? 10 : 6);
+                    Helpers::printHorizontallyCentered(56, 51 + idx * 8, idx == 0 ? "NO" : "YES", active ? 10 : 6);
                 });
             }
         });

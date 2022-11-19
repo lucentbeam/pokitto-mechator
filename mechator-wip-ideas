@@ -3,6 +3,11 @@
 - consider some water-based bases for boat saves/repair
 - consider blueprint on stormy cape
 
+- fix repair shop spawn names (jeep/boat/heli)
+- add "blueprint unlocked" prompt/popup at shop (auto timeout on shop leave)
+- time out "saved" prompt on pause/shop screens
+- fix empty prompts (enter tutorial island, leave tutorial island)
+
 - playthroughs!!
  - track money vs. time
 - tweak ideas:
@@ -20,6 +25,7 @@
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
 - fix audio zeroing
+- remove "dosub" portion of drawRLE if no mini map
   
 ::::IF I REALLY WANT TO::::::::
 - make helicopter deny landing prettier

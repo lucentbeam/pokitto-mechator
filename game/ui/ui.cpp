@@ -127,56 +127,64 @@ UIElement UIElement::getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Twe
     return UIElement(x-w/2,y-h/2,w,h,x,y,0,0,curve);
 }
 
-UIOptions::UIOptions(bool vertical, std::initializer_list<const char *> options) :
-    m_vertical(vertical),
-    m_options(options),
-    m_available(uint8_t(options.size()))
+void UIOptions::update(bool forward, bool back, void (*on_highlight)(int8_t index), bool cycle)
 {
-
-}
-
-UIOptions::UIOptions(bool vertical, std::vector<const char *> options) :
-    m_vertical(vertical),
-    m_options(options),
-    m_available(uint8_t(options.size()))
-{
-
-}
-
-void UIOptions::update(const ControlStatus &status, void (*on_highlight)(int8_t index), bool cycle)
-{
-    int8_t previous = m_active_index;
-    if (m_vertical) {
-        if (status.up.pressed() || status.down.pressed()) {
-            m_active_index += status.y < 0 ? -1 : 1;
-            AudioSystem::play(sfxSelect);
+    if (!forward && !back) return;
+    int8_t next = m_active_index;
+    if (forward) {
+        ++next;
+        while (!m_active[next] && next < m_available) {
+            ++next;
+            if (cycle) next %= m_available;
         }
     } else {
-        if (status.right.pressed() || status.left.pressed()) {
-            m_active_index += status.x < 0 ? -1 : 1;
-            AudioSystem::play(sfxSelect);
+        --next;
+        while (!m_active[next] && (cycle || next > 0)) {
+            --next;
+            if (cycle && next < 0) {
+                next += m_available;
+            }
         }
     }
-    if (m_active_index < 0) {
-        if (cycle) m_active_index += m_available;
-        else m_active_index = 0;
-    } else if (m_active_index >= m_available) {
-        if (cycle) m_active_index %= m_available;
-        else m_active_index = (m_available - 1);
+    if (!m_active[next]) return;
+    if (next != m_active_index) {
+        m_active_index = next;
+        if (on_highlight != nullptr) on_highlight(m_active_index);
+        AudioSystem::play(sfxSelect);
     }
-    if (on_highlight != nullptr && m_active_index != previous) {
-        on_highlight(m_active_index);
+//    m_active_index += forward ? 1 : back ? -1 : 0;
+//    if (m_active_index < 0) {
+//        if (cycle) m_active_index += m_available;
+//        else m_active_index = 0;
+//    } else if (m_active_index >= m_available) {
+//        if (cycle) m_active_index %= m_available;
+//        else m_active_index = (m_available - 1);
+//    }
+//    if (m_active_index != previous) {
+//        if (on_highlight != nullptr) on_highlight(m_active_index);
+//        AudioSystem::play(sfxSelect);
+//    }
+}
+
+void UIOptions::foreach(std::function<void (uint8_t, bool)> callback)
+{
+    int idx = 0;
+    for(int i = 0; i < m_available; ++i) {
+        if (m_active[i]) {
+            callback(idx, i == m_active_index);
+            ++idx;
+        }
     }
 }
 
-void UIOptions::foreach(std::function<void (uint8_t, bool, const char *)> callback)
+void UIOptions::foreach(std::function<void (uint8_t, uint8_t, bool)> callback)
 {
-    uint8_t i = 0;
-    for(const char * s : m_options) {
-        if (i < m_available) {
-            callback(i, i == m_active_index, s);
+    int idx = 0;
+    for(int i = 0; i < m_available; ++i) {
+        if (m_active[i]) {
+            callback(idx, i, i == m_active_index);
+            ++idx;
         }
-        i++;
     }
 }
 

@@ -18,7 +18,7 @@
 static UIElement title = UIElement::getExpander(55, 35, 88, 9, Tween::Easing::OutQuad);
 static UIElement bp_cost_prompt(47,78,38,9,66,82,0,0,Tween::Easing::OutQuad);
 
-static UIOptions options(false, {"NO", "YES"});
+static UIOptions options(2);
 std::vector<int> bps_avail;
 
 int flashing = 0;
@@ -34,16 +34,13 @@ void showBlueprintsShop()
     UI::setVisibility(UI::Element::UIKeyCCount, false);
     UI::setVisibility(UI::Element::UIDollarCount, true);
 
-    std::vector<const char *> opts;
     bps_avail.clear();
     for(int i = 0; i < int(Blueprints::LastIdxBP); ++i) {
         if (GameVariables::hasBlueprintToUnlock(Blueprints(i))) {
-//        if (i > 2) {
-            opts.push_back(bp_names[i]);
             bps_avail.push_back(i);
         }
     }
-    options = UIOptions(false, opts);
+    options = UIOptions(bps_avail.size());
     options.reset();
     title.setCenter(55, 16);
     title.setVisibility(true, uint32_t(0));
@@ -54,7 +51,7 @@ void showBlueprintsShop()
 void updateBlueprintsShopState(FSM &fsm)
 {
     ControlStatus status = Controls::getStatus();
-    options.update(status);
+    options.update(status.right.pressed(), status.left.pressed());
 
     if (flashing > 0) flashing--;
     if (status.a.pressed()) {
@@ -98,13 +95,13 @@ void drawBlueprintsShopState()
 
             x -= 8;
             w += 16;
-            options.foreach([&](uint8_t idx, bool active, const char * text) {
+            options.foreach([&](uint8_t idx, bool active) {
                 RenderSystem::sprite(carousel_x + idx * (spacing + 6), y + h + 2, bullet_empty, 1);
                 if (active) {
                     RenderSystem::drawRect2(carousel_x + idx * (spacing + 6) + 2, y + h + 2 + 2, 2, 2, 10);
 
                     Helpers::drawNotchedRect(x, y + h + 15, w, 22, 0);
-                    Helpers::printHorizontallyCentered(x + w/2, y + h + 17, text, 10);
+                    Helpers::printHorizontallyCentered(x + w/2, y + h + 17, bp_names[bps_avail[idx]], 10);
                     Helpers::printHorizontallyCentered(x + w/2, y + h + 27, bp_descs[bps_avail[idx]], 8);
                 }
             });
