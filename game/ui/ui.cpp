@@ -152,18 +152,6 @@ void UIOptions::update(bool forward, bool back, void (*on_highlight)(int8_t inde
         if (on_highlight != nullptr) on_highlight(m_active_index);
         AudioSystem::play(sfxSelect);
     }
-//    m_active_index += forward ? 1 : back ? -1 : 0;
-//    if (m_active_index < 0) {
-//        if (cycle) m_active_index += m_available;
-//        else m_active_index = 0;
-//    } else if (m_active_index >= m_available) {
-//        if (cycle) m_active_index %= m_available;
-//        else m_active_index = (m_available - 1);
-//    }
-//    if (m_active_index != previous) {
-//        if (on_highlight != nullptr) on_highlight(m_active_index);
-//        AudioSystem::play(sfxSelect);
-//    }
 }
 
 void UIOptions::foreach(std::function<void (uint8_t, bool)> callback)

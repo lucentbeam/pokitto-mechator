@@ -160,6 +160,8 @@ void updateGameState(FSM& fsm) {
             if (strlen(region_name) > 0) {
                 region_indicator.setMaxWidth(RenderSystem::getLineLength(region_name) + 8);
                 region_indicator.showForDuration(3.0f);
+            } else {
+                region_indicator.setVisibility(false, uint32_t(0));
             }
         }
     }
