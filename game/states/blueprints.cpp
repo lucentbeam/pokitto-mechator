@@ -60,6 +60,7 @@ void updateBlueprintsShopState(FSM &fsm)
             Player::updateOwnedWeapons();
             AudioSystem::play(sfxGetItem);
             showShop(true);
+            showBPUnlock();
             GameVariables::changeDollars(-bp_costs[options.activeIndex()]);
             return;
         } else {

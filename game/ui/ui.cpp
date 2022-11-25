@@ -131,13 +131,13 @@ void UIOptions::update(bool forward, bool back, void (*on_highlight)(int8_t inde
 {
     if (!forward && !back) return;
     int8_t next = m_active_index;
-    if (forward) {
+    if (forward && next < (m_available - 1)) {
         ++next;
         while (!m_active[next] && next < m_available) {
             ++next;
             if (cycle) next %= m_available;
         }
-    } else {
+    } else if (back && next > 0) {
         --next;
         while (!m_active[next] && (cycle || next > 0)) {
             --next;
@@ -236,6 +236,9 @@ void UI::setVisibility(UI::Element element, bool visible, bool immediate)
     case UI::Element::UIKeyCCount:
         keyccount.setVisibility(visible,immediate);
         break;
+    case UI::Element::GameSavedPrompt:
+        savedprompt.setVisibility(visible,immediate);
+        break;
     }
 }
 
@@ -256,6 +259,9 @@ void UI::setVisibility(UI::Element element, bool visible, uint32_t delay)
         break;
     case UI::Element::UIKeyCCount:
         keyccount.setVisibility(visible,delay);
+        break;
+    case UI::Element::GameSavedPrompt:
+        savedprompt.setVisibility(visible,delay);
         break;
     }
 }
@@ -280,8 +286,6 @@ void UI::showForDuration(UI::Element element, float duration)
         break;
     case UI::Element::GameSavedPrompt:
         savedprompt.showForDuration(duration);
-        break;
-    default:
         break;
     }
 }

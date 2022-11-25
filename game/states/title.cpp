@@ -53,6 +53,7 @@ void Title::selectData() {
     sprintf(GameVariables::savefile, "/data/mechator/save%d.dat", select_index + 1);
 #endif
 
+    Player::reset();
     if (s_state == DataSelect && game_datas[select_index].elapsedMilliseconds > 5000) {
         GameStorage dat;
         Serialization::tryGet<GameStorage>(GameVariables::savefile, &dat);

@@ -208,6 +208,7 @@ public:
 
     static void storeData();
     static void loadData();
+    static void reset();
     static void updateOwnedWeapons();
 
     // helper mode access (for shop UI)

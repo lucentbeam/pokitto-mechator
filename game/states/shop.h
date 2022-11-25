@@ -6,6 +6,8 @@
 
 void showShop(bool from_repairs = false);
 
+void showBPUnlock();
+
 void updateShopState(FSM &fsm);
 
 void drawShopState();

@@ -652,14 +652,6 @@ void Player::loadData()
 {
     GameStorage * dat = GameVariables::getData();
 
-    Soldier::s_instance = Soldier();
-    Jeep::s_instance = Jeep();
-    Tank::s_instance = Tank();
-    Boat::s_instance = Boat();
-    Helicopter::s_instance = Helicopter();
-
-    s_mode = SoldierMode; // todo: make it boat mode if floating bases?
-
     setPosition(SoldierMode, dat->soldierPosition);
     health(SoldierMode).set(dat->soldierLife);
     setPosition(JeepMode, dat->jeepPosition);
@@ -670,6 +662,19 @@ void Player::loadData()
     health(BoatMode).set(dat->boatLife);
     setPosition(HelicopterMode, dat->heliPosition);
     health(HelicopterMode).set(dat->heliLife);
+
+    // todo: set s_mode to boat mode if floating bases?
+}
+
+void Player::reset()
+{
+    Soldier::s_instance = Soldier();
+    Jeep::s_instance = Jeep();
+    Tank::s_instance = Tank();
+    Boat::s_instance = Boat();
+    Helicopter::s_instance = Helicopter();
+
+    s_mode = SoldierMode;
 }
 
 void Player::updateOwnedWeapons()

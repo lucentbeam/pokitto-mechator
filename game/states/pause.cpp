@@ -25,6 +25,9 @@ void goPause(bool from_map)
     UI::setVisibility(UI::Element::UIKeyCCount, true, uint32_t(150));
     UI::setVisibility(UI::Element::UIDollarCount,     true, uint32_t(300));
     UI::setVisibility(UI::Element::UIHackingKitCount, true, uint32_t(300));
+
+    UI::setVisibility(UI::Element::GameSavedPrompt, false, true);
+
     pause_prompt.setVisibility(true, uint32_t(0));
     equip_prompt.setVisibility(true, uint32_t(0));
     map_prompt.setVisibility(true, uint32_t(0));
@@ -45,6 +48,7 @@ void updatePauseState(FSM&)
         FSM::instance->go(GameStates::MapState);
     }
     if (goingMap) return;
+    UI::update(physicsTimestep);
     ControlStatus status = Controls::getStatus();
     if (status.c.pressed() || status.b.pressed()) {
         pause_prompt.setVisibility(false);

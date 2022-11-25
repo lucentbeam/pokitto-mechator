@@ -13,10 +13,9 @@
 
 static UIElement title = UIElement::getExpander(55, 28, 70, 9, Tween::Easing::OutQuad);
 static UIOptions title_opts(4);
-//static UIOptions title_opts2(true, {"LEAVE", "SAVE", "REPAIR/BUILD", "BLUEPRINTS"});
 static const char * title_opt_lines[4] = {"LEAVE", "SAVE", "REPAIR/BUILD", "BLUEPRINTS"};
 
-//UIOptions * active_options;
+static UIElement blueprintunlock = UIElement::getExpander(55, 82, 80, 9, Tween::Easing::OutQuad);
 
 void showShop(bool from_repairs)
 {
@@ -30,6 +29,8 @@ void showShop(bool from_repairs)
 
     UI::setVisibility(UI::Element::UIHackingKitCount, false);
 
+    UI::setVisibility(UI::Element::GameSavedPrompt, false);
+
     title.setVisibility(true, uint32_t(50));
     if (!from_repairs) title_opts.reset();
     title_opts.setAvailableCount(GameVariables::hasUnusedBlueprints() ? 4 : 3);
@@ -39,21 +40,26 @@ void showShop(bool from_repairs)
 void quitShopState() {
     goGame();
     title.setVisibility(false);
+    blueprintunlock.setVisibility(false, true);
 }
 
 void goRepairState() {
     title.setVisibility(false);
     showRepairs();
+    blueprintunlock.setVisibility(false, true);
 }
 
 void goBlueprintState() {
     title.setVisibility(false);
     showBlueprintsShop();
+    blueprintunlock.setVisibility(false, true);
 }
 
 void updateShopState(FSM&)
 {
     ControlStatus status = Controls::getStatus();
+    UI::update(physicsTimestep);
+    blueprintunlock.update(physicsTimestep);
 
     title_opts.update(status.down.pressed(), status.up.pressed());
 
@@ -105,4 +111,14 @@ void drawShopState()
 
         }
     });
+    blueprintunlock.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h){
+       if (h > 7) {
+           Helpers::printHorizontallyCentered(x + w/2, y + 1, "BLUEPRINT UNLOCKED", 10);
+       }
+    });
+}
+
+void showBPUnlock()
+{
+    blueprintunlock.showForDuration(2.0f);
 }

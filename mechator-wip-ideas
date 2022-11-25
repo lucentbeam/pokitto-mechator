@@ -1,12 +1,6 @@
-- fix enemy boat damage issue
-- fix dying in boat and restarting
-- consider some water-based bases for boat saves/repair
-- consider blueprint on stormy cape
-
-- fix repair shop spawn names (jeep/boat/heli)
-- add "blueprint unlocked" prompt/popup at shop (auto timeout on shop leave)
-- time out "saved" prompt on pause/shop screens
 - fix empty prompts (enter tutorial island, leave tutorial island)
+- fix enemy boat damage issue
+- fix dying and restarting crashes
 
 - playthroughs!!
  - track money vs. time
@@ -21,7 +15,11 @@
   - $10 money boxes?
   - multiframe pathfinding
 
+- consider some water-based bases for boat saves/repair
+- consider blueprint on stormy cape
+
 - check: figure out why turrets don't spawn after tank boss
+
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
 - fix audio zeroing

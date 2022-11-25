@@ -58,7 +58,7 @@ public:
 
     uint8_t activeIndex() const { return uint8_t(m_active_index); }
 
-    void setAvailableCount(uint8_t avail) { m_available = avail; for (int i = 0; i < avail; ++i) m_active[i] = true; }
+    void setAvailableCount(uint8_t avail) { if (m_active_index >= avail) m_active_index = avail -1; m_available = avail; { for (int i = 0; i < avail; ++i) m_active[i] = true; } }
 
     void setActiveAt(int idx, bool active) { m_active[idx] = active; }
 
