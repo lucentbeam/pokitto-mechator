@@ -45,6 +45,7 @@ struct WeaponConfig {
 
 class Weapon
 {
+    static void makeExplosion(float x, float y, bool break_metal);
     static Projectile * fireWeapon(const WeaponConfig &config, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel, bool air, int dmg, SpriteName s, uint16_t mask, bool playsound = true);
 public:
 

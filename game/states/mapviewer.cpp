@@ -24,7 +24,7 @@ static UIElement map_area = UIElement::getExpander(48,50,84,66, Tween::Easing::O
 
 bool hiding = false;
 
-Blinker playerloc_blink(1.2f, 1.0f);
+Blinker playerloc_blink(0.4f, 0.3f);
 Blinker goal_blink(3.6f, 3.25f);
 Blinker door_blink(3.6f, 1.2f);
 
@@ -73,7 +73,7 @@ void MapViewer::draw()
                     SpawnPoint pt = points[i];
                     color = pt.type() == SpawnPoint::SpawnPointType::DoorA ? 48 : pt.type() == SpawnPoint::SpawnPointType::DoorB ? 32 : pt.type() == SpawnPoint::SpawnPointType::DoorC ? 16 : 8;
                     Vec2f pos = pt.pos() * world_to_loc;
-                    RenderSystem::drawRect(tl.x() + pos.x() - 1, tl.y() + pos.y() - 1, 3, 2, color);
+                    RenderSystem::drawRect2(tl.x() + pos.x() - 1, tl.y() + pos.y() - 1, 2, 2, color);
                 }
             }
 

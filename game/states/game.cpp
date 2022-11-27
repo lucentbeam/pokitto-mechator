@@ -56,11 +56,12 @@ void goGame(bool from_title)
         SpawnPoint::reset();
         MapManager::rebuildVisibleTiles();
         Camera::update(-5000, -5000);
+        Camera::stopMovement();
         SpawnPoint::setActiveRegion();
         drawflashlight = true;
     }
 
-    Controls::blockControls(2);
+    Controls::blockControls(20);
 
     FSM::instance->go(GameStates::Game);
 

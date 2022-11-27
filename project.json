@@ -5496,6 +5496,12 @@
 		},
 		"\\content\\maps\\island_2_ground.json.yO4556": {
 			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\enemyaihelper.obj": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\spawnpoints.obj": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
