@@ -8,9 +8,9 @@
 #include "game/player.h"
 #include "core/audiosystem.h"
 
-static UIElement pause_prompt = UIElement::getExpander(53,23,60,11, Tween::Easing::OutQuad);
-static UIElement equip_prompt = UIElement::getExpander(53,35,60,11, Tween::Easing::OutQuad);
-static UIElement map_prompt = UIElement::getExpander(53,66,60,11, Tween::Easing::OutQuad);
+static UIElement pause_prompt = UIElement::getExpander(50,23,60,11, Tween::Easing::OutQuad);
+static UIElement equip_prompt = UIElement::getExpander(50,35,60,11, Tween::Easing::OutQuad);
+static UIElement map_prompt = UIElement::getExpander(50,66,60,11, Tween::Easing::OutQuad);
 
 Weapon::Type selected_weapon = Weapon::MachineGun;
 
@@ -20,11 +20,12 @@ static bool goingMap = false;
 
 void goPause(bool from_map)
 {
-    UI::setVisibility(UI::Element::UIKeyACount, true, uint32_t(150));
-    UI::setVisibility(UI::Element::UIKeyBCount, true, uint32_t(150));
-    UI::setVisibility(UI::Element::UIKeyCCount, true, uint32_t(150));
+    UI::setVisibility(UI::Element::UIKeyACount, true, uint32_t(100));
+    UI::setVisibility(UI::Element::UIKeyBCount, true, uint32_t(133));
+    UI::setVisibility(UI::Element::UIKeyCCount, true, uint32_t(166));
+    UI::setVisibility(UI::Element::UIHackingKitCount, true, uint32_t(200));
+
     UI::setVisibility(UI::Element::UIDollarCount,     true, uint32_t(300));
-    UI::setVisibility(UI::Element::UIHackingKitCount, true, uint32_t(300));
 
     UI::setVisibility(UI::Element::GameSavedPrompt, false, true);
 

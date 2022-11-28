@@ -109,7 +109,7 @@ const int bp_costs[] = {
     1, // mud tires
     1, // Machine Gun
     1, // Counter Motor
-    1, // unobtainium
+    100, // unobtainium
     1, // cluster shot
 };
 

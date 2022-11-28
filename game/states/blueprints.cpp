@@ -55,13 +55,13 @@ void updateBlueprintsShopState(FSM &fsm)
 
     if (flashing > 0) flashing--;
     if (status.a.pressed()) {
-        if (GameVariables::dollars() >= bp_costs[options.activeIndex()]) {
+        if (GameVariables::dollars() >= bp_costs[bps_avail[options.activeIndex()]]) {
             GameVariables::unlockBlueprint(bps_avail[options.activeIndex()]);
             Player::updateOwnedWeapons();
             AudioSystem::play(sfxGetItem);
             showShop(true);
             showBPUnlock();
-            GameVariables::changeDollars(-bp_costs[options.activeIndex()]);
+            GameVariables::changeDollars(-bp_costs[bps_avail[options.activeIndex()]]);
             return;
         } else {
             AudioSystem::play(sfxDeny);
@@ -109,14 +109,11 @@ void drawBlueprintsShopState()
         }
     });
 
+    if (bp_costs[bps_avail[options.activeIndex()]] == 0) return;
     bp_cost_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
-        if (flashing > 0 && (flashing % 6 < 4)) {
-            Helpers::drawNotchedRect(x, y, w, h, 15);
-        }
-        if (h > 8 && options.activeIndex() > 0) {
-            std::string line = "COST: " + std::to_string(bp_costs[bps_avail[options.activeIndex()-1]]);
-            Helpers::printHorizontallyCentered(x + w/2, y + 1, line.c_str(), 10);
-
+        if (h > 8) {
+            std::string line = "COST: " + std::to_string(bp_costs[bps_avail[options.activeIndex()]]);
+            Helpers::printHorizontallyCentered(x + w/2, y + 1, line.c_str(), (flashing > 0 && (flashing % 6 < 4)) ? 15 : 10);
         }
     });
 }

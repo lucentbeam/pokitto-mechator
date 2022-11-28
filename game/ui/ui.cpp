@@ -184,14 +184,18 @@ static UIElement heli_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 
 static UIElement boss_healthbar(104,0,7,88,110,0,7,88,Tween::Easing::OutQuad);
 
-static UIElement kitcount(66,78,19,9,76,82,0,0,Tween::Easing::OutQuad);
+
+static UIElement keyacount(90,25,19,8,100,29,0,0,Tween::Easing::OutQuad);
+static UIElement keybcount(90,34,19,8,100,38,0,0,Tween::Easing::OutQuad);
+static UIElement keyccount(90,43,19,8,100,47,0,0,Tween::Easing::OutQuad);
+static UIElement kitcount(90,52,19,8,100,56,0,0,Tween::Easing::OutQuad);
+
 static UIElement dollarcount(86,78,23,9,97,82,0,0,Tween::Easing::OutQuad);
 
-static UIElement keyacount(90,1,19,8,100,5,0,0,Tween::Easing::OutQuad);
-static UIElement keybcount(90,10,19,8,100,14,0,0,Tween::Easing::OutQuad);
-static UIElement keyccount(90,19,19,8,100,23,0,0,Tween::Easing::OutQuad);
 
 static UIElement savedprompt(40, 76, 30, 9, 55, 81, 0, 0, Tween::Easing::OutQuad);
+
+constexpr uint8_t spr_aimlock[] = {4, 5, 0, 10, 10, 0, 10, 0, 0, 10, 10, 0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10};
 
 int8_t * UI::m_boss_life = nullptr;
 int8_t UI::m_max_boss_life = 0;
@@ -203,7 +207,7 @@ void UI::drawNumber(uint16_t num, int x, int y)
     if (num < 10) {
         x += 1;
     }
-    RenderSystem::print(x, y, buf, num == 0 ? 6 : 10);
+    Helpers::printHorizontallyCentered(x, y, buf, num == 0 ? 6 : 10);
 }
 
 void UI::setVisibility(UI::Element element, bool visible, bool immediate)
@@ -359,11 +363,13 @@ void UI::draw()
     activeDrawMode = HelicopterMode;
     heli_healthbar.draw(false, drawHealthBar);
 
-    if (Player::mode() == HelicopterMode || Player::mode() == BoatMode) {
-        Helpers::drawNotchedRect(85, 1, 24, 24, 0);
+//    if (Player::mode() == HelicopterMode || Player::mode() == BoatMode) {
+    if (FSM::instance->is(Game) && GameVariables::eventVisited(ExitTutorial)) {
+        constexpr int sz = 20;
+        Helpers::drawNotchedRect(109-sz-2, 1, sz+2, sz+2, 0);
         Vec2f ppos = Player::position() * 54.0f / 216.0f / 6.0f;
-        Helpers::drawRLE(86, 2, mechator_reduced, -1, -1, nullptr, ppos.x() - 11, ppos.y() - 11, 22, 22);
-        RenderSystem::pixel(86 + 11, 2 + 11, 10);
+        Helpers::drawRLE(108-sz, 2, mechator_reduced, -1, -1, nullptr, ppos.x() - sz/2, ppos.y() - sz/2, sz, sz);
+        RenderSystem::pixel(109 - sz/2, 2 + sz/2, 10);
     }
 
     if (m_boss_life != nullptr) {
@@ -378,36 +384,36 @@ void UI::draw()
 
     kitcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
-            RenderSystem::sprite(x, y + 1, pickup_hackingkit[0], pickup_hackingkit[0][2]);
-            drawNumber(GameVariables::hackingKits(), x + 9, y+1);
+            RenderSystem::sprite(x, y, pickup_hackingkit[0], pickup_hackingkit[0][2]);
+            drawNumber(GameVariables::hackingKits(), x + 11, y+1);
         }
     });
 
     dollarcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
             RenderSystem::sprite(x + 1, y + 1, pickup_dollar[0]);
-            drawNumber(GameVariables::dollars(), x + 10, y+1);
+            drawNumber(GameVariables::dollars(), x + 15, y+1);
         }
     });
 
     keyacount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
-            RenderSystem::sprite(x, y, pickup_keycard1[1], pickup_keycard1[1][2]);
-            drawNumber(GameVariables::keysA(), x + 8, y+1);
+            RenderSystem::sprite(x+1, y, pickup_keycard1[1], pickup_keycard1[1][2]);
+            drawNumber(GameVariables::keysA(), x + 11, y+1);
         }
     });
 
     keybcount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
-            RenderSystem::sprite(x, y, pickup_keycard2[1], pickup_keycard2[1][2]);
-            drawNumber(GameVariables::keysB(), x + 8, y+1);
+            RenderSystem::sprite(x+1, y, pickup_keycard2[1], pickup_keycard2[1][2]);
+            drawNumber(GameVariables::keysB(), x + 11, y+1);
         }
     });
 
     keyccount.draw(true, [](int16_t x, int16_t y, int16_t, int16_t h) {
         if (h > 7) {
-            RenderSystem::sprite(x, y, pickup_keycard3[1], pickup_keycard3[1][2]);
-            drawNumber(GameVariables::keysC(), x + 8, y+1);
+            RenderSystem::sprite(x+1, y, pickup_keycard3[1], pickup_keycard3[1][2]);
+            drawNumber(GameVariables::keysC(), x + 11, y+1);
         }
     });
 
@@ -425,8 +431,7 @@ void UI::draw()
         } else if (ctrl.a.held()) {
             Helpers::drawNotchedRect(110-1-22, 88-1-9, 22, 9, 0);
             RenderSystem::print(110-1-14, 88-1-8, "aim", 10);
-            const uint8_t lock[] = {4, 5, 0, 10, 10, 0, 10, 0, 0, 10, 10, 0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10};
-            RenderSystem::sprite(110-1-20, 80, lock, 0, 10, 9);
+            RenderSystem::sprite(110-1-20, 80, spr_aimlock, 0, 10, 9);
         }
     }
 }
