@@ -10,11 +10,11 @@
 
 int Mine::timer = 0;
 
-ObjectPool<EnemyMech,8> Enemy::s_mechs;
+ObjectPool<EnemyMech,10> Enemy::s_mechs;
 
 ObjectPool<EnemyTank,5> Enemy::s_tanks;
 
-ObjectPool<EnemyBoat,6> Enemy::s_boats;
+ObjectPool<EnemyBoat,4> Enemy::s_boats;
 
 ObjectPool<EnemyTurret,6> Enemy::s_turrets;
 
@@ -24,7 +24,7 @@ ObjectPool<EnemyHelicopter,2> Enemy::s_helis;
 
 ObjectPool<Mine, 14> Enemy::s_mines;
 
-ObjectPool<WaterMine, 6> Enemy::s_watermines;
+ObjectPool<WaterMine, 5> Enemy::s_watermines;
 
 ObjectPool<EnemyLasers,4> Enemy::s_lasers;
 
@@ -391,13 +391,13 @@ void Enemy::drawAir()
 
 void Enemy::clearAll()
 {
-    s_mechs = ObjectPool<EnemyMech, 8>();
+    s_mechs = ObjectPool<EnemyMech, 10>();
     s_tanks = ObjectPool<EnemyTank, 5>();
-    s_boats = ObjectPool<EnemyBoat, 6>();
+    s_boats = ObjectPool<EnemyBoat, 4>();
     s_turrets = ObjectPool<EnemyTurret, 6>();
     s_bombers = ObjectPool<EnemyBomber, 3>();
     s_helis = ObjectPool<EnemyHelicopter, 2>();
     s_lasers = ObjectPool<EnemyLasers, 4>();
     s_mines = ObjectPool<Mine, 14>();
-    s_watermines = ObjectPool<WaterMine, 6>();
+    s_watermines = ObjectPool<WaterMine, 5>();
 }

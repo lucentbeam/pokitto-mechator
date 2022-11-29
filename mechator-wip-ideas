@@ -1,20 +1,19 @@
 - fix enemy boat damage issue
 - fix dying and restarting crashes
 
+- barracks tweaks
+ - ignore spawn count
+ - spawns never drop cash
+ 
+- spiked tires blueprint
+
 - playthroughs!!
  - track money vs. time
 - tweak ideas:
-  - barracks spawns, various enemy timers:
-    - make more aggressive as they take damage from player (increment counters?)
-	- occasional tanks?
-	- turret on top
-  - barracks go down faster {?}
   - more blueprints!
   - cost tuning
   - $10 money boxes?
-  - multiframe pathfinding
   
-- recompile mini map with islands 1, 2 & 3
 - audio controls
 
 - consider some water-based bases for boat saves/repair
@@ -27,13 +26,12 @@
 - add right/left chevron blinking on pause & blueprints screens
 
 - fix audio zeroing
-- remove "dosub" portion of drawRLE if no mini map
-
-- finish boat island east side / make it less boring
+- optimize "dosub" portion of drawRLE for mini map
   
 ::::IF I REALLY WANT TO::::::::
 - make helicopter deny landing prettier
 - palette swap enemy helis
+- multiframe pathfinding
 - draw smallish segment of map while in boat / heli
  - optimize if I like it
 - sfx:

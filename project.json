@@ -5502,6 +5502,39 @@
 		},
 		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\spawnpoints.obj": {
 			"sdcard": false
+		},
+		"\\content\\art\\worldmap.aseprite": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.GUaJFf": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.jjXJYM": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.nfteMu": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.tvFwcO": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.uGpyew": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.RkQRoH": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.HFlKso": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.szJRTD": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.uAUHfy": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.EvQsVp": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

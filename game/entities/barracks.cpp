@@ -124,36 +124,40 @@ void Barracks::update(float dt)
         }
 
         // decrement counter and check for spawns
-        if (b->m_spawn_count < 3) {
+        if (b->m_spawn_count < 4) {
             b->m_spawn_timer--;
             if (b->m_spawn_timer <= 0) {
-                b->m_spawn_timer = asCounts(2.33f) + (rand() % asCounts(1.0f));
+                b->m_spawn_timer = asCounts(1.2f) + (rand() % asCounts(0.7f));
                 static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::LowWall, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
                 if (!b->m_checks_pathfinding || Pathfinding::canReach(b->m_spawn, Camera::center(), mask)) {
                     if (b->m_spawntype == MechSpawn) {
                         EnemyMech * m = Enemy::createMech(b->m_spawn);
-                        ++b->m_spawn_count;
-                        auto ptr = &b->m_spawn_count;
-                        auto ptr2 = barracks_data + b->m_barracks_index;
-                        m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
-                        m->setDeactivateCallback([=](){
-                            --(*ptr);
-                            if (*ptr2 < 5) {
-                                ++(*ptr2);
-                            }
-                        });
+                        if (m != nullptr) {
+                            ++b->m_spawn_count;
+                            auto ptr = &b->m_spawn_count;
+                            auto ptr2 = barracks_data + b->m_barracks_index;
+                            m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
+                            m->setDeactivateCallback([=](){
+                                --(*ptr);
+                                if (*ptr2 < barracksMaxMoneyDrops) {
+                                    ++(*ptr2);
+                                }
+                            });
+                        }
                     } else if (b->m_spawntype == TankSpawn) {
                         EnemyTank * m = Enemy::createTank(b->m_spawn);
-                        ++b->m_spawn_count;
-                        auto ptr = &b->m_spawn_count;
-                        auto ptr2 = barracks_data + b->m_barracks_index;
-                        m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
-                        m->setDeactivateCallback([=](){
-                            --(*ptr);
-                            if (*ptr2 < 5) {
-                                ++(*ptr2);
-                            }
-                        });
+                        if (m != nullptr) {
+                            ++b->m_spawn_count;
+                            auto ptr = &b->m_spawn_count;
+                            auto ptr2 = barracks_data + b->m_barracks_index;
+                            m->setDropsCash(*ptr2 < barracksMaxMoneyDrops);
+                            m->setDeactivateCallback([=](){
+                                --(*ptr);
+                                if (*ptr2 < 5) {
+                                    ++(*ptr2);
+                                }
+                            });
+                        }
                     } else if (b->m_spawntype == HeliSpawn) {
                         Enemy::createHelicopter(b->m_spawn);
                     }
