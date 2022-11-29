@@ -30,9 +30,6 @@
 		{ "output" : "enemy_laser_ew", "hcount": 2 },
 		{ "output" : "enemy_watermine" },
 		
-		{ "output" : "island_1_reduced", "rle": true },
-		{ "output" : "island_2_reduced", "rle": true },
-		{ "output" : "island_3_reduced", "rle": true },
 		{ "output" : "mechator_reduced", "rle": true },
 		
 		{ "output" : "smoke", "hcount": 6 },

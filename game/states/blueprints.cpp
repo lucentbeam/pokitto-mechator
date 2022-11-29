@@ -109,7 +109,7 @@ void drawBlueprintsShopState()
         }
     });
 
-    if (bp_costs[bps_avail[options.activeIndex()]] == 0) return;
+//    if (bp_costs[bps_avail[options.activeIndex()]] == 0) return;
     bp_cost_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
             std::string line = "COST: " + std::to_string(bp_costs[bps_avail[options.activeIndex()]]);

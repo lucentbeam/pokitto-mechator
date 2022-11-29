@@ -24,8 +24,12 @@
 
 - fix all sequences that rely on checking for turrets / barracks to set modes
 
+- add right/left chevron blinking on pause & blueprints screens
+
 - fix audio zeroing
 - remove "dosub" portion of drawRLE if no mini map
+
+- finish boat island east side / make it less boring
   
 ::::IF I REALLY WANT TO::::::::
 - make helicopter deny landing prettier
