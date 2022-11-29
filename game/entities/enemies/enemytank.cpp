@@ -14,7 +14,6 @@ void EnemyTank::setup(const Vec2f &pos)
     m_counter = rand() % 30;
     status = AIMode::Walking;
     m_drops_cash = true;
-    m_deactivate = [](){};
     m_damage_frames = 0;
 }
 
@@ -48,8 +47,6 @@ bool EnemyTank::update(float dt)
         if (status == AIMode::Walking) {
             m_steering.update(dt, m_aim.x(), m_aim.y());
         }
-    } else if (!alive) {
-        m_deactivate();
     }
     return alive;
 }

@@ -45,9 +45,6 @@ void Enemy::updateMechs(float dt)
     spacer++;
     while (i >= 0) {
         if (!(start + i)->update(dt, (i % 2) == (spacer % 2))) {
-            if ((start + i)->m_on_deactivate) {
-                (start+i)->m_on_deactivate();
-            }
             s_mechs.deactivate(i);
         }
         --i;

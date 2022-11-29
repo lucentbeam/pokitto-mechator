@@ -12,6 +12,13 @@ bool EnemyMech::update(float dt, bool check_collisions)
 
     bool shooting = m_counter+1 > asCounts(1.0f);
     bool alive = EnemyAIHelper::updateEntity(m_pos, m_velocity, m_counter, status, m_life, m_damage_frames, mask, bulletMask, check_collisions, m_drops, shooting);
+    float p_range = Player::mode() == JeepMode ? 6 : Player::mode() == TankMode ? 8 : 0;
+    if (p_range > 0 && (m_pos - Player::position()).length() < p_range) {
+        alive = false;
+        ProjectileManager::create(m_pos, {0, 0}, 12, 0.1)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget});
+        EffectManager::createExplosionBig(m_pos - Vec2f(6,6));
+        AudioSystem::play(sfxExplosionBig);
+    }
     if (alive) {
         if (shooting) {
             ProjectileManager::create(m_pos, m_velocity * 50.0f, 2, 3.0)

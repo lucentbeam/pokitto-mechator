@@ -31,7 +31,6 @@ private:
     Rect m_collision_rect;
 
     int16_t m_spawn_timer = 160;
-    int8_t m_spawn_count = 0;
     int16_t m_barracks_index = 0;
     GenericTicker m_flash;
     SpawnType m_spawntype;

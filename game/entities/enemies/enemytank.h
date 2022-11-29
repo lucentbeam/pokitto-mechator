@@ -19,7 +19,6 @@ const SteeringConfig enemy_tank_steering(enemyTankSpeed, 0.04f,
 
 class EnemyTank
 {
-    std::function<void()> m_deactivate;
     Vec2f m_aim;
     Vec2i m_origin;
     Steering m_steering;
@@ -45,8 +44,6 @@ public:
     bool update(float dt);
 
     void setDropsCash(bool cash) { m_drops_cash = cash; }
-
-    void setDeactivateCallback(std::function<void()> deactivate) { m_deactivate = deactivate; }
 
     int8_t life() const { return m_life; }
 
