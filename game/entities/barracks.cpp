@@ -9,6 +9,7 @@
 #include "game/physics/pathfinding.h"
 
 #include "game/maps/worldtiles.h"
+#include "game/entities/pickups.h"
 
 #include "game/constants.h"
 #include "game/funcs.h"
@@ -24,6 +25,7 @@ int8_t Barracks::s_max_life = 15;
 void Barracks::setTiles(int t, bool offset)
 {
     int til = t;
+    int i = 0;
     for(int x = m_left; x < (m_width + m_left); x+=6) {
         for(int y = m_top; y < (m_height + m_top); y+=6) {
             if (offset) {
@@ -31,6 +33,10 @@ void Barracks::setTiles(int t, bool offset)
                 til += t;
             }
             MapManager::setTileAt(x, y, til);
+            i++;
+            if (t == 203 && i % 2 == 0) {
+                Pickups::spawnDollar(Vec2f(x + 3, y + 3));
+            }
         }
     }
 }

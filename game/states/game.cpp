@@ -59,6 +59,7 @@ void goGame(bool from_title)
         Camera::stopMovement();
         SpawnPoint::setActiveRegion();
         drawflashlight = true;
+        POIs::setShopsDisabled(false);
     }
 
     Controls::blockControls(20);

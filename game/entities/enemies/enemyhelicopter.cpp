@@ -70,7 +70,8 @@ bool EnemyHelicopter::update(float dt)
     m_life -= damage;
     if (m_damage_frames > 0) m_damage_frames--;
     if (m_life <= 0) {
-        Pickups::spawnDollar(m_steering.pos());
+        Pickups::spawnDollar(m_steering.pos() - Vec2f(2, 2));
+        Pickups::spawnDollar(m_steering.pos() + Vec2f(2, 2));
         AudioSystem::play(sfxExplosionBig);
         EffectManager::createExplosion(m_steering.pos(), 10, 10);
         return false;

@@ -284,7 +284,13 @@ const SceneFunc tt_f0 = SceneFunc([](){
     return true;
 });
 
+const SceneFunc stop_music = SceneFunc([](){
+   AudioSystem::playSong(musNone);
+   return true;
+});
+
 const SceneSequence tank_boss_scene[] = {
+    {SceneSequence::DoFunction, &stop_music},
     {SceneSequence::MoveCamera, &tt_m0 },
     {SceneSequence::Wait, &wait30 },
     {SceneSequence::ShowDialogue, &tt_dlog0 },

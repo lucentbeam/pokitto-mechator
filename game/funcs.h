@@ -2,8 +2,10 @@
 #define FUNCS_H
 
 #include "core/rendering/camera.h"
+#include "core/audiosystem.h"
 
 inline void onBarracksExplode() {
+    AudioSystem::play(sfxExplosionBig);
     Camera::shake(0.4f, 0.75f);
 }
 

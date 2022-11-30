@@ -1,5 +1,14 @@
 - fix enemy boat damage issue
 - fix dying and restarting crashes
+- fix tank / poi overlap size
+
+- have barracks skip range check if damage in last 3.0 seconds
+
+- more area labels / flavor
+- more music:
+ - swamp
+ - canyons
+ - boat music
 
 - playthroughs!!
  - track money vs. time
@@ -7,6 +16,10 @@
   - more blueprints!
   - cost tuning
   - $10 money boxes?
+  
+- flash map goal faster
+  
+- fix mech pathfinding (breaks near walls)
   
 - audio controls
 
