@@ -184,7 +184,11 @@ public:
 
     static bool buildVehicleAt(PlayerMode mode, Vec2f position);
 
+    static bool moving();
+
     static bool canGetPickups() { return s_mode != PlayerMode::HelicopterMode; }
+
+    static float pickupDistance() { return s_mode == PlayerMode::TankMode ? 7 : 4; }
 
     static bool hurting();
 

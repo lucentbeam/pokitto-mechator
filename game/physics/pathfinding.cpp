@@ -21,7 +21,7 @@ Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t colli
 
     Node * current = s_unvisited.objects();
     bool done = false;
-    while (!done && s_visited.objectCount() < 60 && s_unvisited.objectCount() > 0) {
+    while (!done && s_visited.objectCount() < 24 && s_unvisited.objectCount() > 0) {
         int active_idx = 0;
         current = s_unvisited.objects();
         for(int i = 0; i < s_unvisited.objectCount(); ++i) {
@@ -46,7 +46,6 @@ Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t colli
             done = true;
             continue;
         }
-
 
         for (int i = -1; i <= 1; ++i) {
             for (int j = -1; j <= 1; ++j) {
@@ -87,12 +86,19 @@ Vec2f Pathfinding::getPath(const Vec2f &start, const Vec2f &goal, uint16_t colli
         }
     }
 
+    Vec2f output(Node::goal_x, Node::goal_y);
     if (current == nullptr || current->index == 0) {
-        return goal;
+        current = s_visited.objects();
+        for(int i = 0; i < s_visited.objectCount(); ++i) {
+            if (current->f() > s_visited.objects()[i].f()) {
+                current = s_unvisited.objects() + i;
+            }
+        }
+        return Vec2f(current->x, current->y);
+//        return output;
     }
 
     int8_t current_idx = current->index;
-    Vec2f output(0,0);
     while (current_idx > 0) {
         output = Vec2f(s_visited.objects()[current_idx].x, s_visited.objects()[current_idx].y);
         current_idx = s_visited.objects()[current_idx].parent_index;

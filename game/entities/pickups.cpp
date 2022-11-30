@@ -132,7 +132,7 @@ void Pickups::update(float dt)
     Pickups * start = s_temporary.objects();
     while (i >= 0) {
         Pickups * current = start + i;
-        if (Player::canGetPickups() && (Player::position() - current->position - Vec2f(3, 3)).length() < 6) {
+        if (Player::canGetPickups() && (Player::position() - current->position - Vec2f(3, 3)).length() < Player::pickupDistance()) {
             current->m_on_collect(current->position);
             s_temporary.deactivate(i);
             --i;

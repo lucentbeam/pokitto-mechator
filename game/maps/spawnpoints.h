@@ -7,5 +7,5 @@
 #include "game/entities/pois.h"
 #include "game/maps/spawnpoint.h"
 
-const extern SpawnPoint points[];
-const int point_count = 391;
+extern const SpawnPoint points[];
+const int point_count = 396;

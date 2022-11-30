@@ -25,7 +25,6 @@ int8_t Barracks::s_max_life = 15;
 void Barracks::setTiles(int t, bool offset)
 {
     int til = t;
-    int i = 0;
     for(int x = m_left; x < (m_width + m_left); x+=6) {
         for(int y = m_top; y < (m_height + m_top); y+=6) {
             if (offset) {
@@ -33,8 +32,7 @@ void Barracks::setTiles(int t, bool offset)
                 til += t;
             }
             MapManager::setTileAt(x, y, til);
-            i++;
-            if (t == 203 && i % 2 == 0) {
+            if (t == 203 && (int(x/6)+int(y/6)) % 2 == 0) {
                 Pickups::spawnDollar(Vec2f(x + 3, y + 3));
             }
         }
@@ -128,12 +126,16 @@ void Barracks::update(float dt)
             b->m_flash.reset(5);
             for(auto p : hitlocs) EffectManager::createHit(p - Vec2f(3.5f, 3.5f));
         }
+        bool force_spawn = damage > 0;
+        if (force_spawn && b->m_spawn_timer < asCounts(0.5f)) {
+            b->m_spawn_timer = 0;
+        }
 
         b->m_spawn_timer--;
         if (b->m_spawn_timer <= 0) {
-            b->m_spawn_timer = asCounts(0.5f) + (rand() % asCounts(2.0f));
             static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::LowWall, Terrain::DestructableMetal}); // todo: make this a static for EnemyMech
-            if (!b->m_checks_pathfinding || Pathfinding::canReach(b->m_spawn, Camera::center(), mask)) {
+            if (force_spawn || !b->m_checks_pathfinding || Pathfinding::canReach(b->m_spawn, Camera::center(), mask)) {
+                b->m_spawn_timer = asCounts(1.0f) + (rand() % asCounts(2.0f));
                 if (b->m_spawntype == MechSpawn) {
                     EnemyMech * m = Enemy::createMech(b->m_spawn);
                     if (m != nullptr) m->setDropsCash(false);
@@ -143,6 +145,8 @@ void Barracks::update(float dt)
                 } else if (b->m_spawntype == HeliSpawn) {
                     Enemy::createHelicopter(b->m_spawn);
                 }
+            } else {
+                b->m_spawn_timer = asCounts(1.0f);
             }
         }
 

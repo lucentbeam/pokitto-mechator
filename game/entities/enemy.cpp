@@ -10,7 +10,7 @@
 
 int Mine::timer = 0;
 
-ObjectPool<EnemyMech,10> Enemy::s_mechs;
+ObjectPool<EnemyMech,12> Enemy::s_mechs;
 
 ObjectPool<EnemyTank,5> Enemy::s_tanks;
 
@@ -388,7 +388,7 @@ void Enemy::drawAir()
 
 void Enemy::clearAll()
 {
-    s_mechs = ObjectPool<EnemyMech, 10>();
+    s_mechs = ObjectPool<EnemyMech, 12>();
     s_tanks = ObjectPool<EnemyTank, 5>();
     s_boats = ObjectPool<EnemyBoat, 4>();
     s_turrets = ObjectPool<EnemyTurret, 6>();

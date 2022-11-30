@@ -20,8 +20,6 @@ constexpr int soldierRepairCost = 4;
 constexpr uint8_t repairCosts[] = { 6, 9, 12, 15 };
 constexpr uint8_t buildCosts[] = { 10, 15, 20, 25 };
 
-const int barracksMaxMoneyDrops = 5;
-
 const float enemyHeliSpeed = 20.0f;
 const float enemyTankSpeed = 12.0f;
 const float enemyBoatSpeed = 28.0f;
@@ -38,12 +36,12 @@ const int8_t helicopterHealthArmored = 20;
 
 const float soldierSpeed = 20.0f;
 
-constexpr float jeepSpeed = 50.0f * 1.2f;
+constexpr float jeepSpeed = 60.0f;
 const float jeepGrassSpeedFraction = 0.64f;
 const float jeepCornering = 0.1f;
 const float jeepFriction = 0.05f;
 
-constexpr float tankSpeed = 32.0f * 1.15f;
+constexpr float tankSpeed = 37.0f;
 const float tankCornering = 0.06f;
 
 const float boatSpeed = 70.0f;

@@ -1,14 +1,17 @@
 - fix enemy boat damage issue
 - fix dying and restarting crashes
-- fix tank / poi overlap size
 
-- have barracks skip range check if damage in last 3.0 seconds
+- laser beams: activate sooner, fire for shorter; more variation?
 
 - more area labels / flavor
 - more music:
  - swamp
  - canyons
  - boat music
+ 
+- add protections to some barrackses (retaining walls, bricks on map)
+
+- stop storm when leaving stormy cape in boat
 
 - playthroughs!!
  - track money vs. time
@@ -37,8 +40,8 @@
   
 ::::IF I REALLY WANT TO::::::::
 - make helicopter deny landing prettier
+- make boats drop repair kits?
 - palette swap enemy helis
-- multiframe pathfinding
 - draw smallish segment of map while in boat / heli
  - optimize if I like it
 - sfx:

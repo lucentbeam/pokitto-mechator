@@ -486,6 +486,11 @@ bool Player::buildVehicleAt(PlayerMode mode, Vec2f position)
     return was_dead;
 }
 
+bool Player::moving()
+{
+    return getInstance(s_mode).m_steering.vel().length() > 30.0f;
+}
+
 bool Player::hurting()
 {
     return Soldier::s_instance.flashing() || Helicopter::s_instance.flashing() || Jeep::s_instance.flashing() || Tank::s_instance.flashing() || Boat::s_instance.flashing();

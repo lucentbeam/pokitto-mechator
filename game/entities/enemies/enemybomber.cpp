@@ -32,7 +32,7 @@ bool EnemyBomber::update(float dt)
         if ((drop_counter % 60) == 0 && delta.length() < 40) {
             status = InSky;
             m_plane_pos.set(Camera::center().x() - 70, Camera::center().y() - 20);
-            m_life = 5;
+            m_life = 4;
         }
         break;
     case InSky:

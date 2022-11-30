@@ -9,6 +9,25 @@
 #include "game/entities/projectile.h"
 #include "game/entities/pickups.h"
 
+bool canHitTarget(Vec2f from) {
+    Vec2f dir = Player::position() - from;
+    float l = dir.length();
+    if (l > 0) {
+        dir = dir / l;
+    }
+    int i = 3;
+    from += dir * 3.0f;
+    static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::DestrucableWood, Terrain::DestructableMetal});
+    while (i < l) {
+        if (CollisionManager::collides(from, mask)) {
+            return false;
+        }
+        i += 3;
+        from += dir * 3.0f;
+    }
+    return true;
+}
+
 bool EnemyAIHelper::updateEntity(Vec2f pos, Vec2f &aim, uint16_t &action_counter, AIMode &mode, int8_t &life, uint8_t &damage_frames, uint16_t walkmask, uint16_t bulletmask, bool checkcollisions, bool drops, bool &shooting)
 {
     if (!Camera::inActiveZone(pos)) {
@@ -45,7 +64,7 @@ bool EnemyAIHelper::updateEntity(Vec2f pos, Vec2f &aim, uint16_t &action_counter
                 aim = aim / len;
             }
         }
-        if (action_counter > asCounts(3.0f)) {
+        if (action_counter > asCounts(3.0f) && canHitTarget(pos)) {
             mode = AIMode::Preparing;
             aim = {0, 0};
             action_counter = rand() % 10;

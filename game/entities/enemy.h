@@ -28,7 +28,7 @@ struct WaterMine {
 
 class Enemy
 {
-    static ObjectPool<EnemyMech, 10> s_mechs;
+    static ObjectPool<EnemyMech, 12> s_mechs;
     static ObjectPool<EnemyTank, 5> s_tanks;
     static ObjectPool<EnemyBoat, 4> s_boats;
     static ObjectPool<EnemyTurret, 6> s_turrets;

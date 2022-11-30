@@ -7,10 +7,10 @@
 #include "game/constants.h"
 #include "core/audiosystem.h"
 
-constexpr int laserDelay = 170;
-constexpr int laserDelayVariation = 40; // delay = laserDelay - (rand() % laserDelayVariation)
-constexpr int laserFireLength = 50;
-constexpr int laserFireCount = 3;
+constexpr int laserDelay = 85;
+constexpr int laserDelayVariation = 30; // delay = laserDelay - (rand() % laserDelayVariation)
+constexpr int laserFireLength = 23;
+constexpr int laserFireCount = 2;
 
 void EnemyLasers::setup(const Vec2f &pos, bool vert, int sz)
 {
@@ -39,7 +39,7 @@ bool EnemyLasers::update(float dt)
                     ->clearSprite()
                     ->setTargetMask({PlayerTarget, EnemyTarget, GroundTarget});
         }
-    } else if (m_counter == (laserDelay - 40)) {
+    } else if (m_counter == (laserDelay - 45)) {
         AudioSystem::play(sfxLaserCharge);
     }
 

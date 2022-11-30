@@ -5607,6 +5607,9 @@
 		},
 		"\\content\\maps\\mechator.json.pX6244": {
 			"sdcard": false
+		},
+		"\\game\\physics\\collisionmanager.h.jVhSUp": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

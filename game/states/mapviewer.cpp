@@ -25,7 +25,7 @@ static UIElement map_area = UIElement::getExpander(48,50,84,66, Tween::Easing::O
 bool hiding = false;
 
 Blinker playerloc_blink(0.4f, 0.3f);
-Blinker goal_blink(3.6f, 3.25f);
+Blinker goal_blink(1.2f, 1.0f);
 Blinker door_blink(3.6f, 1.2f);
 
 void MapViewer::go()
@@ -67,7 +67,7 @@ void MapViewer::draw()
             for (int i = 0; i < spawnpoint_data_count; ++i) {
                 if (GameVariables::doorStates()[i] == Discovered) {
                     SpawnPoint pt = points[i];
-                    color = pt.type() == SpawnPoint::SpawnPointType::DoorA ? 48 : pt.type() == SpawnPoint::SpawnPointType::DoorB ? 32 : pt.type() == SpawnPoint::SpawnPointType::DoorC ? 16 : 8;
+                    color = pt.type() == SpawnPoint::SpawnPointType::DoorA ? 48 : pt.type() == SpawnPoint::SpawnPointType::DoorB ? 32 : pt.type() == SpawnPoint::SpawnPointType::DoorC ? 16 : 10;
                     Vec2f pos = pt.pos() * world_to_loc;
                     RenderSystem::drawRect2(tl.x() + pos.x() - 1, tl.y() + pos.y() - 1, 2, 2, color);
                 }
@@ -76,25 +76,25 @@ void MapViewer::draw()
             Vec2i goal = GameVariables::getGoal();
             if (goal.x() > -200) {
                 Vec2f pos = Vec2f(goal.x() * 54.0f/216.0f, goal.y() * 54.0f/216.0f);
-                RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[!goal_blink.active() ? 1 : 4], 0);
+                RenderSystem::sprite(tl.x() + pos.x() - 3.5f, tl.y() + pos.y() - 3.5f, poi[goal_blink.active() ? 1 : 4], 0);
             }
             Helpers::drawNotchedRect(80, y + h/2 - 17, 30, 37, 0);
             if (door_blink.active()) {
-                RenderSystem::drawRect(83, y + h/2 + 5, 4, 3, 48);
+                RenderSystem::drawRect2(83, y + h/2 + 5, 3, 3, 48);
             } else if (door_blink.active(1.2f)) {
-                RenderSystem::drawRect(83, y + h/2 + 5, 4, 3, 16);
+                RenderSystem::drawRect2(83, y + h/2 + 5, 3, 3, 16);
             } else {
-                RenderSystem::drawRect(83, y + h/2 + 5, 4, 3, 32);
+                RenderSystem::drawRect2(83, y + h/2 + 5, 3, 3, 32);
             }
             if (playerloc_blink.active()) RenderSystem::pixel(84, y + h/2 - 12, 10);
             RenderSystem::print(91, y + h/2 - 15, "loc", 10);
 
-            RenderSystem::sprite(81, y + h/2 - 6, poi[!goal_blink.active() ? 1 : 4], 0);
+            RenderSystem::sprite(81, y + h/2 - 6, poi[goal_blink.active() ? 1 : 4], 0);
             RenderSystem::print(90, y + h/2 - 7, "goal", 10);
 
             RenderSystem::print(90, y + h/2 + 2, "door", 10);
 
-            RenderSystem::drawRect(83, y + h/2 + 13, 4, 3, 8);
+            RenderSystem::drawRect2(83, y + h/2 + 13, 3, 3, 10);
             RenderSystem::print(90, y + h/2 + 10, "base", 10);
 
             if (playerloc_blink.active()) {
