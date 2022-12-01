@@ -192,10 +192,7 @@ static UIElement kitcount(90,52,19,8,100,56,0,0,Tween::Easing::OutQuad);
 
 static UIElement dollarcount(86,78,23,9,97,82,0,0,Tween::Easing::OutQuad);
 
-
-static UIElement savedprompt(40, 76, 30, 9, 55, 81, 0, 0, Tween::Easing::OutQuad);
-
-constexpr uint8_t spr_aimlock[] = {4, 5, 0, 10, 10, 0, 10, 0, 0, 10, 10, 0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10};
+static UIElement savedprompt(40, 77, 30, 9, 55, 81, 0, 0, Tween::Easing::OutQuad);
 
 int8_t * UI::m_boss_life = nullptr;
 int8_t UI::m_max_boss_life = 0;
@@ -426,12 +423,12 @@ void UI::draw()
     if (FSM::instance->is(GameStates::Game)) {
         ControlStatus ctrl = Controls::getStatus();
         if (Player::mode() == PlayerMode::SoldierMode && Soldier::isSprinting()) {
-            Helpers::drawNotchedRect(110-1-27, 88-1-9, 27, 9, 0);
-            RenderSystem::print(110-1-25, 88-1-8, "sprint", 10);
+            Helpers::drawNotchedRect(8, 88-1-9, 27, 9, 0);
+            RenderSystem::print(10, 88-1-8, "sprint", 10);
         } else if (ctrl.a.held()) {
-            Helpers::drawNotchedRect(110-1-22, 88-1-9, 22, 9, 0);
-            RenderSystem::print(110-1-14, 88-1-8, "aim", 10);
-            RenderSystem::sprite(110-1-20, 80, spr_aimlock, 0, 10, 9);
+            Helpers::drawNotchedRect(8, 88-1-9, 22, 9, 0);
+            RenderSystem::sprite(10, 80, ui_lock, 0);
+            RenderSystem::print(16, 88-1-8, "aim", 10);
         }
     }
 }

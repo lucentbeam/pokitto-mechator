@@ -9,7 +9,7 @@
 void EnemyTank::setup(const Vec2f &pos)
 {
     m_origin = {pos.x(), pos.y()};
-    m_life = 7;
+    m_life = 6;
     m_steering.setPos(pos);
     m_counter = rand() % 30;
     status = AIMode::Walking;
@@ -58,7 +58,7 @@ void EnemyTank::draw() const
     auto pos = Camera::worldToScreen(m_steering.pos()) - Vec2f(6.0f, 6.5f);
     int cols[3] = {9, 8, 7};
     if (m_damage_frames > 0) {
-        RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], 10, m_aim.x() > 0);
+        RenderSystem::sprite(pos.x(), pos.y(), enemy_tank[m_steering.rotation_frame(4.0f)], enemy_tank[0][2], 10, m_steering.facing().x() > 0);
         cols[0] = 10;
         cols[1] = 10;
         cols[2] = 10;

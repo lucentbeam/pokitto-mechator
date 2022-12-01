@@ -63,7 +63,7 @@ void Pickups::spawnDollar(const Vec2f &pos)
         GameVariables::changeDollars(1);
         AudioSystem::play(sfxGetDollar);
         UI::showForDuration(UI::Element::UIDollarCount, 2.0f);
-    }, 600);
+    }, 480);
 }
 
 void Pickups::spawnHackingKit(const Vec2i &pos)
@@ -132,7 +132,7 @@ void Pickups::update(float dt)
     Pickups * start = s_temporary.objects();
     while (i >= 0) {
         Pickups * current = start + i;
-        if (Player::canGetPickups() && (Player::position() - current->position - Vec2f(3, 3)).length() < Player::pickupDistance()) {
+        if (Player::canGetPickups() && (Player::position() - current->position).length() < Player::pickupDistance()) {
             current->m_on_collect(current->position);
             s_temporary.deactivate(i);
             --i;
@@ -156,7 +156,7 @@ void Pickups::update(float dt)
             --i;
             continue;
         }
-        if (Player::canGetPickups() && (Player::position() - current->position - Vec2f(3, 3)).length() < 6) {
+        if (Player::canGetPickups() && (Player::position() - current->position - Vec2f(3, 3)).length() < Player::pickupDistance()) {
             current->m_on_collect(current->position);
             s_special.deactivate(i);
             --i;
@@ -181,8 +181,8 @@ void Pickups::draw()
     while (i >= 0) {
         if (CollisionManager::collides(start[i].position, mask)) { --i; continue; }
         Vec2f p = Camera::worldToScreen(start[i].position);
+//        RenderSystem::drawRect(p.x() - Player::pickupDistance(), p.y() - Player::pickupDistance(), Player::pickupDistance() * 2, Player::pickupDistance() * 2, 14);
         RenderSystem::sprite(p.x() - 4, p.y() - 4, start[i].m_sprite.data(), start[i].m_sprite.data()[2]);
-
         --i;
     }
     i = s_special.objectCount()-1;
@@ -190,8 +190,8 @@ void Pickups::draw()
     while (i >= 0) {
         if (CollisionManager::collides(start[i].position, mask)) { --i; continue; }
         Vec2f p = Camera::worldToScreen(start[i].position);
+//        RenderSystem::drawRect(p.x() - Player::pickupDistance() + 3, p.y() - Player::pickupDistance() + 3, Player::pickupDistance() * 2, Player::pickupDistance() * 2, 14);
         RenderSystem::sprite(p.x() - 1, p.y() - 1, start[i].m_sprite.data(), start[i].m_sprite.data()[2]);
-
         --i;
     }
 }

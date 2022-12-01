@@ -88,8 +88,10 @@ const SceneFunc func1 = SceneFunc([](){
 });
 const SceneDialogue dlog0 = SceneDialogue("Soldier!       ","Can you hear me?", SceneDialogue::Base, false);
 const SceneDialogue dlog1 = SceneDialogue("This is central.", nullptr, SceneDialogue::Base, false);
-const SceneDialogue dlog2 = SceneDialogue("You're in enemy","territory now.", SceneDialogue::Base, false);
-const SceneDialogue dlog3 = SceneDialogue("Find their bases!       ","Hack and use them.", SceneDialogue::Base, false);
+const SceneDialogue dlog2 = SceneDialogue("A mainframe in this","area is glitching.", SceneDialogue::Base, false);
+const SceneDialogue dlog2a = SceneDialogue("It is building and","mobilizing mechs.", SceneDialogue::Base, false);
+const SceneDialogue dlog2b = SceneDialogue("You need to get to","it and \"reboot\" it.", SceneDialogue::Base, false);
+const SceneDialogue dlog3 = SceneDialogue("Find its bases!       ","Hack and use them.", SceneDialogue::Base, false);
 const SceneDialogue dlog4 = SceneDialogue("You can build your","own weapons...", SceneDialogue::Base, false);
 const SceneDialogue dlog5 = SceneDialogue("...and infiltrate!",nullptr, SceneDialogue::Base, false);
 const SceneDialogue dlog6 = SceneDialogue("Good luck.        ", "Central out.", SceneDialogue::Base, true);
@@ -101,6 +103,8 @@ const SceneSequence intro_scene[] = {
     {SceneSequence::ShowDialogue, &dlog0 },
     {SceneSequence::ShowDialogue, &dlog1 },
     {SceneSequence::ShowDialogue, &dlog2 },
+    {SceneSequence::ShowDialogue, &dlog2a },
+    {SceneSequence::ShowDialogue, &dlog2b },
     {SceneSequence::ShowDialogue, &dlog3 },
     {SceneSequence::ShowDialogue, &dlog4 },
     {SceneSequence::ShowDialogue, &dlog5 },
@@ -252,6 +256,11 @@ const SceneDialogue tt_dlog9 = SceneDialogue("THANKS.", nullptr, SceneDialogue::
 
 const SceneFunc tt_f0 = SceneFunc([](){
     Barracks::getBarracksAt({27, 99})->setSpawnsTanks();
+
+
+    Barracks::getBarracksAt({27, 99})->setLife(27);
+    Barracks::getBarracksAt({25, 99})->setLife(27);
+    Barracks::getBarracksAt({30, 99})->setLife(27);
 
     Barracks::getBarracksAt({27, 99})->disablePathfindingChecks();
     Barracks::getBarracksAt({25, 99})->disablePathfindingChecks();
@@ -441,15 +450,15 @@ const SceneSequence finalboss_scene[] = {
     {SceneSequence::ShowDialogue, &fb_dlog0 },
     {SceneSequence::ShowDialogue, &fb_dlog1 },
 
-//    {SceneSequence::MoveCamera, &fb_m0 },
-//    {SceneSequence::ShowDialogue, &fb_dlog2 },
-//    {SceneSequence::MoveCamera, &fb_m1 },
-//    {SceneSequence::ShowDialogue, &fb_dlog3 },
-//    {SceneSequence::MoveCamera, &fb_m2 },
-//    {SceneSequence::ShowDialogue, &fb_dlog4 },
-//    {SceneSequence::MoveCamera, &fb_m3 },
-//    {SceneSequence::ShowDialogue, &fb_dlog5 },
-//    {SceneSequence::MoveCamera, &cam_return },
+    {SceneSequence::MoveCamera, &fb_m0 },
+    {SceneSequence::ShowDialogue, &fb_dlog2 },
+    {SceneSequence::MoveCamera, &fb_m1 },
+    {SceneSequence::ShowDialogue, &fb_dlog3 },
+    {SceneSequence::MoveCamera, &fb_m2 },
+    {SceneSequence::ShowDialogue, &fb_dlog4 },
+    {SceneSequence::MoveCamera, &fb_m3 },
+    {SceneSequence::ShowDialogue, &fb_dlog5 },
+    {SceneSequence::MoveCamera, &cam_return },
 
     {SceneSequence::DoFunction, &fb_triggers },
     {SceneSequence::ShowDialogue, &fb_dlog6 },

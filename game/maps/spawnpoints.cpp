@@ -1,5 +1,6 @@
 #include "spawnpoints.h"
 
+
 const SpawnPoint points[] = {
     SpawnPoint({27, 6}, SpawnPoint::Shop),
     SpawnPoint({44, 16}, SpawnPoint::DoorA),
@@ -278,8 +279,8 @@ const SpawnPoint points[] = {
     SpawnPoint({35, 118}, SpawnPoint::KeyB),
     SpawnPoint({37, 43}, SpawnPoint::Blueprint),
     SpawnPoint({55, 48}, SpawnPoint::Mech),
-    SpawnPoint({72, 48}, SpawnPoint::Mech),
-    SpawnPoint({68, 52}, SpawnPoint::Mech),
+    SpawnPoint({71, 53}, SpawnPoint::Mech),
+    SpawnPoint({67, 50}, SpawnPoint::Mech),
     SpawnPoint({96, 48}, SpawnPoint::Mine),
     SpawnPoint({101, 52}, SpawnPoint::Mine),
     SpawnPoint({104, 55}, SpawnPoint::Mine),

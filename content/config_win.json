@@ -57,6 +57,7 @@
 		{ "output" : "title_shot_2", "rle": true},
 		
 		{ "output" : "ui_icons", "hcount": 4},
+		{ "output" : "ui_lock"},
 		{ "output" : "ui_arrow_left"}
 
 	]

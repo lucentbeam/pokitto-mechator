@@ -232,6 +232,7 @@ void drawGameState() {
         }
     });
 
+
     // debug
 //    Camera::debugShowRegion(true);
 //    static FPSHelper fps;

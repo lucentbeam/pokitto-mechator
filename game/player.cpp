@@ -640,8 +640,8 @@ void Player::storeData()
 {
     GameStorage * dat = GameVariables::getData();
 
-    dat->soldierPosition = position(SoldierMode) + Vec2f(0, 6);
-    dat->jeepPosition =    position(JeepMode) + (Player::mode() == JeepMode ? Vec2f(0, 6) : Vec2f(0,0));
+    dat->soldierPosition = position(SoldierMode);
+    dat->jeepPosition =    position(JeepMode);
     dat->boatPosition =    position(BoatMode);
     dat->heliPosition =    position(HelicopterMode);
     dat->tankPosition =    position(TankMode);
@@ -667,8 +667,6 @@ void Player::loadData()
     health(BoatMode).set(dat->boatLife);
     setPosition(HelicopterMode, dat->heliPosition);
     health(HelicopterMode).set(dat->heliLife);
-
-    // todo: set s_mode to boat mode if floating bases?
 }
 
 void Player::reset()

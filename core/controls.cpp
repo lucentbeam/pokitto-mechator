@@ -49,6 +49,7 @@ void Controls::update() {
 
 const ControlStatus Controls::getStatus(bool normalize_dir)
 {
+    if (s_blockframes > 0) return ControlStatus();
     ControlStatus out = s_controls.m_stats;
 
     if (normalize_dir && fabs(out.x) > std::numeric_limits<float>::epsilon() && fabs(out.y) > std::numeric_limits<float>::epsilon()) {
@@ -205,9 +206,7 @@ void Controls::blockControls(int fcount)
 
 const ControlStatus Controls::getStatus(bool normalize_dir)
 {
-    if (s_blockframes > 0) {
-        return ControlStatus();
-    }
+    if (s_blockframes > 0) return ControlStatus();
     ControlStatus out = s_controls.m_stats;
 
     if (normalize_dir && std::fabs(out.x) > std::numeric_limits<float>::epsilon() && std::fabs(out.y) > std::numeric_limits<float>::epsilon()) {

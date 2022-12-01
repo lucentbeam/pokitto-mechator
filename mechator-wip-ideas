@@ -1,34 +1,36 @@
-- fix enemy boat damage issue
-- fix dying and restarting crashes
-
-- more area labels / flavor
-- more music:
- - swamp
- - canyons
- - boat music
-
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
+
+- occasional "elite" mech spawns: more hp, special weapon
+- add blueprint to swamp south of canyon
+
+abilities:
+ - reflective hull
+ - trail of fire
+ - wave beam
     
 - audio controls
+- add right/left chevron blinking on pause & blueprints screens
 
 - consider some water-based bases for boat saves/repair
 - consider blueprint on stormy cape
 
 - check: figure out why turrets don't spawn after tank boss
-
-- fix all sequences that rely on checking for turrets / barracks to set modes
-
-- add right/left chevron blinking on pause & blueprints screens
+- check: dying and restarting crashes?
 
 - fix audio zeroing
 - optimize "dosub" portion of drawRLE for mini map
+- fix all sequences that rely on checking for turrets / barracks to set modes
   
+- more area labels / flavor
+- more music:
+ - swamp
+ - canyons
+ - boat music
+ 
 ::::IF I REALLY WANT TO::::::::
+- hide reticle at stormy cape
 - make helicopter deny landing prettier
-- make boats drop repair kits?
 - palette swap enemy helis
-- draw smallish segment of map while in boat / heli
- - optimize if I like it
 - sfx:
   - when central calls
   - bomber coming (bbbrrrrreeeewwww....)

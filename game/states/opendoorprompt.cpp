@@ -16,8 +16,9 @@ static POIType currentDoor;
 static bool can_open = false;
 
 static UIElement prompt = UIElement::getExpander(55, 44, 90, 9, Tween::Easing::OutQuad);
-static char not_enough_text[24];
-static char open_text[17];
+static const char * not_enough_text = "NEED KEY TOKEN:   ";
+static const char * open_text = "USE TOKEN    ?";
+const uint8_t * card_sprite;
 static UIOptions yes_no(2);
 
 void showOpenDoorPrompt(POIType door) {
@@ -28,27 +29,24 @@ void showOpenDoorPrompt(POIType door) {
     currentDoor = door;
 
     UI::hideHealthbar();
-    UI::setVisibility(UI::Element::UIKeyACount, door == DoorA);
-    UI::setVisibility(UI::Element::UIKeyBCount, door == DoorB);
-    UI::setVisibility(UI::Element::UIKeyCCount, door == DoorC);
+    UI::setVisibility(UI::Element::UIKeyACount, false);
+    UI::setVisibility(UI::Element::UIKeyBCount, false);
+    UI::setVisibility(UI::Element::UIKeyCCount, false);
     UI::setVisibility(UI::Element::UIDollarCount, false);
     UI::setVisibility(UI::Element::UIHackingKitCount, false);
 
     switch (currentDoor) {
     case DoorA:
         can_open = GameVariables::keysA();
-        sprintf(not_enough_text, "- NEED KEY TOKEN [%d] -", 1);
-        sprintf(open_text, "USE A TOKEN [%d]?", 1);
+        card_sprite = pickup_keycard1[1];
         break;
     case DoorB:
         can_open = GameVariables::keysB();
-        sprintf(not_enough_text, "- NEED KEY TOKEN [%d] -", 2);
-        sprintf(open_text, "USE A TOKEN [%d]?", 2);
+        card_sprite = pickup_keycard2[1];
         break;
     case DoorC:
         can_open = GameVariables::keysC();
-        sprintf(not_enough_text, "- NEED KEY TOKEN [%d] -", 3);
-        sprintf(open_text, "USE A TOKEN [%d]?", 3);
+        card_sprite = pickup_keycard3[1];
         break;
     default:
         can_open = false;
@@ -106,7 +104,13 @@ void drawOpenDoorState() {
     drawShadedGame();
     prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
-            Helpers::printHorizontallyCentered(x + w/2, y + 1, can_open ? open_text : not_enough_text, can_open ? 10 : 6);
+            if (can_open) {
+                Helpers::printHorizontallyCentered(x + w/2, y + 1, open_text, 10);
+                RenderSystem::sprite(x + w/2 + 13, y, card_sprite, card_sprite[2], false);
+            } else {
+                Helpers::printHorizontallyCentered(x + w/2, y + 1, not_enough_text, 6);
+                RenderSystem::sprite(x + w/2 + 25, y, card_sprite, card_sprite[2], false);
+            }
             if (can_open) {
                 yes_no.foreach([](uint8_t idx, bool active) {
                     Helpers::drawNotchedRect(46, 50 + idx * 8, 20, 7, 0);

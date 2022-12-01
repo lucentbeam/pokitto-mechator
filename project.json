@@ -5787,6 +5787,42 @@
 		},
 		"\\pokitto-mechator.pro.user.iuwXkq": {
 			"sdcard": false
+		},
+		"\\content\\art\\exports\\ui_lock.png": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.uhfema": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.mpQmNE": {
+			"sdcard": false
+		},
+		"\\game\\sequences.h.iznyoj": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemyboat.cpp.yfCuRV": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemytank.cpp.smsKeX": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.HFHXZF": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.xeTmfC": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.dEvBYf": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.GshVyM": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.VsoyJj": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemyboat.cpp.wzfLNb": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

@@ -42,11 +42,11 @@ bool EnemyBoat::update(float dt)
 
 void EnemyBoat::draw() const
 {
-    auto pos = Camera::worldToScreen(m_steering.pos()) - Vec2f(6.0f, 6.0f);
+    auto pos = Camera::worldToScreen(m_steering.pos()) - Vec2f(4.0f, 4.5f);
     if (m_damage_frames > 0) {
-        RenderSystem::sprite(pos.x(), pos.y(), enemy_boat[m_steering.rotation_frame(4.0f)], enemy_boat[0][2], 10, m_aim.x() > 0);
+        RenderSystem::sprite(pos.x(), pos.y(), enemy_boat[m_steering.rotation_frame(4.0f)], 0, 10, m_steering.facing().x() > 0);
     } else {
-        RenderSystem::sprite(pos.x(), pos.y(), enemy_boat[m_steering.rotation_frame(4.0f)], enemy_boat[0][2], m_steering.facing().x() > 0);
+        RenderSystem::sprite(pos.x(), pos.y(), enemy_boat[m_steering.rotation_frame(4.0f)], 0, m_steering.facing().x() > 0);
     }
 }
 

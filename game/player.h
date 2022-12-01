@@ -188,7 +188,7 @@ public:
 
     static bool canGetPickups() { return s_mode != PlayerMode::HelicopterMode; }
 
-    static float pickupDistance() { return s_mode == PlayerMode::TankMode ? 7 : 4; }
+    static float pickupDistance() { return s_mode == PlayerMode::TankMode ? 9 : s_mode == PlayerMode::JeepMode ? 7 : 5; }
 
     static bool hurting();
 

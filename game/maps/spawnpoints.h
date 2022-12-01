@@ -9,3 +9,4 @@
 
 extern const SpawnPoint points[];
 const int point_count = 396;
+
