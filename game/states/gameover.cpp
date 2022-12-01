@@ -10,7 +10,6 @@
 
 #include "core/rendering/screenbuffer.h"
 #include "game/entities/effects.h"
-#include "game/rendering/cloudmanager.h"
 
 #include "game/ui/ui.h"
 

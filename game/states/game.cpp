@@ -11,7 +11,6 @@
 
 #include "core/rendering/screenbuffer.h"
 #include "game/entities/effects.h"
-#include "game/rendering/cloudmanager.h"
 
 #include "game/ui/ui.h"
 
@@ -149,7 +148,6 @@ void updateGameState(FSM& fsm) {
     checkWaterSpawns();
 
     SpawnPoint::setActiveRegion();
-//    CloudManager::update(physicsTimestep);
 
     checkForCallback();
     if (has_update_callback) {
@@ -157,8 +155,8 @@ void updateGameState(FSM& fsm) {
     }
 
     updateRegionIndicator();
-    if ((status.x != 0 || status.y != 0) && Player::mode() != PlayerMode::BoatMode) {
-        if (checkGroundRegions(region_name)) {
+    if ((status.x != 0 || status.y != 0)) {
+        if (checkGroundRegions(region_name, Player::mode() == BoatMode)) {
             if (strlen(region_name) > 0) {
                 region_indicator.setMaxWidth(RenderSystem::getLineLength(region_name) + 8);
                 region_indicator.showForDuration(3.0f);
@@ -185,9 +183,6 @@ void drawGameState() {
     // ground layer
     MapManager::draw(true);
 
-//    MapManager::draw(&screenbuffer);
-//    RenderSystem::drawBuffer(screenbuffer.getData());
-
     // entities
     Barracks::draw();
     POIs::draw();
@@ -202,10 +197,10 @@ void drawGameState() {
     ProjectileManager::draw();
     EffectManager::draw();
 
-    // sky layer
+    // tree canopy layer
     MapManager::draw(false);
-//    CloudManager::draw();
 
+    // sky layer
     ProjectileManager::drawAir();
     Helicopter::drawAir();
     Soldier::drawAir();
@@ -250,9 +245,6 @@ void drawShadedGame(int shading)
     // ground layer
     MapManager::draw(true);
 
-//    MapManager::draw(&screenbuffer);
-//    RenderSystem::drawBuffer(screenbuffer.getData());
-
     // entities
     POIs::draw();
     Pickups::draw();
@@ -265,10 +257,10 @@ void drawShadedGame(int shading)
     ProjectileManager::draw();
     EffectManager::draw();
 
-    // sky layer
+    // tree canopy layer
     MapManager::draw(false);
-//    CloudManager::draw();
 
+    // sky layer
     ProjectileManager::drawAir();
     Helicopter::drawAir();
     Enemy::drawAir();

@@ -5610,6 +5610,183 @@
 		},
 		"\\game\\physics\\collisionmanager.h.jVhSUp": {
 			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.H10192": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.yRqLVx": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.LojGsv": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.FCrnUV": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.fLUHTy": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.cqqKAY": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.QaWzJz": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.pLayHT": {
+			"sdcard": false
+		},
+		"\\game\\states\\gamewon.cpp.sJTEdC": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.gJErdO": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.OoHzUA": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.cCfruK": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.bRZgnB": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.vmKPNP": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.cHtqxp": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.CkntXk": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemymech.h.NrJPtu": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemyboat.cpp.qFWiHR": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.jFueQh": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.fjcDul": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.ZzPvTp": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.tXhHdd": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.jNLwCG": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.aSPovc": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.oPCUmF": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\tilemap.h.SZkQhi": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.UPwXNp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.DJDdnO": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.YNHLCA": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.bEOaWP": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.gMGedJ": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.sknUiw": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.UVlEOU": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.SlRago": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.jeyUNE": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.cVCuqL": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.UFrFik": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.DmmZtp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.KQumWR": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.NbhyEQ": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.mUmzBe": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.SBfEQK": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.PGWXoT": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.DZjQJU": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.uPxMgz": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.kovfvH": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.RriQBg": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.asSOLA": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.EgkHZv": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.pRydkm": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.ulYQPE": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.fUJFfm": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.BantGf": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.qtKQOD": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.dskdZq": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.DSCAFo": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.iuwXkq": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

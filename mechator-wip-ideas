@@ -1,29 +1,14 @@
 - fix enemy boat damage issue
 - fix dying and restarting crashes
 
-- laser beams: activate sooner, fire for shorter; more variation?
-
 - more area labels / flavor
 - more music:
  - swamp
  - canyons
  - boat music
- 
-- add protections to some barrackses (retaining walls, bricks on map)
 
-- stop storm when leaving stormy cape in boat
-
-- playthroughs!!
- - track money vs. time
-- tweak ideas:
-  - more blueprints!
-  - cost tuning
-  - $10 money boxes?
-  
-- flash map goal faster
-  
-- fix mech pathfinding (breaks near walls)
-  
+- playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
+    
 - audio controls
 
 - consider some water-based bases for boat saves/repair

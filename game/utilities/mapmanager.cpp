@@ -37,6 +37,18 @@ uint8_t MapManager::getTileAtPvt(float x, float y)
     if (s_background.contains(x, y)) {
         return s_background.getTileAt(x, y);
     }
+
+    int px = std::floor(x / 6);
+    int py = std::floor(y / 6);
+    int v = (px + py * 103);
+    int spacer = 91;
+    if (v % 3 == 0) {
+        spacer = 59;
+    } else if (v % 3 == 1) {
+        spacer = 113;
+    }
+    int tile = v % 5 == 0 ? 52 : 51;
+    if (v % spacer == 0) return tile;
     return 19;
 }
 

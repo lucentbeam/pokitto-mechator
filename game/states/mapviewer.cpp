@@ -98,8 +98,7 @@ void MapViewer::draw()
             RenderSystem::print(90, y + h/2 + 10, "base", 10);
 
             if (playerloc_blink.active()) {
-                Vec2f pos = Player::position();
-                pos *= world_to_loc;
+                Vec2f pos = Player::position() * world_to_loc;
                 if (pos.x() < (x - tl.x())) {
                     pos.setX(x - tl.x());
                 } else if (pos.x() > (x - tl.x() + w - 2)) {

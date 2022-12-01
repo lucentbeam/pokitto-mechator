@@ -10,7 +10,6 @@
 
 #include "core/rendering/screenbuffer.h"
 #include "game/entities/effects.h"
-#include "game/rendering/cloudmanager.h"
 
 #include "game/ui/ui.h"
 
@@ -140,7 +139,7 @@ void drawGameWonState()
                 if (pos > -12 && pos <  176) RenderSystem::print(55 - RenderSystem::getLineLength("lucentbeam")/2, pos, "lucentbeam", 2);
                 if (i == 4) {
                     pos += gap;
-                    if (pos > -12 && pos <  176) RenderSystem::print(55 - RenderSystem::getLineLength("mad with power fest")/2, pos, "mad with power fest", 2);
+                    if (pos > -12 && pos <  176) RenderSystem::print(55 - RenderSystem::getLineLength("Retr0rob")/2, pos, "Retr0rob", 2);
                     pos += gap;
                     if (pos > -12 && pos <  176) RenderSystem::print(55 - RenderSystem::getLineLength("pokitto community")/2, pos, "pokitto community", 2);
                 }

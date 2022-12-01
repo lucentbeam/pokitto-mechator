@@ -25,7 +25,7 @@ extern RegionName groundregion_names[];
 
 extern RegionBounds groundregion_areas[];
 
-bool checkGroundRegions(const char * &n);
+bool checkGroundRegions(const char * &n, bool boatmode);
 
 bool isInRegion(RegionNames rn);
 

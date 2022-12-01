@@ -33,7 +33,7 @@ RegionBounds groundregion_areas[] = {
     RegionBounds(123, 156, 142, 178, groundregion_names + 4),
 };
 
-bool checkGroundRegions(const char *&n) {
+bool checkGroundRegions(const char *&n, bool boatmode) {
     Vec2f cp = Camera::center();
 //    if (MapManager::getTileAt(cp.x(), cp.y()) < 54) return false;
     RegionNames previous = currentRegion();
@@ -41,6 +41,7 @@ bool checkGroundRegions(const char *&n) {
         r.occupied = false;
     }
     for(RegionBounds &r : groundregion_areas) {
+        if (boatmode && r.reference_region->region_enum == RegionNames::RegionStormyCape) continue;
         if (r.contains(cp)) {
             r.reference_region->occupied = true;
             n = r.reference_region->name;

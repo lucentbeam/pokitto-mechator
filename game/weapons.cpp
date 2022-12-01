@@ -9,7 +9,7 @@ const WeaponConfig gun_config(5.0f, 3, 0.5f, 100.0f, sfxPlayerGun);
 
 const WeaponConfig mgun_config(10.0f, 2, 0.3f, 130.0f, 15.0f, sfxPlayerGun);
 
-const WeaponConfig spreader_config(3.3f, 3, 0.5f, 100.0f, sfxPlayerGun);
+const WeaponConfig spreader_config(4.0f, 3, 0.5f, 100.0f, sfxPlayerGun2x);
 
 const WeaponConfig dualshot_config(4.4f, 3, 0.35f, 130.0f, sfxPlayerGun2x);
 
@@ -147,7 +147,7 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         break;
     case Type::FlameThrower:
         dir.rotBy((rand() % 70) - 35);
-        fireWeapon(cfg, pos + dir * 4.0f, dir, vel * 1.5f, air, 1, (rand() % 8 == 0) ? ExplosionBig : ExplosionSmall, mask, (counter % 6) == 0);
+        fireWeapon(cfg, pos + dir * 4.0f, dir, vel * 1.5f, air, (rand() % 5) == 0 ? 0 : 1, (rand() % 8 == 0) ? ExplosionBig : ExplosionSmall, mask, (counter % 6) == 0);
         break;
     case Type::Grenade:
         fireWeapon(cfg, pos, fac, vel, air, 0, GrenadeSprite, mask)

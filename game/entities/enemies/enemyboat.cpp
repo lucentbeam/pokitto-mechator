@@ -10,7 +10,7 @@
 void EnemyBoat::setup(const Vec2f &pos)
 {
     m_origin = {pos.x(), pos.y()};
-    m_life = 4;
+    m_life = 3;
     m_steering.setPos(pos);
     m_counter = rand() % 30;
     m_damage_frames = 0;

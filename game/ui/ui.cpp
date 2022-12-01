@@ -367,7 +367,7 @@ void UI::draw()
     if (FSM::instance->is(Game) && GameVariables::eventVisited(ExitTutorial)) {
         constexpr int sz = 20;
         Helpers::drawNotchedRect(109-sz-2, 1, sz+2, sz+2, 0);
-        Vec2f ppos = Player::position() * 54.0f / 216.0f / 6.0f + Vec2f(10.0f, 0.0f);
+        Vec2f ppos = Player::position() * Vec2f(54.0f, 56.0f) / 216.0f / 6.0f + Vec2f(11.0f, -2.0f);
         Helpers::drawRLE(108-sz, 2, mechator_reduced, -1, -1, nullptr, ppos.x() - sz/2, ppos.y() - sz/2, sz, sz);
         RenderSystem::pixel(109 - sz/2, 2 + sz/2, 10);
     }

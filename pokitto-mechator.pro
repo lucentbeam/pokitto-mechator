@@ -25,7 +25,6 @@ SOURCES += \
     game/maps/spawnpoints.cpp \
     game/physics/pathfinding.cpp \
     game/player.cpp \
-    game/rendering/cloudmanager.cpp \
     core/rendering/screenbuffer.cpp \
     game/entities/effects.cpp \
     game/entities/projectile.cpp \
@@ -91,7 +90,6 @@ HEADERS += \
     game/maps/spawnpoints.h \
     #game/maps/worldmutables.h \
     game/physics/pathfinding.h \
-    game/rendering/cloudmanager.h \
     core/rendering/screenbuffer.h \
     core/rendering/tilemap.h \
     core/utilities/babyfsm.h \
