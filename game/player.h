@@ -89,7 +89,7 @@ class Soldier : public Vehicle {
     PlayerMode m_overlaps = SoldierMode;
     uint8_t m_z = 0;
 
-    static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::MachineGun;
+    static constexpr const int s_possible_weapons = Weapon::Gun | Weapon::Shotgun | Weapon::MachineGun;
 
     friend Player;
 public:

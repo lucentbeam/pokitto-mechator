@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="366">
+<map version="1.2" tiledversion="1.2.5" orientation="orthogonal" renderorder="right-down" width="216" height="216" tilewidth="6" tileheight="6" infinite="0" nextlayerid="17" nextobjectid="367">
  <tileset firstgid="1" source="mechator_tiles.tsx"/>
  <layer id="15" name="world" width="216" height="216" opacity="0.9">
   <data encoding="csv">
@@ -607,7 +607,7 @@
   <object id="181" name="enemy_mech" x="1032.56" y="325.01" width="4.1875" height="4"/>
   <object id="182" name="enemy_mech" x="1056.42" y="378.706" width="4.8125" height="4.4375"/>
   <object id="186" name="enemy_tank" x="647.094" y="706.281" width="4.8125" height="4.4375"/>
-  <object id="187" name="enemy_tank" x="849.844" y="767.281" width="4.8125" height="4.4375"/>
+  <object id="187" name="enemy_tank" x="852.344" y="756.906" width="4.8125" height="4.4375"/>
   <object id="188" name="enemy_turret" x="924.594" y="738.656" width="4.8125" height="4.4375"/>
   <object id="189" name="enemy_tank" x="964.094" y="733.281" width="4.8125" height="4.4375"/>
   <object id="190" name="enemy_mech" x="877.094" y="595.031" width="4.8125" height="4.4375"/>
@@ -763,5 +763,6 @@
   <object id="362" name="shop_0_0_1_3_0_0" x="1177.41" y="1026.8" width="3.35795" height="3.71023"/>
   <object id="363" name="shop_0_0_0_2_0_0" x="271.344" y="1182.77" width="3.35795" height="3.71023"/>
   <object id="365" name="enemy_mech" x="900.418" y="384.918" width="4.8125" height="4.4375"/>
+  <object id="366" name="blueprint_14" x="847.386" y="775.472" width="2.5" height="2.875"/>
  </objectgroup>
 </map>

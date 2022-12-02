@@ -52,24 +52,25 @@ public:
     enum Type {
         // soldier
         Gun = 1,
-        MachineGun = 2,
+        Shotgun = 2,
+        MachineGun = 4,
 
         // jeep
-        DualShot = 4,
-        Grenade = 8,
+        DualShot = 8,
+        Grenade = 16,
 
         // tank
-        Missiles = 16,
+        Missiles = 32,
 
         // helicopter
-        MultiMissiles = 32,
+        MultiMissiles = 64,
 
-        Spreader = 64,
-        Multinade = 128,
-        FlameThrower = 256
+        Spreader = 128,
+        Multinade = 256,
+        FlameThrower = 512,
     };
-    static constexpr const Type AllWeapons[] = { Gun, MachineGun, DualShot, Grenade, Missiles, MultiMissiles, Spreader, Multinade, FlameThrower };
-    static constexpr const int WeaponCount = 9;
+    static constexpr const Type AllWeapons[] = { Gun, Shotgun, MachineGun, DualShot, Grenade, Missiles, MultiMissiles, Spreader, Multinade, FlameThrower };
+    static constexpr const int WeaponCount = 10;
 
     static std::string getName(Type t);
     static WeaponConfig getConfig(Type t);

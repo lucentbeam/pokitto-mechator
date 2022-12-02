@@ -1,12 +1,8 @@
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
 
-- occasional "elite" mech spawns: more hp, special weapon
-- add blueprint to swamp south of canyon
-
 abilities:
  - reflective hull
  - trail of fire
- - wave beam
     
 - audio controls
 - add right/left chevron blinking on pause & blueprints screens
@@ -31,6 +27,7 @@ abilities:
 - hide reticle at stormy cape
 - make helicopter deny landing prettier
 - palette swap enemy helis
+- occasional "elite" mech spawns: more hp, special weapon
 - sfx:
   - when central calls
   - bomber coming (bbbrrrrreeeewwww....)

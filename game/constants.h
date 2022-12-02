@@ -65,6 +65,7 @@ const char * const bp_names[] = {
     "Tactical Armor",
 
     "Spreadshot Gun",
+
     "Multinade",
     "Flamethrower",
     "All Terrain Tires",
@@ -72,6 +73,7 @@ const char * const bp_names[] = {
     "Counter Motor",
     "Unobtainium Hull",
     "Cluster Shot",
+    "Shotgun",
 };
 
 const char * const bp_descs[] = {
@@ -92,6 +94,7 @@ const char * const bp_descs[] = {
 
     "Improved Health [Heli]",
     "Unlock Weapon [Heli]",
+    "Unlock Weapon [Soldier]",
 };
 
 const int bp_costs[] = {
@@ -99,16 +102,17 @@ const int bp_costs[] = {
     0, // tank
     0, // boat
     0, // heli
-    1, // ninja shoes
-    1, // tactical armor
-    1, // spreader
-    1, // multinade
-    1, // flamethrower
-    1, // mud tires
-    1, // Machine Gun
-    1, // Counter Motor
-    100, // unobtainium
-    1, // cluster shot
+    8, // ninja shoes
+    8, // tactical armor
+    10, // spreader
+    10, // multinade
+    20, // flamethrower
+    10, // mud tires
+    20, // Machine Gun
+    14, // Counter Motor
+    60, // unobtainium
+    24, // cluster shot
+    12, // shotgun
 };
 
 const uint8_t bullet_empty[] = {6, 6, 1, 1, 0, 0, 1, 1,

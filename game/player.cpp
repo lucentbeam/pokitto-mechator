@@ -691,5 +691,6 @@ void Player::updateOwnedWeapons()
     if (GameVariables::hasBlueprintUnlocked(Blueprints::SpreaderShotBP)) s_owned_weapons |= Weapon::Spreader;
     if (GameVariables::hasBlueprintUnlocked(Blueprints::ClustershotBP)) s_owned_weapons |= Weapon::MultiMissiles;
     if (GameVariables::hasBlueprintUnlocked(Blueprints::FlamethrowerBP)) s_owned_weapons |= Weapon::FlameThrower;
+    if (GameVariables::hasBlueprintUnlocked(Blueprints::ShotgunBP)) s_owned_weapons |= Weapon::Shotgun;
 }
 

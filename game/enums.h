@@ -114,7 +114,9 @@ enum Blueprints : uint8_t {
     UnobtainiumHullBP   = 12, // heli, player.cpp
     ClustershotBP       = 13,  // heli
 
-    LastIdxBP           = 14
+    ShotgunBP           = 14,
+
+    LastIdxBP           = 15
 };
 
 #endif // ENUMS_H

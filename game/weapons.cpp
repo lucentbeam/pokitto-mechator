@@ -20,6 +20,8 @@ const WeaponConfig missile_config(2.0f, 4, 0.35f, 140.0f, sfxMissile);
 
 const WeaponConfig multimissile_config(1.6f, 4, 0.4f, 85.0f, 30.0f, sfxMissile);
 
+const WeaponConfig shotgun_config(2.2f, 2, 0.35f, 100.0f, 30.0f, sfxExplosionSmall);
+
 const WeaponConfig fthrower_config(20.0f, 4, 0.5f, 50.0f, sfxMissile);
 
 void Weapon::makeExplosion(float x, float y, bool break_metal) {
@@ -67,6 +69,8 @@ std::string Weapon::getName(Weapon::Type t)
         return "Multinade";
     case Type::Spreader:
         return "Spreader Shot";
+    case Type::Shotgun:
+        return "Shotgun";
     }
     return "Nameless Gun";
 }
@@ -92,6 +96,8 @@ WeaponConfig Weapon::getConfig(Type t)
         return multinade_config;
     case Type::FlameThrower:
         return fthrower_config;
+    case Type::Shotgun:
+        return shotgun_config;
     }
     return gun_config;
 }
@@ -119,6 +125,7 @@ Weapon::Type Weapon::prevWeapon(Weapon::Type t)
 float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2f &pos, const Vec2f &fac, const Vec2f &vel, bool air)
 {
     if (!action.held()) return 0.0f;
+
     WeaponConfig cfg = getConfig(typ);
     Vec2f dir = fac * 1;
     uint16_t mask = typ == Type::Grenade ? Helpers::getMask({EnemyTarget, GroundTarget}) : Helpers::getMask({EnemyTarget, GroundTarget, AirTarget});
@@ -137,6 +144,25 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
     case Type::DualShot:
         fireWeapon(cfg, pos + fac.rot90() * 3.0f, fac, vel, air, 1, BulletSmall, mask, true);
         fireWeapon(cfg, pos - fac.rot90() * 3.0f, fac, vel, air, 1, BulletSmall, mask, false);
+        break;
+    case Type::Shotgun:
+        dir.rotBy((rand() % 52) - 26);
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
+        dir = fac * 1;
+        dir.rotBy((rand() % 52) - 26);
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
+        dir = fac * 1;
+        dir.rotBy((rand() % 52) - 26);
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
+        dir = fac * 1;
+        dir.rotBy((rand() % 52) - 26);
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
+        dir = fac * 1;
+        dir.rotBy((rand() % 52) - 26);
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
+        dir = fac * 1;
+        dir.rotBy((rand() % 52) - 26);
+        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
         break;
     case Type::Spreader:
         fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask, true);
