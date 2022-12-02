@@ -14,6 +14,7 @@
 
 #include "game/variables.h"
 #include "core/audiosystem.h"
+#include "game/utilities/blinker.h"
 
 static UIElement title = UIElement::getExpander(55, 35, 88, 9, Tween::Easing::OutQuad);
 static UIElement bp_cost_prompt(47,78,38,9,66,82,0,0,Tween::Easing::OutQuad);
@@ -22,6 +23,8 @@ static UIOptions options(2);
 std::vector<int> bps_avail;
 
 int flashing = 0;
+
+static Blinker chevron_blink(1.0f, 0.8f);
 
 void showBlueprintsShop()
 {
@@ -50,6 +53,7 @@ void showBlueprintsShop()
 
 void updateBlueprintsShopState(FSM &fsm)
 {
+    chevron_blink.update();
     ControlStatus status = Controls::getStatus();
     options.update(status.right.pressed(), status.left.pressed());
 
@@ -87,11 +91,13 @@ void drawBlueprintsShopState()
             const int carousel_size = (spacing + 6) * bps_avail.size() + spacing;
             const int carousel_x = x + w/2 - carousel_size/2;
             Helpers::drawNotchedRect(carousel_x - spacing/2, y + h + 2, carousel_size, 6, 1);
-            if (options.activeIndex() > 0) {
-                RenderSystem::sprite(carousel_x - 5, y + h + 3, ui_arrow_left, ui_arrow_left[2]);
-            }
-            if (options.activeIndex() < bps_avail.size()-1) {
-                RenderSystem::sprite(carousel_x + carousel_size - 1, y + h + 3, ui_arrow_left, ui_arrow_left[2], true);
+            if (chevron_blink.active()) {
+                if (options.activeIndex() > 0) {
+                    RenderSystem::sprite(carousel_x - 5, y + h + 2, ui_arrow_left, ui_arrow_left[2]);
+                }
+                if (options.activeIndex() < bps_avail.size()-1) {
+                    RenderSystem::sprite(carousel_x + carousel_size, y + h + 2, ui_arrow_left, ui_arrow_left[2], true);
+                }
             }
 
             x -= 8;

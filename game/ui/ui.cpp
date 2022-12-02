@@ -184,7 +184,6 @@ static UIElement heli_healthbar(0,0,7,88,-7,0,7,88,Tween::Easing::OutQuad);
 
 static UIElement boss_healthbar(104,0,7,88,110,0,7,88,Tween::Easing::OutQuad);
 
-
 static UIElement keyacount(90,25,19,8,100,29,0,0,Tween::Easing::OutQuad);
 static UIElement keybcount(90,34,19,8,100,38,0,0,Tween::Easing::OutQuad);
 static UIElement keyccount(90,43,19,8,100,47,0,0,Tween::Easing::OutQuad);
@@ -362,7 +361,7 @@ void UI::draw()
 
 //    if (Player::mode() == HelicopterMode || Player::mode() == BoatMode) {
     if (FSM::instance->is(Game) && GameVariables::eventVisited(ExitTutorial)) {
-        constexpr int sz = 20;
+        constexpr int sz = 16;
         Helpers::drawNotchedRect(109-sz-2, 1, sz+2, sz+2, 0);
         Vec2f ppos = Player::position() * Vec2f(54.0f, 56.0f) / 216.0f / 6.0f + Vec2f(11.0f, -2.0f);
         Helpers::drawRLE(108-sz, 2, mechator_reduced, -1, -1, nullptr, ppos.x() - sz/2, ppos.y() - sz/2, sz, sz);

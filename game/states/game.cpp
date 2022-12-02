@@ -33,7 +33,7 @@
 static Player player;
 //static ScreenBuffer screenbuffer;
 
-UIElement region_indicator = UIElement::getExpander(57, 8, 30, 9, Tween::OutQuad);
+UIElement region_indicator = UIElement::getExpander(51, 8, 30, 9, Tween::OutQuad);
 const char * region_name = "";
 
 static int8_t * life_list[7] = {nullptr};
@@ -331,8 +331,14 @@ void checkWaterSpawns()
         locs[i] += Camera::center();
         locs[i] += Vec2f((rand() % 36) - 18, (rand() % 36) - 18);
         if (MapManager::getTileAt(locs[i].x(), locs[i].y()) == 19) {
-            if ((rand() % 10) < 3) Enemy::spawnBoat({locs[i].x(), locs[i].y()});
-            else Enemy::spawnWaterMine({locs[i].x(), locs[i].y()}, 1, 1);
+            if ((rand() % 10) < 3) {
+                if (Player::mode() == BoatMode && (rand() % 100) < 15) {
+                    Enemy::spawnHelicopter({locs[i].x(), locs[i].y()});
+                } else {
+                    Enemy::spawnBoat({locs[i].x(), locs[i].y()});
+                }
+            }
+            else Enemy::spawnWaterMine({locs[i].x(), locs[i].y()}, 0, 0);
         }
     }
 }

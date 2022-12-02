@@ -7,6 +7,7 @@
 #include "game/weapons.h"
 #include "game/player.h"
 #include "core/audiosystem.h"
+#include "game/utilities/blinker.h"
 
 static UIElement pause_prompt = UIElement::getExpander(50,23,60,11, Tween::Easing::OutQuad);
 static UIElement equip_prompt = UIElement::getExpander(50,35,60,11, Tween::Easing::OutQuad);
@@ -17,6 +18,8 @@ Weapon::Type selected_weapon = Weapon::MachineGun;
 static int selection = 0;
 
 static bool goingMap = false;
+
+static Blinker chevron_blink(1.0f, 0.8f);
 
 void goPause(bool from_map)
 {
@@ -50,6 +53,7 @@ void updatePauseState(FSM&)
     }
     if (goingMap) return;
     UI::update(physicsTimestep);
+    chevron_blink.update();
     ControlStatus status = Controls::getStatus();
     if (status.c.pressed() || status.b.pressed()) {
         pause_prompt.setVisibility(false);
@@ -96,18 +100,18 @@ void drawPauseState()
 {
     drawShadedGame();
     pause_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
-        static int counter = 0;
-        counter++;
         if (h > 10) {
-            Helpers::printHorizontallyCentered(x + w/2, y + 2, "GAME PAUSED", (counter % 90) < 78 ? 10 : 6);
+            Helpers::printHorizontallyCentered(x + w/2, y + 2, "GAME PAUSED", 10);//chevron_blink.active(0.4f) ? 10 : 6);
         }
     });
     equip_prompt.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 10) {
             Helpers::printHorizontallyCentered(x + w/2, y + 2, Weapon::getName(selected_weapon).c_str(), selection == 0 ? 10 : 6);
             if (selection == 0) {
-                RenderSystem::sprite(x - 5, y + 3, ui_arrow_left, ui_arrow_left[2]);
-                RenderSystem::sprite(x + w + 1, y + 3, ui_arrow_left, ui_arrow_left[2], true);
+                if (chevron_blink.active()) {
+                    RenderSystem::sprite(x - 5, y + 3, ui_arrow_left, ui_arrow_left[2]);
+                    RenderSystem::sprite(x + w + 1, y + 3, ui_arrow_left, ui_arrow_left[2], true);
+                }
             }
 
             WeaponHelper carousel = Player::getCurrentWeaponInfo();
@@ -128,7 +132,7 @@ void drawPauseState()
         if (h > 10) {
             Helpers::printHorizontallyCentered(x + w/2, y + 2, "Map", selection == 1 ? 10 : 6);
             if (selection == 1) {
-                RenderSystem::sprite(x - 3, y + 3, ui_arrow_left, ui_arrow_left[2], true);
+                if (chevron_blink.active()) RenderSystem::sprite(x - 3, y + 3, ui_arrow_left, ui_arrow_left[2], true);
 //                RenderSystem::sprite(x + w + 2, y + 3, ui_arrow_left, ui_arrow_left[2], false);
             }
         }

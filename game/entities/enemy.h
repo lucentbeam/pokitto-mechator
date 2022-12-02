@@ -14,6 +14,9 @@
 #include "enemies/enemylasers.h"
 #include "enemies/enemyboat.h"
 
+constexpr int maxmechcount = 12;
+constexpr int maxtankcount = 5;
+
 struct Mine {
     Vec2f pos;
     int beep_freq;
@@ -28,15 +31,17 @@ struct WaterMine {
 
 class Enemy
 {
-    static ObjectPool<EnemyMech, 12> s_mechs;
-    static ObjectPool<EnemyTank, 5> s_tanks;
+    static ObjectPool<EnemyMech, maxmechcount> s_mechs;
+    static ObjectPool<EnemyTank, maxtankcount> s_tanks;
     static ObjectPool<EnemyBoat, 4> s_boats;
     static ObjectPool<EnemyTurret, 6> s_turrets;
     static ObjectPool<EnemyBomber, 3> s_bombers;
     static ObjectPool<EnemyHelicopter, 2> s_helis;
     static ObjectPool<EnemyLasers, 4> s_lasers;
     static ObjectPool<Mine, 14> s_mines;
-    static ObjectPool<WaterMine, 5> s_watermines;
+    static ObjectPool<WaterMine, 7> s_watermines;
+
+    static int s_max_tanks, s_max_mechs;
 
     static void updateMechs(float dt);
     static void drawMechs();
@@ -84,6 +89,9 @@ public:
     static void update(float dt);
     static void draw();
     static void drawAir();
+
+    static void setMaxMechs(int ct = -1, bool clear = false);
+    static void setMaxTanks(int ct = -1, bool clear = false);
 
     static void clearAll();
 };

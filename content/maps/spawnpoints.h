@@ -75,6 +75,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({193, 13}, SpawnPoint::EnemyBarracks),
 	SpawnPoint({196, 171}, SpawnPoint::Shop),
 	SpawnPoint({45, 197}, SpawnPoint::Shop),
+	SpawnPoint({5, 26}, SpawnPoint::Shop),
 	SpawnPoint({221, 204}, SpawnPoint::EnemyBarracks),
 	SpawnPoint({224, 220}, SpawnPoint::EnemyBarracks),
 	SpawnPoint({232, 213}, SpawnPoint::WaterMine),
@@ -358,7 +359,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({212, 22}, SpawnPoint::Tank),
 	SpawnPoint({140, 15}, SpawnPoint::Mech),
 	SpawnPoint({138, 4}, SpawnPoint::Mech),
-	SpawnPoint({150, 64}, SpawnPoint::Mech),
+	SpawnPoint({151, 71}, SpawnPoint::Mech),
 	SpawnPoint({141, 129}, SpawnPoint::Blueprint),
 	SpawnPoint({230, 206}, SpawnPoint::Turret),
 	SpawnPoint({224, 213}, SpawnPoint::Turret),
@@ -406,6 +407,16 @@ const SpawnPoint points[] = {
 	SpawnPoint({-24, 188}, SpawnPoint::Boat),
 	SpawnPoint({-36, 208}, SpawnPoint::Boat),
 	SpawnPoint({-6, 203}, SpawnPoint::Blueprint),
+	SpawnPoint({6, 206}, SpawnPoint::Mine),
+	SpawnPoint({7, 198}, SpawnPoint::Mine),
+	SpawnPoint({10, 200}, SpawnPoint::Mine),
+	SpawnPoint({13, 197}, SpawnPoint::Mine),
+	SpawnPoint({11, 186}, SpawnPoint::Mine),
+	SpawnPoint({8, 183}, SpawnPoint::Mine),
+	SpawnPoint({13, 184}, SpawnPoint::Mine),
+	SpawnPoint({10, 181}, SpawnPoint::Mine),
+	SpawnPoint({-29, 214}, SpawnPoint::Mine),
+	SpawnPoint({-31, 220}, SpawnPoint::Mine),
 };
 const int point_count = sizeof(points)/sizeof(SpawnPoint);
 

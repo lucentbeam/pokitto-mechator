@@ -10,9 +10,9 @@
 
 int Mine::timer = 0;
 
-ObjectPool<EnemyMech,12> Enemy::s_mechs;
+ObjectPool<EnemyMech,maxmechcount> Enemy::s_mechs;
 
-ObjectPool<EnemyTank,5> Enemy::s_tanks;
+ObjectPool<EnemyTank,maxtankcount> Enemy::s_tanks;
 
 ObjectPool<EnemyBoat,4> Enemy::s_boats;
 
@@ -24,12 +24,17 @@ ObjectPool<EnemyHelicopter,2> Enemy::s_helis;
 
 ObjectPool<Mine, 14> Enemy::s_mines;
 
-ObjectPool<WaterMine, 5> Enemy::s_watermines;
+ObjectPool<WaterMine, 7> Enemy::s_watermines;
 
 ObjectPool<EnemyLasers,4> Enemy::s_lasers;
 
+int Enemy::s_max_tanks = maxtankcount;
+
+int Enemy::s_max_mechs = maxmechcount;
+
 EnemyMech * Enemy::createMech(const Vec2f &pos)
 {
+    if (s_mechs.objectCount() >= s_max_mechs) return nullptr;
     auto m = s_mechs.activateNext();
     if (m != nullptr) {
         m->setup(pos);
@@ -61,6 +66,7 @@ void Enemy::drawMechs()
 
 EnemyTank *Enemy::createTank(const Vec2f &pos)
 {
+    if (s_tanks.objectCount() >= s_max_tanks) return nullptr;
     auto m = s_tanks.activateNext();
     if (m != nullptr) {
         m->setup(pos);
@@ -197,7 +203,8 @@ void Enemy::spawnWaterMine(const Vec2i &pos, int w, int h)
     auto m = s_watermines.activateNext();
     if (m != nullptr) {
         m->pos = pos;
-        m->offset = Vec2i(rand() % w, rand() % h) * 6;
+        if (w > 0 && h > 0) m->offset = Vec2i((rand() % w) * 6 - w * 3, (rand() % h) * 6 - h * 3);
+        else m->offset = Vec2i(0, 0);
         m->bob_freq = (rand() % 30);
     }
 }
@@ -295,17 +302,15 @@ void Enemy::updateMines(float dt)
         }
         return !Camera::inActiveZone(m->pos - Vec2f(3, 3));
     });
-    if (Player::mode() == PlayerMode::BoatMode) {
-        s_watermines.iterate([&](WaterMine *m) {
-            if (player.contains(m->pos + m->offset)) {
-                AudioSystem::play(sfxExplosionSmall);
-                ProjectileManager::create(m->pos + m->offset, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
-                EffectManager::createExplosionBig(m->pos + m->offset - Vec2f(6,6));
-                return true;
-            }
-            return !Camera::inActiveZone(m->pos);
-        });
-    }
+    s_watermines.iterate([&](WaterMine *m) {
+        if (Player::mode() == PlayerMode::BoatMode && player.contains(m->pos + m->offset)) {
+            AudioSystem::play(sfxExplosionSmall);
+            ProjectileManager::create(m->pos + m->offset, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
+            EffectManager::createExplosionBig(m->pos + m->offset - Vec2f(6,6));
+            return true;
+        }
+        return !Camera::inActiveZone(m->pos);
+    });
     s_lasers.iterate([&](EnemyLasers * l) {
         return !l->update(dt);
     });
@@ -386,6 +391,26 @@ void Enemy::drawAir()
     }
 }
 
+void Enemy::setMaxMechs(int ct, bool clear)
+{
+    if (ct < 0) {
+        s_max_mechs = maxmechcount;
+        return;
+    }
+    s_max_mechs = ct;
+    if (clear) s_mechs.clear();
+}
+
+void Enemy::setMaxTanks(int ct, bool clear)
+{
+    if (ct < 0) {
+        s_max_tanks = maxtankcount;
+        return;
+    }
+    s_max_tanks = ct;
+    if (clear) s_tanks.clear();
+}
+
 void Enemy::clearAll()
 {
     s_mechs = ObjectPool<EnemyMech, 12>();
@@ -396,5 +421,8 @@ void Enemy::clearAll()
     s_helis = ObjectPool<EnemyHelicopter, 2>();
     s_lasers = ObjectPool<EnemyLasers, 4>();
     s_mines = ObjectPool<Mine, 14>();
-    s_watermines = ObjectPool<WaterMine, 5>();
+    s_watermines = ObjectPool<WaterMine, 7>();
+
+    setMaxMechs();
+    setMaxTanks();
 }

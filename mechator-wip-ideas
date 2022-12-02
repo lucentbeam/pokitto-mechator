@@ -1,16 +1,11 @@
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
 
-- limit mech and tank spawns (boss fights)
-- tank factory: force player to fight turrets
-
 abilities:
  - reflective hull
  - trail of fire
     
 - audio controls
-- add right/left chevron blinking on pause & blueprints screens
 
-- consider some water-based bases for boat saves/repair
 - consider blueprint on stormy cape
 
 - check: figure out why turrets don't spawn after tank boss

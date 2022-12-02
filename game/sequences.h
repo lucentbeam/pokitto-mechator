@@ -114,6 +114,7 @@ const SceneSequence intro_scene[] = {
 };
 
 const SceneFunc tb_f0 = SceneFunc([](){
+    Enemy::setMaxMechs(4, true);
     EnemyHelicopter * h = Enemy::createHelicopter({80 * 6, 14 * 6});
     EventScene::setTextSpeed(baseTextSpeedLPS / 2.0f);
     h->setMaxLife(18);
@@ -136,6 +137,7 @@ const SceneFunc tb_f0 = SceneFunc([](){
 
     registerCallback({h->getLifePtr(), b1->getLifePtr(), b2->getLifePtr()}, [](){
         // release door as grass (86)
+        Enemy::setMaxMechs();
         RegionTransitionHandler::leaveBoss();
         MapManager::setTileAt(51 * 6 + 3, 19 * 6 + 3, 86);
         MapManager::setTileAt(51 * 6 + 3, 20 * 6 + 3, 86);
@@ -255,6 +257,9 @@ const SceneDialogue tt_dlog8 = SceneDialogue("NICE SAVE.", nullptr, SceneDialogu
 const SceneDialogue tt_dlog9 = SceneDialogue("THANKS.", nullptr, SceneDialogue::EnemyCPU, true);
 
 const SceneFunc tt_f0 = SceneFunc([](){
+    Enemy::setMaxMechs(5, true);
+    Enemy::setMaxTanks(1, true);
+
     Barracks::getBarracksAt({27, 99})->setSpawnsTanks();
 
 
@@ -280,10 +285,12 @@ const SceneFunc tt_f0 = SceneFunc([](){
     MapManager::setTileAt(16 * 6 + 3, 103 * 6 + 3, 218);
     MapManager::setTileAt(16 * 6 + 3, 104 * 6 + 3, 218);
 
-    registerCallback({Barracks::getBarracksAt({27, 99})->getLifePtr(), Barracks::getBarracksAt({25, 99})->getLifePtr(), Barracks::getBarracksAt({30, 99})->getLifePtr()}, [](){
+    registerCallback({Barracks::getBarracksAt({27, 99})->getLifePtr(), Barracks::getBarracksAt({25, 99})->getLifePtr(), Barracks::getBarracksAt({30, 99})->getLifePtr(), Enemy::getTurretAt({19, 94})->getLifePtr(), Enemy::getTurretAt({35, 94})->getLifePtr(), Enemy::getTurretAt({19, 105})->getLifePtr(), Enemy::getTurretAt({35, 105})->getLifePtr()}, [](){
         POIs::setShopsDisabled(false);
         RegionTransitionHandler::leaveBoss();
         EnemyTurret::setAllEnabled(false);
+        Enemy::setMaxMechs();
+        Enemy::setMaxTanks();
         MapManager::setTileAt(16 * 6 + 3, 100 * 6 + 3, 184);
         MapManager::setTileAt(16 * 6 + 3, 101 * 6 + 3, 184);
         MapManager::setTileAt(16 * 6 + 3, 102 * 6 + 3, 184);
