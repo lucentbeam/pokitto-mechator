@@ -59,9 +59,8 @@ void goGame(bool from_title)
         SpawnPoint::setActiveRegion();
         drawflashlight = true;
         POIs::setShopsDisabled(false);
+        Controls::blockControls(20);
     }
-
-    Controls::blockControls(20);
 
     FSM::instance->go(GameStates::Game);
 

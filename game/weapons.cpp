@@ -146,23 +146,11 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
         fireWeapon(cfg, pos - fac.rot90() * 3.0f, fac, vel, air, 1, BulletSmall, mask, false);
         break;
     case Type::Shotgun:
-        dir.rotBy((rand() % 52) - 26);
-        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
-        dir = fac * 1;
-        dir.rotBy((rand() % 52) - 26);
-        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
-        dir = fac * 1;
-        dir.rotBy((rand() % 52) - 26);
-        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
-        dir = fac * 1;
-        dir.rotBy((rand() % 52) - 26);
-        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
-        dir = fac * 1;
-        dir.rotBy((rand() % 52) - 26);
-        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
-        dir = fac * 1;
-        dir.rotBy((rand() % 52) - 26);
-        fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask);
+        for(int i = 0; i < 6; ++i) {
+            dir = fac * 1;
+            dir.rotBy((rand() % 52) - 26);
+            fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask, i == 0);
+        }
         break;
     case Type::Spreader:
         fireWeapon(cfg, pos, dir, vel, air, 1, BulletSmall, mask, true);

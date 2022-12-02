@@ -1,5 +1,8 @@
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
 
+- limit mech and tank spawns (boss fights)
+- tank factory: force player to fight turrets
+
 abilities:
  - reflective hull
  - trail of fire
@@ -18,12 +21,14 @@ abilities:
 - fix all sequences that rely on checking for turrets / barracks to set modes
   
 - more area labels / flavor
+- show region on pause screen
 - more music:
  - swamp
  - canyons
  - boat music
  
 ::::IF I REALLY WANT TO::::::::
+- remove "leave" at shops in favor of <-B prompt?
 - hide reticle at stormy cape
 - make helicopter deny landing prettier
 - palette swap enemy helis

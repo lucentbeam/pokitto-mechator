@@ -762,7 +762,7 @@
   <object id="361" name="enemy_mech" x="828.594" y="24.8722" width="4.8125" height="4.4375"/>
   <object id="362" name="shop_0_0_1_3_0_0" x="1177.41" y="1026.8" width="3.35795" height="3.71023"/>
   <object id="363" name="shop_0_0_0_2_0_0" x="271.344" y="1182.77" width="3.35795" height="3.71023"/>
-  <object id="365" name="enemy_mech" x="900.418" y="384.918" width="4.8125" height="4.4375"/>
+  <object id="365" name="enemy_mech" x="906.418" y="426.418" width="4.8125" height="4.4375"/>
   <object id="366" name="blueprint_14" x="847.386" y="775.472" width="2.5" height="2.875"/>
  </objectgroup>
 </map>
