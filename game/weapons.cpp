@@ -20,7 +20,7 @@ const WeaponConfig missile_config(2.0f, 4, 0.35f, 140.0f, sfxMissile);
 
 const WeaponConfig multimissile_config(1.6f, 4, 0.4f, 85.0f, 30.0f, sfxMissile);
 
-const WeaponConfig shotgun_config(2.2f, 2, 0.35f, 100.0f, 30.0f, sfxExplosionSmall);
+const WeaponConfig shotgun_config(2.0f, 2, 0.35f, 100.0f, 30.0f, sfxExplosionSmall);
 
 const WeaponConfig fthrower_config(20.0f, 4, 0.5f, 50.0f, sfxMissile);
 

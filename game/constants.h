@@ -43,6 +43,7 @@ const float jeepFriction = 0.05f;
 
 constexpr float tankSpeed = 37.0f;
 const float tankCornering = 0.06f;
+const int tankReflectChance = 50;
 
 const float boatSpeed = 70.0f;
 const float boatCornering = 0.1f;

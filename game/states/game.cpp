@@ -45,6 +45,8 @@ static std::function<bool()> update_callback;
 
 static bool drawflashlight;
 
+static int from_title_counter = 0;
+
 void goGame(bool from_title)
 {
     if (from_title) {
@@ -60,6 +62,7 @@ void goGame(bool from_title)
         drawflashlight = true;
         POIs::setShopsDisabled(false);
         Controls::blockControls(20);
+        from_title_counter = 2;
     }
 
     FSM::instance->go(GameStates::Game);
@@ -178,6 +181,11 @@ void updateGameState(FSM& fsm) {
 }
 
 void drawGameState() {
+    if (from_title_counter > 0) {
+        RenderSystem::clear(0);
+        from_title_counter--;
+        return;
+    }
     RenderSystem::setOffset(false);
     // ground layer
     MapManager::draw(true);
@@ -241,6 +249,11 @@ void drawGameState() {
 
 void drawShadedGame(int shading)
 {
+    if (from_title_counter > 0) {
+        RenderSystem::clear(0);
+        from_title_counter--;
+        return;
+    }
     RenderSystem::setOffset(false);
     // ground layer
     MapManager::draw(true);

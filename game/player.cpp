@@ -323,7 +323,7 @@ void Tank::update(float dt)
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
-    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask, GameVariables::hasBlueprint(Blueprints::ReflectiveHullBP) ? 20 : 0);
+    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask, GameVariables::hasBlueprintUnlocked(Blueprints::ReflectiveHullBP) ? tankReflectChance : 0);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
         AudioSystem::play(sfxHit2);

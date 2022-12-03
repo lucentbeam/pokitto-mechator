@@ -1,13 +1,15 @@
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
     
+- fix audio zeroing
+
 - audio controls
 
 - check: figure out why turrets don't spawn after tank boss
 - check: dying and restarting crashes?
 
-- fix audio zeroing
 - optimize "dosub" portion of drawRLE for mini map
-- fix all sequences that rely on checking for turrets / barracks to set modes
+
+- double check final scene for logic (nullptr from getAtLoc stuff)
   
 - more area labels / flavor
 - show region on pause screen
