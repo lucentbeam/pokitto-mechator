@@ -8,28 +8,27 @@
 #include "game/maps/worldtiles.h"
 //#include "game/maps/worldmutables.h"
 
-ObjectPool<Pickups, 8> Pickups::s_temporary;
+ObjectPool<Pickups, 14> Pickups::s_temporary;
 ObjectPool<Pickups, 6> Pickups::s_special;
 
-void Pickups::configure(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime)
+void Pickups::configure(const Vec2i &pos, SpriteName spr, uint16_t lifetime)
 {
     position = pos;
     m_sprite = SpriteWrapper(spr);
-    m_on_collect = on_collect;
     m_lifetime = lifetime;
 }
 
-void Pickups::spawnTemporary(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime)
+void Pickups::spawnTemporary(const Vec2i &pos, SpriteName spr, uint16_t lifetime)
 {
     Pickups * p = s_temporary.activateNext();
     if (p != nullptr) {
-        p->configure(pos, spr, on_collect, lifetime);
+        p->configure(pos, spr, lifetime);
     }
 }
 
-void Pickups::spawnSpecial(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&))
+void Pickups::spawnSpecial(const Vec2i &pos, SpriteName spr)
 {
-    s_special.activateNext()->configure(pos, spr, on_collect, std::numeric_limits<uint16_t>::max());
+    s_special.activateNext()->configure(pos, spr, std::numeric_limits<uint16_t>::max());
 }
 
 bool Pickups::mapIndexUnacquired(const Vec2i &pos)
@@ -59,46 +58,32 @@ void Pickups::acquireAtIndex(const Vec2i &pos, void(*func)(int8_t), UI::Element 
 
 void Pickups::spawnDollar(const Vec2f &pos)
 {
-    spawnTemporary({pos.x(), pos.y()}, DollarSprite, [](const Vec2i &pos) {
-        GameVariables::changeDollars(1);
-        AudioSystem::play(sfxGetDollar);
-        UI::showForDuration(UI::Element::UIDollarCount, 2.0f);
-    }, 480);
+    spawnTemporary({pos.x(), pos.y()}, DollarSprite, 480);
 }
 
 void Pickups::spawnHackingKit(const Vec2i &pos)
 {
-    if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, HackingKitSprite, [](const Vec2i &pos) {
-            acquireAtIndex(pos, GameVariables::changeHackingKits, UI::UIHackingKitCount);
-        });
-    }
+    if (mapIndexUnacquired(pos)) spawnSpecial(pos, HackingKitSprite);
 }
 
 void Pickups::spawnKeycardA(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, Keycard1Sprite, [](const Vec2i &pos) {
-            acquireAtIndex(pos, GameVariables::changeKeysA, UI::Element::UIKeyACount);
-        });
+        spawnSpecial(pos, Keycard1Sprite);
     }
 }
 
 void Pickups::spawnKeycardB(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, Keycard2Sprite, [](const Vec2i &pos) {
-            acquireAtIndex(pos, GameVariables::changeKeysB, UI::Element::UIKeyBCount);
-        });
+        spawnSpecial(pos, Keycard2Sprite);
     }
 }
 
 void Pickups::spawnKeycardC(const Vec2i &pos)
 {
     if (mapIndexUnacquired(pos)) {
-        spawnSpecial(pos, Keycard3Sprite, [](const Vec2i &pos) {
-            acquireAtIndex(pos, GameVariables::changeKeysC, UI::Element::UIKeyCCount);
-        });
+        spawnSpecial(pos, Keycard3Sprite);
     }
 }
 
@@ -118,11 +103,7 @@ void Pickups::spawnBlueprint(const Vec2i &pos)
     int idx = fetchBlueprintIndex(pos);
     if (idx == -1) return;
     if (!GameVariables::hasBlueprint(idx)) {
-        spawnSpecial(pos, BlueprintSprite, [](const Vec2i &pos) {
-            int idx = fetchBlueprintIndex(pos);
-            GameVariables::acquireBlueprint(idx);
-            showBlueprint(Blueprints(idx));
-        });
+        spawnSpecial(pos, BlueprintSprite);
     }
 }
 
@@ -133,14 +114,16 @@ void Pickups::update(float dt)
     while (i >= 0) {
         Pickups * current = start + i;
         if (Player::canGetPickups() && (Player::position() - current->position).length() < Player::pickupDistance()) {
-            current->m_on_collect(current->position);
+            GameVariables::changeDollars(1);
+            AudioSystem::play(sfxGetDollar);
+            UI::showForDuration(UI::Element::UIDollarCount, 2.0f);
             s_temporary.deactivate(i);
             --i;
             continue;
         }
 
         --current->m_lifetime;
-        if (current->m_lifetime == 0) {
+        if (current->m_lifetime == 0 || !Camera::inActiveZone(current->position, Vec2f(4, 4))) {
             s_temporary.deactivate(i);
         }
 
@@ -157,7 +140,27 @@ void Pickups::update(float dt)
             continue;
         }
         if (Player::canGetPickups() && (Player::position() - current->position - Vec2f(3, 3)).length() < Player::pickupDistance()) {
-            current->m_on_collect(current->position);
+            switch(current->m_sprite.getSpriteName()) {
+            case Keycard1Sprite:
+                acquireAtIndex(current->position, GameVariables::changeKeysA, UI::UIKeyACount);
+                break;
+            case Keycard2Sprite:
+                acquireAtIndex(current->position, GameVariables::changeKeysB, UI::UIKeyBCount);
+                break;
+            case Keycard3Sprite:
+                acquireAtIndex(current->position, GameVariables::changeKeysC, UI::UIKeyCCount);
+                break;
+            case HackingKitSprite:
+                acquireAtIndex(current->position, GameVariables::changeHackingKits, UI::UIHackingKitCount);
+                break;
+            case BlueprintSprite:
+                GameVariables::acquireBlueprint(fetchBlueprintIndex(current->position));
+                showBlueprint(Blueprints(fetchBlueprintIndex(current->position)));
+                break;
+            default:
+                break;
+            }
+
             s_special.deactivate(i);
             --i;
             continue;
@@ -198,6 +201,6 @@ void Pickups::draw()
 
 void Pickups::clear()
 {
-    s_temporary = ObjectPool<Pickups, 8>();
+    s_temporary = ObjectPool<Pickups, 14>();
     s_special = ObjectPool<Pickups, 6>();
 }

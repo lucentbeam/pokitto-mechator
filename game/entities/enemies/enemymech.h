@@ -29,7 +29,7 @@ public:
 
     EnemyMech() = default;
 
-    void setup(const Vec2f &pos) { m_pos = pos; m_life = 1; m_drops = true; m_counter = rand() % 60; status = AIMode::Walking; m_damage_frames = 0; }
+    void setup(const Vec2f &pos) { m_pos = pos; m_life = (rand() % 2) + 1; m_drops = true; m_counter = rand() % 60; status = AIMode::Walking; m_damage_frames = 0; }
 
     int8_t life() const { return m_life; }
 

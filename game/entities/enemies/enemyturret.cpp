@@ -56,6 +56,7 @@ bool EnemyTurret::update(float dt)
             ProjectileManager::create(m_pos + dir * 6.0f, f * 33.0f, 4, 3.0)
                     ->setSprite(BulletMedium)
                     ->setTargetMask({PlayerTarget, GroundTarget, AirTarget})
+                    ->setDamage(2)
                     ->setIgnoreWalls();
         }
         m_counter = rand() % 10;

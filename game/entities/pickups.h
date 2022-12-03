@@ -9,19 +9,18 @@
 
 class Pickups
 {
-    static ObjectPool<Pickups, 8> s_temporary;
+    static ObjectPool<Pickups, 14> s_temporary;
     static ObjectPool<Pickups, 6> s_special;
 
     Vec2i position{0,0};
     SpriteWrapper m_sprite;
-    void (*m_on_collect)(const Vec2i&);
     uint16_t m_lifetime;
 
-    void configure(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime);
+    void configure(const Vec2i &pos, SpriteName spr, uint16_t lifetime);
 
-    static void spawnTemporary(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&), uint16_t lifetime);
+    static void spawnTemporary(const Vec2i &pos, SpriteName spr, uint16_t lifetime);
 
-    static void spawnSpecial(const Vec2i &pos, SpriteName spr, void (*on_collect)(const Vec2i&));
+    static void spawnSpecial(const Vec2i &pos, SpriteName spr);
 
     static bool mapIndexUnacquired(const Vec2i &pos);
 

@@ -22,7 +22,7 @@ const uint8_t *SpriteWrapper::data() const {
     return config.sprite + (2 + config.sprite[0] * config.sprite[1]) * currentFrame();
 }
 
-const uint16_t SpriteWrapper::countsPerCycle() const {
+uint16_t SpriteWrapper::countsPerCycle() const {
     const SpriteConfig config = sprite_configs[int(sprite)];
     return uint16_t(config.counts_per_frame) * config.frame_count;
 }

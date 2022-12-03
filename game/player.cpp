@@ -160,7 +160,7 @@ void Jeep::update(float dt)
     if (s_instance.m_steering.moving()) {
         Terrain current = CollisionManager::getTerrainAt(s_instance.m_steering.pos().x(), s_instance.m_steering.pos().y());
         s_instance.m_shake.intensity = current == Terrain::Grass ? Rumbler::Vigorous : Rumbler::Slight;
-        s_instance.m_steering.scaleMaxSpeed(current == Terrain::Grass && !GameVariables::hasBlueprintUnlocked(AllTerrainTiresBP) ? jeepGrassSpeedFraction : 1.0f);
+        s_instance.m_steering.scaleMaxSpeed((current == Terrain::Grass && !GameVariables::hasBlueprintUnlocked(AllTerrainTiresBP) ? jeepGrassSpeedFraction : 1.0f));
         s_instance.m_shake.update();
     }
 
@@ -323,7 +323,7 @@ void Tank::update(float dt)
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
     if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
-    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask);
+    int damage = ProjectileManager::getCollisionDamage(s_instance.m_steering.rect(), bulletMask, GameVariables::hasBlueprint(Blueprints::ReflectiveHullBP) ? 20 : 0);
     if (damage > 0 && !s_instance.flashing()) {
         s_instance.flash();
         AudioSystem::play(sfxHit2);

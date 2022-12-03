@@ -98,7 +98,7 @@ public:
 
     static int getCollisionDamage(const Vec2f &pos, int size, uint16_t mask);
 
-    static int getCollisionDamage(const Rect &rect, uint16_t mask);
+    static int getCollisionDamage(const Rect &rect, uint16_t mask, int reflect_chance = 0);
 
     static int getCollisionDamage(const Rect &rect, uint16_t mask, std::vector<Vec2f> &at);
 

@@ -65,6 +65,8 @@ public:
     Vec2f vel() const { return m_facing * m_current_speed; }
     uint8_t rotation_frame(float frame_count = 8.0f) const;
 
+    float currentSpeed() const { return m_current_speed; }
+
     void scaleMaxSpeed(float val) { m_max_speed = config->max_speed * val; }
 
     static uint8_t getRotationFrame(const Vec2f dir, float frame_count);

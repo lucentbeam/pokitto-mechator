@@ -15,7 +15,7 @@ bool EnemyMech::update(float dt, bool check_collisions)
     float p_range = Player::mode() == JeepMode ? 6 : Player::mode() == TankMode ? 8 : 0;
     if (alive && p_range > 0 && Player::moving() && (m_pos - Player::position()).length() < p_range) {
         alive = false;
-        ProjectileManager::create(m_pos, {0, 0}, 12, 0.1)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget});
+        if (!(Player::mode() == JeepMode && GameVariables::hasBlueprint(Blueprints::RunoverBP))) ProjectileManager::create(m_pos, {0, 0}, 12, 0.1)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget});
         EffectManager::createExplosionBig(m_pos - Vec2f(6,6));
         AudioSystem::play(sfxExplosionBig);
         if (m_drops) Pickups::spawnDollar(m_pos);

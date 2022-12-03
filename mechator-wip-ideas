@@ -1,12 +1,6 @@
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
-
-abilities:
- - reflective hull
- - trail of fire
     
 - audio controls
-
-- consider blueprint on stormy cape
 
 - check: figure out why turrets don't spawn after tank boss
 - check: dying and restarting crashes?

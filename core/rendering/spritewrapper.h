@@ -103,7 +103,9 @@ public:
 
     const uint8_t * data() const;
 
-    const uint16_t countsPerCycle() const;
+    uint16_t countsPerCycle() const;
+
+    SpriteName getSpriteName() const { return sprite; }
 };
 
 #endif // SPRITEWRAPPER_H

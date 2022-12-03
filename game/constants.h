@@ -74,6 +74,8 @@ const char * const bp_names[] = {
     "Unobtainium Hull",
     "Cluster Shot",
     "Shotgun",
+    "Reflective Armor",
+    "Armor Plating"
 };
 
 const char * const bp_descs[] = {
@@ -95,6 +97,9 @@ const char * const bp_descs[] = {
     "Improved Health [Heli]",
     "Unlock Weapon [Heli]",
     "Unlock Weapon [Soldier]",
+
+    "May Reflect Bullets [Tank]",
+    "Ignore Runover Damage [Jeep]"
 };
 
 const int bp_costs[] = {
@@ -110,9 +115,11 @@ const int bp_costs[] = {
     10, // mud tires
     20, // Machine Gun
     14, // Counter Motor
-    60, // unobtainium
+    40, // unobtainium
     24, // cluster shot
     12, // shotgun
+    18, // reflective hull
+    20, // firetrail
 };
 
 const uint8_t bullet_empty[] = {6, 6, 1, 1, 0, 0, 1, 1,

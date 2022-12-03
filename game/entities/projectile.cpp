@@ -1,9 +1,11 @@
 #include "projectile.h"
 #include "core/rendering/camera.h"
+#include "core/audiosystem.h"
 #include "game/utilities/helpers.h"
 #include "game/physics/collisionmanager.h"
 #include "game/sprites.h"
 #include "game/entities/effects.h"
+
 
 Projectile::Projectile() :
     m_body({0, 0}, {0, 0}),
@@ -184,7 +186,7 @@ int ProjectileManager::getCollisionDamage(const Vec2f &pos, int size, uint16_t m
     return getCollisionDamage(rect, mask);
 }
 
-int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask)
+int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask, int reflect_chance)
 {
     int damage = 0;
     int i = 0;
@@ -197,8 +199,17 @@ int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask)
         }
         r = Rect(start[i].m_body.pos().x(), start[i].m_body.pos().y() - start[i].z, start[i].m_bounds);
         if (rect.overlaps(r)) {
-            damage += start[i].damage;
-            start[i].m_lifetime -= 100000.0f;
+            if (reflect_chance > 0 && !start[i].is_missile && (rand() % 100) < reflect_chance) {
+                start[i].m_lifetime += 0.25f;
+                start[i].m_body.addVel(start[i].m_body.vel() * -2.5f);
+                static uint16_t pmask = Helpers::getMask({Targets::PlayerTarget});
+                static uint16_t emask = Helpers::getMask({Targets::EnemyTarget});
+                start[i].mask = (start[i].mask | ~pmask) | emask;
+                AudioSystem::play(sfxSelect);
+            } else {
+                damage += start[i].damage;
+                start[i].m_lifetime -= 100000.0f;
+            }
         }
         ++i;
     }

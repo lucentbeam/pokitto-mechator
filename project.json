@@ -5823,6 +5823,75 @@
 		},
 		"\\game\\entities\\enemies\\enemyboat.cpp.wzfLNb": {
 			"sdcard": false
+		},
+		"\\data\\mechator\\save2.dat": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.VWWzMF": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.h.JryKZv": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.JbPotQ": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\spritewrapper.h.BmwEfj": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\spritewrapper.h.gtLAUk": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.ADsqWK": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.BRjYYQ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.h.JiRdvo": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.ghzxCf": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.mDvpWG": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.iMoJIM": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.CLtdll": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.ocqzfo": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.EfrYlP": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.xrGVpI": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.tuScFy": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.BuBlRg": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.h.kNpHwX": {
+			"sdcard": false
+		},
+		"\\core\\rendering\\spritewrapper.cpp.LjFtZt": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemymech.h.ddAruB": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.opkxhx": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,
