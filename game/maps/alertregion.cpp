@@ -18,7 +18,7 @@ RegionBounds groundregion_areas[] = {
 
     // cape
     RegionBounds(22, 161, 102, 189, groundregion_names + 1),
-    RegionBounds(97, 178, 147, 208, groundregion_names + 1),
+    RegionBounds(97, 178, 147, 215, groundregion_names + 1),
     RegionBounds(145, 190, 172, 213, groundregion_names + 1),
 
     // tank factory

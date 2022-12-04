@@ -153,14 +153,14 @@ uint8_t MapManager::getTileAt(float x, float y)
 
 void MapManager::setTileAt(float x, float y, uint8_t override)
 {
-    if (s_background.contains(x, y)) {
-        s_background.setTileAt(x, y, override);
-    } else if (s_island1.contains(x, y)) {
+    if (s_island1.contains(x, y)) {
         s_island1.setTileAt(x, y, override);
     } else if (s_island2.contains(x, y)) {
         s_island2.setTileAt(x, y, override);
     } else if (s_island3.contains(x, y)) {
         s_island3.setTileAt(x, y, override);
+    } else if (s_background.contains(x, y)) {
+        s_background.setTileAt(x, y, override);
     }
     s_camera_tiles.setTileAt(x, y, override);
 }

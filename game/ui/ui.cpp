@@ -421,7 +421,7 @@ void UI::draw()
 
     if (FSM::instance->is(GameStates::Game)) {
         ControlStatus ctrl = Controls::getStatus();
-        if (Player::mode() == PlayerMode::SoldierMode && Soldier::isSprinting()) {
+        if (Player::tankSprinting() || (Player::mode() == PlayerMode::SoldierMode && Soldier::isSprinting())) {
             Helpers::drawNotchedRect(8, 88-1-9, 27, 9, 0);
             RenderSystem::print(10, 88-1-8, "sprint", 10);
         } else if (ctrl.a.held()) {

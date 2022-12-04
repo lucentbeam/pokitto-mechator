@@ -176,6 +176,7 @@ class Player {
     static int s_owned_weapons;
 
     static float s_shot_cooldown;
+    static float s_tank_sprint;
 
     static Vehicle &getInstance(PlayerMode mode);
 public:
@@ -190,6 +191,7 @@ public:
 
     static float pickupDistance() { return s_mode == PlayerMode::TankMode ? 9 : s_mode == PlayerMode::JeepMode ? 7 : 5; }
 
+    static bool tankSprinting() { return s_mode == PlayerMode::TankMode && s_tank_sprint > tankSprintWait && GameVariables::hasBlueprintUnlocked(Blueprints::PowerReroutBP); }
     static bool hurting();
 
     static bool dead();

@@ -27,8 +27,8 @@ struct GameStorage {
     uint8_t hackingKitCount = 0, keyACount = 0, keyBCount = 0, keyCCount = 0;
     uint16_t dollarCount = 50;
 
-    uint16_t acquiredBlueprints = 0;
-    uint16_t unlockedBlueprints = 0;
+    uint32_t acquiredBlueprints = 0;
+    uint32_t unlockedBlueprints = 0;
 
     uint8_t questStatus = 0;
 

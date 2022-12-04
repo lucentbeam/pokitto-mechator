@@ -115,11 +115,13 @@ enum Blueprints : uint8_t {
     ClustershotBP       = 13, // heli
 
     ShotgunBP           = 14, // soldier
-
     ReflectiveHullBP    = 15, // tank
     RunoverBP           = 16, // jeep
+    PowerReroutBP       = 17, // tank
+    StimpackBP          = 18, // soldier
+    RearGunBP           = 19, // jeep
 
-    LastIdxBP           = 17
+    LastIdxBP           = 20
 };
 
 #endif // ENUMS_H

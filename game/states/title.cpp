@@ -25,7 +25,6 @@ GameStorageHeader Title::game_datas[3];
 float Title::timer = 0.0f;
 float Title::move_timer = 0.0f;
 
-
 void Title::nextData()
 {
     if (select_index == 2) return;
@@ -70,6 +69,12 @@ void Title::selectData() {
         Player::health(TankMode).set(0);
         Player::health(HelicopterMode).set(0);
     }
+#if DEBUGS
+    for(int i = 0; i < Blueprints::LastIdxBP; ++i) {
+        GameVariables::acquireBlueprint(Blueprints(i));
+//        GameVariables::unlockBlueprint(Blueprints(i));
+    }
+#endif
     Player::updateOwnedWeapons();
 
     goGame(true);

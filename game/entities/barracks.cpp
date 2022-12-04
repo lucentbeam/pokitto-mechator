@@ -16,8 +16,6 @@
 
 SimplePool<Barracks, 6> Barracks::s_barracks;
 
-int8_t Barracks::s_max_life = 15;
-
 #ifdef DEBUGS
 #include <iostream>
 #endif
@@ -46,7 +44,7 @@ void Barracks::config(const Vec2f &spawn, int left, int top, uint8_t width, uint
     m_top = top * 6;
     m_width = width * 6;
     m_height = height * 6;
-    m_life = s_max_life;
+    m_life = barracksMaxLife;
     m_collision_rect = Rect(m_left, m_top, m_width, m_height);
     m_spawn_timer = 80 + (rand() % 40);
     m_checks_pathfinding = true;
@@ -171,7 +169,7 @@ int8_t *Barracks::getLifePtr()
     return &m_life;
 }
 
-int8_t Barracks::getLife()
+int8_t Barracks::getLife() const
 {
     return m_life;
 }

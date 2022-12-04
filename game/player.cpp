@@ -42,6 +42,8 @@ int Player::s_owned_weapons = Weapon::Gun | Weapon::Grenade | Weapon::DualShot |
 
 float Player::s_shot_cooldown = 0.0f;
 
+float Player::s_tank_sprint = 0.0f;
+
 const uint8_t reticle[] = {5, 5, 9, 9, 0, 9, 9, 9, 0, 0, 0, 9, 0, 0, 0, 0, 0, 9, 0, 0, 0, 9, 9, 9, 0, 9, 9 };
 const float reticleDistance = 18.0f;
 
@@ -69,9 +71,11 @@ void Soldier::update(float dt)
 
     s_instance.m_steering.update(dt, controls.x , controls.y, s_instance.sprinting ? GameVariables::hasBlueprintUnlocked(Blueprints::NinjaShoesBP) ? 2.4f : 1.55f : 1.0f, true);
 
-    if (!controls.a.held() || s_instance.sprinting) s_instance.m_aim = s_instance.m_steering.aim();
+    bool hasbp = GameVariables::hasBlueprintUnlocked(Blueprints::StimpackBP);
 
-    if (Player::weaponCooldown(dt) && !s_instance.sprinting) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (!(controls.a.held() && !hasbp) || s_instance.sprinting) s_instance.m_aim = s_instance.m_steering.aim();
+
+    if (Player::weaponCooldown(dt) && (hasbp || !s_instance.sprinting)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
 
@@ -165,7 +169,12 @@ void Jeep::update(float dt)
     }
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
-    if (Player::weaponCooldown(dt)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt)) {
+        if (GameVariables::hasBlueprintUnlocked(Blueprints::RearGunBP)) {
+            Weapon::checkFireWeapon(controls.a, Weapon::Gun, s_instance.m_steering.pos(), s_instance.m_steering.facing() * -1, s_instance.m_steering.vel(), false);
+        }
+        Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    }
 
     Player::updateCounter();
     if (controls.b.pressed() && mode_switch_counter > 1) {
@@ -317,7 +326,7 @@ void Tank::update(float dt)
     }
     static uint16_t bulletMask = Helpers::getMask({Targets::PlayerTarget, Targets::GroundTarget});
     ControlStatus controls = Controls::getStatus(true);
-    s_instance.m_steering.update(dt, controls.x, controls.y);
+    s_instance.m_steering.update(dt, controls.x, controls.y, Player::tankSprinting() ? 1.35f : 1.0f);
     Player::setPosition(SoldierMode, s_instance.m_steering.pos());
 
     if (!controls.a.held() && (controls.x != 0 || controls.y != 0)) s_instance.m_aim.set(controls.x, controls.y);
@@ -540,8 +549,11 @@ bool Player::dead()
 
 Vec2f Player::position()
 {
-    // TODO: add helicopter offset if in air
-    return getInstance(s_mode).m_steering.pos();
+    if (s_mode == HelicopterMode) {
+        return getInstance(s_mode).m_steering.pos() - Vec2f(0, Helicopter::s_instance.m_z);
+    } else {
+        return getInstance(s_mode).m_steering.pos();
+    }
 }
 
 Rect Player::bounds()
@@ -579,8 +591,11 @@ bool Player::weaponCooldown(float dt)
 {
     s_shot_cooldown -= dt;
     if (s_shot_cooldown <= 0) {
-        s_shot_cooldown = 0;
+        s_shot_cooldown = 0.0f;
+        s_tank_sprint += dt;
         return true;
+    } else {
+        s_tank_sprint = 0.0f;
     }
     return false;
 }

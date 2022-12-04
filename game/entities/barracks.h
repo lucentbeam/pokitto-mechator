@@ -20,13 +20,11 @@ private:
 
     static SimplePool<Barracks, 6> s_barracks;
 
-    static int8_t s_max_life;
-
     Vec2f m_spawn{0, 0};
     int16_t m_top, m_left;
     uint8_t m_width, m_height;
 
-    int8_t m_life = s_max_life;
+    int8_t m_life = barracksMaxLife;
 
     Rect m_collision_rect;
 
@@ -36,7 +34,7 @@ private:
     SpawnType m_spawntype;
     bool m_checks_pathfinding, m_destroy_out_of_range;
 
-    Stage stage() const { return m_life > s_max_life * 2 / 3 ? DefaultStage : m_life > s_max_life / 3 ? DamagedStage : HeavyDamagedStage; }
+    Stage stage() const { return m_life > barracksMaxLife * 2 / 3 ? DefaultStage : m_life > barracksMaxLife / 3 ? DamagedStage : HeavyDamagedStage; }
 
     void setTiles(int t, bool offset);
 public:
@@ -57,7 +55,7 @@ public:
     static void draw();    
 
     int8_t * getLifePtr();
-    int8_t getLife();
+    int8_t getLife() const;
     void setLife(int8_t v);
 
     static bool isDestroyed(int lx, int ly);

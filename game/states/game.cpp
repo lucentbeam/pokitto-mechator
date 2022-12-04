@@ -30,9 +30,6 @@
 
 #include "game/maps/regiontransitionhandler.h"
 
-static Player player;
-//static ScreenBuffer screenbuffer;
-
 UIElement region_indicator = UIElement::getExpander(51, 8, 30, 9, Tween::OutQuad);
 const char * region_name = "";
 
@@ -58,6 +55,7 @@ void goGame(bool from_title)
         MapManager::rebuildVisibleTiles();
         Camera::update(-5000, -5000);
         Camera::stopMovement();
+        Camera::shake(0.0f, 0.1f);
         SpawnPoint::setActiveRegion();
         drawflashlight = true;
         POIs::setShopsDisabled(false);
@@ -67,7 +65,7 @@ void goGame(bool from_title)
 
     FSM::instance->go(GameStates::Game);
 
-    Camera::update(player.position().x(), player.position().y());
+    Camera::update(Player::position().x(), Player::position().y());
     SpawnPoint::setActiveRegion();
     if (from_title) {
         RegionTransitionHandler::clear();
@@ -143,7 +141,7 @@ void updateGameState(FSM& fsm) {
     POIs::update(physicsTimestep);
     UI::update(physicsTimestep);
 
-    Camera::update(player.position().x(), player.position().y());
+    Camera::update(Player::position().x(), Player::position().y());
     MapManager::update();
 
     if (SequenceTrigger::checkForTriggers()) return;

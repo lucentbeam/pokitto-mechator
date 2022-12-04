@@ -44,13 +44,21 @@ const char * credits[] = {
     "- programmer -",
     "- special thanks -",
     "",
-    "fin"
+    "fin."
 };
+
+static char duration_buf[9];
 
 EndCredits::State EndCredits::credits_state = EndCredits::Fade;
 
 void goGameWonState()
 {
+    float time = float(GameVariables::getData()->header.elapsedMilliseconds) / 1000.0f;
+    int hou = time / 3600.0f;
+    int min = (time - hou * 3600) / 60.0f;
+    int sec = time - hou * 3600 - min * 60;
+    sprintf(duration_buf, "%02d:%02d:%02d", hou, min, sec);
+
     EffectManager::createExplosionBig(Player::position() - Vec2i(7, 7));
     AudioSystem::play(sfxExplosionBig);
     palette = RenderSystem::getPalette();
@@ -108,6 +116,7 @@ void updateGameWonState(FSM &fsm)
 
 void drawGameWonState()
 {
+
     float pos;
     switch (EndCredits::credits_state) {
     case EndCredits::Fade:
@@ -149,7 +158,8 @@ void drawGameWonState()
         break;
     case EndCredits::Fin:
         RenderSystem::clear(0);
-        RenderSystem::print(55 - RenderSystem::getLineLength("fin")/2, f + 6 * credit_space, "fin", 2);
+        RenderSystem::print(55 - RenderSystem::getLineLength("fin")/2, f + 6 * credit_space, "fin.", 2);
+        Helpers::printHorizontallyCentered(55, 76, duration_buf, 1);
 
         break;
     }

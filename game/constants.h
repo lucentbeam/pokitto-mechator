@@ -13,6 +13,8 @@ constexpr int asCounts(float time) {
     return time / physicsTimestep;
 }
 
+const int8_t barracksMaxLife = 15;
+
 const float baseTextSpeedLPS = 25.0f;
 const float cameraCutsceneSpeed = 12.0f;
 
@@ -43,7 +45,8 @@ const float jeepFriction = 0.05f;
 
 constexpr float tankSpeed = 37.0f;
 const float tankCornering = 0.06f;
-const int tankReflectChance = 50;
+constexpr int tankReflectChance = 50;
+constexpr float tankSprintWait = 2.0f;
 
 const float boatSpeed = 70.0f;
 const float boatCornering = 0.1f;
@@ -53,7 +56,7 @@ const float heliSpeed = 55.0f;
 const float heliCornering = 0.05f;
 const float heliFriction = 0.08f;
 
-const int doors_count = 25;
+const int doors_count = 30;
 const int specials_count = 320;
 
 const char * const bp_names[] = {
@@ -76,31 +79,66 @@ const char * const bp_names[] = {
     "Cluster Shot",
     "Shotgun",
     "Reflective Armor",
-    "Armor Plating"
+    "Armor Plating",
+    "Power Rerouting",
+    "Stimpack",
+    "Rear Mounted Gun",
 };
 
 const char * const bp_descs[] = {
-    "Unlock Vehicle",
-    "Unlock Vehicle",
-    "Unlock Vehicle",
-    "Unlock Vehicle",
+    "Mobile Ground Vehicle",
+    "Durable Ground Vehicle",
+    "Fast Water Vehicle",
+    "Free as a Birb",
 
-    "Improved Sprint [Soldier]",
-    "Health Bonus [Soldier]",
+    "Improved Sprint",
+    "Health Bonus",
 
-    "Unlock Weapon [Jeep]",
-    "Unlock Weapon [Jeep]",
-    "Unlock Weapon [Tank]",
-    "Ignore Grass [Jeep]",
-    "Unlock Weapon",
-    "Reduce Drift [Boat]",
+    "Three Shots in One",
+    "Fast Grenades",
+    "Lots of Flames",
+    "Ignore Grass",
+    "Very Fast Bullets",
+    "Reduce Drift",
 
-    "Improved Health [Heli]",
-    "Unlock Weapon [Heli]",
-    "Unlock Weapon [Soldier]",
+    "Health Bonus",
+    "Lots of Missiles",
+    "Multiple Bullets",
 
-    "May Reflect Bullets [Tank]",
-    "Ignore Runover Damage [Jeep]"
+    "May Reflect Bullets",
+    "Damage Free Runovers",
+
+    "Automatic Sprinting",
+    "Fire While Sprinting",
+    "Bonus Fire Backwards"
+};
+
+const char * const bp_desc_types[] = {
+    "Jeep Unlock",
+    "Tank Unlock",
+    "Boat Unlock",
+    "Helicopter Unlock",
+
+    "Soldier Passive",
+    "Soldier Passive",
+
+    "Jeep Weapon",
+    "Jeep Weapon",
+    "Tank Weapon",
+    "Jeep Passive",
+    "Soldier/Tank/Boat Weapon",
+    "Boat Passive",
+
+    "Helicopter Passive",
+    "Helicopter Weapon",
+    "Soldier Weapon",
+
+    "Tank Passive",
+    "Jeep Passive",
+
+    "Tank Passive",
+    "Soldier Ability",
+    "Jeep Ability"
 };
 
 const int bp_costs[] = {
@@ -120,7 +158,10 @@ const int bp_costs[] = {
     24, // cluster shot
     12, // shotgun
     18, // reflective hull
-    20, // firetrail
+    20, // armor
+    10, // tank speed,
+    14, // stimpack
+    8,  // rear gun
 };
 
 const uint8_t bullet_empty[] = {6, 6, 1, 1, 0, 0, 1, 1,

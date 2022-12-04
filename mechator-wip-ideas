@@ -1,7 +1,8 @@
+"You don't have to be happy. You just have to accept it." -Jaime
+
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
     
 - fix audio zeroing
-
 - audio controls
 
 - check: figure out why turrets don't spawn after tank boss
@@ -18,9 +19,14 @@
  - canyons
  - boat music
  
+- clean up blueprints a little more: left/right anims, reposition visuals, fix carousel
+ 
+- add playtime to credits
+ 
+- figure out sprint+shoot issue on Desktop
+ 
 ::::IF I REALLY WANT TO::::::::
 - remove "leave" at shops in favor of <-B prompt?
-- hide reticle at stormy cape
 - make helicopter deny landing prettier
 - palette swap enemy helis
 - occasional "elite" mech spawns: more hp, special weapon

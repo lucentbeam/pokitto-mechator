@@ -365,7 +365,6 @@ const SceneDialogue ah_dlog3 = SceneDialogue("Head over and", "finish them off."
 
 
 const SceneSequence acquiredheli_scene[] = {
-    {SceneSequence::End, nullptr},
     {SceneSequence::ShowDialogue, &ah_dlog0 },
     {SceneSequence::ShowDialogue, &ah_dlog1 },
     {SceneSequence::ShowDialogue, &ah_dlog2 },
@@ -381,27 +380,30 @@ const SceneMoveCam fb_m3 = SceneMoveCam(cameraCutsceneSpeed, {132, 170});
 
 const SceneDialogue fb_dlog0 = SceneDialogue("Soldier, come in.", nullptr, SceneDialogue::Base, false);
 const SceneDialogue fb_dlog1 = SceneDialogue("You've finally made it.", nullptr, SceneDialogue::Base, true);
-const SceneDialogue fb_dlog2 = SceneDialogue("This is the enemy", "supply depot.", SceneDialogue::Base, true);
+const SceneDialogue fb_dlog2 = SceneDialogue("This is the enemy", "mainframe.", SceneDialogue::Base, true);
 
 const SceneDialogue fb_dlog3 = SceneDialogue("Get a good look.",nullptr, SceneDialogue::Base, true);
 const SceneDialogue fb_dlog4 = SceneDialogue("Destroy these", "bases...", SceneDialogue::Base, true);
 const SceneDialogue fb_dlog5 = SceneDialogue("And your mission","is complete.", SceneDialogue::Base, true);
 const SceneDialogue fb_dlog6 = SceneDialogue("They've detected you.","Fight hard!", SceneDialogue::Base, false);
 
-inline void updateBossBarracks(int lx, int ly, int8_t * life) {
+constexpr int boss_barracks_life = 40;
+
+inline int updateBossBarracks(int lx, int ly, bool * configured) {
     if (Barracks::isDestroyed(lx, ly)) {
-        *life = 0;
-        return;
+        return 0;
     }
     Barracks * b1 = Barracks::getBarracksAt({float(lx), float(ly)});
     if (b1 != nullptr) {
-        b1->disablePathfindingChecks();
-        if (*life < b1->getLife()) {
-            b1->setLife(*life);
-        } else {
-            *life = b1->getLife();
+        if (!*configured) {
+            b1->disablePathfindingChecks();
+            b1->disableDestroyOutOfRange();
+            b1->setLife(boss_barracks_life);
+            *configured = true;
         }
+        return b1->getLife();
     }
+    return boss_barracks_life;
 }
 
 inline void randomEnemyShot() {
@@ -427,28 +429,45 @@ inline void randomEnemyShot() {
 
 const SceneFunc fb_triggers = SceneFunc([](){
     RegionTransitionHandler::goBoss(true);
-    static int8_t life = 27;
-    static int8_t lifes[4] = {27, 27, 27, 27};
+    POIs::setShopsDisabled(true);
+    static int8_t life = 24;
+    life = 24;
     UI::showBoss(&life);
+
+    static bool configured[4] = {false, false, false, false};
+    for(int i = 0; i < 4; ++i) configured[i] = false;
+
     RegionTransitionHandler::goBoss(true);
     registerUpdateCallback([&](){
-        static int timer = 20;
-        timer--;
-        if (timer < 0) {
-            timer = 28;
+        static int shot_timer = 20;
+        static float finished_timer = 3.0f;
+
+        int ltot = 0;
+        ltot += updateBossBarracks(100, 140, configured);
+        ltot += updateBossBarracks(116, 138, configured+1);
+        ltot += updateBossBarracks(116, 159, configured+2);
+        ltot += updateBossBarracks(132, 170, configured+3);
+        life = float(ltot) / 4.0f / float(boss_barracks_life) * 24.0f;
+
+        shot_timer--;
+        if (shot_timer < 0 && ltot > 0) {
+            shot_timer = 28;
             randomEnemyShot();
         }
 
-        updateBossBarracks(100, 140, lifes);
-        updateBossBarracks(116, 138, lifes+1);
-        updateBossBarracks(116, 159, lifes+2);
-        updateBossBarracks(132, 170, lifes+3);
-        life = (lifes[0] + lifes[1] + lifes[2] + lifes[3]) / 4;        
-        if (life <= 81) {
-            RegionTransitionHandler::leaveBoss();
-            GameVariables::setGameWon();
+        if (ltot <= 0) {
+            if (finished_timer >= 3.0f) {
+                Enemy::clearAll();
+                ProjectileManager::clear();
+                Camera::shake(0.8f, 1.5f);
+            }
+            finished_timer -= physicsTimestep;
+            if (finished_timer <= 0) {
+                RegionTransitionHandler::leaveBoss();
+                GameVariables::setGameWon();
+            }
         }
-        return life <= 81;
+        return finished_timer <= 0;
     });
     return true;
 });

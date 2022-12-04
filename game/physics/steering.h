@@ -34,9 +34,9 @@ class Steering {
 
     const SteeringConfig * config;
 
-    float m_current_speed;
-    uint8_t m_max_speed;
-    bool m_moving;
+    float m_current_speed = 0.0f;
+    uint8_t m_max_speed = 1;
+    bool m_moving = false;
 public:
     Steering(float x, float y, const SteeringConfig * conf) :
         m_pos(x,y),

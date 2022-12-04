@@ -110,6 +110,9 @@ void drawBlueprintsShopState()
                     Helpers::drawNotchedRect(x, y + h + 15, w, 22, 0);
                     Helpers::printHorizontallyCentered(x + w/2, y + h + 17, bp_names[bps_avail[idx]], 10);
                     Helpers::printHorizontallyCentered(x + w/2, y + h + 27, bp_descs[bps_avail[idx]], 8);
+
+                    Helpers::drawNotchedRect(x, y + h + 48, w + 2, 8, 0);
+                    Helpers::printHorizontallyCentered(x + w/2, y + h + 48, bp_desc_types[bps_avail[idx]], 8);
                 }
             });
         }
