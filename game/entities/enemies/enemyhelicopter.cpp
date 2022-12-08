@@ -54,6 +54,7 @@ bool EnemyHelicopter::update(float dt)
                 AudioSystem::play(sfxEnemyShoot);
                 ProjectileManager::create({m_steering.pos().x(), m_steering.pos().y()}, dir * 50.0f, 2, 3.0)
                         ->setSprite(BulletSmall)
+                        ->setIgnoreWalls()
                         ->setTargetMask({PlayerTarget, GroundTarget, AirTarget});
             }
             m_counter = rand() % 10;

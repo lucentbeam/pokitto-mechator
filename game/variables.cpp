@@ -18,6 +18,11 @@ void GameVariables::changeDollars(int16_t delta)
     s_data.dollarCount += std::fmax(delta, -s_data.dollarCount);
 }
 
+void GameVariables::changeDollarsBig(int8_t delta)
+{
+    s_data.dollarCount += 10;
+}
+
 void GameVariables::changeHackingKits(int8_t delta)
 {
     s_data.hackingKitCount += delta;

@@ -71,11 +71,15 @@ void Soldier::update(float dt)
 
     s_instance.m_steering.update(dt, controls.x , controls.y, s_instance.sprinting ? GameVariables::hasBlueprintUnlocked(Blueprints::NinjaShoesBP) ? 2.4f : 1.55f : 1.0f, true);
 
-    bool hasbp = GameVariables::hasBlueprintUnlocked(Blueprints::StimpackBP);
+    bool has_stimpack = GameVariables::hasBlueprintUnlocked(Blueprints::StimpackBP);
 
-    if (!(controls.a.held() && !hasbp) || s_instance.sprinting) s_instance.m_aim = s_instance.m_steering.aim();
+    if (has_stimpack) {
+        if (!(controls.a.held() && !s_instance.sprinting)) s_instance.m_aim = s_instance.m_steering.aim();
+    } else {
+        if (!controls.a.held() || s_instance.sprinting) s_instance.m_aim = s_instance.m_steering.aim();
+    }
 
-    if (Player::weaponCooldown(dt) && (hasbp || !s_instance.sprinting)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
+    if (Player::weaponCooldown(dt) && (has_stimpack || !s_instance.sprinting)) Player::s_shot_cooldown += Weapon::checkFireWeapon(controls.a, s_instance.current_weapon, s_instance.m_steering.pos(), s_instance.m_aim, s_instance.m_steering.vel());
 
     mode_switch_counter++;
 

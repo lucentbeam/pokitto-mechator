@@ -19,8 +19,8 @@ const float baseTextSpeedLPS = 25.0f;
 const float cameraCutsceneSpeed = 12.0f;
 
 constexpr int soldierRepairCost = 4;
-constexpr uint8_t repairCosts[] = { 6, 9, 12, 15 };
-constexpr uint8_t buildCosts[] = { 10, 15, 20, 25 };
+constexpr uint8_t repairCosts[] = { 4, 6, 8, 10 };
+constexpr uint8_t buildCosts[] = { 8, 12, 14, 16 };
 
 const float enemyHeliSpeed = 20.0f;
 const float enemyTankSpeed = 12.0f;
@@ -57,7 +57,7 @@ const float heliCornering = 0.05f;
 const float heliFriction = 0.08f;
 
 const int doors_count = 30;
-const int specials_count = 320;
+const int specials_count = 50;
 
 const char * const bp_names[] = {
     "Jeep Schematics",
@@ -148,19 +148,19 @@ const int bp_costs[] = {
     0, // heli
     8, // ninja shoes
     8, // tactical armor
-    10, // spreader
-    10, // multinade
-    20, // flamethrower
-    10, // mud tires
-    20, // Machine Gun
-    14, // Counter Motor
-    40, // unobtainium
-    24, // cluster shot
+    8, // spreader
+    8, // multinade
+    16, // flamethrower
+    8, // mud tires
+    16, // Machine Gun
+    10, // Counter Motor
+    30, // unobtainium
+    20, // cluster shot
     12, // shotgun
-    18, // reflective hull
-    20, // armor
-    10, // tank speed,
-    14, // stimpack
+    16, // reflective hull
+    14, // armor
+    14, // tank speed,
+    12, // stimpack
     8,  // rear gun
 };
 

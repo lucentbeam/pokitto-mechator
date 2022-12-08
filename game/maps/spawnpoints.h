@@ -1,5 +1,7 @@
 #pragma once
 
+#include "game/maps/spawnpoint.h"
+
 #include "core/utilities/vec.h"
 #include "game/entities/enemy.h"
 #include "game/entities/barracks.h"
@@ -8,4 +10,5 @@
 #include "game/maps/spawnpoint.h"
 
 extern const SpawnPoint points[];
-const int point_count = 426;
+const int point_count = 437;
+

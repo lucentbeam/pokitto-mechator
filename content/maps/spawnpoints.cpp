@@ -1,7 +1,5 @@
 #pragma once
 
-#include "spawnpoints.h"
-
 const SpawnPoint points[] = {
 	SpawnPoint({27, 6}, SpawnPoint::Shop),
 	SpawnPoint({44, 16}, SpawnPoint::DoorA),

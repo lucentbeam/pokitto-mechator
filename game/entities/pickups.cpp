@@ -9,7 +9,7 @@
 //#include "game/maps/worldmutables.h"
 
 ObjectPool<Pickups, 14> Pickups::s_temporary;
-ObjectPool<Pickups, 6> Pickups::s_special;
+ObjectPool<Pickups, 10> Pickups::s_special;
 
 void Pickups::configure(const Vec2i &pos, SpriteName spr, uint16_t lifetime)
 {
@@ -34,9 +34,11 @@ void Pickups::spawnSpecial(const Vec2i &pos, SpriteName spr)
 bool Pickups::mapIndexUnacquired(const Vec2i &pos)
 {
     int idx = MapManager::getMapIndex(pos.x(), pos.y());
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < specials_count; ++i) {
         if (GameVariables::acquiredSpecials()[i] == idx) {
             return false;
+        } else if (GameVariables::acquiredSpecials()[i] == 0) {
+            return true;
         }
     }
     return true;
@@ -45,7 +47,7 @@ bool Pickups::mapIndexUnacquired(const Vec2i &pos)
 void Pickups::acquireAtIndex(const Vec2i &pos, void(*func)(int8_t), UI::Element id)
 {
     int idx = MapManager::getMapIndex(pos.x(), pos.y());
-    for (int i = 0; i < 100; ++i) {
+    for (int i = 0; i < specials_count; ++i) {
         if (GameVariables::acquiredSpecials()[i] == 0) {
             GameVariables::acquiredSpecials()[i] = idx;
             AudioSystem::play(sfxGetItem);
@@ -59,6 +61,11 @@ void Pickups::acquireAtIndex(const Vec2i &pos, void(*func)(int8_t), UI::Element 
 void Pickups::spawnDollar(const Vec2f &pos)
 {
     spawnTemporary({pos.x(), pos.y()}, DollarSprite, 480);
+}
+
+void Pickups::spawnCashBox(const Vec2i &pos)
+{
+    if (mapIndexUnacquired(pos)) spawnSpecial(pos, CashboxSprite);
 }
 
 void Pickups::spawnHackingKit(const Vec2i &pos)
@@ -157,6 +164,9 @@ void Pickups::update(float dt)
                 GameVariables::acquireBlueprint(fetchBlueprintIndex(current->position));
                 showBlueprint(Blueprints(fetchBlueprintIndex(current->position)));
                 break;
+            case CashboxSprite:
+                acquireAtIndex(current->position, GameVariables::changeDollarsBig, UI::UIDollarCount);
+                break;
             default:
                 break;
             }
@@ -202,5 +212,5 @@ void Pickups::draw()
 void Pickups::clear()
 {
     s_temporary = ObjectPool<Pickups, 14>();
-    s_special = ObjectPool<Pickups, 6>();
+    s_special = ObjectPool<Pickups, 10>();
 }

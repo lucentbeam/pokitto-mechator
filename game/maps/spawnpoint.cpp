@@ -8,6 +8,8 @@
 #include "game/maps/worldtiles.h"
 #include "game/entities/barracks.h"
 
+#include "game/utilities/debuglog.h"
+
 bool SpawnPoint::s_active_points[point_count];
 
 void SpawnPoint::setActiveRegion()
@@ -71,6 +73,9 @@ void SpawnPoint::approach(const SpawnPoint &s, int idx)
         break;
     case KeyC:
         Pickups::spawnKeycardC(s.m_pos);
+        break;
+    case CashBox:
+        Pickups::spawnCashBox(s.m_pos);
         break;
     case Blueprint:
         Pickups::spawnBlueprint(s.m_pos);

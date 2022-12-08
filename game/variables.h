@@ -25,7 +25,7 @@ struct GameStorage {
     GameStorageHeader header;
 
     uint8_t hackingKitCount = 0, keyACount = 0, keyBCount = 0, keyCCount = 0;
-    uint16_t dollarCount = 50;
+    uint16_t dollarCount = 30;
 
     uint32_t acquiredBlueprints = 0;
     uint32_t unlockedBlueprints = 0;
@@ -33,8 +33,8 @@ struct GameStorage {
     uint8_t questStatus = 0;
 
     DoorStatus door_states[spawnpoint_data_count] = { DoorStatus::Hidden };
-    int activated_doors[doors_count];
-    int acquired_specials[specials_count];
+    int activated_doors[doors_count] = {0};
+    int acquired_specials[specials_count] = {0};
 
     Vec2f soldierPosition, jeepPosition, tankPosition, boatPosition, heliPosition;
     int8_t soldierLife, jeepLife, tankLife, boatLife, heliLife;
@@ -47,6 +47,7 @@ class GameVariables {
 
 public:
     static void changeDollars(int16_t delta);
+    static void changeDollarsBig(int8_t delta);
     static void changeHackingKits(int8_t delta);
     static void changeKeysA(int8_t delta);
     static void changeKeysB(int8_t delta);

@@ -49,6 +49,7 @@ SOURCES += \
     game/states/title.cpp \
     game/ui/ui.cpp \
     game/utilities/blinker.cpp \
+    game/utilities/debuglog.cpp \
     game/utilities/helpers.cpp \
     game/utilities/mapmanager.cpp \
     game/utilities/playerstats.cpp \
@@ -128,6 +129,7 @@ HEADERS += \
     game/states/title.h \
     game/ui/ui.h \
     game/utilities/blinker.h \
+    game/utilities/debuglog.h \
     game/utilities/helpers.h \
     game/utilities/mapmanager.h \
     game/utilities/playerstats.h \

@@ -30,6 +30,8 @@
 
 #include "game/maps/regiontransitionhandler.h"
 
+#include "game/utilities/debuglog.h"
+
 UIElement region_indicator = UIElement::getExpander(51, 8, 30, 9, Tween::OutQuad);
 const char * region_name = "";
 
@@ -47,6 +49,7 @@ static int from_title_counter = 0;
 void goGame(bool from_title)
 {
     if (from_title) {
+        DebugLog::log("going to game from title");
         Enemy::clearAll();
         Barracks::clear();
         Pickups::clear();
@@ -236,7 +239,6 @@ void drawGameState() {
             Helpers::printHorizontallyCentered(x + w/2, y + 1, region_name, 10);
         }
     });
-
 
     // debug
 //    Camera::debugShowRegion(true);

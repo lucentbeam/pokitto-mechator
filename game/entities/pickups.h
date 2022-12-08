@@ -10,7 +10,7 @@
 class Pickups
 {
     static ObjectPool<Pickups, 14> s_temporary;
-    static ObjectPool<Pickups, 6> s_special;
+    static ObjectPool<Pickups, 10> s_special;
 
     Vec2i position{0,0};
     SpriteWrapper m_sprite;
@@ -28,6 +28,8 @@ class Pickups
 public:
 
     static void spawnDollar(const Vec2f &pos);
+
+    static void spawnCashBox(const Vec2i &pos);
 
     static void spawnHackingKit(const Vec2i &pos);
 

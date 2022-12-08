@@ -5901,6 +5901,114 @@
 		},
 		"\\pokitto-mechator.pro.user.BaHdPo": {
 			"sdcard": false
+		},
+		"\\game\\variables.h.OxQFjN": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.OSilFW": {
+			"sdcard": false
+		},
+		"\\game\\sprites.h.lvnvxj": {
+			"sdcard": false
+		},
+		"\\game\\sprites.h.yuFvTf": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.wPPdFW": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\mapmanager.cpp.iJHQol": {
+			"sdcard": false
+		},
+		"\\main.cpp.ajJXyD": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.jnQrav": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.autosave.VRDNSp": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.dtdlZx": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\debuglog.obj": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.cpp": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.h": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.h.xONFbO": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.ydfQqk": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.cpp.lQKnpG": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.cpp.dWtqLn": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.h.autosave.coXgNE": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.h.XGYrEt": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.cpp.YKjgkP": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.hvyyed": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.autosave.GkRkwI": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.DGMonD": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.yMPRup": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.cfecpq": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.NVKQaC": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.lMAmii": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.RSAAGu": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.NkNiAn": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.h.bljcHw": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.qycwWJ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.cpp.odMGyO": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

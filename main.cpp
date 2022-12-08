@@ -27,6 +27,8 @@
 #include "game/constants.h"
 #include "game/player.h"
 
+#include "game/utilities/debuglog.h"
+
 #ifdef DEBUGS
 int main (int argv, char * args[])
 #else
@@ -37,6 +39,7 @@ int WinMain()
 #endif
 #endif
 {
+    DebugLog::initialize("/data/mechator/log.txt");
     RenderSystem::initialize();
     AudioSystem::initialize();
 

@@ -21,6 +21,7 @@ public:
         KeyC,
 
         HackingKit,
+        CashBox,
         Blueprint,
 
         EnemyBarracks,

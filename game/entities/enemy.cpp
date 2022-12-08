@@ -305,7 +305,7 @@ void Enemy::updateMines(float dt)
     s_watermines.iterate([&](WaterMine *m) {
         if (Player::mode() == PlayerMode::BoatMode && player.contains(m->pos + m->offset)) {
             AudioSystem::play(sfxExplosionSmall);
-            ProjectileManager::create(m->pos + m->offset, {0, 0}, 10, 0.1)->setDamage(6)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
+            ProjectileManager::create(m->pos + m->offset, {0, 0}, 10, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({PlayerTarget, GroundTarget, EnemyTarget});
             EffectManager::createExplosionBig(m->pos + m->offset - Vec2f(6,6));
             return true;
         }

@@ -1,7 +1,9 @@
 "You don't have to be happy. You just have to accept it." -Jaime
 
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
-    
+
+- try sky clouds instead of ocean rocks
+
 - fix audio zeroing
 - audio controls
 
@@ -9,6 +11,7 @@
 - check: dying and restarting crashes?
 
 - optimize "dosub" portion of drawRLE for mini map
+- optimize spawn point search (bin locations)
 
 - double check final scene for logic (nullptr from getAtLoc stuff)
   
