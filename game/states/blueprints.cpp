@@ -93,13 +93,14 @@ void drawBlueprintsShopState()
     title.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
             Helpers::printHorizontallyCentered(x + w/2 + move_dir, y + 1, bp_names[bps_avail[options.activeIndex()]], 10);
-            const int spacing = 2;
-            const int carousel_size = (spacing + 6) * (bps_avail.size() - 1);
+            const int padding = 3;
+            const int spacing = 7;
+            const int carousel_size = padding * 2 + spacing * bps_avail.size();
             const int carousel_x = x + w/2 - carousel_size/2;
-            Helpers::drawNotchedRect(carousel_x - spacing/2 + move_dir, y + h + 2, carousel_size, 6, 1);
+            Helpers::drawNotchedRect(carousel_x, y + h + 1, carousel_size, 8, 2);
             if (chevron_blink.active()) {
                 if (options.activeIndex() > 0) {
-                    RenderSystem::sprite(carousel_x - 5, y + h + 2, ui_arrow_left, ui_arrow_left[2]);
+                    RenderSystem::sprite(carousel_x - 4, y + h + 2, ui_arrow_left, ui_arrow_left[2]);
                 }
                 if (options.activeIndex() < bps_avail.size()-1) {
                     RenderSystem::sprite(carousel_x + carousel_size, y + h + 2, ui_arrow_left, ui_arrow_left[2], true);
@@ -109,9 +110,9 @@ void drawBlueprintsShopState()
             x -= 8;
             w += 16;
             options.foreach([&](uint8_t idx, bool active) {
-                RenderSystem::sprite(carousel_x + idx * (spacing + 6), y + h + 2, bullet_empty, 1);
+                RenderSystem::sprite(carousel_x + idx * spacing + padding, y + h + 2, bullet_empty, 1);
                 if (active) {
-                    RenderSystem::drawRect2(carousel_x + idx * (spacing + 6) + 2, y + h + 2 + 2, 2, 2, 10);
+                    RenderSystem::drawRect2(carousel_x + idx * spacing + padding + 2, y + h + 2 + 2, 2, 2, 10);
 
                     Helpers::drawNotchedRect(x + move_dir, y + h + 15, w, 22, 0);
                     Helpers::printHorizontallyCentered(x + w/2 + move_dir, y + h + 17, bp_descs[bps_avail[idx]], 10);

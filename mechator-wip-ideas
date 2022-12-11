@@ -1,8 +1,9 @@
 "You don't have to be happy. You just have to accept it." -Jaime
 
-- audio controls
+- fix carousel
+- options: audio controls (vol, mute mus, mute sfx)
+- options: exit to bootloader
 - fix audio fade on pokitto
-- fix audio zeroing
 
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
  - check: figure out why turrets don't spawn after tank boss
@@ -10,20 +11,20 @@
 
 - optimize "dosub" portion of drawRLE for mini map
 - optimize spawn point search (bin locations)
-- code size: check regiontransitionhandler.cpp
  
 - figure out sprint+shoot issue on Desktop
  
 - double check battle scenes - tank + final scene for logic (nullptr from getAtLoc stuff)
 
-- region tweaks:
- - rain in swamp
- - lighter palette in canyons (oscillate?)
-
 - refine music:
  - swamp
  - canyons
  - boat music
+ 
+- fix audio zeroing in raw files
+- hide continue if no saves
+
+- code size: check regiontransitionhandler.cpp
 
 ::::IF I REALLY WANT TO::::::::
 - remove "leave" at shops in favor of <-B prompt?

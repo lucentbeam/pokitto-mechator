@@ -106,6 +106,8 @@ void RegionTransitionHandler::updateSwamp()
         AudioSystem::playSong(musSwamp);
     }
     was_active = active;
+    if (active) RenderSystem::setPalette(palette_fog);
+    else RenderSystem::setPalette(default_palette);
 }
 
 void RegionTransitionHandler::updateNorthBase()
