@@ -50,7 +50,7 @@ class UIOptions {
 public:
     UIOptions(int count) { m_available = count; for (int i = 0; i < count; ++i) m_active[i] = true; }
 
-    void update(bool forward, bool back, void (*on_highlight)(int8_t index) = nullptr, bool cycle = false);
+    int update(bool forward, bool back, void (*on_highlight)(int8_t index) = nullptr, bool cycle = false);
 
     void foreach(std::function<void(uint8_t idx, bool active)>);
 

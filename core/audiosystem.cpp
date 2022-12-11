@@ -2,6 +2,9 @@
 
 #include <string>
 
+const char * sfx_names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
+const char * music_names[] = {"storm", "overworld", "overworld_main", "boss", "ocean", "canyon", "swamp"};
+
 #ifdef DESKTOP_BUILD
 
 float vol = 100;
@@ -12,8 +15,8 @@ float mus_frac = 1.0f;
 sf::Sound AudioSystem::channels[4];
 int AudioSystem::current_channel = 0;
 RawMusic AudioSystem::music[5];
-std::vector<sf::Int16> AudioSystem::raw_buffers[sfx_count];
-sf::SoundBuffer AudioSystem::buffers[sfx_count];
+std::vector<sf::Int16> AudioSystem::raw_buffers[sfxCount];
+sf::SoundBuffer AudioSystem::buffers[sfxCount];
 
 
 bool RawMusic::open(std::string location)
@@ -52,8 +55,7 @@ void RawMusic::onSeek(sf::Time timeOffset)
 void AudioSystem::initialize()
 {
     std::string path = "../data/buttoncity/";
-    std::string names[] = {"confirm","cancel","blip","hurt","zoomin","zoomout","timeup","door","collect","crash","woosh","strike","jump"};
-    for(int i = 0; i < sfx_count; ++i) {
+    for(int i = 0; i < sfxCount; ++i) {
         std::ifstream input;
         input.open(path + names[i] + ".raw", std::ios::binary | std::ios::in);
         if (!input.is_open()){
@@ -100,9 +102,9 @@ void AudioSystem::playSong(Song song)
 
 AudioSystem::SoundClip AudioSystem::s_clips[4];
 
-std::vector<Sint16> AudioSystem::raw_buffers[sfx_count];
+std::vector<Sint16> AudioSystem::raw_buffers[sfxCount];
 
-AudioSystem::RawMusic AudioSystem::music[song_count];
+AudioSystem::RawMusic AudioSystem::music[musCount];
 
 float AudioSystem::s_current_time = 0.0f;
 
@@ -219,12 +221,11 @@ void AudioSystem::initialize() {
     std::string path = "../pokitto-mechator/content/sfx_desktop/";
 #endif
 #endif
-    std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
-    for(int i = 0; i < sfx_count; ++i) {
+    for(int i = 0; i < sfxCount; ++i) {
         std::ifstream input;
-        input.open(path + names[i] + ".raw", std::ios::binary | std::ios::in);
+        input.open(path + sfx_names[i] + ".raw", std::ios::binary | std::ios::in);
         if (!input.is_open()){
-            printf("could not open file %s\n",names[i].c_str());
+            printf("could not open file %s\n",sfx_names[i]);
             continue;
         }
         int16_t raw;
@@ -236,9 +237,8 @@ void AudioSystem::initialize() {
         input.close();
     }
 
-    std::string musics[] = {"storm", "overworld", "overworld_main", "boss"};
-    for(int i = 0; i < song_count; ++i) {
-        music[i].open(path + musics[i] + ".raw");
+    for(int i = 0; i < musCount-1; ++i) {
+        music[i].open(path + music_names[i] + ".raw");
     }
 
     if (s_device_id == 0) {
@@ -335,10 +335,7 @@ void playOnChannel(const char * path) {
 }
 
 void AudioSystem::play(SFX sfx) {
-    std::string path = "/data/mechator/";
-    std::string names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
-    path += names[int(sfx)];
-    path += ".raw";
+    std::string path = std::string("/data/mechator/") + sfx_names[int(sfx)] + ".raw";
     static int channel = 0;
     channel = (channel + 1) % 5;
     switch(channel) {
@@ -363,28 +360,11 @@ void AudioSystem::play(SFX sfx) {
 }
 
 void AudioSystem::playSong(Song song) {
-    switch(song) {
-    case musNone:
+    if (song == musNone) {
         Audio::stop<0>();
-        break;
-    case musCape:
-        Audio::play<0>("data/mechator/storm.raw");
-        break;
-    case musOverworld:
-        Audio::play<0>("data/mechator/overworld.raw");
-        break;
-    case musOverworldMain:
-        Audio::play<0>("data/mechator/overworld_main.raw");
-        break;
-    case musBoss:
-        Audio::play<0>("data/mechator/boss.raw");
-        break;
-//    case musUpcycle:
-//        Audio::play<0>("data/buttoncity/bcupcycle.raw");
-//        break;
-//    case musGame:
-//        Audio::play<0>("data/buttoncity/prismabops.raw");
-//        break;
+    } else {
+        std::string target = std::string("data/mechator/") + music_names[int(song)-1] + ".raw";
+        Audio::play<0>(target.c_str());
     }
 }
 

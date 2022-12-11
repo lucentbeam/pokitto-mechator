@@ -127,9 +127,9 @@ UIElement UIElement::getExpander(int16_t x, int16_t y, int16_t w, int16_t h, Twe
     return UIElement(x-w/2,y-h/2,w,h,x,y,0,0,curve);
 }
 
-void UIOptions::update(bool forward, bool back, void (*on_highlight)(int8_t index), bool cycle)
+int UIOptions::update(bool forward, bool back, void (*on_highlight)(int8_t index), bool cycle)
 {
-    if (!forward && !back) return;
+    if (!forward && !back) return 0;
     int8_t next = m_active_index;
     if (forward && next < (m_available - 1)) {
         ++next;
@@ -146,12 +146,15 @@ void UIOptions::update(bool forward, bool back, void (*on_highlight)(int8_t inde
             }
         }
     }
-    if (!m_active[next]) return;
+    if (!m_active[next]) return 0;
     if (next != m_active_index) {
+        bool right = m_active_index > next;
         m_active_index = next;
         if (on_highlight != nullptr) on_highlight(m_active_index);
         AudioSystem::play(sfxSelect);
+        return right ? 1 : -1;
     }
+    return 0;
 }
 
 void UIOptions::foreach(std::function<void (uint8_t, bool)> callback)

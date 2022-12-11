@@ -1,5 +1,3 @@
-#pragma once
-
 #include "spawnpoints.h"
 
 const SpawnPoint points[] = {
@@ -293,7 +291,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({106, 50}, SpawnPoint::Mine),
 	SpawnPoint({159, 69}, SpawnPoint::Blueprint),
 	SpawnPoint({174, 81}, SpawnPoint::Mech),
-	SpawnPoint({211, 112}, SpawnPoint::Blueprint),
+	SpawnPoint({212, 113}, SpawnPoint::Blueprint),
 	SpawnPoint({54, 129}, SpawnPoint::Mech),
 	SpawnPoint({62, 129}, SpawnPoint::Mech),
 	SpawnPoint({55, 136}, SpawnPoint::Tank),
@@ -328,7 +326,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({65, 74}, SpawnPoint::Blueprint),
 	SpawnPoint({8, 37}, SpawnPoint::Blueprint),
 	SpawnPoint({154, 81}, SpawnPoint::Blueprint),
-	SpawnPoint({88, 26}, SpawnPoint::Blueprint),
+	SpawnPoint({87, 26}, SpawnPoint::Blueprint),
 	SpawnPoint({170, 91}, SpawnPoint::Blueprint),
 	SpawnPoint({52, 34}, SpawnPoint::Blueprint),
 	SpawnPoint({149, 26}, SpawnPoint::Mech),
@@ -371,7 +369,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({8, 136}, SpawnPoint::Blueprint),
 	SpawnPoint({111, 154}, SpawnPoint::Turret),
 	SpawnPoint({108, 138}, SpawnPoint::Turret),
-	SpawnPoint({162, 65}, SpawnPoint::HackingKit),
+	SpawnPoint({161, 63}, SpawnPoint::HackingKit),
 	SpawnPoint({70, 34}, SpawnPoint::Turret),
 	SpawnPoint({55, 34}, SpawnPoint::HackingKit),
 	SpawnPoint({63, 33}, SpawnPoint::CashBox),
@@ -383,6 +381,7 @@ const SpawnPoint points[] = {
 	SpawnPoint({28, 127}, SpawnPoint::CashBox),
 	SpawnPoint({6, 87}, SpawnPoint::CashBox),
 	SpawnPoint({106, 76}, SpawnPoint::CashBox),
+	SpawnPoint({129, 60}, SpawnPoint::CashBox),
 	SpawnPoint({230, 206}, SpawnPoint::Turret),
 	SpawnPoint({224, 213}, SpawnPoint::Turret),
 	SpawnPoint({224, 223}, SpawnPoint::KeyA),

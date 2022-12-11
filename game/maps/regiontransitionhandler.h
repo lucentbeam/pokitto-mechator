@@ -11,21 +11,29 @@ class RegionTransitionHandler
         Peninsula = 2,
         Boss = 3,
         FinalBoss = 4,
+        Swamp = 5,
+        NorthBase = 6,
+        Canyons = 7,
+        Boating = 8
     };
 
     struct State {
         CurrentStatus status = None;
         CurrentStatus previous = None;
         bool in_boss = false;
-        int transition_trackers[5] = {0, 0, 0, 0, 0};
+        int transition_trackers[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
     };
 
     static State s_state;
 
     static void updateBoss();
+    static void updateBoat();
     static void updateOverworld();
     static void updatePeninsula();
     static void updateFinalBoss();
+    static void updateSwamp();
+    static void updateNorthBase();
+    static void updateCanyons();
 public:
 
     static void goRegion(RegionNames name);

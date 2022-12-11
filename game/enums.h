@@ -92,6 +92,9 @@ enum RegionNames : uint8_t {
     RegionTankFactory,
     RegionBoatYard,
     RegionEnemyFactory,
+    RegionFoggySwamp,
+    RegionScorchedCanyons,
+    RegionNorthBase,
 };
 
 enum Blueprints : uint8_t {

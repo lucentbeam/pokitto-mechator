@@ -53,9 +53,10 @@ enum SFX {
     sfxPlayerGun2x = 15,
     sfxHit1 = 16,
     sfxHit2 = 17,
-};
 
-const int sfx_count = 18;
+    sfxCount
+};
+extern const char * sfx_names[];
 
 enum Song {
     musNone = 0,
@@ -63,9 +64,13 @@ enum Song {
     musOverworld = 2,
     musOverworldMain = 3,
     musBoss = 4,
-};
+    musOcean = 5,
+    musCanyon = 6,
+    musSwamp = 7,
 
-const int song_count = 4;
+    musCount
+};
+extern const char * music_names[];
 
 class AudioSystem
 {
@@ -108,9 +113,9 @@ public:
 
     static float s_current_time;
 
-    static std::vector<Sint16> raw_buffers[sfx_count];
+    static std::vector<Sint16> raw_buffers[sfxCount];
 
-    static RawMusic music[song_count];
+    static RawMusic music[musCount];
 
     static int s_active_music;
 

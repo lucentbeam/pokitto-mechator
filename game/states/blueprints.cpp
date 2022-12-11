@@ -16,13 +16,14 @@
 #include "core/audiosystem.h"
 #include "game/utilities/blinker.h"
 
-static UIElement title = UIElement::getExpander(55, 35, 88, 9, Tween::Easing::OutQuad);
+static UIElement title = UIElement::getExpander(55, 35, 92, 9, Tween::Easing::OutQuad);
 static UIElement bp_cost_prompt(47,78,38,9,66,82,0,0,Tween::Easing::OutQuad);
 
 static UIOptions options(2);
 std::vector<int> bps_avail;
 
 int flashing = 0;
+float move_dir = 0.0f;
 
 static Blinker chevron_blink(1.0f, 0.8f);
 
@@ -55,7 +56,12 @@ void updateBlueprintsShopState(FSM &fsm)
 {
     chevron_blink.update();
     ControlStatus status = Controls::getStatus();
-    options.update(status.right.pressed(), status.left.pressed());
+    int d = options.update(status.right.pressed(), status.left.pressed());
+    if (d != 0) {
+        move_dir = float(d) * -10.0f;
+    }
+    move_dir *= 0.5f;
+    if (std::abs(move_dir) < 0.2f) move_dir = 0.0f;
 
     if (flashing > 0) flashing--;
     if (status.a.pressed()) {
@@ -86,11 +92,11 @@ void drawBlueprintsShopState()
 
     title.draw(true, [](int16_t x, int16_t y, int16_t w, int16_t h) {
         if (h > 8) {
-            Helpers::printHorizontallyCentered(x + w/2, y + 1, "UNLOCKABLES", 10);
+            Helpers::printHorizontallyCentered(x + w/2 + move_dir, y + 1, bp_names[bps_avail[options.activeIndex()]], 10);
             const int spacing = 2;
-            const int carousel_size = (spacing + 6) * bps_avail.size() + spacing;
+            const int carousel_size = (spacing + 6) * (bps_avail.size() - 1);
             const int carousel_x = x + w/2 - carousel_size/2;
-            Helpers::drawNotchedRect(carousel_x - spacing/2, y + h + 2, carousel_size, 6, 1);
+            Helpers::drawNotchedRect(carousel_x - spacing/2 + move_dir, y + h + 2, carousel_size, 6, 1);
             if (chevron_blink.active()) {
                 if (options.activeIndex() > 0) {
                     RenderSystem::sprite(carousel_x - 5, y + h + 2, ui_arrow_left, ui_arrow_left[2]);
@@ -107,12 +113,9 @@ void drawBlueprintsShopState()
                 if (active) {
                     RenderSystem::drawRect2(carousel_x + idx * (spacing + 6) + 2, y + h + 2 + 2, 2, 2, 10);
 
-                    Helpers::drawNotchedRect(x, y + h + 15, w, 22, 0);
-                    Helpers::printHorizontallyCentered(x + w/2, y + h + 17, bp_names[bps_avail[idx]], 10);
-                    Helpers::printHorizontallyCentered(x + w/2, y + h + 27, bp_descs[bps_avail[idx]], 8);
-
-                    Helpers::drawNotchedRect(x, y + h + 48, w + 2, 8, 0);
-                    Helpers::printHorizontallyCentered(x + w/2, y + h + 48, bp_desc_types[bps_avail[idx]], 8);
+                    Helpers::drawNotchedRect(x + move_dir, y + h + 15, w, 22, 0);
+                    Helpers::printHorizontallyCentered(x + w/2 + move_dir, y + h + 17, bp_descs[bps_avail[idx]], 10);
+                    Helpers::printHorizontallyCentered(x + w/2 + move_dir, y + h + 27, bp_desc_types[bps_avail[idx]], 8);
                 }
             });
         }

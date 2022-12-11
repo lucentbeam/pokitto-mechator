@@ -214,8 +214,8 @@ void drawGameState() {
     Soldier::drawAir();
     Enemy::drawAir();
 
-    if (isInRegion(RegionStormyCape)) {
-        if (drawflashlight && !RegionTransitionHandler::atBoss()) Player::drawFlashlight();
+    if (!RegionTransitionHandler::atBoss() && isInRegion(RegionStormyCape)) {
+        if (drawflashlight) Player::drawFlashlight();
         const uint8_t rain[] = { 3, 3, 0, 0, 48, 0, 48, 0, 48, 0, 0};
         int x = 0;
         int y = 0;
@@ -227,16 +227,16 @@ void drawGameState() {
             }
             RenderSystem::sprite(x, y, rain, 0);
         }
-        if (!RegionTransitionHandler::atBoss()) RenderSystem::setOffset(true);
-        if (!RegionTransitionHandler::atBoss()) ProjectileManager::draw();
+        RenderSystem::setOffset(true);
+        ProjectileManager::draw();
     }
 
     // ui draw
     UI::draw();
 
     region_indicator.draw(true, [&](int16_t x, int16_t y, int16_t w, int16_t h){
-        if (h > 7) {
-            Helpers::printHorizontallyCentered(x + w/2, y + 1, region_name, 10);
+        if (h > 0) {
+            Helpers::printHorizontallyCentered(x + w/2, y + h/2 - 3, region_name, h > 7 ? 10 : (9 - (h % 2)*2));
         }
     });
 

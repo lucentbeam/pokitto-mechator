@@ -1,33 +1,30 @@
 "You don't have to be happy. You just have to accept it." -Jaime
 
-- playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
-
-- try sky clouds instead of ocean rocks
-
-- fix audio zeroing
 - audio controls
+- fix audio fade on pokitto
+- fix audio zeroing
 
-- check: figure out why turrets don't spawn after tank boss
-- check: dying and restarting crashes?
+- playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
+ - check: figure out why turrets don't spawn after tank boss
+ - check: dying and restarting crashes?
 
 - optimize "dosub" portion of drawRLE for mini map
 - optimize spawn point search (bin locations)
-
-- double check final scene for logic (nullptr from getAtLoc stuff)
-  
-- more area labels / flavor
-- show region on pause screen
-- more music:
- - swamp
- - canyons
- - boat music
- 
-- clean up blueprints a little more: left/right anims, reposition visuals, fix carousel
- 
-- add playtime to credits
+- code size: check regiontransitionhandler.cpp
  
 - figure out sprint+shoot issue on Desktop
  
+- double check battle scenes - tank + final scene for logic (nullptr from getAtLoc stuff)
+
+- region tweaks:
+ - rain in swamp
+ - lighter palette in canyons (oscillate?)
+
+- refine music:
+ - swamp
+ - canyons
+ - boat music
+
 ::::IF I REALLY WANT TO::::::::
 - remove "leave" at shops in favor of <-B prompt?
 - make helicopter deny landing prettier

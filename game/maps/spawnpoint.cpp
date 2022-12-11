@@ -6,7 +6,11 @@
 #include "game/maps/spawnpoints.h"
 #include "game/variables.h"
 #include "game/maps/worldtiles.h"
+
 #include "game/entities/barracks.h"
+#include "game/entities/enemy.h"
+#include "game/entities/pickups.h"
+#include "game/entities/pois.h"
 
 #include "game/utilities/debuglog.h"
 

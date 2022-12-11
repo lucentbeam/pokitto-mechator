@@ -24,6 +24,17 @@ void RegionTransitionHandler::updateBoss()
     was_active = active;
 }
 
+void RegionTransitionHandler::updateBoat()
+{
+    static bool active = false;
+    static bool was_active = false;
+    active = s_state.transition_trackers[int(Boating)] > 0;
+    if (active && !was_active) {
+        AudioSystem::playSong(musOcean);
+    }
+    was_active = active;
+}
+
 void RegionTransitionHandler::updateOverworld()
 {
     static bool active = false;
@@ -86,13 +97,73 @@ void RegionTransitionHandler::updateFinalBoss() {
     RenderSystem::setPalette(palettes[idx]);
 }
 
+void RegionTransitionHandler::updateSwamp()
+{
+    static bool active = false;
+    static bool was_active = false;
+    active = s_state.transition_trackers[int(Swamp)] > 0;
+    if (active && !was_active) {
+        AudioSystem::playSong(musSwamp);
+    }
+    was_active = active;
+}
+
+void RegionTransitionHandler::updateNorthBase()
+{
+    static bool active = false;
+    static bool was_active = false;
+    active = s_state.transition_trackers[int(NorthBase)] > 0;
+    if (active && !was_active) {
+        AudioSystem::playSong(musOverworld);
+    }
+    was_active = active;
+}
+
+void RegionTransitionHandler::updateCanyons()
+{
+    static bool active = false;
+    static bool was_active = false;
+    active = s_state.transition_trackers[int(Canyons)] > 0;
+    if (active && !was_active) {
+        AudioSystem::playSong(musCanyon);
+    }
+    was_active = active;
+
+    int paletteIndex = 0;
+    static int counter = 0;
+    if (s_state.transition_trackers[int(Canyons)] > 0) {
+        counter++;
+        constexpr int frame_delta = 60; // change palettes ever X frames
+        paletteIndex = (counter % (frame_delta * 2)) / frame_delta + 1;
+    } else {
+        counter = 0;
+    }
+    RenderSystem::setPalette(palette_list[2 - paletteIndex]);
+}
+
 void RegionTransitionHandler::goRegion(RegionNames name)
 {
     if (s_state.in_boss) return;
-    if (name == RegionStormyCape) {
+    if (Player::mode() == BoatMode) {
+        if (s_state.status == Boating) return;
+        s_state.previous = s_state.status;
+        s_state.status = Boating;
+    } else if (name == RegionStormyCape) {
         if (s_state.status == Peninsula) return;
         s_state.previous = s_state.status;
         s_state.status = Peninsula;
+    } else if (name == RegionFoggySwamp) {
+        if (s_state.status == Swamp) return;
+        s_state.previous = s_state.status;
+        s_state.status = Swamp;
+    } else if (name == RegionNorthBase) {
+        if (s_state.status == NorthBase) return;
+        s_state.previous = s_state.status;
+        s_state.status = NorthBase;
+    } else if (name == RegionScorchedCanyons) {
+        if (s_state.status == Canyons) return;
+        s_state.previous = s_state.status;
+        s_state.status = Canyons;
     } else {
         if (s_state.status == Overworld) return;
         s_state.previous = s_state.status;
@@ -117,7 +188,7 @@ void RegionTransitionHandler::update()
     if (s_state.transition_trackers[s_state.previous] > 0) {
         s_state.transition_trackers[s_state.previous]--;
         AudioSystem::setMusicFraction(float(s_state.transition_trackers[s_state.previous])/float(transitionTime));
-        switch (s_state.previous) {
+        switch (s_state.previous) {        
         case Overworld:
             updateOverworld();
             return;
@@ -129,6 +200,18 @@ void RegionTransitionHandler::update()
             return;
         case FinalBoss:
             updateFinalBoss();
+            return;
+        case Swamp:
+            updateSwamp();
+            return;
+        case NorthBase:
+            updateNorthBase();
+            return;
+        case Canyons:
+            updateCanyons();
+            return;
+        case Boating:
+            updateBoat();
             return;
         default:
             return;
@@ -152,6 +235,18 @@ void RegionTransitionHandler::update()
         case FinalBoss:
             updateFinalBoss();
             return;
+        case Swamp:
+            updateSwamp();
+            return;
+        case NorthBase:
+            updateNorthBase();
+            return;
+        case Canyons:
+            updateCanyons();
+            return;
+        case Boating:
+            updateBoat();
+            return;
         default:
             return;
         }
@@ -165,4 +260,8 @@ void RegionTransitionHandler::clear()
     updateBoss();
     updateFinalBoss();
     updatePeninsula();
+    updateSwamp();
+    updateNorthBase();
+    updateCanyons();
+    updateBoat();
 }

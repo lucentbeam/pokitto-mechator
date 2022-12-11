@@ -7,9 +7,11 @@
 #include "game/player.h"
 #include "game/ui/ui.h"
 
+constexpr int pickup_temp_count = 14;
+
 class Pickups
 {
-    static ObjectPool<Pickups, 14> s_temporary;
+    static ObjectPool<Pickups, pickup_temp_count> s_temporary;
     static ObjectPool<Pickups, 10> s_special;
 
     Vec2i position{0,0};

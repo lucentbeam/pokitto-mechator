@@ -30,7 +30,7 @@ void goPause(bool from_map)
 
     UI::setVisibility(UI::Element::UIDollarCount,     true, uint32_t(300));
 
-    UI::setVisibility(UI::Element::GameSavedPrompt, false, true);
+    UI::setVisibility(UI::Element::GameSavedPrompt, false, true);    
 
     pause_prompt.setVisibility(true, uint32_t(0));
     equip_prompt.setVisibility(true, uint32_t(0));

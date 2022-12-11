@@ -8,7 +8,7 @@
 #include "game/maps/worldtiles.h"
 //#include "game/maps/worldmutables.h"
 
-ObjectPool<Pickups, 14> Pickups::s_temporary;
+ObjectPool<Pickups, pickup_temp_count> Pickups::s_temporary;
 ObjectPool<Pickups, 10> Pickups::s_special;
 
 void Pickups::configure(const Vec2i &pos, SpriteName spr, uint16_t lifetime)
@@ -211,6 +211,6 @@ void Pickups::draw()
 
 void Pickups::clear()
 {
-    s_temporary = ObjectPool<Pickups, 14>();
+    s_temporary = ObjectPool<Pickups, pickup_temp_count>();
     s_special = ObjectPool<Pickups, 10>();
 }

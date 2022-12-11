@@ -67,6 +67,7 @@ void updateShopState(FSM&)
         AudioSystem::play(sfxConfirm);
         switch(title_opts.activeIndex()) {
         case 0:
+            Controls::blockControls(8);
             quitShopState();
             break;
         case 1:

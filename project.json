@@ -6009,6 +6009,186 @@
 		},
 		"\\game\\entities\\pickups.cpp.odMGyO": {
 			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\debuglog.obj": {
+			"sdcard": false
+		},
+		"\\content\\maps\\spawnpoints.cpp": {
+			"sdcard": false
+		},
+		"\\content\\mus_source\\boat_1.sunvox": {
+			"sdcard": false
+		},
+		"\\content\\mus_source\\canyons.sunvox": {
+			"sdcard": false
+		},
+		"\\content\\mus_source\\swamp.sunvox": {
+			"sdcard": false
+		},
+		"\\content\\sfx\\canyon.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx\\ocean.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx\\swamp.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx_desktop\\canyon.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx_desktop\\ocean.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx_desktop\\swamp.raw": {
+			"sdcard": false
+		},
+		"\\game\\maps\\": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.h.yjdEWF": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.DucVwZ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.h.NKcCXJ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\pickups.h.XBFFsH": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.autosave.aLEuEC": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.autosave": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.XtfUBj": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.gUCgVm": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.ZWQGrC": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.fDjpBX": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoint.cpp.KsEvvO": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.hdciZb": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.h.RvfgEW": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.h.FxJtFq": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.tpUDSL": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.qcxebZ": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.h.PJSFcQ": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.h.bAaHhq": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.rmgLue": {
+			"sdcard": false
+		},
+		"\\game\\maps\\alertregion.h.DNMLPd": {
+			"sdcard": false
+		},
+		"\\game\\maps\\alertregion.cpp.PgFaqh": {
+			"sdcard": false
+		},
+		"\\game\\maps\\alertregion.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\maps\\alertregion.cpp.TJvqua": {
+			"sdcard": false
+		},
+		"\\game\\maps\\alertregion.cpp.DDsEuQ": {
+			"sdcard": false
+		},
+		"\\game\\maps\\alertregion.cpp.eLRZiZ": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.sTWKSa": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.naSIeS": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.jPknKA": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.oWXryo": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.GbQjJe": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.pfkQpL": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.LTKDqs": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.yqlaHF": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.aSbfwi": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.doqqQb": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.TIjMtp": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.TKLOKa": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.EnLGMR": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.zbBaFZ": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.ayvcCA": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.aZtmsW": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.czapyS": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.sWWEDb": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.QkaoHp": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.jFySwN": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.DGGkbR": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.WIpEMj": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

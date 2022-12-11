@@ -18,7 +18,7 @@ struct RegionBounds : public Rect
 {
     RegionName * const reference_region;
 
-    RegionBounds(int x, int y, int x2, int y2, RegionName * const ref) : Rect(x * 6, y * 6, (x2 - x) * 6, (y2 - y) * 6), reference_region(ref) {}
+    constexpr RegionBounds(int x, int y, int x2, int y2, RegionName * const ref) : Rect(x * 6, y * 6, (x2 - x + 1) * 6, (y2 - y + 1) * 6), reference_region(ref) {}
 };
 
 extern RegionName groundregion_names[];
