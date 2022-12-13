@@ -6240,6 +6240,57 @@
 		},
 		"\\core\\palettes.h.BJSERH": {
 			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\debug\\optionsviewer.obj": {
+			"sdcard": false
+		},
+		"\\data\\mechator\\options.cfg": {
+			"sdcard": false
+		},
+		"\\game\\states\\optionsviewer.cpp": {
+			"sdcard": false
+		},
+		"\\game\\states\\optionsviewer.h": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.h.TsVRpc": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.kshEHv": {
+			"sdcard": false
+		},
+		"\\game\\states\\title.cpp.SNmDcF": {
+			"sdcard": false
+		},
+		"\\game\\states\\title.cpp.umZGuT": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.NAiqFX": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.HsEtkx": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.zJbDAd": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.biNUFy": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.cXNTJd": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.h.ChBpXa": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.IClmBb": {
+			"sdcard": false
+		},
+		"\\core\\pokittolibextensions.h.mrKyRt": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.ZuJnDY": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

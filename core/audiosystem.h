@@ -117,8 +117,6 @@ public:
 
     static RawMusic music[musCount];
 
-    static int s_active_music;
-
 #endif
 #endif
 public:
@@ -138,6 +136,13 @@ public:
     static void play(SFX);
 
     static void playSong(Song);
+
+    static void setMusicOn(bool on);
+    static void setSfxOn(bool on);
+
+    static int s_active_music;
+    static bool sfx_on;
+    static bool mus_on;
 };
 
 #endif // AUDIOSYSTEM_H

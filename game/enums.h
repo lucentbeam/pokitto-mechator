@@ -73,7 +73,8 @@ enum GameStates : uint8_t {
     MapState,
     GameWonState,
     TitleState,
-    GameOverState
+    GameOverState,
+    GameOptionsState,
 };
 
 enum QuestStatus : uint8_t {

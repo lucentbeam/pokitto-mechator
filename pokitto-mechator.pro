@@ -43,6 +43,7 @@ SOURCES += \
     game/states/mapviewer.cpp \
     game/states/opendoorprompt.cpp \
     game/states/openshopprompt.cpp \
+    game/states/optionsviewer.cpp \
     game/states/pause.cpp \
     game/states/repairs.cpp \
     game/states/shop.cpp \
@@ -123,6 +124,7 @@ HEADERS += \
     game/states/mapviewer.h \
     game/states/opendoorprompt.h \
     game/states/openshopprompt.h \
+    game/states/optionsviewer.h \
     game/states/pause.h \
     game/states/repairs.h \
     game/states/shop.h \

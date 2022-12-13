@@ -1,8 +1,5 @@
 "You don't have to be happy. You just have to accept it." -Jaime
 
-- fix carousel
-- options: audio controls (vol, mute mus, mute sfx)
-- options: exit to bootloader
 - fix audio fade on pokitto
 
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
@@ -15,6 +12,8 @@
 - figure out sprint+shoot issue on Desktop
  
 - double check battle scenes - tank + final scene for logic (nullptr from getAtLoc stuff)
+
+- figure out dying + restarting
 
 - refine music:
  - swamp

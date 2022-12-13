@@ -3,7 +3,9 @@
 
 #include "core/utilities/babyfsm.h"
 
-#include "game/variables.h"
+struct GameStorageHeader;
+struct ControlStatus;
+class UIOptions;
 
 class Title
 {
@@ -11,21 +13,24 @@ class Title
         Select,
         DataSelect,
         DataOverwrite,
-        ConfirmOverwrite
+        ConfirmOverwrite,
+        Options
     } s_state;
 
-    static int select_index;
     static GameStorageHeader game_datas[3];
     static float timer;
     static float move_timer;
 
-    static void nextData();
-    static void previousData();
     static void selectData();
 
     static void renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highlight, int idx);
     static void drawDataScreen();
+
 public:
+    static void updateTimer(bool reset);
+    static bool updateOptions(const UIOptions &opts, const ControlStatus &ctrl);
+    static void drawOptionScreen(const UIOptions &opt, int yoffset = 0);
+
     static void go();
 
     static void update(FSM &fsm);

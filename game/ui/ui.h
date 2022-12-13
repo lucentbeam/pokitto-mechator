@@ -52,11 +52,13 @@ public:
 
     int update(bool forward, bool back, void (*on_highlight)(int8_t index) = nullptr, bool cycle = false);
 
-    void foreach(std::function<void(uint8_t idx, bool active)>);
+    void foreach(std::function<void(uint8_t idx, bool active)>) const;
 
     void foreach(std::function<void(uint8_t idx, uint8_t actual_idx, bool active)>);
 
     uint8_t activeIndex() const { return uint8_t(m_active_index); }
+
+    void setSelection(int8_t idx) { m_active_index = idx; }
 
     void setAvailableCount(uint8_t avail) { if (m_active_index >= avail) m_active_index = avail -1; m_available = avail; { for (int i = 0; i < avail; ++i) m_active[i] = true; } }
 
@@ -91,6 +93,8 @@ public:
 
     static void showBoss(int8_t * life_ref);
     static void clearBoss();
+
+    static void setShowing(bool show);
 
     static void update(float dt);
     static void draw();

@@ -5,6 +5,33 @@
 const char * sfx_names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
 const char * music_names[] = {"storm", "overworld", "overworld_main", "boss", "ocean", "canyon", "swamp"};
 
+bool AudioSystem::sfx_on = true;
+
+bool AudioSystem::mus_on = true;
+
+static int last_song_request = int(musNone);
+
+
+void AudioSystem::setMusicOn(bool on)
+{
+    mus_on = on;
+
+#ifndef DESKTOP_BUILD
+    if (!on) {
+        int s = last_song_request;
+        playSong(musNone);
+        last_song_request = s;
+    } else {
+        playSong(Song(last_song_request));
+    }
+#endif
+}
+
+void AudioSystem::setSfxOn(bool on)
+{
+    sfx_on = on;
+}
+
 #ifdef DESKTOP_BUILD
 
 float vol = 100;
@@ -189,7 +216,7 @@ void audioCallback(void *userdata, Uint8 * b, int len) {
             }
         }
 
-        if (AudioSystem::s_active_music > 0) {
+        if (AudioSystem::mus_on && AudioSystem::s_active_music > 0) {
             out += float(AudioSystem::music[AudioSystem::s_active_music - 1].getData16()) * mus_frac;
         }
 
@@ -254,6 +281,7 @@ void AudioSystem::initialize() {
 
 void AudioSystem::play(SFX sfx)
 {
+    if (!sfx_on) return;
     for (int i = 0; i < 4; i++) {
         if (!s_clips[i].playing) {
             s_clips[i].set(s_current_time, raw_buffers[int(sfx)].data(), raw_buffers[int(sfx)].size());
@@ -264,6 +292,7 @@ void AudioSystem::play(SFX sfx)
 
 void AudioSystem::playSong(Song song)
 {
+    last_song_request = int(song);
     if (s_active_music == int(song)) return;
     SDL_LockAudio();
     s_active_music = int(song);
@@ -272,7 +301,6 @@ void AudioSystem::playSong(Song song)
         SDL_UnlockAudio();
         return;
     }
-
     music[s_active_music-1].reset();
 
     uint64_t t = SDL_GetPerformanceCounter();
@@ -306,6 +334,7 @@ float AudioSystem::getVolume()
 #include <cstdint>
 
 #include "Pokitto.h"
+#include "core/pokittolibextensions.h"
 #include <LibAudio>
 
 void AudioSystem::initialize()
@@ -315,12 +344,15 @@ void AudioSystem::initialize()
 
 void AudioSystem::setVolume(float value)
 {
+    value /= 100.0f;
     Audio::setVolume(value * 128.0f);
 }
 
 float AudioSystem::getVolume()
 {
-    return float(Pokitto::Sound::getVolume()) / 128.0f;
+    uint8_t v;
+    Audio::getVolume(&v);
+    return float(v) / 128.0f * 100.0f;
 }
 
 void AudioSystem::setMusicFraction(float fraction) {
@@ -335,6 +367,7 @@ void playOnChannel(const char * path) {
 }
 
 void AudioSystem::play(SFX sfx) {
+    if (!sfx_on) return;
     std::string path = std::string("/data/mechator/") + sfx_names[int(sfx)] + ".raw";
     static int channel = 0;
     channel = (channel + 1) % 5;
@@ -360,9 +393,10 @@ void AudioSystem::play(SFX sfx) {
 }
 
 void AudioSystem::playSong(Song song) {
+    last_song_request = int(song);
     if (song == musNone) {
         Audio::stop<0>();
-    } else {
+    } else if (mus_on) {
         std::string target = std::string("data/mechator/") + music_names[int(song)-1] + ".raw";
         Audio::play<0>(target.c_str());
     }

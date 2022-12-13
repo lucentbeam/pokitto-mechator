@@ -157,7 +157,7 @@ int UIOptions::update(bool forward, bool back, void (*on_highlight)(int8_t index
     return 0;
 }
 
-void UIOptions::foreach(std::function<void (uint8_t, bool)> callback)
+void UIOptions::foreach(std::function<void (uint8_t, bool)> callback) const
 {
     int idx = 0;
     for(int i = 0; i < m_available; ++i) {
@@ -198,6 +198,8 @@ static UIElement savedprompt(40, 77, 30, 9, 55, 81, 0, 0, Tween::Easing::OutQuad
 
 int8_t * UI::m_boss_life = nullptr;
 int8_t UI::m_max_boss_life = 0;
+
+static bool s_showing = true;
 
 void UI::drawNumber(uint16_t num, int x, int y)
 {
@@ -321,6 +323,11 @@ void UI::clearBoss()
     m_max_boss_life = 0;
 }
 
+void UI::setShowing(bool show)
+{
+    s_showing = show;
+}
+
 void UI::update(float dt)
 {
     kitcount.update(dt);
@@ -351,6 +358,7 @@ void drawHealthBar(int16_t x, int16_t, int16_t, int16_t) {
 
 void UI::draw()
 {
+    if (!s_showing) return;
     activeDrawMode = SoldierMode;
     soldier_healthbar.draw(false, drawHealthBar);
     activeDrawMode = JeepMode;

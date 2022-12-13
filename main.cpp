@@ -19,6 +19,7 @@
 #include "game/states/gamewon.h"
 #include "game/states/title.h"
 #include "game/states/gameover.h"
+#include "game/states/optionsviewer.h"
 
 #include "game/variables.h"
 
@@ -43,6 +44,8 @@ int WinMain()
     RenderSystem::initialize();
     AudioSystem::initialize();
 
+    GameOptions::initialize();
+
     FSM fsm;
     fsm.add(GameStates::TitleState, Title::update, Title::draw, Title::go);
     fsm.add(GameStates::Game, updateGameState, drawGameState);
@@ -57,6 +60,7 @@ int WinMain()
     fsm.add(GameStates::MapState, MapViewer::update, MapViewer::draw, MapViewer::go);
     fsm.add(GameStates::GameWonState, updateGameWonState, drawGameWonState, goGameWonState);
     fsm.add(GameStates::GameOverState, GameOver::update, GameOver::draw, GameOver::go);
+    fsm.add(GameStates::GameOptionsState, OptionsViewer::update, OptionsViewer::draw, OptionsViewer::go);
 
     int32_t gameTime = 0;
     uint32_t lastGameTime = RenderSystem::getTimeMs();

@@ -15,45 +15,38 @@
 #include "game/utilities/helpers.h"
 #include "game/utilities/mapmanager.h"
 #include "game/player.h"
+#include "game/variables.h"
+
+#include "game/ui/ui.h"
+
+#ifndef DESKTOP_BUILD
+#include "Pokitto.h"
+#endif
+
+UIOptions title_selection(3);
 
 Title::TitleState Title::s_state = Title::Select;
-
-int Title::select_index = 0;
 
 GameStorageHeader Title::game_datas[3];
 
 float Title::timer = 0.0f;
 float Title::move_timer = 0.0f;
 
-void Title::nextData()
-{
-    if (select_index == 2) return;
-    ++select_index;
-    AudioSystem::play(sfxSelect);
-}
-
-void Title::previousData()
-{
-    if (select_index == 0) return;
-    --select_index;
-    AudioSystem::play(sfxSelect);
-}
-
 void Title::selectData() {
     AudioSystem::play(sfxConfirm);
 
 #ifdef DESKTOP_BUILD
 #ifdef DEBUGS
-    sprintf(GameVariables::savefile, "../data/mechator/save%d.dat", select_index + 1);
+    sprintf(GameVariables::savefile, "../data/mechator/save%d.dat", title_selection.activeIndex() + 1);
 #else
-    sprintf(GameVariables::savefile, "data/mechator/save%d.dat", select_index + 1);
+    sprintf(GameVariables::savefile, "data/mechator/save%d.dat", title_selection.activeIndex() + 1);
 #endif
 #else
-    sprintf(GameVariables::savefile, "/data/mechator/save%d.dat", select_index + 1);
+    sprintf(GameVariables::savefile, "/data/mechator/save%d.dat", title_selection.activeIndex() + 1);
 #endif
 
     Player::reset();
-    if (s_state == DataSelect && game_datas[select_index].elapsedMilliseconds > 5000) {
+    if (s_state == DataSelect && game_datas[title_selection.activeIndex()].elapsedMilliseconds > 5000) {
         GameStorage dat;
         Serialization::tryGet<GameStorage>(GameVariables::savefile, &dat);
         GameVariables::loadGame(dat);
@@ -114,7 +107,8 @@ void Title::renderSaveDataInfo(int x, int y, GameStorageHeader &s, bool highligh
 
 void Title::go()
 {
-    select_index = 0;
+    title_selection.setAvailableCount(3);
+    title_selection.setSelection(0);
     move_timer = 0.0f;
     s_state = Select;
 
@@ -138,41 +132,46 @@ void Title::go()
     MapManager::resetMutables();
 }
 
-void Title::update(FSM &fsm)
-{
+void Title::updateTimer(bool reset) {
     timer += physicsTimestep * 20.0f;
+    if (reset) {
+        move_timer = 0.0f;
+        return;
+    }
     move_timer += physicsTimestep * 5.0f;
     if (move_timer > 1.0f) move_timer = 1.0f;
+}
 
+void Title::update(FSM &fsm)
+{
     ControlStatus ctrl = Controls::getStatus();
+    updateTimer(title_selection.update(ctrl.down.pressed(), ctrl.up.pressed()) != 0);
     switch (s_state) {
     case Select:
-        if (select_index > 0 && ctrl.up.pressed()) {
-            select_index = 0;
-            move_timer = 0.0f;
-            AudioSystem::play(sfxSelect);
-        } else if (select_index == 0 && ctrl.down.pressed()) {
-            select_index = 1;
-            move_timer = 0.0f;
-            AudioSystem::play(sfxSelect);
-        }
         if (ctrl.a.pressed() || ctrl.c.pressed()) {
             AudioSystem::play(sfxConfirm);
-            s_state = select_index == 0 ? DataSelect : DataOverwrite;
-            select_index = 0; // TOOD: first available
+            s_state = title_selection.activeIndex() == 0 ? DataSelect : title_selection.activeIndex() == 1 ? DataOverwrite : Options;
+            if (s_state == Options) { title_selection.setAvailableCount(4); title_selection.setSelection(0); }
+            title_selection.setSelection(0);
         }
         break;
     case DataSelect:
     case DataOverwrite:
         if (ctrl.b.pressed()) {
             AudioSystem::play(sfxCancel);
-            select_index = s_state == DataSelect ? 0 : 1;
+            title_selection.setSelection(s_state == DataSelect ? 0 : 1);
             s_state = Select;
             break;
         }
-        if (ctrl.up.pressed()) previousData();
-        else if (ctrl.down.pressed()) nextData();
         if (ctrl.a.pressed() || ctrl.c.pressed()) selectData();
+        break;
+    case Options:
+        if (updateOptions(title_selection, ctrl)) {
+            GameOptions::save();
+            s_state = Select;
+            title_selection.setAvailableCount(3);
+            title_selection.setSelection(2);
+        }
         break;
     }
 
@@ -187,10 +186,70 @@ void Title::drawDataScreen()
     if (s_state == DataSelect) RenderSystem::print(x + 16, y + 2, "- LOAD GAME -", 9);
     else RenderSystem::print(x + 14, y + 2, "- OVERWRITE -", 9);
 
-    renderSaveDataInfo(55, y + 16, game_datas[0], select_index == 0,1);
-    renderSaveDataInfo(55, y + 28, game_datas[1], select_index == 1,2);
-    renderSaveDataInfo(55, y + 40, game_datas[2], select_index == 2,3);
-    RenderSystem::sprite(x + 2, y + 17 + 12 * select_index, ui_arrow_left, 0, true);
+    renderSaveDataInfo(55, y + 16, game_datas[0], title_selection.activeIndex() == 0,1);
+    renderSaveDataInfo(55, y + 28, game_datas[1], title_selection.activeIndex() == 1,2);
+    renderSaveDataInfo(55, y + 40, game_datas[2], title_selection.activeIndex() == 2,3);
+    RenderSystem::sprite(x + 2, y + 17 + 12 * title_selection.activeIndex(), ui_arrow_left, 0, true);
+}
+
+bool Title::updateOptions(const UIOptions &opts, const ControlStatus &ctrl)
+{
+    if (ctrl.b.pressed()) {
+        AudioSystem::play(sfxCancel);
+        return true;
+    }
+    switch(opts.activeIndex()) {
+    case 0:
+        if (ctrl.right.downEvery(1, 5)) GameOptions::setVolumeFrac(GameOptions::volumeFrac() + 0.125f);
+        if (ctrl.left.downEvery(1, 5)) GameOptions::setVolumeFrac(GameOptions::volumeFrac() - 0.125f);
+        break;
+    case 1:
+        if (ctrl.a.pressed() || ctrl.right.pressed() || ctrl.left.pressed()) GameOptions::setMusicOn(!GameOptions::musicOn());
+        break;
+    case 2:
+        if (ctrl.a.pressed() || ctrl.right.pressed() || ctrl.left.pressed()) GameOptions::setSfxOn(!GameOptions::sfxOn());
+        break;
+    case 3:
+        if (ctrl.a.pressed()) {
+#ifndef DESKTOP_BUILD
+            Pokitto::Core::jumpToLoader();
+#endif
+        }
+        break;
+    }
+    return false;
+}
+
+void Title::drawOptionScreen(const UIOptions &opt, int yoffset)
+{
+    const int x = 14;
+    int top = 26 + yoffset;
+//    Helpers::drawNotchedRect(x, y, 110 - x * 2, 53, 0);
+//    Helpers::drawNotchedRect(x + 1, y + 1, 110 - x * 2 - 2, 9, 1);
+    RenderSystem::print(x + 26, top, "OPTIONS", 10);
+    float frac = move_timer * 3.0f;
+    frac *= frac;
+    if (frac > 1.0f) frac = 1.0f;
+    top += 12;
+    const int spacing = 10;
+    opt.foreach([&](int8_t idx, bool active) {
+        if (active) {
+            RenderSystem::drawRect(55 - 54 * move_timer, top + 4.0f + idx * spacing - 2.0f * move_timer, 108 * move_timer, 3 * move_timer, 6);
+            RenderSystem::sprite(6, top + 1 + spacing * idx, ui_arrow_left, 0, true);
+        }
+        const char * txt[] = {"VOLUME", "MUSIC", "SFX", "QUIT TO BOOTLOADER"};
+        RenderSystem::print(14, top + spacing * idx, txt[idx], active ? 10 : 8);
+    });
+    int v = GameOptions::volumeFrac() * 8;
+    for(int i = 1; i < 9; ++i) {
+        if (i <= v) {
+            RenderSystem::drawRect2(57 + 5 * (i - 1), top + 1, 3, 5, opt.activeIndex() == 0 ? 10 : 8);
+        } else {
+            RenderSystem::drawRect2(57 + 5 * (i - 1), top + 3, 3, 1, opt.activeIndex() == 0 ? 9 : 8);
+        }
+    }
+    RenderSystem::print(96 - RenderSystem::getLineLength(GameOptions::musicOn() ? "ON" : "OFF"), top + spacing, GameOptions::musicOn() ? "ON" : "OFF", title_selection.activeIndex() == 1 ? 10 : 8);
+    RenderSystem::print(96 - RenderSystem::getLineLength(GameOptions::sfxOn() ? "ON" : "OFF"), top + spacing * 2, GameOptions::sfxOn() ? "ON" : "OFF", title_selection.activeIndex() == 2 ? 10 : 8);
 }
 
 void Title::draw()
@@ -206,25 +265,36 @@ void Title::draw()
     }
 
     RenderSystem::print(93, 80, "v1.0", 6);
-//    RenderSystem::print(6, 22, "(early access)", 6);
     Helpers::drawRLE(6, 6, title_text);
 
-    if (s_state != Select) {
+    switch (s_state) {
+    case ConfirmOverwrite:
+    case DataSelect:
+    case DataOverwrite:
         drawDataScreen();
         return;
+    case Options:
+        drawOptionScreen(title_selection);
+        return;
     }
-
-    RenderSystem::drawRect(55 - 54 * move_timer, 32 + 4.0f + select_index * 11 - 2.0f * move_timer, 108 * move_timer, 3 * move_timer, 6);
 
     float frac = move_timer * 3.0f;
     frac *= frac;
     if (frac > 1.0f) frac = 1.0f;
-    RenderSystem::print(66 - (select_index == 0 ? frac : 1 - frac) * 4, 32, "CONTINUE", select_index == 0 ? 10 : 8);
-    RenderSystem::print(66 - (select_index == 1 ? frac : 1 - frac) * 4, 43, "NEW GAME", select_index == 1 ? 10 : 8);
-    RenderSystem::sprite(49 + frac * 6.0f, 32 + 1 + select_index * 11, ui_arrow_left, 0, true);
+
+    title_selection.foreach([&](int8_t idx, bool active) {
+        const int top = 28;
+        const int spacing = 10;
+        if (active) {
+            RenderSystem::drawRect(55 - 54 * move_timer, top + 4.0f + idx * spacing - 2.0f * move_timer, 108 * move_timer, 3 * move_timer, 6);
+            RenderSystem::sprite(49 + frac * 6.0f, top + 1 + idx * spacing, ui_arrow_left, 0, true);
+        }
+        const char * txt[] = {"CONTINUE", "NEW GAME", "OPTIONS"};
+        RenderSystem::print(66 - (active ? frac : 0) * 4, top + idx * spacing, txt[idx], active ? 10 : 8);
+    });
 
     Helpers::drawRLE(0 , 58, title_jeep, 49);
     Helpers::drawRLE(58, 82, title_dirt);
-    Helpers::drawRLE(65, 60, title_shot_1);
-    Helpers::drawRLE(82, 64, title_shot_2);
+    Helpers::drawRLE(63, 62, title_shot_1);
+    Helpers::drawRLE(82, 65, title_shot_2);
 }

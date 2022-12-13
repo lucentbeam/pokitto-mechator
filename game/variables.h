@@ -21,6 +21,26 @@ struct GameStorageHeader {
     float percentageComplete() { return 50.0f; }
 };
 
+struct GameOptions {
+    bool mus_on = true;
+    bool sfx_on = true;
+
+    static GameOptions s_options;
+
+public:
+    static void initialize();
+    static void save();
+
+    static bool musicOn();
+    static void setMusicOn(bool value);
+
+    static bool sfxOn();
+    static void setSfxOn(bool value);
+
+    static float volumeFrac();
+    static void setVolumeFrac(float value);
+};
+
 struct GameStorage {
     GameStorageHeader header;
 

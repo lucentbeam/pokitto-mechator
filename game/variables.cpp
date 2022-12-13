@@ -156,3 +156,58 @@ void GameVariables::loadGame(GameStorage s)
 {
     s_data = s;
 }
+
+GameOptions GameOptions::s_options;
+
+void GameOptions::initialize()
+{
+    s_options = GameOptions();
+#ifdef DESKTOP_BUILD
+    Serialization::tryGet<GameOptions>("../data/mechator/options.cfg", &s_options);
+#else
+    Serialization::tryGet<GameOptions>("/data/mechator/options.cfg", &s_options);
+#endif
+    setMusicOn(s_options.mus_on);
+    setSfxOn(s_options.sfx_on);
+}
+
+void GameOptions::save()
+{
+#ifdef DESKTOP_BUILD
+    Serialization::tryStore<GameOptions>("../data/mechator/options.cfg", &s_options);
+#else
+    Serialization::tryStore<GameOptions>("/data/mechator/options.cfg", &s_options);
+#endif
+}
+
+bool GameOptions::musicOn()
+{
+    return s_options.mus_on;
+}
+
+void GameOptions::setMusicOn(bool value)
+{
+    s_options.mus_on = value;
+    AudioSystem::setMusicOn(value);
+}
+
+bool GameOptions::sfxOn()
+{
+    return s_options.sfx_on;
+}
+
+void GameOptions::setSfxOn(bool value)
+{
+    s_options.sfx_on = value;
+    AudioSystem::setSfxOn(value);
+}
+
+float GameOptions::volumeFrac()
+{
+    return AudioSystem::getVolume() / 100.0f;
+}
+
+void GameOptions::setVolumeFrac(float value)
+{
+    AudioSystem::setVolume(value < 0 ? 0 : value > 1 ? 100 : value * 100.0f);
+}

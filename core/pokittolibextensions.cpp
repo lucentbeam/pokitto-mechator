@@ -363,4 +363,16 @@ namespace Pokitto {
     }
 }
 
+#include "SoftwareI2C.h"
+#include <MemOps>
+
+#pragma GCC diagnostic ignored "-Wattributes"
+#define NAKED __attribute__((naked))
+
+namespace Audio {
+
+    void getVolume(uint8_t* buf){
+        SoftwareI2C(P0_4, P0_5).read(0x5e, buf, 1);
+    }
+}
 #endif

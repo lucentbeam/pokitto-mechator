@@ -41,6 +41,12 @@ namespace Pokitto {
 
 }
 
+namespace Audio {
+
+    void getVolume(uint8_t* buf);
+
+}
+
 #endif
 
 #endif // POKITTOLIBEXTENSIONS_H
