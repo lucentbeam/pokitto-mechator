@@ -1,15 +1,11 @@
 "You don't have to be happy. You just have to accept it." -Jaime
 
-- fix audio fade on pokitto
-
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
  - check: figure out why turrets don't spawn after tank boss
  - check: dying and restarting crashes?
 
 - optimize "dosub" portion of drawRLE for mini map
 - optimize spawn point search (bin locations)
- 
-- figure out sprint+shoot issue on Desktop
  
 - double check battle scenes - tank + final scene for logic (nullptr from getAtLoc stuff)
 
@@ -21,11 +17,13 @@
  - boat music
  
 - fix audio zeroing in raw files
-- hide continue if no saves
-
+- code size: set Pokitto_logo to RLE
 - code size: check regiontransitionhandler.cpp
+- code size: remove extra palettes from boss & cape area?
 
 ::::IF I REALLY WANT TO::::::::
+- figure out sprint+shoot issue on Desktop
+- hide continue if no saves
 - remove "leave" at shops in favor of <-B prompt?
 - make helicopter deny landing prettier
 - palette swap enemy helis

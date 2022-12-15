@@ -143,6 +143,13 @@ void POIs::draw()
     }
 }
 
+void POIs::reset()
+{
+    s_current_active_poi = nullptr;
+    s_pois.clear();
+    setShopsDisabled(false);
+}
+
 Vec2f POIs::pos(PlayerMode mode)
 {
     if (s_current_active_poi == nullptr) {

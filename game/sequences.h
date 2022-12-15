@@ -437,7 +437,6 @@ const SceneFunc fb_triggers = SceneFunc([](){
     static bool configured[4] = {false, false, false, false};
     for(int i = 0; i < 4; ++i) configured[i] = false;
 
-    RegionTransitionHandler::goBoss(true);
     registerUpdateCallback([&](){
         static int shot_timer = 20;
         static float finished_timer = 3.0f;

@@ -371,7 +371,7 @@ void UI::draw()
     heli_healthbar.draw(false, drawHealthBar);
 
 //    if (Player::mode() == HelicopterMode || Player::mode() == BoatMode) {
-    if (FSM::instance->is(Game) && GameVariables::eventVisited(ExitTutorial)) {
+    if (m_boss_life != nullptr && FSM::instance->is(Game) && GameVariables::eventVisited(ExitTutorial)) {
         constexpr int sz = 16;
         Helpers::drawNotchedRect(109-sz-2, 1, sz+2, sz+2, 0);
         Vec2f ppos = Player::position() * Vec2f(54.0f, 56.0f) / 216.0f / 6.0f + Vec2f(11.0f, -2.0f);

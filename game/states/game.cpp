@@ -61,7 +61,7 @@ void goGame(bool from_title)
         Camera::shake(0.0f, 0.1f);
         SpawnPoint::setActiveRegion();
         drawflashlight = true;
-        POIs::setShopsDisabled(false);
+        POIs::reset();
         Controls::blockControls(20);
         from_title_counter = 2;
     }

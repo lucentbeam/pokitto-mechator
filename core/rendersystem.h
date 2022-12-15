@@ -45,6 +45,8 @@ public:
 
     static const uint16_t * getPalette();
     static void setPalette(const uint16_t * ptr);
+    static void setPaletteLerped(const uint16_t * p1, const uint16_t * p2, float frac);
+    static void setPaletteLerped(const uint16_t * p1, int r, int g, int b, float frac);
 
     static void print(int x, int y, const char * line, uint8_t color, uint8_t size = 1, uint8_t bgcol = backgroundColor);
 

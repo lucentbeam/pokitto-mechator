@@ -146,22 +146,22 @@ const int bp_costs[] = {
     0, // tank
     0, // boat
     0, // heli
-    8, // ninja shoes
+    12, // ninja shoes
     8, // tactical armor
-    8, // spreader
-    8, // multinade
-    16, // flamethrower
+    10, // spreader
+    10, // multinade
+    20, // flamethrower
     8, // mud tires
-    16, // Machine Gun
+    20, // Machine Gun
     10, // Counter Motor
     30, // unobtainium
     20, // cluster shot
-    12, // shotgun
+    14, // shotgun
     16, // reflective hull
     14, // armor
     14, // tank speed,
     12, // stimpack
-    8,  // rear gun
+    12,  // rear gun
 };
 
 const uint8_t bullet_empty[] = {6, 6, 1, 1, 0, 0, 1, 1,

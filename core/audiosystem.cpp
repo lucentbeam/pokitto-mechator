@@ -9,6 +9,8 @@ bool AudioSystem::sfx_on = true;
 
 bool AudioSystem::mus_on = true;
 
+static float mus_frac = 1.0f;
+
 static int last_song_request = int(musNone);
 
 
@@ -35,8 +37,6 @@ void AudioSystem::setSfxOn(bool on)
 #ifdef DESKTOP_BUILD
 
 float vol = 100;
-
-float mus_frac = 1.0f;
 
 #ifdef SFML_CORE
 sf::Sound AudioSystem::channels[4];
@@ -356,7 +356,8 @@ float AudioSystem::getVolume()
 }
 
 void AudioSystem::setMusicFraction(float fraction) {
-    //mus_frac = fraction;
+    mus_frac = fraction * 127.0f;
+    Audio::RAWFileSource::getSourceInstance<0>().vol = int8_t(mus_frac);
 }
 
 Audio::Sink<6, PROJ_AUD_FREQ> audio;
@@ -398,7 +399,7 @@ void AudioSystem::playSong(Song song) {
         Audio::stop<0>();
     } else if (mus_on) {
         std::string target = std::string("data/mechator/") + music_names[int(song)-1] + ".raw";
-        Audio::play<0>(target.c_str());
+        Audio::play<0>(target.c_str())->vol = int8_t(mus_frac);
     }
 }
 

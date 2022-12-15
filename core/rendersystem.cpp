@@ -956,3 +956,65 @@ void RenderSystem::print(int x, int y, const char *line, uint8_t color, uint8_t 
         x = printChar(x, y, c, color, size);
     }
 }
+
+static uint16_t lerp_palette[130];
+
+void RenderSystem::setPaletteLerped(const uint16_t *p1, const uint16_t *p2, float frac)
+{
+    std::memcpy(lerp_palette + 65, p1 + 65, sizeof(uint16_t) * 65);
+
+    const int max_rb = 0b100000;
+    const int max_g = 0b1000000;
+
+    int rb_f1 = float(max_rb) * frac;
+    int rb_f2 = max_rb - rb_f1;
+    int g_f1 = float(max_g) * frac;
+    int g_f2 = max_g - g_f1;
+
+    int r, g, b, c1, c2;
+
+    for(int i = 0; i < 65; ++i) {
+        c1 = p1[i];
+        c2 = p2[i];
+        r = rb_f2 * int(c1 & 0b1111100000000000) + rb_f1 * int(c2 & 0b1111100000000000);
+        r = (r >> 5) & (0b1111100000000000);
+        g = g_f2 * int(c1 & 0b0000011111100000) + g_f1 * int(c2 & 0b0000011111100000);
+        g = (g >> 6) & (0b0000011111100000);
+        b = rb_f2 * int(c1 & 0b0000000000011111) + rb_f1 * int(c2 & 0b0000000000011111);
+        b = (b >> 5) & (0b0000000000011111);
+        lerp_palette[i] = r | g | b;
+    }
+
+    setPalette(lerp_palette);
+}
+
+void RenderSystem::setPaletteLerped(const uint16_t *p1, int rn, int gn, int bn, float frac)
+{
+    rn = (rn >> 3) << 11;
+    gn = (gn >> 2) << 5;
+    bn >>= 3;
+    std::memcpy(lerp_palette + 65, p1 + 65, sizeof(uint16_t) * 65);
+
+    const int max_rb = 0b100000;
+    const int max_g = 0b1000000;
+
+    int rb_f1 = float(max_rb) * frac;
+    int rb_f2 = max_rb - rb_f1;
+    int g_f1 = float(max_g) * frac;
+    int g_f2 = max_g - g_f1;
+
+    int c1, r, g, b;
+
+    for(int i = 0; i < 65; ++i) {
+        c1 = p1[i];
+        r = rb_f2 * int(c1 & 0b1111100000000000) + rb_f1 * rn;
+        r = (r >> 5) & (0b1111100000000000);
+        g = g_f2 * int(c1 & 0b0000011111100000) + g_f1 * gn;
+        g = (g >> 6) & (0b0000011111100000);
+        b = rb_f2 * int(c1 & 0b0000000000011111) + rb_f1 * bn;
+        b = (b >> 5) & (0b0000000000011111);
+        lerp_palette[i] = r | g | b;
+    }
+
+    setPalette(lerp_palette);
+}

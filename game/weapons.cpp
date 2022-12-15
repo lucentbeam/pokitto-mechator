@@ -195,16 +195,26 @@ float Weapon::checkFireWeapon(const Button &action, Weapon::Type typ, const Vec2
                 });
         break;
     case Type::MultiMissiles:
-        for(int i = 0; i < 5; ++i) {
+        dir = fac * 1;
+        fireWeapon(cfg, pos, dir, vel, true, 0, MissileSprite1, mask, true)
+                ->setMissile(pos + fac * 5.0f, fac * cfg.speed)
+                ->setFlipped(dir.x() > 0)
+                ->setExpireCallback([](Projectile*p) {
+                    makeExplosion(p->pos().x(), p->pos().y(), true);
+                    onPlayerMissileExplode();
+                    AudioSystem::play(sfxExplosionBig);
+                    ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
+                    EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
+                });
+        for(int i = 1; i < 5; ++i) {
             dir = fac * 1;
             dir.rotBy((i * 15 + (rand() % 25)) * (i % 2 == 0 ? 1 : -1));
-            fireWeapon(cfg, pos, dir, vel, true, 0, MissileSprite1, mask, i == 0)
+            fireWeapon(cfg, pos, dir, vel, true, 0, MissileSprite1, mask, false)
                     ->setMissile(pos + fac * 5.0f, fac * cfg.speed)
                     ->setFlipped(dir.x() > 0)
                     ->setExpireCallback([](Projectile*p) {
                         makeExplosion(p->pos().x(), p->pos().y(), true);
                         onPlayerMissileExplode();
-                        AudioSystem::play(sfxExplosionBig);
                         ProjectileManager::create(p->pos(), {0, 0}, 12, 0.1)->setDamage(3)->setIgnoreWalls()->setTargetMask({EnemyTarget, GroundTarget, AirTarget});
                         EffectManager::createExplosionBig(p->pos() - Vec2f(6,6));
                     });

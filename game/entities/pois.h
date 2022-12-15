@@ -45,6 +45,8 @@ public:
 
     static void setShopsDisabled(bool disable) { s_disable_shops = disable; }
 
+    static void reset();
+
     static Vec2f pos(PlayerMode mode = PlayerMode::SoldierMode);
 
     static bool canBuild(PlayerMode mode);

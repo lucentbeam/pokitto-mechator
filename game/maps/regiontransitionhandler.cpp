@@ -9,7 +9,38 @@
 #include "game/alertpalettes.h"
 #include "game/maps/sequencetrigger.h"
 
-const int transitionTime = 25;
+struct TransitionHelper {
+    int waitCounter = 60;
+    const int waitTime = 60;
+    int transitionCounter = 20;
+    const int transitionTime = 20;
+
+    float lastTarget = 0.8f;
+    float nextTarget = 1.0f;
+    bool update(float &frac) {
+        if (waitCounter > 0) {
+            waitCounter--;
+            frac = lastTarget;
+            return false;
+        } else {
+            transitionCounter--;
+            if (transitionCounter == 0) {
+                lastTarget = nextTarget;
+                nextTarget = 0.6f + 0.004f * float(rand() % 101);
+                waitCounter = waitTime;
+                transitionCounter = transitionTime;
+                frac = lastTarget;
+                return true;
+            } else {
+                float f = (float((transitionTime - transitionCounter)) / transitionTime);
+                frac = f * nextTarget + (1.0 - f) * lastTarget;
+                return true;
+            }
+        }
+    }
+};
+
+const int transitionTime = 90;
 
 RegionTransitionHandler::State RegionTransitionHandler::s_state;
 
@@ -87,14 +118,23 @@ void RegionTransitionHandler::updateFinalBoss() {
     }
     was_active = active;
 
-    static float position = 0.0f;
-    position += physicsTimestep * 40.0f;
-    int idx = int(position) % 31;
-    if (idx > 15) {
-        idx = 30 - idx;
+    static int counter = 30;
+    static bool count_down = true;
+    if (active && s_state.transition_trackers[int(FinalBoss)] < transitionTime) {
+        float frac = float(s_state.transition_trackers[int(FinalBoss)]) / float(transitionTime);
+        RenderSystem::setPaletteLerped(default_palette, palette_14, frac);
+    } else if (!active) {
+        RenderSystem::setPalette(default_palette);
+    } else {
+        if (count_down) {
+            counter--;
+            count_down = counter > 0;
+        } else {
+            counter++;
+            count_down = counter == 30;
+        }
+        RenderSystem::setPaletteLerped(default_palette, palette_14, float(counter)/30.0f);
     }
-    const uint16_t * palettes[] = {default_palette, palette_0, palette_1, palette_2, palette_3, palette_4, palette_5, palette_6, palette_7, palette_8, palette_9, palette_10, palette_11, palette_12, palette_13, palette_14};
-    RenderSystem::setPalette(palettes[idx]);
 }
 
 void RegionTransitionHandler::updateSwamp()
@@ -106,8 +146,19 @@ void RegionTransitionHandler::updateSwamp()
         AudioSystem::playSong(musSwamp);
     }
     was_active = active;
-    if (active) RenderSystem::setPalette(palette_fog);
-    else RenderSystem::setPalette(default_palette);
+
+    static TransitionHelper transitions;
+    if (active && s_state.transition_trackers[int(Swamp)] < transitionTime) {
+        float frac = float(s_state.transition_trackers[int(Swamp)]) / float(transitionTime);
+        float t;
+        transitions.update(t);
+        RenderSystem::setPaletteLerped(default_palette, 255, 255, 255, t * frac);
+    } else if (!active) {
+        RenderSystem::setPalette(default_palette);
+    } else {
+        float t;
+        if (transitions.update(t)) RenderSystem::setPaletteLerped(default_palette, 255, 255, 255, t);
+    }
 }
 
 void RegionTransitionHandler::updateNorthBase()
@@ -131,16 +182,18 @@ void RegionTransitionHandler::updateCanyons()
     }
     was_active = active;
 
-    int paletteIndex = 0;
-    static int counter = 0;
-    if (s_state.transition_trackers[int(Canyons)] > 0) {
-        counter++;
-        constexpr int frame_delta = 60; // change palettes ever X frames
-        paletteIndex = (counter % (frame_delta * 2)) / frame_delta + 1;
+    static TransitionHelper transitions;
+    if (active && s_state.transition_trackers[int(Canyons)] < transitionTime) {
+        float frac = float(s_state.transition_trackers[int(Canyons)]) / float(transitionTime);
+        float t;
+        transitions.update(t);
+        RenderSystem::setPaletteLerped(default_palette, light2_palette, t * frac);
+    } else if (!active) {
+        RenderSystem::setPalette(default_palette);
     } else {
-        counter = 0;
+        float t;
+        if (transitions.update(t)) RenderSystem::setPaletteLerped(default_palette, light2_palette, t);
     }
-    RenderSystem::setPalette(palette_list[2 - paletteIndex]);
 }
 
 void RegionTransitionHandler::goRegion(RegionNames name)
