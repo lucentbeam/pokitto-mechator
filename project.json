@@ -6609,6 +6609,18 @@
 		},
 		"\\game\\utilities\\helpers.cpp.flWDzT": {
 			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.Sc3108": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.eM3108": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.kHWvxY": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.HuMCWh": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

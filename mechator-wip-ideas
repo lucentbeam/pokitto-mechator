@@ -1,11 +1,9 @@
 "You don't have to be happy. You just have to accept it." -Jaime
 
-- add some road blocks & variety to scorched canyon
+- fix final boss gameover too soon
 
 - playthroughs: track money vs. time, count repairs, tune vehicle/blueprint/repair costs
  - check: figure out why turrets don't spawn after tank boss
-
-- fix final boss gameover too soon
 
 - double check battle scenes - tank + final scene for logic (nullptr from getAtLoc stuff)
 
@@ -13,6 +11,8 @@
  - swamp
  - canyons
  - boat music
+
+- once over all update/draw functions to look for easy optimizations (reduce floating point ops)
  
 - fix audio zeroing in raw files
 - code size: set Pokitto_logo to RLE
