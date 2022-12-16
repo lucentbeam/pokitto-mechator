@@ -686,6 +686,10 @@ void Player::loadData()
     health(BoatMode).set(dat->boatLife);
     setPosition(HelicopterMode, dat->heliPosition);
     health(HelicopterMode).set(dat->heliLife);
+
+    if (GameVariables::hasBlueprintUnlocked(Blueprints::TacticalArmorBP)) {
+        Soldier::s_instance.m_health.setMaxto(soldierHealthArmored, false);
+    }
 }
 
 void Player::reset()

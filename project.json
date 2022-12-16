@@ -6462,6 +6462,153 @@
 		},
 		"\\pokitto-mechator.pro.user.HPrkhB": {
 			"sdcard": false
+		},
+		"\\core\\serialization.h.MTTsHb": {
+			"sdcard": false
+		},
+		"\\content\\TiledMapReader\\TiledMapReader.pro.user.qlxxoz": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.YqAxCa": {
+			"sdcard": false
+		},
+		"\\core\\audiosystem.cpp.kZNAMf": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.cpp.daNqUI": {
+			"sdcard": false
+		},
+		"\\main.cpp.GHTTBi": {
+			"sdcard": false
+		},
+		"\\main.cpp.olXXip": {
+			"sdcard": false
+		},
+		"\\main.cpp.CXXatj": {
+			"sdcard": false
+		},
+		"\\main.cpp.kCrTpI": {
+			"sdcard": false
+		},
+		"\\main.cpp.BBGOrv": {
+			"sdcard": false
+		},
+		"\\main.cpp.qNfEAD": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.ooSuGn": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.JcXOgQ": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.WuOtiK": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.pvwOmc": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.autosave.OABVSH": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.WztMFz": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.rwFZku": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.ILhAtY": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.zJPsRG": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.NXCXSv": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.ZOYAki": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.KVBLxf": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.MqxGaH": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.xiYULO": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.cWuKJg": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.hmcyAn": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemy.cpp.tgHfGR": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemytank.h.HuhsdL": {
+			"sdcard": false
+		},
+		"\\game\\entities\\enemies\\enemytank.cpp.KbKbpM": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.NHYxgd": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.NHcorM": {
+			"sdcard": false
+		},
+		"\\game\\states\\game.cpp.KVnHpc": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.GScRUh": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.gawVsu": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\tween.h.iXvkFw": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\tween.cpp.iHIAls": {
+			"sdcard": false
+		},
+		"\\core\\utilities\\tween.cpp.hiCWTa": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.Divwar": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.QKmchv": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.fKteYd": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\ui\\ui.cpp.NGSpPf": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\helpers.cpp.GnfOZq": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\helpers.cpp.zIZPwy": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\helpers.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\helpers.cpp.LyAXti": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\helpers.cpp.flWDzT": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

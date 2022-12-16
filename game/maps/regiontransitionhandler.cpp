@@ -152,12 +152,12 @@ void RegionTransitionHandler::updateSwamp()
         float frac = float(s_state.transition_trackers[int(Swamp)]) / float(transitionTime);
         float t;
         transitions.update(t);
-        RenderSystem::setPaletteLerped(default_palette, 255, 255, 255, t * frac);
+        RenderSystem::setPaletteLerped(default_palette, 255, 255, 255, t * frac * 0.5f);
     } else if (!active) {
         RenderSystem::setPalette(default_palette);
     } else {
         float t;
-        if (transitions.update(t)) RenderSystem::setPaletteLerped(default_palette, 255, 255, 255, t);
+        if (transitions.update(t)) RenderSystem::setPaletteLerped(default_palette, 255, 255, 255, t * 0.5f);
     }
 }
 

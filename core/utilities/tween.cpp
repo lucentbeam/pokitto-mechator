@@ -51,15 +51,23 @@ void Tween::setRepeat(bool repeats)
     m_repeats = repeats;
 }
 
-float Tween::getInterpolation(float start, float end) const
+float Tween::getT() const
 {
     int delta = int(RenderSystem::getTimeMs()) - int(m_start_time);
-    if (delta < int(m_delay)) return start;
+    if (delta < int(m_delay)) return 0.0f;
     float t = std::min(std::max(float(delta - m_delay)/float(m_duration), 0.0f), 1.0f);
     if (m_repeats) {
         delta = delta % int(m_duration + m_delay);
         t = std::max(0.0f, float(delta - int(m_delay))/float(m_duration));
     }
+    return t;
+}
+
+float Tween::getInterpolation(float start, float end) const
+{
+    float t = getT();
+    if (t == 0.0f) return 0.0f;
+    else if (t == 1.0f) return end;
 
     if (!m_out_and_back) {
         t = map(t, m_curve);

@@ -41,7 +41,7 @@ public:
 
     bool isFrom(const Vec2f &pos) { return (Vec2f(m_origin.x(), m_origin.y()) - pos).length() < 0.5f; }
 
-    bool update(float dt);
+    bool update(float dt, bool check_collisions);
 
     void setDropsCash(bool cash) { m_drops_cash = cash; }
 

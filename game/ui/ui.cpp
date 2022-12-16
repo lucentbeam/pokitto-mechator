@@ -84,9 +84,8 @@ void UIElement::update(float dt)
 
 void UIElement::draw(bool notched, std::function<void (int16_t, int16_t, int16_t, int16_t)> callback, int dx, int dy)
 {
-    if (!visible && tween.getInterpolation(0, 1.0) > 0.999f) {
-        return;
-    }
+    if (!visible && tween.getT() > 0.999f) return;
+
     int16_t x = visible ? int16_t(tween.getInterpolationInt(m_xh, m_x)) : int16_t(tween.getInterpolationInt(m_x, m_xh));
     x += dx;
     int16_t y = visible ? int16_t(tween.getInterpolationInt(m_yh, m_y)) : int16_t(tween.getInterpolationInt(m_y, m_yh));
@@ -356,6 +355,7 @@ void drawHealthBar(int16_t x, int16_t, int16_t, int16_t) {
     }
 }
 
+#include "game/utilities/debuglog.h"
 void UI::draw()
 {
     if (!s_showing) return;
@@ -370,14 +370,21 @@ void UI::draw()
     activeDrawMode = HelicopterMode;
     heli_healthbar.draw(false, drawHealthBar);
 
-//    if (Player::mode() == HelicopterMode || Player::mode() == BoatMode) {
-    if (m_boss_life != nullptr && FSM::instance->is(Game) && GameVariables::eventVisited(ExitTutorial)) {
+    static int perf_count = 0;
+    static int tickers[2] = {0, 0};
+
+    int delta = RenderSystem::getTimeMs();
+
+    if (m_boss_life == nullptr && FSM::instance->is(Game) && GameVariables::eventVisited(ExitTutorial)) {
         constexpr int sz = 16;
         Helpers::drawNotchedRect(109-sz-2, 1, sz+2, sz+2, 0);
         Vec2f ppos = Player::position() * Vec2f(54.0f, 56.0f) / 216.0f / 6.0f + Vec2f(11.0f, -2.0f);
         Helpers::drawRLE(108-sz, 2, mechator_reduced, -1, -1, nullptr, ppos.x() - sz/2, ppos.y() - sz/2, sz, sz);
         RenderSystem::pixel(109 - sz/2, 2 + sz/2, 10);
     }
+
+    tickers[0] += RenderSystem::getTimeMs() - delta;
+    delta = RenderSystem::getTimeMs();
 
     if (m_boss_life != nullptr) {
         boss_healthbar.draw(false, [](int16_t x, int16_t, int16_t, int16_t) {
@@ -440,5 +447,15 @@ void UI::draw()
             RenderSystem::sprite(10, 80, ui_lock, 0);
             RenderSystem::print(16, 88-1-8, "aim", 10);
         }
+    }
+
+    tickers[1] += RenderSystem::getTimeMs() - delta;
+
+    perf_count++;
+    if ((perf_count % 100) == 0) {
+        char buf[80];
+        sprintf(buf, "ct1: %d   ct2: %d", tickers[0], tickers[1]);
+        DebugLog::log(buf);
+        for(int i = 0; i < 2; ++i) tickers[i] = 0;
     }
 }

@@ -17,14 +17,14 @@ void EnemyTank::setup(const Vec2f &pos)
     m_damage_frames = 0;
 }
 
-bool EnemyTank::update(float dt)
+bool EnemyTank::update(float dt, bool check_collisions)
 {
     static uint16_t mask = Helpers::getMask({Terrain::Wall, Terrain::WaterDeep, Terrain::DestrucableWood, Terrain::DestructableMetal, Terrain::LowWall});
     static uint16_t bulletMask = Helpers::getMask({Targets::EnemyTarget, Targets::GroundTarget});
 
     static int shotcount = 0;
     bool shooting = (m_counter + 1) > (shotcount == 0 ? asCounts(1.25f) : asCounts(0.5f));
-    bool alive = EnemyAIHelper::updateEntity(m_steering.pos(), m_aim, m_counter, status, m_life, m_damage_frames, mask, bulletMask, true, m_drops_cash, shooting);
+    bool alive = EnemyAIHelper::updateEntity(m_steering.pos(), m_aim, m_counter, status, m_life, m_damage_frames, mask, bulletMask, check_collisions, m_drops_cash, shooting);
     if (alive && status == AIMode::Walking) {
         if (shooting) {
             Projectile * p = ProjectileManager::create(m_steering.pos() + m_aim * 6.0f, m_aim * 50.0f, 2, 3.0)

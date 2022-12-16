@@ -126,7 +126,6 @@ void updateGameState(FSM& fsm) {
         Barracks::queryActive();
     }
 #endif
-    SpriteWrapper::update();
 
     // player characters
     Soldier::update(physicsTimestep);
@@ -134,6 +133,8 @@ void updateGameState(FSM& fsm) {
     Tank::update(physicsTimestep);
     Boat::update(physicsTimestep);
     Helicopter::update(physicsTimestep);
+
+    SpriteWrapper::update();
 
     // enemies
     ProjectileManager::update(physicsTimestep);
@@ -182,6 +183,7 @@ void updateGameState(FSM& fsm) {
 }
 
 void drawGameState() {
+
     if (from_title_counter > 0) {
         RenderSystem::clear(0);
         from_title_counter--;
@@ -231,6 +233,7 @@ void drawGameState() {
         ProjectileManager::draw();
     }
 
+
     // ui draw
     UI::draw();
 
@@ -266,6 +269,7 @@ void drawShadedGame(int shading)
     Tank::draw();
     Boat::draw();
     Helicopter::drawGround();
+
     Soldier::draw();
     ProjectileManager::draw();
     EffectManager::draw();
@@ -276,11 +280,12 @@ void drawShadedGame(int shading)
     // sky layer
     ProjectileManager::drawAir();
     Helicopter::drawAir();
+    Soldier::drawAir();
     Enemy::drawAir();
 
     RenderSystem::shadeAll(shading);
 
-    if (isInRegion(RegionStormyCape) && !RegionTransitionHandler::atBoss()) RenderSystem::setOffset(true);
+    if ((isInRegion(RegionScorchedCanyons) || isInRegion(RegionFoggySwamp) || isInRegion(RegionStormyCape)) && !RegionTransitionHandler::atBoss()) RenderSystem::setOffset(true);
 
     // ui draw
     UI::draw();

@@ -19,7 +19,7 @@ public:
 
     void set(int8_t v) { m_current = std::clamp<int8_t>(v, 0, m_max); }
     void setMax() { m_current = m_max; }
-    void setMaxto(int8_t v) { m_current += (v - m_max); m_max = v; }
+    void setMaxto(int8_t v, bool increase = true) { if (increase) m_current += (v - m_max); m_max = v; }
 
     int8_t value() const { return m_current; }
     int8_t max() const { return m_max; }

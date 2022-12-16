@@ -31,13 +31,13 @@ namespace  Helpers {
     void drawRLE(int x, int y, const uint8_t *sprite, int transparent, int frame, uint8_t * buffer, int subx, int suby, int subw, int subh)
     {
         const uint8_t * input = sprite;
+        // reposition start for different frame counts
         while (frame > 0) {
             input += input[0];
             --frame;
         }
-        if (frame < 0) {
-            input--;
-        }
+        if (frame < 0) input--;
+
         bool dosub = subw > 0 && subh > 0;
         uint8_t w = input[1];
         uint8_t h = input[2];
@@ -50,7 +50,22 @@ namespace  Helpers {
         int col = *input++;
         int counter = *input++;
         int yidx, xidx;
-        for (int ycounter = 0; ycounter < h; ++ycounter) {
+
+        if (dosub) {
+            int remove_ct = suby * w;
+            while (remove_ct > 0) {
+                remove_ct -= counter;
+                if (remove_ct < 0) {
+                    counter = - remove_ct;
+                } else {
+                    col = *input++;
+                    counter = *input++;
+                }
+            }
+        }
+
+        for (int ycounter = suby; ycounter < h; ++ycounter) {
+            if (dosub && ycounter >= (suby + subh)) return;
             yidx = y + ycounter;
             if (yidx >= 88) return;
             for (int xcounter = 0; xcounter < w; ++xcounter) {
@@ -65,7 +80,7 @@ namespace  Helpers {
                 if (xidx < 0 || xidx >= 110) continue;
                 if (c == transparent) continue;
                 if (dosub) {
-                    if (xcounter < subx || xcounter >= (subx + subw) || ycounter < suby || ycounter >= (suby + subh)) continue;
+                    if (xcounter < subx || xcounter >= (subx + subw) || ycounter < suby) continue;
                 }
                 buffer[xidx + yidx * 110] = c + 65;
     #ifdef DESKTOP_BUILD

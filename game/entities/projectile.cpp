@@ -189,29 +189,29 @@ int ProjectileManager::getCollisionDamage(const Vec2f &pos, int size, uint16_t m
 int ProjectileManager::getCollisionDamage(const Rect &rect, uint16_t mask, int reflect_chance)
 {
     int damage = 0;
-    int i = 0;
-    Projectile * start = s_projectiles.objects();
+    Projectile * current = s_projectiles.objects();
+    const Projectile * end = s_projectiles.objects() + s_projectiles.objectCount();
     Rect r;
-    while (i < s_projectiles.objectCount()) {
-        if ((mask & start[i].mask) != mask) {
-            ++i;
+    while (current != end) {
+        if ((mask & current->mask) != mask) {
+            ++current;
             continue;
         }
-        r = Rect(start[i].m_body.pos().x(), start[i].m_body.pos().y() - start[i].z, start[i].m_bounds);
+        r = Rect(current->m_body.pos().x(), current->m_body.pos().y() - current->z, current->m_bounds);
         if (rect.overlaps(r)) {
-            if (reflect_chance > 0 && !start[i].is_missile && (rand() % 100) < reflect_chance) {
-                start[i].m_lifetime += 0.25f;
-                start[i].m_body.addVel(start[i].m_body.vel() * -2.5f);
+            if (reflect_chance > 0 && !current->is_missile && (rand() % 100) < reflect_chance) {
+                current->m_lifetime += 0.25f;
+                current->m_body.addVel(current->m_body.vel() * -2.5f);
                 static uint16_t pmask = Helpers::getMask({Targets::PlayerTarget});
                 static uint16_t emask = Helpers::getMask({Targets::EnemyTarget});
-                start[i].mask = (start[i].mask | ~pmask) | emask;
+                current->mask = (current->mask | ~pmask) | emask;
                 AudioSystem::play(sfxSelect);
             } else {
-                damage += start[i].damage;
-                start[i].m_lifetime -= 100000.0f;
+                damage += current->damage;
+                current->m_lifetime -= 100000.0f;
             }
         }
-        ++i;
+        ++current;
     }
     return damage;
 }

@@ -47,9 +47,9 @@ void Enemy::updateMechs(float dt)
     EnemyMech * start = s_mechs.objects();
     int i = s_mechs.objectCount()-1;
     static int spacer = 0;
-    spacer++;
+    spacer = (spacer + 1) % 3;
     while (i >= 0) {
-        if (!(start + i)->update(dt, (i % 2) == (spacer % 2))) {
+        if (!(start + i)->update(dt, (i % 3) == spacer)) {
             s_mechs.deactivate(i);
         }
         --i;
@@ -218,8 +218,10 @@ void Enemy::updateTanks(float dt)
 {
     EnemyTank * start = s_tanks.objects();
     int i = s_tanks.objectCount()-1;
+    static int spacer = 0;
+    spacer = (spacer + 1) % 3;
     while (i >= 0) {
-        if (!(start + i)->update(dt)) {
+        if (!(start + i)->update(dt, (i % 3) == spacer)) {
             s_tanks.deactivate(i);
         }
         --i;
@@ -362,7 +364,7 @@ void Enemy::update(float dt)
     updateBoats(dt);
     updateTurrets(dt);
     updateBombers(dt);
-    updateMines(dt);    
+    updateMines(dt);
     updateHelis(dt);
 }
 

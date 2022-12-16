@@ -653,7 +653,7 @@
   <object id="239" name="enemy_tank" x="1127.26" y="750.448" width="4.8125" height="4.4375"/>
   <object id="240" name="enemy_bomber" x="713.094" y="742.781" width="4.8125" height="4.4375"/>
   <object id="241" name="enemy_mech" x="87.5938" y="397.781" width="4.8125" height="4.4375"/>
-  <object id="242" name="enemy_mech" x="165.927" y="376.781" width="4.8125" height="4.4375"/>
+  <object id="242" name="enemy_mech" x="169.745" y="379.963" width="2.8125" height="2.80114"/>
   <object id="246" name="blueprint_0" x="181.443" y="13.8239" width="2.5" height="2.875"/>
   <object id="250" name="enemy_mech" x="180.685" y="18.8722" width="4.8125" height="4.4375"/>
   <object id="251" name="door_none_4_1_2_1" x="151.159" y="25.2102" width="3.5" height="4.125"/>

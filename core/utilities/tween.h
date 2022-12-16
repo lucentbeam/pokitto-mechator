@@ -27,6 +27,8 @@ public:
 
     void setRepeat(bool repeats);
 
+    float getT() const;
+
     float getInterpolation(float start, float end) const;
 
     float getInterpolation(float start, float apex, float end, float threshold = 0.5f) const;

@@ -153,7 +153,7 @@
   <object id="50" name="enemy_mine" x="91.3438" y="265.094" width="3.5625" height="3.8125"/>
   <object id="51" name="hackingkit" x="85.6534" y="61.5625" width="2.5" height="2.875"/>
   <object id="52" name="enemy_turret" x="216.759" y="157.082" width="4.3125" height="3.875"/>
-  <object id="53" name="door_none_-1_-1_1_1_3" x="121.25" y="150.756" width="3.5" height="4.125"/>
+  <object id="53" name="door_none_-1_-1_1_3_222" x="121.25" y="150.756" width="3.5" height="4.125"/>
   <object id="54" name="barracks_-1_-3_3_3" x="259.313" y="199.188" width="3.375" height="3.625"/>
   <object id="55" name="enemy_heli" x="258.594" y="228.69" width="4.8125" height="4.4375"/>
   <object id="56" name="enemy_boat" x="61.0483" y="223.327" width="3.99432" height="3.71023"/>

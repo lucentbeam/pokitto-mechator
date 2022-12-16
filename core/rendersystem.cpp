@@ -181,6 +181,7 @@ void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transpare
 
 void RenderSystem::shadeAll(int steps)
 {
+    if (steps == 0) return;
     Pokitto::DisplayExtensions::shadeAll(steps, shading);
 }
 
@@ -869,6 +870,7 @@ void RenderSystem::drawShadow(int x, int y, const uint8_t *sprite, int transpare
 
 void RenderSystem::shadeAll(int steps)
 {
+    if (steps == 0) return;
     if (s_clipping && (s_clip_width == 0 || s_clip_height == 0)) return;
     for (int i = 0; i < 110; ++i) {
         for (int j = 0; j < 88; ++j) {
