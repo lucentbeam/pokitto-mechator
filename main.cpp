@@ -40,7 +40,6 @@ int WinMain()
 #endif
 #endif
 {
-    DebugLog::initialize("/data/mechator/log.txt");
     RenderSystem::initialize();
     AudioSystem::initialize();
 

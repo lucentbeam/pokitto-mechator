@@ -53,6 +53,8 @@ enum SFX {
     sfxPlayerGun2x = 15,
     sfxHit1 = 16,
     sfxHit2 = 17,
+    sfxRing = 18,
+    sfxBomber = 19,
 
     sfxCount
 };

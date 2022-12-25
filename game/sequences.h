@@ -15,6 +15,7 @@
 #include "game/variables.h"
 #include "game/maps/regiontransitionhandler.h"
 
+const SceneWait waitring = SceneWait(asCounts(1.8f));
 const SceneWait wait60 = SceneWait(asCounts(1.0f));
 const SceneWait wait30 = SceneWait(asCounts(0.5f));
 
@@ -77,6 +78,10 @@ const SceneDialogue got_boat[] = {
     { "But you'll need", "keys from other", SceneDialogue::Base, false },
     { "island bases around.", "Good luck.", SceneDialogue::Base, true },
 };
+const SceneFunc play_ring = SceneFunc([](){
+    AudioSystem::play(sfxRing);
+    return true;
+});
 
 const SceneFunc func0 = SceneFunc([](){ toLand.reset(); return true; });
 const SceneFunc func1 = SceneFunc([](){
@@ -99,7 +104,8 @@ const SceneDialogue dlog6 = SceneDialogue("Good luck.        ", "Central out.", 
 const SceneSequence intro_scene[] = {
     {SceneSequence::DoFunction, &func0},
     {SceneSequence::DoFunction, &func1},
-    {SceneSequence::Wait, &wait60 },
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     {SceneSequence::ShowDialogue, &dlog0 },
     {SceneSequence::ShowDialogue, &dlog1 },
     {SceneSequence::ShowDialogue, &dlog2 },
@@ -166,6 +172,8 @@ const SceneFunc exit_tut_start = SceneFunc([]{
 
 const SceneSequence exit_tut_island[] = {
     { SceneSequence::DoFunction, &exit_tut_start },
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     { SceneSequence::ShowDialogue, exit_tut },
     { SceneSequence::ShowDialogue, exit_tut + 1 },
     { SceneSequence::ShowDialogue, exit_tut + 2},
@@ -180,6 +188,8 @@ const SceneSequence exit_tut_island[] = {
 };
 
 const SceneSequence acquiredjeep_scene[] = {
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     { SceneSequence::ShowDialogue, got_jeep },
     { SceneSequence::ShowDialogue, got_jeep + 1 },
     { SceneSequence::ShowDialogue, got_jeep + 2},
@@ -191,6 +201,8 @@ const SceneSequence acquiredjeep_scene[] = {
 };
 
 const SceneSequence acquiredtank_scene[] = {
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     { SceneSequence::ShowDialogue, got_tank },
     { SceneSequence::ShowDialogue, got_tank + 1 },
     { SceneSequence::ShowDialogue, got_tank + 2},
@@ -201,6 +213,8 @@ const SceneSequence acquiredtank_scene[] = {
 };
 
 const SceneSequence acquiredboat_scene[] = {
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     { SceneSequence::ShowDialogue, got_boat },
     { SceneSequence::ShowDialogue, got_boat + 1 },
     { SceneSequence::ShowDialogue, got_boat + 2},
@@ -212,6 +226,8 @@ const SceneSequence acquiredboat_scene[] = {
 
 
 const SceneSequence acquiredblueprint_scene[] = {
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     { SceneSequence::ShowDialogue, got_jeep_bp },
     { SceneSequence::ShowDialogue, got_jeep_bp + 1 },
     { SceneSequence::ShowDialogue, got_jeep_bp + 2},
@@ -341,6 +357,8 @@ const SceneDialogue by_dlog5 = SceneDialogue("That will lower a","bridge in the 
 const SceneDialogue by_dlog6 = SceneDialogue("We've detected a","boat yard up there.", SceneDialogue::Base, false);
 
 const SceneSequence boatyard_scene[] = {
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     {SceneSequence::ShowDialogue, &by_dlog0 },
     {SceneSequence::ShowDialogue, &dlog1 },
     {SceneSequence::ShowDialogue, &by_dlog2 },
@@ -365,6 +383,8 @@ const SceneDialogue ah_dlog3 = SceneDialogue("Head over and", "finish them off."
 
 
 const SceneSequence acquiredheli_scene[] = {
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     {SceneSequence::ShowDialogue, &ah_dlog0 },
     {SceneSequence::ShowDialogue, &ah_dlog1 },
     {SceneSequence::ShowDialogue, &ah_dlog2 },
@@ -390,7 +410,7 @@ const SceneDialogue fb_dlog6 = SceneDialogue("They've detected you.","Fight hard
 constexpr int boss_barracks_life = 40;
 
 inline int updateBossBarracks(int lx, int ly, bool * configured) {
-    if (Barracks::isDestroyed(lx, ly)) {
+    if (*configured && Barracks::isDestroyed(lx, ly)) {
         return 0;
     }
     Barracks * b1 = Barracks::getBarracksAt({float(lx), float(ly)});
@@ -428,13 +448,14 @@ inline void randomEnemyShot() {
 }
 
 const SceneFunc fb_triggers = SceneFunc([](){
+    AudioSystem::playSong(musBoss);
     RegionTransitionHandler::goBoss(true);
     POIs::setShopsDisabled(true);
     static int8_t life = 24;
     life = 24;
     UI::showBoss(&life);
 
-    static bool configured[4] = {false, false, false, false};
+    static bool configured[4];
     for(int i = 0; i < 4; ++i) configured[i] = false;
 
     registerUpdateCallback([&](){
@@ -448,13 +469,16 @@ const SceneFunc fb_triggers = SceneFunc([](){
         ltot += updateBossBarracks(132, 170, configured+3);
         life = float(ltot) / 4.0f / float(boss_barracks_life) * 24.0f;
 
+        bool allseen = configured[0];
+        for(int i = 1; i < 4; ++i) allseen &= configured[i];
+
         shot_timer--;
         if (shot_timer < 0 && ltot > 0) {
             shot_timer = 28;
             randomEnemyShot();
         }
 
-        if (ltot <= 0) {
+        if (allseen && ltot <= 0) {
             if (finished_timer >= 3.0f) {
                 Enemy::clearAll();
                 ProjectileManager::clear();
@@ -472,6 +496,8 @@ const SceneFunc fb_triggers = SceneFunc([](){
 });
 
 const SceneSequence finalboss_scene[] = {
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     {SceneSequence::ShowDialogue, &fb_dlog0 },
     {SceneSequence::ShowDialogue, &fb_dlog1 },
 
@@ -496,6 +522,8 @@ const SceneDialogue win_dlog1 = SceneDialogue("You're the hero", "today, soldier
 const SceneDialogue win_dlog2 = SceneDialogue("Now shutting down", "your thread.", SceneDialogue::Base, true);
 
 const SceneSequence win_scene[] = {
+    {SceneSequence::DoFunction, &play_ring},
+    {SceneSequence::Wait, &waitring },
     {SceneSequence::ShowDialogue, &win_dlog0 },
     {SceneSequence::ShowDialogue, &win_dlog1 },
     {SceneSequence::ShowDialogue, &win_dlog2 },

@@ -199,7 +199,7 @@ void RegionTransitionHandler::updateCanyons()
 void RegionTransitionHandler::goRegion(RegionNames name)
 {
     if (s_state.in_boss) return;
-    if (Player::mode() == BoatMode) {
+    if (Player::mode() == BoatMode || Player::mode() == HelicopterMode) {
         if (s_state.status == Boating) return;
         s_state.previous = s_state.status;
         s_state.status = Boating;

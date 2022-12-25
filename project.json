@@ -6621,6 +6621,129 @@
 		},
 		"\\pokitto-mechator.pro.user.HuMCWh": {
 			"sdcard": false
+		},
+		"\\core\\utilities\\tween.cpp.rqJCGt": {
+			"sdcard": false
+		},
+		"\\game\\sequences.h.aTQoVN": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.gmZrVg": {
+			"sdcard": false
+		},
+		"\\game\\entities\\barracks.cpp.VwXSzm": {
+			"sdcard": false
+		},
+		"\\game\\sequences.h.jDwXzo": {
+			"sdcard": false
+		},
+		"\\game\\sequences.h.uwGdqx": {
+			"sdcard": false
+		},
+		"\\game\\sequences.h.oMercT": {
+			"sdcard": false
+		},
+		"\\game\\states\\gamewon.cpp.XNEQLc": {
+			"sdcard": false
+		},
+		"\\game\\sequences.h.qZDNHp": {
+			"sdcard": false
+		},
+		"\\game\\variables.cpp.HRnhci": {
+			"sdcard": false
+		},
+		"\\game\\variables.cpp.DQLtVk": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp.fWUMJN": {
+			"sdcard": false
+		},
+		"\\game\\player.cpp~RF105e0a73.TMP": {
+			"sdcard": false
+		},
+		"\\game\\sequences.h.nBlESE": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.p10776": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.J10776": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.cpp.xVmDkL": {
+			"sdcard": false
+		},
+		"\\game\\maps\\spawnpoints.h.TCbSrx": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.DI8824": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.tX8824": {
+			"sdcard": false
+		},
+		"\\content\\mus_source\\ocean_3.sunvox": {
+			"sdcard": false
+		},
+		"\\content\\mus_source\\ocean_4.sunvox": {
+			"sdcard": false
+		},
+		"\\content\\mus_source\\ocean_2.sunvox": {
+			"sdcard": false
+		},
+		"\\game\\weapons.cpp.ckGsXp": {
+			"sdcard": false
+		},
+		"\\game\\states\\gamewon.cpp.autosave": {
+			"sdcard": false
+		},
+		"\\game\\states\\gamewon.cpp.VIQuVm": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.cpp.UFaXKC": {
+			"sdcard": false
+		},
+		"\\game\\utilities\\debuglog.h.MrOBCy": {
+			"sdcard": false
+		},
+		"\\game\\maps\\regiontransitionhandler.cpp.ogBQmt": {
+			"sdcard": false
+		},
+		"\\pokitto-mechator.pro.user.XOgmGf": {
+			"sdcard": false
+		},
+		"\\content\\sfx\\bomber.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx\\ring.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx_desktop\\bomber.raw": {
+			"sdcard": false
+		},
+		"\\content\\sfx_desktop\\ring.raw": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.oc3836": {
+			"sdcard": false
+		},
+		"\\content\\maps\\island_3_ground.tmx.lg3836": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.jP3836": {
+			"sdcard": false
+		},
+		"\\content\\maps\\island_3_ground.tmx.uQ3836": {
+			"sdcard": false
+		},
+		"\\content\\maps\\island_3_ground.json.qO3836": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.tmx.ly3836": {
+			"sdcard": false
+		},
+		"\\content\\maps\\mechator.json.cC3836": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

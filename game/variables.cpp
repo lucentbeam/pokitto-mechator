@@ -9,6 +9,8 @@ bool DebugOptions::noclip = false;
 
 bool GameVariables::gameWon = false;
 
+static float volume = 0.0;
+
 GameStorage GameVariables::s_data;
 
 char GameVariables::savefile[30] = "/data/mechator/save1.dat";
@@ -155,6 +157,7 @@ GameStorage *GameVariables::getData()
 void GameVariables::loadGame(GameStorage s)
 {
     s_data = s;
+    gameWon = false;
 }
 
 GameOptions GameOptions::s_options;
@@ -167,6 +170,7 @@ void GameOptions::initialize()
 #else
     Serialization::tryGet<GameOptions>("/data/mechator/options.cfg", &s_options);
 #endif
+    volume = AudioSystem::getVolume();
     setMusicOn(s_options.mus_on);
     setSfxOn(s_options.sfx_on);
 }
@@ -204,10 +208,11 @@ void GameOptions::setSfxOn(bool value)
 
 float GameOptions::volumeFrac()
 {
-    return AudioSystem::getVolume() / 100.0f;
+    return volume;
 }
 
 void GameOptions::setVolumeFrac(float value)
 {
-    AudioSystem::setVolume(value < 0 ? 0 : value > 1 ? 100 : value * 100.0f);
+    volume = value < 0 ? 0 : value > 1 ? 1 : value;
+    AudioSystem::setVolume(volume);
 }

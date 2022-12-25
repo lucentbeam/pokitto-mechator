@@ -49,7 +49,6 @@ static int from_title_counter = 0;
 void goGame(bool from_title)
 {
     if (from_title) {
-        DebugLog::log("going to game from title");
         Enemy::clearAll();
         Barracks::clear();
         Pickups::clear();

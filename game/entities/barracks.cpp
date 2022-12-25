@@ -118,6 +118,7 @@ void Barracks::update(float dt)
             b->setTiles(203, false);
             onBarracksExplode();
             EffectManager::createExplosionBig(Vec2f(b->m_left + b->m_width/2 - 4, b->m_top + b->m_height/2 - 4));
+            b->m_life = 0;
             return false;
         } else if (b->stage() != current) {
             b->setTiles(4, true);

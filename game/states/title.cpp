@@ -200,8 +200,13 @@ bool Title::updateOptions(const UIOptions &opts, const ControlStatus &ctrl)
     }
     switch(opts.activeIndex()) {
     case 0:
-        if (ctrl.right.downEvery(1, 5)) GameOptions::setVolumeFrac(GameOptions::volumeFrac() + 0.125f);
-        if (ctrl.left.downEvery(1, 5)) GameOptions::setVolumeFrac(GameOptions::volumeFrac() - 0.125f);
+        if (ctrl.right.downEvery(1, 5) && GameOptions::volumeFrac() < 1.0f) {
+            GameOptions::setVolumeFrac(GameOptions::volumeFrac() + 0.125f);
+            AudioSystem::play(sfxSelect);
+        } else if (ctrl.left.downEvery(1, 5) && GameOptions::volumeFrac() > 0.0f) {
+            GameOptions::setVolumeFrac(GameOptions::volumeFrac() - 0.125f);
+            AudioSystem::play(sfxSelect);
+        }
         break;
     case 1:
         if (ctrl.a.pressed() || ctrl.right.pressed() || ctrl.left.pressed()) GameOptions::setMusicOn(!GameOptions::musicOn());

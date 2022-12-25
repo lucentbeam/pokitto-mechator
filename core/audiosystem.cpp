@@ -2,7 +2,7 @@
 
 #include <string>
 
-const char * sfx_names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2"};
+const char * sfx_names[] = {"confirm","cancel","select","deny","enemy_shoot","enemy_shoot_big","explosion_small","explosion_big","get_dollar","get_item","grenade","laser","laser_charge", "missile", "playergun", "playergun_2x", "playerhit", "playerhit2", "ring", "bomber"};
 const char * music_names[] = {"storm", "overworld", "overworld_main", "boss", "ocean", "canyon", "swamp"};
 
 bool AudioSystem::sfx_on = true;
@@ -36,7 +36,7 @@ void AudioSystem::setSfxOn(bool on)
 
 #ifdef DESKTOP_BUILD
 
-float vol = 100;
+float vol = 1;
 
 #ifdef SFML_CORE
 sf::Sound AudioSystem::channels[4];
@@ -221,7 +221,7 @@ void audioCallback(void *userdata, Uint8 * b, int len) {
         }
 
         out /= 5;
-        *buffer++ = int16_t(out * vol / 100);
+        *buffer++ = int16_t(out * vol);
     }
     AudioSystem::s_current_time += float(len) / AudioSystem::s_audio_freq;
     AudioSystem::s_high_res_counter = SDL_GetPerformanceCounter();
@@ -344,7 +344,6 @@ void AudioSystem::initialize()
 
 void AudioSystem::setVolume(float value)
 {
-    value /= 100.0f;
     Audio::setVolume(value * 128.0f);
 }
 
@@ -352,7 +351,7 @@ float AudioSystem::getVolume()
 {
     uint8_t v;
     Audio::getVolume(&v);
-    return float(v) / 128.0f * 100.0f;
+    return float(v) / 128.0f;
 }
 
 void AudioSystem::setMusicFraction(float fraction) {

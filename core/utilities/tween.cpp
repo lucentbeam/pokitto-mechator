@@ -66,7 +66,7 @@ float Tween::getT() const
 float Tween::getInterpolation(float start, float end) const
 {
     float t = getT();
-    if (t == 0.0f) return 0.0f;
+    if (t == 0.0f) return start;
     else if (t == 1.0f) return end;
 
     if (!m_out_and_back) {

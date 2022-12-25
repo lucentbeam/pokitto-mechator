@@ -35,7 +35,7 @@ const float credit_space = 80.0f;
 
 static float f = 2.0f;
 const uint16_t * palette;
-uint16_t next[64];
+uint16_t next_palette[64];
 
 const char * credits[] = {
     "- scenario -",
@@ -86,7 +86,7 @@ void updateGameWonState(FSM &fsm)
 
 
         for (int i = 0; i < 64; ++i) {
-            next[i] =
+            next_palette[i] =
                     (int(float((palette[i] & 0b1111100000000000) >> 11) * frac) << 11) |
                     (int(float((palette[i] & 0b0000011111100000) >> 5) * frac) << 5) |
                     (int(float(palette[i] & 0b0000000000011111) * frac));
@@ -94,11 +94,11 @@ void updateGameWonState(FSM &fsm)
 
         if (f * 2.5f < -1.0f) {
             EndCredits::credits_state = EndCredits::Credits;
-            next[1] = 0b0111101111101111;
-            next[2] = 0b1111111111111111;
+            next_palette[1] = 0b0111101111101111;
+            next_palette[2] = 0b1111111111111111;
             f = 88.0f;
         }
-        RenderSystem::setPalette(next);
+        RenderSystem::setPalette(next_palette);
 
         break;
     case EndCredits::Credits:
@@ -158,7 +158,7 @@ void drawGameWonState()
         break;
     case EndCredits::Fin:
         RenderSystem::clear(0);
-        RenderSystem::print(55 - RenderSystem::getLineLength("fin")/2, f + 6 * credit_space, "fin.", 2);
+        RenderSystem::print(55 - RenderSystem::getLineLength("Thanks for playing!")/2, f + 6 * credit_space, "Thanks for playing!", 2);
         Helpers::printHorizontallyCentered(55, 76, duration_buf, 1);
 
         break;

@@ -677,6 +677,7 @@ void Player::loadData()
     GameStorage * dat = GameVariables::getData();
 
     setPosition(SoldierMode, dat->soldierPosition);
+    if (dat->soldierLife > soldierHealth) health(SoldierMode).setMaxto(soldierHealthArmored);
     health(SoldierMode).set(dat->soldierLife);
     setPosition(JeepMode, dat->jeepPosition);
     health(JeepMode).set(dat->jeepLife);

@@ -16,9 +16,9 @@ const WeaponConfig dualshot_config(4.4f, 3, 0.35f, 130.0f, sfxPlayerGun2x);
 const WeaponConfig grenade_config(2.8f, 4, 0.5f, 65.0f, sfxGrenade);
 const WeaponConfig multinade_config(5.2f, 4, 0.42f, 70.0f, 10.0f, sfxGrenade);
 
-const WeaponConfig missile_config(2.0f, 5, 0.35f, 140.0f, sfxMissile);
+const WeaponConfig missile_config(2.0f, 8, 0.35f, 140.0f, sfxMissile);
 
-const WeaponConfig multimissile_config(1.5f, 5, 0.4f, 85.0f, 30.0f, sfxMissile);
+const WeaponConfig multimissile_config(1.5f, 8, 0.4f, 85.0f, 30.0f, sfxMissile);
 
 const WeaponConfig shotgun_config(2.0f, 2, 0.35f, 100.0f, 30.0f, sfxExplosionSmall);
 
