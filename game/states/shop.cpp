@@ -11,6 +11,11 @@
 #include "game/variables.h"
 #include "game/player.h"
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#endif
+
 static UIElement title = UIElement::getExpander(55, 28, 70, 9, Tween::Easing::OutQuad);
 static UIOptions title_opts(4);
 static const char * title_opt_lines[4] = {"LEAVE", "SAVE", "REPAIR/BUILD", "BLUEPRINTS"};
@@ -74,6 +79,9 @@ void updateShopState(FSM&)
             Player::storeData();
             GameVariables::saveGame();
             MapManager::dumpMutables(GameVariables::savefile);
+#ifdef __EMSCRIPTEN__
+            EM_ASM({ FS.syncfs(false, function(Error) {}); });
+#endif
             quitShopState();
             UI::showForDuration(UI::Element::GameSavedPrompt, 2.0f);
             AudioSystem::play(sfxGetItem);

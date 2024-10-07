@@ -6744,6 +6744,135 @@
 		},
 		"\\content\\maps\\mechator.json.cC3836": {
 			"sdcard": false
+		},
+		"\\content\\deployment": {
+			"sdcard": false
+		},
+		"\\content\\sfx_pre_zero.zip": {
+			"sdcard": false
+		},
+		"\\build-pokitto-mechator-Desktop_Qt_5_12_3_MSVC2017_64bit\\release\\optionsviewer.obj": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\icon24x.png": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\banner.png": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-ss2.jpg": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-ss3.jpg": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-ss4.jpg": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator.bin": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\icon36x.png": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-ss1.jpg": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\mechator-v1.0.zip": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\mechator.pop": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\bomber.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\boss.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\canyon.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\cancel.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\confirm.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\enemy_shoot.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\deny.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\enemy_shoot_big.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\explosion_big.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\get_item.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\grenade.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\explosion_small.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\laser_charge.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\missile.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\laser.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\ocean.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\overworld_main.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\get_dollar.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\overworld.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\playerhit.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\playerhit2.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\playergun_2x.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\ring.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\swamp.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\storm.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\playergun.raw": {
+			"sdcard": false
+		},
+		"\\content\\deployment\\mechator-release\\data\\mechator\\select.raw": {
+			"sdcard": false
 		}
 	},
 	"ideVersion": 10000,

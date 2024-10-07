@@ -30,19 +30,57 @@
 
 #include "game/utilities/debuglog.h"
 
+struct GameData {
+    int gameTime = 0;
+    int lastGameTime = 0;
+    FSM * fsm;
+};
+
+#ifdef __EMSCRIPTEN__
+#include <unistd.h>
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#endif
+
 #ifdef DEBUGS
 int main (int argv, char * args[])
 #else
 #ifndef DESKTOP_BUILD
 int main (int argv, char * args[])
+#elif __EMSCRIPTEN__
+int main()
 #else
 int WinMain()
 #endif
 #endif
 {
+    GameData data;
+
+#ifdef __EMSCRIPTEN__
+EM_ASM({
+    FS.mkdir("/saves");
+
+    FS.mount(IDBFS, {}, "/saves");
+
+    Module.fs_is_ready = 0;
+
+    FS.syncfs(
+        true,
+        function(Error)
+        {
+            // TODO: check Error
+            Module.fs_is_ready = 1;
+        }
+    );
+});
+while(!EM_ASM_INT({ return Module.fs_is_ready; })) {
+    printf("Loading IDBFS...\n");
+    emscripten_sleep(16);
+}
+#endif
+
     RenderSystem::initialize();
     AudioSystem::initialize();
-
     GameOptions::initialize();
 
     FSM fsm;
@@ -61,25 +99,28 @@ int WinMain()
     fsm.add(GameStates::GameOverState, GameOver::update, GameOver::draw, GameOver::go);
     fsm.add(GameStates::GameOptionsState, OptionsViewer::update, OptionsViewer::draw, OptionsViewer::go);
 
-    int32_t gameTime = 0;
-    uint32_t lastGameTime = RenderSystem::getTimeMs();
+    // initialize everything else
+    data.lastGameTime = RenderSystem::getTimeMs();
+    data.fsm = &fsm;
 
     while (RenderSystem::running())
     {
         if (RenderSystem::update()) {
-            int frameTime = RenderSystem::getTimeMs() - lastGameTime;
-            if (frameTime > 100) frameTime = 100;
-            gameTime += frameTime;
-            lastGameTime = RenderSystem::getTimeMs();
-            while (gameTime > 0) {
+            data.gameTime += RenderSystem::getTimeMs() - data.lastGameTime;
+            data.lastGameTime = RenderSystem::getTimeMs();
+            while (data.gameTime > 0) {
                 Controls::update();
                 GameVariables::updateTime(physicsTimestepMs);
-                fsm.update();
-                gameTime -= physicsTimestepMs;
+                data.fsm->update();
+                data.gameTime -= physicsTimestepMs;
+                data.gameTime += RenderSystem::getTimeMs() - data.lastGameTime;
+                data.lastGameTime = RenderSystem::getTimeMs();
             }
-            fsm.draw();
+            data.fsm->draw(); // TODO: add frame interpolation?
         }
+#ifdef __EMSCRIPTEN__
+        emscripten_sleep(16 - data.gameTime);
+#endif
     }
-
     return 0;
 }

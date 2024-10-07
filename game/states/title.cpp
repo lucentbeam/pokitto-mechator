@@ -23,6 +23,11 @@
 #include "Pokitto.h"
 #endif
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#endif
+
 UIOptions title_selection(3);
 
 Title::TitleState Title::s_state = Title::Select;
@@ -38,6 +43,8 @@ void Title::selectData() {
 #ifdef DESKTOP_BUILD
 #ifdef DEBUGS
     sprintf(GameVariables::savefile, "../data/mechator/save%d.dat", title_selection.activeIndex() + 1);
+#elif __EMSCRIPTEN__
+    sprintf(GameVariables::savefile, "/saves/save%d.dat", title_selection.activeIndex() + 1);
 #else
     sprintf(GameVariables::savefile, "data/mechator/save%d.dat", title_selection.activeIndex() + 1);
 #endif
@@ -117,6 +124,10 @@ void Title::go()
     Serialization::tryGet<GameStorageHeader>("../data/mechator/save1.dat", game_datas);
     Serialization::tryGet<GameStorageHeader>("../data/mechator/save2.dat", game_datas + 1);
     Serialization::tryGet<GameStorageHeader>("../data/mechator/save3.dat", game_datas + 2);
+#elif __EMSCRIPTEN__
+    Serialization::tryGet<GameStorageHeader>("/saves/save1.dat", game_datas);
+    Serialization::tryGet<GameStorageHeader>("/saves/save2.dat", game_datas + 1);
+    Serialization::tryGet<GameStorageHeader>("/saves/save3.dat", game_datas + 2);
 #else
     Serialization::tryGet<GameStorageHeader>("data/mechator/save1.dat", game_datas);
     Serialization::tryGet<GameStorageHeader>("data/mechator/save2.dat", game_datas + 1);

@@ -160,12 +160,12 @@ void Controls::update() {
         ctrl_c = SDL_GameControllerGetButton(joy, SDL_CONTROLLER_BUTTON_START) > 0;
 
         {
-            float x = float(SDL_GameControllerGetAxis(joy, SDL_CONTROLLER_AXIS_LEFTX)) / 32768.0f;
-            float y = float(SDL_GameControllerGetAxis(joy, SDL_CONTROLLER_AXIS_LEFTY)) / 32768.0f;
-            if (std::fabs(x) > 0.2f && std::fabs(x) > std::fabs(s_controls.m_stats.x)) {
+            float x = float(SDL_GameControllerGetAxis(joy, SDL_CONTROLLER_AXIS_LEFTX)) / 32767.0f;
+            float y = float(SDL_GameControllerGetAxis(joy, SDL_CONTROLLER_AXIS_LEFTY)) / 32767.0f;
+            if (std::fabs(x) > 0.34f) {
                 s_controls.m_stats.x = x;
             }
-            if (std::fabs(y) > 0.2f && std::fabs(y) > std::fabs(s_controls.m_stats.y)) {
+            if (std::fabs(y) > 0.34f) {
                 s_controls.m_stats.y = y;
             }
         }
@@ -210,8 +210,9 @@ const ControlStatus Controls::getStatus(bool normalize_dir)
     ControlStatus out = s_controls.m_stats;
 
     if (normalize_dir && std::fabs(out.x) > std::numeric_limits<float>::epsilon() && std::fabs(out.y) > std::numeric_limits<float>::epsilon()) {
-        out.x *= 0.7071f;
-        out.y *= 0.7071f;
+        float len = 1.0f/std::sqrt(out.x * out.x + out.y * out.y);
+        out.x *= len;
+        out.y *= len;
     }
 
     return out;

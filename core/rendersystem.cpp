@@ -387,7 +387,7 @@ struct SDLSystem {
         running = true;
 #ifndef DEBUGS
         in_fs = true;
-        SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+//        SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 #endif
         for (size_t i = 0; i < 130; ++i) {
             uint16_t color = default_palette[i];

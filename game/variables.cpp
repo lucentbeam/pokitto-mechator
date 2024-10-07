@@ -7,9 +7,12 @@
 bool DebugOptions::noclip = false;
 #endif
 
-bool GameVariables::gameWon = false;
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#include <emscripten/html5.h>
+#endif
 
-static float volume = 0.0;
+bool GameVariables::gameWon = false;
 
 GameStorage GameVariables::s_data;
 
@@ -165,20 +168,25 @@ GameOptions GameOptions::s_options;
 void GameOptions::initialize()
 {
     s_options = GameOptions();
-#ifdef DESKTOP_BUILD
-    Serialization::tryGet<GameOptions>("../data/mechator/options.cfg", &s_options);
+#ifdef __EMSCRIPTEN__
+    Serialization::tryGet<GameOptions>("/saves/options.cfg", &s_options);
+#elif DESKTOP_BUILD
+    Serialization::tryGet<GameOptions>("data/mechator/options.cfg", &s_options);
 #else
     Serialization::tryGet<GameOptions>("/data/mechator/options.cfg", &s_options);
 #endif
-    volume = AudioSystem::getVolume();
+    setVolumeFrac(s_options.volume);
     setMusicOn(s_options.mus_on);
     setSfxOn(s_options.sfx_on);
 }
 
 void GameOptions::save()
 {
-#ifdef DESKTOP_BUILD
-    Serialization::tryStore<GameOptions>("../data/mechator/options.cfg", &s_options);
+#ifdef __EMSCRIPTEN__
+    Serialization::tryStore<GameOptions>("/saves/options.cfg", &s_options);
+    EM_ASM({ FS.syncfs(false, function(Error) {}); });
+#elif DESKTOP_BUILD
+    Serialization::tryStore<GameOptions>("data/mechator/options.cfg", &s_options);
 #else
     Serialization::tryStore<GameOptions>("/data/mechator/options.cfg", &s_options);
 #endif
@@ -208,11 +216,11 @@ void GameOptions::setSfxOn(bool value)
 
 float GameOptions::volumeFrac()
 {
-    return volume;
+    return s_options.volume;
 }
 
 void GameOptions::setVolumeFrac(float value)
 {
-    volume = value < 0 ? 0 : value > 1 ? 1 : value;
-    AudioSystem::setVolume(volume);
+    s_options.volume = value < 0 ? 0 : value > 1 ? 1 : value;
+    AudioSystem::setVolume(s_options.volume);
 }

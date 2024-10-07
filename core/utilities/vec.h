@@ -11,7 +11,7 @@ class Vec2f
 public:
     Vec2f() = default;
     constexpr Vec2f(float x, float y) : m_x(x), m_y(y) {}
-    constexpr Vec2f(const Vec2f &other) : m_x(other.m_x), m_y(other.m_y) {}
+//    constexpr Vec2f(const Vec2f &other) : m_x(other.m_x), m_y(other.m_y) {}
 
     float x() const { return m_x; }
     float y() const { return m_y; }

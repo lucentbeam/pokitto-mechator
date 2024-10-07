@@ -108,7 +108,7 @@ void updateGameState(FSM& fsm) {
         return;
     }
 
-    ControlStatus status = Controls::getStatus();
+    ControlStatus status = Controls::getStatus(true);
 
 #ifdef DEBUGS
     static int counter = 60;

@@ -24,6 +24,7 @@ struct GameStorageHeader {
 struct GameOptions {
     bool mus_on = true;
     bool sfx_on = true;
+    float volume = 1.0f;
 
     static GameOptions s_options;
 

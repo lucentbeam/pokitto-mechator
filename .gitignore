@@ -12,5 +12,9 @@
 *.elf
 build-*
 
+build/*
+release/*
+Makefile*
+
 
 src/pokitto-base.pro.user

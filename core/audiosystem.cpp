@@ -238,15 +238,18 @@ void AudioSystem::initialize() {
     s_device_id = SDL_OpenAudioDevice(NULL, 0, &spec, &result, 0);
 
 #ifdef DESKTOP_BUILD
-#ifdef WIN32
-#ifdef DEBUGS
+
+ #ifdef WIN32
+  #ifdef DEBUGS
     std::string path = "../content/sfx_desktop/";
-#else
-    std::string path = "data/mechator/";
-#endif
-#else
+  #else
+    std::string path = "../data/mechator/";
+  #endif
+ #elif __EMSCRIPTEN__
+    std::string path = "sfx/";
+ #else
     std::string path = "../pokitto-mechator/content/sfx_desktop/";
-#endif
+ #endif
 #endif
     for(int i = 0; i < sfxCount; ++i) {
         std::ifstream input;

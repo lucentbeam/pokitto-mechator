@@ -11,9 +11,10 @@ void Steering::update(float dt, float x, float y, float speed_mult, bool instant
         speed_mult *= 5.0f;
     }
 #endif
-    if ((std::fabs(x) > 0.01f || std::fabs(y) > 0.01f)) {
+    if ((std::fabs(x) > 0.2f || std::fabs(y) > 0.2f)) {
         m_moving = true;
-        m_aim = Vec2f(x,y);
+        float l = std::sqrt(x*x+y*y);
+        m_aim = Vec2f(x/l,y/l);
         if (m_aim.dot(m_facing) < 0) {
             Vec2f tmp = m_facing.rot90();
             if (m_aim.dot(tmp) < 0) {
